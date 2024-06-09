@@ -47,6 +47,7 @@ jobs:
     uses: ./.github/workflows/infra-deploy_reusable.yml
     with:
       project: "cloud-primary"
+      packageName: "@infra/cloud-primary"
       baseRef: ${{ github.ref }}
       command: "up"
     secrets: inherit
@@ -58,6 +59,7 @@ jobs:
     uses: ./.github/workflows/infra-deploy_reusable.yml
     with:
       project: "uier"
+      packageName: "@infra/uier"
       baseRef: ${{ github.ref }}
       command: "up"
     secrets: inherit
@@ -69,6 +71,7 @@ jobs:
     uses: ./.github/workflows/infra-deploy_reusable.yml
     with:
       project: "workingparty"
+      packageName: "@infra/workingparty"
       baseRef: ${{ github.ref }}
       command: "up"
     secrets: inherit
@@ -80,6 +83,7 @@ jobs:
     uses: ./.github/workflows/infra-deploy_reusable.yml
     with:
       project: "doprocess"
+      packageName: "@infra/doprocess"
       baseRef: ${{ github.ref }}
       command: "up"
     secrets: inherit

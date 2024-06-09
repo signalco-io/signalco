@@ -9,6 +9,10 @@ on:
         required: true
         type: string
         description: "The project to deploy"
+      packageName:
+        required: true
+        type: string
+        description: "The package name to deploy"
       baseRef:
         required: true
         type: string
@@ -54,7 +58,7 @@ jobs:
       - uses: pnpm/action-setup@v3
         name: ✨ Install pnpm
         with:
-          version: 9.1.4
+          version: 9.2.0
 
       - name: ✨ Get pnpm store directory
         shell: bash
@@ -85,7 +89,7 @@ jobs:
           BASE_BRANCH: ${{ inputs.baseRef }}
 
       - name: ⚒️ Build Infrastructure
-        run: pnpm build --filter=${{ inputs.project }}
+        run: pnpm build --filter=${{ inputs.packageName }}
 
       - name: ⚡ Preview Deploy Infrastructure
         uses: pulumi/actions@v5

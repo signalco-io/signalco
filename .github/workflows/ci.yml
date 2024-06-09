@@ -121,13 +121,14 @@ jobs:
           dotnet build ./Signal.Beacon.WorkerService/Signal.Beacon.csproj -r "${{ matrix.target }}" --self-contained true
         working-directory: ./station
 
-  cloud_preview:
+  cloud_infra_preview:
     name: "Cloud Primary infrastructure (preview)"
     uses: ./.github/workflows/infra-deploy_reusable.yml
     needs: changes
     if: success() && github.event_name == 'pull_request' && needs.changes.outputs.infra == 'true'
     with:
       project: "cloud-primary"
+      packageName: "@infra/cloud-primary"
       baseRef: ${{ github.base_ref }}
       command: "preview"
     secrets: inherit
@@ -139,6 +140,7 @@ jobs:
     if: success() && github.event_name == 'pull_request' && needs.changes.outputs.infra == 'true'
     with:
       project: "uier"
+      packageName: "@infra/uier"
       baseRef: ${{ github.base_ref }}
       command: "preview"
     secrets: inherit
@@ -150,6 +152,7 @@ jobs:
     if: success() && github.event_name == 'pull_request' && needs.changes.outputs.infra == 'true'
     with:
       project: "workingparty"
+      packageName: "@infra/workingparty"
       baseRef: ${{ github.base_ref }}
       command: "preview"
     secrets: inherit
@@ -161,6 +164,7 @@ jobs:
     if: success() && github.event_name == 'pull_request' && needs.changes.outputs.infra == 'true'
     with:
       project: "doprocess"
+      packageName: "@infra/doprocess"
       baseRef: ${{ github.base_ref }}
       command: "preview"
     secrets: inherit
@@ -362,7 +366,7 @@ jobs:
 
   ci_ok:
     name: "[CI] OK"
-    needs: [station_ci, cloud_preview, uier_infra_preview, workingparty_infra_preview, deploy_blog, deploy_app, deploy_brandgrab, deploy_web, deploy_slco, deploy_doprocess, deploy_uidocs, deploy_uier, deploy_workingparty]
+    needs: [station_ci, cloud_infra_preview, doprocess_infra_preview, uier_infra_preview, workingparty_infra_preview, deploy_blog, deploy_app, deploy_brandgrab, deploy_web, deploy_slco, deploy_doprocess, deploy_uidocs, deploy_uier, deploy_workingparty]
     if: ${{ always() }}
     runs-on: ubuntu-latest
     steps:
