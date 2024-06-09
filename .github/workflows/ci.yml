@@ -128,7 +128,7 @@ jobs:
     if: success() && github.event_name == 'pull_request' && needs.changes.outputs.infra == 'true'
     with:
       project: "cloud-primary"
-      packageName: "cloud-primary"
+      packageName: "@infra/cloud-primary"
       baseRef: ${{ github.base_ref }}
       command: "preview"
     secrets: inherit
