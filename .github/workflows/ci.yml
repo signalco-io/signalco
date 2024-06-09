@@ -140,7 +140,7 @@ jobs:
     if: success() && github.event_name == 'pull_request' && needs.changes.outputs.infra == 'true'
     with:
       project: "uier"
-      packageName: "uier"
+      packageName: "@infra/uier"
       baseRef: ${{ github.base_ref }}
       command: "preview"
     secrets: inherit
@@ -152,7 +152,7 @@ jobs:
     if: success() && github.event_name == 'pull_request' && needs.changes.outputs.infra == 'true'
     with:
       project: "workingparty"
-      packageName: "workingparty"
+      packageName: "@infra/workingparty"
       baseRef: ${{ github.base_ref }}
       command: "preview"
     secrets: inherit
@@ -164,7 +164,7 @@ jobs:
     if: success() && github.event_name == 'pull_request' && needs.changes.outputs.infra == 'true'
     with:
       project: "doprocess"
-      packageName: "doprocess"
+      packageName: "@infra/doprocess"
       baseRef: ${{ github.base_ref }}
       command: "preview"
     secrets: inherit
