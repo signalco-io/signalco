@@ -64,8 +64,8 @@ importers:
         specifier: 2.29.1
         version: 2.29.1(@typescript-eslint/parser@7.12.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-typescript@3.6.1)(eslint@8.57.0)
       eslint-plugin-n:
-        specifier: 17.7.0
-        version: 17.7.0(eslint@8.57.0)
+        specifier: 17.8.1
+        version: 17.8.1(eslint@8.57.0)
       eslint-plugin-promise:
         specifier: 6.2.0
         version: 6.2.0(eslint@8.57.0)
@@ -113,8 +113,8 @@ importers:
         specifier: 2.29.1
         version: 2.29.1(@typescript-eslint/parser@7.12.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-typescript@3.6.1)(eslint@8.57.0)
       eslint-plugin-n:
-        specifier: 17.7.0
-        version: 17.7.0(eslint@8.57.0)
+        specifier: 17.8.1
+        version: 17.8.1(eslint@8.57.0)
       eslint-plugin-promise:
         specifier: 6.2.0
         version: 6.2.0(eslint@8.57.0)
@@ -171,8 +171,8 @@ importers:
         specifier: 2.29.1
         version: 2.29.1(@typescript-eslint/parser@7.12.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-typescript@3.6.1)(eslint@8.57.0)
       eslint-plugin-n:
-        specifier: 17.7.0
-        version: 17.7.0(eslint@8.57.0)
+        specifier: 17.8.1
+        version: 17.8.1(eslint@8.57.0)
       eslint-plugin-promise:
         specifier: 6.2.0
         version: 6.2.0(eslint@8.57.0)
@@ -229,8 +229,8 @@ importers:
         specifier: 2.29.1
         version: 2.29.1(@typescript-eslint/parser@7.12.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-typescript@3.6.1)(eslint@8.57.0)
       eslint-plugin-n:
-        specifier: 17.7.0
-        version: 17.7.0(eslint@8.57.0)
+        specifier: 17.8.1
+        version: 17.8.1(eslint@8.57.0)
       eslint-plugin-promise:
         specifier: 6.2.0
         version: 6.2.0(eslint@8.57.0)
@@ -278,8 +278,8 @@ importers:
         specifier: 2.29.1
         version: 2.29.1(@typescript-eslint/parser@7.12.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-typescript@3.6.1)(eslint@8.57.0)
       eslint-plugin-n:
-        specifier: 17.7.0
-        version: 17.7.0(eslint@8.57.0)
+        specifier: 17.8.1
+        version: 17.8.1(eslint@8.57.0)
       eslint-plugin-promise:
         specifier: 6.2.0
         version: 6.2.0(eslint@8.57.0)
@@ -366,8 +366,8 @@ importers:
         specifier: 2.29.1
         version: 2.29.1(@typescript-eslint/parser@7.12.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-typescript@3.6.1)(eslint@8.57.0)
       eslint-plugin-n:
-        specifier: 17.7.0
-        version: 17.7.0(eslint@8.57.0)
+        specifier: 17.8.1
+        version: 17.8.1(eslint@8.57.0)
       eslint-plugin-promise:
         specifier: 6.2.0
         version: 6.2.0(eslint@8.57.0)
@@ -1286,6 +1286,10 @@ packages:
     resolution: {integrity: sha512-LXYT42KJ7lpIKECr2mAXIaMldcNCh/7E0KBKOu4KSfkHmP+mZmSs+8V5gBAqisWBy0OO4W5Oyys0GO1Y8KtdKg==}
     engines: {node: '>=10.13.0'}
 
+  enhanced-resolve@5.17.0:
+    resolution: {integrity: sha512-dwDPwZL0dmye8Txp2gzFmA6sxALaSvdRDjPH0viLcKrtlOL3tw62nWWweVD1SdILDTJrbrL6tdWVN58Wo6U3eA==}
+    engines: {node: '>=10.13.0'}
+
   env-paths@2.2.1:
     resolution: {integrity: sha512-+h1lkLKhZMTYjog1VEpJNG7NZJWcuc2DDk/qsqSTRRCOXiLjeQ1d1/udrUGhqMxUgAlwKNZ0cf2uqan5GLuS2A==}
     engines: {node: '>=6'}
@@ -1385,8 +1389,8 @@ packages:
       '@typescript-eslint/parser':
         optional: true
 
-  eslint-plugin-n@17.7.0:
-    resolution: {integrity: sha512-4Jg4ZKVE4VjHig2caBqPHYNW5na84RVufUuipFLJbgM/G57O6FdpUKJbHakCDJb/yjQuyqVzYWRtU3HNYaZUwg==}
+  eslint-plugin-n@17.8.1:
+    resolution: {integrity: sha512-KdG0h0voZms8UhndNu8DeWx1eM4sY+A4iXtsNo6kOfJLYHNeTGPacGalJ9GcvrbmOL3r/7QOMwVZDSw+1SqsrA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     peerDependencies:
       eslint: '>=8.23.0'
@@ -3714,6 +3718,11 @@ snapshots:
       graceful-fs: 4.2.11
       tapable: 2.2.1
 
+  enhanced-resolve@5.17.0:
+    dependencies:
+      graceful-fs: 4.2.11
+      tapable: 2.2.1
+
   env-paths@2.2.1: {}
 
   err-code@2.0.3: {}
@@ -3889,10 +3898,10 @@ snapshots:
       - eslint-import-resolver-webpack
       - supports-color
 
-  eslint-plugin-n@17.7.0(eslint@8.57.0):
+  eslint-plugin-n@17.8.1(eslint@8.57.0):
     dependencies:
       '@eslint-community/eslint-utils': 4.4.0(eslint@8.57.0)
-      enhanced-resolve: 5.15.0
+      enhanced-resolve: 5.17.0
       eslint: 8.57.0
       eslint-plugin-es-x: 7.5.0(eslint@8.57.0)
       get-tsconfig: 4.7.2
