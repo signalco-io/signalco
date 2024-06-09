@@ -1,5 +1,5 @@
 {
-  "name": "doprocess",
+  "name": "@infra/doprocess",
   "private": true,
   "license": "MIT",
   "main": "dist/index.js",
