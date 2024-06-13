@@ -501,8 +501,8 @@ importers:
         specifier: 4.0.0
         version: 4.0.0
       '@blocknote/core':
-        specifier: 0.14.0
-        version: 0.14.0
+        specifier: 0.14.1
+        version: 0.14.1
       '@blocknote/mantine':
         specifier: 0.14.0
         version: 0.14.0(@tiptap/pm@2.4.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -2673,8 +2673,8 @@ packages:
   '@base2/pretty-print-object@1.0.1':
     resolution: {integrity: sha512-4iri8i1AqYHJE2DstZYkyEprg6Pq6sKx3xn5FpySk9sNhH7qN2LLlHJCfDTZRILNwQNPD7mATWM0TBui7uC1pA==}
 
-  '@blocknote/core@0.14.0':
-    resolution: {integrity: sha512-qtCD2Wq4AGyMMceoVCiKAihEjpCQUyvOc8xJyfkDCxc8b4G+liF10wkrCa7WYVLVUuYxK76F6eIUqdfCyPEdiQ==}
+  '@blocknote/core@0.14.1':
+    resolution: {integrity: sha512-VUrbGiARmKhSorLpXYee0VIhtVO3T3KxJM04UvIC2UwzW+J1z9LAShR5EYAfKHFbgPPqZ5y6gcH29Yu9pSeNgw==}
 
   '@blocknote/mantine@0.14.0':
     resolution: {integrity: sha512-m+lTVsL3SVGjvSwJM09FB1coxLmj0pQfG1TwK3MnmPHKAll+ri836FDFYngmsWa4x2RUEX/DivKlBTg60ogBNw==}
@@ -12100,7 +12100,7 @@ snapshots:
 
   '@base2/pretty-print-object@1.0.1': {}
 
-  '@blocknote/core@0.14.0':
+  '@blocknote/core@0.14.1':
     dependencies:
       '@tiptap/core': 2.4.0(@tiptap/pm@2.4.0)
       '@tiptap/extension-bold': 2.4.0(@tiptap/core@2.4.0(@tiptap/pm@2.4.0))
@@ -12146,7 +12146,7 @@ snapshots:
 
   '@blocknote/mantine@0.14.0(@tiptap/pm@2.4.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@blocknote/core': 0.14.0
+      '@blocknote/core': 0.14.1
       '@blocknote/react': 0.14.0(@tiptap/pm@2.4.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@mantine/core': 7.10.0(@mantine/hooks@7.10.0(react@18.3.1))(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@mantine/hooks': 7.10.0(react@18.3.1)
@@ -12162,7 +12162,7 @@ snapshots:
 
   '@blocknote/react@0.14.0(@tiptap/pm@2.4.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@blocknote/core': 0.14.0
+      '@blocknote/core': 0.14.1
       '@floating-ui/react': 0.26.16(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@tiptap/core': 2.4.0(@tiptap/pm@2.4.0)
       '@tiptap/react': 2.4.0(@tiptap/core@2.4.0(@tiptap/pm@2.4.0))(@tiptap/pm@2.4.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
