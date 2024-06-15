@@ -17,7 +17,7 @@
     "@signalco/eslint-config-signalco": "workspace:*",
     "@types/react": "18.3.3",
     "jose": "5.4.0",
-    "next": "14.2.3",
+    "next": "14.2.4",
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "typescript": "5.4.5"
@@ -25,7 +25,7 @@
   "peerDependencies": {
     "@signalco/js": "workspace:*",
     "jose": "5.4.0",
-    "next": "14.2.3",
+    "next": "14.2.4",
     "react": "18.3.1",
     "react-dom": "18.3.1"
   }
