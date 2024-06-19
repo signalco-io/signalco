@@ -38,7 +38,7 @@
     "tailwindcss": "3.4.4",
     "tailwindcss-animate": "1.0.7",
     "typescript": "5.4.5",
-    "webpack": "5.92.0"
+    "webpack": "5.92.1"
   },
   "dependencies": {
     "@signalco/tailwindcss-config-signalco": "workspace:*",
