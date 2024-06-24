@@ -96,8 +96,8 @@ importers:
         specifier: 1.0.12
         version: 1.0.12(next@14.2.4(@playwright/test@1.44.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.77.6))(react@18.3.1)
       '@vvo/tzdb':
-        specifier: 6.139.0
-        version: 6.139.0
+        specifier: 6.140.0
+        version: 6.140.0
       autoprefixer:
         specifier: 10.4.19
         version: 10.4.19(postcss@8.4.38)
@@ -5914,8 +5914,8 @@ packages:
   '@vitest/utils@1.6.0':
     resolution: {integrity: sha512-21cPiuGMoMZwiOHa2i4LXkMkMkCGzA+MVFV70jRwHo95dL4x/ts5GZhML1QWuy7yfp3WzK3lRvZi3JnXTYqrBw==}
 
-  '@vvo/tzdb@6.139.0':
-    resolution: {integrity: sha512-LpBMlXJIcPddaK3ow5dnqB9z3+EzziCOHz5T6QhshdKu8QU9FW2n8MaDlc2ubxVaJPHerFyq4V8BsCV+T1+lVw==}
+  '@vvo/tzdb@6.140.0':
+    resolution: {integrity: sha512-GUjt7dFhP5GqGzWC1SdzyI+noNxN4V/3eWjZkZ3rg1LnhtRGYgcIimBN4FdBrYZljNjpmLlb7sGFhRRRcqi4mA==}
 
   '@webassemblyjs/ast@1.12.1':
     resolution: {integrity: sha512-EKfMUOPRRUTy5UII4qJDGPpqfwjOmZ5jeGFwid9mnoqIFK+e0vqoi1qH56JpmZSzEL53jKnNzScdmftJyG5xWg==}
@@ -16040,7 +16040,7 @@ snapshots:
       loupe: 2.3.7
       pretty-format: 29.7.0
 
-  '@vvo/tzdb@6.139.0': {}
+  '@vvo/tzdb@6.140.0': {}
 
   '@webassemblyjs/ast@1.12.1':
     dependencies:
