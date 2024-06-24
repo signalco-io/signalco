@@ -102,8 +102,8 @@ importers:
         specifier: 10.4.19
         version: 10.4.19(postcss@8.4.38)
       classix:
-        specifier: 2.1.37
-        version: 2.1.37
+        specifier: 2.1.38
+        version: 2.1.38
       cobe:
         specifier: 0.6.3
         version: 0.6.3
@@ -298,8 +298,8 @@ importers:
         specifier: 10.4.19
         version: 10.4.19(postcss@8.4.38)
       classix:
-        specifier: 2.1.37
-        version: 2.1.37
+        specifier: 2.1.38
+        version: 2.1.38
       encoding:
         specifier: 0.1.13
         version: 0.1.13
@@ -425,8 +425,8 @@ importers:
         specifier: 1.0.0-rc.12
         version: 1.0.0-rc.12
       classix:
-        specifier: 2.1.37
-        version: 2.1.37
+        specifier: 2.1.38
+        version: 2.1.38
       next:
         specifier: 14.2.4
         version: 14.2.4(@playwright/test@1.44.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.77.6)
@@ -579,8 +579,8 @@ importers:
         specifier: 1.3.1
         version: 1.3.1(next@14.2.4(@playwright/test@1.44.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.77.6))(react@18.3.1)
       classix:
-        specifier: 2.1.37
-        version: 2.1.37
+        specifier: 2.1.38
+        version: 2.1.38
       nanoid:
         specifier: 5.0.7
         version: 5.0.7
@@ -691,8 +691,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/ui-primitives
       classix:
-        specifier: 2.1.37
-        version: 2.1.37
+        specifier: 2.1.38
+        version: 2.1.38
       next:
         specifier: 14.2.4
         version: 14.2.4(@playwright/test@1.44.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.77.6)
@@ -912,8 +912,8 @@ importers:
         specifier: 1.3.1
         version: 1.3.1(next@14.2.4(@playwright/test@1.44.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.77.6))(react@18.3.1)
       classix:
-        specifier: 2.1.37
-        version: 2.1.37
+        specifier: 2.1.38
+        version: 2.1.38
       next:
         specifier: 14.2.4
         version: 14.2.4(@playwright/test@1.44.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.77.6)
@@ -1039,8 +1039,8 @@ importers:
         specifier: 10.4.19
         version: 10.4.19(postcss@8.4.38)
       classix:
-        specifier: 2.1.37
-        version: 2.1.37
+        specifier: 2.1.38
+        version: 2.1.38
       encoding:
         specifier: 0.1.13
         version: 0.1.13
@@ -1205,8 +1205,8 @@ importers:
         specifier: 1.3.1
         version: 1.3.1(next@14.2.4(@playwright/test@1.44.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.77.6))(react@18.3.1)
       classix:
-        specifier: 2.1.37
-        version: 2.1.37
+        specifier: 2.1.38
+        version: 2.1.38
       jose:
         specifier: 5.4.1
         version: 5.4.1
@@ -1632,8 +1632,8 @@ importers:
         specifier: 10.4.19
         version: 10.4.19(postcss@8.4.38)
       classix:
-        specifier: 2.1.37
-        version: 2.1.37
+        specifier: 2.1.38
+        version: 2.1.38
       postcss:
         specifier: 8.4.38
         version: 8.4.38
@@ -1812,8 +1812,8 @@ importers:
         specifier: 10.4.19
         version: 10.4.19(postcss@8.4.38)
       classix:
-        specifier: 2.1.37
-        version: 2.1.37
+        specifier: 2.1.38
+        version: 2.1.38
       next:
         specifier: 14.2.4
         version: 14.2.4(@playwright/test@1.44.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.77.6)
@@ -6437,8 +6437,8 @@ packages:
   classcat@5.0.5:
     resolution: {integrity: sha512-JhZUT7JFcQy/EzW605k/ktHtncoo9vnyW/2GspNYwFlN1C/WmjuV/xtS04e9SOkL2sTdw0VAZ2UGCcQ9lR6p6w==}
 
-  classix@2.1.37:
-    resolution: {integrity: sha512-mTlsDSW/AHxHNggs+dNpI2kYGyK0tawAupR0B6vQYU9i8WTAoaa6bFGKIwwiHfmfCZdrsrtlCULic7p/9ZPuVQ==}
+  classix@2.1.38:
+    resolution: {integrity: sha512-vl59khsZzN4cFpEC+K05kz3ArSQUJuIOKppR/8979wkC4vWGiKR7nuvD396tiViGrcztk4W6/9VlgV+tqVrGgw==}
 
   clean-css@5.3.3:
     resolution: {integrity: sha512-D5J+kHaVb/wKSFcyyV75uCn8fiY4sV38XJoe4CUyGQ+mOU/fMVYUdH1hJC+CJQ5uY3EnW27SbJYS4X8BiLrAFg==}
@@ -16629,7 +16629,7 @@ snapshots:
 
   classcat@5.0.5: {}
 
-  classix@2.1.37: {}
+  classix@2.1.38: {}
 
   clean-css@5.3.3:
     dependencies:
