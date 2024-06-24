@@ -16,6 +16,6 @@
         "eslint-plugin-only-warn": "1.1.0",
         "eslint-plugin-react": "7.34.3",
         "eslint-plugin-tailwindcss": "3.17.3",
-        "typescript": "5.4.5"
+        "typescript": "5.5.2"
     }
 }

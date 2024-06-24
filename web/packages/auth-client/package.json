@@ -23,7 +23,7 @@
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "@tanstack/react-query": "5.45.1",
-    "typescript": "5.4.5"
+    "typescript": "5.5.2"
   },
   "peerDependencies": {
     "next": "14.2.4",
