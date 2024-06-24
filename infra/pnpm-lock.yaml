@@ -49,8 +49,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/pulumi
       '@types/node':
-        specifier: 20.14.6
-        version: 20.14.6
+        specifier: 20.14.8
+        version: 20.14.8
       '@typescript-eslint/eslint-plugin':
         specifier: 7.13.1
         version: 7.13.1(@typescript-eslint/parser@7.13.1(eslint@8.57.0)(typescript@5.4.5))(eslint@8.57.0)(typescript@5.4.5)
@@ -98,8 +98,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/pulumi
       '@types/node':
-        specifier: 20.14.6
-        version: 20.14.6
+        specifier: 20.14.8
+        version: 20.14.8
       '@typescript-eslint/eslint-plugin':
         specifier: 7.13.1
         version: 7.13.1(@typescript-eslint/parser@7.13.1(eslint@8.57.0)(typescript@5.4.5))(eslint@8.57.0)(typescript@5.4.5)
@@ -156,8 +156,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/pulumi
       '@types/node':
-        specifier: 20.14.6
-        version: 20.14.6
+        specifier: 20.14.8
+        version: 20.14.8
       '@typescript-eslint/eslint-plugin':
         specifier: 7.13.1
         version: 7.13.1(@typescript-eslint/parser@7.13.1(eslint@8.57.0)(typescript@5.4.5))(eslint@8.57.0)(typescript@5.4.5)
@@ -214,8 +214,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/pulumi
       '@types/node':
-        specifier: 20.14.6
-        version: 20.14.6
+        specifier: 20.14.8
+        version: 20.14.8
       '@typescript-eslint/eslint-plugin':
         specifier: 7.13.1
         version: 7.13.1(@typescript-eslint/parser@7.13.1(eslint@8.57.0)(typescript@5.4.5))(eslint@8.57.0)(typescript@5.4.5)
@@ -263,8 +263,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/pulumi
       '@types/node':
-        specifier: 20.14.6
-        version: 20.14.6
+        specifier: 20.14.8
+        version: 20.14.8
       '@typescript-eslint/eslint-plugin':
         specifier: 7.13.1
         version: 7.13.1(@typescript-eslint/parser@7.13.1(eslint@8.57.0)(typescript@5.4.5))(eslint@8.57.0)(typescript@5.4.5)
@@ -351,8 +351,8 @@ importers:
         specifier: workspace:*
         version: link:../typescript-config
       '@types/node':
-        specifier: 20.14.6
-        version: 20.14.6
+        specifier: 20.14.8
+        version: 20.14.8
       '@typescript-eslint/eslint-plugin':
         specifier: 7.13.1
         version: 7.13.1(@typescript-eslint/parser@7.13.1(eslint@8.57.0)(typescript@5.4.5))(eslint@8.57.0)(typescript@5.4.5)
@@ -923,8 +923,8 @@ packages:
   '@types/keyv@3.1.4':
     resolution: {integrity: sha512-BQ5aZNSCpj7D6K2ksrRCTmKRLEpnPvWDiLPfoGyhZ++8YtiK9d/3DBKPJgry359X/P1PfruyYwvnvwFjuEiEIg==}
 
-  '@types/node@20.14.6':
-    resolution: {integrity: sha512-JbA0XIJPL1IiNnU7PFxDXyfAwcwVVrOoqyzzyQTyMeVhBzkJVMSkC1LlVsRQ2lpqiY4n6Bb9oCS6lzDKVQxbZw==}
+  '@types/node@20.14.8':
+    resolution: {integrity: sha512-DO+2/jZinXfROG7j7WKFn/3C6nFwxy2lLpgLjEXJz+0XKphZlTLJ14mo8Vfg8X5BWN6XjyESXq+LcYdT7tR3bA==}
 
   '@types/responselike@1.0.3':
     resolution: {integrity: sha512-H/+L+UkTV33uf49PH5pCAUBVPNj2nDBXTN+qS1dOwyyg24l3CcicicCA7ca+HMvJBZcFgl5r8e+RR6elsb4Lyw==}
@@ -2835,7 +2835,7 @@ snapshots:
   '@grpc/grpc-js@1.10.1':
     dependencies:
       '@grpc/proto-loader': 0.7.10
-      '@types/node': 20.14.6
+      '@types/node': 20.14.8
 
   '@grpc/proto-loader@0.7.10':
     dependencies:
@@ -3311,7 +3311,7 @@ snapshots:
     dependencies:
       '@types/http-cache-semantics': 4.0.4
       '@types/keyv': 3.1.4
-      '@types/node': 20.14.6
+      '@types/node': 20.14.8
       '@types/responselike': 1.0.3
 
   '@types/google-protobuf@3.15.12': {}
@@ -3322,15 +3322,15 @@ snapshots:
 
   '@types/keyv@3.1.4':
     dependencies:
-      '@types/node': 20.14.6
+      '@types/node': 20.14.8
 
-  '@types/node@20.14.6':
+  '@types/node@20.14.8':
     dependencies:
       undici-types: 5.26.5
 
   '@types/responselike@1.0.3':
     dependencies:
-      '@types/node': 20.14.6
+      '@types/node': 20.14.8
 
   '@types/semver@7.5.8': {}
 
@@ -4807,7 +4807,7 @@ snapshots:
       '@protobufjs/path': 1.1.2
       '@protobufjs/pool': 1.1.0
       '@protobufjs/utf8': 1.1.0
-      '@types/node': 20.14.6
+      '@types/node': 20.14.8
       long: 5.2.3
 
   pump@3.0.0:
