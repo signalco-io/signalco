@@ -12,13 +12,13 @@
         "lint": "eslint ."
     },
     "devDependencies": {
-        "@radix-ui/react-checkbox": "1.0.4",
-        "@radix-ui/react-dialog": "1.0.5",
-        "@radix-ui/react-dropdown-menu": "2.0.6",
-        "@radix-ui/react-menubar": "1.0.4",
-        "@radix-ui/react-popover": "1.0.7",
-        "@radix-ui/react-select": "2.0.0",
-        "@radix-ui/react-slot": "1.0.2",
+        "@radix-ui/react-checkbox": "1.1.0",
+        "@radix-ui/react-dialog": "1.1.1",
+        "@radix-ui/react-dropdown-menu": "2.1.1",
+        "@radix-ui/react-menubar": "1.1.1",
+        "@radix-ui/react-popover": "1.1.1",
+        "@radix-ui/react-select": "2.1.1",
+        "@radix-ui/react-slot": "1.1.0",
         "@signalco/eslint-config-signalco": "workspace:*",
         "@signalco/hooks": "workspace:*",
         "@signalco/js": "workspace:*",
@@ -30,14 +30,14 @@
         "@types/react-dom": "18.3.0",
         "@types/react-timeago": "4.1.7",
         "autoprefixer": "10.4.19",
-        "classix": "2.1.37",
+        "classix": "2.1.38",
         "postcss": "8.4.38",
         "postcss-preset-env": "9.5.14",
         "react": "18.3.1",
         "react-dom": "18.3.1",
         "react-timeago": "7.2.0",
-        "sass": "1.77.5",
+        "sass": "1.77.6",
         "tailwind-merge": "2.3.0",
-        "typescript": "5.4.5"
+        "typescript": "5.5.2"
     }
 }

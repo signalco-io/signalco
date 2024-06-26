@@ -21,9 +21,9 @@
         "@enterwell/react-hooks": "0.5.0",
         "@hcaptcha/react-hcaptcha": "1.10.1",
         "@next/env": "14.2.4",
-        "@reactflow/background": "11.3.13",
-        "@reactflow/controls": "11.2.13",
-        "@reactflow/core": "11.11.3",
+        "@reactflow/background": "11.3.14",
+        "@reactflow/controls": "11.2.14",
+        "@reactflow/core": "11.11.4",
         "@signalco/cms-core": "workspace:*",
         "@signalco/cms-components-marketing": "workspace:*",
         "@signalco/data": "workspace:*",
@@ -35,7 +35,7 @@
         "@signalco/ui-icons": "workspace:*",
         "@vercel/analytics": "1.3.1",
         "autoprefixer": "10.4.19",
-        "classix": "2.1.37",
+        "classix": "2.1.38",
         "encoding": "0.1.13",
         "next": "14.2.4",
         "next-secure-headers": "2.2.0",
@@ -51,12 +51,12 @@
     },
     "devDependencies": {
         "@axe-core/playwright": "4.9.1",
-        "@playwright/test": "1.44.1",
+        "@playwright/test": "1.45.0",
         "@signalco/eslint-config-signalco": "workspace:*",
         "@signalco/tsconfig": "workspace:*",
         "@total-typescript/ts-reset": "0.5.1",
         "@types/color": "3.0.6",
-        "@types/node": "20.14.2",
+        "@types/node": "20.14.9",
         "@types/react": "18.3.3",
         "@types/react-dom": "18.3.0",
         "babel-loader": "9.1.3",
@@ -65,7 +65,7 @@
         "next-sitemap": "4.2.3",
         "openapi-types": "12.1.3",
         "postcss": "8.4.38",
-        "sass": "1.77.5",
-        "typescript": "5.4.5"
+        "sass": "1.77.6",
+        "typescript": "5.5.2"
     }
 }
