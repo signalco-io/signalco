@@ -1145,8 +1145,8 @@ importers:
         specifier: 0.5.0
         version: 0.5.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@react-email/components':
-        specifier: 0.0.19
-        version: 0.0.19(@types/react@18.3.3)(react@18.3.1)
+        specifier: 0.0.21
+        version: 0.0.21(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@signalco/auth-client':
         specifier: workspace:*
         version: link:../../packages/auth-client
@@ -1446,8 +1446,8 @@ importers:
   packages/email-templates:
     dependencies:
       '@react-email/components':
-        specifier: 0.0.19
-        version: 0.0.19(@types/react@18.3.3)(react@18.3.1)
+        specifier: 0.0.21
+        version: 0.0.21(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@signalco/tailwindcss-config-signalco':
         specifier: workspace:*
         version: link:../tailwindcss-config-signalco
@@ -4667,8 +4667,8 @@ packages:
     peerDependencies:
       react: ^18.2.0
 
-  '@react-email/code-block@0.0.4':
-    resolution: {integrity: sha512-xjVLi/9dFNJ70N7hYme+21eQWa3b9/kgp4V+FKQJkQCuIMobxPRCIGM5jKD/0Vo2OqrE5chYv/dkg/aP8a8sPg==}
+  '@react-email/code-block@0.0.5':
+    resolution: {integrity: sha512-mmInpZsSIkNaYC1y40/S0XXrIqbTzrpllP6J1JMJuDOBG8l5T7pNl4V+gwfsSTvy9hVsuzQFmhHK8kVb1UXv3A==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
       react: ^18.2.0
@@ -4685,8 +4685,8 @@ packages:
     peerDependencies:
       react: ^18.2.0
 
-  '@react-email/components@0.0.19':
-    resolution: {integrity: sha512-yf49eIq0NDDXzO2RTZaT8fKa16eKUFMdWWMx4V5Bq+b2JdGuAMobO5s9Ea6azSVL6RDcJ8epdY1TCR2kL2PPHw==}
+  '@react-email/components@0.0.21':
+    resolution: {integrity: sha512-fwGfH7FF+iuq+IdPcbEO5HoF0Pakk9big+fFW9+3kiyvbSNuo8Io1rhPTMLd8q41XomN4g7mgWovdAeS/8PHrA==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
       react: ^18.2.0
@@ -4750,9 +4750,12 @@ packages:
     peerDependencies:
       react: ^18.2.0
 
-  '@react-email/render@0.0.15':
-    resolution: {integrity: sha512-/pT5dBu0y1mogrfEpc002rgRcXpbShK6PFtxTVU6LZZ+bccvZPgk67HKc01lxpa1eYGQgZ6I+VQ02GRnMDclTg==}
+  '@react-email/render@0.0.16':
+    resolution: {integrity: sha512-wDaMy27xAq1cJHtSFptp0DTKPuV2GYhloqia95ub/DH9Dea1aWYsbdM918MOc/b/HvVS3w1z8DWzfAk13bGStQ==}
     engines: {node: '>=18.0.0'}
+    peerDependencies:
+      react: ^18.2.0
+      react-dom: ^18.2.0
 
   '@react-email/row@0.0.8':
     resolution: {integrity: sha512-JsB6pxs/ZyjYpEML3nbwJRGAerjcN/Pa/QG48XUwnT/MioDWrUuyQuefw+CwCrSUZ2P1IDrv2tUD3/E3xzcoKw==}
@@ -14255,7 +14258,7 @@ snapshots:
     dependencies:
       react: 18.3.1
 
-  '@react-email/code-block@0.0.4(react@18.3.1)':
+  '@react-email/code-block@0.0.5(react@18.3.1)':
     dependencies:
       prismjs: 1.29.0
       react: 18.3.1
@@ -14268,11 +14271,11 @@ snapshots:
     dependencies:
       react: 18.3.1
 
-  '@react-email/components@0.0.19(@types/react@18.3.3)(react@18.3.1)':
+  '@react-email/components@0.0.21(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@react-email/body': 0.0.8(react@18.3.1)
       '@react-email/button': 0.0.15(react@18.3.1)
-      '@react-email/code-block': 0.0.4(react@18.3.1)
+      '@react-email/code-block': 0.0.5(react@18.3.1)
       '@react-email/code-inline': 0.0.2(react@18.3.1)
       '@react-email/column': 0.0.10(react@18.3.1)
       '@react-email/container': 0.0.12(react@18.3.1)
@@ -14285,7 +14288,7 @@ snapshots:
       '@react-email/link': 0.0.8(react@18.3.1)
       '@react-email/markdown': 0.0.10(react@18.3.1)
       '@react-email/preview': 0.0.9(react@18.3.1)
-      '@react-email/render': 0.0.15
+      '@react-email/render': 0.0.16(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@react-email/row': 0.0.8(react@18.3.1)
       '@react-email/section': 0.0.12(react@18.3.1)
       '@react-email/tailwind': 0.0.18(react@18.3.1)
@@ -14293,6 +14296,7 @@ snapshots:
       react: 18.3.1
     transitivePeerDependencies:
       - '@types/react'
+      - react-dom
 
   '@react-email/container@0.0.12(react@18.3.1)':
     dependencies:
@@ -14338,7 +14342,7 @@ snapshots:
     dependencies:
       react: 18.3.1
 
-  '@react-email/render@0.0.15':
+  '@react-email/render@0.0.16(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       html-to-text: 9.0.5
       js-beautify: 1.15.1
