@@ -831,8 +831,8 @@ importers:
         specifier: 8.1.1
         version: 8.1.1(postcss@8.4.39)(typescript@5.5.3)(webpack@5.92.1(@swc/core@1.5.7(@swc/helpers@0.5.11))(esbuild@0.20.2))
       rimraf:
-        specifier: 5.0.7
-        version: 5.0.7
+        specifier: 5.0.8
+        version: 5.0.8
       sass:
         specifier: 1.77.6
         version: 1.77.6
@@ -9944,9 +9944,9 @@ packages:
     deprecated: Rimraf versions prior to v4 are no longer supported
     hasBin: true
 
-  rimraf@5.0.7:
-    resolution: {integrity: sha512-nV6YcJo5wbLW77m+8KjH8aB/7/rxQy9SZ0HY5shnwULfS+9nmTtVXAJET5NdZmCzA4fPI/Hm1wo/Po/4mopOdg==}
-    engines: {node: '>=14.18'}
+  rimraf@5.0.8:
+    resolution: {integrity: sha512-XSh0V2/yNhDEi8HwdIefD8MLgs4LQXPag/nEJWs3YUc3Upn+UHa1GyIkEg9xSSNt7HnkO5FjTvmcRzgf+8UZuw==}
+    engines: {node: '>=18'}
     hasBin: true
 
   ripemd160@2.0.2:
@@ -21480,7 +21480,7 @@ snapshots:
     dependencies:
       glob: 7.2.3
 
-  rimraf@5.0.7:
+  rimraf@5.0.8:
     dependencies:
       glob: 10.3.12
 
