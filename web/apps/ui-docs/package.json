@@ -33,7 +33,7 @@
     "storybook-addon-swc": "1.2.0",
     "style-loader": "4.0.0",
     "styled-jsx": "5.1.6",
-    "rimraf": "5.0.8",
+    "rimraf": "5.0.9",
     "storybook": "8.1.11",
     "tailwindcss": "3.4.4",
     "tailwindcss-animate": "1.0.7",
