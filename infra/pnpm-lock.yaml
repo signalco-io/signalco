@@ -27,8 +27,8 @@ importers:
         specifier: 6.44.0
         version: 6.44.0(ts-node@7.0.1)(typescript@5.5.3)
       '@pulumi/azure-native':
-        specifier: 2.49.0
-        version: 2.49.0(ts-node@7.0.1)(typescript@5.5.3)
+        specifier: 2.49.1
+        version: 2.49.1(ts-node@7.0.1)(typescript@5.5.3)
       '@pulumi/cloudflare':
         specifier: 5.33.1
         version: 5.33.1(ts-node@7.0.1)(typescript@5.5.3)
@@ -79,8 +79,8 @@ importers:
   apps/doprocess:
     dependencies:
       '@pulumi/azure-native':
-        specifier: 2.49.0
-        version: 2.49.0(ts-node@7.0.1)(typescript@5.5.3)
+        specifier: 2.49.1
+        version: 2.49.1(ts-node@7.0.1)(typescript@5.5.3)
       '@pulumi/cloudflare':
         specifier: 5.33.1
         version: 5.33.1(ts-node@7.0.1)(typescript@5.5.3)
@@ -134,8 +134,8 @@ importers:
         specifier: 6.44.0
         version: 6.44.0(ts-node@7.0.1)(typescript@5.5.3)
       '@pulumi/azure-native':
-        specifier: 2.49.0
-        version: 2.49.0(ts-node@7.0.1)(typescript@5.5.3)
+        specifier: 2.49.1
+        version: 2.49.1(ts-node@7.0.1)(typescript@5.5.3)
       '@pulumi/cloudflare':
         specifier: 5.33.1
         version: 5.33.1(ts-node@7.0.1)(typescript@5.5.3)
@@ -192,8 +192,8 @@ importers:
         specifier: 6.44.0
         version: 6.44.0(ts-node@7.0.1)(typescript@5.5.3)
       '@pulumi/azure-native':
-        specifier: 2.49.0
-        version: 2.49.0(ts-node@7.0.1)(typescript@5.5.3)
+        specifier: 2.49.1
+        version: 2.49.1(ts-node@7.0.1)(typescript@5.5.3)
       '@pulumi/cloudflare':
         specifier: 5.33.1
         version: 5.33.1(ts-node@7.0.1)(typescript@5.5.3)
@@ -244,8 +244,8 @@ importers:
   apps/workingparty:
     dependencies:
       '@pulumi/azure-native':
-        specifier: 2.49.0
-        version: 2.49.0(ts-node@7.0.1)(typescript@5.5.3)
+        specifier: 2.49.1
+        version: 2.49.1(ts-node@7.0.1)(typescript@5.5.3)
       '@pulumi/cloudflare':
         specifier: 5.33.1
         version: 5.33.1(ts-node@7.0.1)(typescript@5.5.3)
@@ -326,8 +326,8 @@ importers:
         specifier: 6.44.0
         version: 6.44.0(ts-node@7.0.1)(typescript@5.5.3)
       '@pulumi/azure-native':
-        specifier: 2.49.0
-        version: 2.49.0(ts-node@7.0.1)(typescript@5.5.3)
+        specifier: 2.49.1
+        version: 2.49.1(ts-node@7.0.1)(typescript@5.5.3)
       '@pulumi/cloudflare':
         specifier: 5.33.1
         version: 5.33.1(ts-node@7.0.1)(typescript@5.5.3)
@@ -773,8 +773,8 @@ packages:
   '@pulumi/aws@6.44.0':
     resolution: {integrity: sha512-O1VPniIXzsnmzFZhMbQSLKPFvysXNL7pP0m5HSV37VAFgz/4Ri6ikLH+0Zfa70ZLkypYdH7Qvx/aoy5yCS71qw==}
 
-  '@pulumi/azure-native@2.49.0':
-    resolution: {integrity: sha512-7Lsk3E59Fte6aCSBhCzgnl6xPFVOWFZn5yp/vrwhFqM3VBXSLUT8n3x2xjzMjQRi1yAoybNU+x8IigqB/L6I8A==}
+  '@pulumi/azure-native@2.49.1':
+    resolution: {integrity: sha512-IrPefZLbbxmKa9/DXKC9ZX7niSEy6/GXXvqABr5Dmbgc7PDV4lNV0rvtLcWLRyMX8f0cEjV3abtUNzbZAnLZzg==}
 
   '@pulumi/cloudflare@5.33.1':
     resolution: {integrity: sha512-smVHJQV7i+ZkJ6+WLc8WyZUcFmB10SjgjgeU49JFUgNSxnYeSs2TDB8Qu3uPNhZZCFnbbPtjjMwkZtxzRuZ8MQ==}
@@ -3138,7 +3138,7 @@ snapshots:
       - ts-node
       - typescript
 
-  '@pulumi/azure-native@2.49.0(ts-node@7.0.1)(typescript@5.5.3)':
+  '@pulumi/azure-native@2.49.1(ts-node@7.0.1)(typescript@5.5.3)':
     dependencies:
       '@pulumi/pulumi': 3.122.0(ts-node@7.0.1)(typescript@5.5.3)
     transitivePeerDependencies:
