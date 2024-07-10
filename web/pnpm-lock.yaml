@@ -48,8 +48,8 @@ importers:
         specifier: 1.10.1
         version: 1.10.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@microsoft/signalr':
-        specifier: 8.0.0
-        version: 8.0.0(encoding@0.1.13)
+        specifier: 8.0.7
+        version: 8.0.7(encoding@0.1.13)
       '@monaco-editor/react':
         specifier: 4.6.0
         version: 4.6.0(monaco-editor@0.50.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -3681,8 +3681,8 @@ packages:
       '@types/react': '>=16'
       react: '>=16'
 
-  '@microsoft/signalr@8.0.0':
-    resolution: {integrity: sha512-K/wS/VmzRWePCGqGh8MU8OWbS1Zvu7DG7LSJS62fBB8rJUXwwj4axQtqrAAwKGUZHQF6CuteuQR9xMsVpM2JNA==}
+  '@microsoft/signalr@8.0.7':
+    resolution: {integrity: sha512-PHcdMv8v5hJlBkRHAuKG5trGViQEkPYee36LnJQx4xHOQ5LL4X0nEWIxOp5cCtZ7tu+30quz5V3k0b1YNuc6lw==}
 
   '@monaco-editor/loader@1.4.0':
     resolution: {integrity: sha512-00ioBig0x642hytVspPl7DbQyaSWRaolYie/UFNjoTdvoKPzo6xrXLhTk9ixgIKcLH5b5vDOjVNiGyY+uDCUlg==}
@@ -13021,7 +13021,7 @@ snapshots:
       '@types/react': 18.3.3
       react: 18.3.1
 
-  '@microsoft/signalr@8.0.0(encoding@0.1.13)':
+  '@microsoft/signalr@8.0.7(encoding@0.1.13)':
     dependencies:
       abort-controller: 3.0.0
       eventsource: 2.0.2
