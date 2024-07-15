@@ -504,8 +504,8 @@ importers:
         specifier: 0.15.0
         version: 0.15.0
       '@blocknote/mantine':
-        specifier: 0.14.6
-        version: 0.14.6(@tiptap/pm@2.4.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: 0.15.0
+        version: 0.15.0(@tiptap/pm@2.4.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@blocknote/react':
         specifier: 0.14.6
         version: 0.14.6(@tiptap/pm@2.4.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -2675,14 +2675,20 @@ packages:
   '@blocknote/core@0.15.0':
     resolution: {integrity: sha512-MQVRhQO8lO69e42ADNbwDj/5YhllPtmYpLXQNOPgAM8zrA8AIZAWBztUsk6+FdYGfbjSPhrvrmb3dWAavnGBiw==}
 
-  '@blocknote/mantine@0.14.6':
-    resolution: {integrity: sha512-aoRmrPxUuSg8WBpKqg5Rj2y5wAyKj1LqeFBCJz+nIFOiqqCATQxYf+NXpcipzULSFfDq6i5IeW6J+RgC9BpPsg==}
+  '@blocknote/mantine@0.15.0':
+    resolution: {integrity: sha512-MqVbCtkd1BT7ej1FPzwghtZ6IOsxcHKwNWGYKA2UBMQWbektJtxZ7AVubeUbrTnS1yLwpLElYiuGgAgdaW2+4w==}
     peerDependencies:
       react: ^18
       react-dom: ^18
 
   '@blocknote/react@0.14.6':
     resolution: {integrity: sha512-j5BOwhmS90FIFeF4q7SG0JiC4oOTQY6PHF0O7Wxr6qx1cQIXwuXufnzf38BvTZzH6yH0ezZY3fGIm1T6dFWF9A==}
+    peerDependencies:
+      react: ^18
+      react-dom: ^18
+
+  '@blocknote/react@0.15.0':
+    resolution: {integrity: sha512-KTpHvXYceirK9VBHUys4S6erCq2UfZ4C4tfQUjXf3GLKd3YrBGQhkZhaNTyiP9lq6mRKtpB/2GR+VRb0ZtdTdA==}
     peerDependencies:
       react: ^18
       react-dom: ^18
@@ -4943,6 +4949,12 @@ packages:
       '@tiptap/core': ^2.0.0
       '@tiptap/pm': ^2.0.0
 
+  '@tiptap/extension-bubble-menu@2.5.1':
+    resolution: {integrity: sha512-v16LgcOcZHNog7xayiv2ZsB03w4UfZGiE9wW/29D/Tck2zdRWuMDVKTiopH8OciKllPECJbGP+bIxVyFAmXdJA==}
+    peerDependencies:
+      '@tiptap/core': ^2.5.1
+      '@tiptap/pm': ^2.5.1
+
   '@tiptap/extension-code@2.4.0':
     resolution: {integrity: sha512-wjhBukuiyJMq4cTcK3RBTzUPV24k5n1eEPlpmzku6ThwwkMdwynnMGMAmSF3fErh3AOyOUPoTTjgMYN2d10SJA==}
     peerDependencies:
@@ -4996,6 +5008,12 @@ packages:
     peerDependencies:
       '@tiptap/core': ^2.0.0
       '@tiptap/pm': ^2.0.0
+
+  '@tiptap/extension-floating-menu@2.5.1':
+    resolution: {integrity: sha512-1Qx5J7vVnZsZV6txQbgMmSRm3/b37UNRY8JLsRCrLDTmDioWjpTiLkXnAeSKxvcDZcFst3eTR6qmnKj7qr2j6g==}
+    peerDependencies:
+      '@tiptap/core': ^2.5.1
+      '@tiptap/pm': ^2.5.1
 
   '@tiptap/extension-gapcursor@2.4.0':
     resolution: {integrity: sha512-F4y/0J2lseohkFUw9P2OpKhrJ6dHz69ZScABUvcHxjznJLd6+0Zt7014Lw5PA8/m2d/w0fX8LZQ88pZr4quZPQ==}
@@ -5146,6 +5164,14 @@ packages:
     peerDependencies:
       '@tiptap/core': ^2.0.0
       '@tiptap/pm': ^2.0.0
+      react: ^17.0.0 || ^18.0.0
+      react-dom: ^17.0.0 || ^18.0.0
+
+  '@tiptap/react@2.5.1':
+    resolution: {integrity: sha512-cp95Ec/QjdIV/kZTutzNHJzSQnJjipMdgxIDvtO6v8CxdoMKJ2bS2958sVhIaIwP4J9AMVsh4ISfdRqXgilAmw==}
+    peerDependencies:
+      '@tiptap/core': ^2.5.1
+      '@tiptap/pm': ^2.5.1
       react: ^17.0.0 || ^18.0.0
       react-dom: ^17.0.0 || ^18.0.0
 
@@ -5448,6 +5474,9 @@ packages:
 
   '@types/unist@3.0.2':
     resolution: {integrity: sha512-dqId9J8K/vGi5Zr7oo212BGii5m3q5Hxlkwy3WpYuKPklmBEvsbMYYyLxAQpSffdLl/gdW0XUpKWFvYmyoWCoQ==}
+
+  '@types/use-sync-external-store@0.0.6':
+    resolution: {integrity: sha512-zFDAD+tlpf2r4asuHEj0XH6pY6i0g5NeAHPn+15wk3BV6JA69eERFXC1gyGThDkVa1zCyKr5jox1+2LbV/AMLg==}
 
   '@types/uuid@10.0.0':
     resolution: {integrity: sha512-7gqG38EyHgyP1S+7+xomFtL+ZNHcKv6DwNaCZmJmo1vgMugyF3TCnXVg4t1uk89mLNwnLtnY3TpOpCOyp1/xHQ==}
@@ -10601,6 +10630,11 @@ packages:
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
 
+  use-sync-external-store@1.2.2:
+    resolution: {integrity: sha512-PElTlVMwpblvbNqQ82d2n6RjStvdSoNe9FG28kNfz3WiXilJm4DdNkEzRhCZuIDwY8U08WVihhGR5iRqAwfDiw==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+
   util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
 
@@ -11945,10 +11979,10 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@blocknote/mantine@0.14.6(@tiptap/pm@2.4.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@blocknote/mantine@0.15.0(@tiptap/pm@2.4.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@blocknote/core': 0.14.5
-      '@blocknote/react': 0.14.6(@tiptap/pm@2.4.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@blocknote/core': 0.15.0
+      '@blocknote/react': 0.15.0(@tiptap/pm@2.4.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@mantine/core': 7.10.1(@mantine/hooks@7.10.1(react@18.3.1))(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@mantine/hooks': 7.10.1(react@18.3.1)
       '@mantine/utils': 6.0.21(react@18.3.1)
@@ -11966,6 +12000,20 @@ snapshots:
       '@floating-ui/react': 0.26.16(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@tiptap/core': 2.4.0(@tiptap/pm@2.4.0)
       '@tiptap/react': 2.4.0(@tiptap/core@2.4.0(@tiptap/pm@2.4.0))(@tiptap/pm@2.4.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      lodash.merge: 4.6.2
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+      react-icons: 5.2.1(react@18.3.1)
+    transitivePeerDependencies:
+      - '@tiptap/pm'
+      - supports-color
+
+  '@blocknote/react@0.15.0(@tiptap/pm@2.4.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+    dependencies:
+      '@blocknote/core': 0.15.0
+      '@floating-ui/react': 0.26.16(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@tiptap/core': 2.5.1(@tiptap/pm@2.4.0)
+      '@tiptap/react': 2.5.1(@tiptap/core@2.5.1(@tiptap/pm@2.4.0))(@tiptap/pm@2.4.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       lodash.merge: 4.6.2
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
@@ -14461,6 +14509,10 @@ snapshots:
     dependencies:
       '@tiptap/pm': 2.4.0
 
+  '@tiptap/core@2.5.1(@tiptap/pm@2.4.0)':
+    dependencies:
+      '@tiptap/pm': 2.4.0
+
   '@tiptap/core@2.5.1(@tiptap/pm@2.5.1)':
     dependencies:
       '@tiptap/pm': 2.5.1
@@ -14476,6 +14528,12 @@ snapshots:
   '@tiptap/extension-bubble-menu@2.4.0(@tiptap/core@2.4.0(@tiptap/pm@2.4.0))(@tiptap/pm@2.4.0)':
     dependencies:
       '@tiptap/core': 2.4.0(@tiptap/pm@2.4.0)
+      '@tiptap/pm': 2.4.0
+      tippy.js: 6.3.7
+
+  '@tiptap/extension-bubble-menu@2.5.1(@tiptap/core@2.5.1(@tiptap/pm@2.4.0))(@tiptap/pm@2.4.0)':
+    dependencies:
+      '@tiptap/core': 2.5.1(@tiptap/pm@2.4.0)
       '@tiptap/pm': 2.4.0
       tippy.js: 6.3.7
 
@@ -14522,6 +14580,12 @@ snapshots:
   '@tiptap/extension-floating-menu@2.4.0(@tiptap/core@2.4.0(@tiptap/pm@2.4.0))(@tiptap/pm@2.4.0)':
     dependencies:
       '@tiptap/core': 2.4.0(@tiptap/pm@2.4.0)
+      '@tiptap/pm': 2.4.0
+      tippy.js: 6.3.7
+
+  '@tiptap/extension-floating-menu@2.5.1(@tiptap/core@2.5.1(@tiptap/pm@2.4.0))(@tiptap/pm@2.4.0)':
+    dependencies:
+      '@tiptap/core': 2.5.1(@tiptap/pm@2.4.0)
       '@tiptap/pm': 2.4.0
       tippy.js: 6.3.7
 
@@ -14689,6 +14753,17 @@ snapshots:
       '@tiptap/pm': 2.4.0
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
+
+  '@tiptap/react@2.5.1(@tiptap/core@2.5.1(@tiptap/pm@2.4.0))(@tiptap/pm@2.4.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+    dependencies:
+      '@tiptap/core': 2.5.1(@tiptap/pm@2.4.0)
+      '@tiptap/extension-bubble-menu': 2.5.1(@tiptap/core@2.5.1(@tiptap/pm@2.4.0))(@tiptap/pm@2.4.0)
+      '@tiptap/extension-floating-menu': 2.5.1(@tiptap/core@2.5.1(@tiptap/pm@2.4.0))(@tiptap/pm@2.4.0)
+      '@tiptap/pm': 2.4.0
+      '@types/use-sync-external-store': 0.0.6
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+      use-sync-external-store: 1.2.2(react@18.3.1)
 
   '@total-typescript/ts-reset@0.5.1': {}
 
@@ -15039,6 +15114,8 @@ snapshots:
   '@types/unist@2.0.10': {}
 
   '@types/unist@3.0.2': {}
+
+  '@types/use-sync-external-store@0.0.6': {}
 
   '@types/uuid@10.0.0': {}
 
@@ -21813,6 +21890,10 @@ snapshots:
       '@types/react': 18.3.3
 
   use-sync-external-store@1.2.0(react@18.3.1):
+    dependencies:
+      react: 18.3.1
+
+  use-sync-external-store@1.2.2(react@18.3.1):
     dependencies:
       react: 18.3.1
 
