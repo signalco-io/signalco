@@ -24,8 +24,8 @@ importers:
         specifier: 1.1.4
         version: 1.1.4(ts-node@7.0.1)(typescript@5.5.3)
       '@pulumi/aws':
-        specifier: 6.44.0
-        version: 6.44.0(ts-node@7.0.1)(typescript@5.5.3)
+        specifier: 6.45.0
+        version: 6.45.0(ts-node@7.0.1)(typescript@5.5.3)
       '@pulumi/azure-native':
         specifier: 2.50.0
         version: 2.50.0(ts-node@7.0.1)(typescript@5.5.3)
@@ -131,8 +131,8 @@ importers:
         specifier: 1.1.4
         version: 1.1.4(ts-node@7.0.1)(typescript@5.5.3)
       '@pulumi/aws':
-        specifier: 6.44.0
-        version: 6.44.0(ts-node@7.0.1)(typescript@5.5.3)
+        specifier: 6.45.0
+        version: 6.45.0(ts-node@7.0.1)(typescript@5.5.3)
       '@pulumi/azure-native':
         specifier: 2.50.0
         version: 2.50.0(ts-node@7.0.1)(typescript@5.5.3)
@@ -189,8 +189,8 @@ importers:
         specifier: 1.1.4
         version: 1.1.4(ts-node@7.0.1)(typescript@5.5.3)
       '@pulumi/aws':
-        specifier: 6.44.0
-        version: 6.44.0(ts-node@7.0.1)(typescript@5.5.3)
+        specifier: 6.45.0
+        version: 6.45.0(ts-node@7.0.1)(typescript@5.5.3)
       '@pulumi/azure-native':
         specifier: 2.50.0
         version: 2.50.0(ts-node@7.0.1)(typescript@5.5.3)
@@ -323,8 +323,8 @@ importers:
         specifier: 1.1.4
         version: 1.1.4(ts-node@7.0.1)(typescript@5.5.3)
       '@pulumi/aws':
-        specifier: 6.44.0
-        version: 6.44.0(ts-node@7.0.1)(typescript@5.5.3)
+        specifier: 6.45.0
+        version: 6.45.0(ts-node@7.0.1)(typescript@5.5.3)
       '@pulumi/azure-native':
         specifier: 2.50.0
         version: 2.50.0(ts-node@7.0.1)(typescript@5.5.3)
@@ -765,8 +765,8 @@ packages:
   '@protobufjs/utf8@1.1.0':
     resolution: {integrity: sha512-Vvn3zZrhQZkkBE8LSuW3em98c0FwgO4nxzv6OdSxPKJIEKY2bGbHn+mhGIPerzI4twdxaP8/0+06HBpwf345Lw==}
 
-  '@pulumi/aws@6.44.0':
-    resolution: {integrity: sha512-O1VPniIXzsnmzFZhMbQSLKPFvysXNL7pP0m5HSV37VAFgz/4Ri6ikLH+0Zfa70ZLkypYdH7Qvx/aoy5yCS71qw==}
+  '@pulumi/aws@6.45.0':
+    resolution: {integrity: sha512-EhRlYs0Ig53nHRNv3NSgb5TPpJuDmA+N0HCUkPhODUT9n1KTahQnoLbMc+hbvJKPngx6hgye7fagARPO3kWPVw==}
 
   '@pulumi/azure-native@2.50.0':
     resolution: {integrity: sha512-ZtLQ361SZaR+JphurjMEVan2sFAPuf1jiTkRmxvpDpyMX8ThhfkMBGND8z02nyxVmqVyQCyvCOLlckULNv463g==}
@@ -3134,7 +3134,7 @@ snapshots:
 
   '@protobufjs/utf8@1.1.0': {}
 
-  '@pulumi/aws@6.44.0(ts-node@7.0.1)(typescript@5.5.3)':
+  '@pulumi/aws@6.45.0(ts-node@7.0.1)(typescript@5.5.3)':
     dependencies:
       '@pulumi/pulumi': 3.124.0(ts-node@7.0.1)(typescript@5.5.3)
       builtin-modules: 3.0.0
