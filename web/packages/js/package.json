@@ -29,7 +29,7 @@
         "react": "18.3.1",
         "react-dom": "18.3.1",
         "typescript": "5.5.3",
-        "tsup": "8.1.2",
+        "tsup": "8.2.0",
         "@microsoft/api-extractor": "7.47.2"
     },
     "peerDependencies": {
