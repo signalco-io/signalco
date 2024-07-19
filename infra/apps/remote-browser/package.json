@@ -15,7 +15,7 @@
         "eslint-plugin-import": "2.29.1",
         "eslint-plugin-n": "17.9.0",
         "eslint-plugin-promise": "6.4.0",
-        "tsup": "8.1.2",
+        "tsup": "8.2.0",
         "typescript": "5.5.3"
     },
     "dependencies": {
