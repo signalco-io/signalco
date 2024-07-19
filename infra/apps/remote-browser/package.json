@@ -25,7 +25,7 @@
         "@pulumi/cloudflare": "5.34.0",
         "@pulumi/command": "1.0.0",
         "@pulumi/docker": "4.5.4",
-        "@pulumi/pulumi": "3.124.0",
+        "@pulumi/pulumi": "3.125.0",
         "@pulumiverse/vercel": "1.11.0"
     }
 }
