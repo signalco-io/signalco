@@ -49,6 +49,7 @@ function getQuerySelector(element: Element | Node | null | undefined, options: {
     }
     return selectorParts.join('>')
 }
+
 function escapeClass(selector: string) {
     // Fix ID numbers: "50" -> "\\35\\30"
     return selector.replace(/([^a-zA-Z0-9-_])/g, '\\$1')
