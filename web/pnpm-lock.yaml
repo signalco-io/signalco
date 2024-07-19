@@ -138,8 +138,8 @@ importers:
         specifier: 0.10.2
         version: 0.10.2
       openapi-typescript:
-        specifier: 7.0.4
-        version: 7.0.4(encoding@0.1.13)(typescript@5.5.3)
+        specifier: 7.1.0
+        version: 7.1.0(encoding@0.1.13)(typescript@5.5.3)
       pigeon-maps:
         specifier: 0.21.6
         version: 0.21.6(react@18.3.1)
@@ -8862,8 +8862,8 @@ packages:
   openapi-typescript-helpers@0.0.9:
     resolution: {integrity: sha512-BO2TvIDAO/FPVKz1Nj2gy+pUOHfaoENdK5UP3H0Jbh0VXBf3dwYMs58ZwOjiezrbHA2LamdquoyQgahTPvIxGA==}
 
-  openapi-typescript@7.0.4:
-    resolution: {integrity: sha512-Cx1xsSDKRssFJTCAHDgCj7X4m2DYfmwZ0FjuV9WYXdlUtdfbp3hYO6lVrl4F4HrdOAoEs+hUo5UwEsnu2/TU7w==}
+  openapi-typescript@7.1.0:
+    resolution: {integrity: sha512-qxjGhIO6ODCGximE2HiozkPUNbO4y7F2OQyGa+gcn6TdZMMtmuiyDPqoKmf+Y4VlvQRfhJUTU635w8KfZVeuVA==}
     hasBin: true
     peerDependencies:
       typescript: ^5.x
@@ -19592,7 +19592,7 @@ snapshots:
 
   openapi-typescript-helpers@0.0.9: {}
 
-  openapi-typescript@7.0.4(encoding@0.1.13)(typescript@5.5.3):
+  openapi-typescript@7.1.0(encoding@0.1.13)(typescript@5.5.3):
     dependencies:
       '@redocly/openapi-core': 1.16.0(encoding@0.1.13)(supports-color@9.4.0)
       ansi-colors: 4.1.3
