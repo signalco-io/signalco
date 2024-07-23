@@ -84,11 +84,11 @@ importers:
         specifier: workspace:*
         version: link:../../packages/ui-primitives
       '@tanstack/react-query':
-        specifier: 5.51.9
-        version: 5.51.9(react@18.3.1)
+        specifier: 5.51.11
+        version: 5.51.11(react@18.3.1)
       '@tanstack/react-query-devtools':
-        specifier: 5.51.9
-        version: 5.51.9(@tanstack/react-query@5.51.9(react@18.3.1))(react@18.3.1)
+        specifier: 5.51.11
+        version: 5.51.11(@tanstack/react-query@5.51.11(react@18.3.1))(react@18.3.1)
       '@vercel/analytics':
         specifier: 1.3.1
         version: 1.3.1(next@14.2.5(@playwright/test@1.45.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.77.8))(react@18.3.1)
@@ -570,11 +570,11 @@ importers:
         specifier: workspace:*
         version: link:../../packages/ui-primitives
       '@tanstack/react-query':
-        specifier: 5.51.9
-        version: 5.51.9(react@18.3.1)
+        specifier: 5.51.11
+        version: 5.51.11(react@18.3.1)
       '@tanstack/react-query-devtools':
-        specifier: 5.51.9
-        version: 5.51.9(@tanstack/react-query@5.51.9(react@18.3.1))(react@18.3.1)
+        specifier: 5.51.11
+        version: 5.51.11(@tanstack/react-query@5.51.11(react@18.3.1))(react@18.3.1)
       '@vercel/analytics':
         specifier: 1.3.1
         version: 1.3.1(next@14.2.5(@playwright/test@1.45.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.77.8))(react@18.3.1)
@@ -903,11 +903,11 @@ importers:
         specifier: workspace:*
         version: link:../../packages/ui-primitives
       '@tanstack/react-query':
-        specifier: 5.51.9
-        version: 5.51.9(react@18.3.1)
+        specifier: 5.51.11
+        version: 5.51.11(react@18.3.1)
       '@tanstack/react-query-devtools':
-        specifier: 5.51.9
-        version: 5.51.9(@tanstack/react-query@5.51.9(react@18.3.1))(react@18.3.1)
+        specifier: 5.51.11
+        version: 5.51.11(@tanstack/react-query@5.51.11(react@18.3.1))(react@18.3.1)
       '@vercel/analytics':
         specifier: 1.3.1
         version: 1.3.1(next@14.2.5(@playwright/test@1.45.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.77.8))(react@18.3.1)
@@ -1196,11 +1196,11 @@ importers:
         specifier: 0.5.13
         version: 0.5.13(tailwindcss@3.4.6)
       '@tanstack/react-query':
-        specifier: 5.51.9
-        version: 5.51.9(react@18.3.1)
+        specifier: 5.51.11
+        version: 5.51.11(react@18.3.1)
       '@tanstack/react-query-devtools':
-        specifier: 5.51.9
-        version: 5.51.9(@tanstack/react-query@5.51.9(react@18.3.1))(react@18.3.1)
+        specifier: 5.51.11
+        version: 5.51.11(@tanstack/react-query@5.51.11(react@18.3.1))(react@18.3.1)
       '@vercel/analytics':
         specifier: 1.3.1
         version: 1.3.1(next@14.2.5(@playwright/test@1.45.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.77.8))(react@18.3.1)
@@ -1311,8 +1311,8 @@ importers:
         specifier: workspace:*
         version: link:../ui-primitives
       '@tanstack/react-query':
-        specifier: 5.51.9
-        version: 5.51.9(react@18.3.1)
+        specifier: 5.51.11
+        version: 5.51.11(react@18.3.1)
       '@types/react':
         specifier: 18.3.3
         version: 18.3.3
@@ -1884,8 +1884,8 @@ importers:
         specifier: workspace:*
         version: link:../ui-primitives
       '@tanstack/react-query':
-        specifier: 5.51.9
-        version: 5.51.9(react@18.3.1)
+        specifier: 5.51.11
+        version: 5.51.11(react@18.3.1)
       '@types/node':
         specifier: 20.14.11
         version: 20.14.11
@@ -5188,14 +5188,14 @@ packages:
   '@tanstack/query-devtools@5.51.9':
     resolution: {integrity: sha512-FQqJynaEDuwQxoFLP3/i10HQwNYh4wxgs0NeSoL24BLWvpUdstgHqUm2zgwRov8Tmh5kjndPIWaXenwl0D47EA==}
 
-  '@tanstack/react-query-devtools@5.51.9':
-    resolution: {integrity: sha512-ztS5l75gV4xjDUFfEOtBfzcqW5vyfAQ2haWPpGMwq/Ha/3a4gaOE5DKntq+0+upWxUpp4SSvXXm6fMjV5miUcQ==}
+  '@tanstack/react-query-devtools@5.51.11':
+    resolution: {integrity: sha512-8nQRbhdtvl/J9bO+bk/kPQesCOtDgk+oI4AmZJDnkf5OfKTJL3J4tTe+fhuXph7KP4DUOS+ge9o9TGt0OgWFHw==}
     peerDependencies:
-      '@tanstack/react-query': ^5.51.9
+      '@tanstack/react-query': ^5.51.11
       react: ^18 || ^19
 
-  '@tanstack/react-query@5.51.9':
-    resolution: {integrity: sha512-F8j6i42wfKvFrRcxfOyFyYME+bPfNthAGOSkjdv4UwZZXJjnBnBs/yRQGT0bD23LVCTuBzlIfZ0GKSIyclZ9rQ==}
+  '@tanstack/react-query@5.51.11':
+    resolution: {integrity: sha512-4Kq2x0XpDlpvSnaLG+8pHNH60zEc3mBvb3B2tOMDjcPCi/o+Du3p/9qpPLwJOTliVxxPJAP27fuIhLrsRdCr7A==}
     peerDependencies:
       react: ^18.0.0
 
@@ -15077,13 +15077,13 @@ snapshots:
 
   '@tanstack/query-devtools@5.51.9': {}
 
-  '@tanstack/react-query-devtools@5.51.9(@tanstack/react-query@5.51.9(react@18.3.1))(react@18.3.1)':
+  '@tanstack/react-query-devtools@5.51.11(@tanstack/react-query@5.51.11(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@tanstack/query-devtools': 5.51.9
-      '@tanstack/react-query': 5.51.9(react@18.3.1)
+      '@tanstack/react-query': 5.51.11(react@18.3.1)
       react: 18.3.1
 
-  '@tanstack/react-query@5.51.9(react@18.3.1)':
+  '@tanstack/react-query@5.51.11(react@18.3.1)':
     dependencies:
       '@tanstack/query-core': 5.51.9
       react: 18.3.1
