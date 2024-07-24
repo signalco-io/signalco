@@ -1241,8 +1241,8 @@ importers:
         specifier: 0.33.4
         version: 0.33.4
       stripe:
-        specifier: 16.2.0
-        version: 16.2.0
+        specifier: 16.4.0
+        version: 16.4.0
       tailwindcss:
         specifier: 3.4.6
         version: 3.4.6
@@ -9658,10 +9658,6 @@ packages:
     resolution: {integrity: sha512-MvjoMCJwEarSbUYk5O+nmoSzSutSsTwF85zcHPQ9OrlFoZOYIjaqBAJIqIXjptyD5vThxGq52Xu/MaJzRkIk4Q==}
     engines: {node: '>=0.6'}
 
-  qs@6.12.1:
-    resolution: {integrity: sha512-zWmv4RSuB9r2mYQw3zxQuHWeU+42aKi1wWig/j4ele4ygELZ7PEO6MM7rim9oAQH2A5MWfsAVf/jPvTPgCbvUQ==}
-    engines: {node: '>=0.6'}
-
   qs@6.12.3:
     resolution: {integrity: sha512-AWJm14H1vVaO/iNZ4/hO+HyaTehuy9nRqVdkTqlJt0HWvBiBIEXFmb4C0DGeYo3Xes9rrEW+TxHsaigCbN5ICQ==}
     engines: {node: '>=0.6'}
@@ -10395,8 +10391,8 @@ packages:
     resolution: {integrity: sha512-6fPc+R4ihwqP6N/aIv2f1gMH8lOVtWQHoqC4yK6oSDVVocumAsfCqjkXnqiYMhmMwS/mEHLp7Vehlt3ql6lEig==}
     engines: {node: '>=8'}
 
-  stripe@16.2.0:
-    resolution: {integrity: sha512-kNHb5x6mlQJ8V92Afn+F+uyHG3U0+Mc1pOYxDkbEh/kI3oF63URnUt6dwTQthELYWBy04arerm2XjwgtzEPDEA==}
+  stripe@16.4.0:
+    resolution: {integrity: sha512-rFIcDJaF+z28BsR4GXoy0YhAjE24D0AymJRsrAS0YbQAIJi0gOO/4mctbhNzrySS+bLVJOQLefdblDQMMNm58Q==}
     engines: {node: '>=12.*'}
 
   style-loader@3.3.4:
@@ -20744,10 +20740,6 @@ snapshots:
     dependencies:
       side-channel: 1.0.6
 
-  qs@6.12.1:
-    dependencies:
-      side-channel: 1.0.6
-
   qs@6.12.3:
     dependencies:
       side-channel: 1.0.6
@@ -21861,10 +21853,10 @@ snapshots:
 
   strip-json-comments@3.1.1: {}
 
-  stripe@16.2.0:
+  stripe@16.4.0:
     dependencies:
       '@types/node': 20.14.12
-      qs: 6.12.1
+      qs: 6.12.3
 
   style-loader@3.3.4(webpack@5.93.0(@swc/core@1.7.0(@swc/helpers@0.5.12))(esbuild@0.21.5)):
     dependencies:
