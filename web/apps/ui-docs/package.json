@@ -15,7 +15,7 @@
   },
   "devDependencies": {
     "@signalco/tsconfig": "workspace:*",
-    "@storybook/react-vite": "8.2.4",
+    "@storybook/react-vite": "8.2.6",
     "@storybook/addon-essentials": "8.2.6",
     "@storybook/addon-links": "8.2.6",
     "@storybook/addon-themes": "8.2.6",
