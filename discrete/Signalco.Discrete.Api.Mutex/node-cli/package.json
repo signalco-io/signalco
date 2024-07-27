@@ -1,10 +1,14 @@
 {
-  "name": "mutex-cli",
-  "version": "1.0.0",
+  "name": "@signalco/mutex-cli",
+  "version": "0.1.0",
   "description": "Signalco Mutex API CLI",
   "type": "module",
   "author": "Signalco",
   "license": "AGPL-3.0-only",
+  "packageManager": "npm@10.8.2",
+  "engines": {
+    "node": ">=20"
+  },
   "bin": {
     "mutex": "index.js"
   },
@@ -17,7 +21,8 @@
     "mutex",
     "cloud",
     "api",
-    "cli"
+    "cli",
+    "devops"
   ],
   "bugs": {
     "url": "https://github.com/signalco-io/signalco/issues"
