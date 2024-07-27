@@ -1761,8 +1761,8 @@ importers:
   packages/ui-primitives:
     devDependencies:
       '@microsoft/api-extractor':
-        specifier: 7.47.2
-        version: 7.47.2(@types/node@20.14.12)
+        specifier: 7.47.4
+        version: 7.47.4(@types/node@20.14.12)
       '@radix-ui/react-checkbox':
         specifier: 1.1.1
         version: 1.1.1(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -1846,7 +1846,7 @@ importers:
         version: 2.4.0
       tsup:
         specifier: 8.2.0
-        version: 8.2.0(@microsoft/api-extractor@7.47.2(@types/node@20.14.12))(@swc/core@1.7.0)(jiti@1.21.6)(postcss@8.4.40)(typescript@5.5.4)
+        version: 8.2.0(@microsoft/api-extractor@7.47.4(@types/node@20.14.12))(@swc/core@1.7.0)(jiti@1.21.6)(postcss@8.4.40)(typescript@5.5.4)
       typescript:
         specifier: 5.5.4
         version: 5.5.4
@@ -1861,8 +1861,8 @@ importers:
         version: 1.0.7(tailwindcss@3.4.7)
     devDependencies:
       '@microsoft/api-extractor':
-        specifier: 7.47.2
-        version: 7.47.2(@types/node@20.14.12)
+        specifier: 7.47.4
+        version: 7.47.4(@types/node@20.14.12)
       '@signalco/tailwindcss-config-signalco':
         specifier: workspace:*
         version: link:../tailwindcss-config-signalco
@@ -1871,7 +1871,7 @@ importers:
         version: link:../tsconfig
       tsup:
         specifier: 8.2.0
-        version: 8.2.0(@microsoft/api-extractor@7.47.2(@types/node@20.14.12))(@swc/core@1.7.0)(jiti@1.21.6)(postcss@8.4.40)(typescript@5.5.4)
+        version: 8.2.0(@microsoft/api-extractor@7.47.4(@types/node@20.14.12))(@swc/core@1.7.0)(jiti@1.21.6)(postcss@8.4.40)(typescript@5.5.4)
       typescript:
         specifier: 5.5.4
         version: 5.5.4
@@ -1886,8 +1886,8 @@ importers:
         version: 1.0.7(tailwindcss@3.4.7)
     devDependencies:
       '@microsoft/api-extractor':
-        specifier: 7.47.2
-        version: 7.47.2(@types/node@20.14.12)
+        specifier: 7.47.4
+        version: 7.47.4(@types/node@20.14.12)
       '@signalco/tailwindcss-config-signalco':
         specifier: workspace:*
         version: link:../tailwindcss-config-signalco
@@ -1896,7 +1896,7 @@ importers:
         version: link:../tsconfig
       tsup:
         specifier: 8.2.0
-        version: 8.2.0(@microsoft/api-extractor@7.47.2(@types/node@20.14.12))(@swc/core@1.7.0)(jiti@1.21.6)(postcss@8.4.40)(typescript@5.5.4)
+        version: 8.2.0(@microsoft/api-extractor@7.47.4(@types/node@20.14.12))(@swc/core@1.7.0)(jiti@1.21.6)(postcss@8.4.40)(typescript@5.5.4)
       typescript:
         specifier: 5.5.4
         version: 5.5.4
@@ -3724,15 +3724,8 @@ packages:
       '@types/react': '>=16'
       react: '>=16'
 
-  '@microsoft/api-extractor-model@7.29.3':
-    resolution: {integrity: sha512-kEWjLr2ygL3ku9EGyjeTnL2S5IxyH9NaF1k1UoI0Nzwr4xEJBSWCVsWuF2+0lPUrRPA6mTY95fR264SJ5ETKQA==}
-
   '@microsoft/api-extractor-model@7.29.4':
     resolution: {integrity: sha512-LHOMxmT8/tU1IiiiHOdHFF83Qsi+V8d0kLfscG4EvQE9cafiR8blOYr8SfkQKWB1wgEilQgXJX3MIA4vetDLZw==}
-
-  '@microsoft/api-extractor@7.47.2':
-    resolution: {integrity: sha512-YWE2HGrSTZaPPSr7xiNizSuViZpC7Jsa7+DwRW5rYVgrMXNbfX/PpBOoSkl5uaz9I2sv2JKLJ75kVNt64BvS3g==}
-    hasBin: true
 
   '@microsoft/api-extractor@7.47.4':
     resolution: {integrity: sha512-HKm+P4VNzWwvq1Ey+Jfhhj/3MjsD+ka2hbt8L5AcRM95lu1MFOYnz3XlU7Gr79Q/ZhOb7W/imAKeYrOI0bFydg==}
@@ -4687,14 +4680,6 @@ packages:
   '@rushstack/eslint-patch@1.10.2':
     resolution: {integrity: sha512-hw437iINopmQuxWPSUEvqE56NCPsiU8N4AYtfHmJFckclktzK9YQJieD3XkDCDH4OjL+C7zgPUh73R/nrcHrqw==}
 
-  '@rushstack/node-core-library@5.5.0':
-    resolution: {integrity: sha512-Cl3MYQ74Je5Y/EngMxcA3SpHjGZ/022nKbAO1aycGfQ+7eKyNCBu0oywj5B1f367GCzuHBgy+3BlVLKysHkXZw==}
-    peerDependencies:
-      '@types/node': '*'
-    peerDependenciesMeta:
-      '@types/node':
-        optional: true
-
   '@rushstack/node-core-library@5.5.1':
     resolution: {integrity: sha512-ZutW56qIzH8xIOlfyaLQJFx+8IBqdbVCZdnj+XT1MorQ1JqqxHse8vbCpEM+2MjsrqcbxcgDIbfggB1ZSQ2A3g==}
     peerDependencies:
@@ -4703,19 +4688,8 @@ packages:
       '@types/node':
         optional: true
 
-  '@rushstack/rig-package@0.5.2':
-    resolution: {integrity: sha512-mUDecIJeH3yYGZs2a48k+pbhM6JYwWlgjs2Ca5f2n1G2/kgdgP9D/07oglEGf6mRyXEnazhEENeYTSNDRCwdqA==}
-
   '@rushstack/rig-package@0.5.3':
     resolution: {integrity: sha512-olzSSjYrvCNxUFZowevC3uz8gvKr3WTpHQ7BkpjtRpA3wK+T0ybep/SRUMfr195gBzJm5gaXw0ZMgjIyHqJUow==}
-
-  '@rushstack/terminal@0.13.2':
-    resolution: {integrity: sha512-t8i0PsGvBHmFBY8pryO3badqFlxQsm2rw3KYrzjcmVkG/WGklKg1qVkr9beAS1Oe8XWDRgj6SkoHkpNjs7aaNw==}
-    peerDependencies:
-      '@types/node': '*'
-    peerDependenciesMeta:
-      '@types/node':
-        optional: true
 
   '@rushstack/terminal@0.13.3':
     resolution: {integrity: sha512-fc3zjXOw8E0pXS5t9vTiIPx9gHA0fIdTXsu9mT4WbH+P3mYvnrX0iAQ5a6NvyK1+CqYWBTw/wVNx7SDJkI+WYQ==}
@@ -4724,9 +4698,6 @@ packages:
     peerDependenciesMeta:
       '@types/node':
         optional: true
-
-  '@rushstack/ts-command-line@4.22.2':
-    resolution: {integrity: sha512-xkvrGd6D9dPlI3I401Thc640WNsEPB1sGEmy12a2VJaPQPwhE6Ik0gEVPZJ/2G1w213eaCAdxUY1xpiTulsmpA==}
 
   '@rushstack/ts-command-line@4.22.3':
     resolution: {integrity: sha512-edMpWB3QhFFZ4KtSzS8WNjBgR4PXPPOVrOHMbb7kNpmQ1UFS9HdVtjCXg1H5fG+xYAbeE+TMPcVPUyX2p84STA==}
@@ -12465,37 +12436,11 @@ snapshots:
       '@types/react': 18.3.3
       react: 18.3.1
 
-  '@microsoft/api-extractor-model@7.29.3(@types/node@20.14.12)':
-    dependencies:
-      '@microsoft/tsdoc': 0.15.0
-      '@microsoft/tsdoc-config': 0.17.0
-      '@rushstack/node-core-library': 5.5.0(@types/node@20.14.12)
-    transitivePeerDependencies:
-      - '@types/node'
-
   '@microsoft/api-extractor-model@7.29.4(@types/node@20.14.12)':
     dependencies:
       '@microsoft/tsdoc': 0.15.0
       '@microsoft/tsdoc-config': 0.17.0
       '@rushstack/node-core-library': 5.5.1(@types/node@20.14.12)
-    transitivePeerDependencies:
-      - '@types/node'
-
-  '@microsoft/api-extractor@7.47.2(@types/node@20.14.12)':
-    dependencies:
-      '@microsoft/api-extractor-model': 7.29.3(@types/node@20.14.12)
-      '@microsoft/tsdoc': 0.15.0
-      '@microsoft/tsdoc-config': 0.17.0
-      '@rushstack/node-core-library': 5.5.0(@types/node@20.14.12)
-      '@rushstack/rig-package': 0.5.2
-      '@rushstack/terminal': 0.13.2(@types/node@20.14.12)
-      '@rushstack/ts-command-line': 4.22.2(@types/node@20.14.12)
-      lodash: 4.17.21
-      minimatch: 3.0.8
-      resolve: 1.22.8
-      semver: 7.5.4
-      source-map: 0.6.1
-      typescript: 5.4.2
     transitivePeerDependencies:
       - '@types/node'
 
@@ -13688,19 +13633,6 @@ snapshots:
 
   '@rushstack/eslint-patch@1.10.2': {}
 
-  '@rushstack/node-core-library@5.5.0(@types/node@20.14.12)':
-    dependencies:
-      ajv: 8.13.0
-      ajv-draft-04: 1.0.0(ajv@8.13.0)
-      ajv-formats: 3.0.1(ajv@8.13.0)
-      fs-extra: 7.0.1
-      import-lazy: 4.0.0
-      jju: 1.4.0
-      resolve: 1.22.8
-      semver: 7.5.4
-    optionalDependencies:
-      '@types/node': 20.14.12
-
   '@rushstack/node-core-library@5.5.1(@types/node@20.14.12)':
     dependencies:
       ajv: 8.13.0
@@ -13714,22 +13646,10 @@ snapshots:
     optionalDependencies:
       '@types/node': 20.14.12
 
-  '@rushstack/rig-package@0.5.2':
-    dependencies:
-      resolve: 1.22.8
-      strip-json-comments: 3.1.1
-
   '@rushstack/rig-package@0.5.3':
     dependencies:
       resolve: 1.22.8
       strip-json-comments: 3.1.1
-
-  '@rushstack/terminal@0.13.2(@types/node@20.14.12)':
-    dependencies:
-      '@rushstack/node-core-library': 5.5.0(@types/node@20.14.12)
-      supports-color: 8.1.1
-    optionalDependencies:
-      '@types/node': 20.14.12
 
   '@rushstack/terminal@0.13.3(@types/node@20.14.12)':
     dependencies:
@@ -13737,15 +13657,6 @@ snapshots:
       supports-color: 8.1.1
     optionalDependencies:
       '@types/node': 20.14.12
-
-  '@rushstack/ts-command-line@4.22.2(@types/node@20.14.12)':
-    dependencies:
-      '@rushstack/terminal': 0.13.2(@types/node@20.14.12)
-      '@types/argparse': 1.0.38
-      argparse: 1.0.10
-      string-argv: 0.3.2
-    transitivePeerDependencies:
-      - '@types/node'
 
   '@rushstack/ts-command-line@4.22.3(@types/node@20.14.12)':
     dependencies:
@@ -20480,7 +20391,7 @@ snapshots:
 
   tslib@2.6.3: {}
 
-  tsup@8.2.0(@microsoft/api-extractor@7.47.2(@types/node@20.14.12))(@swc/core@1.7.0)(jiti@1.21.6)(postcss@8.4.40)(typescript@5.5.4):
+  tsup@8.2.0(@microsoft/api-extractor@7.47.4(@types/node@20.14.12))(@swc/core@1.7.0)(jiti@1.21.6)(postcss@8.4.40)(typescript@5.5.4):
     dependencies:
       bundle-require: 5.0.0(esbuild@0.23.0)
       cac: 6.7.14
@@ -20498,7 +20409,7 @@ snapshots:
       sucrase: 3.35.0
       tree-kill: 1.2.2
     optionalDependencies:
-      '@microsoft/api-extractor': 7.47.2(@types/node@20.14.12)
+      '@microsoft/api-extractor': 7.47.4(@types/node@20.14.12)
       '@swc/core': 1.7.0(@swc/helpers@0.5.12)
       postcss: 8.4.40
       typescript: 5.5.4
