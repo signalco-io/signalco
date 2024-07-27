@@ -1,4 +1,4 @@
-import { Ref, type ReactElement, MouseEventHandler } from 'react';
+import { Ref, type ReactElement, MouseEventHandler, CSSProperties } from 'react';
 import { Row } from '../Row';
 import { cx } from '../cx';
 import { Button } from '../Button';
@@ -36,7 +36,7 @@ export type ListItemPropsCommon = {
     endDecorator?: ReactElement;
     className?: string;
     title?: string;
-    style?: React.CSSProperties;
+    style?: CSSProperties;
     /**
      * @default 'plain'
      */

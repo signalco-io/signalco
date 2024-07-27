@@ -1,4 +1,4 @@
-import { type PropsWithChildren, useMemo, ReactNode, CSSProperties } from 'react';
+import { type PropsWithChildren, useMemo, ReactNode, CSSProperties, ReactElement } from 'react';
 import { Spinner } from '@signalco/ui-primitives/Spinner';
 import { Skeleton } from '@signalco/ui-primitives/Skeleton';
 import { cx } from '@signalco/ui-primitives/cx';
@@ -7,7 +7,7 @@ import { Alert } from '../Alert';
 import { errorText } from '@signalco/js';
 
 export type LoadableLoadingErrorProps = {
-    error?: unknown | string | React.ReactElement;
+    error?: unknown | string | ReactElement;
     isLoading?: boolean;
 }
 

@@ -1,4 +1,4 @@
-import { type HTMLAttributes, useEffect, useState } from 'react';
+import { HTMLAttributes, useEffect, useState } from 'react';
 import { cx } from '../cx';
 
 export type ScrolledLineProps = HTMLAttributes<HTMLDivElement> & {

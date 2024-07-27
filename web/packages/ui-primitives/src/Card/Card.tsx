@@ -1,3 +1,4 @@
+import React from 'react';
 import { forwardRef, type HTMLAttributes } from 'react';
 import { slug } from '@signalco/js';
 import { cx } from '../cx';

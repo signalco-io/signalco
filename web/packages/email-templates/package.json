@@ -17,7 +17,6 @@
         "@types/node": "20.14.11"
     },
     "dependencies": {
-        "@signalco/tailwindcss-config-signalco": "workspace:*",
         "@react-email/components": "0.0.21",
         "react-email": "2.1.5",
         "react": "18.3.1",
