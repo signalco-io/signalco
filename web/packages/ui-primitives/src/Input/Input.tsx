@@ -1,11 +1,11 @@
-import { InputHTMLAttributes, PropsWithChildren, useMemo } from 'react';
+import { InputHTMLAttributes, PropsWithChildren, ReactNode, useMemo } from 'react';
 import { Stack } from '../Stack';
 import { Row } from '../Row';
 import { cx } from '../cx';
 
 export type InputProps = InputHTMLAttributes<HTMLInputElement> & {
-    startDecorator?: React.ReactNode;
-    endDecorator?: React.ReactNode;
+    startDecorator?: ReactNode;
+    endDecorator?: ReactNode;
     label?: string;
     helperText?: string;
     fullWidth?: boolean;
@@ -56,7 +56,7 @@ export function Input({
                 />
                 {endDecorator ?? null}
             </HorizontalContainer>
-            {helperText && <p className="text-sm text-muted-foreground">{helperText}</p>}
+            {helperText && <p className="text-muted-foreground text-sm">{helperText}</p>}
         </VerticalContainer>
     );
 }

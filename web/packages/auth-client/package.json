@@ -26,9 +26,9 @@
     "typescript": "5.5.4"
   },
   "peerDependencies": {
-    "next": "14.2.5",
-    "react": "18.3.1",
-    "react-dom": "18.3.1",
-    "@tanstack/react-query": "5.51.15"
+    "next": ">=14",
+    "react": ">=18",
+    "react-dom": ">=18",
+    "@tanstack/react-query": ">=5"
   }
 }

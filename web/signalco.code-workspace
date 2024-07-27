@@ -97,6 +97,14 @@
 			"path": "packages/ui-primitives"
 		},
 		{
+			"name": "📦 @signalco/ui-themes-minimal",
+			"path": "packages/ui-themes-minimal"
+		},
+		{
+			"name": "📦 @signalco/ui-themes-minimal-app",
+			"path": "packages/ui-themes-minimal-app"
+		},
+		{
 			"name": "📦 @uier/toolbar",
 			"path": "packages/uier-toolbar"
 		},
