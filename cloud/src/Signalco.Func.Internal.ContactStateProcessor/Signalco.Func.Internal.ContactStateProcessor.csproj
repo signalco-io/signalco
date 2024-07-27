@@ -12,8 +12,8 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Azure.Functions.Worker" Version="1.22.0" />
     <PackageReference Include="Microsoft.Azure.Functions.Worker.Sdk" Version="1.17.4" />
-    <PackageReference Include="Microsoft.Azure.Functions.Worker.Extensions.Storage" Version="6.4.0" />
-    <PackageReference Include="Azure.Storage.Queues" Version="12.19.0" />
+    <PackageReference Include="Microsoft.Azure.Functions.Worker.Extensions.Storage" Version="6.6.0" />
+    <PackageReference Include="Azure.Storage.Queues" Version="12.19.1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Signal.Api.Common\Signal.Api.Common.csproj" />

@@ -1,25 +1,39 @@
 {
     "name": "@signalco/js",
-    "version": "0.0.0",
-    "private": true,
+    "version": "0.1.0",
     "sideEffects": false,
     "type": "module",
     "license": "MIT",
     "exports": {
         ".": "./src/index.ts"
     },
+    "files": [
+        "dist"
+    ],
+    "publishConfig": {
+        "access": "public",
+        "exports": {
+            ".": {
+                "import": "./dist/index.js",
+                "types": "./dist/src/index.d.ts"
+            }
+        }
+    },
     "scripts": {
-        "lint": "eslint ."
+        "lint": "eslint .",
+        "prepublishOnly": "tsup --env.NODE_ENV production"
     },
     "devDependencies": {
         "@signalco/tsconfig": "workspace:*",
         "@signalco/eslint-config-signalco": "workspace:*",
         "react": "18.3.1",
         "react-dom": "18.3.1",
-        "typescript": "5.5.3"
+        "typescript": "5.5.4",
+        "tsup": "8.2.3",
+        "@microsoft/api-extractor": "7.47.4"
     },
     "peerDependencies": {
-        "react": "18.3.1",
-        "react-dom": "18.3.1"
+        "react": ">=18",
+        "react-dom": ">=18"
     }
 }

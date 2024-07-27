@@ -14,13 +14,13 @@
         "@signalco/tsconfig": "workspace:*",
         "@signalco/eslint-config-signalco": "workspace:*",
         "@types/react": "18.3.3",
-        "@types/node": "20.14.11"
+        "@types/node": "20.14.12"
     },
     "dependencies": {
         "@signalco/tailwindcss-config-signalco": "workspace:*",
-        "@react-email/components": "0.0.21",
-        "react-email": "2.1.5",
+        "@react-email/components": "0.0.22",
+        "react-email": "2.1.6",
         "react": "18.3.1",
-        "typescript": "5.5.3"
+        "typescript": "5.5.4"
     }
 }
