@@ -7,16 +7,16 @@
         "packages/*"
     ],
     "license": "MIT",
-    "packageManager": "pnpm@9.5.0",
+    "packageManager": "pnpm@9.6.0",
     "scripts": {
         "build": "turbo run build",
         "clean": "turbo run clean",
-        "dev": "turbo run dev",
+        "dev": "turbo run dev --ui tui",
         "start": "turbo run start",
         "lint": "turbo run lint",
         "test": "turbo run test"
     },
     "devDependencies": {
-        "turbo": "2.0.6"
+        "turbo": "2.0.9"
     }
 }
