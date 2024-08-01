@@ -1,10 +1,10 @@
-import { HTMLAttributes } from 'react';
+import { HTMLAttributes, ReactNode } from 'react';
 import { cx } from '../cx';
 
 export type AvatarProps = HTMLAttributes<HTMLDivElement> & {
     size?: 'sm' | 'md' | 'lg';
 } & ({
-    children: React.ReactNode;
+    children: ReactNode;
     src?: never;
     alt?: never;
 } | {

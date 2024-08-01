@@ -1,8 +1,8 @@
-import { baseConfig } from '@signalco/tailwindcss-config-signalco';
+import { config } from '@signalco/ui-themes-minimal/config';
 
 /** @type {import('tailwindcss').Config} */
 export default {
-  presets: [baseConfig],
+  presets: [config],
   content: [
     './stories/**/*.stories.{tsx,ts}',
     '../../packages/ui/src/**/*.{ts,tsx}',

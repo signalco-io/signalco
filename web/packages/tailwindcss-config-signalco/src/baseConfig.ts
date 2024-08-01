@@ -1,7 +1,8 @@
-const { fontFamily } = require("tailwindcss/defaultTheme")
+import type { Config } from "tailwindcss"
+import { fontFamily } from "tailwindcss/defaultTheme";
+import tailwindcssAnimate from "tailwindcss-animate";
 
-/** @type {import('tailwindcss').Config} */
-export const baseConfig = {
+export const baseConfig: Config = {
     darkMode: ["class", '[class="dark"]'],
     content: [
         './src/**/*.{ts,tsx}'
@@ -58,16 +59,16 @@ export const baseConfig = {
             },
             keyframes: {
                 "accordion-down": {
-                    from: { height: 0 },
+                    from: { height: '0px' },
                     to: { height: "var(--radix-accordion-content-height)" },
                 },
                 "accordion-up": {
                     from: { height: "var(--radix-accordion-content-height)" },
-                    to: { height: 0 },
+                    to: { height: '0px' },
                 },
                 "scroll-reveal": {
-                    '0%': { opacity: 0 },
-                    '2%': { opacity: 1 },
+                    '0%': { opacity: '0' },
+                    '2%': { opacity: '1' },
                 },
                 'scroll': {
                     '0%': { transform: 'translateY(0)' },
@@ -85,30 +86,5 @@ export const baseConfig = {
             },
         },
     },
-    plugins: [require("tailwindcss-animate")],
+    plugins: [tailwindcssAnimate],
 }
-
-const appFontCoef = 0.875;
-/** @type {import('tailwindcss').Config} */
-export const appBaseConfig = {
-    ...baseConfig,
-    theme: {
-        ...baseConfig.theme,
-        // Reduce font size by to 0.875rem (14px)
-        fontSize: {
-            xs: [`${0.75 * appFontCoef}rem`, { lineHeight: `${1 * appFontCoef}rem` }],
-            sm: [`${0.875 * appFontCoef}rem`, { lineHeight: `${1.25 * appFontCoef}rem` }],
-            base: [`${1 * appFontCoef}rem`, { lineHeight: `${1.5 * appFontCoef}rem` }],
-            lg: [`${1.125 * appFontCoef}rem`, { lineHeight: `${1.75 * appFontCoef}rem` }],
-            xl: [`${1.25 * appFontCoef}rem`, { lineHeight: `${1.75 * appFontCoef}rem` }],
-            '2xl': [`${1.5 * appFontCoef}rem`, { lineHeight: `${2 * appFontCoef}rem` }],
-            '3xl': [`${1.875 * appFontCoef}rem`, { lineHeight: `${2.25 * appFontCoef}rem` }],
-            '4xl': [`${2.25 * appFontCoef}rem`, { lineHeight: `${2.5 * appFontCoef}rem` }],
-            '5xl': [`${3 * appFontCoef}rem`, { lineHeight: '1' }],
-            '6xl': [`${3.75 * appFontCoef}rem`, { lineHeight: '1' }],
-            '7xl': [`${4.5 * appFontCoef}rem`, { lineHeight: '1' }],
-            '8xl': [`${6 * appFontCoef}rem`, { lineHeight: '1' }],
-            '9xl': [`${8 * appFontCoef}rem`, { lineHeight: '1' }],
-        }
-    }
-};
