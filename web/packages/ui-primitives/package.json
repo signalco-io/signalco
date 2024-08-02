@@ -52,7 +52,7 @@
         "sass": "1.77.8",
         "tailwind-merge": "2.4.0",
         "typescript": "5.5.4",
-        "tsup": "8.2.3",
+        "tsup": "8.2.4",
         "@microsoft/api-extractor": "7.47.4"
     },
     "peerDependencies": {

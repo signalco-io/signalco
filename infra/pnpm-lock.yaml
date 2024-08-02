@@ -70,8 +70,8 @@ importers:
         specifier: 7.0.0
         version: 7.0.0(eslint@8.57.0)
       tsup:
-        specifier: 8.2.3
-        version: 8.2.3(typescript@5.5.4)
+        specifier: 8.2.4
+        version: 8.2.4(typescript@5.5.4)
       typescript:
         specifier: 5.5.4
         version: 5.5.4
@@ -119,8 +119,8 @@ importers:
         specifier: 7.0.0
         version: 7.0.0(eslint@8.57.0)
       tsup:
-        specifier: 8.2.3
-        version: 8.2.3(typescript@5.5.4)
+        specifier: 8.2.4
+        version: 8.2.4(typescript@5.5.4)
       typescript:
         specifier: 5.5.4
         version: 5.5.4
@@ -177,8 +177,8 @@ importers:
         specifier: 7.0.0
         version: 7.0.0(eslint@8.57.0)
       tsup:
-        specifier: 8.2.3
-        version: 8.2.3(typescript@5.5.4)
+        specifier: 8.2.4
+        version: 8.2.4(typescript@5.5.4)
       typescript:
         specifier: 5.5.4
         version: 5.5.4
@@ -235,8 +235,8 @@ importers:
         specifier: 7.0.0
         version: 7.0.0(eslint@8.57.0)
       tsup:
-        specifier: 8.2.3
-        version: 8.2.3(typescript@5.5.4)
+        specifier: 8.2.4
+        version: 8.2.4(typescript@5.5.4)
       typescript:
         specifier: 5.5.4
         version: 5.5.4
@@ -284,8 +284,8 @@ importers:
         specifier: 7.0.0
         version: 7.0.0(eslint@8.57.0)
       tsup:
-        specifier: 8.2.3
-        version: 8.2.3(typescript@5.5.4)
+        specifier: 8.2.4
+        version: 8.2.4(typescript@5.5.4)
       typescript:
         specifier: 5.5.4
         version: 5.5.4
@@ -2586,8 +2586,8 @@ packages:
   tsconfig-paths@3.15.0:
     resolution: {integrity: sha512-2Ac2RgzDe/cn48GvOe3M+o82pEFewD3UPbyoUHHdKasHwJKjds4fLXWf/Ux5kATBKN20oaFGu+jbElp1pos0mg==}
 
-  tsup@8.2.3:
-    resolution: {integrity: sha512-6YNT44oUfXRbZuSMNmN36GzwPPIlD2wBccY7looM2fkTcxkf2NEmwr3OZuDZoySklnrIG4hoEtzy8yUXYOqNcg==}
+  tsup@8.2.4:
+    resolution: {integrity: sha512-akpCPePnBnC/CXgRrcy72ZSntgIEUa1jN0oJbbvpALWKNOz1B7aM+UVDWGRGIO/T/PZugAESWDJUAb5FD48o8Q==}
     engines: {node: '>=18'}
     hasBin: true
     peerDependencies:
@@ -5222,7 +5222,7 @@ snapshots:
       minimist: 1.2.8
       strip-bom: 3.0.0
 
-  tsup@8.2.3(typescript@5.5.4):
+  tsup@8.2.4(typescript@5.5.4):
     dependencies:
       bundle-require: 5.0.0(esbuild@0.23.0)
       cac: 6.7.14
