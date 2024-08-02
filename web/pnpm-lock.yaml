@@ -1525,8 +1525,8 @@ importers:
         specifier: 18.3.1
         version: 18.3.1(react@18.3.1)
       tsup:
-        specifier: 8.2.3
-        version: 8.2.3(@microsoft/api-extractor@7.47.4(@types/node@20.14.14))(@swc/core@1.7.0)(jiti@1.21.6)(postcss@8.4.40)(typescript@5.5.4)
+        specifier: 8.2.4
+        version: 8.2.4(@microsoft/api-extractor@7.47.4(@types/node@20.14.14))(@swc/core@1.7.0)(jiti@1.21.6)(postcss@8.4.40)(typescript@5.5.4)
       typescript:
         specifier: 5.5.4
         version: 5.5.4
@@ -1549,8 +1549,8 @@ importers:
         specifier: 18.3.1
         version: 18.3.1(react@18.3.1)
       tsup:
-        specifier: 8.2.3
-        version: 8.2.3(@microsoft/api-extractor@7.47.4(@types/node@20.14.14))(@swc/core@1.7.0)(jiti@1.21.6)(postcss@8.4.40)(typescript@5.5.4)
+        specifier: 8.2.4
+        version: 8.2.4(@microsoft/api-extractor@7.47.4(@types/node@20.14.14))(@swc/core@1.7.0)(jiti@1.21.6)(postcss@8.4.40)(typescript@5.5.4)
       typescript:
         specifier: 5.5.4
         version: 5.5.4
@@ -1845,8 +1845,8 @@ importers:
         specifier: 2.4.0
         version: 2.4.0
       tsup:
-        specifier: 8.2.3
-        version: 8.2.3(@microsoft/api-extractor@7.47.4(@types/node@20.14.14))(@swc/core@1.7.0)(jiti@1.21.6)(postcss@8.4.40)(typescript@5.5.4)
+        specifier: 8.2.4
+        version: 8.2.4(@microsoft/api-extractor@7.47.4(@types/node@20.14.14))(@swc/core@1.7.0)(jiti@1.21.6)(postcss@8.4.40)(typescript@5.5.4)
       typescript:
         specifier: 5.5.4
         version: 5.5.4
@@ -1870,8 +1870,8 @@ importers:
         specifier: workspace:*
         version: link:../tsconfig
       tsup:
-        specifier: 8.2.3
-        version: 8.2.3(@microsoft/api-extractor@7.47.4(@types/node@20.14.14))(@swc/core@1.7.0)(jiti@1.21.6)(postcss@8.4.40)(typescript@5.5.4)
+        specifier: 8.2.4
+        version: 8.2.4(@microsoft/api-extractor@7.47.4(@types/node@20.14.14))(@swc/core@1.7.0)(jiti@1.21.6)(postcss@8.4.40)(typescript@5.5.4)
       typescript:
         specifier: 5.5.4
         version: 5.5.4
@@ -1895,8 +1895,8 @@ importers:
         specifier: workspace:*
         version: link:../tsconfig
       tsup:
-        specifier: 8.2.3
-        version: 8.2.3(@microsoft/api-extractor@7.47.4(@types/node@20.14.14))(@swc/core@1.7.0)(jiti@1.21.6)(postcss@8.4.40)(typescript@5.5.4)
+        specifier: 8.2.4
+        version: 8.2.4(@microsoft/api-extractor@7.47.4(@types/node@20.14.14))(@swc/core@1.7.0)(jiti@1.21.6)(postcss@8.4.40)(typescript@5.5.4)
       typescript:
         specifier: 5.5.4
         version: 5.5.4
@@ -1970,8 +1970,8 @@ importers:
         specifier: 1.0.7
         version: 1.0.7(tailwindcss@3.4.7)
       tsup:
-        specifier: 8.2.3
-        version: 8.2.3(@microsoft/api-extractor@7.47.4(@types/node@20.14.14))(@swc/core@1.7.0)(jiti@1.21.6)(postcss@8.4.40)(typescript@5.5.4)
+        specifier: 8.2.4
+        version: 8.2.4(@microsoft/api-extractor@7.47.4(@types/node@20.14.14))(@swc/core@1.7.0)(jiti@1.21.6)(postcss@8.4.40)(typescript@5.5.4)
       typescript:
         specifier: 5.5.4
         version: 5.5.4
@@ -9940,8 +9940,8 @@ packages:
   tslib@2.6.3:
     resolution: {integrity: sha512-xNvxJEOUiWPGhUuUdQgAJPKOOJfGnIyKySOc09XkKsgdUV/3E2zvwZYdejjmRgPCgcym1juLH3226yA7sEFJKQ==}
 
-  tsup@8.2.3:
-    resolution: {integrity: sha512-6YNT44oUfXRbZuSMNmN36GzwPPIlD2wBccY7looM2fkTcxkf2NEmwr3OZuDZoySklnrIG4hoEtzy8yUXYOqNcg==}
+  tsup@8.2.4:
+    resolution: {integrity: sha512-akpCPePnBnC/CXgRrcy72ZSntgIEUa1jN0oJbbvpALWKNOz1B7aM+UVDWGRGIO/T/PZugAESWDJUAb5FD48o8Q==}
     engines: {node: '>=18'}
     hasBin: true
     peerDependencies:
@@ -20364,7 +20364,7 @@ snapshots:
 
   tslib@2.6.3: {}
 
-  tsup@8.2.3(@microsoft/api-extractor@7.47.4(@types/node@20.14.14))(@swc/core@1.7.0)(jiti@1.21.6)(postcss@8.4.40)(typescript@5.5.4):
+  tsup@8.2.4(@microsoft/api-extractor@7.47.4(@types/node@20.14.14))(@swc/core@1.7.0)(jiti@1.21.6)(postcss@8.4.40)(typescript@5.5.4):
     dependencies:
       bundle-require: 5.0.0(esbuild@0.23.0)
       cac: 6.7.14
