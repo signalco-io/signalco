@@ -56,7 +56,7 @@
         "@signalco/tsconfig": "workspace:*",
         "@total-typescript/ts-reset": "0.5.1",
         "@types/color": "3.0.6",
-        "@types/node": "20.14.13",
+        "@types/node": "20.14.14",
         "@types/react": "18.3.3",
         "@types/react-dom": "18.3.0",
         "babel-loader": "9.1.3",
