@@ -59,7 +59,9 @@ export default function Roadmap({ items, error, isLoading }: { items: RoadmapIte
     return (
         <Container maxWidth="sm">
             <Stack spacing={4}>
-                <PageCenterHeader header="Roadmap" subHeader="Help us by voting our roadmap." />
+                <PageCenterHeader subHeader="Help us by voting our roadmap.">
+                    Roadmap
+                </PageCenterHeader>
                 <Loadable error={error} isLoading={isLoading} loadingLabel={'Loading items'}>
                     <Stack spacing={2}>
                         {statusOrderedList.map(status => (

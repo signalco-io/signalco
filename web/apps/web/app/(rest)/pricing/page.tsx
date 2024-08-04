@@ -52,7 +52,9 @@ const pricingFaq = [
 export default function PricingPage() {
     return (
         <Stack spacing={4}>
-            <PageCenterHeader header={'Pricing'} subHeader={'Find the plan for you'} />
+            <PageCenterHeader subHeader={'Find the plan for you'}>
+                Pricing
+            </PageCenterHeader>
             <Row spacing={4} alignItems="stretch" justifyContent="center">
                 {pricingOptions.map((po, i) => <PricingCard key={po.id} option={po} variant={pricingCardVariantMap[i] ?? 'normal'} />)}
             </Row>
