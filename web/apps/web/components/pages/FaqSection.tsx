@@ -15,7 +15,9 @@ export default function FaqSection({ faq }: { faq: FaqItem[] }) {
         <div className="self-center">
             <Container maxWidth="md">
                 <Stack spacing={2}>
-                    <PageCenterHeader header={'Frequently asked questions'} secondary />
+                    <PageCenterHeader secondary>
+                        Frequently asked questions
+                    </PageCenterHeader>
                     <Stack spacing={2}>
                         {faq.map(f => (
                             <Accordion key={f.id}>

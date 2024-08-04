@@ -5,7 +5,9 @@ import PageCenterHeader from '../../../../components/pages/PageCenterHeader';
 export default function FeatureSpacesPage() {
     return (
         <Stack spacing={4}>
-            <PageCenterHeader header="Spaces" />
+            <PageCenterHeader>
+                Spaces
+            </PageCenterHeader>
             <Typography level="h4">Widgets</Typography>
             <Stack spacing={2}>
                 <Typography level="h5">Explore widgets</Typography>

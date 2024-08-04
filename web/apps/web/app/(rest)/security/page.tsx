@@ -77,7 +77,9 @@ export default function SecurityPage() {
     return (
         <Stack spacing={8}>
             <Container maxWidth="xs">
-                <PageCenterHeader level="h1" header="Security" subHeader="We take security very seriously. We use industry standard security practices to ensure your data is safe." />
+                <PageCenterHeader level="h1" subHeader="We take security very seriously. We use industry standard security practices to ensure your data is safe.">
+                    Security
+                </PageCenterHeader>
             </Container>
             <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
                 {securityShortFeatures.map((feature) => (
