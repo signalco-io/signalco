@@ -29,10 +29,6 @@ on:
                 default: 'preview'
 
 env:
-    TURBO_REMOTE_CACHE_SIGNATURE_KEYL: ${{ secrets.TURBO_REMOTE_CACHE_SIGNATURE_KEY }}
-    TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
-    TURBO_TEAM: signalco
-    TURBO_REMOTE_ONLY: true
     VERCEL_PROJECT_ID: ${{ inputs.vercelProjectId }}
     VERCEL_ORG_ID: team_Ade0MlfC3211ml3wYJZ4c9hn
 

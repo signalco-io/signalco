@@ -21,8 +21,8 @@ const footerData: SectionData = {
                 { label: 'Channels', href: KnownPages.Channels },
                 { label: 'App', href: KnownPages.App },
                 { label: 'Pricing', href: KnownPages.Pricing },
-                { label: 'Station', href: KnownPages.Station },
                 { label: 'Roadmap', href: KnownPages.Roadmap },
+                { label: 'All our products', href: KnownPages.Products }
             ]
         },
         {

@@ -27,11 +27,11 @@
     "prepublishOnly": "tsup"
   },
   "devDependencies": {
-    "@signalco/tsconfig": "workspace:*",
+    "@microsoft/api-extractor": "7.47.5",
     "@signalco/tailwindcss-config-signalco": "workspace:*",
-    "tsup": "8.2.3",
-    "typescript": "5.5.4",
-    "@microsoft/api-extractor": "7.47.4"
+    "@signalco/tsconfig": "workspace:*",
+    "tsup": "8.2.4",
+    "typescript": "5.5.4"
   },
   "peerDependencies": {
     "tailwindcss": ">=3",
