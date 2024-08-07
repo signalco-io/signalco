@@ -594,8 +594,8 @@ importers:
         specifier: 0.3.0
         version: 0.3.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       openai:
-        specifier: 4.54.0
-        version: 4.54.0(encoding@0.1.13)
+        specifier: 4.55.1
+        version: 4.55.1(encoding@0.1.13)
       react:
         specifier: 18.3.1
         version: 18.3.1
@@ -1217,8 +1217,8 @@ importers:
         specifier: 0.3.0
         version: 0.3.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       openai:
-        specifier: 4.54.0
-        version: 4.54.0(encoding@0.1.13)
+        specifier: 4.55.1
+        version: 4.55.1(encoding@0.1.13)
       react:
         specifier: 18.3.1
         version: 18.3.1
@@ -1526,7 +1526,7 @@ importers:
         version: 18.3.1(react@18.3.1)
       tsup:
         specifier: 8.2.4
-        version: 8.2.4(@microsoft/api-extractor@7.47.5(@types/node@22.1.0))(@swc/core@1.7.6)(jiti@1.21.6)(postcss@8.4.41)(typescript@5.5.4)
+        version: 8.2.4(@microsoft/api-extractor@7.47.5(@types/node@22.1.0))(@swc/core@1.7.6(@swc/helpers@0.5.12))(jiti@1.21.6)(postcss@8.4.41)(typescript@5.5.4)
       typescript:
         specifier: 5.5.4
         version: 5.5.4
@@ -1550,7 +1550,7 @@ importers:
         version: 18.3.1(react@18.3.1)
       tsup:
         specifier: 8.2.4
-        version: 8.2.4(@microsoft/api-extractor@7.47.5(@types/node@22.1.0))(@swc/core@1.7.6)(jiti@1.21.6)(postcss@8.4.41)(typescript@5.5.4)
+        version: 8.2.4(@microsoft/api-extractor@7.47.5(@types/node@22.1.0))(@swc/core@1.7.6(@swc/helpers@0.5.12))(jiti@1.21.6)(postcss@8.4.41)(typescript@5.5.4)
       typescript:
         specifier: 5.5.4
         version: 5.5.4
@@ -1846,7 +1846,7 @@ importers:
         version: 2.4.0
       tsup:
         specifier: 8.2.4
-        version: 8.2.4(@microsoft/api-extractor@7.47.5(@types/node@22.1.0))(@swc/core@1.7.6)(jiti@1.21.6)(postcss@8.4.41)(typescript@5.5.4)
+        version: 8.2.4(@microsoft/api-extractor@7.47.5(@types/node@22.1.0))(@swc/core@1.7.6(@swc/helpers@0.5.12))(jiti@1.21.6)(postcss@8.4.41)(typescript@5.5.4)
       typescript:
         specifier: 5.5.4
         version: 5.5.4
@@ -1871,7 +1871,7 @@ importers:
         version: link:../tsconfig
       tsup:
         specifier: 8.2.4
-        version: 8.2.4(@microsoft/api-extractor@7.47.5(@types/node@22.1.0))(@swc/core@1.7.6)(jiti@1.21.6)(postcss@8.4.41)(typescript@5.5.4)
+        version: 8.2.4(@microsoft/api-extractor@7.47.5(@types/node@22.1.0))(@swc/core@1.7.6(@swc/helpers@0.5.12))(jiti@1.21.6)(postcss@8.4.41)(typescript@5.5.4)
       typescript:
         specifier: 5.5.4
         version: 5.5.4
@@ -1896,7 +1896,7 @@ importers:
         version: link:../tsconfig
       tsup:
         specifier: 8.2.4
-        version: 8.2.4(@microsoft/api-extractor@7.47.5(@types/node@22.1.0))(@swc/core@1.7.6)(jiti@1.21.6)(postcss@8.4.41)(typescript@5.5.4)
+        version: 8.2.4(@microsoft/api-extractor@7.47.5(@types/node@22.1.0))(@swc/core@1.7.6(@swc/helpers@0.5.12))(jiti@1.21.6)(postcss@8.4.41)(typescript@5.5.4)
       typescript:
         specifier: 5.5.4
         version: 5.5.4
@@ -1971,7 +1971,7 @@ importers:
         version: 1.0.7(tailwindcss@3.4.7)
       tsup:
         specifier: 8.2.4
-        version: 8.2.4(@microsoft/api-extractor@7.47.5(@types/node@20.14.14))(@swc/core@1.7.6)(jiti@1.21.6)(postcss@8.4.41)(typescript@5.5.4)
+        version: 8.2.4(@microsoft/api-extractor@7.47.5(@types/node@20.14.14))(@swc/core@1.7.6(@swc/helpers@0.5.12))(jiti@1.21.6)(postcss@8.4.41)(typescript@5.5.4)
       typescript:
         specifier: 5.5.4
         version: 5.5.4
@@ -8614,9 +8614,14 @@ packages:
     resolution: {integrity: sha512-1FlR+gjXK7X+AsAHso35MnyN5KqGwJRi/31ft6x0M194ht7S+rWAvd7PHss9xSKMzE0asv1pyIHaJYq+BbacAQ==}
     engines: {node: '>=12'}
 
-  openai@4.54.0:
-    resolution: {integrity: sha512-e/12BdtTtj+tXs7iHm+Dm7H7WjEWnw7O52B2wSfCQ6lD5F6cvjzo7cANXy5TJ1Q3/qc8YRPT5wBTTFtP5sBp1g==}
+  openai@4.55.1:
+    resolution: {integrity: sha512-FziYJcWl+SAGbt5AcRIzVzNcnKohpEMQdtzVOmHFbBp/if7x2+ACqgxF2XUbyi2PcKONPcVpmtG5h9qoDAEXwQ==}
     hasBin: true
+    peerDependencies:
+      zod: ^3.23.8
+    peerDependenciesMeta:
+      zod:
+        optional: true
 
   openapi-fetch@0.10.5:
     resolution: {integrity: sha512-lOHWzQDYrMakHSqAOqJJGawitSGQzLM8w8zXTrpffe7u9aWqzFvhdJJNqfcW1EzaXtNNdPdMzXaFLdrjgn68ow==}
@@ -18736,7 +18741,7 @@ snapshots:
     dependencies:
       mimic-fn: 4.0.0
 
-  openai@4.54.0(encoding@0.1.13):
+  openai@4.55.1(encoding@0.1.13):
     dependencies:
       '@types/node': 18.19.41
       '@types/node-fetch': 2.6.11
@@ -20730,7 +20735,7 @@ snapshots:
 
   tslib@2.6.3: {}
 
-  tsup@8.2.4(@microsoft/api-extractor@7.47.5(@types/node@20.14.14))(@swc/core@1.7.6)(jiti@1.21.6)(postcss@8.4.41)(typescript@5.5.4):
+  tsup@8.2.4(@microsoft/api-extractor@7.47.5(@types/node@20.14.14))(@swc/core@1.7.6(@swc/helpers@0.5.12))(jiti@1.21.6)(postcss@8.4.41)(typescript@5.5.4):
     dependencies:
       bundle-require: 5.0.0(esbuild@0.23.0)
       cac: 6.7.14
@@ -20759,7 +20764,7 @@ snapshots:
       - tsx
       - yaml
 
-  tsup@8.2.4(@microsoft/api-extractor@7.47.5(@types/node@22.1.0))(@swc/core@1.7.6)(jiti@1.21.6)(postcss@8.4.41)(typescript@5.5.4):
+  tsup@8.2.4(@microsoft/api-extractor@7.47.5(@types/node@22.1.0))(@swc/core@1.7.6(@swc/helpers@0.5.12))(jiti@1.21.6)(postcss@8.4.41)(typescript@5.5.4):
     dependencies:
       bundle-require: 5.0.0(esbuild@0.23.0)
       cac: 6.7.14
