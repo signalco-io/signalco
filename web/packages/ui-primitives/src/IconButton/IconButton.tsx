@@ -1,6 +1,5 @@
 import { forwardRef, type ComponentProps, PropsWithChildren, useMemo } from 'react';
 import { LoaderSpinner } from '@signalco/ui-icons';
-import { Slot } from '@radix-ui/react-slot';
 import { Link } from '../Link';
 import { cx } from '../cx';
 import { Button } from '../Button';
@@ -8,16 +7,15 @@ import { Button } from '../Button';
 export type IconButtonProps = ComponentProps<typeof Button>;
 
 const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(({
-    href, disabled, asChild, loading, variant, children, fullWidth, className, size, ...rest
+    href, disabled, loading, variant, children, fullWidth, className, size, ...rest
 }: IconButtonProps, ref) => {
     const Comp = useMemo(() => href && !disabled
         ? ({ children }: PropsWithChildren) => <Link href={href}>{children}</Link>
         : ({ children }: PropsWithChildren) => <>{children}</>, [href, disabled]);
-    const ButtonComp = useMemo(() => asChild ? Slot : 'button', [asChild]);
 
     return (
         <Comp>
-            <ButtonComp
+            <button
                 ref={ref}
                 className={cx(
                     'inline-flex gap-1 items-center justify-center text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background',
@@ -35,7 +33,7 @@ const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(({
                 {...rest}>
                 {loading && <LoaderSpinner className="mr-2 size-4 animate-spin" />}
                 {loading ? null : children}
-            </ButtonComp>
+            </button>
         </Comp>
     );
 });
