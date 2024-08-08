@@ -1,6 +1,5 @@
 'use client';
 
-import { Typography } from '@signalco/ui-primitives/Typography';
 import { Stack } from '@signalco/ui-primitives/Stack';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@signalco/ui-primitives/Menu';
 import { ListHeader } from '@signalco/ui-primitives/List';

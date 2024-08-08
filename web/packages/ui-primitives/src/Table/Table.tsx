@@ -1,9 +1,11 @@
-import { HTMLAttributes } from 'react'
+import type { HTMLAttributes, TdHTMLAttributes, ThHTMLAttributes } from 'react'
 import { cx } from '../cx'
 
 function Table({ className, ...rest }: HTMLAttributes<HTMLTableElement>) {
     return (
-        <table className={cx('w-full overflow-auto', className)} {...rest} />
+        <div className="relative w-full overflow-auto">
+            <table className={cx('w-full caption-bottom-text-sm', className)} {...rest} />
+        </div>
     )
 }
 
@@ -13,9 +15,9 @@ function Header({ ...rest }: HTMLAttributes<HTMLTableSectionElement>) {
     )
 }
 
-function Head({ ...rest }: HTMLAttributes<HTMLHeadElement>) {
+function Head({ ...rest }: ThHTMLAttributes<HTMLTableCellElement>) {
     return (
-        <th className="h-12 px-3 text-left align-middle text-base font-medium text-muted-foreground" {...rest} />
+        <th className="h-12 px-4 text-left align-middle text-base font-medium text-muted-foreground" {...rest} />
     )
 }
 
@@ -31,9 +33,9 @@ function Row({ className, ...rest }: HTMLAttributes<HTMLTableRowElement>) {
     )
 }
 
-function Cell({ className, ...rest }: HTMLAttributes<HTMLTableCellElement>) {
+function Cell({ className, ...rest }: TdHTMLAttributes<HTMLTableCellElement>) {
     return (
-        <td className={cx('p-3 text-base align-middle', className)} {...rest} />
+        <td className={cx('p-4 text-base align-middle', className)} {...rest} />
     )
 }
 

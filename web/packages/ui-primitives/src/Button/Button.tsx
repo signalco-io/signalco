@@ -1,7 +1,5 @@
 import { forwardRef, type ButtonHTMLAttributes, type PropsWithChildren, type ReactNode, useMemo } from 'react'
 import { LoaderSpinner } from '@signalco/ui-icons';
-import { Slot } from '@radix-ui/react-slot';
-import { Typography } from '../Typography';
 import { VariantKeys } from '../theme';
 import { Link } from '../Link';
 import { cx } from '../cx'
@@ -14,7 +12,6 @@ export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
     loading?: boolean;
     fullWidth?: boolean;
     href?: string;
-    asChild?: boolean;
 };
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
@@ -28,17 +25,15 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
     size,
     href,
     fullWidth,
-    asChild,
     ...otherProps
 }, ref) => {
     const Comp = useMemo(() => href && !disabled
         ? ({ children }: PropsWithChildren) => <Link href={href}>{children}</Link>
         : ({ children }: PropsWithChildren) => <>{children}</>, [href, disabled]);
-    const ButtonComp = useMemo(() => asChild ? Slot : 'button', [asChild]);
 
     return (
         <Comp>
-            <ButtonComp
+            <button
                 ref={ref}
                 className={cx(
                     'select-none inline-flex gap-1 items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background cursor-default',
@@ -65,7 +60,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(({
                         {children}
                     </span>) : children}
                 {typeof endDecorator === 'string' ? <span>{endDecorator}</span> : endDecorator}
-            </ButtonComp>
+            </button>
         </Comp>
     )
 });

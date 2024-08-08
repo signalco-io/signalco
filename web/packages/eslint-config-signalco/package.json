@@ -11,7 +11,7 @@
         "@typescript-eslint/parser": "8.0.1",
         "eslint": "8.57.0",
         "eslint-config-next": "14.2.5",
-        "eslint-config-turbo": "2.0.11",
+        "eslint-config-turbo": "2.0.12",
         "eslint-plugin-import": "2.29.1",
         "eslint-plugin-only-warn": "1.1.0",
         "eslint-plugin-react": "7.35.0",

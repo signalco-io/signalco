@@ -15,8 +15,8 @@ importers:
         specifier: workspace:*
         version: link:packages/typescript-config
       turbo:
-        specifier: 2.0.11
-        version: 2.0.11
+        specifier: 2.0.12
+        version: 2.0.12
 
   apps/cloud-primary:
     dependencies:
@@ -27,8 +27,8 @@ importers:
         specifier: 6.48.0
         version: 6.48.0(ts-node@7.0.1)(typescript@5.5.4)
       '@pulumi/azure-native':
-        specifier: 2.52.1
-        version: 2.52.1(ts-node@7.0.1)(typescript@5.5.4)
+        specifier: 2.54.0
+        version: 2.54.0(ts-node@7.0.1)(typescript@5.5.4)
       '@pulumi/cloudflare':
         specifier: 5.35.1
         version: 5.35.1(ts-node@7.0.1)(typescript@5.5.4)
@@ -67,8 +67,8 @@ importers:
         specifier: 17.10.2
         version: 17.10.2(eslint@8.57.0)
       eslint-plugin-promise:
-        specifier: 7.0.0
-        version: 7.0.0(eslint@8.57.0)
+        specifier: 7.1.0
+        version: 7.1.0(eslint@8.57.0)
       tsup:
         specifier: 8.2.4
         version: 8.2.4(typescript@5.5.4)
@@ -79,8 +79,8 @@ importers:
   apps/doprocess:
     dependencies:
       '@pulumi/azure-native':
-        specifier: 2.52.1
-        version: 2.52.1(ts-node@7.0.1)(typescript@5.5.4)
+        specifier: 2.54.0
+        version: 2.54.0(ts-node@7.0.1)(typescript@5.5.4)
       '@pulumi/cloudflare':
         specifier: 5.35.1
         version: 5.35.1(ts-node@7.0.1)(typescript@5.5.4)
@@ -116,8 +116,8 @@ importers:
         specifier: 17.10.2
         version: 17.10.2(eslint@8.57.0)
       eslint-plugin-promise:
-        specifier: 7.0.0
-        version: 7.0.0(eslint@8.57.0)
+        specifier: 7.1.0
+        version: 7.1.0(eslint@8.57.0)
       tsup:
         specifier: 8.2.4
         version: 8.2.4(typescript@5.5.4)
@@ -134,8 +134,8 @@ importers:
         specifier: 6.48.0
         version: 6.48.0(ts-node@7.0.1)(typescript@5.5.4)
       '@pulumi/azure-native':
-        specifier: 2.52.1
-        version: 2.52.1(ts-node@7.0.1)(typescript@5.5.4)
+        specifier: 2.54.0
+        version: 2.54.0(ts-node@7.0.1)(typescript@5.5.4)
       '@pulumi/cloudflare':
         specifier: 5.35.1
         version: 5.35.1(ts-node@7.0.1)(typescript@5.5.4)
@@ -174,8 +174,8 @@ importers:
         specifier: 17.10.2
         version: 17.10.2(eslint@8.57.0)
       eslint-plugin-promise:
-        specifier: 7.0.0
-        version: 7.0.0(eslint@8.57.0)
+        specifier: 7.1.0
+        version: 7.1.0(eslint@8.57.0)
       tsup:
         specifier: 8.2.4
         version: 8.2.4(typescript@5.5.4)
@@ -192,8 +192,8 @@ importers:
         specifier: 6.48.0
         version: 6.48.0(ts-node@7.0.1)(typescript@5.5.4)
       '@pulumi/azure-native':
-        specifier: 2.52.1
-        version: 2.52.1(ts-node@7.0.1)(typescript@5.5.4)
+        specifier: 2.54.0
+        version: 2.54.0(ts-node@7.0.1)(typescript@5.5.4)
       '@pulumi/cloudflare':
         specifier: 5.35.1
         version: 5.35.1(ts-node@7.0.1)(typescript@5.5.4)
@@ -232,8 +232,8 @@ importers:
         specifier: 17.10.2
         version: 17.10.2(eslint@8.57.0)
       eslint-plugin-promise:
-        specifier: 7.0.0
-        version: 7.0.0(eslint@8.57.0)
+        specifier: 7.1.0
+        version: 7.1.0(eslint@8.57.0)
       tsup:
         specifier: 8.2.4
         version: 8.2.4(typescript@5.5.4)
@@ -244,8 +244,8 @@ importers:
   apps/workingparty:
     dependencies:
       '@pulumi/azure-native':
-        specifier: 2.52.1
-        version: 2.52.1(ts-node@7.0.1)(typescript@5.5.4)
+        specifier: 2.54.0
+        version: 2.54.0(ts-node@7.0.1)(typescript@5.5.4)
       '@pulumi/cloudflare':
         specifier: 5.35.1
         version: 5.35.1(ts-node@7.0.1)(typescript@5.5.4)
@@ -281,8 +281,8 @@ importers:
         specifier: 17.10.2
         version: 17.10.2(eslint@8.57.0)
       eslint-plugin-promise:
-        specifier: 7.0.0
-        version: 7.0.0(eslint@8.57.0)
+        specifier: 7.1.0
+        version: 7.1.0(eslint@8.57.0)
       tsup:
         specifier: 8.2.4
         version: 8.2.4(typescript@5.5.4)
@@ -302,8 +302,8 @@ importers:
         specifier: 9.1.0
         version: 9.1.0(eslint@8.57.0)
       eslint-config-turbo:
-        specifier: 2.0.11
-        version: 2.0.11(eslint@8.57.0)
+        specifier: 2.0.12
+        version: 2.0.12(eslint@8.57.0)
       eslint-import-resolver-typescript:
         specifier: 3.6.1
         version: 3.6.1(@typescript-eslint/parser@8.0.1(eslint@8.57.0)(typescript@5.5.4))(eslint-plugin-import@2.29.1)(eslint@8.57.0)
@@ -326,8 +326,8 @@ importers:
         specifier: 6.48.0
         version: 6.48.0(ts-node@7.0.1)(typescript@5.5.4)
       '@pulumi/azure-native':
-        specifier: 2.52.1
-        version: 2.52.1(ts-node@7.0.1)(typescript@5.5.4)
+        specifier: 2.54.0
+        version: 2.54.0(ts-node@7.0.1)(typescript@5.5.4)
       '@pulumi/cloudflare':
         specifier: 5.35.1
         version: 5.35.1(ts-node@7.0.1)(typescript@5.5.4)
@@ -369,8 +369,8 @@ importers:
         specifier: 17.10.2
         version: 17.10.2(eslint@8.57.0)
       eslint-plugin-promise:
-        specifier: 7.0.0
-        version: 7.0.0(eslint@8.57.0)
+        specifier: 7.1.0
+        version: 7.1.0(eslint@8.57.0)
       typescript:
         specifier: 5.5.4
         version: 5.5.4
@@ -774,8 +774,8 @@ packages:
   '@pulumi/aws@6.48.0':
     resolution: {integrity: sha512-Y+raJupp7mtMmDC6C1yDiapE6cPbkH/T+wVovePBKtwggipJ33ezZtZ8n95CseiN9ii9fo5jX0iLIEaOpv5/fw==}
 
-  '@pulumi/azure-native@2.52.1':
-    resolution: {integrity: sha512-Q85m4ObkhBzAh6d/EU+hRBupoA6pPQmysGg9AIfoTK/ojeSO+Vw0H5KR83AaCWkLkrnGj6HZRI098I0MvhLL2A==}
+  '@pulumi/azure-native@2.54.0':
+    resolution: {integrity: sha512-nlNvxETI3fU08iSeJCjYGa478m3WthAMD2T8raJjeFSC/TKIX3qRJU94p7rbd5fh2JVUtkbkskDDkzT/ikoefQ==}
 
   '@pulumi/cloudflare@5.35.1':
     resolution: {integrity: sha512-mDiGwMPRPuLTXf8h4ucfUsoSWMvnjIZfYIjL1CKVfKp3/3w38KPi2eNa44e4IjQzQwZnBTWcSjP/bnYeloeIJw==}
@@ -1381,8 +1381,8 @@ packages:
     peerDependencies:
       eslint: '>=7.0.0'
 
-  eslint-config-turbo@2.0.11:
-    resolution: {integrity: sha512-hriQ+OQvKbtE1w7JH+w2X+Lh/9YPgnaNJmjrfhANWStFJTDa1NrJMCm2UaxHbDNKxFsr/mN9TTkVCRiTktIaqw==}
+  eslint-config-turbo@2.0.12:
+    resolution: {integrity: sha512-3PUzoyeJi2SjsTSjfWgTUIHK7kOqsapDEaOT7sCjFnZXvuhYLKxW37lysjq7+55abGGm0yQTXxNFLjrQKUORag==}
     peerDependencies:
       eslint: '>6.6.0'
 
@@ -1443,14 +1443,14 @@ packages:
     resolution: {integrity: sha512-2tktqUAT+Q3hCAU0iSf4xAN1k9zOpjK5WO8104mB0rT/dGhOa09582HN5HlbxNbPRZ0THV7nLGvzugcNOSjzfA==}
     engines: {node: '>=6'}
 
-  eslint-plugin-promise@7.0.0:
-    resolution: {integrity: sha512-wb1ECT+b90ndBdAujhIdAU8oQ3Vt5gKqP/t78KOmg0ifynrvc2jGR9f6ndbOVNFpKf6jLUBlBBDF3H3Wk0JICg==}
+  eslint-plugin-promise@7.1.0:
+    resolution: {integrity: sha512-8trNmPxdAy3W620WKDpaS65NlM5yAumod6XeC4LOb+jxlkG4IVcp68c6dXY2ev+uT4U1PtG57YDV6EGAXN0GbQ==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     peerDependencies:
       eslint: ^7.0.0 || ^8.0.0 || ^9.0.0
 
-  eslint-plugin-turbo@2.0.11:
-    resolution: {integrity: sha512-cM2KRlC6zh8Y5pOpiGTkBMp3/V4f4sEebSYcHjotfc4VQziPXuZtf/4Si4pd6l1FpmYfkgE+AReZsRfEfK17bw==}
+  eslint-plugin-turbo@2.0.12:
+    resolution: {integrity: sha512-vXWKer7F0RPTcVy1B+hFTEK4mlEOpouB8MCAFD3WW4C6t98wvuDCsIPjxIldpxg7CnwmRxALpNWgNVkU2LVVEQ==}
     peerDependencies:
       eslint: '>6.6.0'
 
@@ -2609,38 +2609,38 @@ packages:
     resolution: {integrity: sha512-ZSDngmP1z6zw+FIkIBjvOp/II/mIub/O7Pp12j1WNsiCpg5R5wAc//i555bBQsE44O94btLt0xM/Zr2LQjwdCg==}
     engines: {node: ^16.14.0 || >=18.0.0}
 
-  turbo-darwin-64@2.0.11:
-    resolution: {integrity: sha512-YlHEEhcm+jI1BSZoLugGHUWDfRXaNaQIv7tGQBfadYjo9kixBnqoTOU6s1ubOrQMID+lizZZQs79GXwqM6vohg==}
+  turbo-darwin-64@2.0.12:
+    resolution: {integrity: sha512-NAgfgbXxX/JScWQmmQnGbPuFZq7LIswHfcMk5JwyBXQM/xmklNOxxac7MnGGIOf19Z2f6S3qHy17VIj0SeGfnA==}
     cpu: [x64]
     os: [darwin]
 
-  turbo-darwin-arm64@2.0.11:
-    resolution: {integrity: sha512-K/YW+hWzRQ/wGmtffxllH4M1tgy8OlwgXODrIiAGzkSpZl9+pIsem/F86UULlhsIeavBYK/LS5+dzV3DPMjJ9w==}
+  turbo-darwin-arm64@2.0.12:
+    resolution: {integrity: sha512-cP02uer5KSJ+fXL+OfRRk5hnVjV0c60hxDgNcJxrZpfhun7HHoKDDR7w2xhQntiA45aC6ZZEXRqMKpj6GAmKbg==}
     cpu: [arm64]
     os: [darwin]
 
-  turbo-linux-64@2.0.11:
-    resolution: {integrity: sha512-mv8CwGP06UPweMh1Vlp6PI6OWnkuibxfIJ4Vlof7xqjohAaZU5FLqeOeHkjQflH/6YrCVuS9wrK0TFOu+meTtA==}
+  turbo-linux-64@2.0.12:
+    resolution: {integrity: sha512-+mQgGfg1eq5qF+wenK/FKJaNMNAo5DQLC4htQy+8osW+fx6U+8+6UlPQPaycAWDEqwOI7NwuqkeHfkEQLQUTyQ==}
     cpu: [x64]
     os: [linux]
 
-  turbo-linux-arm64@2.0.11:
-    resolution: {integrity: sha512-wLE5tl4oriTmHbuayc0ki0csaCplmVLj+uCWtecM/mfBuZgNS9ICNM9c4sB+Cfl5tlBBFeepqRNgvRvn8WeVZg==}
+  turbo-linux-arm64@2.0.12:
+    resolution: {integrity: sha512-KFyEZDXfPU1DK4zimxdCcqAcK7IIttX4mfsgB7NsSEOmH0dhHOih/YFYiyEDC1lTRx0C2RlzQ0Kjjdz48AN5Eg==}
     cpu: [arm64]
     os: [linux]
 
-  turbo-windows-64@2.0.11:
-    resolution: {integrity: sha512-tja3zvVCSWu3HizOoeQv0qDJ+GeWGWRFOOM6a8i3BYnXLgGKAaDZFcjwzgC50tWiAw4aowIVR4OouwIyRhLBaQ==}
+  turbo-windows-64@2.0.12:
+    resolution: {integrity: sha512-kJj4KCkZTkDTDCqsSw1m1dbO4WeoQq1mYUm/thXOH0OkeqYbSMt0EyoTcJOgKUDsrMnzZD2gPfYrlYHtV69lVA==}
     cpu: [x64]
     os: [win32]
 
-  turbo-windows-arm64@2.0.11:
-    resolution: {integrity: sha512-sYjXP6k94Bqh99R+y3M1Ks6LRIEZybMz+7enA8GKl6JJ2ZFaXxTnS6q+/2+ii1+rRwxohj5OBb4gxODcF8Jd4w==}
+  turbo-windows-arm64@2.0.12:
+    resolution: {integrity: sha512-TY3ROxguDilN2olCwcZMaePdW01Xhma0pZU7bNhsQEqca9RGAmsZBuzfGnTMcWPmv4tpnb/PlX1hrt1Hod/44Q==}
     cpu: [arm64]
     os: [win32]
 
-  turbo@2.0.11:
-    resolution: {integrity: sha512-imDlFFAvitbCm1JtDFJ6eG882qwxHUmVT2noPb3p2jq5o5DuXOchMbkVS9kUeC3/4WpY5N0GBZ3RvqNyjHZw1Q==}
+  turbo@2.0.12:
+    resolution: {integrity: sha512-8s2KwqjwQj7z8Z53SUZSKVkQOZ2/Sl4D2F440oaBY/k2lGju60dW6srEpnn8/RIDeICZmQn3pQHF79Jfnc5Skw==}
     hasBin: true
 
   type-check@0.4.0:
@@ -3186,7 +3186,7 @@ snapshots:
       - ts-node
       - typescript
 
-  '@pulumi/azure-native@2.52.1(ts-node@7.0.1)(typescript@5.5.4)':
+  '@pulumi/azure-native@2.54.0(ts-node@7.0.1)(typescript@5.5.4)':
     dependencies:
       '@pulumi/pulumi': 3.128.0(ts-node@7.0.1)(typescript@5.5.4)
     transitivePeerDependencies:
@@ -3899,10 +3899,10 @@ snapshots:
     dependencies:
       eslint: 8.57.0
 
-  eslint-config-turbo@2.0.11(eslint@8.57.0):
+  eslint-config-turbo@2.0.12(eslint@8.57.0):
     dependencies:
       eslint: 8.57.0
-      eslint-plugin-turbo: 2.0.11(eslint@8.57.0)
+      eslint-plugin-turbo: 2.0.12(eslint@8.57.0)
 
   eslint-import-resolver-node@0.3.9:
     dependencies:
@@ -3988,11 +3988,11 @@ snapshots:
 
   eslint-plugin-only-warn@1.1.0: {}
 
-  eslint-plugin-promise@7.0.0(eslint@8.57.0):
+  eslint-plugin-promise@7.1.0(eslint@8.57.0):
     dependencies:
       eslint: 8.57.0
 
-  eslint-plugin-turbo@2.0.11(eslint@8.57.0):
+  eslint-plugin-turbo@2.0.12(eslint@8.57.0):
     dependencies:
       dotenv: 16.0.3
       eslint: 8.57.0
@@ -5256,32 +5256,32 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  turbo-darwin-64@2.0.11:
+  turbo-darwin-64@2.0.12:
     optional: true
 
-  turbo-darwin-arm64@2.0.11:
+  turbo-darwin-arm64@2.0.12:
     optional: true
 
-  turbo-linux-64@2.0.11:
+  turbo-linux-64@2.0.12:
     optional: true
 
-  turbo-linux-arm64@2.0.11:
+  turbo-linux-arm64@2.0.12:
     optional: true
 
-  turbo-windows-64@2.0.11:
+  turbo-windows-64@2.0.12:
     optional: true
 
-  turbo-windows-arm64@2.0.11:
+  turbo-windows-arm64@2.0.12:
     optional: true
 
-  turbo@2.0.11:
+  turbo@2.0.12:
     optionalDependencies:
-      turbo-darwin-64: 2.0.11
-      turbo-darwin-arm64: 2.0.11
-      turbo-linux-64: 2.0.11
-      turbo-linux-arm64: 2.0.11
-      turbo-windows-64: 2.0.11
-      turbo-windows-arm64: 2.0.11
+      turbo-darwin-64: 2.0.12
+      turbo-darwin-arm64: 2.0.12
+      turbo-linux-64: 2.0.12
+      turbo-linux-arm64: 2.0.12
+      turbo-windows-64: 2.0.12
+      turbo-windows-arm64: 2.0.12
 
   type-check@0.4.0:
     dependencies:
