@@ -30,6 +30,7 @@ export {
     CircleSlashed as Disabled,
     CircleEqual,
     Circle as Empty,
+    CircleX as Error,
     Filter,
     Square as Stop,
     LayoutList,

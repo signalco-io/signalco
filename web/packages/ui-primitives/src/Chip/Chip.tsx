@@ -5,6 +5,7 @@ import {Link} from '../Link';
 import { cx } from '../cx';
 
 export type ChipProps = PropsWithChildren<{
+    disabled?: boolean;
     color?: ColorPaletteProp;
     variant?: 'plain' | 'outlined' | 'soft' | 'solid';
     size?: 'sm' | 'md' | 'lg';
@@ -15,7 +16,7 @@ export type ChipProps = PropsWithChildren<{
     title?: string,
 }>;
 
-export function Chip({ size, color, startDecorator, onClick, children, href, className, title }: ChipProps) {
+export function Chip({ disabled, size, color, startDecorator, onClick, children, href, className, title }: ChipProps) {
     const actionable = typeof onClick !== 'undefined' || typeof href !== 'undefined';
 
     const chipClassName = cx(
@@ -31,7 +32,7 @@ export function Chip({ size, color, startDecorator, onClick, children, href, cla
         color === 'error' && 'bg-red-300 text-red-800 border-red-400',
         color === 'primary' && 'bg-neutral-950 text-white border-neutral-950',
         color === 'secondary' && 'bg-neutral-500 text-white border-neutral-600',
-        actionable && 'hover:bg-opacity-90',
+        (actionable && !disabled) && 'hover:bg-opacity-90',
     );
     const Wrapper = onClick
         ? (props: PropsWithChildren) => <button title={title} onClick={onClick} className={cx(chipClassName, className)}>{props.children}</button>

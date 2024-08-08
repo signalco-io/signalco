@@ -8,12 +8,13 @@
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <PlaywrightPlatform>linux-x64</PlaywrightPlatform>
     <Deterministic>true</Deterministic>
+    <PackageLicenseExpression>AGPL-3.0-only</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="chromium.linux-x64" Version="2024.4.16" />
-    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.20.1" />
-    <PackageReference Include="Microsoft.Playwright" Version="1.43.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
+    <PackageReference Include="Microsoft.Playwright" Version="1.45.1" />
   </ItemGroup>
 
 </Project>

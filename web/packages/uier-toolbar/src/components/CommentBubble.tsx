@@ -1,6 +1,6 @@
 'use client';
 
-import { HTMLAttributes, useContext, useState } from 'react';
+import React, { HTMLAttributes, useContext, useState } from 'react';
 import { Stack } from '@signalco/ui-primitives/Stack';
 import { Row } from '@signalco/ui-primitives/Row';
 import { Popper } from '@signalco/ui-primitives/Popper';

@@ -1,0 +1,34 @@
+{
+  "name": "@signalco/auth-client",
+  "version": "0.0.0",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./components": "./src/components/index.ts"
+  },
+  "scripts": {
+    "lint": "eslint ."
+  },
+  "devDependencies": {
+    "@signalco/eslint-config-signalco": "workspace:*",
+    "@signalco/tailwindcss-config-signalco": "workspace:*",
+    "@signalco/tsconfig": "workspace:*",
+    "@signalco/ui-icons": "workspace:*",
+    "@signalco/ui-primitives": "workspace:*",
+    "@tanstack/react-query": "5.51.23",
+    "@types/react": "18.3.3",
+    "@types/react-dom": "18.3.0",
+    "next": "14.2.5",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "typescript": "5.5.4"
+  },
+  "peerDependencies": {
+    "@tanstack/react-query": ">=5",
+    "next": ">=14",
+    "react": ">=18",
+    "react-dom": ">=18"
+  }
+}

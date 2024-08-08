@@ -1,0 +1,31 @@
+{
+  "name": "@signalco/auth-server",
+  "version": "0.0.0",
+  "private": true,
+  "sideEffects": false,
+  "type": "module",
+  "license": "MIT",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "lint": "eslint ."
+  },
+  "devDependencies": {
+    "@signalco/js": "workspace:*",
+    "@signalco/tsconfig": "workspace:*",
+    "@signalco/eslint-config-signalco": "workspace:*",
+    "@types/react": "18.3.3",
+    "jose": "5.6.3",
+    "next": "14.2.5",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "typescript": "5.5.4"
+  },
+  "peerDependencies": {
+    "jose": ">=5",
+    "next": ">=14",
+    "react": ">=18",
+    "react-dom": ">=18"
+  }
+}

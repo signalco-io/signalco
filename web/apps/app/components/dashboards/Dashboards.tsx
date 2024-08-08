@@ -123,10 +123,6 @@ export function Dashboards() {
     const [isDashboardSettingsOpenValue, setIsDashboardSettingsOpen] = useSearchParam('settings');
     const isDashboardSettingsOpen = isDashboardSettingsOpenValue === 'true';
 
-    console.debug('Rendering Dashboards');
-
-    console.debug('selectedId', selectedId, 'isLoading', selectedDashboard.isLoading, typeof selectedDashboard.data);
-
     return (
         <>
             <SpaceBackground background={selectedDashboard.data?.background} />

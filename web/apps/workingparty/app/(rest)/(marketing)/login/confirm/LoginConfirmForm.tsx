@@ -20,7 +20,7 @@ export function LoginConfirmForm() {
 
         try {
             await loginConfirm.mutateAsync({ email, verifyPhrase });
-            router.push(KnownPages.App);
+            router.push(KnownPages.LoginConfirmSuccess);
         } catch (error) {
             console.error('Failed to verify email', error);
             router.push(KnownPages.LoginConfirmFailed);
@@ -31,7 +31,7 @@ export function LoginConfirmForm() {
         <>
             <Typography center level="h2" semiBold>Email Verification</Typography>
             <Typography center level="body1" secondary>
-                To complete the login process, please click the button bellow;
+                To complete the login process, please click the button bellow:
             </Typography>
             <Button
                 variant="solid"

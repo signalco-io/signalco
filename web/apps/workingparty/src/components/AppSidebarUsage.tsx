@@ -10,12 +10,13 @@ import { cx } from '@signalco/ui-primitives/cx';
 import { Button } from '@signalco/ui-primitives/Button';
 import { Loadable } from '@signalco/ui/Loadable';
 import { KnownPages } from '../knownPages';
-import { useCurrentUser } from '../hooks/data/users/useCurrentUser';
 import { useAccountUsage } from '../hooks/data/account/useAccountUsage';
 import { useAccountSubscriptions } from '../hooks/data/account/useAccountSubscriptions';
+import { useCurrentUser } from '../../../../packages/auth-client/src/useCurrentUser';
+import { User } from './providers/AppAuthProvider';
 
 export function AppSidebarUsage() {
-    const currentUser = useCurrentUser();
+    const currentUser = useCurrentUser<User>();
     const accountId = currentUser.data?.user?.accountIds[0];
     const usage = useAccountUsage(accountId);
     const subscriptions = useAccountSubscriptions(accountId);

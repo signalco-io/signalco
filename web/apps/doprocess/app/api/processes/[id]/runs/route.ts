@@ -1,23 +1,26 @@
-import { getProcessIdByPublicId, getProcessRun, getProcessRuns, runProcess } from '../../../../../src/lib/repo/processesRepository';
-import { ensureUserId } from '../../../../../src/lib/auth/apiAuth';
+import { entityIdByPublicId } from '../../../../../src/lib/repo/shared';
+import { getProcessRun, getProcessRuns, runProcess } from '../../../../../src/lib/repo/processesRepository';
+import { cosmosDataContainerProcesses } from '../../../../../src/lib/db/client';
+import { withAuth } from '../../../../../src/lib/auth/auth';
 import { requiredParamString } from '../../../../../src/lib/api/apiParam';
 
 export const runtime = 'edge';
 
 export async function GET(_request: Request, { params }: { params: { id: string } }) {
     const processPublicId = requiredParamString(params.id);
-    const { userId } = ensureUserId();
-    const processId = await getProcessIdByPublicId(processPublicId);
-    if (processId == null)
-        return new Response(null, { status: 404 });
-    const processRuns = await getProcessRuns(userId, processId);
-    const processRunsDto = processRuns.map(p => ({
-        ...p,
-        id: p.publicId,
-        publicId: undefined,
-        processId: processPublicId
-    }));
-    return Response.json(processRunsDto);
+    return await withAuth(async ({ userId }) => {
+        const processId = await entityIdByPublicId(cosmosDataContainerProcesses(), processPublicId);
+        if (processId == null)
+            return new Response(null, { status: 404 });
+        const processRuns = await getProcessRuns(userId, processId);
+        const processRunsDto = processRuns.map(p => ({
+            ...p,
+            id: p.publicId,
+            publicId: undefined,
+            processId: processPublicId
+        }));
+        return Response.json(processRunsDto);
+    });
 }
 
 export async function POST(request: Request, { params }: { params: { id: string } }) {
@@ -28,13 +31,13 @@ export async function POST(request: Request, { params }: { params: { id: string 
     if (name == null)
         throw new Error('Missing name');
 
-    const { userId } = ensureUserId();
+    return await withAuth(async ({ accountId, userId }) => {
+        const processId = await entityIdByPublicId(cosmosDataContainerProcesses(), processPublicId);
+        if (processId == null)
+            return new Response(null, { status: 404 });
 
-    const processId = await getProcessIdByPublicId(processPublicId);
-    if (processId == null)
-        return new Response(null, { status: 404 });
-
-    const id = await runProcess(userId, processId, name);
-    const processRun = await getProcessRun(userId, processId, Number(id));
-    return Response.json({ id: processRun?.publicId });
+        const id = await runProcess(accountId, userId, processId, name);
+        const processRun = await getProcessRun(userId, processId, id);
+        return Response.json({ id: processRun?.publicId });
+    });
 }

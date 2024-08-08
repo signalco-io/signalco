@@ -6,7 +6,7 @@ import { Row } from '@signalco/ui-primitives/Row';
 import { Chip } from '@signalco/ui-primitives/Chip';
 import { ExternalLink } from '@signalco/ui-icons';
 import { Timeago } from '@signalco/ui/Timeago';
-import { DisableButton } from '@signalco/ui/DisableButton';
+import { EnableChip } from '@signalco/ui/EnableChip';
 import { camelToSentenceCase } from '@signalco/js';
 import useContact from '../../../src/hooks/signalco/useContact';
 import useEntity from '../../../src/hooks/signalco/entity/useEntity';
@@ -57,8 +57,8 @@ export default function EntityLayout({ children, params }: PropsWithChildren<{ p
                                 {`${level}%`}
                             </Chip>
                         }
-                        {(!disabledContact.isLoading && !disabledContact.isError) && (
-                            <DisableButton disabled={isDisabled} onClick={handleDisableToggle} />
+                        {(!disabledContact.isLoading && !disabledContact.error) && (
+                            <EnableChip enabled={!isDisabled} onClick={handleDisableToggle} />
                         )}
                         <ShareEntityChip entity={entity} entityType={1} />
                         {visitLinks?.map(link => (

@@ -1,7 +1,7 @@
 'use client';
 
 import { QueryList } from '@signalco/ui/QueryList';
-import { SignedIn, SignedOut } from '@clerk/nextjs';
+import { SignedOut, SignedIn } from '@signalco/auth-client/components';
 import { InAppCtaSignUp } from '../../shared/InAppCtaSignUp';
 import { useDocuments } from '../../../src/hooks/useDocuments';
 import { DocumentsListItem } from './DocumentsListItem';

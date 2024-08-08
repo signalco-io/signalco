@@ -38,7 +38,10 @@ const nextConfig = {
                     knownSecureHeadersExternalUrls.google,
                     knownSecureHeadersExternalUrls.googleFonts,
                     knownSecureHeadersExternalUrls.vercel,
-                    knownSecureHeadersExternalUrls.checkly
+                    knownSecureHeadersExternalUrls.checkly,
+                    {
+                        imgSrc: ['https://workingparty.ai', 'https://doprocess.app', 'https://slco.io', 'https://brandgrab.io', 'https://uier.io', 'https://modrobots.com'],
+                    }
                 ].filter(Boolean)
             ))
         }];

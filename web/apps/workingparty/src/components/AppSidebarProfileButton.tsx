@@ -7,10 +7,11 @@ import { Avatar } from '@signalco/ui-primitives/Avatar';
 import { LogOut, Settings } from '@signalco/ui-icons';
 import { initials } from '@signalco/js';
 import { KnownPages } from '../knownPages';
-import { useCurrentUser } from '../hooks/data/users/useCurrentUser';
+import { useCurrentUser } from '../../../../packages/auth-client/src/useCurrentUser';
+import { User } from './providers/AppAuthProvider';
 
 export function AppSidebarProfileButton() {
-    const currentUser = useCurrentUser();
+    const currentUser = useCurrentUser<User>();
 
     const displayNameInitials = initials(currentUser.data?.user?.displayName ?? '');
 
@@ -20,10 +21,10 @@ export function AppSidebarProfileButton() {
                 <Button
                     startDecorator={<Avatar size="md">{displayNameInitials}</Avatar>}
                     variant="plain"
-                    className="gap-2 pl-1 pr-2">
+                    className="max-w-full gap-2 pl-1 pr-2">
                     {currentUser.isLoading ? (
                         <Skeleton className="h-6 w-36" />
-                    ) : currentUser.data?.user?.displayName}
+                    ) : <span className="overflow-hidden text-ellipsis">{currentUser.data?.user?.displayName}</span>}
                 </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent>

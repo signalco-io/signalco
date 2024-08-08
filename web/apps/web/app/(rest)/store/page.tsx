@@ -131,7 +131,9 @@ export default function StorePage() {
 
     return (
         <Stack spacing={8}>
-            <PageCenterHeader header="Store" subHeader="Discover your new smart home" />
+            <PageCenterHeader subHeader="Discover your new smart home">
+                Store
+            </PageCenterHeader>
             <Gallery
                 items={items}
                 itemComponent={StoreItemThumb}

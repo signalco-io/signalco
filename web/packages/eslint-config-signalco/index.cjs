@@ -49,7 +49,6 @@ module.exports = {
         "no-var": "error",
         "prefer-const": "error",
         "@typescript-eslint/no-inferrable-types": "error",
-        "@typescript-eslint/no-extra-semi": "error",
         "@typescript-eslint/no-unused-vars": "error",
         "@typescript-eslint/no-namespace": 0,
         "import/namespace": 0,

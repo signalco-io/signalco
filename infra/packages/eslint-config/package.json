@@ -2,17 +2,18 @@
   "name": "@infra/eslint-config",
   "version": "0.0.0",
   "private": true,
+  "license": "MIT",
   "files": [
     "library.js"
   ],
   "devDependencies": {
-    "eslint-config-turbo": "1.13.3",
+    "eslint-config-turbo": "2.0.12",
     "eslint-config-prettier": "9.1.0",
     "eslint-plugin-only-warn": "1.1.0",
     "eslint-plugin-import": "2.29.1",
     "eslint-import-resolver-typescript": "3.6.1",
-    "@typescript-eslint/parser": "7.7.1",
-    "@typescript-eslint/eslint-plugin": "7.7.1",
-    "typescript": "5.4.5"
+    "@typescript-eslint/parser": "8.0.1",
+    "@typescript-eslint/eslint-plugin": "8.0.1",
+    "typescript": "5.5.4"
   }
 }

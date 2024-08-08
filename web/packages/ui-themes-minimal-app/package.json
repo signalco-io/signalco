@@ -1,0 +1,40 @@
+{
+  "name": "@signalco/ui-themes-minimal-app",
+  "version": "0.1.2",
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    "./styles": "./src/index.css",
+    "./config": "./src/config.ts"
+  },
+  "files": [
+    "dist",
+    "src/index.css"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "exports": {
+      "./styles": "./src/index.css",
+      "./config": {
+        "import": "./dist/config.js",
+        "require": "./dist/config.cjs",
+        "types": "./dist/src/config.d.ts"
+      }
+    }
+  },
+  "scripts": {
+    "prepublishOnly": "tsup"
+  },
+  "devDependencies": {
+    "@microsoft/api-extractor": "7.47.5",
+    "@signalco/tailwindcss-config-signalco": "workspace:*",
+    "@signalco/tsconfig": "workspace:*",
+    "tsup": "8.2.4",
+    "typescript": "5.5.4"
+  },
+  "peerDependencies": {
+    "tailwindcss": ">=3",
+    "tailwindcss-animate": ">=1"
+  }
+}

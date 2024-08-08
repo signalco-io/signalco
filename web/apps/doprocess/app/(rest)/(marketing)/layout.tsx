@@ -2,7 +2,7 @@ import { Container } from '@signalco/ui-primitives/Container';
 import { Button } from '@signalco/ui-primitives/Button';
 import { Navigate } from '@signalco/ui-icons';
 import { PageNav, PageNavMenu } from '@signalco/ui/Nav';
-import { SignedOut, SignInButton, SignUpButton, SignedIn, UserButton } from '@clerk/nextjs';
+import { SignInButton, SignUpButton, SignedIn, SignedOut, UserButton } from '@signalco/auth-client/components';
 import { KnownPages } from '../../../src/knownPages';
 import DoProcessLogo from '../../../components/brand/DoProcessLogo';
 
@@ -11,7 +11,7 @@ export default function RootMarketingLayout({ children, }: {
 }) {
     return (
         <>
-            <PageNav fullWidth logo={<DoProcessLogo />}>
+            <PageNav fullWidth logo={<DoProcessLogo height={52} />}>
                 <PageNavMenu>
                     <SignedOut>
                         <SignInButton />
@@ -24,7 +24,7 @@ export default function RootMarketingLayout({ children, }: {
                             endDecorator={<Navigate />}>
                             App
                         </Button>
-                        <UserButton afterSignOutUrl="/" />
+                        <UserButton />
                     </SignedIn>
                 </PageNavMenu>
             </PageNav>

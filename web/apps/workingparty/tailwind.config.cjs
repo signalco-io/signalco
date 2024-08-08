@@ -1,10 +1,10 @@
 import TailwindTypography from '@tailwindcss/typography';
-import { appBaseConfig } from '@signalco/tailwindcss-config-signalco';
+import { config } from '@signalco/ui-themes-minimal-app/config';
 
 /** @type {import('tailwindcss').Config} */
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
-    presets: [appBaseConfig],
+    presets: [config],
     content: [
         './app/**/*.{ts,tsx}',
         './components/**/*.{ts,tsx}',

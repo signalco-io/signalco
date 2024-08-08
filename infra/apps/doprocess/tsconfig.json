@@ -1,0 +1,15 @@
+{
+    "extends": "@infra/typescript-config/app.json",
+    "parserOptions": {
+        "project": "./tsconfig.json"
+    },
+    "include": [
+        "./src/**/*.ts",
+        "./.eslintrc.cjs"
+    ],
+    "exclude": [
+        "**/node_modules/*",
+        "**/dist/*",
+        ".turbo"
+    ]
+}

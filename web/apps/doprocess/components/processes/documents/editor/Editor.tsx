@@ -1,9 +1,11 @@
 'use client';
 
 import { useTheme } from 'next-themes';
-import { BlockNoteView, Theme, darkDefaultTheme, useCreateBlockNote } from '@blocknote/react';
-import '@blocknote/core/style.css';
-import { PartialBlock } from '@blocknote/core';
+import { useCreateBlockNote } from '@blocknote/react';
+import { BlockNoteView, darkDefaultTheme, type Theme } from '@blocknote/mantine';
+import { type PartialBlock } from '@blocknote/core';
+
+import '@blocknote/mantine/style.css';
 
 type EditorProps = {
     id: string | undefined,
@@ -30,7 +32,7 @@ export function Editor({ id, content, editable, onChange }: EditorProps) {
     });
 
     const handleDocumentChange = () => {
-        onChange?.(JSON.stringify(editor.topLevelBlocks));
+        onChange?.(JSON.stringify(editor.document));
     };
 
     return (

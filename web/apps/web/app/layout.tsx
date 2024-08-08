@@ -1,3 +1,4 @@
+import { ReactNode } from 'react';
 import { Inter } from 'next/font/google';
 import { Viewport, type Metadata } from 'next';
 import { Analytics } from '@vercel/analytics/react';
@@ -9,7 +10,7 @@ const inter = Inter({
 });
 
 export default function RootLayout({ children, }: {
-    children: React.ReactNode;
+    children: ReactNode;
 }) {
     return (
         <html lang="en">

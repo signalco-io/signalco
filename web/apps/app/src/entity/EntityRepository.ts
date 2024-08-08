@@ -23,12 +23,13 @@ export async function entityAsync(id: string) {
     try {
         const entity = await getAsync(`/entity/${id}`);
         return mapEntityDetailsFromDto(entity);
-    } catch (err) {
-        const errorStatusCode = objectWithKey(objectWithKey(err, 'cause')?.cause, 'statusCode')?.statusCode;
+    } catch (error) {
+        const errorStatusCode = objectWithKey(objectWithKey(error, 'cause')?.cause, 'statusCode')?.statusCode;
         if (errorStatusCode === 404) {
+            console.debug('Entity not found', id);
             return null;
         }
-        throw err;
+        throw error;
     }
 }
 
@@ -41,7 +42,7 @@ export async function entityRenameAsync(id: string, newAlias: string) {
 }
 
 export async function entitiesAsync(type?: number) {
-    const data = await requestAsync('/entity', 'get');
+    const data = await requestAsync('/entities?types=' + type, 'get');
     if (Array.isArray(data)) {
         let entities = data.map(mapEntityDetailsFromDto) as IEntityDetails[];
         if (typeof type !== 'undefined') {

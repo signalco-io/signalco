@@ -18,7 +18,7 @@ export type DocumentEditorProps = {
 export function DocumentEditor({ id, editable, onSavingChange }: DocumentEditorProps) {
     const { data: document, isLoading, error } = useDocument(id);
     const documentUpdate = useDocumentUpdate();
-    const documentData = document?.data as string | null | undefined;
+    const documentData = document?.dataJson;
 
     const currentContentId = useRef<string>();
     const [content, setContent] = useState<string | null>();

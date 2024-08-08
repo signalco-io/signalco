@@ -41,6 +41,14 @@
 			"path": "apps/workingparty"
 		},
 		{
+			"name": "📦 @signalco/auth-client",
+			"path": "packages/auth-client"
+		},
+		{
+			"name": "📦 @signalco/auth-server",
+			"path": "packages/auth-server"
+		},
+		{
 			"name": "📦 @signalco/cms-core",
 			"path": "packages/cms-core"
 		},
@@ -87,6 +95,14 @@
 		{
 			"name": "📦 @signalco/ui-primitives",
 			"path": "packages/ui-primitives"
+		},
+		{
+			"name": "📦 @signalco/ui-themes-minimal",
+			"path": "packages/ui-themes-minimal"
+		},
+		{
+			"name": "📦 @signalco/ui-themes-minimal-app",
+			"path": "packages/ui-themes-minimal-app"
 		},
 		{
 			"name": "📦 @uier/toolbar",
