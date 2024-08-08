@@ -504,8 +504,8 @@ importers:
         specifier: 0.15.3
         version: 0.15.3
       '@blocknote/mantine':
-        specifier: 0.15.3
-        version: 0.15.3(@tiptap/pm@2.5.4)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: 0.15.4
+        version: 0.15.4(@tiptap/pm@2.5.4)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@blocknote/react':
         specifier: 0.15.4
         version: 0.15.4(@tiptap/pm@2.5.4)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -2741,8 +2741,8 @@ packages:
   '@blocknote/core@0.15.4':
     resolution: {integrity: sha512-agOIkb63u4GDzK1UbL4v1Tzcim7p2mJj/YMS7QEYCSe54pdgVH07Gx2CS+nZfjs8BmPjCkEQg1yRxCf0NT9P+g==}
 
-  '@blocknote/mantine@0.15.3':
-    resolution: {integrity: sha512-KEtRffEAjqmIW9sSpDdiEgOhsSZLcI2zV/0hHOe/ZM/01UE/V4Vl7VKicgDd7FUBzn2BoqqxOv0GW1n5mLsfCw==}
+  '@blocknote/mantine@0.15.4':
+    resolution: {integrity: sha512-sMKR2MrubzHShnG23Q+RwmsXoqGu/E9vyqdZ5TSM8D2J5pydqLiwO8pKXS3Uq4OnddZMXyn/V3q1pa7Uh7T2Rw==}
     peerDependencies:
       react: ^18
       react-dom: ^18
@@ -11781,9 +11781,9 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@blocknote/mantine@0.15.3(@tiptap/pm@2.5.4)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@blocknote/mantine@0.15.4(@tiptap/pm@2.5.4)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@blocknote/core': 0.15.3
+      '@blocknote/core': 0.15.4
       '@blocknote/react': 0.15.4(@tiptap/pm@2.5.4)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@mantine/core': 7.11.2(@mantine/hooks@7.11.2(react@18.3.1))(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@mantine/hooks': 7.11.2(react@18.3.1)
@@ -19720,7 +19720,7 @@ snapshots:
 
   react-textarea-autosize@8.5.3(@types/react@18.3.3)(react@18.3.1):
     dependencies:
-      '@babel/runtime': 7.24.8
+      '@babel/runtime': 7.25.0
       react: 18.3.1
       use-composed-ref: 1.3.0(react@18.3.1)
       use-latest: 1.2.1(@types/react@18.3.3)(react@18.3.1)
