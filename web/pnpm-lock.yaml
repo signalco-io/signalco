@@ -501,8 +501,8 @@ importers:
         specifier: 4.1.0
         version: 4.1.0
       '@blocknote/core':
-        specifier: 0.15.3
-        version: 0.15.3
+        specifier: 0.15.4
+        version: 0.15.4
       '@blocknote/mantine':
         specifier: 0.15.3
         version: 0.15.3(@tiptap/pm@2.5.4)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -2734,9 +2734,6 @@ packages:
 
   '@base2/pretty-print-object@1.0.1':
     resolution: {integrity: sha512-4iri8i1AqYHJE2DstZYkyEprg6Pq6sKx3xn5FpySk9sNhH7qN2LLlHJCfDTZRILNwQNPD7mATWM0TBui7uC1pA==}
-
-  '@blocknote/core@0.15.3':
-    resolution: {integrity: sha512-2ZOWpxt4rm5YdH9Gn9YXYQsI9wYMAkFcKkuSpprHGCl7ALk+Iv7Gw+BswttlhKFyYoY/df7dlc9lcZr5zVAWWw==}
 
   '@blocknote/core@0.15.4':
     resolution: {integrity: sha512-agOIkb63u4GDzK1UbL4v1Tzcim7p2mJj/YMS7QEYCSe54pdgVH07Gx2CS+nZfjs8BmPjCkEQg1yRxCf0NT9P+g==}
@@ -11689,52 +11686,6 @@ snapshots:
 
   '@base2/pretty-print-object@1.0.1': {}
 
-  '@blocknote/core@0.15.3':
-    dependencies:
-      '@emoji-mart/data': 1.2.1
-      '@tiptap/core': 2.5.4(@tiptap/pm@2.5.4)
-      '@tiptap/extension-bold': 2.5.4(@tiptap/core@2.5.4(@tiptap/pm@2.5.4))
-      '@tiptap/extension-code': 2.5.4(@tiptap/core@2.5.4(@tiptap/pm@2.5.4))
-      '@tiptap/extension-collaboration': 2.5.4(@tiptap/core@2.5.4(@tiptap/pm@2.5.4))(@tiptap/pm@2.5.4)(y-prosemirror@1.2.9(prosemirror-model@1.22.2)(prosemirror-state@1.4.3)(prosemirror-view@1.33.9)(y-protocols@1.0.6(yjs@13.6.18))(yjs@13.6.18))
-      '@tiptap/extension-collaboration-cursor': 2.5.4(@tiptap/core@2.5.4(@tiptap/pm@2.5.4))(y-prosemirror@1.2.9(prosemirror-model@1.22.2)(prosemirror-state@1.4.3)(prosemirror-view@1.33.9)(y-protocols@1.0.6(yjs@13.6.18))(yjs@13.6.18))
-      '@tiptap/extension-dropcursor': 2.5.4(@tiptap/core@2.5.4(@tiptap/pm@2.5.4))(@tiptap/pm@2.5.4)
-      '@tiptap/extension-gapcursor': 2.5.4(@tiptap/core@2.5.4(@tiptap/pm@2.5.4))(@tiptap/pm@2.5.4)
-      '@tiptap/extension-hard-break': 2.5.4(@tiptap/core@2.5.4(@tiptap/pm@2.5.4))
-      '@tiptap/extension-history': 2.5.4(@tiptap/core@2.5.4(@tiptap/pm@2.5.4))(@tiptap/pm@2.5.4)
-      '@tiptap/extension-horizontal-rule': 2.5.4(@tiptap/core@2.5.4(@tiptap/pm@2.5.4))(@tiptap/pm@2.5.4)
-      '@tiptap/extension-italic': 2.5.4(@tiptap/core@2.5.4(@tiptap/pm@2.5.4))
-      '@tiptap/extension-link': 2.5.4(@tiptap/core@2.5.4(@tiptap/pm@2.5.4))(@tiptap/pm@2.5.4)
-      '@tiptap/extension-paragraph': 2.5.4(@tiptap/core@2.5.4(@tiptap/pm@2.5.4))
-      '@tiptap/extension-strike': 2.5.4(@tiptap/core@2.5.4(@tiptap/pm@2.5.4))
-      '@tiptap/extension-table-cell': 2.5.4(@tiptap/core@2.5.4(@tiptap/pm@2.5.4))
-      '@tiptap/extension-table-header': 2.5.4(@tiptap/core@2.5.4(@tiptap/pm@2.5.4))
-      '@tiptap/extension-table-row': 2.5.4(@tiptap/core@2.5.4(@tiptap/pm@2.5.4))
-      '@tiptap/extension-text': 2.5.4(@tiptap/core@2.5.4(@tiptap/pm@2.5.4))
-      '@tiptap/extension-underline': 2.5.4(@tiptap/core@2.5.4(@tiptap/pm@2.5.4))
-      '@tiptap/pm': 2.5.4
-      emoji-mart: 5.6.0
-      hast-util-from-dom: 4.2.0
-      prosemirror-model: 1.22.2
-      prosemirror-state: 1.4.3
-      prosemirror-tables: 1.4.0
-      prosemirror-transform: 1.9.0
-      prosemirror-view: 1.33.9
-      rehype-format: 5.0.0
-      rehype-parse: 8.0.5
-      rehype-remark: 9.1.2
-      rehype-stringify: 9.0.4
-      remark-gfm: 3.0.1
-      remark-parse: 10.0.2
-      remark-rehype: 10.1.0
-      remark-stringify: 10.0.3
-      unified: 10.1.2
-      uuid: 8.3.2
-      y-prosemirror: 1.2.9(prosemirror-model@1.22.2)(prosemirror-state@1.4.3)(prosemirror-view@1.33.9)(y-protocols@1.0.6(yjs@13.6.18))(yjs@13.6.18)
-      y-protocols: 1.0.6(yjs@13.6.18)
-      yjs: 13.6.18
-    transitivePeerDependencies:
-      - supports-color
-
   '@blocknote/core@0.15.4':
     dependencies:
       '@emoji-mart/data': 1.2.1
@@ -11783,7 +11734,7 @@ snapshots:
 
   '@blocknote/mantine@0.15.3(@tiptap/pm@2.5.4)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@blocknote/core': 0.15.3
+      '@blocknote/core': 0.15.4
       '@blocknote/react': 0.15.4(@tiptap/pm@2.5.4)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@mantine/core': 7.11.2(@mantine/hooks@7.11.2(react@18.3.1))(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@mantine/hooks': 7.11.2(react@18.3.1)
