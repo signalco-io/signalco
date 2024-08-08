@@ -1,7 +1,6 @@
 {
     "name": "@signalco/ui-primitives",
-    "version": "0.0.0",
-    "private": true,
+    "version": "0.1.7",
     "license": "MIT",
     "type": "module",
     "sideEffects": false,
