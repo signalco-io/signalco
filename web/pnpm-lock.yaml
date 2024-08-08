@@ -594,8 +594,8 @@ importers:
         specifier: 0.3.0
         version: 0.3.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       openai:
-        specifier: 4.55.1
-        version: 4.55.1(encoding@0.1.13)
+        specifier: 4.55.3
+        version: 4.55.3(encoding@0.1.13)
       react:
         specifier: 18.3.1
         version: 18.3.1
@@ -1217,8 +1217,8 @@ importers:
         specifier: 0.3.0
         version: 0.3.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       openai:
-        specifier: 4.55.1
-        version: 4.55.1(encoding@0.1.13)
+        specifier: 4.55.3
+        version: 4.55.3(encoding@0.1.13)
       react:
         specifier: 18.3.1
         version: 18.3.1
@@ -8603,8 +8603,8 @@ packages:
     resolution: {integrity: sha512-1FlR+gjXK7X+AsAHso35MnyN5KqGwJRi/31ft6x0M194ht7S+rWAvd7PHss9xSKMzE0asv1pyIHaJYq+BbacAQ==}
     engines: {node: '>=12'}
 
-  openai@4.55.1:
-    resolution: {integrity: sha512-FziYJcWl+SAGbt5AcRIzVzNcnKohpEMQdtzVOmHFbBp/if7x2+ACqgxF2XUbyi2PcKONPcVpmtG5h9qoDAEXwQ==}
+  openai@4.55.3:
+    resolution: {integrity: sha512-/IUDdK5w3aB1Kd88Ml7w5F+EkVM5aXlrY+lSpWXdIPL18CmGkC7lV9HFJ7beR0OUSFLFT0qmWvMynqtbMF06/Q==}
     hasBin: true
     peerDependencies:
       zod: ^3.23.8
@@ -18729,7 +18729,7 @@ snapshots:
     dependencies:
       mimic-fn: 4.0.0
 
-  openai@4.55.1(encoding@0.1.13):
+  openai@4.55.3(encoding@0.1.13):
     dependencies:
       '@types/node': 18.19.41
       '@types/node-fetch': 2.6.11
