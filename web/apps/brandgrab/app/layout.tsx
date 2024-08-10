@@ -1,11 +1,5 @@
-import { Inter } from 'next/font/google';
 import './global.css';
 import { Metadata, Viewport } from 'next';
-
-const inter = Inter({
-    subsets: ['latin'],
-    variable: '--font-sans',
-});
 
 export default function RootLayout({
     // Layouts must accept a children prop.
@@ -16,7 +10,7 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
-            <body className={`${inter.variable} font-sans`}>
+            <body className={'font-sans'}>
                 {children}
             </body>
         </html>

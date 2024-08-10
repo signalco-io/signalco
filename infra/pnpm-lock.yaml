@@ -27,11 +27,11 @@ importers:
         specifier: 6.48.0
         version: 6.48.0(ts-node@7.0.1)(typescript@5.5.4)
       '@pulumi/azure-native':
-        specifier: 2.54.0
-        version: 2.54.0(ts-node@7.0.1)(typescript@5.5.4)
+        specifier: 2.55.0
+        version: 2.55.0(ts-node@7.0.1)(typescript@5.5.4)
       '@pulumi/cloudflare':
-        specifier: 5.35.1
-        version: 5.35.1(ts-node@7.0.1)(typescript@5.5.4)
+        specifier: 5.36.0
+        version: 5.36.0(ts-node@7.0.1)(typescript@5.5.4)
       '@pulumi/command':
         specifier: 1.0.1
         version: 1.0.1(ts-node@7.0.1)(typescript@5.5.4)
@@ -49,8 +49,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/pulumi
       '@types/node':
-        specifier: 20.14.14
-        version: 20.14.14
+        specifier: 20.14.15
+        version: 20.14.15
       '@typescript-eslint/eslint-plugin':
         specifier: 8.0.1
         version: 8.0.1(@typescript-eslint/parser@8.0.1(eslint@8.57.0)(typescript@5.5.4))(eslint@8.57.0)(typescript@5.5.4)
@@ -79,11 +79,11 @@ importers:
   apps/doprocess:
     dependencies:
       '@pulumi/azure-native':
-        specifier: 2.54.0
-        version: 2.54.0(ts-node@7.0.1)(typescript@5.5.4)
+        specifier: 2.55.0
+        version: 2.55.0(ts-node@7.0.1)(typescript@5.5.4)
       '@pulumi/cloudflare':
-        specifier: 5.35.1
-        version: 5.35.1(ts-node@7.0.1)(typescript@5.5.4)
+        specifier: 5.36.0
+        version: 5.36.0(ts-node@7.0.1)(typescript@5.5.4)
       '@pulumi/docker':
         specifier: 4.5.5
         version: 4.5.5(ts-node@7.0.1)(typescript@5.5.4)
@@ -98,8 +98,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/pulumi
       '@types/node':
-        specifier: 20.14.14
-        version: 20.14.14
+        specifier: 20.14.15
+        version: 20.14.15
       '@typescript-eslint/eslint-plugin':
         specifier: 8.0.1
         version: 8.0.1(@typescript-eslint/parser@8.0.1(eslint@8.57.0)(typescript@5.5.4))(eslint@8.57.0)(typescript@5.5.4)
@@ -134,11 +134,11 @@ importers:
         specifier: 6.48.0
         version: 6.48.0(ts-node@7.0.1)(typescript@5.5.4)
       '@pulumi/azure-native':
-        specifier: 2.54.0
-        version: 2.54.0(ts-node@7.0.1)(typescript@5.5.4)
+        specifier: 2.55.0
+        version: 2.55.0(ts-node@7.0.1)(typescript@5.5.4)
       '@pulumi/cloudflare':
-        specifier: 5.35.1
-        version: 5.35.1(ts-node@7.0.1)(typescript@5.5.4)
+        specifier: 5.36.0
+        version: 5.36.0(ts-node@7.0.1)(typescript@5.5.4)
       '@pulumi/command':
         specifier: 1.0.1
         version: 1.0.1(ts-node@7.0.1)(typescript@5.5.4)
@@ -156,8 +156,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/pulumi
       '@types/node':
-        specifier: 20.14.14
-        version: 20.14.14
+        specifier: 20.14.15
+        version: 20.14.15
       '@typescript-eslint/eslint-plugin':
         specifier: 8.0.1
         version: 8.0.1(@typescript-eslint/parser@8.0.1(eslint@8.57.0)(typescript@5.5.4))(eslint@8.57.0)(typescript@5.5.4)
@@ -192,11 +192,11 @@ importers:
         specifier: 6.48.0
         version: 6.48.0(ts-node@7.0.1)(typescript@5.5.4)
       '@pulumi/azure-native':
-        specifier: 2.54.0
-        version: 2.54.0(ts-node@7.0.1)(typescript@5.5.4)
+        specifier: 2.55.0
+        version: 2.55.0(ts-node@7.0.1)(typescript@5.5.4)
       '@pulumi/cloudflare':
-        specifier: 5.35.1
-        version: 5.35.1(ts-node@7.0.1)(typescript@5.5.4)
+        specifier: 5.36.0
+        version: 5.36.0(ts-node@7.0.1)(typescript@5.5.4)
       '@pulumi/command':
         specifier: 1.0.1
         version: 1.0.1(ts-node@7.0.1)(typescript@5.5.4)
@@ -214,8 +214,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/pulumi
       '@types/node':
-        specifier: 20.14.14
-        version: 20.14.14
+        specifier: 20.14.15
+        version: 20.14.15
       '@typescript-eslint/eslint-plugin':
         specifier: 8.0.1
         version: 8.0.1(@typescript-eslint/parser@8.0.1(eslint@8.57.0)(typescript@5.5.4))(eslint@8.57.0)(typescript@5.5.4)
@@ -244,11 +244,11 @@ importers:
   apps/workingparty:
     dependencies:
       '@pulumi/azure-native':
-        specifier: 2.54.0
-        version: 2.54.0(ts-node@7.0.1)(typescript@5.5.4)
+        specifier: 2.55.0
+        version: 2.55.0(ts-node@7.0.1)(typescript@5.5.4)
       '@pulumi/cloudflare':
-        specifier: 5.35.1
-        version: 5.35.1(ts-node@7.0.1)(typescript@5.5.4)
+        specifier: 5.36.0
+        version: 5.36.0(ts-node@7.0.1)(typescript@5.5.4)
       '@pulumi/docker':
         specifier: 4.5.5
         version: 4.5.5(ts-node@7.0.1)(typescript@5.5.4)
@@ -263,8 +263,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/pulumi
       '@types/node':
-        specifier: 20.14.14
-        version: 20.14.14
+        specifier: 20.14.15
+        version: 20.14.15
       '@typescript-eslint/eslint-plugin':
         specifier: 8.0.1
         version: 8.0.1(@typescript-eslint/parser@8.0.1(eslint@8.57.0)(typescript@5.5.4))(eslint@8.57.0)(typescript@5.5.4)
@@ -326,11 +326,11 @@ importers:
         specifier: 6.48.0
         version: 6.48.0(ts-node@7.0.1)(typescript@5.5.4)
       '@pulumi/azure-native':
-        specifier: 2.54.0
-        version: 2.54.0(ts-node@7.0.1)(typescript@5.5.4)
+        specifier: 2.55.0
+        version: 2.55.0(ts-node@7.0.1)(typescript@5.5.4)
       '@pulumi/cloudflare':
-        specifier: 5.35.1
-        version: 5.35.1(ts-node@7.0.1)(typescript@5.5.4)
+        specifier: 5.36.0
+        version: 5.36.0(ts-node@7.0.1)(typescript@5.5.4)
       '@pulumi/command':
         specifier: 1.0.1
         version: 1.0.1(ts-node@7.0.1)(typescript@5.5.4)
@@ -351,8 +351,8 @@ importers:
         specifier: workspace:*
         version: link:../typescript-config
       '@types/node':
-        specifier: 20.14.14
-        version: 20.14.14
+        specifier: 20.14.15
+        version: 20.14.15
       '@typescript-eslint/eslint-plugin':
         specifier: 8.0.1
         version: 8.0.1(@typescript-eslint/parser@8.0.1(eslint@8.57.0)(typescript@5.5.4))(eslint@8.57.0)(typescript@5.5.4)
@@ -774,11 +774,11 @@ packages:
   '@pulumi/aws@6.48.0':
     resolution: {integrity: sha512-Y+raJupp7mtMmDC6C1yDiapE6cPbkH/T+wVovePBKtwggipJ33ezZtZ8n95CseiN9ii9fo5jX0iLIEaOpv5/fw==}
 
-  '@pulumi/azure-native@2.54.0':
-    resolution: {integrity: sha512-nlNvxETI3fU08iSeJCjYGa478m3WthAMD2T8raJjeFSC/TKIX3qRJU94p7rbd5fh2JVUtkbkskDDkzT/ikoefQ==}
+  '@pulumi/azure-native@2.55.0':
+    resolution: {integrity: sha512-WEJkALsp8Tyn3JeQN5kjIKP7oRlAKfONBTAyBv0YCoqaNnXOWtlH4xtz87zfqXI9uxbVM03SA6lJ25Lcg416cg==}
 
-  '@pulumi/cloudflare@5.35.1':
-    resolution: {integrity: sha512-mDiGwMPRPuLTXf8h4ucfUsoSWMvnjIZfYIjL1CKVfKp3/3w38KPi2eNa44e4IjQzQwZnBTWcSjP/bnYeloeIJw==}
+  '@pulumi/cloudflare@5.36.0':
+    resolution: {integrity: sha512-o9kqc5mzpNkMG9tmgsJgYv0KTh/rVUd/fJ/FE71P12m2TwWO5VR1Y96kk+ZMdbpoD847W66OtMjWRUBLBgX1cg==}
 
   '@pulumi/command@1.0.1':
     resolution: {integrity: sha512-PqqcMp80Y9dc7Lt0epXqvqha76S4XF08NB8lpMA0zJ9zWvkkssQ8lq8XdHuZOrAGHXj7gKBs6JBrhhltoovUTQ==}
@@ -942,8 +942,8 @@ packages:
   '@types/keyv@3.1.4':
     resolution: {integrity: sha512-BQ5aZNSCpj7D6K2ksrRCTmKRLEpnPvWDiLPfoGyhZ++8YtiK9d/3DBKPJgry359X/P1PfruyYwvnvwFjuEiEIg==}
 
-  '@types/node@20.14.14':
-    resolution: {integrity: sha512-d64f00982fS9YoOgJkAMolK7MN8Iq3TDdVjchbYHdEmjth/DHowx82GnoA+tVUAN+7vxfYUgAzi+JXbKNd2SDQ==}
+  '@types/node@20.14.15':
+    resolution: {integrity: sha512-Fz1xDMCF/B00/tYSVMlmK7hVeLh7jE5f3B7X1/hmV0MJBwE27KlS7EvD/Yp+z1lm8mVhwV5w+n8jOZG8AfTlKw==}
 
   '@types/responselike@1.0.3':
     resolution: {integrity: sha512-H/+L+UkTV33uf49PH5pCAUBVPNj2nDBXTN+qS1dOwyyg24l3CcicicCA7ca+HMvJBZcFgl5r8e+RR6elsb4Lyw==}
@@ -2884,7 +2884,7 @@ snapshots:
   '@grpc/grpc-js@1.10.1':
     dependencies:
       '@grpc/proto-loader': 0.7.10
-      '@types/node': 20.14.14
+      '@types/node': 20.14.15
 
   '@grpc/proto-loader@0.7.10':
     dependencies:
@@ -3186,7 +3186,7 @@ snapshots:
       - ts-node
       - typescript
 
-  '@pulumi/azure-native@2.54.0(ts-node@7.0.1)(typescript@5.5.4)':
+  '@pulumi/azure-native@2.55.0(ts-node@7.0.1)(typescript@5.5.4)':
     dependencies:
       '@pulumi/pulumi': 3.128.0(ts-node@7.0.1)(typescript@5.5.4)
     transitivePeerDependencies:
@@ -3195,7 +3195,7 @@ snapshots:
       - ts-node
       - typescript
 
-  '@pulumi/cloudflare@5.35.1(ts-node@7.0.1)(typescript@5.5.4)':
+  '@pulumi/cloudflare@5.36.0(ts-node@7.0.1)(typescript@5.5.4)':
     dependencies:
       '@pulumi/pulumi': 3.128.0(ts-node@7.0.1)(typescript@5.5.4)
     transitivePeerDependencies:
@@ -3368,7 +3368,7 @@ snapshots:
     dependencies:
       '@types/http-cache-semantics': 4.0.4
       '@types/keyv': 3.1.4
-      '@types/node': 20.14.14
+      '@types/node': 20.14.15
       '@types/responselike': 1.0.3
 
   '@types/estree@1.0.5': {}
@@ -3381,15 +3381,15 @@ snapshots:
 
   '@types/keyv@3.1.4':
     dependencies:
-      '@types/node': 20.14.14
+      '@types/node': 20.14.15
 
-  '@types/node@20.14.14':
+  '@types/node@20.14.15':
     dependencies:
       undici-types: 5.26.5
 
   '@types/responselike@1.0.3':
     dependencies:
-      '@types/node': 20.14.14
+      '@types/node': 20.14.15
 
   '@types/semver@7.5.8': {}
 
@@ -4880,7 +4880,7 @@ snapshots:
       '@protobufjs/path': 1.1.2
       '@protobufjs/pool': 1.1.0
       '@protobufjs/utf8': 1.1.0
-      '@types/node': 20.14.14
+      '@types/node': 20.14.15
       long: 5.2.3
 
   pump@3.0.0:

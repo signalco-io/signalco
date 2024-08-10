@@ -29,7 +29,7 @@
     "devDependencies": {
         "@infra/typescript-config": "workspace:*",
         "@infra/eslint-config": "workspace:*",
-        "@types/node": "20.14.14",
+        "@types/node": "20.14.15",
         "@typescript-eslint/eslint-plugin": "8.0.1",
         "@typescript-eslint/parser": "8.0.1",
         "eslint": "8.57.0",
@@ -41,8 +41,8 @@
     "dependencies": {
         "@checkly/pulumi": "1.1.4",
         "@pulumi/aws": "6.48.0",
-        "@pulumi/azure-native": "2.54.0",
-        "@pulumi/cloudflare": "5.35.1",
+        "@pulumi/azure-native": "2.55.0",
+        "@pulumi/cloudflare": "5.36.0",
         "@pulumi/command": "1.0.1",
         "@pulumi/docker": "4.5.5",
         "@pulumi/pulumi": "3.128.0",
