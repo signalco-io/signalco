@@ -36,12 +36,12 @@
         "react-dom": "18.3.1",
         "react-timeago": "7.2.0",
         "sass": "1.77.8",
-        "tailwind-merge": "2.4.0",
+        "tailwind-merge": "2.5.0",
         "typescript": "5.5.4"
     },
     "peerDependencies": {
+        "@signalco/ui-primitives": "0",
         "react": "18",
-        "react-dom": "18",
-        "@signalco/ui-primitives": "0"
+        "react-dom": "18"
     }
 }
