@@ -24,7 +24,7 @@ export function Wave({ value, breakpoints }: { value: number, breakpoints: reado
                     // 'fill-red-400'
                 )}
                 style={{
-                    '--wave-height': `${value}px`,
+                    '--wave-height': `${value}%`,
                 } as CSSProperties}>
                 <SingleWave />
                 <SingleWave />
@@ -39,7 +39,7 @@ export function Wave({ value, breakpoints }: { value: number, breakpoints: reado
                     value >= breakpoints[2] && 'bg-rose-500 dark:bg-rose-700',
                 )}
                 style={{
-                    '--wave-height': `${value}px`
+                    '--wave-height': `${value}%`
                 } as CSSProperties}></div>
         </div>
     );
