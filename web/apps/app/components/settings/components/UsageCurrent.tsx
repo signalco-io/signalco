@@ -87,7 +87,7 @@ export function UsageCurrent() {
                         width={500}
                         height={300}
                         discrete
-                        aggregate
+                        aggregate={1}
                         limits={[
                             { id: 'executions', value: limit }
                         ]} />
