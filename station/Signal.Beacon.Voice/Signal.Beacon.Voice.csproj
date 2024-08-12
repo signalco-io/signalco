@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <Deterministic>true</Deterministic>
     <PackageLicenseExpression>AGPL-3.0-only</PackageLicenseExpression>
@@ -19,7 +19,7 @@
     <PackageReference Include="FuzzySharp" Version="2.0.2" />
     <PackageReference Include="Google.Apis" Version="1.68.0" />
     <PackageReference Include="Google.Cloud.Speech.V1" Version="3.8.0" />
-    <PackageReference Include="OpenTK.Audio.OpenAL" Version="5.0.0-pre.10" />
+    <PackageReference Include="OpenTK.Audio.OpenAL" Version="5.0.0-pre.11" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.1" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.1" />
     <PackageReference Include="Porcupine" Version="3.0.2" />
