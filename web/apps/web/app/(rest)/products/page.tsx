@@ -18,6 +18,7 @@ const products = [
     { id: 'npm-ui-primitives', tags: ['npm'], name: '@signalco/ui-primitives', logo: undefined, url: 'https://www.npmjs.com/package/@signalco/ui-primitives' },
     { id: 'npm-ui-themes-minimal', tags: ['npm'], name: '@signalco/ui-themes-minimal', logo: undefined, url: 'https://www.npmjs.com/package/@signalco/ui-themes-minimal' },
     { id: 'npm-ui-themes-minimal-app', tags: ['npm'], name: '@signalco/ui-themes-minimal-app', logo: undefined, url: 'https://www.npmjs.com/package/@signalco/ui-themes-minimal-app' },
+    { id: 'npm-ui-icons', tags: ['npm'], name: '@signalco/ui-icons', logo: undefined, url: 'https://www.npmjs.com/package/@signalco/ui-icons' },
     { id: 'npm-hooks', tags: ['npm'], name: '@signalco/hooks', logo: undefined, url: 'https://www.npmjs.com/package/@signalco/hooks' },
     { id: 'npm-js', tags: ['npm'], name: '@signalco/js', logo: undefined, url: 'https://www.npmjs.com/package/@signalco/js' },
 ];
