@@ -126,6 +126,7 @@ function WidgetAirConditioning(props: WidgetSharedProps<ConfigProps>) {
                     height={rows * 25 - 2}
                     hideLegend
                     adaptiveDomain
+                    aggregate={30 * 60 * 1000}
                 />
             </div>
         </div>
