@@ -7,23 +7,13 @@ import { Bug, Link as LinkIcon } from '@signalco/ui-icons';
 import { NavigatingButton } from '@signalco/ui/NavigatingButton';
 import { Breadcrumbs } from '@signalco/ui/Breadcrumbs';
 import { channelCategories as channelCategoriesData, channelsData } from '@signalco/data/data';
+import { SectionsView } from '@signalco/cms-core/SectionsView';
+import { channelsFaq } from '../page';
 import { KnownPages } from '../../../../src/knownPages';
 import ShareSocial from '../../../../components/pages/ShareSocial';
-import FaqSection from '../../../../components/pages/FaqSection';
 import CtaSection from '../../../../components/pages/CtaSection';
 import ChannelLogo from '../../../../components/channels/ChannelLogo';
-
-type ChannelFaqItem = {
-    id: string;
-    question: string;
-    answer: string;
-}
-
-const channelFaq: ChannelFaqItem[] = [
-    { id: 'channel', question: 'What is Channel?', answer: 'Channel is Entity that contains all information required for connected online service, application or device. Channels can execute actions directly or contain connected entities to manage.' },
-    { id: 'entities', question: 'What are Entities?', answer: 'Entity is a thing you want to automate in signalco. This can be is online service connected to signalco, smart device, your custom space, automation process, etc.' },
-    { id: 'executions', question: 'What are Executions?', answer: 'Execution is when one of your automation processes executes one action.' },
-];
+import { sectionsComponentRegistry } from '../../../(landing)/page';
 
 export async function generateStaticParams() {
     return channelsData.map((channel) => ({
@@ -97,7 +87,10 @@ export default function ChannelPage({ params }: { params: { channelName: string 
                     {channel?.planned && <Typography level="body3">Available soon</Typography>}
                 </Stack>
             </Stack>
-            <FaqSection faq={channelFaq} />
+            <SectionsView
+                sectionsData={channelsFaq}
+                componentsRegistry={sectionsComponentRegistry}
+            />
             <CtaSection />
         </Stack>
     );
