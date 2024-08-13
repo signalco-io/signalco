@@ -59,7 +59,7 @@ export default function Roadmap({ items, error, isLoading }: { items: RoadmapIte
     return (
         <Container maxWidth="sm">
             <Stack spacing={4}>
-                <PageCenterHeader subHeader="Help us by voting our roadmap.">
+                <PageCenterHeader level="h1" subHeader="Help us by voting our roadmap.">
                     Roadmap
                 </PageCenterHeader>
                 <Loadable error={error} isLoading={isLoading} loadingLabel={'Loading items'}>

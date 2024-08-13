@@ -7,7 +7,7 @@ const LayoutResourceGraph = dynamic(() => import('./LayoutResourceGraph'), { ssr
 export default function InfrastructurePage() {
     return (
         <Stack spacing={8}>
-            <PageCenterHeader>
+            <PageCenterHeader level="h1">
                 Infrastructure
             </PageCenterHeader>
             <LayoutResourceGraph />

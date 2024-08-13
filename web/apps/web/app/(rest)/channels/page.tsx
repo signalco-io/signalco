@@ -23,7 +23,7 @@ export default function ChannelsPage() {
     return (
         <Stack spacing={8}>
             <Stack spacing={4}>
-                <PageCenterHeader subHeader="List of all channels available on signalco">
+                <PageCenterHeader level="h1" subHeader="List of all channels available on signalco">
                     Channels
                 </PageCenterHeader>
                 <Suspense>

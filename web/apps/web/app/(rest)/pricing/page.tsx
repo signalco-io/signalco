@@ -22,7 +22,7 @@ const pricingFaq = [
 export default function PricingPage() {
     return (
         <Stack spacing={4}>
-            <PageCenterHeader subHeader={'Find the plan for you'}>
+            <PageCenterHeader level="h1" subHeader={'Find plat that matches your ambition.'}>
                 Pricing
             </PageCenterHeader>
             <SectionsView

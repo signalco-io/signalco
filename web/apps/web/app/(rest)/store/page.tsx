@@ -131,7 +131,7 @@ export default function StorePage() {
 
     return (
         <Stack spacing={8}>
-            <PageCenterHeader subHeader="Discover your new smart home">
+            <PageCenterHeader level="h1" subHeader="Discover your new smart home">
                 Store
             </PageCenterHeader>
             <Gallery
