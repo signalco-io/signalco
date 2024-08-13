@@ -4,9 +4,9 @@ import { Card, CardContent } from '@signalco/ui-primitives/Card';
 import { Avatar } from '@signalco/ui-primitives/Avatar';
 import { Shield, Lock, Euro } from '@signalco/ui-icons';
 import { SectionsView } from '@signalco/cms-core/SectionsView';
-import PageCenterHeader from '../../../components/pages/PageCenterHeader';
-import CtaSection from '../../../components/pages/CtaSection';
-import { sectionsComponentRegistry } from '../../(landing)/page';
+import { sectionsComponentRegistry } from '../page';
+import PageCenterHeader from '../../components/pages/PageCenterHeader';
+import CtaSection from '../../components/pages/CtaSection';
 
 const securityFaq = [
     {

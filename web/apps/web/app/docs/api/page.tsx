@@ -24,7 +24,7 @@ import { Alert } from '@signalco/ui/Alert';
 import { camelToSentenceCase, HttpOperation, ObjectDictAny, objectWithKey } from '@signalco/js';
 import { useSearchParam } from '@signalco/hooks/useSearchParam';
 import { usePromise } from '@enterwell/react-hooks';
-import { isDeveloper } from '../../../../src/services/EnvProvider';
+import { isDeveloper } from '../../../src/services/EnvProvider';
 
 function HttpOperationChip(props: { operation?: HttpOperation | undefined, small?: boolean }) {
     const color = ({

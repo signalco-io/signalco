@@ -2,6 +2,8 @@ import { ReactNode } from 'react';
 import { Viewport, type Metadata } from 'next';
 import { Analytics } from '@vercel/analytics/react';
 import './global.css';
+import { RootClientProvider } from '../components/providers/RootClientProvider';
+import { PageLayout } from '../components/layouts/PageLayout';
 
 export default function RootLayout({ children, }: {
     children: ReactNode;
@@ -9,7 +11,11 @@ export default function RootLayout({ children, }: {
     return (
         <html lang="en">
             <body className={'font-sans'}>
-                {children}
+                <RootClientProvider>
+                    <PageLayout>
+                        {children}
+                    </PageLayout>
+                </RootClientProvider>
                 <Analytics />
             </body>
         </html>
