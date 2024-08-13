@@ -37,7 +37,7 @@ export function Loadable({
     const indicator = useMemo(() => {
         if (placeholder == null || placeholder === 'circular') {
             return (
-                <Spinner loading={true} loadingLabel={loadingLabel} className={cx('p-2 w-full', className)} />
+                <Spinner loading={true} loadingLabel={loadingLabel} className={cx('p-2 size-10 w-full', className)} />
             );
         }
 

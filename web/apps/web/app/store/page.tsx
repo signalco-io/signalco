@@ -13,8 +13,8 @@ import type { ColorVariants } from '@signalco/ui/theme';
 import { Gallery } from '@signalco/ui/Gallery';
 import { FilterList } from '@signalco/ui/FilterList';
 import { objectWithKey } from '@signalco/js';
-import PageCenterHeader from '../../../components/pages/PageCenterHeader';
-import SignalcoLogo from '../../../components/icons/SignalcoLogo';
+import PageCenterHeader from '../../components/pages/PageCenterHeader';
+import SignalcoLogo from '../../components/icons/SignalcoLogo';
 import contentData from './content.json';
 
 function StoreStockStatusBadge(props: { status: number | undefined }) {
@@ -23,27 +23,27 @@ function StoreStockStatusBadge(props: { status: number | undefined }) {
     let text = 'Out of stock';
     let color: ColorVariants = 'neutral';
     switch (props.status) {
-    default:
-    case 0:
-        break;
-    case 1:
-        Icon = Check;
-        opacity = 1;
-        text = 'In stock';
-        color = 'success';
-        break;
-    case 2:
-        Icon = ExternalLink;
-        opacity = 1;
-        text = 'Sold elsewhere';
-        color = 'neutral';
-        break;
-    case 3:
-        Icon = Hourglass;
-        opacity = 1;
-        text = 'On backorder';
-        color = 'warning';
-        break;
+        default:
+        case 0:
+            break;
+        case 1:
+            Icon = Check;
+            opacity = 1;
+            text = 'In stock';
+            color = 'success';
+            break;
+        case 2:
+            Icon = ExternalLink;
+            opacity = 1;
+            text = 'Sold elsewhere';
+            color = 'neutral';
+            break;
+        case 3:
+            Icon = Hourglass;
+            opacity = 1;
+            text = 'On backorder';
+            color = 'warning';
+            break;
     }
 
     return (
@@ -131,7 +131,7 @@ export default function StorePage() {
 
     return (
         <Stack spacing={8}>
-            <PageCenterHeader subHeader="Discover your new smart home">
+            <PageCenterHeader level="h1" subHeader="Discover your new smart home">
                 Store
             </PageCenterHeader>
             <Gallery

@@ -14,8 +14,8 @@
   "devDependencies": {
     "@infra/pulumi": "workspace:*",
     "@types/node": "20.14.15",
-    "@typescript-eslint/eslint-plugin": "8.0.1",
-    "@typescript-eslint/parser": "8.0.1",
+    "@typescript-eslint/eslint-plugin": "8.1.0",
+    "@typescript-eslint/parser": "8.1.0",
     "eslint": "8.57.0",
     "eslint-plugin-import": "2.29.1",
     "eslint-plugin-n": "17.10.2",
@@ -24,7 +24,7 @@
     "typescript": "5.5.4"
   },
   "dependencies": {
-    "@pulumi/pulumi": "3.128.0",
+    "@pulumi/pulumi": "3.129.0",
     "@pulumi/azure-native": "2.55.0",
     "@pulumi/cloudflare": "5.36.0",
     "@pulumi/docker": "4.5.5",

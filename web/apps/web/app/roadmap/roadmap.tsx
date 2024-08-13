@@ -10,8 +10,8 @@ import { NavigatingButton } from '@signalco/ui/NavigatingButton';
 import { Loadable } from '@signalco/ui/Loadable';
 import { ItemsShowMore } from '@signalco/ui/FilterList';
 import { camelToSentenceCase, orderBy } from '@signalco/js';
-import { RoadmapItem as RoadmapItemModel, RoadmapItemStatus } from '../../api/github/[owner]/[repo]/issues/route';
-import PageCenterHeader from '../../../components/pages/PageCenterHeader';
+import { RoadmapItem as RoadmapItemModel, RoadmapItemStatus } from '../api/github/[owner]/[repo]/issues/route';
+import PageCenterHeader from '../../components/pages/PageCenterHeader';
 
 const statusOrderedList: RoadmapItemStatus[] = ['inProgress', 'inQueue', 'planned', 'triage', 'completed'];
 
@@ -59,7 +59,7 @@ export default function Roadmap({ items, error, isLoading }: { items: RoadmapIte
     return (
         <Container maxWidth="sm">
             <Stack spacing={4}>
-                <PageCenterHeader subHeader="Help us by voting our roadmap.">
+                <PageCenterHeader level="h1" subHeader="Help us by voting our roadmap.">
                     Roadmap
                 </PageCenterHeader>
                 <Loadable error={error} isLoading={isLoading} loadingLabel={'Loading items'}>

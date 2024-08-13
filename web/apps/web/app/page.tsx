@@ -8,19 +8,21 @@ import { SectionData } from '@signalco/cms-core/SectionData';
 import { Pricing1 } from '@signalco/cms-components-marketing/Pricing';
 import { Heading1 } from '@signalco/cms-components-marketing/Heading';
 import { Feature2, Feature3, Feature4 } from '@signalco/cms-components-marketing/Feature';
-import { isDeveloper } from '../../src/services/EnvProvider';
-import { KnownPages } from '../../src/knownPages';
-import { NewsletterSection } from '../../components/views/NewsletterSection';
-import DiscoverVisual from '../../components/pages/landing/visuals/DiscoverVisual';
-import CtaSection from '../../components/pages/CtaSection';
-import SignalcoLogo from '../../components/icons/SignalcoLogo';
+import { Faq1 } from '@signalco/cms-components-marketing/Faq';
+import { isDeveloper } from '../src/services/EnvProvider';
+import { KnownPages } from '../src/knownPages';
+import { NewsletterSection } from '../components/views/NewsletterSection';
+import DiscoverVisual from '../components/pages/landing/visuals/DiscoverVisual';
+import CtaSection from '../components/pages/CtaSection';
+import SignalcoLogotype from '../components/icons/SignalcoLogotype';
 
-const sectionsComponentRegistry = {
+export const sectionsComponentRegistry = {
     'Heading1': memo(Heading1),
     'Feature2': memo(Feature2),
     'Feature3': memo(Feature3),
     'Feature4': memo(Feature4),
-    'Pricing1': memo(Pricing1)
+    'Pricing1': memo(Pricing1),
+    'Faq1': memo(Faq1)
 };
 
 const integrationsList = [
@@ -35,12 +37,68 @@ const integrationsList = [
 
 const integrationsLogoSize = 60;
 
+export const sectionPricing = [
+    {
+        component: 'Pricing1',
+        tagline: 'Pricing',
+        header: 'Flexible Pricing Plans for Everyone',
+        description: 'Choose a pricing plan that suits your needs and budget.',
+        features: [
+            {
+                features: [
+                    {
+                        asset: <Check />,
+                        header: '10 entities',
+                    },
+                    {
+                        asset: <Check />,
+                        header: '2,000 executions',
+                    },
+                    {
+                        asset: <Check />,
+                        header: 'No credit card required',
+                    },
+                ],
+                ctas: [
+                    { label: 'Start for Free', href: KnownPages.App },
+                ]
+            },
+            {
+                header: 'Plus',
+                description: 'When free isn\'t enough...',
+                asset: '€2/mo',
+                features: [
+                    { asset: <Check />, header: '20 entities' },
+                    { asset: <Check />, header: '10,000 executions' },
+                    { asset: <Check />, header: '7 day history' },
+                ],
+                // ctas: [
+                //     { label: 'Get Started', href: KnownPages.AppSettingsAccountBillingPlans },
+                // ]
+            },
+            {
+                header: 'Pro',
+                description: 'Pro plan scales with you',
+                asset: '€5/mo',
+                features: [
+                    { asset: <Check />, header: '50 entities' },
+                    { asset: <Check />, header: '50,000 executions' },
+                    { asset: <Check />, header: '30 day history' }
+                ],
+                // ctas: [
+                //     { label: 'Start like a Pro', href: KnownPages.AppSettingsAccountBillingPlans, secondary: true },
+                // ]
+            }
+        ]
+    }
+];
+
 const sectionsData: SectionData[] = [
     {
         component: 'Heading1',
         tagline: 'Automate your life',
         // header: 'Signalco',
-        description: <SignalcoLogo width={220} />,
+        description: <SignalcoLogotype width={220} />,
         ctas: [
             { label: 'Get Started', href: '/runs' },
         ],
@@ -113,59 +171,7 @@ const sectionsData: SectionData[] = [
             </>
         )
     },
-    {
-        component: 'Pricing1',
-        tagline: 'Pricing',
-        header: 'Flexible Pricing Plans for Everyone',
-        description: 'Choose a pricing plan that suits your needs and budget.',
-        features: [
-            {
-                features: [
-                    {
-                        asset: <Check />,
-                        header: '10 entities',
-                    },
-                    {
-                        asset: <Check />,
-                        header: '2k executions',
-                    },
-                    {
-                        asset: <Check />,
-                        header: 'No credit card required',
-                    },
-                ],
-                ctas: [
-                    { label: 'Start for Free', href: KnownPages.App },
-                ]
-            },
-            {
-                header: 'Plus',
-                description: 'When free isn\'t enough...',
-                asset: '€2/mo',
-                features: [
-                    { asset: <Check />, header: '20 entities' },
-                    { asset: <Check />, header: '10k executions' },
-                    { asset: <Check />, header: '7 day history' },
-                ],
-                // ctas: [
-                //     { label: 'Get Started', href: KnownPages.AppSettingsAccountBillingPlans },
-                // ]
-            },
-            {
-                header: 'Pro',
-                description: 'Pro plan scales with you',
-                asset: '€5/mo',
-                features: [
-                    { asset: <Check />, header: '50 entities' },
-                    { asset: <Check />, header: '50k executions' },
-                    { asset: <Check />, header: '30 day history' }
-                ],
-                // ctas: [
-                //     { label: 'Start like a Pro', href: KnownPages.AppSettingsAccountBillingPlans, secondary: true },
-                // ]
-            }
-        ]
-    }
+    ...sectionPricing
 ];
 
 export default function LandingPage() {

@@ -1,11 +1,11 @@
 import { Typography } from '@signalco/ui-primitives/Typography';
 import { Stack } from '@signalco/ui-primitives/Stack';
-import PageCenterHeader from '../../../../components/pages/PageCenterHeader';
+import PageCenterHeader from '../../../components/pages/PageCenterHeader';
 
 export default function FeatureSpacesPage() {
     return (
         <Stack spacing={4}>
-            <PageCenterHeader>
+            <PageCenterHeader level="h1">
                 Spaces
             </PageCenterHeader>
             <Typography level="h4">Widgets</Typography>

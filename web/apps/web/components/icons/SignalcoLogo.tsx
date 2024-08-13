@@ -1,5 +1,10 @@
+'use client';
+
+import { useTheme } from 'next-themes';
 import Image, { ImageProps } from 'next/image';
+import { cx } from '@signalco/ui-primitives/cx';
 import { SupportedColorScheme } from '@signalco/ui/theme';
+import { useIsClient } from '@signalco/hooks/useIsClient';
 
 export type SignalcoLogoProps = Omit<ImageProps, 'width' | 'height' | 'alt' | 'src'> & {
     width?: number;
@@ -8,6 +13,8 @@ export type SignalcoLogoProps = Omit<ImageProps, 'width' | 'height' | 'alt' | 's
 }
 
 export default function SignalcoLogo({ width, height, theme, ...rest }: SignalcoLogoProps) {
+    const { resolvedTheme: activeTheme } = useTheme();
+    const resolvedTheme = theme ?? activeTheme;
     const scale = width ? width / 414 : (height ? height / 426 : undefined);
     if (!scale)
         throw new Error('Either height or width must be provided to SignalcoLogo.')
@@ -16,15 +23,21 @@ export default function SignalcoLogo({ width, height, theme, ...rest }: Signalco
     const h = 426 * scale;
 
     const urlParams = new URLSearchParams({
-        theme: theme ?? 'light',
+        theme: resolvedTheme ?? 'light',
     });
 
+    const isClient = useIsClient();
+
     return (
-        <Image
-            alt="signalco"
-            width={w}
-            height={h}
-            src={`/api/branding/logotype?${urlParams.toString()}`}
-            {...rest} />
+        <div style={{ width: w, height: h }} className={cx('transition-opacity', isClient ? 'opacity-100' : 'opacity-0')}>
+            {isClient && (
+                <Image
+                    alt="signalco"
+                    width={w}
+                    height={h}
+                    src={`/api/branding/logo?${urlParams.toString()}`}
+                    {...rest} />
+            )}
+        </div>
     );
 }
