@@ -1,14 +1,14 @@
 'use client';
 
 import { useMemo, CSSProperties } from 'react';
-import { IDashboardModel } from '../../src/dashboards/DashboardsRepository';
+import { Dashboard } from '../../src/dashboards/DashboardsRepository';
 import { useDashboardSizes } from './useDashboardSizes';
 import { NoWidgetsPlaceholder } from './NoWidgetsPlaceholder';
 import GridWrapper from './GridWrapper';
 import DragableWidget from './DragableWidget';
 import DisplayWidget from './DisplayWidget';
 
-function DashboardView(props: { dashboard: IDashboardModel, isEditing: boolean, onAddWidget: () => void }) {
+function DashboardView(props: { dashboard: Dashboard, isEditing: boolean, onAddWidget: () => void }) {
     const { dashboard, isEditing, onAddWidget } = props;
 
     function handleOrderChanged(newOrder: string[]) {
@@ -21,14 +21,14 @@ function DashboardView(props: { dashboard: IDashboardModel, isEditing: boolean, 
     }
 
     function handleSetWidgetConfig(widgetId: string, config: Record<string, unknown> | undefined) {
-        const widget = dashboard.widgets.find(w => w.id === widgetId);
+        const widget = dashboard.configuration.widgets.find(w => w.id === widgetId);
         if (widget) {
             widget.config = config;
         }
     }
 
     function handleRemoveWidget(widgetId: string) {
-        dashboard.widgets.splice(dashboard.widgets.findIndex(w => w.id === widgetId), 1);
+        dashboard.configuration.widgets.splice(dashboard.configuration.widgets.findIndex(w => w.id === widgetId), 1);
     }
 
     const WidgetComponent = isEditing ? DragableWidget : DisplayWidget;
@@ -36,8 +36,8 @@ function DashboardView(props: { dashboard: IDashboardModel, isEditing: boolean, 
     const { resizeObserverRef, widgetSize, numberOfColumns, dashboardWidth } = useDashboardSizes();
 
     // Render placeholder when there is no widgets
-    const widgetsOrder = useMemo(() => dashboard.widgets.slice().sort((a, b) => a.order - b.order).map(w => w.id), [dashboard.widgets]);
-    const widgets = useMemo(() => widgetsOrder.map(wo => dashboard.widgets.find(w => wo === w.id)).filter(Boolean), [dashboard.widgets, widgetsOrder]);
+    const widgetsOrder = useMemo(() => dashboard.configuration.widgets.slice().sort((a, b) => a.order - b.order).map(w => w.id), [dashboard.configuration.widgets]);
+    const widgets = useMemo(() => widgetsOrder.map(wo => dashboard.configuration.widgets.find(w => wo === w.id)).filter(Boolean), [dashboard.configuration.widgets, widgetsOrder]);
     if (widgets.length <= 0) {
         return <NoWidgetsPlaceholder onAdd={onAddWidget} />
     }

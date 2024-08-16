@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
-/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
 import React from 'react';
 import { Typography } from '@signalco/ui-primitives/Typography';
 import { Stack } from '@signalco/ui-primitives/Stack';
@@ -17,7 +15,7 @@ import ShareEntityChip from '../entity/ShareEntityChip';
 import useLocale from '../../src/hooks/useLocale';
 import useSaveDashboard from '../../src/hooks/dashboards/useSaveDashboard';
 import useDashboards from '../../src/hooks/dashboards/useDashboards';
-import DashboardsRepository, { IDashboardModel } from '../../src/dashboards/DashboardsRepository';
+import { Dashboard, dashboardsGetFavorites, dashboardsGetOrder, dashboardsSetFavorite, dashboardsSetOrder } from '../../src/dashboards/DashboardsRepository';
 
 interface IDashboardSelectorMenuProps {
     selectedId: string | undefined,
@@ -27,7 +25,7 @@ interface IDashboardSelectorMenuProps {
 }
 
 interface IDashboardSortableItemProps {
-    dashboard: IDashboardModel;
+    dashboard: Dashboard;
     selectedId: string | undefined;
     onSelection: (id: string) => void;
     onFavorite: (id: string) => void;
@@ -44,6 +42,9 @@ function DashboardSortableItem(props: IDashboardSortableItemProps) {
         transition,
     };
 
+    const favorites = dashboardsGetFavorites();
+    const isFacorite = favorites.includes(dashboard.id);
+
     return (
         <div ref={setNodeRef} style={style} {...attributes} {...listeners}>
             <Row className="relative">
@@ -56,17 +57,17 @@ function DashboardSortableItem(props: IDashboardSortableItemProps) {
                     onClick={() => onSelection(dashboard.id)}
                     fullWidth
                 >
-                    {dashboard.name}
+                    {dashboard.alias}
                 </Button>
                 <IconButton
                     className={cx(
                         'absolute right-0 hover:opacity-100 peer-hover:opacity-100',
-                        dashboard.isFavorite ? 'opacity-60' : 'opacity-0'
+                        isFacorite ? 'opacity-60' : 'opacity-0'
                     )}
                     size="sm"
                     variant="plain"
                     onClick={() => onFavorite(dashboard.id)}>
-                    {dashboard.isFavorite ? <Pin size={16} /> : <PinOff size={16} />}
+                    {isFacorite ? <Pin size={16} /> : <PinOff size={16} />}
                 </IconButton>
             </Row>
         </div>
@@ -81,40 +82,36 @@ function DashboardSelectorMenu(props: IDashboardSelectorMenuProps) {
     const { data: dashboards } = useDashboards();
     const saveDashboard = useSaveDashboard();
 
-    const orderedDashboardIds = dashboards?.slice().sort((a, b) => a.order - b.order).map(d => d.id) ?? [];
-    const orderedDashboards = orderedDashboardIds?.map((dor) => dashboards?.find(d => dor === d.id)!) ?? [];
+    const incopleteOrderedDashboardIds = dashboardsGetOrder();
+    const orderedDashboards = dashboards?.sort((a, b) => {
+        const aIndex = incopleteOrderedDashboardIds.indexOf(a.id);
+        const bIndex = incopleteOrderedDashboardIds.indexOf(b.id);
+        return aIndex - bIndex;
+    }) ?? [];
+    const orderedDashboardIds = orderedDashboards.map(d => d.id);
 
     const handleNewDashboard = async () => {
         const newDashboardId = await saveDashboard.mutateAsync({
-            name: 'New dashboard'
+            alias: 'New dashboard'
         });
         setDashboardId(newDashboardId);
     };
 
-    const handleToggleFavorite = async (id: string) => {
-        const dashboard = dashboards?.find(d => d.id === id);
-        if (dashboard) {
-            await DashboardsRepository.favoriteSetAsync(dashboard.id, !dashboard.isFavorite);
-        }
+    const handleToggleFavorite = (id: string) => {
+        const isFavorite = dashboardsGetFavorites().includes(id);
+        dashboardsSetFavorite(id, !isFavorite);
     }
 
     const onFullscreen = () => setFullScreen(isFullScreen === 'true' ? undefined : 'true');
 
-    async function handleDragEnd(event: DragEndEvent) {
+    function handleDragEnd(event: DragEndEvent) {
         const { active, over } = event;
 
         if (over && active.id !== over.id) {
             const oldIndex = orderedDashboardIds.indexOf(active.id.toString());
             const newIndex = orderedDashboardIds.indexOf(over.id.toString());
             const newOrderedDashboards = arrayMove(orderedDashboards, oldIndex, newIndex);
-            for (let i = 0; i < newOrderedDashboards.length; i++) {
-                const item = newOrderedDashboards[i];
-                if (item) {
-                    item.order = i;
-                }
-            }
-
-            await DashboardsRepository.dashboardsOrderSetAsync(newOrderedDashboards.map(d => d.id));
+            dashboardsSetOrder(newOrderedDashboards.map(d => d.id));
         }
     }
 
@@ -163,7 +160,7 @@ function DashboardSelectorMenu(props: IDashboardSelectorMenuProps) {
             <Divider />
             <Stack className="p-2">
                 <Row>
-                    <Typography level="body2" className="grow">{selectedDashboard?.name}</Typography>
+                    <Typography level="body2" className="grow">{selectedDashboard?.alias}</Typography>
                     <ShareEntityChip entity={selectedDashboard} entityType={3} />
                 </Row>
                 <Button variant="plain" onClick={onFullscreen}>{t('ToggleFullscreen')}</Button>
