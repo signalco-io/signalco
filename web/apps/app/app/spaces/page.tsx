@@ -1,11 +1,10 @@
-'use client';
-
-import dynamic from 'next/dynamic'
-
-const Dashboards = dynamic(() => import('../../components/dashboards/Dashboards').then(mod => mod.Dashboards), { ssr: false });
+import { DashboardsDefaultRedirect } from '../../components/dashboards/DashboardsDefaultRedirect';
+import { Dashboards } from '../../components/dashboards/Dashboards';
 
 export default function SpacesPage() {
     return (
-        <Dashboards />
+        <DashboardsDefaultRedirect>
+            <Dashboards />
+        </DashboardsDefaultRedirect>
     );
 }
