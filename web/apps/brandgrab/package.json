@@ -36,15 +36,15 @@
         "react": "18.3.1",
         "react-dom": "18.3.1",
         "react-transition-group": "4.4.5",
-        "sharp": "0.33.4"
+        "sharp": "0.33.5"
     },
     "devDependencies": {
         "@axe-core/playwright": "4.9.1",
-        "@playwright/test": "1.46.0",
+        "@playwright/test": "1.46.1",
         "@signalco/eslint-config-signalco": "workspace:*",
         "@signalco/tsconfig": "workspace:*",
         "@types/color": "3.0.6",
-        "@types/node": "20.14.15",
+        "@types/node": "20.15.0",
         "@types/react": "18.3.3",
         "@types/react-dom": "18.3.0",
         "eslint": "8.57.0",
