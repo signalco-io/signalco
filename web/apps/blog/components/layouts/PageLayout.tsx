@@ -12,7 +12,7 @@ export function PageLayout({ maxWidth, children }: PageLayoutProps) {
     return (
         <Stack spacing={4}>
             <PageNav logo={<SignalcoLogotype height={42} />} />
-            <div className='pt-16'>
+            <div className="pt-16">
                 <Container maxWidth={maxWidth}>
                     {children}
                 </Container>

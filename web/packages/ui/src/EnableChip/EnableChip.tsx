@@ -10,7 +10,7 @@ export function EnableChip({ enabled, readonly, ...rest }: EnableChipProps) {
     return (
         <Chip
             disabled={readonly}
-            startDecorator={!enabled ? <Disabled className='size-4' /> : <Check className='size-4' />}
+            startDecorator={!enabled ? <Disabled className="size-4" /> : <Check className="size-4" />}
             {...rest}>
             {!enabled ? 'Disabled' : 'Enabled'}
         </Chip>

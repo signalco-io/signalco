@@ -8,8 +8,8 @@ import { List, ListHeader } from '@signalco/ui-primitives/List';
 import { AI, Store } from '@signalco/ui-icons';
 import { SplitView } from '@signalco/ui/SplitView';
 import { KnownPages } from '../../../../../src/knownPages';
-import { AppSidebar } from '../../../../../src/components/AppSidebar';
 import { marketplaceCategories } from '../../../../../src/data/marketplaceCategories';
+import { AppSidebar } from '../../../../../src/components/AppSidebar';
 
 export default function AppMarketplaceLayout({ children }: PropsWithChildren) {
     const router = useRouter();

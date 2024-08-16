@@ -13,7 +13,7 @@ import { markeplaceCategoriesFlat } from '../../../../../../src/data/markeplaceC
 
 export function WorkerCard({ worker }: { worker: (typeof marketplaceWorkers)[0]; }) {
     const { name, description, categories } = worker;
-    const [_, setSelectedWorkerId] = useSearchParam('worker');
+    const [, setSelectedWorkerId] = useSearchParam('worker');
 
     const handleShowWorkerDetails = () => {
         setSelectedWorkerId(worker.id);

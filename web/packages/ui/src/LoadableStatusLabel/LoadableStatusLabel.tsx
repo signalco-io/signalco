@@ -1,9 +1,9 @@
-import { errorText } from "@signalco/js";
-import { Check, Error } from "@signalco/ui-icons";
-import { Row } from "@signalco/ui-primitives/Row";
-import { ScrolledLine } from "@signalco/ui-primitives/ScrolledLine";
-import { Spinner } from "@signalco/ui-primitives/Spinner";
-import { Typography } from "@signalco/ui-primitives/Typography";
+import { Typography } from '@signalco/ui-primitives/Typography';
+import { Spinner } from '@signalco/ui-primitives/Spinner';
+import { ScrolledLine } from '@signalco/ui-primitives/ScrolledLine';
+import { Row } from '@signalco/ui-primitives/Row';
+import { Check, Error } from '@signalco/ui-icons';
+import { errorText } from '@signalco/js';
 
 export type LoadableStatusLabelProps = {
     successLabel: string;

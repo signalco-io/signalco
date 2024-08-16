@@ -1,8 +1,8 @@
 import { PropsWithChildren } from 'react';
 import { CompanyGitHub, CompanyReddit, CompanyX } from '@signalco/ui-icons';
+import { PageNav } from '@signalco/ui/Nav';
 import { SectionData } from '@signalco/cms-core/SectionData';
 import { Footer1 } from '@signalco/cms-components-marketing/Footer';
-import { PageNav } from '@signalco/ui/Nav';
 import { KnownPages } from '../../src/knownPages';
 
 const footerData: SectionData = {

@@ -27,7 +27,7 @@ export function CommentThread({ commentItem, onResolve }: { commentItem: Comment
                     {threadLastItem && <Divider />}
                 </>
             )}
-            {expanded && restComments.map((item, i) => (
+            {expanded && restComments.map((item) => (
                 <Fragment key={item.id}>
                     <div className="px-4 py-3">
                         <CommentThreadItem

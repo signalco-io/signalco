@@ -56,7 +56,7 @@ export function Input({
                 />
                 {endDecorator ?? null}
             </HorizontalContainer>
-            {helperText && <p className="text-muted-foreground text-sm">{helperText}</p>}
+            {helperText && <p className="text-sm text-muted-foreground">{helperText}</p>}
         </VerticalContainer>
     );
 }

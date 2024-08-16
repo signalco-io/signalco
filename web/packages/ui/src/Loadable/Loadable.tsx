@@ -3,8 +3,8 @@ import { Spinner } from '@signalco/ui-primitives/Spinner';
 import { Skeleton } from '@signalco/ui-primitives/Skeleton';
 import { cx } from '@signalco/ui-primitives/cx';
 import { Warning } from '@signalco/ui-icons';
-import { Alert } from '../Alert';
 import { errorText } from '@signalco/js';
+import { Alert } from '../Alert';
 
 export type LoadableLoadingErrorProps = {
     error?: unknown | string | ReactElement;

@@ -41,7 +41,7 @@ export function DocumentEditor({ id, editable, onSavingChange }: DocumentEditorP
                     id,
                     data: content
                 });
-            } catch(err) {
+            } catch {
                 showNotification('Failed to save document', 'error');
             } finally{
                 onSavingChange?.(false);

@@ -21,7 +21,7 @@ function nanoFormater(
 }
 
 export function Timeago({ date, live, format, noDate = '-' }: TimeagoProps) {
-    if ((typeof date !== 'number' && !((date as any) instanceof Date)) || date == null) {
+    if ((typeof date !== 'number' && !((date as unknown) instanceof Date)) || date == null) {
         return (
             <Typography level="body2">{noDate}</Typography>
         );
