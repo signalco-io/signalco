@@ -12,7 +12,7 @@
   "devDependencies": {
     "@infra/eslint-config": "workspace:*",
     "@infra/typescript-config": "workspace:*",
-    "turbo": "2.0.13"
+    "turbo": "2.0.14"
   },
   "packageManager": "pnpm@9.7.1",
   "engines": {

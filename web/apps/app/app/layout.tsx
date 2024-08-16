@@ -8,7 +8,7 @@ import { LayoutClientWrapper } from './LayoutClientWrapper';
 
 export default function RootLayout({ children }: PropsWithChildren) {
     return (
-        <html lang="en">
+        <html lang="en" suppressHydrationWarning={true}>
             <body className={'font-sans'}>
                 <LayoutClientWrapper>
                     <AppLayout>
