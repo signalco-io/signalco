@@ -23,11 +23,11 @@ export function PrimaryValueLabel({ value, unit, size = 'normal' }: { value: num
     return (
         <Row alignItems="stretch">
             <Stack className="h-full" justifyContent="center" alignItems="center">
-                <Typography extraThin className={valueTextSize}>{valueWhole}</Typography>
+                <Typography extraThin className={valueTextSize}>{Number.isNaN(valueWhole) ? 0 : valueWhole}</Typography>
             </Stack>
             <Stack alignItems="start" justifyContent="space-between">
-                <Typography extraThin className={detailsTextSize} tertiary>{unit}</Typography>
-                <Typography extraThin className={detailsTextSize} tertiary>.{degreesDecimal}</Typography>
+                <Typography extraThin className={detailsTextSize} tertiary>{unit ?? ''}</Typography>
+                <Typography extraThin className={detailsTextSize} tertiary>.{Number.isNaN(degreesDecimal) ? 0 : degreesDecimal}</Typography>
             </Stack>
         </Row>
     );

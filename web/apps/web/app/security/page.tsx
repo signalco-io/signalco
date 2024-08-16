@@ -7,12 +7,16 @@ import { SectionsView } from '@signalco/cms-core/SectionsView';
 import { sectionsComponentRegistry } from '../page';
 import PageCenterHeader from '../../components/pages/PageCenterHeader';
 import CtaSection from '../../components/pages/CtaSection';
+import { KnownPages } from '../../src/knownPages';
 
 const securityFaq = [
     {
         component: 'Faq1',
         header: 'FAQ',
         description: 'Find answers to common questions about signalco security.',
+        ctas: [
+            { label: 'Contact', href: KnownPages.Contact },
+        ],
         features: [
             {
                 id: 'isSignalcoSecure',

@@ -3,12 +3,16 @@ import { SectionsView } from '@signalco/cms-core/SectionsView';
 import { sectionPricing, sectionsComponentRegistry } from '../page';
 import PageCenterHeader from '../../components/pages/PageCenterHeader';
 import CtaSection from '../../components/pages/CtaSection';
+import { KnownPages } from '../../src/knownPages';
 
 const pricingFaq = [
     {
         component: 'Faq1',
         header: 'FAQ',
         description: 'Find answers to common questions about signalco pricing.',
+        ctas: [
+            { label: 'Contact', href: KnownPages.Contact },
+        ],
         features: [
             { id: 'planForMe', header: 'Which plan is right for me?', description: 'Free plan is perfect for anyone who is looking to start with automation. Basic plan is great when you have many automations and services. Pro plan is next step that allows you to scale automations and need advanced features.' },
             { id: 'entities', header: 'What are Entities?', description: 'Entity is a thing you want to automate in signalco. This can be is online service connected to signalco, smart device, your custom space, automation process, etc.' },

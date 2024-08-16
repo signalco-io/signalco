@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useCallback, useEffect, useState } from 'react';
+import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import { Typography } from '@signalco/ui-primitives/Typography';
@@ -19,7 +20,9 @@ import useDashboard from '../../src/hooks/dashboards/useDashboard';
 import { WidgetModel } from '../../src/dashboards/DashboardsRepository';
 import { SpacesEditingBackground } from './SpacesEditingBackground';
 import DashboardView from './DashboardView';
+import { DashboardSkeleton } from './DashboardSkeleton';
 import DashboardSettings from './DashboardSettings';
+import { DashboardPadding } from './DashboardPadding';
 
 const WidgetStoreDynamic = dynamic(() => import('../widget-store/WidgetStore'));
 
@@ -71,20 +74,20 @@ function SpaceBackground({ background }: { background?: string }) {
 export function Dashboards() {
     const { t } = useLocale('App', 'Dashboards');
     const [selectedId, setDashboardId] = useSearchParam('dashboard');
-    const selectedDashboard = useDashboard(selectedId);
+    const { data: selectedDashboard, isLoading: selectedDashboardIsLoading, error: selectedDashboardError } = useDashboard(selectedId);
 
     const saveDashboard = useSaveDashboard();
     const [isEditingValue, setIsEditing] = useSearchParam('editing');
     const isEditing = isEditingValue === 'true';
     const handleEditDone = async () => {
-        if (!selectedDashboard.data) {
+        if (!selectedDashboard) {
             console.warn('Can not save - dashboard not selected');
             return;
         }
 
         try {
-            console.debug(`Saving dashboard ${selectedId}...`, selectedDashboard.data);
-            await saveDashboard.mutateAsync(selectedDashboard.data);
+            console.debug(`Saving dashboard ${selectedId}...`, selectedDashboard);
+            await saveDashboard.mutateAsync(selectedDashboard);
         } catch (err) {
             console.error('Failed to save dashboards', err);
             showNotification(t('SaveFailedNotification'), 'error');
@@ -111,9 +114,9 @@ export function Dashboards() {
 
     const [showWidgetStore, setShowWidgetStore] = useState(false);
     const handleAddWidget = useCallback((widgetType: widgetType) => {
-        selectedDashboard.data?.widgets.push(new WidgetModel('new-widget', selectedDashboard.data.widgets.length, widgetType));
+        selectedDashboard?.widgets.push(new WidgetModel('new-widget', selectedDashboard.widgets.length, widgetType));
         setShowWidgetStore(false);
-    }, [selectedDashboard.data?.widgets]);
+    }, [selectedDashboard?.widgets]);
 
     const handleAddWidgetPlaceholder = () => {
         setIsEditing('true');
@@ -123,9 +126,16 @@ export function Dashboards() {
     const [isDashboardSettingsOpenValue, setIsDashboardSettingsOpen] = useSearchParam('settings');
     const isDashboardSettingsOpen = isDashboardSettingsOpenValue === 'true';
 
+    const isLoading = Boolean(selectedId) && selectedDashboardIsLoading;
+
+    // Handle 404
+    if (!selectedDashboard && !selectedDashboardIsLoading) {
+        return notFound();
+    }
+
     return (
         <>
-            <SpaceBackground background={selectedDashboard.data?.background} />
+            <SpaceBackground background={selectedDashboard?.background} />
             {isEditing && (
                 <>
                     <SpacesEditingBackground />
@@ -139,33 +149,35 @@ export function Dashboards() {
                     </Row>
                 </>
             )}
-            <Stack spacing={1}>
-                <Loadable isLoading={selectedDashboard.isLoading} loadingLabel="Loading dashboards..." error={selectedDashboard.error}>
-                    <div className="p-2 sm:px-2 sm:py-0">
-                        {selectedDashboard.data
-                            ? (
-                                <DashboardView
-                                    dashboard={selectedDashboard.data}
-                                    isEditing={isEditing}
-                                    onAddWidget={handleAddWidgetPlaceholder} />
-                            ) : (
-                                <Stack alignItems="center" justifyContent="center">
-                                    <Row style={{ height: '80vh' }} justifyContent="center">
-                                        <Stack style={{ maxWidth: 280 }} spacing={4} alignItems="center" justifyContent="center">
-                                            <Image priority width={280} height={213} alt={t('NoDashboardsPlaceholder')} src="/assets/placeholders/placeholder-no-dashboards.svg" />
-                                            <Typography level="h2">{t('NoDashboardsPlaceholder')}</Typography>
-                                            <Typography center level="body2">{t('NoDashboardsHelpText')}</Typography>
-                                            <Button variant="solid" onClick={handleNewDashboard}>{t('NewDashboard')}</Button>
-                                        </Stack>
-                                    </Row>
-                                </Stack>
-                            )}
-                    </div>
-                </Loadable>
-            </Stack>
-            {selectedDashboard.data && (
+            <Loadable
+                isLoading={isLoading}
+                placeholder={<DashboardSkeleton />}
+                loadingLabel="Loading dashboard..."
+                error={selectedDashboardError}>
+                <DashboardPadding>
+                    {selectedDashboard
+                        ? (
+                            <DashboardView
+                                dashboard={selectedDashboard}
+                                isEditing={isEditing}
+                                onAddWidget={handleAddWidgetPlaceholder} />
+                        ) : (
+                            <Stack alignItems="center" justifyContent="center">
+                                <Row style={{ height: '80vh' }} justifyContent="center">
+                                    <Stack style={{ maxWidth: 280 }} spacing={4} alignItems="center" justifyContent="center">
+                                        <Image priority width={280} height={213} alt={t('NoDashboardsPlaceholder')} src="/assets/placeholders/placeholder-no-dashboards.svg" />
+                                        <Typography level="h2">{t('NoDashboardsPlaceholder')}</Typography>
+                                        <Typography center level="body2">{t('NoDashboardsHelpText')}</Typography>
+                                        <Button variant="solid" onClick={handleNewDashboard}>{t('NewDashboard')}</Button>
+                                    </Stack>
+                                </Row>
+                            </Stack>
+                        )}
+                </DashboardPadding>
+            </Loadable>
+            {selectedDashboard && (
                 <DashboardSettings
-                    dashboard={selectedDashboard.data}
+                    dashboard={selectedDashboard}
                     isOpen={isDashboardSettingsOpen}
                     onClose={() => setIsDashboardSettingsOpen(undefined)} />
             )}

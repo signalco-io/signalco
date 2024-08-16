@@ -9,7 +9,7 @@ import { NavigatingButton } from '@signalco/ui/NavigatingButton';
 import { Breadcrumbs } from '@signalco/ui/Breadcrumbs';
 import { channelCategories as channelCategoriesData, channelsData } from '@signalco/data/data';
 import { SectionsView } from '@signalco/cms-core/SectionsView';
-import { channelsFaq } from '../page';
+import { channelsFaq } from '../data';
 import { sectionsComponentRegistry } from '../../page';
 import { KnownPages } from '../../../src/knownPages';
 import ShareSocial from '../../../components/pages/ShareSocial';

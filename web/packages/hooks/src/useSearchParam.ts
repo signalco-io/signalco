@@ -12,11 +12,11 @@ export function useSetSearchParam(parameterName: string): (value: string | undef
         const currentValue = searchParams.get(parameterName);
         if (currentValue === value ||
             currentValue == null && value == null) {
-            console.debug('useSearchParam: Ignoring because value is the same as current value', parameterName, value, '===', currentValue);
+            console.debug('useSearchParam: Ignoring because value', parameterName, 'is the same as current value', parameterName, value, '===', currentValue);
             return;
         }
 
-        console.debug('useSearchParam: Setting value', parameterName, 'from', currentValue, 'to', value);
+        console.debug('useSearchParam: Setting value', parameterName, ' from', currentValue, 'to', value);
 
         const currentSearch = new URLSearchParams(Array.from(searchParams.entries()));
         if (value)

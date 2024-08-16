@@ -5,9 +5,10 @@ import { Row } from '@signalco/ui-primitives/Row';
 import { Popper } from '@signalco/ui-primitives/Popper';
 import { ButtonDropdown } from '@signalco/ui-primitives/ButtonDropdown';
 import { Button } from '@signalco/ui-primitives/Button';
-import { showNotification } from '@signalco/ui-notifications';
+import { PageNotificationVariant, showNotification } from '@signalco/ui-notifications';
 import { Loadable } from '@signalco/ui/Loadable';
 import { useSearchParam } from '@signalco/hooks/useSearchParam';
+import useLocale from '../../src/hooks/useLocale';
 import useDashboards from '../../src/hooks/dashboards/useDashboards';
 import DashboardSelectorMenu from './DashboardSelectorMenu';
 
@@ -16,29 +17,25 @@ type DashboardSelectorProps = {
     onSettings: () => void
 }
 
-function DashboardSelector({ onEditWidgets, onSettings }: DashboardSelectorProps) {
-    const [selectedId, setSelectedId] = useSearchParam('dashboard');
-    const [isOpen, setIsOpen] = useState(false);
-    const { data: dashboards, isLoading, error } = useDashboards();
-
+function useErrorNotification(error: Error | null, message: string, variant?: PageNotificationVariant) {
     useEffect(() => {
         if (error) {
             console.error(error);
-            showNotification('There was an error while loading dashboards. Please refresh the page.', 'error');
+            showNotification(message, variant ?? 'error');
         }
-    }, [error]);
+    }, [error, message, variant]);
+}
+
+function DashboardSelector({ onEditWidgets, onSettings }: DashboardSelectorProps) {
+    const { t } = useLocale('App', 'Dashboards');
+    const [selectedId, setSelectedId] = useSearchParam('dashboard');
+    const [isOpen, setIsOpen] = useState(false);
+    const { data: dashboards, isLoading: dashboardsIsLoading, error: dashboardsError } = useDashboards();
+    useErrorNotification(dashboardsError, t('DashboardsLoadingError'));
 
     const currentDashboard = dashboards?.find(d => d.id == selectedId);
     const currentName = currentDashboard?.name;
     const favoriteDashboards = dashboards?.filter(d => d.isFavorite);
-
-    // Set initial selection on component and dashboards load
-    useEffect(() => {
-        if (!selectedId && dashboards?.length && !isLoading) {
-            console.debug('Selecting first available dashboard', dashboards[0]?.id);
-            setSelectedId(dashboards[0]?.id);
-        }
-    }, [selectedId, dashboards, setSelectedId, isLoading]);
 
     const handleSelection = (id: string) => {
         setSelectedId(id);
@@ -53,8 +50,8 @@ function DashboardSelector({ onEditWidgets, onSettings }: DashboardSelectorProps
     return (
         <Row>
             <Loadable
-                isLoading={isLoading}
-                error={error}
+                isLoading={dashboardsIsLoading}
+                error={dashboardsError}
                 loadingLabel="Loading spaces..."
                 placeholder="skeletonRect"
                 height={30}
@@ -76,9 +73,6 @@ function DashboardSelector({ onEditWidgets, onSettings }: DashboardSelectorProps
             </Loadable>
             {(favoriteDashboards?.length ?? 0) > 0 && (
                 <div className="relative overflow-x-auto [scroll-timeline:--scroll-timeline_x] [transform:translateZ(0)]">
-                    {/* <div className="fixed inset-y-0 left-0 h-full animate-scroll-overflow [animation-timeline:--scroll-timeline]">
-                        <Left className="opacity-60" />
-                    </div> */}
                     <Row>
                         {favoriteDashboards?.map(fd => (
                             <Button
@@ -90,9 +84,6 @@ function DashboardSelector({ onEditWidgets, onSettings }: DashboardSelectorProps
                             </Button>
                         ))}
                     </Row>
-                    {/* <div className="fixed inset-y-0 right-0 h-full animate-scroll-overflow [animation-direction:reverse]">
-                        <Navigate className="opacity-60" />
-                    </div> */}
                 </div>
             )}
         </Row>
