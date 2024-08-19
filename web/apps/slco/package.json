@@ -39,7 +39,7 @@
         "tailwindcss-animate": "1.0.7"
     },
     "devDependencies": {
-        "@axe-core/playwright": "4.9.1",
+        "@axe-core/playwright": "4.10.0",
         "@playwright/test": "1.46.1",
         "@signalco/eslint-config-signalco": "workspace:*",
         "@signalco/tsconfig": "workspace:*",
