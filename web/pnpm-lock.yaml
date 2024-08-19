@@ -178,8 +178,8 @@ importers:
         version: 10.0.0
     devDependencies:
       '@axe-core/playwright':
-        specifier: 4.9.1
-        version: 4.9.1(playwright-core@1.46.1)
+        specifier: 4.10.0
+        version: 4.10.0(playwright-core@1.46.1)
       '@playwright/test':
         specifier: 1.46.1
         version: 1.46.1
@@ -338,8 +338,8 @@ importers:
         version: 1.0.7(tailwindcss@3.4.10)
     devDependencies:
       '@axe-core/playwright':
-        specifier: 4.9.1
-        version: 4.9.1(playwright-core@1.46.1)
+        specifier: 4.10.0
+        version: 4.10.0(playwright-core@1.46.1)
       '@playwright/test':
         specifier: 1.46.1
         version: 1.46.1
@@ -450,8 +450,8 @@ importers:
         version: 0.33.5
     devDependencies:
       '@axe-core/playwright':
-        specifier: 4.9.1
-        version: 4.9.1(playwright-core@1.46.1)
+        specifier: 4.10.0
+        version: 4.10.0(playwright-core@1.46.1)
       '@playwright/test':
         specifier: 1.46.1
         version: 1.46.1
@@ -619,8 +619,8 @@ importers:
         version: 1.0.7(tailwindcss@3.4.10)
     devDependencies:
       '@axe-core/playwright':
-        specifier: 4.9.1
-        version: 4.9.1(playwright-core@1.46.1)
+        specifier: 4.10.0
+        version: 4.10.0(playwright-core@1.46.1)
       '@playwright/test':
         specifier: 1.46.1
         version: 1.46.1
@@ -722,8 +722,8 @@ importers:
         version: 1.0.7(tailwindcss@3.4.10)
     devDependencies:
       '@axe-core/playwright':
-        specifier: 4.9.1
-        version: 4.9.1(playwright-core@1.46.1)
+        specifier: 4.10.0
+        version: 4.10.0(playwright-core@1.46.1)
       '@playwright/test':
         specifier: 1.46.1
         version: 1.46.1
@@ -934,8 +934,8 @@ importers:
         version: 1.0.7(tailwindcss@3.4.10)
     devDependencies:
       '@axe-core/playwright':
-        specifier: 4.9.1
-        version: 4.9.1(playwright-core@1.46.1)
+        specifier: 4.10.0
+        version: 4.10.0(playwright-core@1.46.1)
       '@playwright/test':
         specifier: 1.46.1
         version: 1.46.1
@@ -1073,8 +1073,8 @@ importers:
         version: 1.0.7(tailwindcss@3.4.10)
     devDependencies:
       '@axe-core/playwright':
-        specifier: 4.9.1
-        version: 4.9.1(playwright-core@1.46.1)
+        specifier: 4.10.0
+        version: 4.10.0(playwright-core@1.46.1)
       '@playwright/test':
         specifier: 1.46.1
         version: 1.46.1
@@ -1248,8 +1248,8 @@ importers:
         version: 1.0.7(tailwindcss@3.4.10)
     devDependencies:
       '@axe-core/playwright':
-        specifier: 4.9.1
-        version: 4.9.1(playwright-core@1.46.1)
+        specifier: 4.10.0
+        version: 4.10.0(playwright-core@1.46.1)
       '@playwright/test':
         specifier: 1.46.1
         version: 1.46.1
@@ -2001,8 +2001,8 @@ packages:
   '@auth0/auth0-spa-js@2.1.3':
     resolution: {integrity: sha512-NMTBNuuG4g3rame1aCnNS5qFYIzsTUV5qTFPRfTyYFS1feS6jsCBR+eTq9YkxCp1yuoM2UIcjunPaoPl77U9xQ==}
 
-  '@axe-core/playwright@4.9.1':
-    resolution: {integrity: sha512-8m4WZbZq7/aq7ZY5IG8GqV+ZdvtGn/iJdom+wBg+iv/3BAOBIfNQtIu697a41438DzEEyptXWmC3Xl5Kx/o9/g==}
+  '@axe-core/playwright@4.10.0':
+    resolution: {integrity: sha512-kEr3JPEVUSnKIYp/egV2jvFj+chIjCjPp3K3zlpJMza/CB3TFw8UZNbI9agEC2uMz4YbgAOyzlbUy0QS+OofFA==}
     peerDependencies:
       playwright-core: '>= 1.0.0'
 
@@ -5862,12 +5862,12 @@ packages:
     resolution: {integrity: sha512-wvUjBtSGN7+7SjNpq/9M2Tg350UZD3q62IFZLbRAR1bSMlCo1ZaeW+BJ+D090e4hIIZLBcTDWe4Mh4jvUDajzQ==}
     engines: {node: '>= 0.4'}
 
-  axe-core@4.7.0:
-    resolution: {integrity: sha512-M0JtH+hlOL5pLQwHOLNYZaXuhqmvS8oExsqB1SBYgA4Dk7u/xx+YdGHXaK5pyUfed5mYXdlYiphWq3G8cRi5JQ==}
+  axe-core@4.10.0:
+    resolution: {integrity: sha512-Mr2ZakwQ7XUAjp7pAwQWRhhK8mQQ6JAaNWSjmjxil0R8BPioMtQsTLOolGYkji1rcL++3dCqZA3zWqpT+9Ew6g==}
     engines: {node: '>=4'}
 
-  axe-core@4.9.1:
-    resolution: {integrity: sha512-QbUdXJVTpvUTHU7871ppZkdOLBeGUKBQWHkHrvN2V9IQWGMt61zf3B45BtzjxEJzYuj0JBjBZP/hmYS/R9pmAw==}
+  axe-core@4.7.0:
+    resolution: {integrity: sha512-M0JtH+hlOL5pLQwHOLNYZaXuhqmvS8oExsqB1SBYgA4Dk7u/xx+YdGHXaK5pyUfed5mYXdlYiphWq3G8cRi5JQ==}
     engines: {node: '>=4'}
 
   axobject-query@3.2.1:
@@ -10470,9 +10470,9 @@ snapshots:
 
   '@auth0/auth0-spa-js@2.1.3': {}
 
-  '@axe-core/playwright@4.9.1(playwright-core@1.46.1)':
+  '@axe-core/playwright@4.10.0(playwright-core@1.46.1)':
     dependencies:
-      axe-core: 4.9.1
+      axe-core: 4.10.0
       playwright-core: 1.46.1
 
   '@azure/abort-controller@1.1.0':
@@ -14975,9 +14975,9 @@ snapshots:
     dependencies:
       possible-typed-array-names: 1.0.0
 
-  axe-core@4.7.0: {}
+  axe-core@4.10.0: {}
 
-  axe-core@4.9.1: {}
+  axe-core@4.7.0: {}
 
   axobject-query@3.2.1:
     dependencies:
