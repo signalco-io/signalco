@@ -19,7 +19,7 @@
   "dependencies": {
     "@azure/cosmos": "4.1.0",
     "@blocknote/core": "0.15.5",
-    "@blocknote/mantine": "0.15.4",
+    "@blocknote/mantine": "0.15.5",
     "@blocknote/react": "0.15.5",
     "@dnd-kit/core": "6.1.0",
     "@dnd-kit/modifiers": "7.0.0",

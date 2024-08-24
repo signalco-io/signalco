@@ -504,8 +504,8 @@ importers:
         specifier: 0.15.5
         version: 0.15.5
       '@blocknote/mantine':
-        specifier: 0.15.4
-        version: 0.15.4(@tiptap/pm@2.5.9)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: 0.15.5
+        version: 0.15.5(@tiptap/pm@2.5.9)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@blocknote/react':
         specifier: 0.15.5
         version: 0.15.5(@tiptap/pm@2.5.9)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -2693,8 +2693,8 @@ packages:
   '@blocknote/core@0.15.5':
     resolution: {integrity: sha512-xbFTBYbp4LMqGClWVycwgRn2WSAMrlKfxmHXfOvqzColGhk6df2n0MI35RQcES2yhUE/WCBzw3Z4Er/wIcsPzw==}
 
-  '@blocknote/mantine@0.15.4':
-    resolution: {integrity: sha512-sMKR2MrubzHShnG23Q+RwmsXoqGu/E9vyqdZ5TSM8D2J5pydqLiwO8pKXS3Uq4OnddZMXyn/V3q1pa7Uh7T2Rw==}
+  '@blocknote/mantine@0.15.5':
+    resolution: {integrity: sha512-G4msPVDZR/D2dRJA9nvfsMSkdhfYpqgibkc1fYuibS3yVgKKGyG/PrGj6jLM/+2AnBzM3u9xF3LWGVjnVkB6DA==}
     peerDependencies:
       react: ^18
       react-dom: ^18
@@ -11479,7 +11479,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@blocknote/mantine@0.15.4(@tiptap/pm@2.5.9)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@blocknote/mantine@0.15.5(@tiptap/pm@2.5.9)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@blocknote/core': 0.15.5
       '@blocknote/react': 0.15.5(@tiptap/pm@2.5.9)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
