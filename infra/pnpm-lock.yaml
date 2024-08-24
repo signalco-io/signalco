@@ -30,8 +30,8 @@ importers:
         specifier: 2.58.0
         version: 2.58.0(ts-node@7.0.1)(typescript@5.5.4)
       '@pulumi/cloudflare':
-        specifier: 5.36.0
-        version: 5.36.0(ts-node@7.0.1)(typescript@5.5.4)
+        specifier: 5.37.1
+        version: 5.37.1(ts-node@7.0.1)(typescript@5.5.4)
       '@pulumi/command':
         specifier: 1.0.1
         version: 1.0.1(ts-node@7.0.1)(typescript@5.5.4)
@@ -82,8 +82,8 @@ importers:
         specifier: 2.58.0
         version: 2.58.0(ts-node@7.0.1)(typescript@5.5.4)
       '@pulumi/cloudflare':
-        specifier: 5.36.0
-        version: 5.36.0(ts-node@7.0.1)(typescript@5.5.4)
+        specifier: 5.37.1
+        version: 5.37.1(ts-node@7.0.1)(typescript@5.5.4)
       '@pulumi/docker':
         specifier: 4.5.5
         version: 4.5.5(ts-node@7.0.1)(typescript@5.5.4)
@@ -137,8 +137,8 @@ importers:
         specifier: 2.58.0
         version: 2.58.0(ts-node@7.0.1)(typescript@5.5.4)
       '@pulumi/cloudflare':
-        specifier: 5.36.0
-        version: 5.36.0(ts-node@7.0.1)(typescript@5.5.4)
+        specifier: 5.37.1
+        version: 5.37.1(ts-node@7.0.1)(typescript@5.5.4)
       '@pulumi/command':
         specifier: 1.0.1
         version: 1.0.1(ts-node@7.0.1)(typescript@5.5.4)
@@ -195,8 +195,8 @@ importers:
         specifier: 2.58.0
         version: 2.58.0(ts-node@7.0.1)(typescript@5.5.4)
       '@pulumi/cloudflare':
-        specifier: 5.36.0
-        version: 5.36.0(ts-node@7.0.1)(typescript@5.5.4)
+        specifier: 5.37.1
+        version: 5.37.1(ts-node@7.0.1)(typescript@5.5.4)
       '@pulumi/command':
         specifier: 1.0.1
         version: 1.0.1(ts-node@7.0.1)(typescript@5.5.4)
@@ -247,8 +247,8 @@ importers:
         specifier: 2.58.0
         version: 2.58.0(ts-node@7.0.1)(typescript@5.5.4)
       '@pulumi/cloudflare':
-        specifier: 5.36.0
-        version: 5.36.0(ts-node@7.0.1)(typescript@5.5.4)
+        specifier: 5.37.1
+        version: 5.37.1(ts-node@7.0.1)(typescript@5.5.4)
       '@pulumi/docker':
         specifier: 4.5.5
         version: 4.5.5(ts-node@7.0.1)(typescript@5.5.4)
@@ -329,8 +329,8 @@ importers:
         specifier: 2.58.0
         version: 2.58.0(ts-node@7.0.1)(typescript@5.5.4)
       '@pulumi/cloudflare':
-        specifier: 5.36.0
-        version: 5.36.0(ts-node@7.0.1)(typescript@5.5.4)
+        specifier: 5.37.1
+        version: 5.37.1(ts-node@7.0.1)(typescript@5.5.4)
       '@pulumi/command':
         specifier: 1.0.1
         version: 1.0.1(ts-node@7.0.1)(typescript@5.5.4)
@@ -777,8 +777,8 @@ packages:
   '@pulumi/azure-native@2.58.0':
     resolution: {integrity: sha512-vfW9VW/M28E8N8C+gypmMMTYAtFwcI7ReXfjwhva+OVbRGoumaW5hP0sxkfdMaqE+hWD0KNqWes9x0108DVy2A==}
 
-  '@pulumi/cloudflare@5.36.0':
-    resolution: {integrity: sha512-o9kqc5mzpNkMG9tmgsJgYv0KTh/rVUd/fJ/FE71P12m2TwWO5VR1Y96kk+ZMdbpoD847W66OtMjWRUBLBgX1cg==}
+  '@pulumi/cloudflare@5.37.1':
+    resolution: {integrity: sha512-4s0lcIOM56rEMeZYEhrHi4tOHz78XrN+jDMj79afnToXzHFIYonBsK9BNEhEsQlyjQ0rlwB35QvpAY/MqSBcaw==}
 
   '@pulumi/command@1.0.1':
     resolution: {integrity: sha512-PqqcMp80Y9dc7Lt0epXqvqha76S4XF08NB8lpMA0zJ9zWvkkssQ8lq8XdHuZOrAGHXj7gKBs6JBrhhltoovUTQ==}
@@ -3195,7 +3195,7 @@ snapshots:
       - ts-node
       - typescript
 
-  '@pulumi/cloudflare@5.36.0(ts-node@7.0.1)(typescript@5.5.4)':
+  '@pulumi/cloudflare@5.37.1(ts-node@7.0.1)(typescript@5.5.4)':
     dependencies:
       '@pulumi/pulumi': 3.129.0(ts-node@7.0.1)(typescript@5.5.4)
     transitivePeerDependencies:
