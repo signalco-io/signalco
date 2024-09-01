@@ -14,7 +14,7 @@
         "@signalco/tsconfig": "workspace:*",
         "@signalco/eslint-config-signalco": "workspace:*",
         "@types/react": "18.3.5",
-        "@types/node": "20.16.2"
+        "@types/node": "20.16.3"
     },
     "dependencies": {
         "@react-email/components": "0.0.23",
