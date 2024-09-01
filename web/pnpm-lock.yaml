@@ -501,8 +501,8 @@ importers:
         specifier: 4.1.0
         version: 4.1.0
       '@blocknote/core':
-        specifier: 0.15.5
-        version: 0.15.5
+        specifier: 0.15.6
+        version: 0.15.6
       '@blocknote/mantine':
         specifier: 0.15.5
         version: 0.15.5(@tiptap/pm@2.5.9)(@types/react@18.3.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -2690,8 +2690,8 @@ packages:
   '@base2/pretty-print-object@1.0.1':
     resolution: {integrity: sha512-4iri8i1AqYHJE2DstZYkyEprg6Pq6sKx3xn5FpySk9sNhH7qN2LLlHJCfDTZRILNwQNPD7mATWM0TBui7uC1pA==}
 
-  '@blocknote/core@0.15.5':
-    resolution: {integrity: sha512-xbFTBYbp4LMqGClWVycwgRn2WSAMrlKfxmHXfOvqzColGhk6df2n0MI35RQcES2yhUE/WCBzw3Z4Er/wIcsPzw==}
+  '@blocknote/core@0.15.6':
+    resolution: {integrity: sha512-eNpohYtIDCGpKoCKtK2gGOeEl4sGX7jBl/8hX0OJINEGi1LtbWYEWNToRBDwBt9Uq2MW/PqG3iRuJ2oTcfTuZw==}
 
   '@blocknote/mantine@0.15.5':
     resolution: {integrity: sha512-G4msPVDZR/D2dRJA9nvfsMSkdhfYpqgibkc1fYuibS3yVgKKGyG/PrGj6jLM/+2AnBzM3u9xF3LWGVjnVkB6DA==}
@@ -11433,7 +11433,7 @@ snapshots:
 
   '@base2/pretty-print-object@1.0.1': {}
 
-  '@blocknote/core@0.15.5':
+  '@blocknote/core@0.15.6':
     dependencies:
       '@emoji-mart/data': 1.2.1
       '@tiptap/core': 2.5.9(@tiptap/pm@2.5.9)
@@ -11481,7 +11481,7 @@ snapshots:
 
   '@blocknote/mantine@0.15.5(@tiptap/pm@2.5.9)(@types/react@18.3.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@blocknote/core': 0.15.5
+      '@blocknote/core': 0.15.6
       '@blocknote/react': 0.15.5(@tiptap/pm@2.5.9)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@mantine/core': 7.12.0(@mantine/hooks@7.12.0(react@18.3.1))(@types/react@18.3.5)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@mantine/hooks': 7.12.0(react@18.3.1)
@@ -11496,7 +11496,7 @@ snapshots:
 
   '@blocknote/react@0.15.5(@tiptap/pm@2.5.9)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@blocknote/core': 0.15.5
+      '@blocknote/core': 0.15.6
       '@floating-ui/react': 0.26.22(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@tiptap/core': 2.5.9(@tiptap/pm@2.5.9)
       '@tiptap/react': 2.5.4(@tiptap/core@2.5.9(@tiptap/pm@2.5.9))(@tiptap/pm@2.5.9)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
