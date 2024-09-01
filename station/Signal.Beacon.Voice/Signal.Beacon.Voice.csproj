@@ -22,7 +22,7 @@
     <PackageReference Include="OpenTK.Audio.OpenAL" Version="5.0.0-pre.11" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.1" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.1" />
-    <PackageReference Include="Porcupine" Version="3.0.2" />
+    <PackageReference Include="Porcupine" Version="3.0.3" />
   </ItemGroup>
 
   <ItemGroup>
