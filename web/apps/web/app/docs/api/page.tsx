@@ -459,7 +459,7 @@ function Actions(props: ActionsProps) {
 
             const data = await response.json();
             setResponse(JSON.stringify(data, undefined, 2));
-        } catch (err) {
+        } catch {
             setResponseStatusCode(999);
             setResponse('Unknown error');
         }

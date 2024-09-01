@@ -60,7 +60,7 @@ export default function LoginPage() {
             const email = formData.email.value;
             const { verifyPhrase, clientId } = await emailLogin.mutateAsync({ email });
             router.push(KnownPages.LoginEmailSent(verifyPhrase, email, clientId));
-        } catch (error) {
+        } catch {
             showNotification('Failed to send login email. Please try again.', 'error');
         }
     }

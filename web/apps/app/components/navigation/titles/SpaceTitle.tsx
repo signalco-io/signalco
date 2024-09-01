@@ -1,8 +1,7 @@
 'use client';
 
-import React from 'react';
 import { useSearchParam } from '@signalco/hooks/useSearchParam';
-import DashboardSelector from '../../dashboards/DashboardSelector';
+import { DashboardSelector } from '../../dashboards/DashboardSelector';
 
 export function SpaceTitle() {
     const [, setIsEditing] = useSearchParam('editing');

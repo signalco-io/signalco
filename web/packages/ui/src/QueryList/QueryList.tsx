@@ -7,7 +7,6 @@ import { Row } from '@signalco/ui-primitives/Row';
 import { Modal } from '@signalco/ui-primitives/Modal';
 import { ListItem } from '@signalco/ui-primitives/ListItem';
 import { List as UIList } from '@signalco/ui-primitives/List';
-import { cx } from '@signalco/ui-primitives/cx';
 import { Add } from '@signalco/ui-icons';
 import { Loadable } from '../Loadable';
 import { QueryListSkeleton } from './QueryListSkeleton';

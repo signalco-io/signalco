@@ -1,6 +1,6 @@
+import { PropsWithChildren } from 'react';
 import { Link } from '@signalco/ui-primitives/Link';
 import { Button } from '@signalco/ui-primitives/Button';
-import { PropsWithChildren } from 'react';
 
 export type NavLinkItem = {
     href: string,

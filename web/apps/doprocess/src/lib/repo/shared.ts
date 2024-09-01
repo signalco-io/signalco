@@ -21,7 +21,7 @@ export async function entityIdByPublicId(container: Container, publicId: string)
 }
 
 export async function publicIdExists(entityContainer: Container, publicId: string) {
-    (await entityContainer.items.query({
+    return (await entityContainer.items.query({
         query: 'SELECT * FROM c WHERE c.publicId = @publicId',
         parameters: [{ name: '@publicId', value: publicId }]
     }).fetchAll()).resources.length > 0;

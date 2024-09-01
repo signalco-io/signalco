@@ -1,7 +1,6 @@
 import { useState, Fragment } from 'react';
-import { Typography } from '@signalco/ui-primitives/Typography';
 import { Stack } from '@signalco/ui-primitives/Stack';
-import { Card, CardContent, CardHeader, CardTitle } from '@signalco/ui-primitives/Card';
+import { Card, CardContent, CardHeader } from '@signalco/ui-primitives/Card';
 import { Button } from '@signalco/ui-primitives/Button';
 import { showNotification } from '@signalco/ui-notifications';
 import EntityStatus from '../../entity/EntityStatus';

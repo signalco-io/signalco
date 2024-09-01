@@ -25,7 +25,7 @@ function DisplayEntityTarget({ target, selectContact, selectValue, valueSerializ
     const [open, setOpen] = useState(false);
 
     const handleEntitySelected = (target: Partial<IContactPointer> | undefined, valueSerialized: string | undefined) => {
-        onChanged && onChanged(target, valueSerialized);
+        onChanged?.(target, valueSerialized);
     };
 
     const handleEntitySelectionClose = () => {

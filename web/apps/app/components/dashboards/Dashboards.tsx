@@ -17,7 +17,6 @@ import ConfigurationDialog from '../shared/dialog/ConfigurationDialog';
 import useLocale from '../../src/hooks/useLocale';
 import useSaveDashboard from '../../src/hooks/dashboards/useSaveDashboard';
 import useDashboard from '../../src/hooks/dashboards/useDashboard';
-import { WidgetModel } from '../../src/dashboards/DashboardsRepository';
 import { SpacesEditingBackground } from './SpacesEditingBackground';
 import DashboardView from './DashboardView';
 import { DashboardSkeleton } from './DashboardSkeleton';
@@ -103,7 +102,7 @@ export function Dashboards() {
     const handleNewDashboard = async () => {
         try {
             const newDashboardId = await saveDashboard.mutateAsync({
-                name: 'New dashboard'
+                alias: 'New dashboard'
             });
             setDashboardId(newDashboardId);
         } catch (err) {
@@ -114,9 +113,13 @@ export function Dashboards() {
 
     const [showWidgetStore, setShowWidgetStore] = useState(false);
     const handleAddWidget = useCallback((widgetType: widgetType) => {
-        selectedDashboard?.widgets.push(new WidgetModel('new-widget', selectedDashboard.widgets.length, widgetType));
+        selectedDashboard?.configuration.widgets.push({
+            id: 'new-widget',
+            order: selectedDashboard.configuration.widgets.length,
+            type: widgetType
+        });
         setShowWidgetStore(false);
-    }, [selectedDashboard?.widgets]);
+    }, [selectedDashboard?.configuration.widgets]);
 
     const handleAddWidgetPlaceholder = () => {
         setIsEditing('true');
@@ -135,7 +138,7 @@ export function Dashboards() {
 
     return (
         <>
-            <SpaceBackground background={selectedDashboard?.background} />
+            <SpaceBackground background={selectedDashboard?.configuration.background} />
             {isEditing && (
                 <>
                     <SpacesEditingBackground />

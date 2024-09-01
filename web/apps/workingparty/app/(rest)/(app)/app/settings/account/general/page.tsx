@@ -42,7 +42,7 @@ export default function SettingsAccountGeneralPage() {
         try {
             await accountUpdate.mutateAsync({ name });
             showNotification('Account name updated', 'success');
-        } catch (error) {
+        } catch {
             showNotification('Failed to update account name', 'error');
         }
     }

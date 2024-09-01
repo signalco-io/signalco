@@ -1,15 +1,16 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Row } from '@signalco/ui-primitives/Row';
 import { Popper } from '@signalco/ui-primitives/Popper';
 import { ButtonDropdown } from '@signalco/ui-primitives/ButtonDropdown';
 import { Button } from '@signalco/ui-primitives/Button';
-import { PageNotificationVariant, showNotification } from '@signalco/ui-notifications';
 import { Loadable } from '@signalco/ui/Loadable';
 import { useSearchParam } from '@signalco/hooks/useSearchParam';
 import useLocale from '../../src/hooks/useLocale';
+import { useErrorNotification } from '../../src/hooks/useErrorNotification';
 import useDashboards from '../../src/hooks/dashboards/useDashboards';
+import { dashboardsGetFavorites } from '../../src/dashboards/DashboardsRepository';
 import DashboardSelectorMenu from './DashboardSelectorMenu';
 
 type DashboardSelectorProps = {
@@ -17,16 +18,7 @@ type DashboardSelectorProps = {
     onSettings: () => void
 }
 
-function useErrorNotification(error: Error | null, message: string, variant?: PageNotificationVariant) {
-    useEffect(() => {
-        if (error) {
-            console.error(error);
-            showNotification(message, variant ?? 'error');
-        }
-    }, [error, message, variant]);
-}
-
-function DashboardSelector({ onEditWidgets, onSettings }: DashboardSelectorProps) {
+export function DashboardSelector({ onEditWidgets, onSettings }: DashboardSelectorProps) {
     const { t } = useLocale('App', 'Dashboards');
     const [selectedId, setSelectedId] = useSearchParam('dashboard');
     const [isOpen, setIsOpen] = useState(false);
@@ -34,8 +26,9 @@ function DashboardSelector({ onEditWidgets, onSettings }: DashboardSelectorProps
     useErrorNotification(dashboardsError, t('DashboardsLoadingError'));
 
     const currentDashboard = dashboards?.find(d => d.id == selectedId);
-    const currentName = currentDashboard?.name;
-    const favoriteDashboards = dashboards?.filter(d => d.isFavorite);
+    const currentName = currentDashboard?.alias;
+    const favoriteDashboardIds = dashboardsGetFavorites();
+    const favoriteDashboards = dashboards?.filter(d => favoriteDashboardIds.includes(d.id));
 
     const handleSelection = (id: string) => {
         setSelectedId(id);
@@ -72,7 +65,7 @@ function DashboardSelector({ onEditWidgets, onSettings }: DashboardSelectorProps
                 )}
             </Loadable>
             {(favoriteDashboards?.length ?? 0) > 0 && (
-                <div className="relative overflow-x-auto [scroll-timeline:--scroll-timeline_x] [transform:translateZ(0)]">
+                <div className="relative hidden overflow-x-auto [scroll-timeline:--scroll-timeline_x] [transform:translateZ(0)] md:block">
                     <Row>
                         {favoriteDashboards?.map(fd => (
                             <Button
@@ -80,7 +73,7 @@ function DashboardSelector({ onEditWidgets, onSettings }: DashboardSelectorProps
                                 variant="plain"
                                 onClick={() => setSelectedId(fd.id)}
                                 className="px-8 sm:px-5">
-                                {fd.name}
+                                {fd.alias}
                             </Button>
                         ))}
                     </Row>
@@ -89,5 +82,3 @@ function DashboardSelector({ onEditWidgets, onSettings }: DashboardSelectorProps
         </Row>
     );
 }
-
-export default DashboardSelector;

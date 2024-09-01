@@ -1,6 +1,4 @@
-const root = {
+module.exports = {
     root: true,
     extends: ['@signalco/eslint-config-signalco'],
 };
-
-export default root;

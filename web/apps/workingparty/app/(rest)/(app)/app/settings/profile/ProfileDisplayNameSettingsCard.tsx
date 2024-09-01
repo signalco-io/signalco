@@ -42,7 +42,7 @@ export function ProfileDisplayNameSettingsCard() {
         try {
             await currentUserUpdate.mutateAsync({ displayName });
             showNotification('Display name updated', 'success');
-        } catch (error) {
+        } catch {
             showNotification('Failed to update display name', 'error');
         }
     }
