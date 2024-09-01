@@ -498,8 +498,8 @@ importers:
   apps/doprocess:
     dependencies:
       '@azure/cosmos':
-        specifier: 4.1.0
-        version: 4.1.0
+        specifier: 4.1.1
+        version: 4.1.1
       '@blocknote/core':
         specifier: 0.15.6
         version: 0.15.6
@@ -1130,8 +1130,8 @@ importers:
         specifier: 1.0.0
         version: 1.0.0
       '@azure/cosmos':
-        specifier: 4.1.0
-        version: 4.1.0
+        specifier: 4.1.1
+        version: 4.1.1
       '@enterwell/react-form-builder':
         specifier: 0.3.2
         version: 0.3.2(@enterwell/react-form-validation@1.4.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -2046,8 +2046,8 @@ packages:
     resolution: {integrity: sha512-AfalUQ1ZppaKuxPPMsFEUdX6GZPB3d9paR9d/TTL7Ow2De8cJaC7ibi7kWVlFAVPCYo31OcnGymc0R89DX8Oaw==}
     engines: {node: '>=18.0.0'}
 
-  '@azure/cosmos@4.1.0':
-    resolution: {integrity: sha512-+m085WKIGkf6wyw4vT85FFXl9j3U35u+LFFVwmLqfPbolnQAtoX24cowXz+vseW4BWKyx6Lamb+Zz+jl69zn6g==}
+  '@azure/cosmos@4.1.1':
+    resolution: {integrity: sha512-EKcRHZy3enhz7hU/qlwW2urcoF7haFkQRbLhR+rUaAtzDaN6+F/rH4xJtNc94NjOEoeHUI+bkze63ZA55Gca0A==}
     engines: {node: '>=18.0.0'}
 
   '@azure/logger@1.1.2':
@@ -10556,7 +10556,7 @@ snapshots:
       '@azure/abort-controller': 2.1.2
       tslib: 2.6.3
 
-  '@azure/cosmos@4.1.0':
+  '@azure/cosmos@4.1.1':
     dependencies:
       '@azure/abort-controller': 2.1.2
       '@azure/core-auth': 1.7.2
