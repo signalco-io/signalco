@@ -594,8 +594,8 @@ importers:
         specifier: 0.3.0
         version: 0.3.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       openai:
-        specifier: 4.56.0
-        version: 4.56.0(encoding@0.1.13)
+        specifier: 4.57.0
+        version: 4.57.0(encoding@0.1.13)
       react:
         specifier: 18.3.1
         version: 18.3.1
@@ -1220,8 +1220,8 @@ importers:
         specifier: 0.3.0
         version: 0.3.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       openai:
-        specifier: 4.56.0
-        version: 4.56.0(encoding@0.1.13)
+        specifier: 4.57.0
+        version: 4.57.0(encoding@0.1.13)
       react:
         specifier: 18.3.1
         version: 18.3.1
@@ -8414,8 +8414,8 @@ packages:
     resolution: {integrity: sha512-1FlR+gjXK7X+AsAHso35MnyN5KqGwJRi/31ft6x0M194ht7S+rWAvd7PHss9xSKMzE0asv1pyIHaJYq+BbacAQ==}
     engines: {node: '>=12'}
 
-  openai@4.56.0:
-    resolution: {integrity: sha512-zcag97+3bG890MNNa0DQD9dGmmTWL8unJdNkulZzWRXrl+QeD+YkBI4H58rJcwErxqGK6a0jVPZ4ReJjhDGcmw==}
+  openai@4.57.0:
+    resolution: {integrity: sha512-JnwBSIYqiZ3jYjB5f2in8hQ0PRA092c6m+/6dYB0MzK0BEbn+0dioxZsPLBm5idJbg9xzLNOiGVm2OSuhZ+BdQ==}
     hasBin: true
     peerDependencies:
       zod: ^3.23.8
@@ -18334,15 +18334,17 @@ snapshots:
     dependencies:
       mimic-fn: 4.0.0
 
-  openai@4.56.0(encoding@0.1.13):
+  openai@4.57.0(encoding@0.1.13):
     dependencies:
       '@types/node': 18.19.43
       '@types/node-fetch': 2.6.11
+      '@types/qs': 6.9.15
       abort-controller: 3.0.0
       agentkeepalive: 4.5.0
       form-data-encoder: 1.7.2
       formdata-node: 4.4.1
       node-fetch: 2.7.0(encoding@0.1.13)
+      qs: 6.12.3
     transitivePeerDependencies:
       - encoding
 
