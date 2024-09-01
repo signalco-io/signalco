@@ -60,7 +60,7 @@
         "next": "14.2.7",
         "next-secure-headers": "2.2.0",
         "next-themes": "0.3.0",
-        "openapi-fetch": "0.11.1",
+        "openapi-fetch": "0.12.0",
         "openapi-typescript": "7.3.3",
         "pigeon-maps": "0.21.6",
         "react": "18.3.1",
