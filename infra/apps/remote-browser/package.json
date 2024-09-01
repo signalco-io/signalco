@@ -8,9 +8,9 @@
     },
     "devDependencies": {
         "@infra/pulumi": "workspace:*",
-        "@types/node": "20.15.0",
-        "@typescript-eslint/eslint-plugin": "8.1.0",
-        "@typescript-eslint/parser": "8.1.0",
+        "@types/node": "20.16.2",
+        "@typescript-eslint/eslint-plugin": "8.3.0",
+        "@typescript-eslint/parser": "8.3.0",
         "eslint": "8.57.0",
         "eslint-plugin-import": "2.29.1",
         "eslint-plugin-n": "17.10.2",
@@ -20,12 +20,12 @@
     },
     "dependencies": {
         "@checkly/pulumi": "1.1.4",
-        "@pulumi/aws": "6.49.1",
-        "@pulumi/azure-native": "2.56.0",
-        "@pulumi/cloudflare": "5.36.0",
+        "@pulumi/aws": "6.50.1",
+        "@pulumi/azure-native": "2.58.0",
+        "@pulumi/cloudflare": "5.37.1",
         "@pulumi/command": "1.0.1",
         "@pulumi/docker": "4.5.5",
-        "@pulumi/pulumi": "3.129.0",
+        "@pulumi/pulumi": "3.130.0",
         "@pulumiverse/vercel": "1.11.0"
     }
 }

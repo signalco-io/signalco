@@ -23,13 +23,13 @@
     "devDependencies": {
         "@signalco/tsconfig": "workspace:*",
         "@signalco/eslint-config-signalco": "workspace:*",
-        "lucide-react": "0.428.0",
+        "lucide-react": "0.436.0",
         "react": "18.3.1",
         "react-dom": "18.3.1",
         "typescript": "5.5.4",
-        "@types/react": "18.3.3",
+        "@types/react": "18.3.4",
         "tsup": "8.2.4",
-        "@microsoft/api-extractor": "7.47.6"
+        "@microsoft/api-extractor": "7.47.7"
     },
     "peerDependencies": {
         "react": ">=18",
