@@ -120,8 +120,8 @@ importers:
         specifier: 3.6.0
         version: 3.6.0
       jose:
-        specifier: 5.7.0
-        version: 5.7.0
+        specifier: 5.8.0
+        version: 5.8.0
       monaco-editor:
         specifier: 0.51.0
         version: 0.51.0
@@ -1205,8 +1205,8 @@ importers:
         specifier: 2.1.38
         version: 2.1.38
       jose:
-        specifier: 5.7.0
-        version: 5.7.0
+        specifier: 5.8.0
+        version: 5.8.0
       nanoid:
         specifier: 5.0.7
         version: 5.0.7
@@ -1344,8 +1344,8 @@ importers:
         specifier: 18.3.5
         version: 18.3.5
       jose:
-        specifier: 5.7.0
-        version: 5.7.0
+        specifier: 5.8.0
+        version: 5.8.0
       next:
         specifier: 14.2.7
         version: 14.2.7(@babel/core@7.25.2)(@playwright/test@1.46.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.77.8)
@@ -7610,8 +7610,8 @@ packages:
   jju@1.4.0:
     resolution: {integrity: sha512-8wb9Yw966OSxApiCt0K3yNJL8pnNeIv+OEq2YMidz4FKP6nonSRoOXc80iXY4JaN2FC11B9qsNmDsm+ZOfMROA==}
 
-  jose@5.7.0:
-    resolution: {integrity: sha512-3P9qfTYDVnNn642LCAqIKbTGb9a1TBxZ9ti5zEVEr48aDdflgRjhspWFb6WM4PzAfFbGMJYC4+803v8riCRAKw==}
+  jose@5.8.0:
+    resolution: {integrity: sha512-E7CqYpL/t7MMnfGnK/eg416OsFCVUrU/Y3Vwe7QjKhu/BkS1Ms455+2xsqZQVN57/U2MHMBvEb5SrmAZWAIntA==}
 
   joycon@3.1.1:
     resolution: {integrity: sha512-34wB/Y7MW7bzjKRjUKTa46I2Z7eV62Rkhva+KkopW7Qvv/OSWBqvkSY7vusOPrNuZcUG3tApvdVgNB8POj3SPw==}
@@ -17198,7 +17198,7 @@ snapshots:
 
   jju@1.4.0: {}
 
-  jose@5.7.0: {}
+  jose@5.8.0: {}
 
   joycon@3.1.1: {}
 
