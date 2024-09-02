@@ -4,7 +4,7 @@ import { PageNav } from '@signalco/ui/Nav';
 export function PageFullLayout(props: PropsWithChildren) {
     return (
         <>
-            <PageNav fullWidth logo="BrandGrab.io" />
+            <PageNav logo="BrandGrab.io" />
             <div style={{ paddingTop: '80px' }}>
                 {props.children}
             </div>

@@ -6,7 +6,7 @@ export default function RootMarketingLayout({ children, }: {
 }) {
     return (
         <>
-            <PageNav fullWidth logo={'uier'} />
+            <PageNav logo={'uier'} />
             <Container className="pt-20">
                 {children}
             </Container>
