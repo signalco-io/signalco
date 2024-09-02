@@ -1,6 +1,6 @@
 import { PropsWithChildren } from 'react';
 import { Container } from '@signalco/ui-primitives/Container';
-import { PageNav, PageNavMenu } from '@signalco/ui/Nav';
+import { PageNav } from '@signalco/ui/Nav';
 import { SectionsView } from '@signalco/cms-core/SectionsView';
 import { SectionData } from '@signalco/cms-core/SectionData';
 import { KnownPages } from '../../../src/knownPages';
@@ -39,12 +39,12 @@ const data: SectionData[] = [
 export default function RootMarketingLayout({ children, }: PropsWithChildren) {
     return (
         <>
-            <PageNav fullWidth logo={<WorkingPartyLogotype height={32} />}>
-                <PageNavMenu links={[
+            <PageNav
+                logo={<WorkingPartyLogotype height={32} />}
+                links={[
                     // { href: KnownPages.Pricing, text: 'Pricing' }
                 ]}>
-                    <NavigatingButton href={KnownPages.App}>App</NavigatingButton>
-                </PageNavMenu>
+                <NavigatingButton href={KnownPages.App}>App</NavigatingButton>
             </PageNav>
             <Container className="pt-16">
                 {children}

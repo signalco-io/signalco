@@ -36,7 +36,7 @@ const footerData: SectionData = {
 export function PageFullLayout(props: PropsWithChildren) {
     return (
         <>
-            <PageNav logo="slco.io" fullWidth />
+            <PageNav logo="slco.io" />
             <div style={{ paddingTop: '80px' }}>
                 {props.children}
             </div>

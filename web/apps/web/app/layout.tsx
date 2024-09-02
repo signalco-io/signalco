@@ -6,7 +6,7 @@ import { Stack } from '@signalco/ui-primitives/Stack';
 import { Container } from '@signalco/ui-primitives/Container';
 import { CompanyX, CompanyReddit, CompanyGitHub } from '@signalco/ui-icons';
 import { NavigatingButton } from '@signalco/ui/NavigatingButton';
-import { PageNav, PageNavMenu } from '@signalco/ui/Nav';
+import { PageNav } from '@signalco/ui/Nav';
 import { SectionData } from '@signalco/cms-core/SectionData';
 import { Footer1 } from '@signalco/cms-components-marketing/Footer';
 import { KnownPages } from '../src/knownPages';
@@ -70,14 +70,14 @@ export function PageLayout({ children, fullWidth }: PropsWithChildren<{ fullWidt
     const ContentContainer = fullWidth ? Fragment : Container;
     return (
         <Stack spacing={4}>
-            <PageNav fullWidth={fullWidth} logo={<SignalcoLogotype height={32} />}>
-                <PageNavMenu links={[
+            <PageNav
+                logo={<SignalcoLogotype height={32} />}
+                links={[
                     { href: KnownPages.Features, text: 'Features' },
                     { href: KnownPages.Channels, text: 'Channels' },
                     { href: KnownPages.Pricing, text: 'Pricing' }
                 ]}>
-                    <NavigatingButton href={KnownPages.App}>App</NavigatingButton>
-                </PageNavMenu>
+                <NavigatingButton href={KnownPages.App}>App</NavigatingButton>
             </PageNav>
             <main className="pt-20">
                 <ContentContainer>
