@@ -1,3 +1,4 @@
+import { AssistantUpdateParams } from 'openai/resources/beta/assistants.mjs';
 import { nanoid } from 'nanoid';
 import { openAiClient } from '../openAiClient';
 import { cosmosDataContainerWorkers } from '../cosmosClient';
@@ -77,11 +78,21 @@ export async function workersCreate({ accountId, marketplaceWorkerId }: { accoun
         });
     }
 
+    const assistantUpdates: AssistantUpdateParams = {};
+
+    // Update assistant model if not matching with marketplace model
+    if (oaiAssistant.model !== workerMarketplaceInfo.model) {
+        assistantUpdates.model = workerMarketplaceInfo.model;
+    }
+
     // Update assistant instructions if not matching with marketplace instructions
     if (oaiAssistant.instructions !== assistantMarketplaceInstructions) {
-        await openai.beta.assistants.update(oaiAssistant.id, {
-            instructions: assistantMarketplaceInstructions,
-        });
+        assistantUpdates.instructions = assistantMarketplaceInstructions;
+    }
+
+    // Update assistant if needed
+    if (Object.keys(assistantUpdates).length > 0) {
+        await openai.beta.assistants.update(oaiAssistant.id, assistantUpdates);
     }
 
     const newWorker: DbWorker = {
