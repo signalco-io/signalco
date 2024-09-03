@@ -16,18 +16,16 @@ function defaultSearchFunc<TItem>(i: TItem, kw: string) {
     return typeof i === 'string' && i.toString().toLocaleLowerCase() === kw;
 }
 
-type UseSearchReturn<TItem> = [TItem[], string, (text: string) => void];
+export type UseSearchReturn<TItem> = [TItem[], string, (text: string) => void];
 
-function useSearch<TItem>(items?: TItem[], filterFunc?: (item: TItem, keyword: string) => boolean): UseSearchReturn<TItem> {
+export function useSearch<TItem>(items?: TItem[], filterFunc?: (item: TItem, keyword: string) => boolean): UseSearchReturn<TItem> {
     const [searchText, setSearchText] = useState<string>('');
     const filteredItems = useMemo(() => searchText
         ? (items || []).filter(i => filterFunc
             ? filterFunc(i, searchText.toLowerCase())
             : defaultSearchFunc(i, searchText.toLocaleLowerCase()))
         : items || [],
-    [filterFunc, items, searchText]);
+        [filterFunc, items, searchText]);
 
     return [filteredItems, searchText, setSearchText];
 }
-
-export default useSearch;
