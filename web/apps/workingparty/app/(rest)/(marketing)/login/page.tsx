@@ -73,6 +73,7 @@ export default function LoginPage() {
                     <Stack spacing={1}>
                         <Input
                             placeholder="Email address"
+                            autoComplete="email"
                             autoFocus
                             {...formData.email.props}
                         />

@@ -64,6 +64,7 @@ export async function POST(request: Request, { params }: { params: { workerid: s
             return new Response(null, { status: 500 });
         }
 
+        // TODO: Do this parallel with other tasks
         await accountUsageIncrement(accountId, {
             messages: 1,
             oaigpt35tokens: oaiUsage?.total_tokens

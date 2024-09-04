@@ -1,9 +1,11 @@
-import { UseMutationResult, useMutation } from '@tanstack/react-query';
+import { UseMutationResult, useMutation, useQueryClient } from '@tanstack/react-query';
+import { authCurrentUserQueryKeys } from '@signalco/auth-client';
 
 export function useLoginConfirm(): UseMutationResult<void, Error, {
     email: string;
     verifyPhrase: string;
 }, unknown> {
+    const queryClient = useQueryClient();
     return useMutation({
         mutationFn: async ({ email, verifyPhrase }: { email: string; verifyPhrase: string; }) => {
             const resp = await fetch('/api/auth/login/confirm', {
@@ -16,6 +18,9 @@ export function useLoginConfirm(): UseMutationResult<void, Error, {
             if (resp.status < 200 || resp.status > 299) {
                 throw new Error('Failed to confirm login');
             }
+        },
+        onSuccess: async () => {
+            await queryClient.invalidateQueries({ queryKey: authCurrentUserQueryKeys });
         }
     });
 }

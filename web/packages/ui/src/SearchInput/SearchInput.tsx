@@ -1,15 +1,13 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Input } from '@signalco/ui-primitives/Input';
-import useSearch, { filterFuncObjectStringProps } from '../../../src/hooks/useSearch';
-import useLocale from '../../../src/hooks/useLocale';
+import { useSearch, filterFuncObjectStringProps } from '@signalco/hooks/useSearch';
 
 export type SearchInputProps<T> = {
     items: T[] | undefined,
     onFilteredItems: (filteredItems: T[]) => void
 };
 
-export default function SearchInput<TItem extends object>({ items, onFilteredItems }: SearchInputProps<TItem>) {
-    const { t } = useLocale('App', 'Components', 'SearchInput');
+export function SearchInput<TItem extends object>({ items, onFilteredItems }: SearchInputProps<TItem>) {
     const [filteredItems, searchText, handleSearchTextChange] = useSearch(items, filterFuncObjectStringProps);
 
     useEffect(() => {
@@ -18,7 +16,7 @@ export default function SearchInput<TItem extends object>({ items, onFilteredIte
 
     return (
         <Input
-            placeholder={t('Label')}
+            placeholder="Search..."
             value={searchText}
             onChange={(e) => handleSearchTextChange(e.target.value)}
             className="w-full sm:w-auto" />

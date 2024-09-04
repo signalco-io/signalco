@@ -103,7 +103,7 @@ export function ListItem({
                 className
             )}>
             {typeof startDecorator === 'string' ? <span>{startDecorator}</span> : startDecorator ?? null}
-            {Boolean(label) && <div className="grow">{label}</div>}
+            {Boolean(label) && <div className="min-w-0 grow">{label}</div>}
             {Boolean(endDecorator) && (
                 <>
                     {typeof endDecorator === 'string' ? <span>{endDecorator}</span> : endDecorator ?? null}

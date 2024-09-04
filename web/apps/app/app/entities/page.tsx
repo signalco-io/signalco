@@ -8,6 +8,7 @@ import { Row } from '@signalco/ui-primitives/Row';
 import { IconButton } from '@signalco/ui-primitives/IconButton';
 import { cx } from '@signalco/ui-primitives/cx';
 import { Add, Check, LayoutGrid, LayoutList } from '@signalco/ui-icons';
+import { SearchInput } from '@signalco/ui/SearchInput';
 import { Loadable } from '@signalco/ui/Loadable';
 import { useSearchParam } from '@signalco/hooks/useSearchParam';
 import { KnownPages } from '../../src/knownPages';
@@ -17,7 +18,6 @@ import useUpsertEntity from '../../src/hooks/signalco/entity/useUpsertEntity';
 import useDeleteEntity from '../../src/hooks/signalco/entity/useDeleteEntity';
 import useAllEntities from '../../src/hooks/signalco/entity/useAllEntities';
 import IEntityDetails from '../../src/entity/IEntityDetails';
-import SearchInput from '../../components/shared/inputs/SearchInput';
 import ConfirmDeleteButton from '../../components/shared/dialog/ConfirmDeleteButton';
 import EntityCard from '../../components/entity/EntityCard';
 
