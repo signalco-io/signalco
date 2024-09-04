@@ -191,9 +191,6 @@
             "Confirm": "Confirm"
         },
         "Components": {
-            "SearchInput": {
-                "Label": "Search..."
-            },
             "AppThemePicker": {
                 "PickDayNightTimes": "Pick day and night times",
                 "DayTime": "Day time",
