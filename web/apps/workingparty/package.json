@@ -70,7 +70,7 @@
         "@types/react-dom": "18.3.0",
         "eslint": "8.57.0",
         "next-sitemap": "4.2.3",
-        "postcss": "8.4.44",
+        "postcss": "8.4.45",
         "sass": "1.78.0",
         "typescript": "5.5.4"
     }
