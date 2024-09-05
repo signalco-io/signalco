@@ -3,7 +3,7 @@ import { plansGet } from '../../../../../../../src/lib/repository/plansRepositor
 import { accountGet } from '../../../../../../../src/lib/repository/accountsRepository';
 import { withAuth } from '../../../../../../../src/lib/auth/withAuth';
 
-export const runtime = 'edge';
+
 
 export type CheckoutSessionDto = Awaited<ReturnType<typeof stripeCheckout>>;
 

@@ -1,7 +1,7 @@
 import { plansGetAll } from '../../../src/lib/repository/plansRepository';
 import { PlanDto } from '../../../src/lib/dtos/plan';
 
-export const runtime = 'edge';
+
 
 export async function GET() {
     const plans = await plansGetAll();

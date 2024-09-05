@@ -5,7 +5,7 @@ import { toPhrase } from '../../../../src/lib/shared/phrases/toPhrase';
 import { loginRequestsCreate } from '../../../../src/lib/repository/loginRequests';
 import { sendEmail } from '../../../../src/lib/email/emailService';
 
-export const runtime = 'edge';
+
 
 export async function POST(request: Request) {
     const json = await request.json();
