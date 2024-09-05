@@ -1,7 +1,7 @@
 import { createProcess, getProcess, getProcesses } from '../../../src/lib/repo/processesRepository';
 import { withAuth } from '../../../src/lib/auth/auth';
 
-export const runtime = 'edge';
+
 
 export async function GET() {
     return await withAuth(async ({ userId }) => {
