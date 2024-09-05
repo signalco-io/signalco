@@ -39,8 +39,8 @@ importers:
         specifier: 4.5.5
         version: 4.5.5(ts-node@7.0.1)(typescript@5.5.4)
       '@pulumi/pulumi':
-        specifier: 3.130.0
-        version: 3.130.0(ts-node@7.0.1)(typescript@5.5.4)
+        specifier: 3.131.0
+        version: 3.131.0(ts-node@7.0.1)(typescript@5.5.4)
       '@pulumiverse/vercel':
         specifier: 1.11.0
         version: 1.11.0(ts-node@7.0.1)(typescript@5.5.4)
@@ -49,8 +49,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/pulumi
       '@types/node':
-        specifier: 20.16.4
-        version: 20.16.4
+        specifier: 20.16.5
+        version: 20.16.5
       '@typescript-eslint/eslint-plugin':
         specifier: 8.4.0
         version: 8.4.0(@typescript-eslint/parser@8.4.0(eslint@8.57.0)(typescript@5.5.4))(eslint@8.57.0)(typescript@5.5.4)
@@ -88,8 +88,8 @@ importers:
         specifier: 4.5.5
         version: 4.5.5(ts-node@7.0.1)(typescript@5.5.4)
       '@pulumi/pulumi':
-        specifier: 3.130.0
-        version: 3.130.0(ts-node@7.0.1)(typescript@5.5.4)
+        specifier: 3.131.0
+        version: 3.131.0(ts-node@7.0.1)(typescript@5.5.4)
       '@pulumiverse/vercel':
         specifier: 1.11.0
         version: 1.11.0(ts-node@7.0.1)(typescript@5.5.4)
@@ -98,8 +98,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/pulumi
       '@types/node':
-        specifier: 20.16.4
-        version: 20.16.4
+        specifier: 20.16.5
+        version: 20.16.5
       '@typescript-eslint/eslint-plugin':
         specifier: 8.4.0
         version: 8.4.0(@typescript-eslint/parser@8.4.0(eslint@8.57.0)(typescript@5.5.4))(eslint@8.57.0)(typescript@5.5.4)
@@ -146,8 +146,8 @@ importers:
         specifier: 4.5.5
         version: 4.5.5(ts-node@7.0.1)(typescript@5.5.4)
       '@pulumi/pulumi':
-        specifier: 3.130.0
-        version: 3.130.0(ts-node@7.0.1)(typescript@5.5.4)
+        specifier: 3.131.0
+        version: 3.131.0(ts-node@7.0.1)(typescript@5.5.4)
       '@pulumiverse/vercel':
         specifier: 1.11.0
         version: 1.11.0(ts-node@7.0.1)(typescript@5.5.4)
@@ -156,8 +156,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/pulumi
       '@types/node':
-        specifier: 20.16.4
-        version: 20.16.4
+        specifier: 20.16.5
+        version: 20.16.5
       '@typescript-eslint/eslint-plugin':
         specifier: 8.4.0
         version: 8.4.0(@typescript-eslint/parser@8.4.0(eslint@8.57.0)(typescript@5.5.4))(eslint@8.57.0)(typescript@5.5.4)
@@ -204,8 +204,8 @@ importers:
         specifier: 4.5.5
         version: 4.5.5(ts-node@7.0.1)(typescript@5.5.4)
       '@pulumi/pulumi':
-        specifier: 3.130.0
-        version: 3.130.0(ts-node@7.0.1)(typescript@5.5.4)
+        specifier: 3.131.0
+        version: 3.131.0(ts-node@7.0.1)(typescript@5.5.4)
       '@pulumiverse/vercel':
         specifier: 1.11.0
         version: 1.11.0(ts-node@7.0.1)(typescript@5.5.4)
@@ -214,8 +214,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/pulumi
       '@types/node':
-        specifier: 20.16.4
-        version: 20.16.4
+        specifier: 20.16.5
+        version: 20.16.5
       '@typescript-eslint/eslint-plugin':
         specifier: 8.4.0
         version: 8.4.0(@typescript-eslint/parser@8.4.0(eslint@8.57.0)(typescript@5.5.4))(eslint@8.57.0)(typescript@5.5.4)
@@ -253,8 +253,8 @@ importers:
         specifier: 4.5.5
         version: 4.5.5(ts-node@7.0.1)(typescript@5.5.4)
       '@pulumi/pulumi':
-        specifier: 3.130.0
-        version: 3.130.0(ts-node@7.0.1)(typescript@5.5.4)
+        specifier: 3.131.0
+        version: 3.131.0(ts-node@7.0.1)(typescript@5.5.4)
       '@pulumiverse/vercel':
         specifier: 1.11.0
         version: 1.11.0(ts-node@7.0.1)(typescript@5.5.4)
@@ -263,8 +263,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/pulumi
       '@types/node':
-        specifier: 20.16.4
-        version: 20.16.4
+        specifier: 20.16.5
+        version: 20.16.5
       '@typescript-eslint/eslint-plugin':
         specifier: 8.4.0
         version: 8.4.0(@typescript-eslint/parser@8.4.0(eslint@8.57.0)(typescript@5.5.4))(eslint@8.57.0)(typescript@5.5.4)
@@ -338,8 +338,8 @@ importers:
         specifier: 4.5.5
         version: 4.5.5(ts-node@7.0.1)(typescript@5.5.4)
       '@pulumi/pulumi':
-        specifier: 3.130.0
-        version: 3.130.0(ts-node@7.0.1)(typescript@5.5.4)
+        specifier: 3.131.0
+        version: 3.131.0(ts-node@7.0.1)(typescript@5.5.4)
       '@pulumiverse/vercel':
         specifier: 1.11.0
         version: 1.11.0(ts-node@7.0.1)(typescript@5.5.4)
@@ -351,8 +351,8 @@ importers:
         specifier: workspace:*
         version: link:../typescript-config
       '@types/node':
-        specifier: 20.16.4
-        version: 20.16.4
+        specifier: 20.16.5
+        version: 20.16.5
       '@typescript-eslint/eslint-plugin':
         specifier: 8.4.0
         version: 8.4.0(@typescript-eslint/parser@8.4.0(eslint@8.57.0)(typescript@5.5.4))(eslint@8.57.0)(typescript@5.5.4)
@@ -790,8 +790,8 @@ packages:
   '@pulumi/docker@4.5.5':
     resolution: {integrity: sha512-+5u0A3H3PTkxGfVuvDafbdyyYT8xLzLJnKdKc2jFEpphwKlXF+lc4YhjsDLBp1cc/5JPfE4hujOxGAxwt/5BUQ==}
 
-  '@pulumi/pulumi@3.130.0':
-    resolution: {integrity: sha512-WsvXRfEdCz+AcuzP41ABgN5Ye3qLt4v/EVZXUT7sMHU6G8uazaLtS92tpvNp+pgeRZf9kbotCEoABXKg+d+1oQ==}
+  '@pulumi/pulumi@3.131.0':
+    resolution: {integrity: sha512-QNtQeav3dkU0mRdMe2TVvkBmIGkBevVvbD7/bt0fJlGoX/onzv5tysqi1GWCkXsq0FKtBtGYNpVD6wH0cqMN6g==}
     engines: {node: '>=18'}
     peerDependencies:
       ts-node: '>= 7.0.1 < 12'
@@ -949,8 +949,8 @@ packages:
   '@types/keyv@3.1.4':
     resolution: {integrity: sha512-BQ5aZNSCpj7D6K2ksrRCTmKRLEpnPvWDiLPfoGyhZ++8YtiK9d/3DBKPJgry359X/P1PfruyYwvnvwFjuEiEIg==}
 
-  '@types/node@20.16.4':
-    resolution: {integrity: sha512-ioyQ1zK9aGEomJ45zz8S8IdzElyxhvP1RVWnPrXDf6wFaUb+kk1tEcVVJkF7RPGM0VWI7cp5U57oCPIn5iN1qg==}
+  '@types/node@20.16.5':
+    resolution: {integrity: sha512-VwYCweNo3ERajwy0IUlqqcyZ8/A7Zwa9ZP3MnENWcB11AejO+tLy3pu850goUW2FC/IJMdZUfKpX/yxL1gymCA==}
 
   '@types/responselike@1.0.3':
     resolution: {integrity: sha512-H/+L+UkTV33uf49PH5pCAUBVPNj2nDBXTN+qS1dOwyyg24l3CcicicCA7ca+HMvJBZcFgl5r8e+RR6elsb4Lyw==}
@@ -2983,7 +2983,7 @@ snapshots:
 
   '@checkly/pulumi@1.1.4(ts-node@7.0.1)(typescript@5.5.4)':
     dependencies:
-      '@pulumi/pulumi': 3.130.0(ts-node@7.0.1)(typescript@5.5.4)
+      '@pulumi/pulumi': 3.131.0(ts-node@7.0.1)(typescript@5.5.4)
     transitivePeerDependencies:
       - bluebird
       - supports-color
@@ -3088,7 +3088,7 @@ snapshots:
   '@grpc/grpc-js@1.10.1':
     dependencies:
       '@grpc/proto-loader': 0.7.10
-      '@types/node': 20.16.4
+      '@types/node': 20.16.5
 
   '@grpc/proto-loader@0.7.10':
     dependencies:
@@ -3382,7 +3382,7 @@ snapshots:
 
   '@pulumi/aws@6.50.1(ts-node@7.0.1)(typescript@5.5.4)':
     dependencies:
-      '@pulumi/pulumi': 3.130.0(ts-node@7.0.1)(typescript@5.5.4)
+      '@pulumi/pulumi': 3.131.0(ts-node@7.0.1)(typescript@5.5.4)
       builtin-modules: 3.0.0
       mime: 2.6.0
       resolve: 1.22.8
@@ -3394,7 +3394,7 @@ snapshots:
 
   '@pulumi/azure-native@2.59.0(ts-node@7.0.1)(typescript@5.5.4)':
     dependencies:
-      '@pulumi/pulumi': 3.130.0(ts-node@7.0.1)(typescript@5.5.4)
+      '@pulumi/pulumi': 3.131.0(ts-node@7.0.1)(typescript@5.5.4)
     transitivePeerDependencies:
       - bluebird
       - supports-color
@@ -3403,7 +3403,7 @@ snapshots:
 
   '@pulumi/cloudflare@5.37.1(ts-node@7.0.1)(typescript@5.5.4)':
     dependencies:
-      '@pulumi/pulumi': 3.130.0(ts-node@7.0.1)(typescript@5.5.4)
+      '@pulumi/pulumi': 3.131.0(ts-node@7.0.1)(typescript@5.5.4)
     transitivePeerDependencies:
       - bluebird
       - supports-color
@@ -3412,7 +3412,7 @@ snapshots:
 
   '@pulumi/command@1.0.1(ts-node@7.0.1)(typescript@5.5.4)':
     dependencies:
-      '@pulumi/pulumi': 3.130.0(ts-node@7.0.1)(typescript@5.5.4)
+      '@pulumi/pulumi': 3.131.0(ts-node@7.0.1)(typescript@5.5.4)
     transitivePeerDependencies:
       - bluebird
       - supports-color
@@ -3421,7 +3421,7 @@ snapshots:
 
   '@pulumi/docker@4.5.5(ts-node@7.0.1)(typescript@5.5.4)':
     dependencies:
-      '@pulumi/pulumi': 3.130.0(ts-node@7.0.1)(typescript@5.5.4)
+      '@pulumi/pulumi': 3.131.0(ts-node@7.0.1)(typescript@5.5.4)
       semver: 5.7.2
     transitivePeerDependencies:
       - bluebird
@@ -3429,7 +3429,7 @@ snapshots:
       - ts-node
       - typescript
 
-  '@pulumi/pulumi@3.130.0(ts-node@7.0.1)(typescript@5.5.4)':
+  '@pulumi/pulumi@3.131.0(ts-node@7.0.1)(typescript@5.5.4)':
     dependencies:
       '@grpc/grpc-js': 1.10.1
       '@logdna/tail-file': 2.2.0
@@ -3457,7 +3457,7 @@ snapshots:
       picomatch: 3.0.1
       pkg-dir: 7.0.0
       require-from-string: 2.0.2
-      semver: 7.6.0
+      semver: 7.6.3
       source-map-support: 0.5.21
       tmp: 0.2.1
       upath: 1.2.0
@@ -3472,7 +3472,7 @@ snapshots:
 
   '@pulumiverse/vercel@1.11.0(ts-node@7.0.1)(typescript@5.5.4)':
     dependencies:
-      '@pulumi/pulumi': 3.130.0(ts-node@7.0.1)(typescript@5.5.4)
+      '@pulumi/pulumi': 3.131.0(ts-node@7.0.1)(typescript@5.5.4)
     transitivePeerDependencies:
       - bluebird
       - supports-color
@@ -3576,7 +3576,7 @@ snapshots:
     dependencies:
       '@types/http-cache-semantics': 4.0.4
       '@types/keyv': 3.1.4
-      '@types/node': 20.16.4
+      '@types/node': 20.16.5
       '@types/responselike': 1.0.3
 
   '@types/estree@1.0.5': {}
@@ -3589,15 +3589,15 @@ snapshots:
 
   '@types/keyv@3.1.4':
     dependencies:
-      '@types/node': 20.16.4
+      '@types/node': 20.16.5
 
-  '@types/node@20.16.4':
+  '@types/node@20.16.5':
     dependencies:
       undici-types: 6.19.6
 
   '@types/responselike@1.0.3':
     dependencies:
-      '@types/node': 20.16.4
+      '@types/node': 20.16.5
 
   '@types/semver@7.5.8': {}
 
@@ -5059,7 +5059,7 @@ snapshots:
   normalize-package-data@6.0.0:
     dependencies:
       hosted-git-info: 7.0.1
-      is-core-module: 2.13.1
+      is-core-module: 2.15.1
       semver: 7.6.3
       validate-npm-package-license: 3.0.4
 
@@ -5297,7 +5297,7 @@ snapshots:
       '@protobufjs/path': 1.1.2
       '@protobufjs/pool': 1.1.0
       '@protobufjs/utf8': 1.1.0
-      '@types/node': 20.16.4
+      '@types/node': 20.16.5
       long: 5.2.3
 
   pump@3.0.0:
