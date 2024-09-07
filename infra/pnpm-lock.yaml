@@ -24,8 +24,8 @@ importers:
         specifier: 1.1.4
         version: 1.1.4(ts-node@7.0.1)(typescript@5.5.4)
       '@pulumi/aws':
-        specifier: 6.50.1
-        version: 6.50.1(ts-node@7.0.1)(typescript@5.5.4)
+        specifier: 6.51.0
+        version: 6.51.0(ts-node@7.0.1)(typescript@5.5.4)
       '@pulumi/azure-native':
         specifier: 2.59.0
         version: 2.59.0(ts-node@7.0.1)(typescript@5.5.4)
@@ -131,8 +131,8 @@ importers:
         specifier: 1.1.4
         version: 1.1.4(ts-node@7.0.1)(typescript@5.5.4)
       '@pulumi/aws':
-        specifier: 6.50.1
-        version: 6.50.1(ts-node@7.0.1)(typescript@5.5.4)
+        specifier: 6.51.0
+        version: 6.51.0(ts-node@7.0.1)(typescript@5.5.4)
       '@pulumi/azure-native':
         specifier: 2.59.0
         version: 2.59.0(ts-node@7.0.1)(typescript@5.5.4)
@@ -189,8 +189,8 @@ importers:
         specifier: 1.1.4
         version: 1.1.4(ts-node@7.0.1)(typescript@5.5.4)
       '@pulumi/aws':
-        specifier: 6.50.1
-        version: 6.50.1(ts-node@7.0.1)(typescript@5.5.4)
+        specifier: 6.51.0
+        version: 6.51.0(ts-node@7.0.1)(typescript@5.5.4)
       '@pulumi/azure-native':
         specifier: 2.59.0
         version: 2.59.0(ts-node@7.0.1)(typescript@5.5.4)
@@ -323,8 +323,8 @@ importers:
         specifier: 1.1.4
         version: 1.1.4(ts-node@7.0.1)(typescript@5.5.4)
       '@pulumi/aws':
-        specifier: 6.50.1
-        version: 6.50.1(ts-node@7.0.1)(typescript@5.5.4)
+        specifier: 6.51.0
+        version: 6.51.0(ts-node@7.0.1)(typescript@5.5.4)
       '@pulumi/azure-native':
         specifier: 2.59.0
         version: 2.59.0(ts-node@7.0.1)(typescript@5.5.4)
@@ -775,8 +775,8 @@ packages:
   '@protobufjs/utf8@1.1.0':
     resolution: {integrity: sha512-Vvn3zZrhQZkkBE8LSuW3em98c0FwgO4nxzv6OdSxPKJIEKY2bGbHn+mhGIPerzI4twdxaP8/0+06HBpwf345Lw==}
 
-  '@pulumi/aws@6.50.1':
-    resolution: {integrity: sha512-PzU8DnOsLCFgqeV7eFSrmcyqos2ilsuuRNbGLxP9pP1dXhsBvXoLFVyLNdTuI+zDG58fOmC2c7KsXXuyo3vjvg==}
+  '@pulumi/aws@6.51.0':
+    resolution: {integrity: sha512-t2aduFqp8CVZ5axGbBGwKZUjMb8y3YC1iVLgaW5wh/eHW2AYEgz9u+weqkte5c43v16QIfV15bXBy6j/fkVQOg==}
 
   '@pulumi/azure-native@2.59.0':
     resolution: {integrity: sha512-4iMuIS9fvGmDE/06By2QBMEcFbh+qJZXOIGGnPHQhlZcoJrpyoRjAanB5ljklk/nTaK9w2mzWf8tN9FcFpYr3g==}
@@ -1788,10 +1788,6 @@ packages:
   has-unicode@2.0.1:
     resolution: {integrity: sha512-8Rf9Y83NBReMnx0gFzA8JImQACstCYWUplepDa9xprwwtmgEZUF0h/i5xSA625zB/I37EtrswSST6OXxwaaIJQ==}
 
-  hasown@2.0.0:
-    resolution: {integrity: sha512-vUptKVTpIJhcczKBbgnS+RtcuYMB8+oNzPK2/Hp3hanz8JmpATdmmgLgSaadVREkDm+e2giHwY3ZRkyjSIDDFA==}
-    engines: {node: '>= 0.4'}
-
   hasown@2.0.2:
     resolution: {integrity: sha512-0hJU9SCPvmMzIBdZFqNPXWa6dqh7WdH0cII9y+CyS8rG3nL48Bclra9HmKhVVUHyPWNH5Y7xDwAB7bfgSjkUMQ==}
     engines: {node: '>= 0.4'}
@@ -1893,9 +1889,6 @@ packages:
   is-callable@1.2.7:
     resolution: {integrity: sha512-1BC0BVFhS/p0qtw6enp8e+8OD0UrK0oFLztSjNzhcKA3WDuJxxAPXzPuPtKkjEY9UUoEWlX/8fgKeu2S8i9JTA==}
     engines: {node: '>= 0.4'}
-
-  is-core-module@2.13.1:
-    resolution: {integrity: sha512-hHrIjvZsftOsvKSn2TRYl63zvxsgE0K+0mYMoH6gD4omR5IWB2KynivBQczo3+wF1cCkjzvptnI9Q0sPU66ilw==}
 
   is-core-module@2.15.1:
     resolution: {integrity: sha512-z0vtXSwucUJtANQWldhbtbt7BnL0vxiFjIdDLAatwhDYty2bad6s+rijD6Ri4YuYJubLzIJLUidCh09e1djEVQ==}
@@ -3380,7 +3373,7 @@ snapshots:
 
   '@protobufjs/utf8@1.1.0': {}
 
-  '@pulumi/aws@6.50.1(ts-node@7.0.1)(typescript@5.5.4)':
+  '@pulumi/aws@6.51.0(ts-node@7.0.1)(typescript@5.5.4)':
     dependencies:
       '@pulumi/pulumi': 3.131.0(ts-node@7.0.1)(typescript@5.5.4)
       builtin-modules: 3.0.0
@@ -4653,10 +4646,6 @@ snapshots:
 
   has-unicode@2.0.1: {}
 
-  hasown@2.0.0:
-    dependencies:
-      function-bind: 1.1.2
-
   hasown@2.0.2:
     dependencies:
       function-bind: 1.1.2
@@ -4770,10 +4759,6 @@ snapshots:
       semver: 7.6.3
 
   is-callable@1.2.7: {}
-
-  is-core-module@2.13.1:
-    dependencies:
-      hasown: 2.0.0
 
   is-core-module@2.15.1:
     dependencies:
@@ -5364,7 +5349,7 @@ snapshots:
 
   resolve@1.22.8:
     dependencies:
-      is-core-module: 2.13.1
+      is-core-module: 2.15.1
       path-parse: 1.0.7
       supports-preserve-symlinks-flag: 1.0.0
 
