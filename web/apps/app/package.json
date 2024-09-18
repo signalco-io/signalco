@@ -33,7 +33,7 @@
         "@hcaptcha/react-hcaptcha": "1.11.0",
         "@microsoft/signalr": "8.0.7",
         "@monaco-editor/react": "4.6.0",
-        "@next/env": "14.2.8",
+        "@next/env": "14.2.12",
         "@signalco/data": "workspace:*",
         "@signalco/hooks": "workspace:*",
         "@signalco/js": "workspace:*",
