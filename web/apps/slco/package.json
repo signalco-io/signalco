@@ -46,7 +46,7 @@
         "@types/node": "22.5.5",
         "@types/react": "18.3.5",
         "@types/react-dom": "18.3.0",
-        "eslint": "8.57.0",
+        "eslint": "8.57.1",
         "next-sitemap": "4.2.3",
         "postcss": "8.4.47",
         "sass": "1.78.0",

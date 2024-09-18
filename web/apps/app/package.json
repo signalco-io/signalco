@@ -89,7 +89,7 @@
         "@types/suncalc": "1.9.2",
         "@types/uuid": "10.0.0",
         "colorette": "2.0.20",
-        "eslint": "8.57.0",
+        "eslint": "8.57.1",
         "fs-extra": "11.2.0",
         "next-sitemap": "4.2.3",
         "openapi-types": "12.1.3",
