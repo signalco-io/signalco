@@ -44,7 +44,7 @@
         "@types/react-timeago": "4.1.7",
         "autoprefixer": "10.4.20",
         "classix": "2.1.38",
-        "next": "14.2.8",
+        "next": "14.2.10",
         "postcss": "8.4.45",
         "postcss-preset-env": "10.0.3",
         "react": "18.3.1",
