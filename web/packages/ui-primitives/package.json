@@ -24,7 +24,7 @@
         "prepublishOnly": "tsup --env.NODE_ENV production"
     },
     "devDependencies": {
-        "@microsoft/api-extractor": "7.47.7",
+        "@microsoft/api-extractor": "7.47.9",
         "@radix-ui/react-checkbox": "1.1.1",
         "@radix-ui/react-dialog": "1.1.1",
         "@radix-ui/react-dropdown-menu": "2.1.1",
