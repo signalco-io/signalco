@@ -91,10 +91,10 @@ importers:
         version: 5.56.2(@tanstack/react-query@5.56.2(react@18.3.1))(react@18.3.1)
       '@vercel/analytics':
         specifier: 1.3.1
-        version: 1.3.1(next@14.2.10(@babel/core@7.25.2)(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.78.0))(react@18.3.1)
+        version: 1.3.1(next@14.2.10(@babel/core@7.25.2)(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.79.1))(react@18.3.1)
       '@vercel/speed-insights':
         specifier: 1.0.12
-        version: 1.0.12(next@14.2.10(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.78.0))(react@18.3.1)
+        version: 1.0.12(next@14.2.10(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.79.1))(react@18.3.1)
       '@vvo/tzdb':
         specifier: 6.145.0
         version: 6.145.0
@@ -127,7 +127,7 @@ importers:
         version: 0.51.0
       next:
         specifier: 14.2.10
-        version: 14.2.10(@babel/core@7.25.2)(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.78.0)
+        version: 14.2.10(@babel/core@7.25.2)(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.79.1)
       next-secure-headers:
         specifier: 2.2.0
         version: 2.2.0
@@ -224,7 +224,7 @@ importers:
         version: 11.2.0
       next-sitemap:
         specifier: 4.2.3
-        version: 4.2.3(next@14.2.10(@babel/core@7.25.2)(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.78.0))
+        version: 4.2.3(next@14.2.10(@babel/core@7.25.2)(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.79.1))
       openapi-types:
         specifier: 12.1.3
         version: 12.1.3
@@ -235,11 +235,11 @@ importers:
         specifier: 18.3.1
         version: 18.3.1
       sass:
-        specifier: 1.78.0
-        version: 1.78.0
+        specifier: 1.79.1
+        version: 1.79.1
       sass-loader:
         specifier: 16.0.1
-        version: 16.0.1(sass@1.78.0)(webpack@5.94.0)
+        version: 16.0.1(sass@1.79.1)(webpack@5.94.0)
       typescript:
         specifier: 5.6.2
         version: 5.6.2
@@ -287,7 +287,7 @@ importers:
         version: link:../../packages/ui-themes-minimal
       '@vercel/analytics':
         specifier: 1.3.1
-        version: 1.3.1(next@14.2.10(@babel/core@7.25.2)(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.78.0))(react@18.3.1)
+        version: 1.3.1(next@14.2.10(@babel/core@7.25.2)(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.79.1))(react@18.3.1)
       autoprefixer:
         specifier: 10.4.20
         version: 10.4.20(postcss@8.4.47)
@@ -296,7 +296,7 @@ importers:
         version: 2.1.38
       next:
         specifier: 14.2.10
-        version: 14.2.10(@babel/core@7.25.2)(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.78.0)
+        version: 14.2.10(@babel/core@7.25.2)(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.79.1)
       next-secure-headers:
         specifier: 2.2.0
         version: 2.2.0
@@ -351,13 +351,13 @@ importers:
         version: 8.57.1
       next-sitemap:
         specifier: 4.2.3
-        version: 4.2.3(next@14.2.10(@babel/core@7.25.2)(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.78.0))
+        version: 4.2.3(next@14.2.10(@babel/core@7.25.2)(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.79.1))
       postcss:
         specifier: 8.4.47
         version: 8.4.47
       sass:
-        specifier: 1.78.0
-        version: 1.78.0
+        specifier: 1.79.1
+        version: 1.79.1
       typescript:
         specifier: 5.6.2
         version: 5.6.2
@@ -405,7 +405,7 @@ importers:
         version: 2.1.38
       next:
         specifier: 14.2.10
-        version: 14.2.10(@babel/core@7.25.2)(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.78.0)
+        version: 14.2.10(@babel/core@7.25.2)(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.79.1)
       next-secure-headers:
         specifier: 2.2.0
         version: 2.2.0
@@ -448,13 +448,13 @@ importers:
         version: 8.57.1
       next-sitemap:
         specifier: 4.2.3
-        version: 4.2.3(next@14.2.10(@babel/core@7.25.2)(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.78.0))
+        version: 4.2.3(next@14.2.10(@babel/core@7.25.2)(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.79.1))
       postcss:
         specifier: 8.4.47
         version: 8.4.47
       sass:
-        specifier: 1.78.0
-        version: 1.78.0
+        specifier: 1.79.1
+        version: 1.79.1
       tailwindcss:
         specifier: 3.4.12
         version: 3.4.12
@@ -547,7 +547,7 @@ importers:
         version: 5.56.2(@tanstack/react-query@5.56.2(react@18.3.1))(react@18.3.1)
       '@vercel/analytics':
         specifier: 1.3.1
-        version: 1.3.1(next@14.2.10(@babel/core@7.25.2)(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.78.0))(react@18.3.1)
+        version: 1.3.1(next@14.2.10(@babel/core@7.25.2)(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.79.1))(react@18.3.1)
       classix:
         specifier: 2.1.38
         version: 2.1.38
@@ -556,7 +556,7 @@ importers:
         version: 5.0.7
       next:
         specifier: 14.2.10
-        version: 14.2.10(@babel/core@7.25.2)(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.78.0)
+        version: 14.2.10(@babel/core@7.25.2)(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.79.1)
       next-secure-headers:
         specifier: 2.2.0
         version: 2.2.0
@@ -614,13 +614,13 @@ importers:
         version: 8.57.1
       next-sitemap:
         specifier: 4.2.3
-        version: 4.2.3(next@14.2.10(@babel/core@7.25.2)(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.78.0))
+        version: 4.2.3(next@14.2.10(@babel/core@7.25.2)(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.79.1))
       postcss:
         specifier: 8.4.47
         version: 8.4.47
       sass:
-        specifier: 1.78.0
-        version: 1.78.0
+        specifier: 1.79.1
+        version: 1.79.1
       typescript:
         specifier: 5.6.2
         version: 5.6.2
@@ -659,7 +659,7 @@ importers:
         version: 2.1.38
       next:
         specifier: 14.2.10
-        version: 14.2.10(@babel/core@7.25.2)(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.78.0)
+        version: 14.2.10(@babel/core@7.25.2)(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.79.1)
       next-secure-headers:
         specifier: 2.2.0
         version: 2.2.0
@@ -711,13 +711,13 @@ importers:
         version: 8.57.1
       next-sitemap:
         specifier: 4.2.3
-        version: 4.2.3(next@14.2.10(@babel/core@7.25.2)(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.78.0))
+        version: 4.2.3(next@14.2.10(@babel/core@7.25.2)(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.79.1))
       postcss:
         specifier: 8.4.47
         version: 8.4.47
       sass:
-        specifier: 1.78.0
-        version: 1.78.0
+        specifier: 1.79.1
+        version: 1.79.1
       typescript:
         specifier: 5.6.2
         version: 5.6.2
@@ -763,7 +763,7 @@ importers:
         version: 8.3.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.3.1)(typescript@5.6.2)
       '@storybook/react-vite':
         specifier: 8.3.1
-        version: 8.3.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@4.21.2)(storybook@8.3.1)(typescript@5.6.2)(vite@5.4.2(@types/node@22.5.5)(sass@1.78.0)(terser@5.31.6))
+        version: 8.3.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@4.21.2)(storybook@8.3.1)(typescript@5.6.2)(vite@5.4.2(@types/node@22.5.5)(sass@1.79.1)(terser@5.31.6))
       '@storybook/theming':
         specifier: 8.3.1
         version: 8.3.1(storybook@8.3.1)
@@ -789,11 +789,11 @@ importers:
         specifier: 6.0.1
         version: 6.0.1
       sass:
-        specifier: 1.78.0
-        version: 1.78.0
+        specifier: 1.79.1
+        version: 1.79.1
       sass-loader:
         specifier: 16.0.1
-        version: 16.0.1(sass@1.78.0)(webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.12))(esbuild@0.23.0))
+        version: 16.0.1(sass@1.79.1)(webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.12))(esbuild@0.23.0))
       storybook:
         specifier: 8.3.1
         version: 8.3.1
@@ -862,13 +862,13 @@ importers:
         version: 5.56.2(@tanstack/react-query@5.56.2(react@18.3.1))(react@18.3.1)
       '@vercel/analytics':
         specifier: 1.3.1
-        version: 1.3.1(next@14.2.10(@babel/core@7.25.2)(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.78.0))(react@18.3.1)
+        version: 1.3.1(next@14.2.10(@babel/core@7.25.2)(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.79.1))(react@18.3.1)
       classix:
         specifier: 2.1.38
         version: 2.1.38
       next:
         specifier: 14.2.10
-        version: 14.2.10(@babel/core@7.25.2)(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.78.0)
+        version: 14.2.10(@babel/core@7.25.2)(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.79.1)
       next-secure-headers:
         specifier: 2.2.0
         version: 2.2.0
@@ -923,13 +923,13 @@ importers:
         version: 8.57.1
       next-sitemap:
         specifier: 4.2.3
-        version: 4.2.3(next@14.2.10(@babel/core@7.25.2)(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.78.0))
+        version: 4.2.3(next@14.2.10(@babel/core@7.25.2)(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.79.1))
       postcss:
         specifier: 8.4.47
         version: 8.4.47
       sass:
-        specifier: 1.78.0
-        version: 1.78.0
+        specifier: 1.79.1
+        version: 1.79.1
       typescript:
         specifier: 5.6.2
         version: 5.6.2
@@ -986,7 +986,7 @@ importers:
         version: 0.5.15(tailwindcss@3.4.12)
       '@vercel/analytics':
         specifier: 1.3.1
-        version: 1.3.1(next@14.2.10(@babel/core@7.25.2)(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.78.0))(react@18.3.1)
+        version: 1.3.1(next@14.2.10(@babel/core@7.25.2)(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.79.1))(react@18.3.1)
       autoprefixer:
         specifier: 10.4.20
         version: 10.4.20(postcss@8.4.47)
@@ -995,7 +995,7 @@ importers:
         version: 2.1.38
       next:
         specifier: 14.2.10
-        version: 14.2.10(@babel/core@7.25.2)(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.78.0)
+        version: 14.2.10(@babel/core@7.25.2)(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.79.1)
       next-secure-headers:
         specifier: 2.2.0
         version: 2.2.0
@@ -1059,7 +1059,7 @@ importers:
         version: 8.57.1
       next-sitemap:
         specifier: 4.2.3
-        version: 4.2.3(next@14.2.10(@babel/core@7.25.2)(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.78.0))
+        version: 4.2.3(next@14.2.10(@babel/core@7.25.2)(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.79.1))
       openapi-types:
         specifier: 12.1.3
         version: 12.1.3
@@ -1067,8 +1067,8 @@ importers:
         specifier: 8.4.47
         version: 8.4.47
       sass:
-        specifier: 1.78.0
-        version: 1.78.0
+        specifier: 1.79.1
+        version: 1.79.1
       typescript:
         specifier: 5.6.2
         version: 5.6.2
@@ -1149,7 +1149,7 @@ importers:
         version: 5.56.2(@tanstack/react-query@5.56.2(react@18.3.1))(react@18.3.1)
       '@vercel/analytics':
         specifier: 1.3.1
-        version: 1.3.1(next@14.2.10(@babel/core@7.25.2)(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.78.0))(react@18.3.1)
+        version: 1.3.1(next@14.2.10(@babel/core@7.25.2)(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.79.1))(react@18.3.1)
       classix:
         specifier: 2.1.38
         version: 2.1.38
@@ -1161,7 +1161,7 @@ importers:
         version: 5.0.7
       next:
         specifier: 14.2.10
-        version: 14.2.10(@babel/core@7.25.2)(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.78.0)
+        version: 14.2.10(@babel/core@7.25.2)(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.79.1)
       next-secure-headers:
         specifier: 2.2.0
         version: 2.2.0
@@ -1179,7 +1179,7 @@ importers:
         version: 18.3.1(react@18.3.1)
       react-email:
         specifier: 3.0.1
-        version: 3.0.1(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.78.0)
+        version: 3.0.1(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.79.1)
       react-markdown:
         specifier: 9.0.1
         version: 9.0.1(@types/react@18.3.5)(react@18.3.1)
@@ -1228,13 +1228,13 @@ importers:
         version: 8.57.1
       next-sitemap:
         specifier: 4.2.3
-        version: 4.2.3(next@14.2.10(@babel/core@7.25.2)(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.78.0))
+        version: 4.2.3(next@14.2.10(@babel/core@7.25.2)(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.79.1))
       postcss:
         specifier: 8.4.47
         version: 8.4.47
       sass:
-        specifier: 1.78.0
-        version: 1.78.0
+        specifier: 1.79.1
+        version: 1.79.1
       typescript:
         specifier: 5.6.2
         version: 5.6.2
@@ -1267,7 +1267,7 @@ importers:
         version: 18.3.0
       next:
         specifier: 14.2.10
-        version: 14.2.10(@babel/core@7.25.2)(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.78.0)
+        version: 14.2.10(@babel/core@7.25.2)(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.79.1)
       react:
         specifier: 18.3.1
         version: 18.3.1
@@ -1297,7 +1297,7 @@ importers:
         version: 5.8.0
       next:
         specifier: 14.2.10
-        version: 14.2.10(@babel/core@7.25.2)(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.78.0)
+        version: 14.2.10(@babel/core@7.25.2)(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.79.1)
       react:
         specifier: 18.3.1
         version: 18.3.1
@@ -1399,7 +1399,7 @@ importers:
         version: 18.3.1
       react-email:
         specifier: 3.0.1
-        version: 3.0.1(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.78.0)
+        version: 3.0.1(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.79.1)
       typescript:
         specifier: 5.6.2
         version: 5.6.2
@@ -1469,7 +1469,7 @@ importers:
         version: 18.3.5
       next:
         specifier: 14.2.10
-        version: 14.2.10(@babel/core@7.25.2)(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.78.0)
+        version: 14.2.10(@babel/core@7.25.2)(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.79.1)
       react:
         specifier: 18.3.1
         version: 18.3.1
@@ -1602,8 +1602,8 @@ importers:
         specifier: 7.2.0
         version: 7.2.0(react@18.3.1)
       sass:
-        specifier: 1.78.0
-        version: 1.78.0
+        specifier: 1.79.1
+        version: 1.79.1
       tailwind-merge:
         specifier: 2.5.2
         version: 2.5.2
@@ -1777,7 +1777,7 @@ importers:
         version: 2.1.38
       next:
         specifier: 14.2.10
-        version: 14.2.10(@babel/core@7.25.2)(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.78.0)
+        version: 14.2.10(@babel/core@7.25.2)(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.79.1)
       postcss:
         specifier: 8.4.47
         version: 8.4.47
@@ -1794,8 +1794,8 @@ importers:
         specifier: 7.2.0
         version: 7.2.0(react@18.3.1)
       sass:
-        specifier: 1.78.0
-        version: 1.78.0
+        specifier: 1.79.1
+        version: 1.79.1
       tailwind-merge:
         specifier: 2.5.2
         version: 2.5.2
@@ -1916,8 +1916,8 @@ importers:
         specifier: 7.2.0
         version: 7.2.0(react@18.3.1)
       sass:
-        specifier: 1.78.0
-        version: 1.78.0
+        specifier: 1.79.1
+        version: 1.79.1
       tailwindcss:
         specifier: 3.4.12
         version: 3.4.12
@@ -5174,6 +5174,10 @@ packages:
     resolution: {integrity: sha512-7VT13fmjotKpGipCW9JEQAusEPE+Ei8nl6/g4FBAmIm0GOOLMua9NDDo/DWp0ZAxCr3cPq5ZpBqmPAQgDda2Pw==}
     engines: {node: '>= 8.10.0'}
 
+  chokidar@4.0.0:
+    resolution: {integrity: sha512-mxIojEAQcuEvT/lyXq+jf/3cO/KoA6z4CeNDGGevTybECPOMFCnQy3OPahluUkbqgPNGw5Bi78UC7Po6Lhy+NA==}
+    engines: {node: '>= 14.16.0'}
+
   chrome-trace-event@1.0.4:
     resolution: {integrity: sha512-rNjApaLzuwaOTjCiT8lSDdGN1APCiqkChLMJxJPWLunPAt5fy8xgU9/jNOchV84wfIxrA0lRQB7oCT8jrn/wrQ==}
     engines: {node: '>=6.0'}
@@ -8064,6 +8068,10 @@ packages:
     resolution: {integrity: sha512-hOS089on8RduqdbhvQ5Z37A0ESjsqz6qnRcffsMU3495FuTdqSm+7bhJ29JvIOsBDEEnan5DPu9t3To9VRlMzA==}
     engines: {node: '>=8.10.0'}
 
+  readdirp@4.0.1:
+    resolution: {integrity: sha512-GkMg9uOTpIWWKbSsgwb5fA4EavTR+SG/PMPoAY8hkhHfEEY0/vqljY+XHqtDf2cr2IJtoNRDbrrEpZUiZCkYRw==}
+    engines: {node: '>= 14.16.0'}
+
   recast@0.23.9:
     resolution: {integrity: sha512-Hx/BGIbwj+Des3+xy5uAtAbdCyqK9y9wbBcDFDYanLS9JnMqf7OeF87HQwUimE87OEc72mr6tkKUKMBBL+hF9Q==}
     engines: {node: '>= 4'}
@@ -8237,8 +8245,8 @@ packages:
       webpack:
         optional: true
 
-  sass@1.78.0:
-    resolution: {integrity: sha512-AaIqGSrjo5lA2Yg7RvFZrlXDBCp3nV4XP73GrLGvdRWWwk+8H3l0SDvq/5bA4eF+0RFPLuWUk3E+P1U/YqnpsQ==}
+  sass@1.79.1:
+    resolution: {integrity: sha512-+mA7svoNKeL0DiJqZGeR/ZGUu8he4I8o3jyUcOFyo4eBJrwNgIMmAEwCMo/N2Y3wdjOBcRzoNxZIOtrtMX8EXg==}
     engines: {node: '>=14.0.0'}
     hasBin: true
 
@@ -10205,13 +10213,13 @@ snapshots:
       wrap-ansi: 8.1.0
       wrap-ansi-cjs: wrap-ansi@7.0.0
 
-  '@joshwooding/vite-plugin-react-docgen-typescript@0.3.1(typescript@5.6.2)(vite@5.4.2(@types/node@22.5.5)(sass@1.78.0)(terser@5.31.6))':
+  '@joshwooding/vite-plugin-react-docgen-typescript@0.3.1(typescript@5.6.2)(vite@5.4.2(@types/node@22.5.5)(sass@1.79.1)(terser@5.31.6))':
     dependencies:
       glob: 7.2.3
       glob-promise: 4.2.2(glob@7.2.3)
       magic-string: 0.27.0
       react-docgen-typescript: 2.2.2(typescript@5.6.2)
-      vite: 5.4.2(@types/node@22.5.5)(sass@1.78.0)(terser@5.31.6)
+      vite: 5.4.2(@types/node@22.5.5)(sass@1.79.1)(terser@5.31.6)
     optionalDependencies:
       typescript: 5.6.2
 
@@ -11370,7 +11378,7 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  '@storybook/builder-vite@8.3.1(storybook@8.3.1)(typescript@5.6.2)(vite@5.4.2(@types/node@22.5.5)(sass@1.78.0)(terser@5.31.6))':
+  '@storybook/builder-vite@8.3.1(storybook@8.3.1)(typescript@5.6.2)(vite@5.4.2(@types/node@22.5.5)(sass@1.79.1)(terser@5.31.6))':
     dependencies:
       '@storybook/csf-plugin': 8.3.1(storybook@8.3.1)
       '@types/find-cache-dir': 3.2.1
@@ -11382,7 +11390,7 @@ snapshots:
       magic-string: 0.30.10
       storybook: 8.3.1
       ts-dedent: 2.2.0
-      vite: 5.4.2(@types/node@22.5.5)(sass@1.78.0)(terser@5.31.6)
+      vite: 5.4.2(@types/node@22.5.5)(sass@1.79.1)(terser@5.31.6)
     optionalDependencies:
       typescript: 5.6.2
     transitivePeerDependencies:
@@ -11442,11 +11450,11 @@ snapshots:
       react-dom: 18.3.1(react@18.3.1)
       storybook: 8.3.1
 
-  '@storybook/react-vite@8.3.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@4.21.2)(storybook@8.3.1)(typescript@5.6.2)(vite@5.4.2(@types/node@22.5.5)(sass@1.78.0)(terser@5.31.6))':
+  '@storybook/react-vite@8.3.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@4.21.2)(storybook@8.3.1)(typescript@5.6.2)(vite@5.4.2(@types/node@22.5.5)(sass@1.79.1)(terser@5.31.6))':
     dependencies:
-      '@joshwooding/vite-plugin-react-docgen-typescript': 0.3.1(typescript@5.6.2)(vite@5.4.2(@types/node@22.5.5)(sass@1.78.0)(terser@5.31.6))
+      '@joshwooding/vite-plugin-react-docgen-typescript': 0.3.1(typescript@5.6.2)(vite@5.4.2(@types/node@22.5.5)(sass@1.79.1)(terser@5.31.6))
       '@rollup/pluginutils': 5.1.0(rollup@4.21.2)
-      '@storybook/builder-vite': 8.3.1(storybook@8.3.1)(typescript@5.6.2)(vite@5.4.2(@types/node@22.5.5)(sass@1.78.0)(terser@5.31.6))
+      '@storybook/builder-vite': 8.3.1(storybook@8.3.1)(typescript@5.6.2)(vite@5.4.2(@types/node@22.5.5)(sass@1.79.1)(terser@5.31.6))
       '@storybook/react': 8.3.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.3.1)(typescript@5.6.2)
       find-up: 5.0.0
       magic-string: 0.30.10
@@ -11456,7 +11464,7 @@ snapshots:
       resolve: 1.22.8
       storybook: 8.3.1
       tsconfig-paths: 4.2.0
-      vite: 5.4.2(@types/node@22.5.5)(sass@1.78.0)(terser@5.31.6)
+      vite: 5.4.2(@types/node@22.5.5)(sass@1.79.1)(terser@5.31.6)
     transitivePeerDependencies:
       - '@preact/preset-vite'
       - '@storybook/test'
@@ -12121,16 +12129,16 @@ snapshots:
 
   '@ungap/structured-clone@1.2.0': {}
 
-  '@vercel/analytics@1.3.1(next@14.2.10(@babel/core@7.25.2)(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.78.0))(react@18.3.1)':
+  '@vercel/analytics@1.3.1(next@14.2.10(@babel/core@7.25.2)(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.79.1))(react@18.3.1)':
     dependencies:
       server-only: 0.0.1
     optionalDependencies:
-      next: 14.2.10(@babel/core@7.25.2)(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.78.0)
+      next: 14.2.10(@babel/core@7.25.2)(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.79.1)
       react: 18.3.1
 
-  '@vercel/speed-insights@1.0.12(next@14.2.10(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.78.0))(react@18.3.1)':
+  '@vercel/speed-insights@1.0.12(next@14.2.10(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.79.1))(react@18.3.1)':
     optionalDependencies:
-      next: 14.2.10(@babel/core@7.25.2)(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.78.0)
+      next: 14.2.10(@babel/core@7.25.2)(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.79.1)
       react: 18.3.1
 
   '@vvo/tzdb@6.145.0': {}
@@ -12599,6 +12607,10 @@ snapshots:
       readdirp: 3.6.0
     optionalDependencies:
       fsevents: 2.3.3
+
+  chokidar@4.0.0:
+    dependencies:
+      readdirp: 4.0.1
 
   chrome-trace-event@1.0.4: {}
 
@@ -15272,20 +15284,20 @@ snapshots:
 
   next-secure-headers@2.2.0: {}
 
-  next-sitemap@4.2.3(next@14.2.10(@babel/core@7.25.2)(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.78.0)):
+  next-sitemap@4.2.3(next@14.2.10(@babel/core@7.25.2)(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.79.1)):
     dependencies:
       '@corex/deepmerge': 4.0.43
       '@next/env': 13.5.6
       fast-glob: 3.3.2
       minimist: 1.2.8
-      next: 14.2.10(@babel/core@7.25.2)(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.78.0)
+      next: 14.2.10(@babel/core@7.25.2)(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.79.1)
 
   next-themes@0.3.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  next@14.2.10(@babel/core@7.25.2)(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.78.0):
+  next@14.2.10(@babel/core@7.25.2)(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.79.1):
     dependencies:
       '@next/env': 14.2.10
       '@swc/helpers': 0.5.5
@@ -15307,12 +15319,12 @@ snapshots:
       '@next/swc-win32-ia32-msvc': 14.2.10
       '@next/swc-win32-x64-msvc': 14.2.10
       '@playwright/test': 1.47.1
-      sass: 1.78.0
+      sass: 1.79.1
     transitivePeerDependencies:
       - '@babel/core'
       - babel-plugin-macros
 
-  next@14.2.3(@babel/core@7.24.5)(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.78.0):
+  next@14.2.3(@babel/core@7.24.5)(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.79.1):
     dependencies:
       '@next/env': 14.2.3
       '@swc/helpers': 0.5.5
@@ -15334,7 +15346,7 @@ snapshots:
       '@next/swc-win32-ia32-msvc': 14.2.3
       '@next/swc-win32-x64-msvc': 14.2.3
       '@playwright/test': 1.47.1
-      sass: 1.78.0
+      sass: 1.79.1
     transitivePeerDependencies:
       - '@babel/core'
       - babel-plugin-macros
@@ -16140,7 +16152,7 @@ snapshots:
       react-dom: 18.3.1(react@18.3.1)
       react-is: 18.1.0
 
-  react-email@3.0.1(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.78.0):
+  react-email@3.0.1(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.79.1):
     dependencies:
       '@babel/core': 7.24.5
       '@babel/parser': 7.24.5
@@ -16152,7 +16164,7 @@ snapshots:
       glob: 10.3.4
       log-symbols: 4.1.0
       mime-types: 2.1.35
-      next: 14.2.3(@babel/core@7.24.5)(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.78.0)
+      next: 14.2.3(@babel/core@7.24.5)(@playwright/test@1.47.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.79.1)
       normalize-path: 3.0.0
       ora: 5.4.1
       socket.io: 4.7.5
@@ -16309,6 +16321,8 @@ snapshots:
   readdirp@3.6.0:
     dependencies:
       picomatch: 2.3.1
+
+  readdirp@4.0.1: {}
 
   recast@0.23.9:
     dependencies:
@@ -16566,25 +16580,25 @@ snapshots:
 
   safer-buffer@2.1.2: {}
 
-  sass-loader@16.0.1(sass@1.78.0)(webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.12))(esbuild@0.23.0)):
+  sass-loader@16.0.1(sass@1.79.1)(webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.12))(esbuild@0.23.0)):
     dependencies:
       neo-async: 2.6.2
     optionalDependencies:
-      sass: 1.78.0
+      sass: 1.79.1
       webpack: 5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.12))(esbuild@0.23.0)
 
-  sass-loader@16.0.1(sass@1.78.0)(webpack@5.94.0):
+  sass-loader@16.0.1(sass@1.79.1)(webpack@5.94.0):
     dependencies:
       neo-async: 2.6.2
     optionalDependencies:
-      sass: 1.78.0
+      sass: 1.79.1
       webpack: 5.94.0
 
-  sass@1.78.0:
+  sass@1.79.1:
     dependencies:
-      chokidar: 3.6.0
+      chokidar: 4.0.0
       immutable: 4.3.5
-      source-map-js: 1.2.0
+      source-map-js: 1.2.1
 
   scheduler@0.23.2:
     dependencies:
@@ -17470,7 +17484,7 @@ snapshots:
       d3-time: 3.1.0
       d3-timer: 3.0.1
 
-  vite@5.4.2(@types/node@22.5.5)(sass@1.78.0)(terser@5.31.6):
+  vite@5.4.2(@types/node@22.5.5)(sass@1.79.1)(terser@5.31.6):
     dependencies:
       esbuild: 0.21.5
       postcss: 8.4.47
@@ -17478,7 +17492,7 @@ snapshots:
     optionalDependencies:
       '@types/node': 22.5.5
       fsevents: 2.3.3
-      sass: 1.78.0
+      sass: 1.79.1
       terser: 5.31.6
 
   w3c-keyname@2.2.8: {}
