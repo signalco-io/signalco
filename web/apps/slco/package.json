@@ -19,7 +19,7 @@
     },
     "dependencies": {
         "@hcaptcha/react-hcaptcha": "1.11.0",
-        "@next/env": "14.2.12",
+        "@next/env": "14.2.13",
         "@signalco/cms-components-marketing": "workspace:*",
         "@signalco/cms-core": "workspace:*",
         "@signalco/data": "workspace:*",
