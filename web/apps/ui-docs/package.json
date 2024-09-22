@@ -22,7 +22,7 @@
     "@storybook/react": "8.3.1",
     "@storybook/react-vite": "8.3.1",
     "@storybook/theming": "8.3.1",
-    "@types/react": "18.3.5",
+    "@types/react": "18.3.8",
     "@types/react-dom": "18.3.0",
     "autoprefixer": "10.4.20",
     "css-loader": "7.1.2",

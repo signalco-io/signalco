@@ -15,7 +15,7 @@
     "@signalco/eslint-config-signalco": "workspace:*",
     "@signalco/js": "workspace:*",
     "@signalco/tsconfig": "workspace:*",
-    "@types/react": "18.3.5",
+    "@types/react": "18.3.8",
     "jose": "5.8.0",
     "next": "14.2.10",
     "react": "18.3.1",
