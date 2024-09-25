@@ -17,14 +17,14 @@
     "@signalco/tsconfig": "workspace:*",
     "@types/react": "18.3.9",
     "jose": "5.9.3",
-    "next": "14.2.10",
+    "next": "14.2.11",
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "typescript": "5.6.2"
   },
   "peerDependencies": {
     "jose": ">=5",
-    "next": ">=14.2.10",
+    "next": ">=14.2.11",
     "react": ">=18",
     "react-dom": ">=18"
   }

@@ -29,14 +29,14 @@
         "@signalco/js": "workspace:*",
         "@signalco/tsconfig": "workspace:*",
         "@types/react": "18.3.9",
-        "next": "14.2.10",
+        "next": "14.2.11",
         "react": "18.3.1",
         "react-dom": "18.3.1",
         "tsup": "8.3.0",
         "typescript": "5.6.2"
     },
     "peerDependencies": {
-        "next": ">=14.2.10",
+        "next": ">=14.2.11",
         "react": ">=18",
         "react-dom": ">=18"
     }

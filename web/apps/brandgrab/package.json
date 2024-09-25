@@ -31,7 +31,7 @@
         "@signalco/ui-themes-minimal": "workspace:*",
         "cheerio": "1.0.0",
         "classix": "2.1.39",
-        "next": "14.2.10",
+        "next": "14.2.11",
         "next-secure-headers": "2.2.0",
         "react": "18.3.1",
         "react-dom": "18.3.1",
