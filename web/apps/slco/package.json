@@ -27,7 +27,7 @@
         "@signalco/ui-icons": "workspace:*",
         "@signalco/ui-primitives": "workspace:*",
         "@signalco/ui-themes-minimal": "workspace:*",
-        "classix": "2.1.41",
+        "classix": "2.2.0",
         "next": "14.2.13",
         "next-secure-headers": "2.2.0",
         "react": "18.3.1",
