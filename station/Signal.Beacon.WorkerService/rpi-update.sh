@@ -31,7 +31,7 @@ then
 	URL=$( echo $RELEASE_JSON | jq -r 'map(select(.prerelease)) | first | .assets[] | select(.name | test("station-v(.*)-linux-arm64.tar.gz")) | .browser_download_url' )
 else
 	echo "Determining stable version..."
-	RELEASE_JSON=$( curl -s $"https://api.github.com/repos/signalco-io/station/signalco/latest" )
+	RELEASE_JSON=$( curl -s $"https://api.github.com/repos/signalco-io/signalco/releases/latest" )
 	VER=$( echo $RELEASE_JSON | jq -r '.tag_name' )
 	URL=$( echo $RELEASE_JSON | jq -r '.assets[] | select(.name | test("station-v(.*)-linux-arm64.tar.gz")) | .browser_download_url' )
 fi
