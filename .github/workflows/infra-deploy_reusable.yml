@@ -92,7 +92,7 @@ jobs:
         run: pnpm build --filter=${{ inputs.packageName }}
 
       - name: ⚡ Preview Deploy Infrastructure
-        uses: pulumi/actions@v5
+        uses: pulumi/actions@v6
         with:
           command: ${{ inputs.command }}
           stack-name: signalco/${{ inputs.project }}/${{ steps.extract_branch.outputs.stack }}

@@ -37,6 +37,12 @@ public static class SecretKeys
         public const string Region = "AzureSpeech--Region";
     }
 
+    public static class AzureCommunicationServices
+    {
+        public const string ConnectionString = "AcsConnectionString";
+        public const string Domain = "AcsDomain";
+    }
+
     public static class SmtpNotification
     {
         public const string Username = "SmtpNotificationUsername";
