@@ -36,15 +36,6 @@ jobs:
       - name: "Checkout GitHub Action"
         uses: actions/checkout@v4
 
-      - name: ✋ Set up mutex
-        id: mutex-setup
-        run: |
-          pushd ../discrete/Signalco.Discrete.Api.Mutex/node-cli
-          npm install
-          npm install -g
-          npx mutex wait signalcoinfra${{ inputs.command }}${{ inputs.project }}
-          popd
-
       - name: ✨ Setup DotNet ${{ env.DOTNET_VERSION }} Environment
         uses: actions/setup-dotnet@v4
         with:
@@ -90,6 +81,15 @@ jobs:
 
       - name: ⚒️ Build Infrastructure
         run: pnpm build --filter=${{ inputs.packageName }}
+
+      - name: ✋ Set up mutex
+        id: mutex-setup
+        run: |
+          pushd ../discrete/Signalco.Discrete.Api.Mutex/node-cli
+          npm install
+          npm install -g
+          npx mutex wait signalcoinfra${{ inputs.command }}${{ inputs.project }}
+          popd
 
       - name: ⚡ Preview Deploy Infrastructure
         uses: pulumi/actions@v6

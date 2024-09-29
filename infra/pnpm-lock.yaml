@@ -23,9 +23,6 @@ importers:
       '@checkly/pulumi':
         specifier: 1.1.4
         version: 1.1.4(ts-node@7.0.1)(typescript@5.6.2)
-      '@pulumi/aws':
-        specifier: 6.54.0
-        version: 6.54.0(ts-node@7.0.1)(typescript@5.6.2)
       '@pulumi/azure-native':
         specifier: 2.63.0
         version: 2.63.0(ts-node@7.0.1)(typescript@5.6.2)
@@ -766,9 +763,6 @@ packages:
   '@protobufjs/utf8@1.1.0':
     resolution: {integrity: sha512-Vvn3zZrhQZkkBE8LSuW3em98c0FwgO4nxzv6OdSxPKJIEKY2bGbHn+mhGIPerzI4twdxaP8/0+06HBpwf345Lw==}
 
-  '@pulumi/aws@6.54.0':
-    resolution: {integrity: sha512-kBiZCN/FE76oKo59150C2ZHc4kwg4U9jwuElyo80bF4y8deAOHBaq5vDBT95TTZqg9vNSAqIr5XWwAc9V5YGxQ==}
-
   '@pulumi/azure-native@2.63.0':
     resolution: {integrity: sha512-DDQ5N88JLd4vZGx8myXzuYr+tJT+T6MR0fBpfgTi1wHzIY+OyMUcjTWavLC+1kNHjauPm9r9S+jkEE4iHw+nZg==}
 
@@ -1148,10 +1142,6 @@ packages:
 
   buffer-from@1.1.2:
     resolution: {integrity: sha512-E+XQCRwSbaaiChtv6k6Dwgc+bx+Bs6vuKJHHl5kox/BaKbhiXzqQOwK4cO22yElGp2OCmjwVhT3HmxgyPGnJfQ==}
-
-  builtin-modules@3.0.0:
-    resolution: {integrity: sha512-hMIeU4K2ilbXV6Uv93ZZ0Avg/M91RaKXucQ+4me2Do1txxBDyDZWCBa5bJSLqoNTRpXTLwEzIk1KmloenDDjhg==}
-    engines: {node: '>=6'}
 
   builtins@5.0.1:
     resolution: {integrity: sha512-qwVpFEHNfhYJIzNRBvd2C1kyo6jz3ZSMPyyuR47OPdiKWlbYnZNyDWuyR175qDnAJLiCo5fBBqPb3RiXgWlkOQ==}
@@ -2056,11 +2046,6 @@ packages:
   micromatch@4.0.5:
     resolution: {integrity: sha512-DMy+ERcEW2q8Z2Po+WNXuw3c5YaUSFjAO5GsJqfEl7UjvtIuFKO6ZrKvcItdy98dwFI2N1tg3zNIdKaQT+aNdA==}
     engines: {node: '>=8.6'}
-
-  mime@2.6.0:
-    resolution: {integrity: sha512-USPkMeET31rOMiarsBNIHZKLGgvKc/LrjofAnBlOttf5ajRvqiRA8QsenbcooctK6d6Ts6aqZXBA+XbkKthiQg==}
-    engines: {node: '>=4.0.0'}
-    hasBin: true
 
   mimic-fn@2.1.0:
     resolution: {integrity: sha512-OqbOk5oEQeAZ8WXWydlu9HJjz9WVdEIvamMCcXmuqUYjTknH/sqsWvhQ3vgwKFRR1HpjvNBKQ37nbJgYzGqGcg==}
@@ -3327,18 +3312,6 @@ snapshots:
 
   '@protobufjs/utf8@1.1.0': {}
 
-  '@pulumi/aws@6.54.0(ts-node@7.0.1)(typescript@5.6.2)':
-    dependencies:
-      '@pulumi/pulumi': 3.134.1(ts-node@7.0.1)(typescript@5.6.2)
-      builtin-modules: 3.0.0
-      mime: 2.6.0
-      resolve: 1.22.8
-    transitivePeerDependencies:
-      - bluebird
-      - supports-color
-      - ts-node
-      - typescript
-
   '@pulumi/azure-native@2.63.0(ts-node@7.0.1)(typescript@5.6.2)':
     dependencies:
       '@pulumi/pulumi': 3.134.1(ts-node@7.0.1)(typescript@5.6.2)
@@ -3789,8 +3762,6 @@ snapshots:
       fill-range: 7.0.1
 
   buffer-from@1.1.2: {}
-
-  builtin-modules@3.0.0: {}
 
   builtins@5.0.1:
     dependencies:
@@ -4863,8 +4834,6 @@ snapshots:
     dependencies:
       braces: 3.0.2
       picomatch: 2.3.1
-
-  mime@2.6.0: {}
 
   mimic-fn@2.1.0: {}
 
