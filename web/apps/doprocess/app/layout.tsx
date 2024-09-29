@@ -5,7 +5,7 @@ import { Analytics } from '@vercel/analytics/react';
 import { ClientProvider } from '../components/providers/ClientProvider';
 import { AuthProvider } from '../components/providers/AuthProvider';
 
-export const runtime = 'edge';
+
 
 export default function RootLayout({ children, }: {
     children: React.ReactNode;

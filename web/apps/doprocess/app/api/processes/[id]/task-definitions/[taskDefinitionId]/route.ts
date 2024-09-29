@@ -6,7 +6,7 @@ import { withAuth } from '../../../../../../src/lib/auth/auth';
 import { optionalUserId } from '../../../../../../src/lib/auth/apiAuth';
 import { requiredParamString } from '../../../../../../src/lib/api/apiParam';
 
-export const runtime = 'edge';
+
 
 export async function GET(_request: Request, { params }: { params: { id: string, taskDefinitionId: string } }) {
     const processPublicId = requiredParamString(params.id);

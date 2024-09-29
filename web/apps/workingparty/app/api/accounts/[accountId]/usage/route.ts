@@ -1,7 +1,7 @@
 import { accountUsage } from '../../../../../src/lib/repository/accountsRepository';
 import { withAuth } from '../../../../../src/lib/auth/withAuth';
 
-export const runtime = 'edge';
+
 
 export type AccountUsageDto = {
     messages: {

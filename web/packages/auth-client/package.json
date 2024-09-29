@@ -17,17 +17,17 @@
     "@signalco/tsconfig": "workspace:*",
     "@signalco/ui-icons": "workspace:*",
     "@signalco/ui-primitives": "workspace:*",
-    "@tanstack/react-query": "5.54.1",
-    "@types/react": "18.3.5",
+    "@tanstack/react-query": "5.56.2",
+    "@types/react": "18.3.10",
     "@types/react-dom": "18.3.0",
-    "next": "14.2.8",
+    "next": "14.2.13",
     "react": "18.3.1",
     "react-dom": "18.3.1",
-    "typescript": "5.5.4"
+    "typescript": "5.6.2"
   },
   "peerDependencies": {
     "@tanstack/react-query": ">=5",
-    "next": ">=14",
+    "next": ">=14.2.10",
     "react": ">=18",
     "react-dom": ">=18"
   }

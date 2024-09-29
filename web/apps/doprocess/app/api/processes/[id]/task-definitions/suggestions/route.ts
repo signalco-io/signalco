@@ -6,7 +6,7 @@ import { cosmosDataContainerProcesses } from '../../../../../../src/lib/db/clien
 import { withAuth } from '../../../../../../src/lib/auth/auth';
 import { requiredParamString } from '../../../../../../src/lib/api/apiParam';
 
-export const runtime = 'edge';
+
 
 export async function GET(_request: Request, { params }: { params: { id: string } }) {
     const processPublicId = requiredParamString(params.id);
