@@ -8,7 +8,7 @@ export function dnsRecord(name: string, dnsName: Input<string>, value: Input<str
         name: dnsName,
         zoneId,
         type,
-        value,
+        content: value,
         priority: type === 'MX' ? 10 : undefined,
     }, {
         protect,

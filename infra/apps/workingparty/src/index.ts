@@ -5,8 +5,7 @@ import { DatabaseAccount, SqlResourceSqlDatabase, SqlResourceSqlContainer, Datab
 import { nextJsApp } from '@infra/pulumi/vercel';
 import { dnsRecord } from '@infra/pulumi/cloudflare';
 import { ProjectDomain, ProjectEnvironmentVariable } from '@pulumiverse/vercel';
-import { CommunicationService, EmailService, Domain, DomainManagement, UserEngagementTracking, SenderUsername, listCommunicationServiceKeysOutput } from '@pulumi/azure-native/communication/index.js';
-import { createStorageAccount } from '@infra/pulumi/azure';
+import { createStorageAccount, acsEmails } from '@infra/pulumi/azure';
 
 const up = async () => {
     const config = new Config();
@@ -114,70 +113,17 @@ const up = async () => {
         queueName: 'email-queue',
     });
 
-    // Create ACS
-    const aes = new EmailService('wp-azure-email-service', {
-        dataLocation: 'Europe',
-        emailServiceName: 'wpemail',
-        location: 'Global',
-        resourceGroupName: resourceGroup.name,
-    });
-    const aesDomain = new Domain('wp-aes-domain', {
-        resourceGroupName: resourceGroup.name,
-        emailServiceName: aes.name,
-        domainManagement: DomainManagement.CustomerManaged,
-        domainName: domainName,
-        location: 'Global',
-        userEngagementTracking: UserEngagementTracking.Disabled,
-    });
-    if (aesDomain.verificationRecords.domain) {
-        const aesDomainVerifyDataName = aesDomain.verificationRecords.domain.apply(domainVerification => domainVerification?.name ?? '');
-        const aesDomainVerifyDataValue = aesDomain.verificationRecords.domain.apply(domainVerification => domainVerification?.value ?? '');
-        dnsRecord('wp-aes-domain-domainverify', aesDomainVerifyDataName, aesDomainVerifyDataValue, 'TXT', false);
-    }
-    if (aesDomain.verificationRecords.sPF) {
-        const aesDomainVerifySpfName = aesDomain.verificationRecords.sPF.apply(dkimVerification => dkimVerification?.name ?? '');
-        const aesDomainVerifySpfValue = aesDomain.verificationRecords.sPF.apply(dkimVerification => dkimVerification?.value ?? '');
-        dnsRecord('wp-aes-domain-spf', aesDomainVerifySpfName, aesDomainVerifySpfValue, 'TXT', false);
-    }
-    if (aesDomain.verificationRecords.dKIM) {
-        const aesDomainVerifyDkimName = aesDomain.verificationRecords.dKIM.apply(dkimVerification => subdomain ? (`${dkimVerification?.name ?? ''}.${subdomain}`) : dkimVerification?.name ?? '');
-        const aesDomainVerifyDkimValue = aesDomain.verificationRecords.dKIM.apply(dkimVerification => dkimVerification?.value ?? '');
-        dnsRecord('wp-aes-domain-dkim', aesDomainVerifyDkimName, aesDomainVerifyDkimValue, 'CNAME', false);
-    }
-    if (aesDomain.verificationRecords.dKIM2) {
-        const aesDomainVerifyDkimName = aesDomain.verificationRecords.dKIM2.apply(dkimVerification => subdomain ? (`${dkimVerification?.name ?? ''}.${subdomain}`) : dkimVerification?.name ?? '');
-        const aesDomainVerifyDkimValue = aesDomain.verificationRecords.dKIM2.apply(dkimVerification => dkimVerification?.value ?? '');
-        dnsRecord('wp-aes-domain-dkim2', aesDomainVerifyDkimName, aesDomainVerifyDkimValue, 'CNAME', false);
-    }
-    // NOTE: Domain needs to be verified manually in Azure Communication Services
-
-    new SenderUsername('wp-aes-sender-notifications', {
-        resourceGroupName: resourceGroup.name,
-        emailServiceName: aes.name,
-        domainName: aesDomain.name,
-        displayName: 'WorkingParty Notifications',
-        senderUsername: 'notifications',
-        username: 'notifications',
-    });
-    new SenderUsername('wp-aes-sender-system', {
-        resourceGroupName: resourceGroup.name,
-        emailServiceName: aes.name,
-        domainName: aesDomain.name,
-        displayName: 'WorkingParty',
-        senderUsername: 'system',
-        username: 'system',
-    });
-    const communicaionService = new CommunicationService('wp-azure-communication-service', {
-        communicationServiceName: `wpacs-${stack}`,
-        dataLocation: 'Europe',
-        location: 'Global',
-        resourceGroupName: resourceGroup.name,
-        linkedDomains: [aesDomain.id],
-    });
-    const acsPrimaryConnectionString = listCommunicationServiceKeysOutput({
-        resourceGroupName: resourceGroup.name,
-        communicationServiceName: communicaionService.name,
-    }).apply(keys => keys.primaryConnectionString ?? '');
+    // ACS (Email)
+    const { acsPrimaryConnectionString } = await acsEmails(
+        'wp',
+        resourceGroup,
+        domainName,
+        subdomain,
+        stack,
+        [
+            { subdomain: 'notifications', displayName: 'WorkingParty Notifications' },
+            { subdomain: 'system', displayName: 'WorkingParty' },
+        ]);
 
     // Vercel setup
     const app = nextJsApp('wp', 'workingparty', 'web/apps/workingparty');

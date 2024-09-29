@@ -9,5 +9,6 @@ internal interface INotificationSmtpService
         string recipientEmail,
         string title,
         string content,
+        string? sender = "system",
         CancellationToken cancellationToken = default);
 }
