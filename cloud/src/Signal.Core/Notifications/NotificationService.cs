@@ -31,7 +31,7 @@ internal class NotificationService(
                         throw new InvalidOperationException($"Email not available for user {userId}"),
                         content.Title,
                         content.Content?.ToString() ?? string.Empty,
-                        cancellationToken);
+                        cancellationToken: cancellationToken);
                 }
             }
             catch

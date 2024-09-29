@@ -14,8 +14,8 @@ import {
     createFunctionsStorage,
     createLogWorkspace,
     createAppInsights,
+    acsEmails,
 } from '@infra/pulumi/azure';
-import { createSes } from '@infra/pulumi/aws';
 import { apiStatusCheck } from '@infra/pulumi/checkly';
 import { dnsRecord } from '@infra/pulumi/cloudflare';
 import { publishProjectAsync } from '@infra/pulumi/dotnet';
@@ -160,8 +160,22 @@ const up = async () => {
         // Create general storage and prepare tables
         const storage = createStorageAccount(resourceGroup, storagePrefix, shouldProtect);
 
-        // Create AWS SES service
-        const ses = createSes(`ses-${stack}`, 'notification');
+        // ACS (Email)
+        // DomainName can be root (e.g. signalco.io) or subdomain (e.g. next.signalco.io)
+        // ACS Domain name should be the root domain (e.g. signalco.io)
+        // Subdomain is used for the ACS subdomain (e.g. next)
+        const acsDomainName = domainName.split('.').length > 2 ? domainName.split('.').slice(1).join('.') : domainName;
+        const acsSubDomain = domainName.split('.').length > 2 ? domainName.split('.')[0] : null;
+        const { acsPrimaryConnectionString } = await acsEmails(
+            'cp',
+            resourceGroup,
+            acsDomainName,
+            acsSubDomain,
+            stack,
+            [
+                { subdomain: 'notifications', displayName: 'Signalco Notifications' },
+                { subdomain: 'system', displayName: 'Signalco' },
+            ]);
 
         // Create and populate vault
         const vault = createKeyVault(resourceGroup, keyvaultPrefix, shouldProtect, [
@@ -188,10 +202,8 @@ const up = async () => {
         };
 
         const internalEnvVariables = {
-            SmtpNotificationServerUrl: ses.smtpServer,
-            SmtpNotificationFromDomain: ses.smtpFromDomain,
-            SmtpNotificationUsername: ses.smtpUsername,
-            SmtpNotificationPassword: ses.smtpPassword,
+            AcsConnectionString: acsPrimaryConnectionString,
+            AcsDomain: acsDomainName,
             'Auth0_ClientId_Station': config.requireSecret('secret-auth0ClientIdStation'),
             'Auth0_ClientSecret_Station': config.requireSecret('secret-auth0ClientSecretStation'),
             'HCaptcha_Secret': config.requireSecret('secret-hcaptchaSecret'),
