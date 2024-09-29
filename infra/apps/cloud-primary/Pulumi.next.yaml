@@ -1,9 +1,4 @@
 config:
-  aws:accessKey:
-    secure: AAABAE94zXYm+fQ/e5hqo/P5tYzk5exZVi+l3Yw9f/XG/01P1TlSoewLLaFDGOjJbqk+xQ==
-  aws:region: eu-west-1
-  aws:secretKey:
-    secure: AAABABKpWxWSYjEJOwiVSaWTjRHAc5BPAHI/MaMjPkiivOw2NdIywUUPPWMKG1ibmMV8jyQMVez8obSP4ST70tcQfRfpVogg
   azure-native:clientId: 92261697-6976-49ea-a6b0-82e81b393e1c
   azure-native:clientSecret:
     secure: AAABAISoQTNqX9gB36S936iDwNKxq3rlJtdxJ6c7V5figvuX5ywpqtWx2ca2jxBikrNrB0gUaipqqYOHB9Q/Wdvgbn1HeYmA
