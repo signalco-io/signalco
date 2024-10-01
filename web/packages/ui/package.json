@@ -12,12 +12,12 @@
         "lint": "eslint ."
     },
     "devDependencies": {
-        "@radix-ui/react-checkbox": "1.1.1",
-        "@radix-ui/react-dialog": "1.1.1",
-        "@radix-ui/react-dropdown-menu": "2.1.1",
-        "@radix-ui/react-menubar": "1.1.1",
-        "@radix-ui/react-popover": "1.1.1",
-        "@radix-ui/react-select": "2.1.1",
+        "@radix-ui/react-checkbox": "1.1.2",
+        "@radix-ui/react-dialog": "1.1.2",
+        "@radix-ui/react-dropdown-menu": "2.1.2",
+        "@radix-ui/react-menubar": "1.1.2",
+        "@radix-ui/react-popover": "1.1.2",
+        "@radix-ui/react-select": "2.1.2",
         "@signalco/eslint-config-signalco": "workspace:*",
         "@signalco/hooks": "workspace:*",
         "@signalco/js": "workspace:*",
