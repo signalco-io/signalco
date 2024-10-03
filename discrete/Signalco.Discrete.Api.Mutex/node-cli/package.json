@@ -5,7 +5,7 @@
   "type": "module",
   "author": "Signalco",
   "license": "AGPL-3.0-only",
-  "packageManager": "npm@10.8.3",
+  "packageManager": "npm@10.9.0",
   "engines": {
     "node": ">=20"
   },
