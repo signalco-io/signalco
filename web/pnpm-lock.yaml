@@ -1310,6 +1310,9 @@ importers:
 
   packages/cms-components-marketing:
     devDependencies:
+      '@microsoft/api-extractor':
+        specifier: 7.47.9
+        version: 7.47.9(@types/node@22.7.4)
       '@signalco/cms-core':
         specifier: workspace:*
         version: link:../cms-core
@@ -1343,12 +1346,18 @@ importers:
       react-dom:
         specifier: 18.3.1
         version: 18.3.1(react@18.3.1)
+      tsup:
+        specifier: 8.3.0
+        version: 8.3.0(@microsoft/api-extractor@7.47.9(@types/node@22.7.4))(@swc/core@1.7.22(@swc/helpers@0.5.12))(jiti@1.21.6)(postcss@8.4.47)(typescript@5.6.2)(yaml@2.5.0)
       typescript:
         specifier: 5.6.2
         version: 5.6.2
 
   packages/cms-core:
     devDependencies:
+      '@microsoft/api-extractor':
+        specifier: 7.47.9
+        version: 7.47.9(@types/node@22.7.4)
       '@signalco/eslint-config-signalco':
         specifier: workspace:*
         version: link:../eslint-config-signalco
@@ -1376,6 +1385,9 @@ importers:
       react-dom:
         specifier: 18.3.1
         version: 18.3.1(react@18.3.1)
+      tsup:
+        specifier: 8.3.0
+        version: 8.3.0(@microsoft/api-extractor@7.47.9(@types/node@22.7.4))(@swc/core@1.7.22(@swc/helpers@0.5.12))(jiti@1.21.6)(postcss@8.4.47)(typescript@5.6.2)(yaml@2.5.0)
       typescript:
         specifier: 5.6.2
         version: 5.6.2
@@ -1532,6 +1544,9 @@ importers:
 
   packages/ui:
     devDependencies:
+      '@microsoft/api-extractor':
+        specifier: 7.47.9
+        version: 7.47.9(@types/node@22.7.4)
       '@radix-ui/react-checkbox':
         specifier: 1.1.2
         version: 1.1.2(@types/react-dom@18.3.0)(@types/react@18.3.11)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -1607,6 +1622,9 @@ importers:
       tailwind-merge:
         specifier: 2.5.3
         version: 2.5.3
+      tsup:
+        specifier: 8.3.0
+        version: 8.3.0(@microsoft/api-extractor@7.47.9(@types/node@22.7.4))(@swc/core@1.7.22(@swc/helpers@0.5.12))(jiti@1.21.6)(postcss@8.4.47)(typescript@5.6.2)(yaml@2.5.0)
       typescript:
         specifier: 5.6.2
         version: 5.6.2
