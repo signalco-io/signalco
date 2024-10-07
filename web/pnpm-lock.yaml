@@ -96,8 +96,8 @@ importers:
         specifier: 1.0.12
         version: 1.0.12(next@14.2.14(@playwright/test@1.47.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.79.4))(react@18.3.1)
       '@vvo/tzdb':
-        specifier: 6.145.0
-        version: 6.145.0
+        specifier: 6.146.0
+        version: 6.146.0
       autoprefixer:
         specifier: 10.4.20
         version: 10.4.20(postcss@8.4.47)
@@ -4794,8 +4794,8 @@ packages:
       vue-router:
         optional: true
 
-  '@vvo/tzdb@6.145.0':
-    resolution: {integrity: sha512-X3DTmeEzsZi/ZkYXofW04t1bFInYUk6SJBuNWPvV9wjCp9fI2C2n6OTDT9+YLKCJTosolMx1YKZWMJQykJerPQ==}
+  '@vvo/tzdb@6.146.0':
+    resolution: {integrity: sha512-nPnkIsYWG7ZSEcd/Om7gK9AH78Xbf89RdFJyVjshBe6XcXzl/OPeS8eYHgGb7lznoeDuqub7KrzzqMTGpI8HhQ==}
 
   '@webassemblyjs/ast@1.12.1':
     resolution: {integrity: sha512-EKfMUOPRRUTy5UII4qJDGPpqfwjOmZ5jeGFwid9mnoqIFK+e0vqoi1qH56JpmZSzEL53jKnNzScdmftJyG5xWg==}
@@ -5922,6 +5922,7 @@ packages:
   eslint@8.57.1:
     resolution: {integrity: sha512-ypowyDxpVSYpkXr9WPv2PAZCtNip1Mv5KTW0SCurXv/9iOpcrH9PaqUElksqEB6pChqHGDRCFTyrZlGhnLNGiA==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+    deprecated: This version is no longer supported. Please see https://eslint.org/version-support for other options.
     hasBin: true
 
   espree@9.6.1:
@@ -12166,7 +12167,7 @@ snapshots:
       next: 14.2.14(@babel/core@7.25.2)(@playwright/test@1.47.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.79.4)
       react: 18.3.1
 
-  '@vvo/tzdb@6.145.0': {}
+  '@vvo/tzdb@6.146.0': {}
 
   '@webassemblyjs/ast@1.12.1':
     dependencies:
