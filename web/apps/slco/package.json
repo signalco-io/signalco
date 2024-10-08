@@ -38,7 +38,7 @@
     },
     "devDependencies": {
         "@axe-core/playwright": "4.10.0",
-        "@playwright/test": "1.47.2",
+        "@playwright/test": "1.48.0",
         "@signalco/eslint-config-signalco": "workspace:*",
         "@signalco/tsconfig": "workspace:*",
         "@total-typescript/ts-reset": "0.6.1",
