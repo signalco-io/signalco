@@ -29,6 +29,6 @@
         "@pulumi/command": "1.0.1",
         "@pulumi/docker": "4.5.6",
         "@pulumi/pulumi": "3.136.1",
-        "@pulumiverse/vercel": "1.11.0"
+        "@pulumiverse/vercel": "1.14.3"
     }
 }
