@@ -24,7 +24,7 @@
     "typescript": "5.6.2"
   },
   "dependencies": {
-    "@pulumi/pulumi": "3.135.1",
+    "@pulumi/pulumi": "3.136.0",
     "@pulumi/azure-native": "2.65.0",
     "@pulumi/cloudflare": "5.40.0",
     "@pulumi/docker": "4.5.6",
