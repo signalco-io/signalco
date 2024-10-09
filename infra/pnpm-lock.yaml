@@ -22,25 +22,25 @@ importers:
     dependencies:
       '@checkly/pulumi':
         specifier: 1.1.4
-        version: 1.1.4(ts-node@7.0.1)(typescript@5.6.2)
+        version: 1.1.4(ts-node@7.0.1)(typescript@5.6.3)
       '@pulumi/azure-native':
         specifier: 2.65.1
-        version: 2.65.1(ts-node@7.0.1)(typescript@5.6.2)
+        version: 2.65.1(ts-node@7.0.1)(typescript@5.6.3)
       '@pulumi/cloudflare':
         specifier: 5.40.1
-        version: 5.40.1(ts-node@7.0.1)(typescript@5.6.2)
+        version: 5.40.1(ts-node@7.0.1)(typescript@5.6.3)
       '@pulumi/command':
         specifier: 1.0.1
-        version: 1.0.1(ts-node@7.0.1)(typescript@5.6.2)
+        version: 1.0.1(ts-node@7.0.1)(typescript@5.6.3)
       '@pulumi/docker':
         specifier: 4.5.6
-        version: 4.5.6(ts-node@7.0.1)(typescript@5.6.2)
+        version: 4.5.6(ts-node@7.0.1)(typescript@5.6.3)
       '@pulumi/pulumi':
         specifier: 3.136.1
-        version: 3.136.1(ts-node@7.0.1)(typescript@5.6.2)
+        version: 3.136.1(ts-node@7.0.1)(typescript@5.6.3)
       '@pulumiverse/vercel':
         specifier: 1.14.3
-        version: 1.14.3(ts-node@7.0.1)(typescript@5.6.2)
+        version: 1.14.3(ts-node@7.0.1)(typescript@5.6.3)
     devDependencies:
       '@infra/pulumi':
         specifier: workspace:*
@@ -50,16 +50,16 @@ importers:
         version: 20.16.11
       '@typescript-eslint/eslint-plugin':
         specifier: 8.8.1
-        version: 8.8.1(@typescript-eslint/parser@8.8.1(eslint@8.57.1)(typescript@5.6.2))(eslint@8.57.1)(typescript@5.6.2)
+        version: 8.8.1(@typescript-eslint/parser@8.8.1(eslint@8.57.1)(typescript@5.6.3))(eslint@8.57.1)(typescript@5.6.3)
       '@typescript-eslint/parser':
         specifier: 8.8.1
-        version: 8.8.1(eslint@8.57.1)(typescript@5.6.2)
+        version: 8.8.1(eslint@8.57.1)(typescript@5.6.3)
       eslint:
         specifier: 8.57.1
         version: 8.57.1
       eslint-plugin-import:
         specifier: 2.31.0
-        version: 2.31.0(@typescript-eslint/parser@8.8.1(eslint@8.57.1)(typescript@5.6.2))(eslint-import-resolver-typescript@3.6.3)(eslint@8.57.1)
+        version: 2.31.0(@typescript-eslint/parser@8.8.1(eslint@8.57.1)(typescript@5.6.3))(eslint-import-resolver-typescript@3.6.3)(eslint@8.57.1)
       eslint-plugin-n:
         specifier: 17.10.3
         version: 17.10.3(eslint@8.57.1)
@@ -68,28 +68,28 @@ importers:
         version: 7.1.0(eslint@8.57.1)
       tsup:
         specifier: 8.3.0
-        version: 8.3.0(typescript@5.6.2)
+        version: 8.3.0(typescript@5.6.3)
       typescript:
-        specifier: 5.6.2
-        version: 5.6.2
+        specifier: 5.6.3
+        version: 5.6.3
 
   apps/doprocess:
     dependencies:
       '@pulumi/azure-native':
         specifier: 2.65.1
-        version: 2.65.1(ts-node@7.0.1)(typescript@5.6.2)
+        version: 2.65.1(ts-node@7.0.1)(typescript@5.6.3)
       '@pulumi/cloudflare':
         specifier: 5.40.1
-        version: 5.40.1(ts-node@7.0.1)(typescript@5.6.2)
+        version: 5.40.1(ts-node@7.0.1)(typescript@5.6.3)
       '@pulumi/docker':
         specifier: 4.5.6
-        version: 4.5.6(ts-node@7.0.1)(typescript@5.6.2)
+        version: 4.5.6(ts-node@7.0.1)(typescript@5.6.3)
       '@pulumi/pulumi':
         specifier: 3.136.1
-        version: 3.136.1(ts-node@7.0.1)(typescript@5.6.2)
+        version: 3.136.1(ts-node@7.0.1)(typescript@5.6.3)
       '@pulumiverse/vercel':
         specifier: 1.14.3
-        version: 1.14.3(ts-node@7.0.1)(typescript@5.6.2)
+        version: 1.14.3(ts-node@7.0.1)(typescript@5.6.3)
     devDependencies:
       '@infra/pulumi':
         specifier: workspace:*
@@ -99,16 +99,16 @@ importers:
         version: 20.16.11
       '@typescript-eslint/eslint-plugin':
         specifier: 8.8.1
-        version: 8.8.1(@typescript-eslint/parser@8.8.1(eslint@8.57.1)(typescript@5.6.2))(eslint@8.57.1)(typescript@5.6.2)
+        version: 8.8.1(@typescript-eslint/parser@8.8.1(eslint@8.57.1)(typescript@5.6.3))(eslint@8.57.1)(typescript@5.6.3)
       '@typescript-eslint/parser':
         specifier: 8.8.1
-        version: 8.8.1(eslint@8.57.1)(typescript@5.6.2)
+        version: 8.8.1(eslint@8.57.1)(typescript@5.6.3)
       eslint:
         specifier: 8.57.1
         version: 8.57.1
       eslint-plugin-import:
         specifier: 2.31.0
-        version: 2.31.0(@typescript-eslint/parser@8.8.1(eslint@8.57.1)(typescript@5.6.2))(eslint-import-resolver-typescript@3.6.3)(eslint@8.57.1)
+        version: 2.31.0(@typescript-eslint/parser@8.8.1(eslint@8.57.1)(typescript@5.6.3))(eslint-import-resolver-typescript@3.6.3)(eslint@8.57.1)
       eslint-plugin-n:
         specifier: 17.10.3
         version: 17.10.3(eslint@8.57.1)
@@ -117,34 +117,34 @@ importers:
         version: 7.1.0(eslint@8.57.1)
       tsup:
         specifier: 8.3.0
-        version: 8.3.0(typescript@5.6.2)
+        version: 8.3.0(typescript@5.6.3)
       typescript:
-        specifier: 5.6.2
-        version: 5.6.2
+        specifier: 5.6.3
+        version: 5.6.3
 
   apps/remote-browser:
     dependencies:
       '@checkly/pulumi':
         specifier: 1.1.4
-        version: 1.1.4(ts-node@7.0.1)(typescript@5.6.2)
+        version: 1.1.4(ts-node@7.0.1)(typescript@5.6.3)
       '@pulumi/azure-native':
         specifier: 2.65.1
-        version: 2.65.1(ts-node@7.0.1)(typescript@5.6.2)
+        version: 2.65.1(ts-node@7.0.1)(typescript@5.6.3)
       '@pulumi/cloudflare':
         specifier: 5.40.1
-        version: 5.40.1(ts-node@7.0.1)(typescript@5.6.2)
+        version: 5.40.1(ts-node@7.0.1)(typescript@5.6.3)
       '@pulumi/command':
         specifier: 1.0.1
-        version: 1.0.1(ts-node@7.0.1)(typescript@5.6.2)
+        version: 1.0.1(ts-node@7.0.1)(typescript@5.6.3)
       '@pulumi/docker':
         specifier: 4.5.6
-        version: 4.5.6(ts-node@7.0.1)(typescript@5.6.2)
+        version: 4.5.6(ts-node@7.0.1)(typescript@5.6.3)
       '@pulumi/pulumi':
         specifier: 3.136.1
-        version: 3.136.1(ts-node@7.0.1)(typescript@5.6.2)
+        version: 3.136.1(ts-node@7.0.1)(typescript@5.6.3)
       '@pulumiverse/vercel':
         specifier: 1.14.3
-        version: 1.14.3(ts-node@7.0.1)(typescript@5.6.2)
+        version: 1.14.3(ts-node@7.0.1)(typescript@5.6.3)
     devDependencies:
       '@infra/pulumi':
         specifier: workspace:*
@@ -154,16 +154,16 @@ importers:
         version: 20.16.11
       '@typescript-eslint/eslint-plugin':
         specifier: 8.8.1
-        version: 8.8.1(@typescript-eslint/parser@8.8.1(eslint@8.57.1)(typescript@5.6.2))(eslint@8.57.1)(typescript@5.6.2)
+        version: 8.8.1(@typescript-eslint/parser@8.8.1(eslint@8.57.1)(typescript@5.6.3))(eslint@8.57.1)(typescript@5.6.3)
       '@typescript-eslint/parser':
         specifier: 8.8.1
-        version: 8.8.1(eslint@8.57.1)(typescript@5.6.2)
+        version: 8.8.1(eslint@8.57.1)(typescript@5.6.3)
       eslint:
         specifier: 8.57.1
         version: 8.57.1
       eslint-plugin-import:
         specifier: 2.31.0
-        version: 2.31.0(@typescript-eslint/parser@8.8.1(eslint@8.57.1)(typescript@5.6.2))(eslint-import-resolver-typescript@3.6.3)(eslint@8.57.1)
+        version: 2.31.0(@typescript-eslint/parser@8.8.1(eslint@8.57.1)(typescript@5.6.3))(eslint-import-resolver-typescript@3.6.3)(eslint@8.57.1)
       eslint-plugin-n:
         specifier: 17.10.3
         version: 17.10.3(eslint@8.57.1)
@@ -172,34 +172,34 @@ importers:
         version: 7.1.0(eslint@8.57.1)
       tsup:
         specifier: 8.3.0
-        version: 8.3.0(typescript@5.6.2)
+        version: 8.3.0(typescript@5.6.3)
       typescript:
-        specifier: 5.6.2
-        version: 5.6.2
+        specifier: 5.6.3
+        version: 5.6.3
 
   apps/uier:
     dependencies:
       '@checkly/pulumi':
         specifier: 1.1.4
-        version: 1.1.4(ts-node@7.0.1)(typescript@5.6.2)
+        version: 1.1.4(ts-node@7.0.1)(typescript@5.6.3)
       '@pulumi/azure-native':
         specifier: 2.65.1
-        version: 2.65.1(ts-node@7.0.1)(typescript@5.6.2)
+        version: 2.65.1(ts-node@7.0.1)(typescript@5.6.3)
       '@pulumi/cloudflare':
         specifier: 5.40.1
-        version: 5.40.1(ts-node@7.0.1)(typescript@5.6.2)
+        version: 5.40.1(ts-node@7.0.1)(typescript@5.6.3)
       '@pulumi/command':
         specifier: 1.0.1
-        version: 1.0.1(ts-node@7.0.1)(typescript@5.6.2)
+        version: 1.0.1(ts-node@7.0.1)(typescript@5.6.3)
       '@pulumi/docker':
         specifier: 4.5.6
-        version: 4.5.6(ts-node@7.0.1)(typescript@5.6.2)
+        version: 4.5.6(ts-node@7.0.1)(typescript@5.6.3)
       '@pulumi/pulumi':
         specifier: 3.136.1
-        version: 3.136.1(ts-node@7.0.1)(typescript@5.6.2)
+        version: 3.136.1(ts-node@7.0.1)(typescript@5.6.3)
       '@pulumiverse/vercel':
         specifier: 1.14.3
-        version: 1.14.3(ts-node@7.0.1)(typescript@5.6.2)
+        version: 1.14.3(ts-node@7.0.1)(typescript@5.6.3)
     devDependencies:
       '@infra/pulumi':
         specifier: workspace:*
@@ -209,16 +209,16 @@ importers:
         version: 20.16.11
       '@typescript-eslint/eslint-plugin':
         specifier: 8.8.1
-        version: 8.8.1(@typescript-eslint/parser@8.8.1(eslint@8.57.1)(typescript@5.6.2))(eslint@8.57.1)(typescript@5.6.2)
+        version: 8.8.1(@typescript-eslint/parser@8.8.1(eslint@8.57.1)(typescript@5.6.3))(eslint@8.57.1)(typescript@5.6.3)
       '@typescript-eslint/parser':
         specifier: 8.8.1
-        version: 8.8.1(eslint@8.57.1)(typescript@5.6.2)
+        version: 8.8.1(eslint@8.57.1)(typescript@5.6.3)
       eslint:
         specifier: 8.57.1
         version: 8.57.1
       eslint-plugin-import:
         specifier: 2.31.0
-        version: 2.31.0(@typescript-eslint/parser@8.8.1(eslint@8.57.1)(typescript@5.6.2))(eslint-import-resolver-typescript@3.6.3)(eslint@8.57.1)
+        version: 2.31.0(@typescript-eslint/parser@8.8.1(eslint@8.57.1)(typescript@5.6.3))(eslint-import-resolver-typescript@3.6.3)(eslint@8.57.1)
       eslint-plugin-n:
         specifier: 17.10.3
         version: 17.10.3(eslint@8.57.1)
@@ -227,28 +227,28 @@ importers:
         version: 7.1.0(eslint@8.57.1)
       tsup:
         specifier: 8.3.0
-        version: 8.3.0(typescript@5.6.2)
+        version: 8.3.0(typescript@5.6.3)
       typescript:
-        specifier: 5.6.2
-        version: 5.6.2
+        specifier: 5.6.3
+        version: 5.6.3
 
   apps/workingparty:
     dependencies:
       '@pulumi/azure-native':
         specifier: 2.65.1
-        version: 2.65.1(ts-node@7.0.1)(typescript@5.6.2)
+        version: 2.65.1(ts-node@7.0.1)(typescript@5.6.3)
       '@pulumi/cloudflare':
         specifier: 5.40.1
-        version: 5.40.1(ts-node@7.0.1)(typescript@5.6.2)
+        version: 5.40.1(ts-node@7.0.1)(typescript@5.6.3)
       '@pulumi/docker':
         specifier: 4.5.6
-        version: 4.5.6(ts-node@7.0.1)(typescript@5.6.2)
+        version: 4.5.6(ts-node@7.0.1)(typescript@5.6.3)
       '@pulumi/pulumi':
         specifier: 3.136.1
-        version: 3.136.1(ts-node@7.0.1)(typescript@5.6.2)
+        version: 3.136.1(ts-node@7.0.1)(typescript@5.6.3)
       '@pulumiverse/vercel':
         specifier: 1.14.3
-        version: 1.14.3(ts-node@7.0.1)(typescript@5.6.2)
+        version: 1.14.3(ts-node@7.0.1)(typescript@5.6.3)
     devDependencies:
       '@infra/pulumi':
         specifier: workspace:*
@@ -258,16 +258,16 @@ importers:
         version: 20.16.11
       '@typescript-eslint/eslint-plugin':
         specifier: 8.8.1
-        version: 8.8.1(@typescript-eslint/parser@8.8.1(eslint@8.57.1)(typescript@5.6.2))(eslint@8.57.1)(typescript@5.6.2)
+        version: 8.8.1(@typescript-eslint/parser@8.8.1(eslint@8.57.1)(typescript@5.6.3))(eslint@8.57.1)(typescript@5.6.3)
       '@typescript-eslint/parser':
         specifier: 8.8.1
-        version: 8.8.1(eslint@8.57.1)(typescript@5.6.2)
+        version: 8.8.1(eslint@8.57.1)(typescript@5.6.3)
       eslint:
         specifier: 8.57.1
         version: 8.57.1
       eslint-plugin-import:
         specifier: 2.31.0
-        version: 2.31.0(@typescript-eslint/parser@8.8.1(eslint@8.57.1)(typescript@5.6.2))(eslint-import-resolver-typescript@3.6.3)(eslint@8.57.1)
+        version: 2.31.0(@typescript-eslint/parser@8.8.1(eslint@8.57.1)(typescript@5.6.3))(eslint-import-resolver-typescript@3.6.3)(eslint@8.57.1)
       eslint-plugin-n:
         specifier: 17.10.3
         version: 17.10.3(eslint@8.57.1)
@@ -276,19 +276,19 @@ importers:
         version: 7.1.0(eslint@8.57.1)
       tsup:
         specifier: 8.3.0
-        version: 8.3.0(typescript@5.6.2)
+        version: 8.3.0(typescript@5.6.3)
       typescript:
-        specifier: 5.6.2
-        version: 5.6.2
+        specifier: 5.6.3
+        version: 5.6.3
 
   packages/eslint-config:
     devDependencies:
       '@typescript-eslint/eslint-plugin':
         specifier: 8.8.1
-        version: 8.8.1(@typescript-eslint/parser@8.8.1(eslint@8.57.1)(typescript@5.6.2))(eslint@8.57.1)(typescript@5.6.2)
+        version: 8.8.1(@typescript-eslint/parser@8.8.1(eslint@8.57.1)(typescript@5.6.3))(eslint@8.57.1)(typescript@5.6.3)
       '@typescript-eslint/parser':
         specifier: 8.8.1
-        version: 8.8.1(eslint@8.57.1)(typescript@5.6.2)
+        version: 8.8.1(eslint@8.57.1)(typescript@5.6.3)
       eslint-config-prettier:
         specifier: 9.1.0
         version: 9.1.0(eslint@8.57.1)
@@ -297,40 +297,40 @@ importers:
         version: 2.1.3(eslint@8.57.1)
       eslint-import-resolver-typescript:
         specifier: 3.6.3
-        version: 3.6.3(@typescript-eslint/parser@8.8.1(eslint@8.57.1)(typescript@5.6.2))(eslint-plugin-import@2.31.0)(eslint@8.57.1)
+        version: 3.6.3(@typescript-eslint/parser@8.8.1(eslint@8.57.1)(typescript@5.6.3))(eslint-plugin-import@2.31.0)(eslint@8.57.1)
       eslint-plugin-import:
         specifier: 2.31.0
-        version: 2.31.0(@typescript-eslint/parser@8.8.1(eslint@8.57.1)(typescript@5.6.2))(eslint-import-resolver-typescript@3.6.3)(eslint@8.57.1)
+        version: 2.31.0(@typescript-eslint/parser@8.8.1(eslint@8.57.1)(typescript@5.6.3))(eslint-import-resolver-typescript@3.6.3)(eslint@8.57.1)
       eslint-plugin-only-warn:
         specifier: 1.1.0
         version: 1.1.0
       typescript:
-        specifier: 5.6.2
-        version: 5.6.2
+        specifier: 5.6.3
+        version: 5.6.3
 
   packages/pulumi:
     dependencies:
       '@checkly/pulumi':
         specifier: 1.1.4
-        version: 1.1.4(ts-node@7.0.1)(typescript@5.6.2)
+        version: 1.1.4(ts-node@7.0.1)(typescript@5.6.3)
       '@pulumi/azure-native':
         specifier: 2.65.1
-        version: 2.65.1(ts-node@7.0.1)(typescript@5.6.2)
+        version: 2.65.1(ts-node@7.0.1)(typescript@5.6.3)
       '@pulumi/cloudflare':
         specifier: 5.40.1
-        version: 5.40.1(ts-node@7.0.1)(typescript@5.6.2)
+        version: 5.40.1(ts-node@7.0.1)(typescript@5.6.3)
       '@pulumi/command':
         specifier: 1.0.1
-        version: 1.0.1(ts-node@7.0.1)(typescript@5.6.2)
+        version: 1.0.1(ts-node@7.0.1)(typescript@5.6.3)
       '@pulumi/docker':
         specifier: 4.5.6
-        version: 4.5.6(ts-node@7.0.1)(typescript@5.6.2)
+        version: 4.5.6(ts-node@7.0.1)(typescript@5.6.3)
       '@pulumi/pulumi':
         specifier: 3.136.1
-        version: 3.136.1(ts-node@7.0.1)(typescript@5.6.2)
+        version: 3.136.1(ts-node@7.0.1)(typescript@5.6.3)
       '@pulumiverse/vercel':
         specifier: 1.14.3
-        version: 1.14.3(ts-node@7.0.1)(typescript@5.6.2)
+        version: 1.14.3(ts-node@7.0.1)(typescript@5.6.3)
     devDependencies:
       '@infra/eslint-config':
         specifier: workspace:*
@@ -343,16 +343,16 @@ importers:
         version: 20.16.11
       '@typescript-eslint/eslint-plugin':
         specifier: 8.8.1
-        version: 8.8.1(@typescript-eslint/parser@8.8.1(eslint@8.57.1)(typescript@5.6.2))(eslint@8.57.1)(typescript@5.6.2)
+        version: 8.8.1(@typescript-eslint/parser@8.8.1(eslint@8.57.1)(typescript@5.6.3))(eslint@8.57.1)(typescript@5.6.3)
       '@typescript-eslint/parser':
         specifier: 8.8.1
-        version: 8.8.1(eslint@8.57.1)(typescript@5.6.2)
+        version: 8.8.1(eslint@8.57.1)(typescript@5.6.3)
       eslint:
         specifier: 8.57.1
         version: 8.57.1
       eslint-plugin-import:
         specifier: 2.31.0
-        version: 2.31.0(@typescript-eslint/parser@8.8.1(eslint@8.57.1)(typescript@5.6.2))(eslint-import-resolver-typescript@3.6.3)(eslint@8.57.1)
+        version: 2.31.0(@typescript-eslint/parser@8.8.1(eslint@8.57.1)(typescript@5.6.3))(eslint-import-resolver-typescript@3.6.3)(eslint@8.57.1)
       eslint-plugin-n:
         specifier: 17.10.3
         version: 17.10.3(eslint@8.57.1)
@@ -360,8 +360,8 @@ importers:
         specifier: 7.1.0
         version: 7.1.0(eslint@8.57.1)
       typescript:
-        specifier: 5.6.2
-        version: 5.6.2
+        specifier: 5.6.3
+        version: 5.6.3
 
   packages/typescript-config: {}
 
@@ -2693,8 +2693,8 @@ packages:
     resolution: {integrity: sha512-/OxDN6OtAk5KBpGb28T+HZc2M+ADtvRxXrKKbUwtsLgdoxgX13hyy7ek6bFRl5+aBs2yZzB0c4CnQfAtVypW/g==}
     engines: {node: '>= 0.4'}
 
-  typescript@5.6.2:
-    resolution: {integrity: sha512-NW8ByodCSNCwZeghjN3o+JX5OFH0Ojg6sadjEKY4huZ52TqbJTJnDo5+Tw98lSy63NZvi4n+ez5m2u5d4PkZyw==}
+  typescript@5.6.3:
+    resolution: {integrity: sha512-hjcS1mhfuyi4WW8IWtjP7brDrG2cuDZukyrYrSauoXGNgx0S7zceP07adYkJycEr56BOUTNPzbInooiN3fn1qw==}
     engines: {node: '>=14.17'}
     hasBin: true
 
@@ -2804,9 +2804,9 @@ snapshots:
 
   '@aashutoshrathi/word-wrap@1.2.6': {}
 
-  '@checkly/pulumi@1.1.4(ts-node@7.0.1)(typescript@5.6.2)':
+  '@checkly/pulumi@1.1.4(ts-node@7.0.1)(typescript@5.6.3)':
     dependencies:
-      '@pulumi/pulumi': 3.136.1(ts-node@7.0.1)(typescript@5.6.2)
+      '@pulumi/pulumi': 3.136.1(ts-node@7.0.1)(typescript@5.6.3)
     transitivePeerDependencies:
       - bluebird
       - supports-color
@@ -3203,36 +3203,36 @@ snapshots:
 
   '@protobufjs/utf8@1.1.0': {}
 
-  '@pulumi/azure-native@2.65.1(ts-node@7.0.1)(typescript@5.6.2)':
+  '@pulumi/azure-native@2.65.1(ts-node@7.0.1)(typescript@5.6.3)':
     dependencies:
-      '@pulumi/pulumi': 3.136.1(ts-node@7.0.1)(typescript@5.6.2)
+      '@pulumi/pulumi': 3.136.1(ts-node@7.0.1)(typescript@5.6.3)
     transitivePeerDependencies:
       - bluebird
       - supports-color
       - ts-node
       - typescript
 
-  '@pulumi/cloudflare@5.40.1(ts-node@7.0.1)(typescript@5.6.2)':
+  '@pulumi/cloudflare@5.40.1(ts-node@7.0.1)(typescript@5.6.3)':
     dependencies:
-      '@pulumi/pulumi': 3.136.1(ts-node@7.0.1)(typescript@5.6.2)
+      '@pulumi/pulumi': 3.136.1(ts-node@7.0.1)(typescript@5.6.3)
     transitivePeerDependencies:
       - bluebird
       - supports-color
       - ts-node
       - typescript
 
-  '@pulumi/command@1.0.1(ts-node@7.0.1)(typescript@5.6.2)':
+  '@pulumi/command@1.0.1(ts-node@7.0.1)(typescript@5.6.3)':
     dependencies:
-      '@pulumi/pulumi': 3.136.1(ts-node@7.0.1)(typescript@5.6.2)
+      '@pulumi/pulumi': 3.136.1(ts-node@7.0.1)(typescript@5.6.3)
     transitivePeerDependencies:
       - bluebird
       - supports-color
       - ts-node
       - typescript
 
-  '@pulumi/docker@4.5.6(ts-node@7.0.1)(typescript@5.6.2)':
+  '@pulumi/docker@4.5.6(ts-node@7.0.1)(typescript@5.6.3)':
     dependencies:
-      '@pulumi/pulumi': 3.136.1(ts-node@7.0.1)(typescript@5.6.2)
+      '@pulumi/pulumi': 3.136.1(ts-node@7.0.1)(typescript@5.6.3)
       semver: 5.7.2
     transitivePeerDependencies:
       - bluebird
@@ -3240,7 +3240,7 @@ snapshots:
       - ts-node
       - typescript
 
-  '@pulumi/pulumi@3.136.1(ts-node@7.0.1)(typescript@5.6.2)':
+  '@pulumi/pulumi@3.136.1(ts-node@7.0.1)(typescript@5.6.3)':
     dependencies:
       '@grpc/grpc-js': 1.10.1
       '@logdna/tail-file': 2.2.0
@@ -3274,16 +3274,16 @@ snapshots:
       upath: 1.2.0
     optionalDependencies:
       ts-node: 7.0.1
-      typescript: 5.6.2
+      typescript: 5.6.3
     transitivePeerDependencies:
       - bluebird
       - supports-color
 
   '@pulumi/query@0.3.0': {}
 
-  '@pulumiverse/vercel@1.14.3(ts-node@7.0.1)(typescript@5.6.2)':
+  '@pulumiverse/vercel@1.14.3(ts-node@7.0.1)(typescript@5.6.3)':
     dependencies:
-      '@pulumi/pulumi': 3.136.1(ts-node@7.0.1)(typescript@5.6.2)
+      '@pulumi/pulumi': 3.136.1(ts-node@7.0.1)(typescript@5.6.3)
     transitivePeerDependencies:
       - bluebird
       - supports-color
@@ -3416,34 +3416,34 @@ snapshots:
 
   '@types/tmp@0.2.6': {}
 
-  '@typescript-eslint/eslint-plugin@8.8.1(@typescript-eslint/parser@8.8.1(eslint@8.57.1)(typescript@5.6.2))(eslint@8.57.1)(typescript@5.6.2)':
+  '@typescript-eslint/eslint-plugin@8.8.1(@typescript-eslint/parser@8.8.1(eslint@8.57.1)(typescript@5.6.3))(eslint@8.57.1)(typescript@5.6.3)':
     dependencies:
       '@eslint-community/regexpp': 4.10.0
-      '@typescript-eslint/parser': 8.8.1(eslint@8.57.1)(typescript@5.6.2)
+      '@typescript-eslint/parser': 8.8.1(eslint@8.57.1)(typescript@5.6.3)
       '@typescript-eslint/scope-manager': 8.8.1
-      '@typescript-eslint/type-utils': 8.8.1(eslint@8.57.1)(typescript@5.6.2)
-      '@typescript-eslint/utils': 8.8.1(eslint@8.57.1)(typescript@5.6.2)
+      '@typescript-eslint/type-utils': 8.8.1(eslint@8.57.1)(typescript@5.6.3)
+      '@typescript-eslint/utils': 8.8.1(eslint@8.57.1)(typescript@5.6.3)
       '@typescript-eslint/visitor-keys': 8.8.1
       eslint: 8.57.1
       graphemer: 1.4.0
       ignore: 5.3.1
       natural-compare: 1.4.0
-      ts-api-utils: 1.3.0(typescript@5.6.2)
+      ts-api-utils: 1.3.0(typescript@5.6.3)
     optionalDependencies:
-      typescript: 5.6.2
+      typescript: 5.6.3
     transitivePeerDependencies:
       - supports-color
 
-  '@typescript-eslint/parser@8.8.1(eslint@8.57.1)(typescript@5.6.2)':
+  '@typescript-eslint/parser@8.8.1(eslint@8.57.1)(typescript@5.6.3)':
     dependencies:
       '@typescript-eslint/scope-manager': 8.8.1
       '@typescript-eslint/types': 8.8.1
-      '@typescript-eslint/typescript-estree': 8.8.1(typescript@5.6.2)
+      '@typescript-eslint/typescript-estree': 8.8.1(typescript@5.6.3)
       '@typescript-eslint/visitor-keys': 8.8.1
       debug: 4.3.5
       eslint: 8.57.1
     optionalDependencies:
-      typescript: 5.6.2
+      typescript: 5.6.3
     transitivePeerDependencies:
       - supports-color
 
@@ -3452,21 +3452,21 @@ snapshots:
       '@typescript-eslint/types': 8.8.1
       '@typescript-eslint/visitor-keys': 8.8.1
 
-  '@typescript-eslint/type-utils@8.8.1(eslint@8.57.1)(typescript@5.6.2)':
+  '@typescript-eslint/type-utils@8.8.1(eslint@8.57.1)(typescript@5.6.3)':
     dependencies:
-      '@typescript-eslint/typescript-estree': 8.8.1(typescript@5.6.2)
-      '@typescript-eslint/utils': 8.8.1(eslint@8.57.1)(typescript@5.6.2)
+      '@typescript-eslint/typescript-estree': 8.8.1(typescript@5.6.3)
+      '@typescript-eslint/utils': 8.8.1(eslint@8.57.1)(typescript@5.6.3)
       debug: 4.3.5
-      ts-api-utils: 1.3.0(typescript@5.6.2)
+      ts-api-utils: 1.3.0(typescript@5.6.3)
     optionalDependencies:
-      typescript: 5.6.2
+      typescript: 5.6.3
     transitivePeerDependencies:
       - eslint
       - supports-color
 
   '@typescript-eslint/types@8.8.1': {}
 
-  '@typescript-eslint/typescript-estree@8.8.1(typescript@5.6.2)':
+  '@typescript-eslint/typescript-estree@8.8.1(typescript@5.6.3)':
     dependencies:
       '@typescript-eslint/types': 8.8.1
       '@typescript-eslint/visitor-keys': 8.8.1
@@ -3475,18 +3475,18 @@ snapshots:
       is-glob: 4.0.3
       minimatch: 9.0.5
       semver: 7.6.3
-      ts-api-utils: 1.3.0(typescript@5.6.2)
+      ts-api-utils: 1.3.0(typescript@5.6.3)
     optionalDependencies:
-      typescript: 5.6.2
+      typescript: 5.6.3
     transitivePeerDependencies:
       - supports-color
 
-  '@typescript-eslint/utils@8.8.1(eslint@8.57.1)(typescript@5.6.2)':
+  '@typescript-eslint/utils@8.8.1(eslint@8.57.1)(typescript@5.6.3)':
     dependencies:
       '@eslint-community/eslint-utils': 4.4.0(eslint@8.57.1)
       '@typescript-eslint/scope-manager': 8.8.1
       '@typescript-eslint/types': 8.8.1
-      '@typescript-eslint/typescript-estree': 8.8.1(typescript@5.6.2)
+      '@typescript-eslint/typescript-estree': 8.8.1(typescript@5.6.3)
       eslint: 8.57.1
     transitivePeerDependencies:
       - supports-color
@@ -3956,43 +3956,43 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-import-resolver-typescript@3.6.3(@typescript-eslint/parser@8.8.1(eslint@8.57.1)(typescript@5.6.2))(eslint-plugin-import@2.31.0)(eslint@8.57.1):
+  eslint-import-resolver-typescript@3.6.3(@typescript-eslint/parser@8.8.1(eslint@8.57.1)(typescript@5.6.3))(eslint-plugin-import@2.31.0)(eslint@8.57.1):
     dependencies:
       '@nolyfill/is-core-module': 1.0.39
       debug: 4.3.5
       enhanced-resolve: 5.17.0
       eslint: 8.57.1
-      eslint-module-utils: 2.8.2(@typescript-eslint/parser@8.8.1(eslint@8.57.1)(typescript@5.6.2))(eslint-import-resolver-typescript@3.6.3)(eslint@8.57.1)
+      eslint-module-utils: 2.8.2(@typescript-eslint/parser@8.8.1(eslint@8.57.1)(typescript@5.6.3))(eslint-import-resolver-typescript@3.6.3)(eslint@8.57.1)
       fast-glob: 3.3.2
       get-tsconfig: 4.7.6
       is-bun-module: 1.1.0
       is-glob: 4.0.3
     optionalDependencies:
-      eslint-plugin-import: 2.31.0(@typescript-eslint/parser@8.8.1(eslint@8.57.1)(typescript@5.6.2))(eslint-import-resolver-typescript@3.6.3)(eslint@8.57.1)
+      eslint-plugin-import: 2.31.0(@typescript-eslint/parser@8.8.1(eslint@8.57.1)(typescript@5.6.3))(eslint-import-resolver-typescript@3.6.3)(eslint@8.57.1)
     transitivePeerDependencies:
       - '@typescript-eslint/parser'
       - eslint-import-resolver-node
       - eslint-import-resolver-webpack
       - supports-color
 
-  eslint-module-utils@2.12.0(@typescript-eslint/parser@8.8.1(eslint@8.57.1)(typescript@5.6.2))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.3)(eslint@8.57.1):
+  eslint-module-utils@2.12.0(@typescript-eslint/parser@8.8.1(eslint@8.57.1)(typescript@5.6.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.3)(eslint@8.57.1):
     dependencies:
       debug: 3.2.7
     optionalDependencies:
-      '@typescript-eslint/parser': 8.8.1(eslint@8.57.1)(typescript@5.6.2)
+      '@typescript-eslint/parser': 8.8.1(eslint@8.57.1)(typescript@5.6.3)
       eslint: 8.57.1
       eslint-import-resolver-node: 0.3.9
-      eslint-import-resolver-typescript: 3.6.3(@typescript-eslint/parser@8.8.1(eslint@8.57.1)(typescript@5.6.2))(eslint-plugin-import@2.31.0)(eslint@8.57.1)
+      eslint-import-resolver-typescript: 3.6.3(@typescript-eslint/parser@8.8.1(eslint@8.57.1)(typescript@5.6.3))(eslint-plugin-import@2.31.0)(eslint@8.57.1)
     transitivePeerDependencies:
       - supports-color
 
-  eslint-module-utils@2.8.2(@typescript-eslint/parser@8.8.1(eslint@8.57.1)(typescript@5.6.2))(eslint-import-resolver-typescript@3.6.3)(eslint@8.57.1):
+  eslint-module-utils@2.8.2(@typescript-eslint/parser@8.8.1(eslint@8.57.1)(typescript@5.6.3))(eslint-import-resolver-typescript@3.6.3)(eslint@8.57.1):
     dependencies:
       debug: 3.2.7
     optionalDependencies:
-      '@typescript-eslint/parser': 8.8.1(eslint@8.57.1)(typescript@5.6.2)
+      '@typescript-eslint/parser': 8.8.1(eslint@8.57.1)(typescript@5.6.3)
       eslint: 8.57.1
-      eslint-import-resolver-typescript: 3.6.3(@typescript-eslint/parser@8.8.1(eslint@8.57.1)(typescript@5.6.2))(eslint-plugin-import@2.31.0)(eslint@8.57.1)
+      eslint-import-resolver-typescript: 3.6.3(@typescript-eslint/parser@8.8.1(eslint@8.57.1)(typescript@5.6.3))(eslint-plugin-import@2.31.0)(eslint@8.57.1)
     transitivePeerDependencies:
       - supports-color
 
@@ -4003,7 +4003,7 @@ snapshots:
       eslint: 8.57.1
       eslint-compat-utils: 0.1.2(eslint@8.57.1)
 
-  eslint-plugin-import@2.31.0(@typescript-eslint/parser@8.8.1(eslint@8.57.1)(typescript@5.6.2))(eslint-import-resolver-typescript@3.6.3)(eslint@8.57.1):
+  eslint-plugin-import@2.31.0(@typescript-eslint/parser@8.8.1(eslint@8.57.1)(typescript@5.6.3))(eslint-import-resolver-typescript@3.6.3)(eslint@8.57.1):
     dependencies:
       '@rtsao/scc': 1.1.0
       array-includes: 3.1.8
@@ -4014,7 +4014,7 @@ snapshots:
       doctrine: 2.1.0
       eslint: 8.57.1
       eslint-import-resolver-node: 0.3.9
-      eslint-module-utils: 2.12.0(@typescript-eslint/parser@8.8.1(eslint@8.57.1)(typescript@5.6.2))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.3)(eslint@8.57.1)
+      eslint-module-utils: 2.12.0(@typescript-eslint/parser@8.8.1(eslint@8.57.1)(typescript@5.6.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.3)(eslint@8.57.1)
       hasown: 2.0.2
       is-core-module: 2.15.1
       is-glob: 4.0.3
@@ -4026,7 +4026,7 @@ snapshots:
       string.prototype.trimend: 1.0.8
       tsconfig-paths: 3.15.0
     optionalDependencies:
-      '@typescript-eslint/parser': 8.8.1(eslint@8.57.1)(typescript@5.6.2)
+      '@typescript-eslint/parser': 8.8.1(eslint@8.57.1)(typescript@5.6.3)
     transitivePeerDependencies:
       - eslint-import-resolver-typescript
       - eslint-import-resolver-webpack
@@ -5260,9 +5260,9 @@ snapshots:
 
   treeverse@3.0.0: {}
 
-  ts-api-utils@1.3.0(typescript@5.6.2):
+  ts-api-utils@1.3.0(typescript@5.6.3):
     dependencies:
-      typescript: 5.6.2
+      typescript: 5.6.3
 
   ts-interface-checker@0.1.13: {}
 
@@ -5285,7 +5285,7 @@ snapshots:
       minimist: 1.2.8
       strip-bom: 3.0.0
 
-  tsup@8.3.0(typescript@5.6.2):
+  tsup@8.3.0(typescript@5.6.3):
     dependencies:
       bundle-require: 5.0.0(esbuild@0.23.0)
       cac: 6.7.14
@@ -5304,7 +5304,7 @@ snapshots:
       tinyglobby: 0.2.6
       tree-kill: 1.2.2
     optionalDependencies:
-      typescript: 5.6.2
+      typescript: 5.6.3
     transitivePeerDependencies:
       - jiti
       - supports-color
@@ -5384,7 +5384,7 @@ snapshots:
       is-typed-array: 1.1.13
       possible-typed-array-names: 1.0.0
 
-  typescript@5.6.2: {}
+  typescript@5.6.3: {}
 
   unbox-primitive@1.0.2:
     dependencies:
