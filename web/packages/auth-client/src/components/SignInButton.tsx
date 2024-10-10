@@ -1,11 +1,17 @@
-import { Button } from '@signalco/ui-primitives/Button';
+'use client';
 
-export function SignInButton() {
+import { useContext } from 'react';
+import { Button, ButtonProps } from '@signalco/ui-primitives/Button';
+import { AuthContext } from '../AuthContext';
+
+export function SignInButton({ variant, children, ...props }: Omit<ButtonProps, 'href'>) {
+    const authContext = useContext(AuthContext);
     return (
         <Button
-            href={'/login'}
-            variant="plain">
-            Sign in
+            href={authContext.urls?.signIn ?? '/signin'}
+            variant={variant ?? 'plain'}
+            {...props}>
+            {children ?? 'Sign In'}
         </Button>
     );
 }
