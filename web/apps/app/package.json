@@ -66,7 +66,7 @@
         "react": "18.3.1",
         "react-dom": "18.3.1",
         "react-grid-layout": "1.5.0",
-        "recharts": "2.12.7",
+        "recharts": "2.13.0",
         "sharp": "0.33.5",
         "suncalc": "1.9.0",
         "tailwindcss": "3.4.13",
