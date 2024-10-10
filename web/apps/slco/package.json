@@ -19,7 +19,7 @@
     },
     "dependencies": {
         "@hcaptcha/react-hcaptcha": "1.11.0",
-        "@next/env": "14.2.14",
+        "@next/env": "14.2.15",
         "@signalco/cms-components-marketing": "workspace:*",
         "@signalco/cms-core": "workspace:*",
         "@signalco/data": "workspace:*",
@@ -28,7 +28,7 @@
         "@signalco/ui-primitives": "workspace:*",
         "@signalco/ui-themes-minimal": "workspace:*",
         "classix": "2.2.0",
-        "next": "14.2.14",
+        "next": "14.2.15",
         "next-secure-headers": "2.2.0",
         "react": "18.3.1",
         "react-dom": "18.3.1",
