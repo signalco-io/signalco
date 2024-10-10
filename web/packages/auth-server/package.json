@@ -1,6 +1,6 @@
 {
   "name": "@signalco/auth-server",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "sideEffects": false,
   "type": "module",
   "license": "MIT",
@@ -15,7 +15,7 @@
     "exports": {
       ".": {
         "import": "./dist/index.js",
-        "types": "./dist/index.d.ts"
+        "types": "./dist/src/index.d.ts"
       }
     }
   },
