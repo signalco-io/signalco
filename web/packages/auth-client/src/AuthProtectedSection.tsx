@@ -1,7 +1,7 @@
 'use client';
 
 import { PropsWithChildren } from 'react';
-import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useCurrentUser } from './useCurrentUser';
 
 type AuthProtectedSectionProps = PropsWithChildren<{
@@ -13,14 +13,15 @@ type AuthProtectedSectionProps = PropsWithChildren<{
 }>;
 
 export function AuthProtectedSection({ children, mode = 'hide', redirectUrl }: AuthProtectedSectionProps) {
-    const { data, isLoading, isPending } = useCurrentUser();
+    const router = useRouter();
+    const { data, isLoading } = useCurrentUser();
 
-    if (mode === 'hide' && (isLoading || isPending || !data?.isLogginedIn)) {
+    if (mode === 'hide' && (isLoading || !data?.isLogginedIn)) {
         return null;
     }
 
-    if (mode === 'redirect' && redirectUrl && !isLoading && !isPending && !data?.isLogginedIn) {
-        redirect(redirectUrl);
+    if (mode === 'redirect' && redirectUrl && !isLoading && !data?.isLogginedIn) {
+        router.push(redirectUrl);
     }
 
     return children;
