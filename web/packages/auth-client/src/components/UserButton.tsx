@@ -1,24 +1,28 @@
 'use client';
 
 import { useContext } from 'react';
-import { Modal } from '@signalco/ui-primitives/Modal';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@signalco/ui-primitives/Menu';
 import { IconButton } from '@signalco/ui-primitives/IconButton';
-import { Button } from '@signalco/ui-primitives/Button';
 import { Avatar } from '@signalco/ui-primitives/Avatar';
-import { User } from '@signalco/ui-icons';
+import { LogOut, User } from '@signalco/ui-icons';
 import { AuthContext } from '../AuthContext';
 
 export function UserButton() {
     const authContext = useContext(AuthContext);
     return (
-        <Modal trigger={(
-            <IconButton>
-                <Avatar>
-                    <User />
-                </Avatar>
-            </IconButton>
-        )}>
-            <Button href={authContext.urls?.signOut ?? '/signout'}>Sign Out</Button>
-        </Modal>
+        <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+                <IconButton className="rounded-full">
+                    <Avatar className="bg-transparent">
+                        <User />
+                    </Avatar>
+                </IconButton>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+                <DropdownMenuItem href={authContext.urls?.signOut ?? '/sign-out'} startDecorator={<LogOut />}>
+                    Sign out
+                </DropdownMenuItem>
+            </DropdownMenuContent>
+        </DropdownMenu>
     );
 }

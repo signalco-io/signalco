@@ -10,7 +10,7 @@ Example imeplementation:
 'use client';
 
 import { PropsWithChildren } from 'react';
-import { AuthProvider } from '@signalco/auth-client';
+import { AuthProvider } from '@signalco/auth-client/components';
 
 export type User = {
     id: string;
@@ -57,7 +57,7 @@ const queryClient = new QueryClient();
 Modes available for `AuthProtectedSection` are `hide` and `redirect`. Hide will hide the section if the user is not authenticated. Redirect will redirect the user to the specified URL.
 
 ```tsx
-import { AuthProtectedSection } from '@signalco/auth-client';
+import { AuthProtectedSection } from '@signalco/auth-client/components';
 
 // This will hide the section if user is not authenticated
 <AuthProtectedSection mode="hide">

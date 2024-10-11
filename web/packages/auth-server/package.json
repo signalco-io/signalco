@@ -1,11 +1,12 @@
 {
   "name": "@signalco/auth-server",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "sideEffects": false,
   "type": "module",
   "license": "MIT",
   "exports": {
-    ".": "./src/index.ts"
+    ".": "./src/index.ts",
+    "./components": "./src/components/index.ts"
   },
   "files": [
     "dist"
@@ -15,7 +16,11 @@
     "exports": {
       ".": {
         "import": "./dist/index.js",
-        "types": "./dist/src/index.d.ts"
+        "types": "./dist/index.d.ts"
+      },
+      "./components": {
+        "import": "./dist/components/index.js",
+        "types": "./dist/components/index.d.ts"
       }
     }
   },
