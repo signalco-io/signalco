@@ -55,7 +55,7 @@
         "compare-versions": "6.1.1",
         "d3": "7.9.0",
         "date-fns": "4.1.0",
-        "jose": "5.9.3",
+        "jose": "5.9.4",
         "monaco-editor": "0.52.0",
         "next": "14.2.15",
         "next-secure-headers": "2.2.0",
