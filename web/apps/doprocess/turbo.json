@@ -13,7 +13,8 @@
                 "public/*.js"
             ],
             "env": [
-                "OPENAI_API_KEY"
+                "OPENAI_API_KEY",
+                "DP_JWT_SIGN_SECRET"
             ]
         }
     }

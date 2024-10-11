@@ -5,8 +5,6 @@ import { withAuth } from '../../../../src/lib/auth/auth';
 import { optionalUserId } from '../../../../src/lib/auth/apiAuth';
 import { requiredParamString } from '../../../../src/lib/api/apiParam';
 
-
-
 export async function GET(_request: Request, { params }: { params: { id: string } }) {
     const documentPublicId = requiredParamString(params.id);
     const { userId } = optionalUserId();
