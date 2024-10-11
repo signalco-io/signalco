@@ -2,7 +2,7 @@
 
 import { PropsWithChildren } from 'react';
 import { useRouter } from 'next/navigation';
-import { useCurrentUser } from './useCurrentUser';
+import { useCurrentUser } from '../useCurrentUser';
 
 type AuthProtectedSectionProps = PropsWithChildren<{
     mode?: 'hide';
@@ -24,5 +24,5 @@ export function AuthProtectedSection({ children, mode = 'hide', redirectUrl }: A
         router.push(redirectUrl);
     }
 
-    return children;
+    return <>{children}</>;
 }
