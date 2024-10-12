@@ -33,7 +33,7 @@
     "@signalco/js": "workspace:*",
     "@signalco/tsconfig": "workspace:*",
     "@types/react": "18.3.11",
-    "jose": "5.9.3",
+    "jose": "5.9.4",
     "next": "14.2.15",
     "react": "18.3.1",
     "react-dom": "18.3.1",
