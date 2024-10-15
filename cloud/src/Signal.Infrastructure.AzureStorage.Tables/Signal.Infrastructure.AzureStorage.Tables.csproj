@@ -22,7 +22,7 @@
     <PackageReference Include="Azure.Storage.Blobs" Version="12.22.2" />
     <PackageReference Include="Azure.Storage.Common" Version="12.21.1" />
     <PackageReference Include="Azure.Storage.Queues" Version="12.20.1" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.2" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
