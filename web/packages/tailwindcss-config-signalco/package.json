@@ -10,7 +10,7 @@
         "./*": "./src/*.ts"
     },
     "devDependencies": {
-        "tailwindcss": "3.4.13",
+        "tailwindcss": "3.4.14",
         "tailwindcss-animate": "1.0.7"
     },
     "peerDependencies": {
