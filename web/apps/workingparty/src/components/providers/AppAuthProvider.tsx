@@ -1,7 +1,7 @@
 'use client';
 
 import { PropsWithChildren } from 'react';
-import { AuthProvider } from '@signalco/auth-client';
+import { AuthProvider } from '@signalco/auth-client/components';
 
 export type User = {
     id: string;
