@@ -1,7 +1,7 @@
 import { plansGetAll } from '../../../src/lib/repository/plansRepository';
 import { PlanDto } from '../../../src/lib/dtos/plan';
 
-
+export const dynamic = 'force-dynamic';
 
 export async function GET() {
     const plans = await plansGetAll();
@@ -16,5 +16,3 @@ export async function GET() {
     }));
     return Response.json(dtos);
 }
-
-export const dynamic = 'force-dynamic'

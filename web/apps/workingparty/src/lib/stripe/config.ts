@@ -1,7 +1,14 @@
 import Stripe from 'stripe';
 
-export const stripe = new Stripe(
-    process.env.STRIPE_SECRETKEY ?? '',
-    {
+let stripe: Stripe | null = null;
+
+export function getStripe() {
+    if (!stripe) {
+        stripe = new Stripe(
+            process.env.STRIPE_SECRETKEY ?? '',
+            {
+            }
+        );
     }
-);
+    return stripe;
+}

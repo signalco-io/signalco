@@ -41,8 +41,8 @@ const Button = forwardRef<HTMLElement, ButtonProps>(({
     ...otherProps
 }, ref) => {
     const Comp = useMemo(() => otherProps.href
-        ? (props: any) => <Link {...props} />
-        : (props: any) => <button {...props} />, [otherProps.href]);
+        ? forwardRef((props: any, ref) => <Link ref={ref} {...props} />)
+        : forwardRef((props: any, ref) => <button ref={ref} {...props} />), [otherProps.href]);
 
     return (
         <Comp

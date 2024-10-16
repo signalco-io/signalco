@@ -1,6 +1,6 @@
 import { loginRequestsVerify } from '../../../../../src/lib/repository/loginRequests';
 
-
+export const dynamic = 'force-dynamic';
 
 export async function POST(request: Request) {
     const json = await request.json();
