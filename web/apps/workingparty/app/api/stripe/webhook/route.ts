@@ -1,5 +1,5 @@
 import Stripe from 'stripe';
-import { stripe } from '../../../../src/lib/stripe/config';
+import { getStripe } from '../../../../src/lib/stripe/config';
 import { plansCreate, plansDelete, plansGetAll, plansGetByStripePriceId, plansUpdate } from '../../../../src/lib/repository/plansRepository';
 import { accountGetByStripeCustomerId, accountSubscriptionCreate, accountSubscriptionSetStatus, accountSubscriptions } from '../../../../src/lib/repository/accountsRepository';
 
@@ -30,7 +30,7 @@ async function deletePriceRecord(price: Stripe.Price) {
 
 async function upsertPriceRecord(price: Stripe.Price) {
     const product = typeof price.product === 'string'
-        ? await stripe.products.retrieve(price.product)
+        ? await getStripe().products.retrieve(price.product)
         : price.product;
     if (!product || product.deleted) {
         throw new Error('Product not found');
@@ -95,7 +95,7 @@ async function createSubscription(stripeSubscriptionId: string, stripeCustomerId
         throw new Error('Account not found');
     }
 
-    const stripeSubscription = await stripe.subscriptions.retrieve(stripeSubscriptionId);
+    const stripeSubscription = await getStripe().subscriptions.retrieve(stripeSubscriptionId);
     if (stripeSubscription.items.data.length > 1) {
         throw new Error('Multiple items in subscription not supported');
     }
@@ -123,7 +123,7 @@ async function manageSubscriptionStatusChange(stripeSubscriptionId: string, stri
         throw new Error('Account not found');
     }
 
-    const stripeSubscription = await stripe.subscriptions.retrieve(stripeSubscriptionId);
+    const stripeSubscription = await getStripe().subscriptions.retrieve(stripeSubscriptionId);
     if (stripeSubscription.items.data.length > 1) {
         throw new Error('Multiple items in subscription not supported');
     }
@@ -153,7 +153,7 @@ export async function POST(req: Request) {
     try {
         if (!sig || !webhookSecret)
             return new Response('Webhook secret not found.', { status: 400 });
-        event = stripe.webhooks.constructEvent(body, sig, webhookSecret);
+        event = getStripe().webhooks.constructEvent(body, sig, webhookSecret);
         console.info(`🔔  Webhook received: ${event.type}`);
     } catch (err: unknown) {
         if (err instanceof Error) {
