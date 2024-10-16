@@ -1,8 +1,9 @@
 import storybookSignalcoTheme from './signalco-theme';
 import { withThemeByClassName } from '@storybook/addon-themes';
 import '../global.css';
+import { Preview } from '@storybook/react';
 
-const preview = {
+const preview: Preview = {
   parameters: {
     controls: {
       matchers: {
@@ -21,7 +22,7 @@ const preview = {
         dark: 'dark'
       },
       defaultTheme: 'dark',
-    }),
+    })
   ]
 };
 
