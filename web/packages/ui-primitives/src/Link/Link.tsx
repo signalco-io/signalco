@@ -1,4 +1,4 @@
-import type { AnchorHTMLAttributes } from 'react';
+import { forwardRef, type AnchorHTMLAttributes } from 'react';
 import { isAbsoluteUrl } from '@signalco/js';
 import { cx } from '../cx';
 
@@ -8,9 +8,10 @@ export type LinkProps = AnchorHTMLAttributes<HTMLAnchorElement> & {
     'aria-label'?: string | undefined;
 };
 
-export function Link({ className, href, children, ...rest }: LinkProps) {
+const Link = forwardRef<HTMLAnchorElement, LinkProps>(({ className, href, children, ...rest }: LinkProps, ref) => {
     return (
         <a
+            ref={ref}
             href={href}
             className={cx(
                 typeof children === 'string' && 'no-underline text-muted-foreground',
@@ -21,4 +22,6 @@ export function Link({ className, href, children, ...rest }: LinkProps) {
             {children}
         </a>
     );
-}
+});
+Link.displayName = 'Button'
+export { Link };
