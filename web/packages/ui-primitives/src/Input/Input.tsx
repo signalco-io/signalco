@@ -37,12 +37,12 @@ export function Input({
             <HorizontalContainer className={cx(
                 fullWidth && 'w-full',
                 'rounded-md ring-offset-background',
-                'has-[:focus-visible]:outline-none has-[:focus-visible]:ring-offset-2',
-                'has-[:disabled]:opacity-50 has-[:disabled]:cursor-not-allowed',
-                'has-[:file]:border-0 has-[:file]:bg-transparent has-[:file]:text-sm has-[:file]:font-medium',
-                'has-[:placeholder]:text-muted-foreground',
-                (!variant || variant === 'outlined') && 'border border-input bg-background has-[:focus-visible]:ring-2 has-[:focus-visible]:ring-ring',
-                variant === 'plain' && 'border-0 bg-transparent has-[:disabled]:bg-muted/30',
+                'file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground',
+                'placeholder:text-muted-foreground',
+                'focus-visible:outline-none focus-visible:ring-offset-2',
+                'disabled:cursor-not-allowed disabled:opacity-50',
+                (!variant || variant === 'outlined') && 'border border-input bg-background focus-visible:ring-2 focus-visible:ring-ring',
+                variant === 'plain' && 'border-0 bg-transparent disabled:bg-muted/30',
                 className
             )}>
                 {startDecorator ?? null}
