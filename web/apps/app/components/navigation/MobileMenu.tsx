@@ -10,7 +10,7 @@ import { Close, Menu } from '@signalco/ui-icons';
 import useLocale from '../../src/hooks/useLocale';
 import { NavItem } from './NavProfile';
 
-type MobileMenuProps = Omit<IconButtonProps, 'plain' | 'onClick' | 'aria-label' | 'children'> & {
+type MobileMenuProps = Omit<IconButtonProps, 'type' | 'onClick' | 'children'> & {
     items: NavItem[];
     active?: NavItem;
 };
@@ -40,6 +40,7 @@ export function MobileMenu({
                 variant="plain"
                 onClick={() => open ? handleClose() : handleOpen()}
                 aria-label="Toggle menu"
+                type="button"
                 {...rest}>
                 {open ? <Close /> : <Menu />}
             </IconButton>
