@@ -1,7 +1,7 @@
 import { accountGet, accountUpdate } from '../../../../src/lib/repository/accountsRepository';
 import { withAuth } from '../../../../src/lib/auth/withAuth';
 
-
+export const dynamic = 'force-dynamic';
 
 export async function GET(_request: Request, { params }: { params: { accountId: string } }) {
     const { accountId } = params;
