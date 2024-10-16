@@ -39,7 +39,7 @@
     },
     "devDependencies": {
         "@axe-core/playwright": "4.10.0",
-        "@playwright/test": "1.48.0",
+        "@playwright/test": "1.48.1",
         "@signalco/eslint-config-signalco": "workspace:*",
         "@signalco/tsconfig": "workspace:*",
         "@types/color": "3.0.6",
