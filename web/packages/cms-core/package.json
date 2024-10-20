@@ -1,14 +1,27 @@
 {
     "name": "@signalco/cms-core",
-    "version": "0.0.0",
-    "private": true,
+    "version": "0.1.0",
     "license": "MIT",
     "type": "module",
+    "sideEffects": false,
     "exports": {
         "./*": "./src/*/index.ts"
     },
+    "files": [
+        "dist"
+    ],
+    "publishConfig": {
+        "access": "public",
+        "exports": {
+            "./*": {
+                "import": "./dist/*/index.js",
+                "types": "./dist/*/index.d.ts"
+            }
+        }
+    },
     "scripts": {
-        "lint": "eslint ."
+        "lint": "eslint .",
+        "prepublishOnly": "tsup --env.NODE_ENV production"
     },
     "devDependencies": {
         "@signalco/eslint-config-signalco": "workspace:*",
@@ -16,10 +29,17 @@
         "@signalco/ui-icons": "workspace:*",
         "@signalco/tailwindcss-config-signalco": "workspace:*",
         "@signalco/tsconfig": "workspace:*",
-        "@types/react": "18.3.10",
-        "@types/react-dom": "18.3.0",
+        "@types/react": "18.3.11",
+        "@types/react-dom": "18.3.1",
         "react": "18.3.1",
         "react-dom": "18.3.1",
-        "typescript": "5.6.2"
+        "typescript": "5.6.3",
+        "@microsoft/api-extractor": "7.47.11",
+        "tsup": "8.3.0"
+    },
+    "peerDependencies": {
+        "@signalco/ui-primitives": "0",
+        "react": "18",
+        "react-dom": "18"
     }
 }

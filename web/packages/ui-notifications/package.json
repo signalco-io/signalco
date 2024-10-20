@@ -13,13 +13,17 @@
     "devDependencies": {
         "@signalco/eslint-config-signalco": "workspace:*",
         "@signalco/tailwindcss-config-signalco": "workspace:*",
-        "@signalco/ui-primitives": "workspace:*",
         "@signalco/tsconfig": "workspace:*",
-        "@types/react": "18.3.10",
-        "@types/react-dom": "18.3.0",
+        "@types/react": "18.3.11",
+        "@types/react-dom": "18.3.1",
         "react": "18.3.1",
         "react-dom": "18.3.1",
         "sonner": "1.5.0",
-        "typescript": "5.6.2"
+        "typescript": "5.6.3"
+    },
+    "peerDependencies": {
+        "@signalco/ui-primitives": ">=0",
+        "react": ">=18",
+        "react-dom": ">=18"
     }
 }

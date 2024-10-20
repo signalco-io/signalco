@@ -1,7 +1,7 @@
 import { usersPatch } from '../../../../src/lib/repository/usersRepository';
 import { withAuth } from '../../../../src/lib/auth/withAuth';
 
-
+export const dynamic = 'force-dynamic';
 
 export async function GET() {
     return await withAuth(async ({ user }) => {

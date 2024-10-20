@@ -1,6 +1,6 @@
 import { nanoid } from 'nanoid';
 import { PatchOperation } from '@azure/cosmos';
-import { stripe } from '../stripe/config';
+import { getStripe } from '../stripe/config';
 import { cosmosDataContainerAccounts, cosmosDataContainerSubscriptions, cosmosDataContainerUsage } from '../cosmosClient';
 import { workersGetAll } from './workersRepository';
 import { DbPlan, plansGet, plansGetAll } from './plansRepository';
@@ -178,7 +178,7 @@ async function accountCancelAllSubscriptions(accountId: string) {
         if (!activeSubscription?.stripeSubscriptionId) continue;
 
         try {
-            await stripe.subscriptions.cancel(activeSubscription.stripeSubscriptionId, {
+            await getStripe().subscriptions.cancel(activeSubscription.stripeSubscriptionId, {
                 cancellation_details: {
                     comment: 'Plan upgraded'
                 }

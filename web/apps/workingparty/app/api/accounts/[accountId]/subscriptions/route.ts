@@ -2,7 +2,7 @@ import { accountSubscriptions } from '../../../../../src/lib/repository/accounts
 import { SubscriptionDto } from '../../../../../src/lib/dtos/subscription';
 import { withAuth } from '../../../../../src/lib/auth/withAuth';
 
-
+export const dynamic = 'force-dynamic';
 
 export async function GET(_request: Request, { params }: { params: { accountId: string } }) {
     const { accountId } = params;

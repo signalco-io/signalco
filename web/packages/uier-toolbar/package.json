@@ -25,20 +25,20 @@
         "@signalco/ui-icons": "workspace:*",
         "@signalco/ui-primitives": "workspace:*",
         "@signalco/ui-themes-minimal": "workspace:*",
-        "@tanstack/react-query": "5.56.2",
-        "@types/node": "22.7.4",
-        "@types/react": "18.3.10",
-        "@types/react-dom": "18.3.0",
+        "@tanstack/react-query": "5.59.15",
+        "@types/node": "22.7.7",
+        "@types/react": "18.3.11",
+        "@types/react-dom": "18.3.1",
         "autoprefixer": "10.4.20",
         "postcss": "8.4.47",
-        "postcss-preset-env": "10.0.5",
+        "postcss-preset-env": "10.0.7",
         "react": "18.3.1",
         "react-dom": "18.3.1",
         "react-timeago": "7.2.0",
-        "sass": "1.79.4",
-        "tailwindcss": "3.4.13",
+        "sass": "1.80.3",
+        "tailwindcss": "3.4.14",
         "tailwindcss-animate": "1.0.7",
         "tsup": "8.3.0",
-        "typescript": "5.6.2"
+        "typescript": "5.6.3"
     }
 }

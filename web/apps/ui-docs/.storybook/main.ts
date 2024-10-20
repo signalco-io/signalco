@@ -12,14 +12,11 @@ import type { StorybookConfig } from '@storybook/react-vite';
 const config: StorybookConfig = {
   stories: ["../stories"],
   addons: [
-    // getAbsolutePath("@storybook/addon-links"),
-    // getAbsolutePath("@storybook/addon-essentials"),
-    // getAbsolutePath("@storybook/addon-themes")
     '@storybook/addon-links',
     '@storybook/addon-essentials',
     '@storybook/addon-themes'
   ],
-  framework: '@storybook/react-vite', // 👈 Add this
+  framework: '@storybook/react-vite',
   docs: {
     autodocs: true
   }

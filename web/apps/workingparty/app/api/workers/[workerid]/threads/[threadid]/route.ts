@@ -1,7 +1,7 @@
 import { threadsDelete, threadsGet } from '../../../../../../src/lib/repository/threadsRepository';
 import { withAuth } from '../../../../../../src/lib/auth/withAuth';
 
-
+export const dynamic = 'force-dynamic';
 
 export async function GET(_request: Request, { params }: { params: { workerid: string, threadid: string } }) {
     const { threadid } = params;

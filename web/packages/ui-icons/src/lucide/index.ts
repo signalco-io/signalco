@@ -48,6 +48,7 @@ export {
     Share2 as Share,
     Send,
     Users as People,
+    User,
     Minimize,
     Inbox,
     Link2 as Link,

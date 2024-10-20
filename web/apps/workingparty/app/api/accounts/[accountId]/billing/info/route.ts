@@ -2,9 +2,9 @@ import { stripeCustomerBillingInfo } from '../../../../../../src/lib/stripe/serv
 import { accountGet } from '../../../../../../src/lib/repository/accountsRepository';
 import { withAuth } from '../../../../../../src/lib/auth/withAuth';
 
-
-
 export type AccountBillingInfoDto = ReturnType<typeof stripeCustomerBillingInfo>;
+
+export const dynamic = 'force-dynamic';
 
 export async function GET(_request: Request, { params }: { params: { accountId: string } }) {
     const { accountId } = params;

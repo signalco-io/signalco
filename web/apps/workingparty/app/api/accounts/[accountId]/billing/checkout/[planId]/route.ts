@@ -3,7 +3,7 @@ import { plansGet } from '../../../../../../../src/lib/repository/plansRepositor
 import { accountGet } from '../../../../../../../src/lib/repository/accountsRepository';
 import { withAuth } from '../../../../../../../src/lib/auth/withAuth';
 
-
+export const dynamic = 'force-dynamic';
 
 export type CheckoutSessionDto = Awaited<ReturnType<typeof stripeCheckout>>;
 

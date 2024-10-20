@@ -1,4 +1,5 @@
 import { Button } from "@signalco/ui-primitives/Button";
+import { Card } from "@signalco/ui-primitives/Card";
 import { Meta, StoryObj } from "@storybook/react";
 
 export default { component: Button, tags: ['autodocs'] } satisfies Meta<typeof Button>;
@@ -17,11 +18,32 @@ export const VariantPlain: Story = {
     }
 };
 
-export const VariantSoft: Story = {
+export const VariantSoftOnBackground: Story = {
     args: {
         variant: 'soft',
         ...Default.args
-    }
+    },
+    decorators: [
+        (Story) => (
+            <div className="p-4 bg-background">
+                <Story />
+            </div>
+        )
+    ]
+};
+
+export const VariantSoftOnCard: Story = {
+    args: {
+        variant: 'soft',
+        ...Default.args
+    },
+    decorators: [
+        (Story) => (
+            <Card>
+                <Story />
+            </Card>
+        )
+    ]
 };
 
 export const VariantSolid: Story = {
