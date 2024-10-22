@@ -7,8 +7,9 @@ import { requiredParamString } from '../../../../../src/lib/api/apiParam';
 
 
 
-export async function GET(_request: Request, { params }: { params: { id: string } }) {
-    const processPublicId = requiredParamString(params.id);
+export async function GET(_request: Request, { params }: { params: Promise<{ id: string }> }) {
+    const { id } = await params;
+    const processPublicId = requiredParamString(id);
 
     const { userId } = optionalUserId();
 
@@ -26,8 +27,9 @@ export async function GET(_request: Request, { params }: { params: { id: string 
     return Response.json(taskDefinitionsDto);
 }
 
-export async function POST(request: Request, { params }: { params: { id: string } }) {
-    const processPublicId = requiredParamString(params.id);
+export async function POST(request: Request, { params }: { params: Promise<{ id: string }> }) {
+    const { id } = await params;
+    const processPublicId = requiredParamString(id);
 
     const data = await request.json();
     const text = data != null && typeof data === 'object' && 'text' in data && typeof data.text === 'string' ? data.text : '';

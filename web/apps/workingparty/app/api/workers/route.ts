@@ -2,7 +2,7 @@ import { workersCreate, workersGetAll } from '../../../src/lib/repository/worker
 import { accountUsageOverLimit } from '../../../src/lib/repository/accountsRepository';
 import { withAuth } from '../../../src/lib/auth/withAuth';
 
-
+export const dynamic = 'force-dynamic';
 
 export async function GET() {
     return withAuth(async ({ accountId }) =>

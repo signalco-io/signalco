@@ -1,10 +1,10 @@
 import { accountUsageScope } from '../../../../../../src/lib/repository/accountsRepository';
 import { withAuth } from '../../../../../../src/lib/auth/withAuth';
 
+export const dynamic = 'force-dynamic';
 
-
-export async function GET(_request: Request, { params }: { params: { accountId: string, scope: string } }) {
-    const { accountId, scope } = params;
+export async function GET(_request: Request, { params }: { params: Promise<{ accountId: string, scope: string }> }) {
+    const { accountId, scope } = await params;
     if (!accountId || !scope)
         return new Response(null, { status: 400 });
 

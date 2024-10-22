@@ -16,7 +16,6 @@ export function ObjectVisualizer(props: { name: string; value: ParsedJson; defau
 
     return (
         <ListTreeItem
-            nodeId={name}
             defaultOpen={defaultOpen}
             label={(
                 <Row spacing={1}>

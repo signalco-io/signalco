@@ -5,7 +5,7 @@ import { Add } from '@signalco/ui-icons';
 
 export type QueryListeItemCreateProps =
     Required<Pick<ListItemProps, 'label' | 'onSelected'>> &
-    Omit<ListItemProps, 'nodeId' | 'startDecorator' | 'endDecorator' | 'href' | 'divRef'> & {
+    Omit<ListItemProps, 'nodeId' | 'startDecorator' | 'endDecorator' | 'href' | 'divRef' | 'buttonRef'> & {
         loading?: boolean
     };
 

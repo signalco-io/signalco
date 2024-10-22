@@ -8,8 +8,9 @@ import { requiredParamString } from '../../../../../../src/lib/api/apiParam';
 
 
 
-export async function GET(_request: Request, { params }: { params: { id: string } }) {
-    const processPublicId = requiredParamString(params.id);
+export async function GET(_request: Request, { params }: { params: Promise<{ id: string }> }) {
+    const { id } = await params;
+    const processPublicId = requiredParamString(id);
 
     return await withAuth(async ({ userId }) => {
         const processId = await entityIdByPublicId(cosmosDataContainerProcesses(), processPublicId);

@@ -22,6 +22,9 @@ const nextConfig = {
             }
         ]
     },
+    experimental: {
+        reactCompiler: true
+    },
     eslint: {
         dirs: ['worker', 'tools', 'src', 'app', 'locales', 'components']
     },

@@ -7,8 +7,10 @@ import { openAiCreateMessage, openAiListMessages } from '../../../../../../../sr
 import { cosmosDataContainerThreads } from '../../../../../../../src/lib/cosmosClient';
 import { withAuth } from '../../../../../../../src/lib/auth/withAuth';
 
-export async function GET(request: Request, { params }: { params: { threadid: string } }) {
-    const { threadid } = params;
+export const dynamic = 'force-dynamic';
+
+export async function GET(request: Request, { params }: { params: Promise<{ threadid: string }> }) {
+    const { threadid } = await params;
 
     const { searchParams } = new URL(request.url);
     const before = searchParams.get('before') || undefined;
@@ -35,8 +37,8 @@ export async function GET(request: Request, { params }: { params: { threadid: st
     });
 }
 
-export async function POST(request: Request, { params }: { params: { workerid: string, threadid: string } }) {
-    const { workerid, threadid } = params;
+export async function POST(request: Request, { params }: { params: Promise<{ workerid: string, threadid: string }> }) {
+    const { workerid, threadid } = await params;
 
     return await withAuth(async ({ accountId }) => {
         // Extract message from JSON payload

@@ -5,10 +5,9 @@ import { withAuth } from '../../../../src/lib/auth/auth';
 import { optionalUserId } from '../../../../src/lib/auth/apiAuth';
 import { requiredParamString } from '../../../../src/lib/api/apiParam';
 
-
-
-export async function GET(_request: Request, { params }: { params: { id: string } }) {
-    const documentPublicId = requiredParamString(params.id);
+export async function GET(_request: Request, { params }: { params: Promise<{ id: string }> }) {
+    const { id } = await params;
+    const documentPublicId = requiredParamString(id);
     const { userId } = optionalUserId();
 
     const documentId = await entityIdByPublicId(cosmosDataContainerDocuments(), documentPublicId);
@@ -20,8 +19,9 @@ export async function GET(_request: Request, { params }: { params: { id: string 
     return Response.json(documentDto);
 }
 
-export async function PUT(request: Request, { params }: { params: { id: string } }) {
-    const documentPublicId = requiredParamString(params.id);
+export async function PUT(request: Request, { params }: { params: Promise<{ id: string }> }) {
+    const { id } = await params;
+    const documentPublicId = requiredParamString(id);
     return await withAuth(async ({ userId }) => {
         const documentId = await entityIdByPublicId(cosmosDataContainerDocuments(), documentPublicId);
         if (documentId == null)
@@ -43,8 +43,9 @@ export async function PUT(request: Request, { params }: { params: { id: string }
     });
 }
 
-export async function DELETE(_request: Request, { params }: { params: { id: string } }) {
-    const documentPublicId = requiredParamString(params.id);
+export async function DELETE(_request: Request, { params }: { params: Promise<{ id: string }> }) {
+    const { id } = await params;
+    const documentPublicId = requiredParamString(id);
     return await withAuth(async ({ userId }) => {
         const documentId = await entityIdByPublicId(cosmosDataContainerDocuments(), documentPublicId);
         if (documentId == null)

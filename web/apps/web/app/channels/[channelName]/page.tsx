@@ -34,8 +34,8 @@ function LinkChannelIssues({ channelName }: { channelName: string }) {
     )
 }
 
-export default function ChannelPage({ params }: { params: { channelName: string } }) {
-    const channelName = params.channelName;
+export default async function ChannelPage({ params }: { params: Promise<{ channelName: string }> }) {
+    const { channelName } = await params;
 
     const channel = channelsData.find(c => c.channelName === channelName);
     if (!channel)

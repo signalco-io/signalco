@@ -1,7 +1,7 @@
 import { accountUsage } from '../../../../../src/lib/repository/accountsRepository';
 import { withAuth } from '../../../../../src/lib/auth/withAuth';
 
-
+export const dynamic = 'force-dynamic';
 
 export type AccountUsageDto = {
     messages: {
@@ -20,8 +20,8 @@ export type AccountUsageDto = {
     },
 };
 
-export async function GET(_request: Request, { params }: { params: { accountId: string } }) {
-    const { accountId } = params;
+export async function GET(_request: Request, { params }: { params: Promise<{ accountId: string }> }) {
+    const { accountId } = await params;
     if (!accountId)
         return new Response(null, { status: 400 });
 

@@ -7,13 +7,13 @@
     "library.js"
   ],
   "devDependencies": {
-    "eslint-config-turbo": "2.1.2",
+    "eslint-config-turbo": "2.2.3",
     "eslint-config-prettier": "9.1.0",
     "eslint-plugin-only-warn": "1.1.0",
-    "eslint-plugin-import": "2.30.0",
+    "eslint-plugin-import": "2.31.0",
     "eslint-import-resolver-typescript": "3.6.3",
-    "@typescript-eslint/parser": "8.7.0",
-    "@typescript-eslint/eslint-plugin": "8.7.0",
-    "typescript": "5.6.2"
+    "@typescript-eslint/parser": "8.11.0",
+    "@typescript-eslint/eslint-plugin": "8.11.0",
+    "typescript": "5.6.3"
   }
 }

@@ -1,10 +1,10 @@
 import { workersDelete, workersGet } from '../../../../src/lib/repository/workersRepository';
 import { withAuth } from '../../../../src/lib/auth/withAuth';
 
+export const dynamic = 'force-dynamic';
 
-
-export async function GET(_request: Request, { params }: { params: { workerid: string } }) {
-    const { workerid } = params;
+export async function GET(_request: Request, { params }: { params: Promise<{ workerid: string }> }) {
+    const { workerid } = await params;
     if (!workerid)
         return new Response(null, { status: 400 });
 
@@ -20,8 +20,8 @@ export async function GET(_request: Request, { params }: { params: { workerid: s
     });
 }
 
-export async function DELETE(_request: Request, { params }: { params: { workerid: string } }) {
-    const { workerid } = params;
+export async function DELETE(_request: Request, { params }: { params: Promise<{ workerid: string }> }) {
+    const { workerid } = await params;
     if (!workerid)
         return new Response(null, { status: 400 });
 

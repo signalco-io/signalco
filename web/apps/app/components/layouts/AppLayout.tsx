@@ -1,3 +1,5 @@
+'use client';
+
 import React, { PropsWithChildren, Suspense } from 'react';
 import dynamic from 'next/dynamic';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';

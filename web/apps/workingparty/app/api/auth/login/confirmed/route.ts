@@ -6,6 +6,8 @@ import { accountCreate } from '../../../../../src/lib/repository/accountsReposit
 import { authConfig } from '../../../../../src/lib/auth/ensureAuthUserId';
 import { createJwt } from '../../../../../src/lib/auth/createJwt';
 
+export const dynamic = 'force-dynamic';
+
 export async function POST(request: Request) {
     const json = await request.json();
     let email: string | undefined = undefined;
@@ -45,7 +47,7 @@ export async function POST(request: Request) {
         await authConfig.jwtSecretFactory());
 
     // Set header for JWT
-    cookies().set('wp_session', jwt, {
+    (await cookies()).set('wp_session', jwt, {
         secure: true,
         httpOnly: true,
         sameSite: 'strict',

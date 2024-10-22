@@ -3,12 +3,12 @@ import { plansGet } from '../../../../../../../src/lib/repository/plansRepositor
 import { accountGet } from '../../../../../../../src/lib/repository/accountsRepository';
 import { withAuth } from '../../../../../../../src/lib/auth/withAuth';
 
-
+export const dynamic = 'force-dynamic';
 
 export type CheckoutSessionDto = Awaited<ReturnType<typeof stripeCheckout>>;
 
-export async function GET(_request: Request, { params }: { params: { accountId: string, planId: string } }) {
-    const { accountId, planId } = params;
+export async function GET(_request: Request, { params }: { params: Promise<{ accountId: string, planId: string }> }) {
+    const { accountId, planId } = await params;
     if (!accountId || !planId)
         return new Response(null, { status: 400 });
 

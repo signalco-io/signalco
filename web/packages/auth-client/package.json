@@ -1,33 +1,52 @@
 {
   "name": "@signalco/auth-client",
-  "version": "0.0.0",
-  "private": true,
+  "version": "0.2.0",
   "license": "MIT",
   "type": "module",
+  "sideEffects": false,
   "exports": {
     ".": "./src/index.ts",
     "./components": "./src/components/index.ts"
   },
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "exports": {
+      ".": {
+        "import": "./dist/index.js",
+        "types": "./dist/index.d.ts"
+      },
+      "./components": {
+        "import": "./dist/components/index.js",
+        "types": "./dist/components/index.d.ts"
+      }
+    }
+  },
   "scripts": {
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "prepublishOnly": "tsup --env.NODE_ENV production"
   },
   "devDependencies": {
     "@signalco/eslint-config-signalco": "workspace:*",
     "@signalco/tailwindcss-config-signalco": "workspace:*",
     "@signalco/tsconfig": "workspace:*",
     "@signalco/ui-icons": "workspace:*",
-    "@signalco/ui-primitives": "workspace:*",
-    "@tanstack/react-query": "5.56.2",
-    "@types/react": "18.3.10",
-    "@types/react-dom": "18.3.0",
-    "next": "14.2.13",
-    "react": "18.3.1",
-    "react-dom": "18.3.1",
-    "typescript": "5.6.2"
+    "@tanstack/react-query": "5.59.15",
+    "@types/react": "npm:types-react@19.0.0-rc.1",
+    "@types/react-dom": "npm:types-react-dom@19.0.0-rc.1",
+    "next": "15.0.0",
+    "react": "19.0.0-rc-65a56d0e-20241020",
+    "react-dom": "19.0.0-rc-65a56d0e-20241020",
+    "typescript": "5.6.3",
+    "@microsoft/api-extractor": "7.47.11",
+    "tsup": "8.3.0"
   },
   "peerDependencies": {
     "@tanstack/react-query": ">=5",
-    "next": ">=14.2.10",
+    "@signalco/ui-primitives": "0",
+    "next": ">=14",
     "react": ">=18",
     "react-dom": ">=18"
   }
