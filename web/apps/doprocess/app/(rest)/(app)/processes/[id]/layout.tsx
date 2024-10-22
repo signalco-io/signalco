@@ -1,7 +1,7 @@
 'use client';
 
 import { PropsWithChildren, useMemo } from 'react';
-import { usePathname } from 'next/navigation';
+import { useParams, usePathname } from 'next/navigation';
 import { Stack } from '@signalco/ui-primitives/Stack';
 import { SplitView } from '@signalco/ui/SplitView';
 import { Breadcrumbs } from '@signalco/ui/Breadcrumbs';
@@ -9,7 +9,8 @@ import { KnownPages } from '../../../../../src/knownPages';
 import { TypographyProcessName } from '../../../../../components/processes/processes/TypographyProcessName';
 import { ProcessDetails } from '../../../../../components/processes/processes/ProcessDetails';
 
-export default function ProcessLayout({ children, params }: PropsWithChildren<{ params: { id: string } }>) {
+export default function ProcessLayout({ children }: PropsWithChildren) {
+    const params = useParams<{ id: string }>();
     const { id } = params;
 
     // Extract process run segment

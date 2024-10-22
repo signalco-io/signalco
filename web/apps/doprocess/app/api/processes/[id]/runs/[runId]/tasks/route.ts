@@ -7,9 +7,10 @@ import { requiredParamString } from '../../../../../../../src/lib/api/apiParam';
 
 
 
-export async function GET(_request: Request, { params }: { params: { id: string, runId: string } }) {
-    const processPublicId = requiredParamString(params.id);
-    const runPublicId = requiredParamString(params.runId);
+export async function GET(_request: Request, { params }: { params: Promise<{ id: string, runId: string }> }) {
+    const { id, runId: paramRunId } = await params;
+    const processPublicId = requiredParamString(id);
+    const runPublicId = requiredParamString(paramRunId);
     const { userId } = optionalUserId();
 
     const processId = await entityIdByPublicId(cosmosDataContainerProcesses(), processPublicId);
@@ -33,9 +34,10 @@ export async function GET(_request: Request, { params }: { params: { id: string,
     return Response.json(tasksDto);
 }
 
-export async function POST(request: Request, { params }: { params: { id: string, runId: string } }) {
-    const processPublicId = requiredParamString(params.id);
-    const runPublicId = requiredParamString(params.runId);
+export async function POST(request: Request, { params }: { params: Promise<{ id: string, runId: string }> }) {
+    const { id, runId } = await params;
+    const processPublicId = requiredParamString(id);
+    const runPublicId = requiredParamString(runId);
     return await withAuth(async ({ accountId, userId }) => {
         const processId = await entityIdByPublicId(cosmosDataContainerProcesses(), processPublicId);
         if (processId == null)

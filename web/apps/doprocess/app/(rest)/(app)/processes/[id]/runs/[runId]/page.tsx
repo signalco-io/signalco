@@ -1,7 +1,7 @@
 import { TaskDetails } from '../../../../../../../components/processes/tasks/TaskDetails';
 
-export default function ProcessRunPage({ params }: { params: { id: string } }) {
-    const { id } = params;
+export default async function ProcessRunPage({ params }: { params: Promise<{ id: string }> }) {
+    const { id } = await params;
 
     return (
         <TaskDetails processId={id} editable={false} />

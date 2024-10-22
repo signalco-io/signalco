@@ -1,8 +1,12 @@
-import styles from './DiscoverVisual.module.scss';
-
 function DiscoverVisual() {
     return (
-        <svg className={styles.root} width="616" height="616" viewBox="0 0 616 616" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg
+            className="w-full [&_circle:last-of-type]:fill-[#45ca7a] dark:[&_circle:last-of-type]:fill-[#2c8550] [&_circle]:fill-foreground [&_line]:stroke-border [&_path]:fill-foreground [&_stop]:[stop-color:hsl(var(--background))]"
+            width="616"
+            height="616"
+            viewBox="0 0 616 616"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg">
             <g>
                 <line x1="458.428" y1="145.742" x2="555.428" y2="306.742" />
                 <line x1="355.192" y1="223.538" x2="555.192" y2="306.538" />

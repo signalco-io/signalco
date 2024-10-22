@@ -6,11 +6,10 @@ import { withAuth } from '../../../../../../src/lib/auth/auth';
 import { optionalUserId } from '../../../../../../src/lib/auth/apiAuth';
 import { requiredParamString } from '../../../../../../src/lib/api/apiParam';
 
-
-
-export async function GET(_request: Request, { params }: { params: { id: string, taskDefinitionId: string } }) {
-    const processPublicId = requiredParamString(params.id);
-    const taskDefinitionPublicId = requiredParamString(params.taskDefinitionId);
+export async function GET(_request: Request, { params }: { params: Promise<{ id: string, taskDefinitionId: string }> }) {
+    const { id, taskDefinitionId: paramTaskDefinitionId } = await params;
+    const processPublicId = requiredParamString(id);
+    const taskDefinitionPublicId = requiredParamString(paramTaskDefinitionId);
 
     const { userId } = optionalUserId();
 
@@ -34,9 +33,10 @@ export async function GET(_request: Request, { params }: { params: { id: string,
     return Response.json(taskDefinitionDto);
 }
 
-export async function PUT(request: Request, { params }: { params: { id: string, taskDefinitionId: string } }) {
-    const processPublicId = requiredParamString(params.id);
-    const taskDefinitionPublicId = requiredParamString(params.taskDefinitionId);
+export async function PUT(request: Request, { params }: { params: Promise<{ id: string, taskDefinitionId: string }> }) {
+    const { id, taskDefinitionId: paramTaskDefinitionId } = await params;
+    const processPublicId = requiredParamString(id);
+    const taskDefinitionPublicId = requiredParamString(paramTaskDefinitionId);
 
     return await withAuth(async ({ accountId, userId }) => {
         const processId = await entityIdByPublicId(cosmosDataContainerProcesses(), processPublicId);
@@ -86,9 +86,10 @@ export async function PUT(request: Request, { params }: { params: { id: string, 
     });
 }
 
-export async function DELETE(_request: Request, { params }: { params: { id: string, taskDefinitionId: string } }) {
-    const processPublicId = requiredParamString(params.id);
-    const taskDefinitionPublicId = requiredParamString(params.taskDefinitionId);
+export async function DELETE(_request: Request, { params }: { params: Promise<{ id: string, taskDefinitionId: string }> }) {
+    const { id, taskDefinitionId: paramTaskDefinitionId } = await params;
+    const processPublicId = requiredParamString(id);
+    const taskDefinitionPublicId = requiredParamString(paramTaskDefinitionId);
 
     return await withAuth(async ({ userId }) => {
         const processId = await entityIdByPublicId(cosmosDataContainerProcesses(), processPublicId);

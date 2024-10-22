@@ -4,7 +4,7 @@ import type { UserBase } from './@types/UserBase';
 import type { AuthConfigInitialized } from './@types/AuthConfigInitialized';
 
 export async function ensureAuthUserId<TUser extends UserBase>(authConfig: AuthConfigInitialized<TUser>) {
-    const sessionCookie = cookies().get(authConfig.cookie.name);
+    const sessionCookie = (await cookies()).get(authConfig.cookie.name);
     if (!sessionCookie?.value)
         throw new Error('Unauthorized');
 

@@ -19,7 +19,7 @@ export const authConfig: AuthConfig = {
 }
 
 export async function ensureAuthUserId() {
-    const sessionCookie = cookies().get(authConfig.cookieName);
+    const sessionCookie = (await cookies()).get(authConfig.cookieName);
     if (!sessionCookie?.value)
         return Response.json({ error: 'Unauthorized' }, { status: 401 });
 

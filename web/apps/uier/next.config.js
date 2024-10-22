@@ -22,6 +22,9 @@ const nextConfig = {
             }
         ]
     },
+    experimental: {
+        reactCompiler: true
+    },
     eslint: {
         dirs: ['src', 'app', 'locales']
     },

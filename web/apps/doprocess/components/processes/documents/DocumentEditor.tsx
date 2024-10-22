@@ -20,7 +20,7 @@ export function DocumentEditor({ id, editable, onSavingChange }: DocumentEditorP
     const documentUpdate = useDocumentUpdate();
     const documentData = document?.dataJson;
 
-    const currentContentId = useRef<string>();
+    const currentContentId = useRef<string>(null);
     const [content, setContent] = useState<string | null>();
     useEffect(() => {
         if (!isLoading && !error && currentContentId.current !== id) {
@@ -64,7 +64,7 @@ export function DocumentEditor({ id, editable, onSavingChange }: DocumentEditorP
             loadingLabel="Loading document..."
             placeholder={<EditorSkeleton />}
             error={error}>
-            {content && (
+            {content && currentContentId.current && (
                 <Editor
                     id={currentContentId.current}
                     content={content}

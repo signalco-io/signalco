@@ -1,7 +1,5 @@
 import React, { forwardRef } from 'react';
-import { cx } from '@signalco/ui-primitives/cx';
 import type { SupportedColorScheme } from '@signalco/ui/theme';
-import styles from './SignalcoLogotype.module.scss';
 
 interface SignalcoLogotypeProps {
     width?: number;
@@ -22,7 +20,7 @@ function SignalcoLogotype({ width, height, theme }: SignalcoLogotypeProps, ref: 
         <div
             aria-label="Signalco"
             role="img"
-            className={cx(styles.root)}
+            className="relative flex gap-2"
             ref={ref}
             style={{ paddingTop: paddingTop }}>
             <svg version="1.0"

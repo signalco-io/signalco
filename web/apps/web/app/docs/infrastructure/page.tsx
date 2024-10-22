@@ -1,3 +1,5 @@
+'use client';
+
 import dynamic from 'next/dynamic';
 import { Stack } from '@signalco/ui-primitives/Stack';
 import PageCenterHeader from '../../../components/pages/PageCenterHeader';
