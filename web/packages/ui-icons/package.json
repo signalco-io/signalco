@@ -1,6 +1,6 @@
 {
     "name": "@signalco/ui-icons",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "sideEffects": false,
     "type": "module",
     "license": "MIT",
@@ -33,7 +33,7 @@
         "typescript": "5.6.3"
     },
     "peerDependencies": {
-        "react": ">=18",
-        "react-dom": ">=18"
+        "react": ">=19.0.0-rc-65a56d0e-20241020",
+        "react-dom": ">=19.0.0-rc-65a56d0e-20241020"
     }
 }
