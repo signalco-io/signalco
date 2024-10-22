@@ -41,7 +41,7 @@
         "@signalco/tsconfig": "workspace:*",
         "@signalco/ui-icons": "workspace:*",
         "@types/react": "npm:types-react@19.0.0-rc.1",
-        "@types/react-dom": "npm:types-react-dom@19.0.0-rc.1",
+        "@types/react-dom": "npm:types-react-dom@19.0.0",
         "@types/react-timeago": "4.1.7",
         "autoprefixer": "10.4.20",
         "classix": "2.2.0",
