@@ -1,53 +1,11 @@
 import { join } from 'path';
 import { readdir, readFile } from 'fs/promises';
-import React, { memo } from 'react';
+import React from 'react';
 import { Typography } from '@signalco/ui-primitives/Typography';
 import { Stack } from '@signalco/ui-primitives/Stack';
 import { Row } from '@signalco/ui-primitives/Row';
 import { Card, CardContent, CardHeader } from '@signalco/ui-primitives/Card';
-import { CompanyGitHub, CompanyReddit, CompanyX } from '@signalco/ui-icons';
-import { SectionsView } from '@signalco/cms-core/SectionsView';
-import { SectionData } from '@signalco/cms-core/SectionData';
-import { Footer1 } from '@signalco/cms-components-marketing/Footer';
 import PageCenterHeader from '../pages/PageCenterHeader';
-import SignalcoLogotype from '../icons/SignalcoLogotype';
-import { KnownPages } from '../../src/knownPages';
-
-const sectionsComponentRegistry = {
-    'Footer1': memo(Footer1)
-}
-
-const sectionsData: SectionData[] = [
-    {
-        component: 'Footer1',
-        tagline: 'signalco',
-        asset: <SignalcoLogotype width={220} />,
-        features: [
-            {
-                header: 'Community',
-                ctas: [
-                    { label: 'r/signalco', href: 'https://www.reddit.com/r/signalco/' },
-                    { label: 'Discussions on GitHub', href: 'https://github.com/signalco-io/signalco/discussions' },
-                ]
-            },
-            {
-                header: 'Legal',
-                ctas: [
-                    { label: 'Privacy Policy', href: KnownPages.LegalPrivacyPolicy },
-                    { label: 'Terms of Service', href: KnownPages.LegalTermsOfService },
-                    { label: 'Cookie Policy', href: KnownPages.LegalCookiePolicy },
-                    { label: 'Acceptable Use Policy', href: KnownPages.LegalAcceptableUsePolicy },
-                    { label: 'SLA', href: KnownPages.LegalSla },
-                ]
-            }
-        ],
-        ctas: [
-            { label: 'X formerly known as Twitter', href: 'https://x.com/signalco_io', icon: <CompanyX /> },
-            { label: 'reddit', href: 'https://www.reddit.com/r/signalco/', icon: <CompanyReddit /> },
-            { label: 'GitHub', href: 'https://github.com/signalco-io/signalco', icon: <CompanyGitHub /> },
-        ]
-    }
-];
 
 export default async function LandingPageView() {
     // Get all *.mdx files in base directory
@@ -93,9 +51,6 @@ export default async function LandingPageView() {
                     ))}
                 </Row>
             </Stack>
-            <SectionsView
-                sectionsData={sectionsData}
-                componentsRegistry={sectionsComponentRegistry} />
         </div>
     );
 }
