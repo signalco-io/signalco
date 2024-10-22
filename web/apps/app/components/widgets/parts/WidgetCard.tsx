@@ -1,4 +1,4 @@
-import React, { CSSProperties, useState } from 'react';
+import React, { CSSProperties, ReactNode, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { Stack } from '@signalco/ui-primitives/Stack';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@signalco/ui-primitives/Menu';
@@ -12,7 +12,7 @@ import { IsConfigurationValid } from '../../../src/widgets/ConfigurationValidato
 const WidgetConfiguration = dynamic(() => import('./WidgetConfiguration'));
 
 interface IWidgetCardProps {
-    children: JSX.Element,
+    children: ReactNode,
     isEditMode?: boolean
     config: Record<string, unknown>,
     options?: IWidgetConfigurationOption<unknown>[],

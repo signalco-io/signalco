@@ -1,10 +1,11 @@
 'use client';
 
-import { redirect } from 'next/navigation';
+import { redirect, useParams } from 'next/navigation';
 import { KnownPages } from '../../../../../../src/knownPages';
 import { useWorkerThreads } from '../../../../../../src/hooks/data/workers/useWorkerThreads'
 
-export default function WorkerPage({ params }: { params: { workerid: string } }) {
+export default function WorkerPage() {
+    const params = useParams<{ workerid: string }>();
     const { workerid } = params;
     const threads = useWorkerThreads(workerid);
 

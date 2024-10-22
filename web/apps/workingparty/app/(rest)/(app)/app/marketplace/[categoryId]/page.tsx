@@ -1,6 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
+import { useParams } from 'next/navigation';
 import { Typography } from '@signalco/ui-primitives/Typography';
 import { Stack } from '@signalco/ui-primitives/Stack';
 import { Row } from '@signalco/ui-primitives/Row';
@@ -12,7 +13,10 @@ import { markeplaceCategoriesFlat } from '../../../../../../src/data/markeplaceC
 import { WorkerModal } from './WorkerModal';
 import { WorkerCard } from './WorkerCard';
 
-export default function MarketplaceCategoryPage({ params }: { params: { categoryId: string } }) {
+// TODO: Make server-side page
+
+export default function MarketplaceCategoryPage() {
+    const params = useParams<{ categoryId: string }>();
     const { categoryId } = params;
     const selectedCategory = markeplaceCategoriesFlat.find((category) => category.id === categoryId);
     const filteredWorkers = useMemo(() => orderBy(categoryId === 'explore'

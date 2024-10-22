@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useParams } from 'next/navigation';
 import { Stack } from '@signalco/ui-primitives/Stack';
 import { cx } from '@signalco/ui-primitives/cx';
 import { useDocument } from '../../../../../src/hooks/useDocument';
@@ -8,7 +9,8 @@ import { TypographyDocumentName } from '../../../../../components/processes/docu
 import { DocumentEditor } from '../../../../../components/processes/documents/DocumentEditor';
 import { DocumentDetailsToolbar } from '../../../../../components/processes/documents/DocumentDetailsToolbar';
 
-export default function DocumentPage({ params }: { params: { id: string } }) {
+export default function DocumentPage() {
+    const params = useParams<{ id: string }>();
     const { id } = params;
     const [saving, setSaving] = useState(false);
     const { data: document } = useDocument(id);

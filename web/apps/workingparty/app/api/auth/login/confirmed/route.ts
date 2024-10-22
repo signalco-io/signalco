@@ -47,7 +47,7 @@ export async function POST(request: Request) {
         await authConfig.jwtSecretFactory());
 
     // Set header for JWT
-    cookies().set('wp_session', jwt, {
+    (await cookies()).set('wp_session', jwt, {
         secure: true,
         httpOnly: true,
         sameSite: 'strict',

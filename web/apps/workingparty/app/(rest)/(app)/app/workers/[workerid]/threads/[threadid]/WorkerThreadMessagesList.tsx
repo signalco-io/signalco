@@ -17,7 +17,7 @@ export function WorkerThreadMessagesList({
 }: {
     workerId: string;
     threadId: string;
-    containerRef: React.RefObject<HTMLDivElement>;
+    containerRef: React.RefObject<HTMLDivElement | null>;
     onLoadingChanged?: (loading: boolean) => void;
 }) {
     const [autoScroll, setAutoScroll] = useState(true);

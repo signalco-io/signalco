@@ -3,8 +3,8 @@ import { withAuth } from '../../../../../../src/lib/auth/withAuth';
 
 export const dynamic = 'force-dynamic';
 
-export async function GET(_request: Request, { params }: { params: { workerid: string, threadid: string } }) {
-    const { threadid } = params;
+export async function GET(_request: Request, { params }: { params: Promise<{ workerid: string, threadid: string }> }) {
+    const { threadid } = await params;
     if (!threadid)
         return new Response(null, { status: 400 });
 
@@ -20,8 +20,8 @@ export async function GET(_request: Request, { params }: { params: { workerid: s
     });
 }
 
-export async function DELETE(_request: Request, { params }: { params: { workerid: string, threadid: string } }) {
-    const { threadid } = params;
+export async function DELETE(_request: Request, { params }: { params: Promise<{ workerid: string, threadid: string }> }) {
+    const { threadid } = await params;
     if (!threadid)
         return new Response(null, { status: 400 });
 

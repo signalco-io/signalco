@@ -7,7 +7,7 @@ export async function setCookie<TUser extends UserBase>(
     cookieValue: Promise<string> | string,
     expiry?: number
 ) {
-    cookies().set(
+    (await cookies()).set(
         config.cookie.name,
         await cookieValue,
         {

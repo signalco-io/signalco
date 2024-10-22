@@ -1,6 +1,7 @@
 'use client';
 
 import { Suspense, type PropsWithChildren } from 'react';
+import { useParams } from 'next/navigation';
 import { Stack } from '@signalco/ui-primitives/Stack';
 import { Row } from '@signalco/ui-primitives/Row';
 import { Chip } from '@signalco/ui-primitives/Chip';
@@ -18,7 +19,10 @@ import ShareEntityChip from '../../../components/entity/ShareEntityChip';
 import EntityStatus, { useEntityStatus } from '../../../components/entity/EntityStatus';
 import { useEntityBattery } from '../../../components/entity/EntityBattery';
 
-export default function EntityLayout({ children, params }: PropsWithChildren<{ params: { id?: string } }>) {
+// TODO: Make server-side page
+
+export default function EntityLayout({ children }: PropsWithChildren) {
+    const params = useParams<{ id: string }>();
     const { id } = params;
     const { data: entity } = useEntity(id);
     const { hasStatus, isOffline, isStale } = useEntityStatus(entity);

@@ -80,7 +80,7 @@ If you want more control over cookie, you can create and set it manually.
 ```ts
 import { createJwt } from './auth';
 
-cookies().set(
+(await cookies()).set(
     'auth_session', // Make sure this matches configured `cookie.name`
     await createJwt(user.id), 
     {
@@ -98,5 +98,5 @@ When you want to log out a user, you should clear the JWT cookie. You can use `c
 ```ts
 import { clearCookie } from './auth';
 
-clearCookie();
+await clearCookie();
 ```

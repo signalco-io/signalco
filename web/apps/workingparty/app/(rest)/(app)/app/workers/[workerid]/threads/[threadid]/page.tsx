@@ -1,7 +1,7 @@
 'use client';
 
 import { useRef, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { Typography } from '@signalco/ui-primitives/Typography';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@signalco/ui-primitives/Menu';
 import { IconButton } from '@signalco/ui-primitives/IconButton';
@@ -14,7 +14,8 @@ import { useThread } from '../../../../../../../../src/hooks/data/threads/useThr
 import { WorkerThreadMessagesList } from './WorkerThreadMessagesList';
 import { ThreadMessageInput } from './ThreadMessageInput';
 
-export default function WorkerThreadPage({ params }: { params: { workerid: string, threadid: string } }) {
+export default function WorkerThreadPage() {
+    const params = useParams<{ workerid: string, threadid: string }>();
     const { workerid, threadid } = params;
     const router = useRouter();
     const containerRef = useRef<HTMLDivElement>(null);
