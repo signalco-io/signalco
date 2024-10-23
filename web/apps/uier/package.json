@@ -49,7 +49,7 @@
     "@signalco/tsconfig": "workspace:*",
     "@total-typescript/ts-reset": "0.6.1",
     "@types/color": "3.0.6",
-    "@types/node": "22.7.8",
+    "@types/node": "22.7.9",
     "@types/react": "npm:types-react@19.0.0-rc.1",
     "@types/react-dom": "npm:types-react-dom@19.0.0-rc.1",
     "babel-plugin-react-compiler": "19.0.0-beta-8a03594-20241020",
