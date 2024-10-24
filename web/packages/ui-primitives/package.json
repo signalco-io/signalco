@@ -51,7 +51,7 @@
         "react": "19.0.0-rc-65a56d0e-20241020",
         "react-dom": "19.0.0-rc-65a56d0e-20241020",
         "react-timeago": "7.2.0",
-        "sass": "1.80.3",
+        "sass": "1.80.4",
         "tailwind-merge": "2.5.4",
         "tsup": "8.3.0",
         "typescript": "5.6.3"
