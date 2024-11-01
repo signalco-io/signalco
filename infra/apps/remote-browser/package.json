@@ -21,7 +21,7 @@
     "dependencies": {
         "@checkly/pulumi": "1.1.4",
         "@pulumi/azure-native": "2.69.0",
-        "@pulumi/cloudflare": "5.41.0",
+        "@pulumi/cloudflare": "5.42.0",
         "@pulumi/command": "1.0.1",
         "@pulumi/docker": "4.5.7",
         "@pulumi/pulumi": "3.137.0",
