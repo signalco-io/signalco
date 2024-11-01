@@ -95,10 +95,10 @@ importers:
         version: 5.59.16(@tanstack/react-query@5.59.16(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)
       '@vercel/analytics':
         specifier: 1.3.2
-        version: 1.3.2(next@15.0.0(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.4))(react@19.0.0-rc-65a56d0e-20241020)
+        version: 1.3.2(next@15.0.0(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.5))(react@19.0.0-rc-65a56d0e-20241020)
       '@vercel/speed-insights':
         specifier: 1.0.13
-        version: 1.0.13(next@15.0.0(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.4))(react@19.0.0-rc-65a56d0e-20241020)
+        version: 1.0.13(next@15.0.0(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.5))(react@19.0.0-rc-65a56d0e-20241020)
       '@vvo/tzdb':
         specifier: 6.147.0
         version: 6.147.0
@@ -131,7 +131,7 @@ importers:
         version: 0.52.0
       next:
         specifier: 15.0.0
-        version: 15.0.0(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.4)
+        version: 15.0.0(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.5)
       next-secure-headers:
         specifier: 2.2.0
         version: 2.2.0
@@ -231,7 +231,7 @@ importers:
         version: 11.2.0
       next-sitemap:
         specifier: 4.2.3
-        version: 4.2.3(next@15.0.0(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.4))
+        version: 4.2.3(next@15.0.0(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.5))
       openapi-types:
         specifier: 12.1.3
         version: 12.1.3
@@ -242,11 +242,11 @@ importers:
         specifier: 18.3.1
         version: 18.3.1
       sass:
-        specifier: 1.80.4
-        version: 1.80.4
+        specifier: 1.80.5
+        version: 1.80.5
       sass-loader:
         specifier: 16.0.2
-        version: 16.0.2(sass@1.80.4)(webpack@5.94.0)
+        version: 16.0.2(sass@1.80.5)(webpack@5.94.0)
       typescript:
         specifier: 5.6.3
         version: 5.6.3
@@ -294,7 +294,7 @@ importers:
         version: link:../../packages/ui-themes-minimal
       '@vercel/analytics':
         specifier: 1.3.2
-        version: 1.3.2(next@15.0.0(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.4))(react@19.0.0-rc-65a56d0e-20241020)
+        version: 1.3.2(next@15.0.0(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.5))(react@19.0.0-rc-65a56d0e-20241020)
       autoprefixer:
         specifier: 10.4.20
         version: 10.4.20(postcss@8.4.47)
@@ -303,7 +303,7 @@ importers:
         version: 2.2.0
       next:
         specifier: 15.0.0
-        version: 15.0.0(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.4)
+        version: 15.0.0(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.5)
       next-secure-headers:
         specifier: 2.2.0
         version: 2.2.0
@@ -364,13 +364,13 @@ importers:
         version: 8.57.1
       next-sitemap:
         specifier: 4.2.3
-        version: 4.2.3(next@15.0.0(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.4))
+        version: 4.2.3(next@15.0.0(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.5))
       postcss:
         specifier: 8.4.47
         version: 8.4.47
       sass:
-        specifier: 1.80.4
-        version: 1.80.4
+        specifier: 1.80.5
+        version: 1.80.5
       typescript:
         specifier: 5.6.3
         version: 5.6.3
@@ -418,7 +418,7 @@ importers:
         version: 2.2.0
       next:
         specifier: 15.0.0
-        version: 15.0.0(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.4)
+        version: 15.0.0(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.5)
       next-secure-headers:
         specifier: 2.2.0
         version: 2.2.0
@@ -464,13 +464,13 @@ importers:
         version: 8.57.1
       next-sitemap:
         specifier: 4.2.3
-        version: 4.2.3(next@15.0.0(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.4))
+        version: 4.2.3(next@15.0.0(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.5))
       postcss:
         specifier: 8.4.47
         version: 8.4.47
       sass:
-        specifier: 1.80.4
-        version: 1.80.4
+        specifier: 1.80.5
+        version: 1.80.5
       tailwindcss:
         specifier: 3.4.14
         version: 3.4.14
@@ -563,7 +563,7 @@ importers:
         version: 5.59.16(@tanstack/react-query@5.59.16(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)
       '@vercel/analytics':
         specifier: 1.3.2
-        version: 1.3.2(next@15.0.0(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.4))(react@19.0.0-rc-65a56d0e-20241020)
+        version: 1.3.2(next@15.0.0(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.5))(react@19.0.0-rc-65a56d0e-20241020)
       classix:
         specifier: 2.2.0
         version: 2.2.0
@@ -572,7 +572,7 @@ importers:
         version: 5.0.8
       next:
         specifier: 15.0.0
-        version: 15.0.0(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.4)
+        version: 15.0.0(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.5)
       next-secure-headers:
         specifier: 2.2.0
         version: 2.2.0
@@ -633,13 +633,13 @@ importers:
         version: 8.57.1
       next-sitemap:
         specifier: 4.2.3
-        version: 4.2.3(next@15.0.0(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.4))
+        version: 4.2.3(next@15.0.0(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.5))
       postcss:
         specifier: 8.4.47
         version: 8.4.47
       sass:
-        specifier: 1.80.4
-        version: 1.80.4
+        specifier: 1.80.5
+        version: 1.80.5
       typescript:
         specifier: 5.6.3
         version: 5.6.3
@@ -678,7 +678,7 @@ importers:
         version: 2.2.0
       next:
         specifier: 15.0.0
-        version: 15.0.0(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.4)
+        version: 15.0.0(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.5)
       next-secure-headers:
         specifier: 2.2.0
         version: 2.2.0
@@ -733,13 +733,13 @@ importers:
         version: 8.57.1
       next-sitemap:
         specifier: 4.2.3
-        version: 4.2.3(next@15.0.0(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.4))
+        version: 4.2.3(next@15.0.0(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.5))
       postcss:
         specifier: 8.4.47
         version: 8.4.47
       sass:
-        specifier: 1.80.4
-        version: 1.80.4
+        specifier: 1.80.5
+        version: 1.80.5
       typescript:
         specifier: 5.6.3
         version: 5.6.3
@@ -785,7 +785,7 @@ importers:
         version: 8.3.6(react-dom@18.3.1(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(storybook@8.3.6)(typescript@5.6.3)
       '@storybook/react-vite':
         specifier: 8.3.6
-        version: 8.3.6(react-dom@18.3.1(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(rollup@4.24.0)(storybook@8.3.6)(typescript@5.6.3)(vite@5.4.2(@types/node@22.7.9)(sass@1.80.4)(terser@5.31.6))
+        version: 8.3.6(react-dom@18.3.1(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(rollup@4.24.0)(storybook@8.3.6)(typescript@5.6.3)(vite@5.4.2(@types/node@22.7.9)(sass@1.80.5)(terser@5.31.6))
       '@storybook/theming':
         specifier: 8.3.6
         version: 8.3.6(storybook@8.3.6)
@@ -811,11 +811,11 @@ importers:
         specifier: 6.0.1
         version: 6.0.1
       sass:
-        specifier: 1.80.4
-        version: 1.80.4
+        specifier: 1.80.5
+        version: 1.80.5
       sass-loader:
         specifier: 16.0.2
-        version: 16.0.2(sass@1.80.4)(webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.13))(esbuild@0.23.0))
+        version: 16.0.2(sass@1.80.5)(webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.13))(esbuild@0.23.0))
       storybook:
         specifier: 8.3.6
         version: 8.3.6
@@ -884,13 +884,13 @@ importers:
         version: 5.59.16(@tanstack/react-query@5.59.16(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)
       '@vercel/analytics':
         specifier: 1.3.2
-        version: 1.3.2(next@15.0.0(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.4))(react@19.0.0-rc-65a56d0e-20241020)
+        version: 1.3.2(next@15.0.0(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.5))(react@19.0.0-rc-65a56d0e-20241020)
       classix:
         specifier: 2.2.0
         version: 2.2.0
       next:
         specifier: 15.0.0
-        version: 15.0.0(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.4)
+        version: 15.0.0(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.5)
       next-secure-headers:
         specifier: 2.2.0
         version: 2.2.0
@@ -948,13 +948,13 @@ importers:
         version: 8.57.1
       next-sitemap:
         specifier: 4.2.3
-        version: 4.2.3(next@15.0.0(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.4))
+        version: 4.2.3(next@15.0.0(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.5))
       postcss:
         specifier: 8.4.47
         version: 8.4.47
       sass:
-        specifier: 1.80.4
-        version: 1.80.4
+        specifier: 1.80.5
+        version: 1.80.5
       typescript:
         specifier: 5.6.3
         version: 5.6.3
@@ -1011,7 +1011,7 @@ importers:
         version: 0.5.15(tailwindcss@3.4.14)
       '@vercel/analytics':
         specifier: 1.3.2
-        version: 1.3.2(next@15.0.0(@babel/core@7.25.2)(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.4))(react@19.0.0-rc-65a56d0e-20241020)
+        version: 1.3.2(next@15.0.0(@babel/core@7.25.2)(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.5))(react@19.0.0-rc-65a56d0e-20241020)
       autoprefixer:
         specifier: 10.4.20
         version: 10.4.20(postcss@8.4.47)
@@ -1020,7 +1020,7 @@ importers:
         version: 2.2.0
       next:
         specifier: 15.0.0
-        version: 15.0.0(@babel/core@7.25.2)(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.4)
+        version: 15.0.0(@babel/core@7.25.2)(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.5)
       next-secure-headers:
         specifier: 2.2.0
         version: 2.2.0
@@ -1087,7 +1087,7 @@ importers:
         version: 8.57.1
       next-sitemap:
         specifier: 4.2.3
-        version: 4.2.3(next@15.0.0(@babel/core@7.25.2)(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.4))
+        version: 4.2.3(next@15.0.0(@babel/core@7.25.2)(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.5))
       openapi-types:
         specifier: 12.1.3
         version: 12.1.3
@@ -1095,8 +1095,8 @@ importers:
         specifier: 8.4.47
         version: 8.4.47
       sass:
-        specifier: 1.80.4
-        version: 1.80.4
+        specifier: 1.80.5
+        version: 1.80.5
       typescript:
         specifier: 5.6.3
         version: 5.6.3
@@ -1177,7 +1177,7 @@ importers:
         version: 5.59.16(@tanstack/react-query@5.59.16(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)
       '@vercel/analytics':
         specifier: 1.3.2
-        version: 1.3.2(next@15.0.0(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.4))(react@19.0.0-rc-65a56d0e-20241020)
+        version: 1.3.2(next@15.0.0(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.5))(react@19.0.0-rc-65a56d0e-20241020)
       classix:
         specifier: 2.2.0
         version: 2.2.0
@@ -1189,7 +1189,7 @@ importers:
         version: 5.0.8
       next:
         specifier: 15.0.0
-        version: 15.0.0(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.4)
+        version: 15.0.0(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.5)
       next-secure-headers:
         specifier: 2.2.0
         version: 2.2.0
@@ -1207,7 +1207,7 @@ importers:
         version: 19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020)
       react-email:
         specifier: 3.0.1
-        version: 3.0.1(@playwright/test@1.48.2)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.4)
+        version: 3.0.1(@playwright/test@1.48.2)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.5)
       react-markdown:
         specifier: 9.0.1
         version: 9.0.1(react@19.0.0-rc-65a56d0e-20241020)(types-react@19.0.0-rc.1)
@@ -1259,13 +1259,13 @@ importers:
         version: 8.57.1
       next-sitemap:
         specifier: 4.2.3
-        version: 4.2.3(next@15.0.0(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.4))
+        version: 4.2.3(next@15.0.0(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.5))
       postcss:
         specifier: 8.4.47
         version: 8.4.47
       sass:
-        specifier: 1.80.4
-        version: 1.80.4
+        specifier: 1.80.5
+        version: 1.80.5
       typescript:
         specifier: 5.6.3
         version: 5.6.3
@@ -1302,7 +1302,7 @@ importers:
         version: types-react-dom@19.0.0-rc.1
       next:
         specifier: 15.0.0
-        version: 15.0.0(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.4)
+        version: 15.0.0(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.5)
       react:
         specifier: 19.0.0-rc-65a56d0e-20241020
         version: 19.0.0-rc-65a56d0e-20241020
@@ -1341,7 +1341,7 @@ importers:
         version: 5.9.6
       next:
         specifier: 15.0.0
-        version: 15.0.0(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.4)
+        version: 15.0.0(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.5)
       react:
         specifier: 19.0.0-rc-65a56d0e-20241020
         version: 19.0.0-rc-65a56d0e-20241020
@@ -1458,7 +1458,7 @@ importers:
         version: 19.0.0-rc-65a56d0e-20241020
       react-email:
         specifier: 3.0.1
-        version: 3.0.1(@playwright/test@1.48.2)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.4)
+        version: 3.0.1(@playwright/test@1.48.2)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.5)
       typescript:
         specifier: 5.6.3
         version: 5.6.3
@@ -1528,7 +1528,7 @@ importers:
         version: types-react@19.0.0-rc.1
       next:
         specifier: 15.0.0
-        version: 15.0.0(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.4)
+        version: 15.0.0(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.5)
       react:
         specifier: 19.0.0-rc-65a56d0e-20241020
         version: 19.0.0-rc-65a56d0e-20241020
@@ -1658,8 +1658,8 @@ importers:
         specifier: 7.2.0
         version: 7.2.0(react@19.0.0-rc-65a56d0e-20241020)
       sass:
-        specifier: 1.80.4
-        version: 1.80.4
+        specifier: 1.80.5
+        version: 1.80.5
       tailwind-merge:
         specifier: 2.5.4
         version: 2.5.4
@@ -1849,7 +1849,7 @@ importers:
         version: 2.2.0
       next:
         specifier: 15.0.0
-        version: 15.0.0(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.4)
+        version: 15.0.0(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.5)
       postcss:
         specifier: 8.4.47
         version: 8.4.47
@@ -1866,8 +1866,8 @@ importers:
         specifier: 7.2.0
         version: 7.2.0(react@19.0.0-rc-65a56d0e-20241020)
       sass:
-        specifier: 1.80.4
-        version: 1.80.4
+        specifier: 1.80.5
+        version: 1.80.5
       tailwind-merge:
         specifier: 2.5.4
         version: 2.5.4
@@ -1988,8 +1988,8 @@ importers:
         specifier: 7.2.0
         version: 7.2.0(react@19.0.0-rc-65a56d0e-20241020)
       sass:
-        specifier: 1.80.4
-        version: 1.80.4
+        specifier: 1.80.5
+        version: 1.80.5
       tailwindcss:
         specifier: 3.4.14
         version: 3.4.14
@@ -5507,10 +5507,6 @@ packages:
     resolution: {integrity: sha512-7VT13fmjotKpGipCW9JEQAusEPE+Ei8nl6/g4FBAmIm0GOOLMua9NDDo/DWp0ZAxCr3cPq5ZpBqmPAQgDda2Pw==}
     engines: {node: '>= 8.10.0'}
 
-  chokidar@4.0.0:
-    resolution: {integrity: sha512-mxIojEAQcuEvT/lyXq+jf/3cO/KoA6z4CeNDGGevTybECPOMFCnQy3OPahluUkbqgPNGw5Bi78UC7Po6Lhy+NA==}
-    engines: {node: '>= 14.16.0'}
-
   chokidar@4.0.1:
     resolution: {integrity: sha512-n8enUVCED/KVRQlab1hr3MVpcVMvxtZjmEa956u+4YijlmQED223XMSYj2tLuKvr4jcCTzNNMpQDUer72MMmzA==}
     engines: {node: '>= 14.16.0'}
@@ -8604,8 +8600,8 @@ packages:
       webpack:
         optional: true
 
-  sass@1.80.4:
-    resolution: {integrity: sha512-rhMQ2tSF5CsuuspvC94nPM9rToiAFw2h3JTrLlgmNw1MH79v8Cr3DH6KF6o6r+8oofY3iYVPUf66KzC8yuVN1w==}
+  sass@1.80.5:
+    resolution: {integrity: sha512-TQd2aoQl/+zsxRMEDSxVdpPIqeq9UFc6pr7PzkugiTx3VYCFPUaa3P4RrBQsqok4PO200Vkz0vXQBNlg7W907g==}
     engines: {node: '>=14.0.0'}
     hasBin: true
 
@@ -10677,13 +10673,13 @@ snapshots:
       '@types/istanbul-reports': 1.1.2
       '@types/yargs': 13.0.12
 
-  '@joshwooding/vite-plugin-react-docgen-typescript@0.3.0(typescript@5.6.3)(vite@5.4.2(@types/node@22.7.9)(sass@1.80.4)(terser@5.31.6))':
+  '@joshwooding/vite-plugin-react-docgen-typescript@0.3.0(typescript@5.6.3)(vite@5.4.2(@types/node@22.7.9)(sass@1.80.5)(terser@5.31.6))':
     dependencies:
       glob: 7.2.3
       glob-promise: 4.2.2(glob@7.2.3)
       magic-string: 0.27.0
       react-docgen-typescript: 2.2.2(typescript@5.6.3)
-      vite: 5.4.2(@types/node@22.7.9)(sass@1.80.4)(terser@5.31.6)
+      vite: 5.4.2(@types/node@22.7.9)(sass@1.80.5)(terser@5.31.6)
     optionalDependencies:
       typescript: 5.6.3
 
@@ -11931,7 +11927,7 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@19.0.0-rc-65a56d0e-20241020)
 
-  '@storybook/builder-vite@8.3.6(storybook@8.3.6)(typescript@5.6.3)(vite@5.4.2(@types/node@22.7.9)(sass@1.80.4)(terser@5.31.6))':
+  '@storybook/builder-vite@8.3.6(storybook@8.3.6)(typescript@5.6.3)(vite@5.4.2(@types/node@22.7.9)(sass@1.80.5)(terser@5.31.6))':
     dependencies:
       '@storybook/csf-plugin': 8.3.6(storybook@8.3.6)
       '@types/find-cache-dir': 3.2.1
@@ -11943,7 +11939,7 @@ snapshots:
       magic-string: 0.30.10
       storybook: 8.3.6
       ts-dedent: 2.2.0
-      vite: 5.4.2(@types/node@22.7.9)(sass@1.80.4)(terser@5.31.6)
+      vite: 5.4.2(@types/node@22.7.9)(sass@1.80.5)(terser@5.31.6)
     optionalDependencies:
       typescript: 5.6.3
     transitivePeerDependencies:
@@ -12009,11 +12005,11 @@ snapshots:
       react-dom: 18.3.1(react@19.0.0-rc-65a56d0e-20241020)
       storybook: 8.3.6
 
-  '@storybook/react-vite@8.3.6(react-dom@18.3.1(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(rollup@4.24.0)(storybook@8.3.6)(typescript@5.6.3)(vite@5.4.2(@types/node@22.7.9)(sass@1.80.4)(terser@5.31.6))':
+  '@storybook/react-vite@8.3.6(react-dom@18.3.1(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(rollup@4.24.0)(storybook@8.3.6)(typescript@5.6.3)(vite@5.4.2(@types/node@22.7.9)(sass@1.80.5)(terser@5.31.6))':
     dependencies:
-      '@joshwooding/vite-plugin-react-docgen-typescript': 0.3.0(typescript@5.6.3)(vite@5.4.2(@types/node@22.7.9)(sass@1.80.4)(terser@5.31.6))
+      '@joshwooding/vite-plugin-react-docgen-typescript': 0.3.0(typescript@5.6.3)(vite@5.4.2(@types/node@22.7.9)(sass@1.80.5)(terser@5.31.6))
       '@rollup/pluginutils': 5.1.0(rollup@4.24.0)
-      '@storybook/builder-vite': 8.3.6(storybook@8.3.6)(typescript@5.6.3)(vite@5.4.2(@types/node@22.7.9)(sass@1.80.4)(terser@5.31.6))
+      '@storybook/builder-vite': 8.3.6(storybook@8.3.6)(typescript@5.6.3)(vite@5.4.2(@types/node@22.7.9)(sass@1.80.5)(terser@5.31.6))
       '@storybook/react': 8.3.6(react-dom@18.3.1(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(storybook@8.3.6)(typescript@5.6.3)
       find-up: 5.0.0
       magic-string: 0.30.10
@@ -12023,7 +12019,7 @@ snapshots:
       resolve: 1.22.8
       storybook: 8.3.6
       tsconfig-paths: 4.2.0
-      vite: 5.4.2(@types/node@22.7.9)(sass@1.80.4)(terser@5.31.6)
+      vite: 5.4.2(@types/node@22.7.9)(sass@1.80.5)(terser@5.31.6)
     transitivePeerDependencies:
       - '@preact/preset-vite'
       - '@storybook/test'
@@ -12696,23 +12692,23 @@ snapshots:
 
   '@ungap/structured-clone@1.2.0': {}
 
-  '@vercel/analytics@1.3.2(next@15.0.0(@babel/core@7.25.2)(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.4))(react@19.0.0-rc-65a56d0e-20241020)':
+  '@vercel/analytics@1.3.2(next@15.0.0(@babel/core@7.25.2)(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.5))(react@19.0.0-rc-65a56d0e-20241020)':
     dependencies:
       server-only: 0.0.1
     optionalDependencies:
-      next: 15.0.0(@babel/core@7.25.2)(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.4)
+      next: 15.0.0(@babel/core@7.25.2)(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.5)
       react: 19.0.0-rc-65a56d0e-20241020
 
-  '@vercel/analytics@1.3.2(next@15.0.0(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.4))(react@19.0.0-rc-65a56d0e-20241020)':
+  '@vercel/analytics@1.3.2(next@15.0.0(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.5))(react@19.0.0-rc-65a56d0e-20241020)':
     dependencies:
       server-only: 0.0.1
     optionalDependencies:
-      next: 15.0.0(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.4)
+      next: 15.0.0(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.5)
       react: 19.0.0-rc-65a56d0e-20241020
 
-  '@vercel/speed-insights@1.0.13(next@15.0.0(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.4))(react@19.0.0-rc-65a56d0e-20241020)':
+  '@vercel/speed-insights@1.0.13(next@15.0.0(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.5))(react@19.0.0-rc-65a56d0e-20241020)':
     optionalDependencies:
-      next: 15.0.0(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.4)
+      next: 15.0.0(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.5)
       react: 19.0.0-rc-65a56d0e-20241020
 
   '@vvo/tzdb@6.147.0': {}
@@ -13191,10 +13187,6 @@ snapshots:
       readdirp: 3.6.0
     optionalDependencies:
       fsevents: 2.3.3
-
-  chokidar@4.0.0:
-    dependencies:
-      readdirp: 4.0.1
 
   chokidar@4.0.1:
     dependencies:
@@ -15905,28 +15897,28 @@ snapshots:
 
   next-secure-headers@2.2.0: {}
 
-  next-sitemap@4.2.3(next@15.0.0(@babel/core@7.25.2)(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.4)):
+  next-sitemap@4.2.3(next@15.0.0(@babel/core@7.25.2)(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.5)):
     dependencies:
       '@corex/deepmerge': 4.0.43
       '@next/env': 13.5.6
       fast-glob: 3.3.2
       minimist: 1.2.8
-      next: 15.0.0(@babel/core@7.25.2)(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.4)
+      next: 15.0.0(@babel/core@7.25.2)(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.5)
 
-  next-sitemap@4.2.3(next@15.0.0(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.4)):
+  next-sitemap@4.2.3(next@15.0.0(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.5)):
     dependencies:
       '@corex/deepmerge': 4.0.43
       '@next/env': 13.5.6
       fast-glob: 3.3.2
       minimist: 1.2.8
-      next: 15.0.0(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.4)
+      next: 15.0.0(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.5)
 
   next-themes@0.3.0(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020):
     dependencies:
       react: 19.0.0-rc-65a56d0e-20241020
       react-dom: 19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020)
 
-  next@14.2.3(@babel/core@7.24.5)(@playwright/test@1.48.2)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.4):
+  next@14.2.3(@babel/core@7.24.5)(@playwright/test@1.48.2)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.5):
     dependencies:
       '@next/env': 14.2.3
       '@swc/helpers': 0.5.5
@@ -15948,12 +15940,12 @@ snapshots:
       '@next/swc-win32-ia32-msvc': 14.2.3
       '@next/swc-win32-x64-msvc': 14.2.3
       '@playwright/test': 1.48.2
-      sass: 1.80.4
+      sass: 1.80.5
     transitivePeerDependencies:
       - '@babel/core'
       - babel-plugin-macros
 
-  next@15.0.0(@babel/core@7.25.2)(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.4):
+  next@15.0.0(@babel/core@7.25.2)(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.5):
     dependencies:
       '@next/env': 15.0.0
       '@swc/counter': 0.1.3
@@ -15975,13 +15967,13 @@ snapshots:
       '@next/swc-win32-x64-msvc': 15.0.0
       '@playwright/test': 1.48.2
       babel-plugin-react-compiler: 19.0.0-beta-8a03594-20241020
-      sass: 1.80.4
+      sass: 1.80.5
       sharp: 0.33.5
     transitivePeerDependencies:
       - '@babel/core'
       - babel-plugin-macros
 
-  next@15.0.0(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.4):
+  next@15.0.0(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.5):
     dependencies:
       '@next/env': 15.0.0
       '@swc/counter': 0.1.3
@@ -16003,7 +15995,7 @@ snapshots:
       '@next/swc-win32-x64-msvc': 15.0.0
       '@playwright/test': 1.48.2
       babel-plugin-react-compiler: 19.0.0-beta-8a03594-20241020
-      sass: 1.80.4
+      sass: 1.80.5
       sharp: 0.33.5
     transitivePeerDependencies:
       - '@babel/core'
@@ -16833,7 +16825,7 @@ snapshots:
       react-dom: 18.3.1(react@19.0.0-rc-65a56d0e-20241020)
       react-is: 18.1.0
 
-  react-email@3.0.1(@playwright/test@1.48.2)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.4):
+  react-email@3.0.1(@playwright/test@1.48.2)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.5):
     dependencies:
       '@babel/core': 7.24.5
       '@babel/parser': 7.24.5
@@ -16845,7 +16837,7 @@ snapshots:
       glob: 10.3.4
       log-symbols: 4.1.0
       mime-types: 2.1.35
-      next: 14.2.3(@babel/core@7.24.5)(@playwright/test@1.48.2)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.4)
+      next: 14.2.3(@babel/core@7.24.5)(@playwright/test@1.48.2)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.5)
       normalize-path: 3.0.0
       ora: 5.4.1
       socket.io: 4.7.5
@@ -17252,24 +17244,24 @@ snapshots:
 
   safer-buffer@2.1.2: {}
 
-  sass-loader@16.0.2(sass@1.80.4)(webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.13))(esbuild@0.23.0)):
+  sass-loader@16.0.2(sass@1.80.5)(webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.13))(esbuild@0.23.0)):
     dependencies:
       neo-async: 2.6.2
     optionalDependencies:
-      sass: 1.80.4
+      sass: 1.80.5
       webpack: 5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.13))(esbuild@0.23.0)
 
-  sass-loader@16.0.2(sass@1.80.4)(webpack@5.94.0):
+  sass-loader@16.0.2(sass@1.80.5)(webpack@5.94.0):
     dependencies:
       neo-async: 2.6.2
     optionalDependencies:
-      sass: 1.80.4
+      sass: 1.80.5
       webpack: 5.94.0
 
-  sass@1.80.4:
+  sass@1.80.5:
     dependencies:
       '@parcel/watcher': 2.4.1
-      chokidar: 4.0.0
+      chokidar: 4.0.1
       immutable: 4.3.5
       source-map-js: 1.2.1
 
@@ -18136,7 +18128,7 @@ snapshots:
       d3-time: 3.1.0
       d3-timer: 3.0.1
 
-  vite@5.4.2(@types/node@22.7.9)(sass@1.80.4)(terser@5.31.6):
+  vite@5.4.2(@types/node@22.7.9)(sass@1.80.5)(terser@5.31.6):
     dependencies:
       esbuild: 0.21.5
       postcss: 8.4.47
@@ -18144,7 +18136,7 @@ snapshots:
     optionalDependencies:
       '@types/node': 22.7.9
       fsevents: 2.3.3
-      sass: 1.80.4
+      sass: 1.80.5
       terser: 5.31.6
 
   w3c-keyname@2.2.8: {}
