@@ -100,8 +100,8 @@ importers:
         specifier: 1.0.14
         version: 1.0.14(next@15.0.2(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.5))(react@19.0.0-rc-65a56d0e-20241020)
       '@vvo/tzdb':
-        specifier: 6.147.0
-        version: 6.147.0
+        specifier: 6.148.0
+        version: 6.148.0
       autoprefixer:
         specifier: 10.4.20
         version: 10.4.20(postcss@8.4.47)
@@ -4930,8 +4930,8 @@ packages:
       vue-router:
         optional: true
 
-  '@vvo/tzdb@6.147.0':
-    resolution: {integrity: sha512-naptD2MNHejOzUzqGAIR0KoDwQq0SNH07Z/HqbGF8c9JpednT/UHSfa6vfAR1velUUe64UwRGaOiVDEs7JrbYw==}
+  '@vvo/tzdb@6.148.0':
+    resolution: {integrity: sha512-ShAppJ5BDUVb0m8nfwcg7qmdbzP09Lc+jf/ehKBpGSH/eXjr8ed1s6d0J8nmc68msqkLE3NHFkswg6rE+eCPsA==}
 
   '@webassemblyjs/ast@1.12.1':
     resolution: {integrity: sha512-EKfMUOPRRUTy5UII4qJDGPpqfwjOmZ5jeGFwid9mnoqIFK+e0vqoi1qH56JpmZSzEL53jKnNzScdmftJyG5xWg==}
@@ -12259,7 +12259,7 @@ snapshots:
       next: 15.0.2(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.5)
       react: 19.0.0-rc-65a56d0e-20241020
 
-  '@vvo/tzdb@6.147.0': {}
+  '@vvo/tzdb@6.148.0': {}
 
   '@webassemblyjs/ast@1.12.1':
     dependencies:
