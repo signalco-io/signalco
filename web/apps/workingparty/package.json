@@ -45,7 +45,7 @@
         "classix": "2.2.0",
         "jose": "5.9.6",
         "nanoid": "5.0.8",
-        "next": "15.0.0",
+        "next": "15.0.2",
         "next-secure-headers": "2.2.0",
         "next-themes": "0.3.0",
         "openai": "4.69.0",
