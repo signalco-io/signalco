@@ -490,8 +490,8 @@ importers:
         specifier: 0.18.0
         version: 0.18.0(@types/hast@3.0.4)
       '@blocknote/mantine':
-        specifier: 0.17.1
-        version: 0.17.1(@tiptap/pm@2.7.2)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(types-react@19.0.0-rc.1)
+        specifier: 0.18.1
+        version: 0.18.1(@tiptap/pm@2.7.2)(@types/hast@3.0.4)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(types-react@19.0.0-rc.1)
       '@blocknote/react':
         specifier: 0.17.1
         version: 0.17.1(@tiptap/pm@2.7.2)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)
@@ -2168,17 +2168,23 @@ packages:
   '@blocknote/core@0.18.0':
     resolution: {integrity: sha512-U/4Ps6c5waLihGlh27VoGQLJG/zzbOBi2Olzyzlt/1XZDZMJ3zWS1gdicfIgQkQmz/c2BfuKt7T0lCtejmdtSQ==}
 
-  '@blocknote/mantine@0.17.1':
-    resolution: {integrity: sha512-K3Y+6uyhO70rBCAZDrW1/D+ZQm2/g6+QeN15XRq2d210IXsSVM051xgNyDEk2vpMYVNf+WJyRXHR3FoN2vc77A==}
+  '@blocknote/mantine@0.18.1':
+    resolution: {integrity: sha512-dz5uyWDHvlNZrR3MffF9fekU7G0zQw/KKMJi6D97GMC45izaPaFvoYKwTrIIR64rQpCd3SnzL+tby4lNKREfrg==}
     peerDependencies:
-      react: ^18
-      react-dom: ^18
+      react: ^18.0 || ^19.0 || >= 19.0.0-rc
+      react-dom: ^18.0 || ^19.0 || >= 19.0.0-rc
 
   '@blocknote/react@0.17.1':
     resolution: {integrity: sha512-9irtckfgxGcTmf+8JZF61l3slu6ET4famWUtPCOXcI7a1M8uSS86bagq19qYmPVutTnUXP6K8T6svOfUn14W7Q==}
     peerDependencies:
       react: ^18
       react-dom: ^18
+
+  '@blocknote/react@0.18.1':
+    resolution: {integrity: sha512-Ub0XJe2PbcOnYbtDFT9lNV+kGrPdowhiWlvelYIobTu1Jy7vXCYg8nlCjao4QIdBlf0eVWkCUR1wyUWoxxnx2g==}
+    peerDependencies:
+      react: ^18.0 || ^19.0 || >= 19.0.0-rc
+      react-dom: ^18.0 || ^19.0 || >= 19.0.0-rc
 
   '@corex/deepmerge@4.0.43':
     resolution: {integrity: sha512-N8uEMrMPL0cu/bdboEWpQYb/0i2K5Qn8eCsxzOmxSggJbbQte7ljMRoXm917AbntqTGOzdTu+vP3KOOzoC70HQ==}
@@ -9558,10 +9564,10 @@ snapshots:
       - sugar-high
       - supports-color
 
-  '@blocknote/mantine@0.17.1(@tiptap/pm@2.7.2)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(types-react@19.0.0-rc.1)':
+  '@blocknote/mantine@0.18.1(@tiptap/pm@2.7.2)(@types/hast@3.0.4)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(types-react@19.0.0-rc.1)':
     dependencies:
-      '@blocknote/core': 0.17.1
-      '@blocknote/react': 0.17.1(@tiptap/pm@2.7.2)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)
+      '@blocknote/core': 0.18.0(@types/hast@3.0.4)
+      '@blocknote/react': 0.18.1(@tiptap/pm@2.7.2)(@types/hast@3.0.4)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)
       '@mantine/core': 7.12.0(@mantine/hooks@7.12.0(react@19.0.0-rc-65a56d0e-20241020))(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(types-react@19.0.0-rc.1)
       '@mantine/hooks': 7.12.0(react@19.0.0-rc-65a56d0e-20241020)
       '@mantine/utils': 6.0.22(react@19.0.0-rc-65a56d0e-20241020)
@@ -9570,7 +9576,12 @@ snapshots:
       react-icons: 5.2.1(react@19.0.0-rc-65a56d0e-20241020)
     transitivePeerDependencies:
       - '@tiptap/pm'
+      - '@types/hast'
       - '@types/react'
+      - highlight.js
+      - lowlight
+      - refractor
+      - sugar-high
       - supports-color
 
   '@blocknote/react@0.17.1(@tiptap/pm@2.7.2)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)':
@@ -9585,6 +9596,25 @@ snapshots:
       react-icons: 5.2.1(react@19.0.0-rc-65a56d0e-20241020)
     transitivePeerDependencies:
       - '@tiptap/pm'
+      - supports-color
+
+  '@blocknote/react@0.18.1(@tiptap/pm@2.7.2)(@types/hast@3.0.4)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)':
+    dependencies:
+      '@blocknote/core': 0.18.0(@types/hast@3.0.4)
+      '@floating-ui/react': 0.26.22(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)
+      '@tiptap/core': 2.7.2(@tiptap/pm@2.7.2)
+      '@tiptap/react': 2.7.2(@tiptap/core@2.7.2(@tiptap/pm@2.7.2))(@tiptap/pm@2.7.2)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)
+      lodash.merge: 4.6.2
+      react: 19.0.0-rc-65a56d0e-20241020
+      react-dom: 19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020)
+      react-icons: 5.2.1(react@19.0.0-rc-65a56d0e-20241020)
+    transitivePeerDependencies:
+      - '@tiptap/pm'
+      - '@types/hast'
+      - highlight.js
+      - lowlight
+      - refractor
+      - sugar-high
       - supports-color
 
   '@corex/deepmerge@4.0.43': {}
