@@ -45,7 +45,7 @@
         "@types/color": "4.2.0",
         "@types/node": "22.7.9",
         "@types/react": "npm:types-react@19.0.0-rc.1",
-        "@types/react-dom": "npm:types-react-dom@19.0.0-rc.1",
+        "@types/react-dom": "npm:types-react-dom@19.0.0",
         "babel-plugin-react-compiler": "19.0.0-beta-8a03594-20241020",
         "eslint": "8.57.1",
         "next-sitemap": "4.2.3",
