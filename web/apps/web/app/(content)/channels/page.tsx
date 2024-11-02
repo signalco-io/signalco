@@ -1,10 +1,10 @@
 import { Suspense } from 'react';
 import { Stack } from '@signalco/ui-primitives/Stack';
 import { SectionsView } from '@signalco/cms-core/SectionsView';
-import { sectionsComponentRegistry } from '../page';
-import PageCenterHeader from '../../components/pages/PageCenterHeader';
-import CtaSection from '../../components/pages/CtaSection';
-import ChannelsGallery from '../../components/channels/ChannelsGallery';
+import { sectionsComponentRegistry } from '../../page';
+import PageCenterHeader from '../../../components/pages/PageCenterHeader';
+import CtaSection from '../../../components/pages/CtaSection';
+import ChannelsGallery from '../../../components/channels/ChannelsGallery';
 import { channelsFaq } from './data';
 
 export default function ChannelsPage() {

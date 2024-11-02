@@ -1,6 +1,6 @@
 import { Typography } from '@signalco/ui-primitives/Typography';
 import { Stack } from '@signalco/ui-primitives/Stack';
-import PageCenterHeader from '../../../components/pages/PageCenterHeader';
+import PageCenterHeader from '../../../../components/pages/PageCenterHeader';
 
 export default function FeatureSpacesPage() {
     return (

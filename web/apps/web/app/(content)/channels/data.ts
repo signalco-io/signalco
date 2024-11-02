@@ -1,4 +1,4 @@
-import { KnownPages } from '../../src/knownPages';
+import { KnownPages } from '../../../src/knownPages';
 
 export const channelsFaq = [
     {

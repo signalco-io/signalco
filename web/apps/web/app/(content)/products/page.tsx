@@ -1,7 +1,7 @@
 import { Typography } from '@signalco/ui-primitives/Typography';
 import { Stack } from '@signalco/ui-primitives/Stack';
 import { Card } from '@signalco/ui-primitives/Card';
-import PageCenterHeader from '../../components/pages/PageCenterHeader';
+import PageCenterHeader from '../../../components/pages/PageCenterHeader';
 
 const products = [
     { id: 'signalco', tags: ['platform'], name: 'signalco', logo: 'https://www.signalco.io/images/icon_x512.png', url: 'https://www.signalco.io' },

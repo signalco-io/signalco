@@ -1,9 +1,9 @@
 import { Stack } from '@signalco/ui-primitives/Stack';
 import { SectionsView } from '@signalco/cms-core/SectionsView';
-import { sectionPricing, sectionsComponentRegistry } from '../page';
-import { KnownPages } from '../../src/knownPages';
-import PageCenterHeader from '../../components/pages/PageCenterHeader';
-import CtaSection from '../../components/pages/CtaSection';
+import { sectionPricing, sectionsComponentRegistry } from '../../page';
+import { KnownPages } from '../../../src/knownPages';
+import PageCenterHeader from '../../../components/pages/PageCenterHeader';
+import CtaSection from '../../../components/pages/CtaSection';
 
 const pricingFaq = [
     {

@@ -3,6 +3,7 @@ import { ThemeProvider } from 'next-themes';
 import { Viewport, type Metadata } from 'next';
 import { Analytics } from '@vercel/analytics/react';
 import { Stack } from '@signalco/ui-primitives/Stack';
+import { cx } from '@signalco/ui-primitives/cx';
 import { Container } from '@signalco/ui-primitives/Container';
 import { CompanyX, CompanyReddit, CompanyGitHub } from '@signalco/ui-icons';
 import { NavigatingButton } from '@signalco/ui/NavigatingButton';
@@ -79,7 +80,7 @@ export function PageLayout({ children, fullWidth }: PropsWithChildren<{ fullWidt
                 ]}>
                 <NavigatingButton href={KnownPages.App}>App</NavigatingButton>
             </PageNav>
-            <main className="pt-20">
+            <main className={cx(fullWidth ? 'pt-8' : 'pt-20')}>
                 <ContentContainer>
                     {children}
                 </ContentContainer>
@@ -95,9 +96,7 @@ export default function RootLayout({ children, }: {
         <html lang="en">
             <body className={'font-sans'}>
                 <ThemeProvider attribute="class">
-                    <PageLayout>
-                        {children}
-                    </PageLayout>
+                    {children}
                 </ThemeProvider>
                 <Analytics />
             </body>

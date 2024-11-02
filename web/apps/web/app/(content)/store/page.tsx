@@ -13,8 +13,8 @@ import type { ColorVariants } from '@signalco/ui/theme';
 import { Gallery } from '@signalco/ui/Gallery';
 import { FilterList } from '@signalco/ui/FilterList';
 import { objectWithKey } from '@signalco/js';
-import PageCenterHeader from '../../components/pages/PageCenterHeader';
-import SignalcoLogo from '../../components/icons/SignalcoLogo';
+import PageCenterHeader from '../../../components/pages/PageCenterHeader';
+import SignalcoLogo from '../../../components/icons/SignalcoLogo';
 import contentData from './content.json';
 
 function StoreStockStatusBadge(props: { status: number | undefined }) {
