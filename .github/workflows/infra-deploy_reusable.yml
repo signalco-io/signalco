@@ -26,9 +26,6 @@ defaults:
   run:
     working-directory: ./infra
 
-env:
-  DOTNET_VERSION: "7.0.x" # set this to the dotnet version to use    
-
 jobs:
   infra-build-and-execute:
     runs-on: ubuntu-latest
@@ -39,7 +36,7 @@ jobs:
       - name: ✨ Setup DotNet ${{ env.DOTNET_VERSION }} Environment
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: ${{ env.DOTNET_VERSION }}
+          dotnet-version: 8.0.x
         
       - name: ✨ Setup Node
         uses: actions/setup-node@v4
