@@ -7,7 +7,7 @@
     "type": "module",
     "license": "AGPL-3.0-only",
     "engines": {
-        "node": "20.x"
+        "node": "22.x"
     },
     "scripts": {
         "dev": "next -p 4001 --turbo",
@@ -43,7 +43,7 @@
         "@signalco/eslint-config-signalco": "workspace:*",
         "@signalco/tsconfig": "workspace:*",
         "@types/color": "4.2.0",
-        "@types/node": "22.7.9",
+        "@types/node": "22.8.6",
         "@types/react": "npm:types-react@19.0.0-rc.1",
         "@types/react-dom": "npm:types-react-dom@19.0.0-rc.1",
         "babel-plugin-react-compiler": "19.0.0-beta-8a03594-20241020",
