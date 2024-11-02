@@ -35,7 +35,7 @@
         "react": "19.0.0-rc-65a56d0e-20241020",
         "react-dom": "19.0.0-rc-65a56d0e-20241020",
         "react-timeago": "7.2.0",
-        "sass": "1.80.5",
+        "sass": "1.80.6",
         "tailwindcss": "3.4.14",
         "tailwindcss-animate": "1.0.7",
         "tsup": "8.3.5",
