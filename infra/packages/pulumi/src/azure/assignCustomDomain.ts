@@ -6,7 +6,7 @@ import {
     Certificate,
     HostNameType,
     SslState,
-    CustomHostNameDnsRecordType
+    CustomHostNameDnsRecordType,
 } from '@pulumi/azure-native/web/index.js';
 import { ResourceGroup } from '@pulumi/azure-native/resources/index.js';
 import { dnsRecord } from '../cloudflare/dnsRecord.js';
