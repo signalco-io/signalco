@@ -7,8 +7,8 @@
     "type": "module",
     "sideEffects": false,
     "dependencies": {
-        "@typescript-eslint/eslint-plugin": "8.12.2",
-        "@typescript-eslint/parser": "8.12.2",
+        "@typescript-eslint/eslint-plugin": "8.13.0",
+        "@typescript-eslint/parser": "8.13.0",
         "eslint": "8.57.1",
         "eslint-config-next": "15.0.2",
         "eslint-config-turbo": "2.2.3",
