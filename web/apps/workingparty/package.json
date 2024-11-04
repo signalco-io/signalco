@@ -22,7 +22,7 @@
         "@enterwell/react-form-builder": "0.3.2",
         "@enterwell/react-form-validation": "1.4.0",
         "@enterwell/react-hooks": "0.5.0",
-        "@react-email/components": "0.0.26",
+        "@react-email/components": "0.0.27",
         "@signalco/auth-client": "workspace:*",
         "@signalco/auth-server": "workspace:*",
         "@signalco/cms-components-marketing": "workspace:*",
