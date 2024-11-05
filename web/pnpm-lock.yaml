@@ -88,11 +88,11 @@ importers:
         specifier: workspace:*
         version: link:../../packages/ui-themes-minimal-app
       '@tanstack/react-query':
-        specifier: 5.59.17
-        version: 5.59.17(react@19.0.0-rc-65a56d0e-20241020)
+        specifier: 5.59.19
+        version: 5.59.19(react@19.0.0-rc-65a56d0e-20241020)
       '@tanstack/react-query-devtools':
-        specifier: 5.59.17
-        version: 5.59.17(@tanstack/react-query@5.59.17(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)
+        specifier: 5.59.19
+        version: 5.59.19(@tanstack/react-query@5.59.19(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)
       '@vercel/analytics':
         specifier: 1.3.2
         version: 1.3.2(next@15.0.2(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.6))(react@19.0.0-rc-65a56d0e-20241020)
@@ -556,11 +556,11 @@ importers:
         specifier: workspace:*
         version: link:../../packages/ui-themes-minimal
       '@tanstack/react-query':
-        specifier: 5.59.17
-        version: 5.59.17(react@19.0.0-rc-65a56d0e-20241020)
+        specifier: 5.59.19
+        version: 5.59.19(react@19.0.0-rc-65a56d0e-20241020)
       '@tanstack/react-query-devtools':
-        specifier: 5.59.17
-        version: 5.59.17(@tanstack/react-query@5.59.17(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)
+        specifier: 5.59.19
+        version: 5.59.19(@tanstack/react-query@5.59.19(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)
       '@vercel/analytics':
         specifier: 1.3.2
         version: 1.3.2(next@15.0.2(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.6))(react@19.0.0-rc-65a56d0e-20241020)
@@ -877,11 +877,11 @@ importers:
         specifier: workspace:*
         version: link:../../packages/ui-themes-minimal
       '@tanstack/react-query':
-        specifier: 5.59.17
-        version: 5.59.17(react@19.0.0-rc-65a56d0e-20241020)
+        specifier: 5.59.19
+        version: 5.59.19(react@19.0.0-rc-65a56d0e-20241020)
       '@tanstack/react-query-devtools':
-        specifier: 5.59.17
-        version: 5.59.17(@tanstack/react-query@5.59.17(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)
+        specifier: 5.59.19
+        version: 5.59.19(@tanstack/react-query@5.59.19(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)
       '@vercel/analytics':
         specifier: 1.3.2
         version: 1.3.2(next@15.0.2(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.6))(react@19.0.0-rc-65a56d0e-20241020)
@@ -1170,11 +1170,11 @@ importers:
         specifier: 0.5.15
         version: 0.5.15(tailwindcss@3.4.14)
       '@tanstack/react-query':
-        specifier: 5.59.17
-        version: 5.59.17(react@19.0.0-rc-65a56d0e-20241020)
+        specifier: 5.59.19
+        version: 5.59.19(react@19.0.0-rc-65a56d0e-20241020)
       '@tanstack/react-query-devtools':
-        specifier: 5.59.17
-        version: 5.59.17(@tanstack/react-query@5.59.17(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)
+        specifier: 5.59.19
+        version: 5.59.19(@tanstack/react-query@5.59.19(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)
       '@vercel/analytics':
         specifier: 1.3.2
         version: 1.3.2(next@15.0.2(@playwright/test@1.48.2)(babel-plugin-react-compiler@19.0.0-beta-8a03594-20241020)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(sass@1.80.6))(react@19.0.0-rc-65a56d0e-20241020)
@@ -1292,8 +1292,8 @@ importers:
         specifier: workspace:*
         version: link:../ui-icons
       '@tanstack/react-query':
-        specifier: 5.59.17
-        version: 5.59.17(react@19.0.0-rc-65a56d0e-20241020)
+        specifier: 5.59.19
+        version: 5.59.19(react@19.0.0-rc-65a56d0e-20241020)
       '@types/react':
         specifier: npm:types-react@19.0.0-rc.1
         version: types-react@19.0.0-rc.1
@@ -1958,8 +1958,8 @@ importers:
         specifier: workspace:*
         version: link:../ui-themes-minimal
       '@tanstack/react-query':
-        specifier: 5.59.17
-        version: 5.59.17(react@19.0.0-rc-65a56d0e-20241020)
+        specifier: 5.59.19
+        version: 5.59.19(react@19.0.0-rc-65a56d0e-20241020)
       '@types/node':
         specifier: 22.7.9
         version: 22.7.9
@@ -4441,17 +4441,17 @@ packages:
   '@tanstack/query-core@5.59.17':
     resolution: {integrity: sha512-jWdDiif8kaqnRGHNXAa9CnudtxY5v9DUxXhodgqX2Rwzj+1UwStDHEbBd9IA5C7VYAaJ2s+BxFR6PUBs8ERorA==}
 
-  '@tanstack/query-devtools@5.58.0':
-    resolution: {integrity: sha512-iFdQEFXaYYxqgrv63ots+65FGI+tNp5ZS5PdMU1DWisxk3fez5HG3FyVlbUva+RdYS5hSLbxZ9aw3yEs97GNTw==}
+  '@tanstack/query-devtools@5.59.19':
+    resolution: {integrity: sha512-Gw+3zsADpqiYgx/6MMr9bP1+x2LR8vOuGjo5Un/89qwwP3z7WAHPWFagLFDYkLq68NX7ekUpW/EOYlUMugMXGA==}
 
-  '@tanstack/react-query-devtools@5.59.17':
-    resolution: {integrity: sha512-P5lRlPmSKXQZ+pzVFPMCrwKPyRtUk/yggtuceB435JPLiaP7UGoO6JQfSsaXHnVC9+LzRMYJjIEq6zm+1HteeQ==}
+  '@tanstack/react-query-devtools@5.59.19':
+    resolution: {integrity: sha512-mYFWTHLtJr2HdyYPZPzzvQ2ksCsSL6L04fCtusPFD3waskXrtmvWvyuDIGeEGdVAYS0Urwxw/0sYvcTVQZH+zQ==}
     peerDependencies:
-      '@tanstack/react-query': ^5.59.17
+      '@tanstack/react-query': ^5.59.19
       react: ^18 || ^19
 
-  '@tanstack/react-query@5.59.17':
-    resolution: {integrity: sha512-2taBKHT3LrRmS9ttUOmtaekVOXlZ5JXzNhL9Kmi6BSBdfIAZwEinMXZ8hffVuDpFoRCWlBaGcNkhP/zXgzq5ow==}
+  '@tanstack/react-query@5.59.19':
+    resolution: {integrity: sha512-xLRfyFyQOFcLltKCds0LijfC6/HQJrrTTnZB8ciyn74LIkVAm++vZJ6eUVG20RmJtdP8REdy7vSOYW4M3//XLA==}
     peerDependencies:
       react: ^18 || ^19
 
@@ -11665,15 +11665,15 @@ snapshots:
 
   '@tanstack/query-core@5.59.17': {}
 
-  '@tanstack/query-devtools@5.58.0': {}
+  '@tanstack/query-devtools@5.59.19': {}
 
-  '@tanstack/react-query-devtools@5.59.17(@tanstack/react-query@5.59.17(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)':
+  '@tanstack/react-query-devtools@5.59.19(@tanstack/react-query@5.59.19(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)':
     dependencies:
-      '@tanstack/query-devtools': 5.58.0
-      '@tanstack/react-query': 5.59.17(react@19.0.0-rc-65a56d0e-20241020)
+      '@tanstack/query-devtools': 5.59.19
+      '@tanstack/react-query': 5.59.19(react@19.0.0-rc-65a56d0e-20241020)
       react: 19.0.0-rc-65a56d0e-20241020
 
-  '@tanstack/react-query@5.59.17(react@19.0.0-rc-65a56d0e-20241020)':
+  '@tanstack/react-query@5.59.19(react@19.0.0-rc-65a56d0e-20241020)':
     dependencies:
       '@tanstack/query-core': 5.59.17
       react: 19.0.0-rc-65a56d0e-20241020
