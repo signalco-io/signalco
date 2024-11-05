@@ -16,6 +16,7 @@ export type TypographyProps = HTMLAttributes<HTMLParagraphElement> & {
     color?: ColorVariants;
     gutterBottom?: boolean;
     center?: boolean;
+    mono?: boolean;
 };
 
 export function populateTypographyStylesAndClasses({
@@ -23,6 +24,7 @@ export function populateTypographyStylesAndClasses({
     level,
     center, gutterBottom, noWrap, uppercase,
     secondary, tertiary,
+    mono,
     extraThin, thin, semiBold, bold,
     className,
     ...rest
@@ -53,6 +55,8 @@ export function populateTypographyStylesAndClasses({
             bold && 'font-bold',
             // Alignment
             center && 'text-center',
+            // Font
+            mono && 'font-mono',
             // Special cases
             noWrap && 'whitespace-nowrap overflow-hidden overflow-ellipsis',
             gutterBottom && 'mb-2',

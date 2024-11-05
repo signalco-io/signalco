@@ -2,7 +2,7 @@
 
 import { useCallback } from 'react';
 import { usePromise } from '@enterwell/react-hooks';
-import { RoadmapItem } from '../api/github/[owner]/[repo]/issues/route';
+import { RoadmapItem } from '../../api/github/[owner]/[repo]/issues/route';
 import Roadmap from './roadmap';
 
 export function RoadmapSection() {
@@ -12,6 +12,6 @@ export function RoadmapSection() {
     console.log('Roadmap page render');
 
     return (
-        <Roadmap items={item as RoadmapItem[]} error={error} isLoading={isLoading}  />
+        <Roadmap items={item as RoadmapItem[]} error={error} isLoading={isLoading} />
     );
 }

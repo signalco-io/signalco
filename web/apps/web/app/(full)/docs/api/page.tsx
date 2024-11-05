@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useCallback, useState, useContext, createContext, Suspense } from 'react';
+import React, { useCallback, useState, useContext, createContext, Suspense, Fragment } from 'react';
 import { OpenAPIV3 } from 'openapi-types';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Typography } from '@signalco/ui-primitives/Typography';
@@ -17,6 +17,7 @@ import { Card, CardOverflow } from '@signalco/ui-primitives/Card';
 import { Button } from '@signalco/ui-primitives/Button';
 import { Security, Send } from '@signalco/ui-icons';
 import type { ColorPaletteProp } from '@signalco/ui/theme';
+import { SplitView } from '@signalco/ui/SplitView';
 import { NavigatingButton } from '@signalco/ui/NavigatingButton';
 import { Loadable } from '@signalco/ui/Loadable';
 import { CopyToClipboardInput } from '@signalco/ui/CopyToClipboardInput';
@@ -24,7 +25,7 @@ import { Alert } from '@signalco/ui/Alert';
 import { camelToSentenceCase, HttpOperation, ObjectDictAny, objectWithKey } from '@signalco/js';
 import { useSearchParam } from '@signalco/hooks/useSearchParam';
 import { usePromise } from '@enterwell/react-hooks';
-import { isDeveloper } from '../../../src/services/EnvProvider';
+import { isDeveloper } from '../../../../src/services/EnvProvider';
 
 function HttpOperationChip(props: { operation?: HttpOperation | undefined, small?: boolean }) {
     const color = ({
@@ -145,21 +146,18 @@ function ApiOperation(props: ApiOperationProps) {
                 <Stack spacing={1}>
                     <Typography uppercase>Parameters</Typography>
                     <Card>
-                        {parametersResolved.map((parameter, i) => (
+                        {parametersResolved.map((parameter, index) => (
                             <React.Fragment key={parameter.name}>
                                 <div className="p-2">
                                     <Stack>
                                         <Row spacing={1} justifyContent="space-between">
-                                            <Typography uppercase>{parameter.name}</Typography>
-                                            <Row spacing={1}>
-                                                <Typography level="body2">in</Typography>
-                                                <Typography level="body2" uppercase>{parameter.in}</Typography>
-                                            </Row>
+                                            <Typography semiBold mono>{parameter.name}</Typography>
+                                            <Typography level="body2" uppercase>{parameter.in}</Typography>
                                         </Row>
                                         {parameter.description && <Typography level="body2">{parameter.description}</Typography>}
                                     </Stack>
                                 </div>
-                                {i != Object.keys(parametersResolved).length && <Divider />}
+                                {index != Object.keys(parametersResolved).length - 1 && <Divider />}
                             </React.Fragment>
                         ))}
                     </Card>
@@ -249,7 +247,7 @@ function Nav() {
     }
 
     return (
-        <Stack spacing={2}>
+        <Stack spacing={2} className="p-4">
             <Row spacing={1}>
                 <Typography>{info.title}</Typography>
                 <Chip size="sm" variant="soft">
@@ -331,7 +329,7 @@ function Route() {
     const [operationName] = useSearchParam('op');
 
     if (api == null)
-        return <Typography>Select action from navigation bar</Typography>
+        return <Typography className="p-8 text-center">Select action from navigation bar</Typography>
 
     const pathOperations = getOperations(api)
         .filter(i => typeof tagName === 'undefined' || (i.operation.tags?.map(i => i.toLowerCase()).indexOf(tagName.toLowerCase()) ?? -1) >= 0)
@@ -339,19 +337,22 @@ function Route() {
         .filter(i => typeof operationName === 'undefined' || (i.operationName.toLowerCase() === operationName.toLowerCase()));
 
     return (
-        <div className="py-2 pr-2">
-            <Stack spacing={4}>
-                {pathOperations.map(({ pathName, operationName, httpOperation, operation }) => (
-                    <Card key={`path-${pathName}-${operationName}`}>
-                        <Row spacing={2} alignItems="start">
-                            <div className="grow">
-                                <ApiOperation path={pathName} operation={httpOperation} info={operation} />
-                            </div>
-                            <div className="w-1/3">
-                                <Actions path={pathName} operation={httpOperation} info={operation} />
-                            </div>
-                        </Row>
-                    </Card>
+        <div className="p-4">
+            <Stack spacing={6}>
+                {pathOperations.map(({ pathName, operationName, httpOperation, operation }, index) => (
+                    <Fragment key={`path-${pathName}-${operationName}`}>
+                        <div key={`path-${pathName}-${operationName}`}>
+                            <Row spacing={2} alignItems="start">
+                                <div className="grow">
+                                    <ApiOperation path={pathName} operation={httpOperation} info={operation} />
+                                </div>
+                                <div className="w-1/3">
+                                    <Actions path={pathName} operation={httpOperation} info={operation} />
+                                </div>
+                            </Row>
+                        </div>
+                        {index != pathOperations.length - 1 && <Divider />}
+                    </Fragment>
                 ))}
             </Stack>
         </div>
@@ -569,32 +570,27 @@ export default function DocsApiPage() {
     const apiRequest = useCallback(() => getOpenApiDoc(url), [url]);
     const { item: api, isLoading, error } = usePromise<OpenAPIV3.Document>(apiRequest);
 
-    console.info('OpenAPI scheme: ', api);
+    console.debug('OpenAPI scheme: ', api);
 
     return (
         <ApiContext.Provider value={api}>
-            <Stack>
+            <Stack spacing={1}>
                 {error && (
                     <Alert color="danger">
-                        <Typography bold>{'Couldn\'t load OpenAPI docs'}</Typography>
+                        <Typography bold>{'Couldn\'t load OpenAPI documentation'}</Typography>
                         <Typography level="body2">{error}</Typography>
                     </Alert>
                 )}
-                <Row>
-                    <div className="min-w-[230px] self-start px-2 py-4 md:min-w-[320px]">
-                        <Loadable isLoading={isLoading || !api} loadingLabel="Loading API">
-                            <Suspense>
-                                <Nav />
-                            </Suspense>
-                        </Loadable>
-                    </div>
-                    <Divider />
-                    <div className="grow">
+                <SplitView>
+                    <Loadable isLoading={isLoading || !api} loadingLabel="Loading API">
                         <Suspense>
-                            <Route />
+                            <Nav />
                         </Suspense>
-                    </div>
-                </Row>
+                    </Loadable>
+                    <Suspense>
+                        <Route />
+                    </Suspense>
+                </SplitView>
             </Stack>
         </ApiContext.Provider>
     );
