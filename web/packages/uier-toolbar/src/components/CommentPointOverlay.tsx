@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import { cx } from '@signalco/ui-primitives/cx';
 import { getElementSelector } from '@signalco/js';
 import { useWindowEvent } from '@signalco/hooks/useWindowEvent';
-import { CommentPoint } from './Comments';
+import { CommentPoint } from './@types/Comments';
 
 type CommentPointOverlayProps = {
     onPoint: (commentPoint: CommentPoint) => void;

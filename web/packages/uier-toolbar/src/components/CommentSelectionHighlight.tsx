@@ -3,7 +3,7 @@
 import { HTMLAttributes } from 'react';
 import { cx } from '@signalco/ui-primitives/cx';
 import { useCommentItemRects } from '../hooks/useCommentItemRects';
-import { CommentSelection } from './Comments';
+import { CommentSelection } from './@types/Comments';
 
 type CommentSelectionHighlightProps = HTMLAttributes<HTMLDivElement> & {
     commentSelection: CommentSelection;

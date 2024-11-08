@@ -31,14 +31,15 @@ export function CommentToolbar({ creatingPointComment, onAddPointComment, onShow
                     title="Inbox">
                     <Inbox />
                 </IconButton>
-                <Divider orientation="vertical" flex className="my-2" />
+                {/* TODO Enable when implemented */}
+                {/* <Divider orientation="vertical" flex className="my-2" />
                 <IconButton
                     variant="plain"
                     className="rounded-full"
                     onClick={onExitReview}
                     title="Toolbar menu">
                     <Menu />
-                </IconButton>
+                </IconButton> */}
             </Row>
         </div>
     );
