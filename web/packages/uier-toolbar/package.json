@@ -30,7 +30,7 @@
         "@types/react": "npm:types-react@19.0.0-rc.1",
         "@types/react-dom": "npm:types-react-dom@19.0.0-rc.1",
         "autoprefixer": "10.4.20",
-        "postcss": "8.4.47",
+        "postcss": "8.4.48",
         "postcss-preset-env": "10.0.9",
         "react": "19.0.0-rc-65a56d0e-20241020",
         "react-dom": "19.0.0-rc-65a56d0e-20241020",
