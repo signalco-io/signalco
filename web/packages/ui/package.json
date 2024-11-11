@@ -43,7 +43,7 @@
         "autoprefixer": "10.4.20",
         "classix": "2.2.0",
         "postcss": "8.4.48",
-        "postcss-preset-env": "10.0.9",
+        "postcss-preset-env": "10.1.0",
         "react": "19.0.0-rc-65a56d0e-20241020",
         "react-dom": "19.0.0-rc-65a56d0e-20241020",
         "react-timeago": "7.2.0",
