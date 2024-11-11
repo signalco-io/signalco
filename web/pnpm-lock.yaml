@@ -176,8 +176,8 @@ importers:
         version: 11.0.2
     devDependencies:
       '@axe-core/playwright':
-        specifier: 4.10.0
-        version: 4.10.0(playwright-core@1.48.2)
+        specifier: 4.10.1
+        version: 4.10.1(playwright-core@1.48.2)
       '@playwright/test':
         specifier: 1.48.2
         version: 1.48.2
@@ -324,8 +324,8 @@ importers:
         version: 1.0.7(tailwindcss@3.4.14)
     devDependencies:
       '@axe-core/playwright':
-        specifier: 4.10.0
-        version: 4.10.0(playwright-core@1.48.2)
+        specifier: 4.10.1
+        version: 4.10.1(playwright-core@1.48.2)
       '@playwright/test':
         specifier: 1.48.2
         version: 1.48.2
@@ -433,8 +433,8 @@ importers:
         version: 0.33.5
     devDependencies:
       '@axe-core/playwright':
-        specifier: 4.10.0
-        version: 4.10.0(playwright-core@1.48.2)
+        specifier: 4.10.1
+        version: 4.10.1(playwright-core@1.48.2)
       '@playwright/test':
         specifier: 1.48.2
         version: 1.48.2
@@ -599,8 +599,8 @@ importers:
         version: 1.0.7(tailwindcss@3.4.14)
     devDependencies:
       '@axe-core/playwright':
-        specifier: 4.10.0
-        version: 4.10.0(playwright-core@1.48.2)
+        specifier: 4.10.1
+        version: 4.10.1(playwright-core@1.48.2)
       '@playwright/test':
         specifier: 1.48.2
         version: 1.48.2
@@ -699,8 +699,8 @@ importers:
         version: 1.0.7(tailwindcss@3.4.14)
     devDependencies:
       '@axe-core/playwright':
-        specifier: 4.10.0
-        version: 4.10.0(playwright-core@1.48.2)
+        specifier: 4.10.1
+        version: 4.10.1(playwright-core@1.48.2)
       '@playwright/test':
         specifier: 1.48.2
         version: 1.48.2
@@ -914,8 +914,8 @@ importers:
         version: 1.0.7(tailwindcss@3.4.14)
     devDependencies:
       '@axe-core/playwright':
-        specifier: 4.10.0
-        version: 4.10.0(playwright-core@1.48.2)
+        specifier: 4.10.1
+        version: 4.10.1(playwright-core@1.48.2)
       '@playwright/test':
         specifier: 1.48.2
         version: 1.48.2
@@ -1047,8 +1047,8 @@ importers:
         version: 1.0.7(tailwindcss@3.4.14)
     devDependencies:
       '@axe-core/playwright':
-        specifier: 4.10.0
-        version: 4.10.0(playwright-core@1.48.2)
+        specifier: 4.10.1
+        version: 4.10.1(playwright-core@1.48.2)
       '@playwright/test':
         specifier: 1.48.2
         version: 1.48.2
@@ -1225,8 +1225,8 @@ importers:
         version: 1.0.7(tailwindcss@3.4.14)
     devDependencies:
       '@axe-core/playwright':
-        specifier: 4.10.0
-        version: 4.10.0(playwright-core@1.48.2)
+        specifier: 4.10.1
+        version: 4.10.1(playwright-core@1.48.2)
       '@playwright/test':
         specifier: 1.48.2
         version: 1.48.2
@@ -2022,8 +2022,8 @@ packages:
   '@auth0/auth0-spa-js@2.1.3':
     resolution: {integrity: sha512-NMTBNuuG4g3rame1aCnNS5qFYIzsTUV5qTFPRfTyYFS1feS6jsCBR+eTq9YkxCp1yuoM2UIcjunPaoPl77U9xQ==}
 
-  '@axe-core/playwright@4.10.0':
-    resolution: {integrity: sha512-kEr3JPEVUSnKIYp/egV2jvFj+chIjCjPp3K3zlpJMza/CB3TFw8UZNbI9agEC2uMz4YbgAOyzlbUy0QS+OofFA==}
+  '@axe-core/playwright@4.10.1':
+    resolution: {integrity: sha512-EV5t39VV68kuAfMKqb/RL+YjYKhfuGim9rgIaQ6Vntb2HgaCaau0h98Y3WEUqW1+PbdzxDtDNjFAipbtZuBmEA==}
     peerDependencies:
       playwright-core: '>= 1.0.0'
 
@@ -5170,6 +5170,10 @@ packages:
 
   axe-core@4.10.0:
     resolution: {integrity: sha512-Mr2ZakwQ7XUAjp7pAwQWRhhK8mQQ6JAaNWSjmjxil0R8BPioMtQsTLOolGYkji1rcL++3dCqZA3zWqpT+9Ew6g==}
+    engines: {node: '>=4'}
+
+  axe-core@4.10.2:
+    resolution: {integrity: sha512-RE3mdQ7P3FRSe7eqCWoeQ/Z9QXrtniSjp1wUjt5nRC3WIpz5rSCve6o3fsZ2aCpJtrZjSZgjwXAoTO5k4tEI0w==}
     engines: {node: '>=4'}
 
   axobject-query@4.1.0:
@@ -9196,9 +9200,9 @@ snapshots:
 
   '@auth0/auth0-spa-js@2.1.3': {}
 
-  '@axe-core/playwright@4.10.0(playwright-core@1.48.2)':
+  '@axe-core/playwright@4.10.1(playwright-core@1.48.2)':
     dependencies:
-      axe-core: 4.10.0
+      axe-core: 4.10.2
       playwright-core: 1.48.2
 
   '@azure/abort-controller@1.1.0':
@@ -12487,6 +12491,8 @@ snapshots:
       possible-typed-array-names: 1.0.0
 
   axe-core@4.10.0: {}
+
+  axe-core@4.10.2: {}
 
   axobject-query@4.1.0: {}
 
