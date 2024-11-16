@@ -33,7 +33,7 @@ export function createFunction(
         },
         keyVaultReferenceIdentity: 'SystemAssigned',
         siteConfig: {
-            linuxFxVersion: 'DOTNET-ISOLATED|8.0',
+            linuxFxVersion: 'DOTNET-ISOLATED|9.0',
             http20Enabled: true,
             minTlsVersion: SupportedTlsVersions.SupportedTlsVersions_1_2,
             functionAppScaleLimit: 200,
