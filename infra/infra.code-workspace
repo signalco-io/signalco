@@ -13,23 +13,27 @@
 			"path": "apps/uier"
 		},
 		{
+			"name": "🚀 doprocess.app",
+			"path": "apps/doprocess"
+		},
+		{
 			"name": "🚀 remote-browser",
 			"path": "apps/remote-browser"
 		},
 		{
-			"name": "📦 @signalco/lexorder",
-			"path": "packages/lexorder"
+			"name": "🚀 workingparty.ai",
+			"path": "apps/workingparty"
 		},
 		{
-			"name": "⚙️ @infra/eslint-config",
+			"name": "📦 @infra/eslint-config",
 			"path": "packages/eslint-config"
 		},
 		{
-			"name": "⚙️ @infra/pulumi",
+			"name": "📦 @infra/pulumi",
 			"path": "packages/pulumi"
 		},
 		{
-			"name": "⚙️ @infra/typescript-config",
+			"name": "📦 @infra/typescript-config",
 			"path": "packages/typescript-config"
 		}
 	],

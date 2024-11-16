@@ -53,14 +53,13 @@ const up = async () => {
     } else {
         const shouldProtect = stack === 'production';
 
-        const resourceGroupName = `signalco-cloud-${stack}`;
         const signalrPrefix = 'sr';
         const storagePrefix = 'store';
         const keyvaultPrefix = 'kv';
 
         const currentStack = new StackReference(`signalco/${getProject()}/${getStack()}`);
 
-        const resourceGroup = new ResourceGroup(resourceGroupName);
+        const resourceGroup = new ResourceGroup(`signalco-cloud-${stack}`);
 
         const domainName = `${config.require('domain')}`;
         const corsDomains = [`app.${domainName}`, `www.${domainName}`, domainName];
@@ -181,7 +180,7 @@ const up = async () => {
         const registry = getContainerRegistry(resourceGroupSharedName, containerRegistryName);
         const appRb = createRemoteBrowser(resourceGroup, 'rb', registry, logWorkspace, false);
 
-        // Create general storage and prepare tables
+        // Create general storage
         const storage = createStorageAccount(resourceGroup, storagePrefix, shouldProtect);
 
         // ACS (Email)
