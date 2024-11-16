@@ -385,7 +385,7 @@ jobs:
 
   ci_ok:
     name: "[CI] OK"
-    needs: [station_ci, cloud_infra_preview, doprocess_infra_preview, uier_infra_preview, workingparty_infra_preview, deploy_blog, deploy_app, deploy_brandgrab, deploy_web, deploy_slco, deploy_doprocess, deploy_uidocs, deploy_uier, deploy_workingparty]
+    needs: [codeql-analysis, station_ci, cloud_infra_preview, doprocess_infra_preview, uier_infra_preview, workingparty_infra_preview, deploy_blog, deploy_app, deploy_brandgrab, deploy_web, deploy_slco, deploy_doprocess, deploy_uidocs, deploy_uier, deploy_workingparty]
     if: ${{ always() }}
     runs-on: ubuntu-latest
     steps:
