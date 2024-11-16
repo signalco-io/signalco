@@ -36,7 +36,7 @@ jobs:
       - name: ✨ Setup DotNet ${{ env.DOTNET_VERSION }} Environment
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: 8.0.x
+          dotnet-version: 9.0.x
         
       - name: ✨ Setup Node
         uses: actions/setup-node@v4

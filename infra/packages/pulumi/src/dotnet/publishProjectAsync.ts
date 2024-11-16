@@ -1,7 +1,7 @@
 import { run } from '@pulumi/command/local/index.js';
 
 export async function publishProjectAsync(codePath: string) {
-    const dotnetVersion = 8;
+    const dotnetVersion = 9;
     await run({
         command: 'dotnet clean',
         dir: codePath,
