@@ -1,18 +1,23 @@
 'use client';
 
-import React, { PropsWithChildren, useCallback } from 'react';
+import React, { PropsWithChildren, memo, useCallback } from 'react';
 import NextImage from 'next/image';
 import { Typography } from '@signalco/ui-primitives/Typography';
-import { Tooltip } from '@signalco/ui-primitives/Tooltip';
 import { Stack } from '@signalco/ui-primitives/Stack';
 import { Link } from '@signalco/ui-primitives/Link';
 import { Divider } from '@signalco/ui-primitives/Divider';
 import { Container } from '@signalco/ui-primitives/Container';
 import { Card, CardContent, CardCover, CardOverflow } from '@signalco/ui-primitives/Card';
+import { CompanyGitHub, CompanyReddit, CompanyX } from '@signalco/ui-icons';
 import { Loadable } from '@signalco/ui/Loadable';
 import { orderBy, isImageDataUrl } from '@signalco/js';
 import { useSearchParam } from '@signalco/hooks/useSearchParam';
+import { SectionsView } from '@signalco/cms-core/SectionsView';
+import { SectionData } from '@signalco/cms-core/SectionData';
+import { Footer1 } from '@signalco/cms-components-marketing/Footer';
 import { usePromise } from '@enterwell/react-hooks';
+import InputGrabDomain from '../InputGrabDomain';
+import { KnownPages } from '../../src/knownPages';
 import { ScreenshotResponse } from '../../app/api/screenshot/route';
 import { BrandResources } from '../../app/api/quick/route';
 
@@ -50,11 +55,9 @@ function OgPreview({ og }: { og: BrandResources['og'] | undefined }) {
                 </div>
                 <CardOverflow className="flex">
                     {!!og.siteName && (
-                        <Tooltip title={og.siteName}>
-                            <Typography noWrap level="body3" semiBold secondary>
-                                {og.siteName}
-                            </Typography>
-                        </Tooltip>
+                        <Typography noWrap level="body3" semiBold secondary title={og.siteName}>
+                            {og.siteName}
+                        </Typography>
                     )}
                     {!!og.type && (
                         <>
@@ -75,11 +78,9 @@ function OgPreview({ og }: { og: BrandResources['og'] | undefined }) {
                     {!!og.url && (
                         <>
                             <Divider orientation="vertical" />
-                            <Tooltip title={og.url}>
-                                <Typography level="body3" noWrap semiBold secondary>
-                                    {og.url}
-                                </Typography>
-                            </Tooltip>
+                            <Typography level="body3" noWrap semiBold secondary title={og.url}>
+                                {og.url}
+                            </Typography>
                         </>
                     )}
                 </CardOverflow>
@@ -299,14 +300,55 @@ async function quickLookup(domain: string | undefined): Promise<BrandResources |
     return await fetch('/api/quick?domain=' + encodeURIComponent(domain)).then(res => res.json()).then(res => res as BrandResources);
 }
 
+const sectionsComponentRegistry = {
+    'Footer1': memo(Footer1)
+}
+
+const sectionsData: SectionData[] = [
+    {
+        component: 'Footer1',
+        tagline: 'BrandGrab',
+        features: [
+            {
+                header: 'Community',
+                ctas: [
+                    { label: 'r/signalco', href: 'https://www.reddit.com/r/signalco/' },
+                    { label: 'Discussions on GitHub', href: 'https://github.com/signalco-io/signalco/discussions' },
+                ]
+            },
+            {
+                header: 'Legal',
+                ctas: [
+                    { label: 'Privacy Policy', href: KnownPages.LegalPrivacyPolicy },
+                    { label: 'Terms of Service', href: KnownPages.LegalTermsOfService },
+                    { label: 'Cookie Policy', href: KnownPages.LegalCookiePolicy },
+                    { label: 'Acceptable Use Policy', href: KnownPages.LegalAcceptableUsePolicy },
+                    { label: 'SLA', href: KnownPages.LegalSla },
+                ]
+            }
+        ],
+        ctas: [
+            { label: 'X formerly known as Twitter', href: 'https://x.com/signalco_io', icon: <CompanyX /> },
+            { label: 'reddit', href: 'https://www.reddit.com/r/signalco/', icon: <CompanyReddit /> },
+            { label: 'GitHub', href: 'https://github.com/signalco-io/signalco', icon: <CompanyGitHub /> },
+        ]
+    }
+];
+
 export default function LandingPageView() {
     const [domain] = useSearchParam('domain');
 
     return (
-        <Stack style={{ overflowX: 'hidden', paddingBottom: 16 }}>
+        <Stack spacing={8}>
+            <Container maxWidth="md">
+                <InputGrabDomain />
+            </Container>
             <Container maxWidth="md">
                 <BrandView domain={domain} />
             </Container>
+            <SectionsView
+                sectionsData={sectionsData}
+                componentsRegistry={sectionsComponentRegistry} />
         </Stack>
     );
 }

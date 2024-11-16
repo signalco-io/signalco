@@ -1,30 +1,40 @@
+import { CSSProperties, ReactElement } from 'react';
 import type { ColorVariants } from '../theme';
 import { cx } from '../cx';
 
 export type DotIndicatorProps = {
     color: ColorVariants;
-    content?: React.ReactElement;
+    /**
+     * @default filled
+     */
+    variant?: 'outlined' | 'filled';
+    content?: ReactElement;
+    /**
+     * @default 10
+     */
     size?: number;
 }
 
-export function DotIndicator(props: DotIndicatorProps) {
-    const { color, content, size: requestedSize } = props;
+export function DotIndicator({ color, content, size: requestedSize, variant = 'filled' }: DotIndicatorProps) {
     const size = requestedSize || 10;
     return (
         <div
             className={cx(
-                'flex flex-col items-center justify-center text-white text-center',
-                color === 'success' && 'bg-green-500',
-                color === 'warning' && 'bg-yellow-500',
-                color === 'danger' && 'bg-red-500',
-                color === 'info' && 'bg-blue-500',
-                color === 'neutral' && 'bg-slate-500'
+                'flex flex-col items-center justify-center text-white text-center rounded-full w-[--dot-size] h-[--dot-size]',
+                variant === 'filled' && color === 'success' && 'bg-green-500',
+                variant === 'filled' && color === 'warning' && 'bg-yellow-500',
+                variant === 'filled' && color === 'danger' && 'bg-red-500',
+                variant === 'filled' && color === 'info' && 'bg-blue-500',
+                variant === 'filled' && color === 'neutral' && 'bg-slate-500',
+                variant === 'outlined' && color === 'success' && 'border border-green-500',
+                variant === 'outlined' && color === 'warning' && 'border border-yellow-500',
+                variant === 'outlined' && color === 'danger' && 'border border-red-500',
+                variant === 'outlined' && color === 'info' && 'border border-blue-500',
+                variant === 'outlined' && color === 'neutral' && 'border border-slate-500',
             )}
             style={{
-                width: size,
-                height: size,
-                borderRadius: size / 2
-            }}>
+                '--dot-size': `${size}px`
+            } as CSSProperties}>
             {content}
         </div>
     )

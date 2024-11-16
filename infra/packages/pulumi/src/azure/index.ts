@@ -18,3 +18,4 @@ export * from './getConnectionString.js';
 export * from './signedBlobReadUrl.js';
 export * from './vaultSecret.js';
 export * from './webAppIdentity.js';
+export * from './acsEmails.js';

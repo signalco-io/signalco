@@ -1,4 +1,6 @@
 {
+    "installCommand": "pnpm install --frozen-lockfile --filter app... --filter .",
+    "buildCommand": "cd ../.. && npx turbo run build --filter=app...",
     "regions": [
         "dub1"
     ]

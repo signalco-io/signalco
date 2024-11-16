@@ -16,17 +16,30 @@ type CommentToolbarProps = {
 export function CommentToolbar({ creatingPointComment, onAddPointComment, onShowSidebar, onExitReview }: CommentToolbarProps) {
     return (
         <div className="fixed bottom-4 left-1/2 z-[51] -translate-x-1/2 rounded-full border bg-black p-1">
-            <Row spacing={0}>
-                <IconButton variant={creatingPointComment ? 'soft' : 'plain'} className="rounded-full" onClick={onAddPointComment}>
+            <Row>
+                <IconButton
+                    title="Add comment"
+                    variant={creatingPointComment ? 'soft' : 'plain'}
+                    className="rounded-full"
+                    onClick={onAddPointComment}>
                     <CommentIcon icon="add" size={24} variant="outlined" />
                 </IconButton>
-                <IconButton variant="plain" className="rounded-full" onClick={onShowSidebar}>
+                <IconButton
+                    variant="plain"
+                    className="rounded-full"
+                    onClick={onShowSidebar}
+                    title="Inbox">
                     <Inbox />
                 </IconButton>
-                <Divider orientation="vertical" />
-                <IconButton variant="plain" className="rounded-full" onClick={onExitReview}>
+                {/* TODO Enable when implemented */}
+                {/* <Divider orientation="vertical" flex className="my-2" />
+                <IconButton
+                    variant="plain"
+                    className="rounded-full"
+                    onClick={onExitReview}
+                    title="Toolbar menu">
                     <Menu />
-                </IconButton>
+                </IconButton> */}
             </Row>
         </div>
     );

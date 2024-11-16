@@ -1,4 +1,6 @@
+import React from 'react';
 import { forwardRef, type HTMLAttributes } from 'react';
+import { slug } from '@signalco/js';
 import { cx } from '../cx';
 
 export type CardProps = HTMLAttributes<HTMLDivElement> & {
@@ -36,8 +38,12 @@ export function CardHeader({ className, ...props }: HTMLAttributes<HTMLDivElemen
     return <div className={cx('flex flex-col space-y-1.5 p-6', className)} {...props} />;
 }
 
-export function CardTitle({ className, ...props }: HTMLAttributes<HTMLHeadingElement>) {
-    return <div className={cx('text-lg font-semibold leading-none tracking-tight', className)} {...props} />;
+export function CardTitle({ children, className, ...props }: HTMLAttributes<HTMLHeadingElement>) {
+    return (
+        <div id={typeof children === 'string' ? slug(children) : undefined} className={cx('text-2xl font-semibold leading-none tracking-tight', className)} {...props}>
+            {children}
+        </div>
+    );
 }
 
 export function CardOverflow({ className, ...props }: HTMLAttributes<HTMLDivElement>) {

@@ -1,6 +1,6 @@
 import { RunsListView } from '../../../../../../components/processes/processes/RunsListView';
 
-export default function ProcessRunsPage({ params }: { params: { id: string } }) {
-    const processId = params.id;
+export default async function ProcessRunsPage({ params }: { params: Promise<{ id: string }> }) {
+    const processId = (await params).id;
     return <RunsListView processId={processId} />
 }

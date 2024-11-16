@@ -1,8 +1,8 @@
 'use client';
 
 import { PropsWithChildren, useContext } from 'react';
+import { SplitView } from '@signalco/ui/SplitView';
 import { SidebarContext } from '../../src/contexts/SidebarContext';
-import { SplitView } from './SplitView';
 import { Sidebar } from './Sidebar';
 
 export function AppLayout({ children }: PropsWithChildren) {

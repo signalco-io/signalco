@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { CSSProperties, ReactNode, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { Stack } from '@signalco/ui-primitives/Stack';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@signalco/ui-primitives/Menu';
-import { Card, CardOverflow } from '@signalco/ui-primitives/Card';
+import { Card } from '@signalco/ui-primitives/Card';
 import { Button } from '@signalco/ui-primitives/Button';
 import { Delete, MoreHorizontal, Settings } from '@signalco/ui-icons';
 import { ErrorBoundary } from '@signalco/ui/ErrorBoundary';
@@ -12,11 +12,11 @@ import { IsConfigurationValid } from '../../../src/widgets/ConfigurationValidato
 const WidgetConfiguration = dynamic(() => import('./WidgetConfiguration'));
 
 interface IWidgetCardProps {
-    children: JSX.Element,
+    children: ReactNode,
     isEditMode?: boolean
-    config: object,
+    config: Record<string, unknown>,
     options?: IWidgetConfigurationOption<unknown>[],
-    onConfigured?: (config: object) => void
+    onConfigured?: (config: Record<string, unknown>) => void
     onRemove?: () => void
 }
 
@@ -37,14 +37,12 @@ export default function WidgetCard(props: IWidgetCardProps) {
 
     const width = (config as CardConfig)?.columns || 2;
     const height = (config as CardConfig)?.rows || 2;
-    const sizeWidth = width * 78 + (width - 1) * 8;
-    const sizeHeight = height * 78 + (height - 1) * 8;
 
     const isLoading = typeof options === 'undefined';
     const needsConfiguration = typeof options === 'undefined' || options == null || !IsConfigurationValid(config, options);
 
     const [isConfiguring, setIsConfiguring] = useState<boolean>(false);
-    const handleOnConfiguration = (newConfig: object) => {
+    const handleOnConfiguration = (newConfig: Record<string, unknown>) => {
         if (onConfigured) {
             onConfigured(newConfig);
         }
@@ -63,17 +61,11 @@ export default function WidgetCard(props: IWidgetCardProps) {
 
     return (
         <>
-            <Card
-                className="relative overflow-hidden"
+            <Card className="relative h-[--widget-instance-h] w-[--widget-instance-w] overflow-hidden border border-border/70 bg-card/80 p-0 shadow-md backdrop-blur-md"
                 style={{
-                    width: `${sizeWidth}px`,
-                    height: `${sizeHeight}px`
-                }}>
-                <CardOverflow
-                    style={{
-                        width: `${sizeWidth}px`,
-                        height: `${sizeHeight}px`
-                    }}>
+                    '--widget-instance-w': `calc(${width} * var(--widget-size) + ${0.5 * (width - 1)}rem)`,
+                    '--widget-instance-h': `calc(${height} * var(--widget-size) + ${0.5 * (height - 1)}rem)`,
+                } as CSSProperties}>
                     {(!isLoading && needsConfiguration) ? (
                         <Stack justifyContent="stretch" className="h-full">
                             <Button disabled={!isEditMode} size="lg" fullWidth onClick={handleOnConfigureClicked}>Configure widget</Button>
@@ -84,7 +76,7 @@ export default function WidgetCard(props: IWidgetCardProps) {
                     {isEditMode && (
                         <div className="absolute right-0 top-0">
                             <DropdownMenu>
-                                <DropdownMenuTrigger>
+                            <DropdownMenuTrigger asChild>
                                     <Button className="min-w-[42px]"><MoreHorizontal /></Button>
                                 </DropdownMenuTrigger>
                                 <DropdownMenuContent>
@@ -101,8 +93,7 @@ export default function WidgetCard(props: IWidgetCardProps) {
                                 </DropdownMenuContent>
                             </DropdownMenu>
                         </div>
-                    )}
-                </CardOverflow>
+                )}
             </Card>
             {(isConfiguring && options) &&
                 <WidgetConfiguration

@@ -1,6 +1,6 @@
-@import '@signalco/ui/index.css';
+@import '@signalco/ui-themes-minimal-app/styles';
 
 :root {
-  --graph-stroke: #999;
+  --graph-stroke: hsl(0, 0%, 70%);
 }
 

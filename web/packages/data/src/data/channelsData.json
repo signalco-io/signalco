@@ -159,15 +159,6 @@
         "officialUrl": "https://www.ibroadlink.com/"
     },
     {
-        "channelName": "nordigen",
-        "label": "Nordigen",
-        "categories": [
-            "finance"
-        ],
-        "planned": true,
-        "officialUrl": "https://nordigen.com/"
-    },
-    {
         "channelName": "polygonio",
         "label": "Polygon.io",
         "categories": [

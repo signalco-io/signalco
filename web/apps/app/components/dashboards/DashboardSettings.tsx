@@ -9,25 +9,28 @@ import ConfigurationDialog from '../shared/dialog/ConfigurationDialog';
 import useLocale from '../../src/hooks/useLocale';
 import useSaveDashboard from '../../src/hooks/dashboards/useSaveDashboard';
 import useDeleteDashboard from '../../src/hooks/dashboards/useDeleteDashboard';
-import { IDashboardModel } from '../../src/dashboards/DashboardsRepository';
+import { Dashboard } from '../../src/dashboards/DashboardsRepository';
+import { BackgroundSelector } from './BackgroundSelector';
 
-interface IDashboardSettingsProps {
+export type DashboardSettingsProps = {
     isOpen: boolean,
-    dashboard?: IDashboardModel,
+    dashboard: Dashboard,
     onClose: () => void,
 }
 
-function DashboardSettings({ isOpen, dashboard, onClose }: IDashboardSettingsProps) {
+function DashboardSettings({ isOpen, dashboard, onClose }: DashboardSettingsProps) {
     const { t } = useLocale('App', 'Dashboards');
-    const [name, setName] = useState(dashboard?.name || '');
+    const [name, setName] = useState(dashboard?.alias || '');
+    const [background, setBackground] = useState(dashboard?.configuration.background);
     const [, setDashboardId] = useSearchParam('dashboard');
     const saveDashboard = useSaveDashboard();
     const deleteDashboard = useDeleteDashboard();
 
     const handleSave = async () => {
-        saveDashboard.mutate({
-            ...dashboard,
-            name: name
+        await saveDashboard.mutateAsync({
+            id: dashboard?.id,
+            alias: name,
+            configuration: dashboard?.configuration
         });
         onClose();
     }
@@ -42,7 +45,7 @@ function DashboardSettings({ isOpen, dashboard, onClose }: IDashboardSettingsPro
 
     useEffect(() => {
         if (dashboard) {
-            setName(dashboard.name);
+            setName(dashboard.alias);
         }
     }, [dashboard]);
 
@@ -54,7 +57,7 @@ function DashboardSettings({ isOpen, dashboard, onClose }: IDashboardSettingsPro
             actions={(
                 <>
                     <Button onClick={onClose}>{t('Cancel')}</Button>
-                    <Button autoFocus onClick={handleSave}>{t('SaveChanges')}</Button>
+                    <Button autoFocus onClick={handleSave} loading={saveDashboard.isPending}>{t('SaveChanges')}</Button>
                 </>
             )}>
             <Stack spacing={4}>
@@ -62,13 +65,18 @@ function DashboardSettings({ isOpen, dashboard, onClose }: IDashboardSettingsPro
                     label={t('DashboardSettingName')}
                     value={name}
                     onChange={(e) => setName(e.target.value ?? '')} />
+                <Stack spacing={2}>
+                    <Typography level="body2" semiBold>{t('Background')}</Typography>
+                    <BackgroundSelector value={background} onChange={setBackground} />
+                </Stack>
                 <Stack spacing={1}>
-                    <Typography level="body2">{t('Advanced')}</Typography>
+                    <Typography level="body2" semiBold>{t('Advanced')}</Typography>
                     <ConfirmDeleteButton
                         buttonLabel={t('DeleteButtonLabel')}
                         header={t('DeleteTitle')}
-                        expectedConfirmText={dashboard?.name || t('ConfirmDialogExpectedText')}
-                        onConfirm={handleDashboardDelete} />
+                        expectedConfirmText={dashboard?.alias || t('ConfirmDialogExpectedText')}
+                        onConfirm={handleDashboardDelete}
+                    />
                 </Stack>
             </Stack>
         </ConfigurationDialog>

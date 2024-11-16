@@ -1,12 +1,7 @@
 import { createSecureHeaders } from 'next-secure-headers';
 import { combineSecureHeaders, knownSecureHeadersExternalUrls } from '@signalco/data/node';
-import nextBundleAnalyzer from '@next/bundle-analyzer';
 
 const isDevelopment = process.env.NODE_ENV === 'development';
-
-const withBundleAnalyzer = nextBundleAnalyzer({
-    enabled: process.env.ANALYZE === 'true',
-});
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -14,7 +9,21 @@ const nextConfig = {
     images: {
         dangerouslyAllowSVG: true,
         contentSecurityPolicy: 'default-src \'self\'; script-src \'none\'; sandbox;',
-        domains: ['slco.io']
+        remotePatterns: [
+            {
+                hostname: 'slco.io',
+                pathname: '/images/**',
+                protocol: 'https',
+            },
+            {
+                hostname: 'slco.io',
+                pathname: '/assets/**',
+                protocol: 'https',
+            }
+        ]
+    },
+    experimental: {
+        reactCompiler: true
     },
     eslint: {
         dirs: ['worker', 'tools', 'src', 'app', 'locales', 'components']
@@ -28,7 +37,7 @@ const nextConfig = {
                 isDevelopment,
                 [
                     knownSecureHeadersExternalUrls.github,
-                    knownSecureHeadersExternalUrls.clarity,
+                    knownSecureHeadersExternalUrls.googleFonts,
                     knownSecureHeadersExternalUrls.vercel
                 ]
             ))
@@ -36,6 +45,4 @@ const nextConfig = {
     },
 };
 
-export default isDevelopment
-    ? withBundleAnalyzer(nextConfig)
-    : withBundleAnalyzer(nextConfig);
+export default nextConfig;

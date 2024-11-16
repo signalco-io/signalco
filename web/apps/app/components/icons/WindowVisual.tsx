@@ -1,9 +1,9 @@
 /* eslint-disable tailwindcss/no-custom-classname */
-import { useState } from 'react';
+import { CSSProperties, useState } from 'react';
+import { cx } from '@signalco/ui-primitives/cx';
 import { useInterval } from '@signalco/hooks/useInterval';
 import { now } from '../../src/services/DateTimeProvider';
 import { colorToRgb } from '../../src/helpers/StringHelpers';
-import styles from './WindowVisual.module.scss';
 
 const skySunnyGrads = [
     [{ color: '#00000c', position: 0 }, { color: '#00000c', position: 0 }],
@@ -32,7 +32,7 @@ const skySunnyGrads = [
     [{ color: '#00000c', position: 80 }, { color: '#150800', position: 100 }],
 ];
 
-function WindowVisual(props: { shadePerc: number, size: number, dateAndTime?: Date }) {
+function WindowVisual({ size, ...props }: { shadePerc: number, size?: number, dateAndTime?: Date }) {
     const [hours, setHours] = useState(((props.dateAndTime ?? now()).getHours()) % 24);
 
     // Update hours every minute
@@ -52,7 +52,17 @@ function WindowVisual(props: { shadePerc: number, size: number, dateAndTime?: Da
     const shadePosition = 1 + (perc * 64);
 
     return (
-        <svg xmlns="http://www.w3.org/2000/svg" className={styles.root} width={props.size * 1.4} height={props.size * 1.4} fill="none" viewBox="0 0 81 104">
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className={cx(
+                'mt-2 -mx-4 [&_*]:transition-all',
+                Boolean(size) ? 'w-[--visual-size] h-[--visual-size]' : 'w-full h-full'
+            )}
+            style={{
+                '--visual-size': size ? `${size}px` : undefined
+            } as CSSProperties}
+            fill="none"
+            viewBox="0 0 81 104">
             <g className="Theme=Dark, Shades=Mid">
                 <path fill="hsl(var(--foreground))" d="M16 1h49v71H16z" className="Frame" />
                 <g className="Pane" filter="url(#filter0_d_21:114)">

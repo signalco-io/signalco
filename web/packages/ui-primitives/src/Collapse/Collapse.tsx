@@ -5,7 +5,7 @@ export type CollapseProps = PropsWithChildren<{
     duration?: number,
 }>;
 
-export function Collapse({ children, appear, duration = 200 }: CollapseProps) {
+export function Collapse({ children, appear, duration = 150 }: CollapseProps) {
     const containerRef = useRef<HTMLDivElement>(null);
     const [targetHeight, setHeight] = useState<number | undefined>(0);
 

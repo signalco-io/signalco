@@ -5,6 +5,11 @@ export type TimeagoProps = {
     date: number | Date | undefined;
     live?: boolean;
     format?: 'default' | 'nano';
+    /**
+     * The placeholder to display when the date is undefined.
+     * @default '-'
+     */
+    noDate?: string;
 };
 
 function nanoFormater(
@@ -15,14 +20,18 @@ function nanoFormater(
     return <span>{`${suffix === 'from now' ? '-' : ''}${value}${unit[0]}`}</span>;
 }
 
-export function Timeago({ date, live, format }: TimeagoProps) {
-    const isNever = typeof date === 'number' || date == null;
+export function Timeago({ date, live, format, noDate = '-' }: TimeagoProps) {
+    if ((typeof date !== 'number' && !((date as unknown) instanceof Date)) || date == null) {
+        return (
+            <Typography level="body2">{noDate}</Typography>
+        );
+    }
 
     return (
-        <div>
-            {isNever
-                ? <Typography level="body3">?</Typography>
-                : <ReactTimeago formatter={format === 'nano' ? nanoFormater : undefined} date={date} live={live} />}
-        </div>
-    )
+        <ReactTimeago
+            title={(typeof date === 'number' ? new Date(date) : date)?.toLocaleString()}
+            formatter={format === 'nano' ? nanoFormater : undefined}
+            date={date}
+            live={live} />
+    );
 }

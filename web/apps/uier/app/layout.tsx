@@ -1,27 +1,21 @@
 import Script from 'next/script';
-import { Inter } from 'next/font/google';
 import { Metadata, Viewport } from 'next';
 import './global.css';
 import { Analytics } from '@vercel/analytics/react';
-import { ClientProvider } from '../components/providers/ClientProvider';
-import { AuthProvider } from '../components/providers/AuthProvider';
+import { ClientProvider } from '../src/components/providers/ClientProvider';
+import { AuthProvider } from '../src/components/providers/AuthProvider';
 
-const inter = Inter({
-    subsets: ['latin'],
-    variable: '--font-sans',
-});
-
-export default function RootLayout({ children, }: {
+export default function RootLayout({ children }: {
     children: React.ReactNode;
 }) {
     return (
         <html lang="en" suppressHydrationWarning>
-            <body className={`${inter.variable} font-sans`}>
+            <body className={'font-sans'}>
                 <AuthProvider>
                     <ClientProvider>
                         {children}
                         <Analytics />
-                        <Script src="http://localhost:5500/index.js" />
+                        <Script src="http://localhost:4005/index.js" />
                     </ClientProvider>
                 </AuthProvider>
             </body>
@@ -30,8 +24,8 @@ export default function RootLayout({ children, }: {
 }
 
 export const metadata = {
-    title: 'DoProcess.app',
-    description: 'Do process the right way',
+    title: 'uier',
+    description: 'uier',
     manifest: '/manifest.json',
     icons: {
         apple: '/apple-touch-icon.png',

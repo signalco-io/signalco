@@ -27,7 +27,7 @@ const Row = forwardRef<HTMLDivElement, RowProps>(({ spacing, alignItems, justify
                 justifyItems === 'center' && 'justify-items-center',
                 className)}
             style={{
-                '--s-gap': `${(spacing ?? 0) * 8}px`,
+                '--s-gap': `${(spacing ?? 0) * 0.5}rem`,
                 ...style
             } as CSSProperties}
             {...props}

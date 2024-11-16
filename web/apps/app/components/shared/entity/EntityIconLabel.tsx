@@ -28,11 +28,11 @@ export default function EntityIconLabel({ entityId, description, header }: Entit
             ) : entity && (<EntityIcon entity={entity} />)}
             <Stack alignItems="start" style={{ minWidth: 0 }}>
                 <div className="max-w-full">
-                    <Typography noWrap>
-                        <Loadable isLoading={isLoading} loadingLabel="Loading entity" error={error}>
+                    <Loadable isLoading={isLoading} loadingLabel="Loading entity" error={error}>
+                        <Typography noWrap>
                             {entityName}
-                        </Loadable>
-                    </Typography>
+                        </Typography>
+                    </Loadable>
                 </div>
                 {!isLoading && (
                     <Typography level="body2">

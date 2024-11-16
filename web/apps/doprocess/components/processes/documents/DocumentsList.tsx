@@ -1,7 +1,7 @@
 'use client';
 
-import { SignedIn, SignedOut } from '@clerk/nextjs';
-import { List } from '../../shared/List';
+import { QueryList } from '@signalco/ui/QueryList';
+import { SignedOut, SignedIn } from '@signalco/auth-client/components';
 import { InAppCtaSignUp } from '../../shared/InAppCtaSignUp';
 import { useDocuments } from '../../../src/hooks/useDocuments';
 import { DocumentsListItem } from './DocumentsListItem';
@@ -11,10 +11,11 @@ export function DocumentsList() {
     return (
         <>
             <SignedIn>
-                <List
+                <QueryList
                     query={useDocuments}
                     itemRender={(item) => (<DocumentsListItem document={item} />)}
                     editable
+                    variant="outlined"
                     itemCreateLabel="New document"
                     createForm={<DocumentCreateForm redirect />}
                 />

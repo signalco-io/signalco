@@ -1,7 +1,7 @@
 'use client';
+
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Tooltip } from '@signalco/ui-primitives/Tooltip';
 import { Stack } from '@signalco/ui-primitives/Stack';
 import { Input } from '@signalco/ui-primitives/Input';
 import { Button } from '@signalco/ui-primitives/Button';
@@ -35,15 +35,15 @@ export function DocumentCreateForm({ redirect }: { redirect: boolean; }) {
                 onChange={(e) => setName(e.target.value)}
                 label="Name"
                 placeholder="example: Onboarding manual" />
-            <Tooltip title="Create tempalte" className="self-end">
                 <Button
+                className="self-end"
+                title="Create tempalte"
                     loading={createProcess.isPending}
                     variant="solid"
                     startDecorator={<Add />}
                     onClick={handleDocumentCreate}>
                     Create
-                </Button>
-            </Tooltip>
+            </Button>
         </Stack>
     );
 }

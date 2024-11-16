@@ -1,33 +1,40 @@
 import { createSecureHeaders } from 'next-secure-headers';
 import { combineSecureHeaders, knownSecureHeadersExternalUrls } from '@signalco/data/node';
-import nextBundleAnalyzer from '@next/bundle-analyzer';
 
 const isDevelopment = process.env.NODE_ENV === 'development';
 
-const withBundleAnalyzer = nextBundleAnalyzer({
-    enabled: process.env.ANALYZE === 'true',
-});
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     reactStrictMode: true,
-    experimental: {
-        outputFileTracingExcludes: {
-            '*': [
-                './**/node_modules/@swc/core-linux-x64-gnu',
-                './**/node_modules/@swc/core-linux-x64-musl',
-                './**/node_modules/esbuild/linux',
-                './**/node_modules/webpack',
-                './**/node_modules/rollup',
-                './**/node_modules/terser',
-            ],
-        },
+    outputFileTracingExcludes: {
+        '*': [
+            './**/node_modules/@swc/core-linux-x64-gnu',
+            './**/node_modules/@swc/core-linux-x64-musl',
+            './**/node_modules/esbuild/linux',
+            './**/node_modules/webpack',
+            './**/node_modules/rollup',
+            './**/node_modules/terser',
+        ],
     },
-    outputFileTracing: true,
+    experimental: {
+        reactCompiler: true
+    },
     images: {
         dangerouslyAllowSVG: true,
         contentSecurityPolicy: 'default-src \'self\'; script-src \'none\'; sandbox;',
-        domains: ['www.brandgrab.io']
+        remotePatterns: [
+            {
+                hostname: 'www.brandgrab.io',
+                pathname: '/images/**',
+                protocol: 'https',
+            },
+            {
+                hostname: 'www.brandgrab.io',
+                pathname: '/assets/**',
+                protocol: 'https',
+            }
+        ]
     },
     eslint: {
         dirs: ['worker', 'tools', 'src', 'app', 'locales', 'components']
@@ -41,14 +48,12 @@ const nextConfig = {
                 isDevelopment,
                 [
                     knownSecureHeadersExternalUrls.signalco,
-                    knownSecureHeadersExternalUrls.clarity,
-                    knownSecureHeadersExternalUrls.vercel
+                    knownSecureHeadersExternalUrls.vercel,
+                    knownSecureHeadersExternalUrls.googleFonts,
                 ]
             ))
         }];
     },
 };
 
-export default isDevelopment
-    ? withBundleAnalyzer(nextConfig)
-    : withBundleAnalyzer(nextConfig);
+export default nextConfig;

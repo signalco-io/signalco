@@ -2,14 +2,19 @@
     "name": "@signalco/tailwindcss-config-signalco",
     "version": "0.0.0",
     "private": true,
+    "license": "MIT",
     "main": "index.js",
     "type": "module",
     "sideEffects": false,
-    "dependencies": {
-        "tailwindcss": "3.4.0",
+    "exports": {
+        "./*": "./src/*.ts"
+    },
+    "devDependencies": {
+        "tailwindcss": "3.4.15",
         "tailwindcss-animate": "1.0.7"
     },
-    "publishConfig": {
-        "access": "public"
+    "peerDependencies": {
+        "tailwindcss": ">=3",
+        "tailwindcss-animate": ">=1"
     }
 }

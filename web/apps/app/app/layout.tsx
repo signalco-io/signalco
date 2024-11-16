@@ -1,21 +1,15 @@
 import './global.css';
 import { PropsWithChildren } from 'react';
-import { Inter } from 'next/font/google';
 import { Viewport, type Metadata } from 'next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import { Analytics } from '@vercel/analytics/react';
 import { AppLayout } from '../components/layouts/AppLayout';
 import { LayoutClientWrapper } from './LayoutClientWrapper';
 
-const inter = Inter({
-    subsets: ['latin'],
-    variable: '--font-sans',
-});
-
 export default function RootLayout({ children }: PropsWithChildren) {
     return (
-        <html lang="en">
-            <body className={`${inter.variable} font-sans`}>
+        <html lang="en" suppressHydrationWarning={true}>
+            <body className={'font-sans'}>
                 <LayoutClientWrapper>
                     <AppLayout>
                         {children}

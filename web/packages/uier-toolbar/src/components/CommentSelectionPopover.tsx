@@ -1,13 +1,12 @@
 'use client';
 
 import { useState } from 'react';
-import { Tooltip } from '@signalco/ui-primitives/Tooltip';
 import { cx } from '@signalco/ui-primitives/cx';
 import { Button } from '@signalco/ui-primitives/Button';
 import { Comment } from '@signalco/ui-icons';
 import { orderBy } from '@signalco/js';
 import { useResizeObserver } from '@enterwell/react-hooks';
-import { popoverWidth, popoverWindowMargin } from './Comments';
+import { popoverWidth, popoverWindowMargin } from './@types/Comments';
 
 export function CommentSelectionPopover({ rects, onCreate }: { rects: DOMRect[]; onCreate: () => void; }) {
     const [popoverHeight, setPopoverHeight] = useState(0);
@@ -31,15 +30,14 @@ export function CommentSelectionPopover({ rects, onCreate }: { rects: DOMRect[];
             )}
             style={{ left: leftFixed, top: topFixed }}>
             <div>
-                <Tooltip title="Add comment">
-                    <Button
-                        variant="plain"
-                        className="gap-2 rounded-full"
-                        onClick={onCreate}
-                        startDecorator={<Comment />}>
-                        Comment...
-                    </Button>
-                </Tooltip>
+                <Button
+                    title="Add comment"
+                    variant="plain"
+                    className="gap-2 rounded-full"
+                    onClick={onCreate}
+                    startDecorator={<Comment />}>
+                    Comment...
+                </Button>
             </div>
         </div>
     );

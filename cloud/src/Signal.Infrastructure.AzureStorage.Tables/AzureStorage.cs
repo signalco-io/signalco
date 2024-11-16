@@ -18,18 +18,16 @@ using Signal.Core.Users;
 
 namespace Signal.Infrastructure.AzureStorage.Tables;
 
-internal class AzureStorage : IAzureStorage
+internal class AzureStorage(
+    IAzureStorageDao dao,
+    IAzureStorageClientFactory clientFactory)
+    : IAzureStorage
 {
-    private readonly IAzureStorageDao dao;
-    private readonly IAzureStorageClientFactory clientFactory;
-
-    public AzureStorage(
-        IAzureStorageDao dao,
-        IAzureStorageClientFactory clientFactory)
-    {
-        this.dao = dao ?? throw new ArgumentNullException(nameof(dao));
-        this.clientFactory = clientFactory ?? throw new ArgumentNullException(nameof(clientFactory));
-    }
+    public async Task PatCreateAsync(string userId, string patEnd, string patHash, string? alias, DateTime? expire, CancellationToken cancellationToken = default) =>
+        await this.WithClientAsync(
+            ItemTableNames.AuthPats,
+            c => c.AddEntityAsync(new AzureAuthPat(userId, patHash, patEnd, alias, expire), cancellationToken),
+            cancellationToken);
 
     public async Task UpsertAsync(IEntity entity, CancellationToken cancellationToken = default) =>
         await this.WithClientAsync(
@@ -79,7 +77,7 @@ internal class AzureStorage : IAzureStorage
             client => client.UpsertEntityAsync(new AzureNewsletterSubscription(subscription.Email),
                 cancellationToken: cancellationToken),
             cancellationToken);
-    
+
     public async Task QueueAsync(ContactStateProcessQueueItem item, CancellationToken cancellationToken = default) =>
         await this.WithQueueClientAsync(
             ItemQueueNames.ContactStateProcessingQueue,
@@ -89,7 +87,7 @@ internal class AzureStorage : IAzureStorage
 
     public async Task QueueAsync(UsageQueueItem? item, CancellationToken cancellationToken = default)
     {
-        if (item == null) 
+        if (item == null)
             return;
 
         await this.WithQueueClientAsync(
@@ -99,10 +97,27 @@ internal class AzureStorage : IAzureStorage
                 cancellationToken: cancellationToken), cancellationToken);
     }
 
-    public Task RemoveAsync(IContactPointer contactPointer, CancellationToken cancellationToken)
+    public async Task RemoveAsync(IContactPointer contactPointer, CancellationToken cancellationToken)
     {
         var (partitionKey, rowKey) = AzureContact.ToStorageIdentifier(contactPointer);
-        return this.WithClientAsync(
+
+        // Delete contact history
+        await this.WithClientAsync(
+            ItemTableNames.ContactsHistory,
+            async c =>
+            {
+                var items = c.QueryAsync<AzureContactHistoryItem>(entry =>
+                        entry.PartitionKey == contactPointer.ToString(),
+                    cancellationToken: cancellationToken);
+                var itemsPages = items.AsPages(null, 100);
+                await foreach (var page in itemsPages)
+                    await c.SubmitTransactionAsync(page.Values.Select(pageItem => new TableTransactionAction(
+                        TableTransactionActionType.Delete,
+                        pageItem)), cancellationToken);
+            }, cancellationToken);
+
+        // Delete contact
+        await this.WithClientAsync(
             ItemTableNames.Contacts,
             c => c.DeleteEntityAsync(partitionKey, rowKey, cancellationToken: cancellationToken), cancellationToken);
     }
@@ -114,14 +129,14 @@ internal class AzureStorage : IAzureStorage
             {
                 var item = AzureUserAssignedEntitiesTableEntry.From(assignment);
                 return c.DeleteEntityAsync(item.PartitionKey, item.RowKey, cancellationToken: cancellationToken);
-            }, 
+            },
             cancellationToken);
 
     public async Task RemoveEntityAsync(
         string id,
         CancellationToken cancellationToken = default)
     {
-        var entity = await this.dao.GetAsync(id, cancellationToken);
+        var entity = await dao.GetAsync(id, cancellationToken);
         if (entity != null)
         {
             await this.WithClientAsync(
@@ -135,10 +150,10 @@ internal class AzureStorage : IAzureStorage
     }
 
     public async Task RemoveContactLinksProcessTriggersAsync(
-        string processEntityId, 
+        string processEntityId,
         CancellationToken cancellationToken = default)
     {
-        var links = await this.dao.ContactLinkProcessTriggersAsync(processEntityId, cancellationToken);
+        var links = await dao.ContactLinkProcessTriggersAsync(processEntityId, cancellationToken);
         await this.WithClientAsync(
             ItemTableNames.ContactLinks,
             async client => await Task.WhenAll(links.Select(async l =>
@@ -151,8 +166,8 @@ internal class AzureStorage : IAzureStorage
 
     public async Task AppendToFileAsync(string directory, string fileName, Stream data, CancellationToken cancellationToken = default)
     {
-        var client = await this.clientFactory.GetAppendBlobClientAsync(
-            BlobContainerNames.StationLogs, 
+        var client = await clientFactory.GetAppendBlobClientAsync(
+            BlobContainerNames.StationLogs,
             $"{directory.Replace("\\", "/")}/{fileName}",
             cancellationToken);
 
@@ -160,15 +175,15 @@ internal class AzureStorage : IAzureStorage
         await client.AppendBlockAsync(data, cancellationToken: cancellationToken);
     }
 
-    public async Task EnsureTableAsync(string tableName, CancellationToken cancellationToken = default) => 
+    public async Task EnsureTableAsync(string tableName, CancellationToken cancellationToken = default) =>
         await this.WithClientAsync(tableName, client => client.CreateIfNotExistsAsync(cancellationToken), cancellationToken);
-    
-    public async Task EnsureQueueAsync(string queueName, CancellationToken cancellationToken = default) => 
+
+    public async Task EnsureQueueAsync(string queueName, CancellationToken cancellationToken = default) =>
         await this.WithQueueClientAsync(queueName, client => client.CreateIfNotExistsAsync(cancellationToken: cancellationToken), cancellationToken);
 
-    private async Task WithQueueClientAsync(string queueName, Func<QueueClient, Task> action, CancellationToken cancellationToken = default) => 
-        await action(await this.clientFactory.GetQueueClientAsync(queueName, cancellationToken));
+    private async Task WithQueueClientAsync(string queueName, Func<QueueClient, Task> action, CancellationToken cancellationToken = default) =>
+        await action(await clientFactory.GetQueueClientAsync(queueName, cancellationToken));
 
-    private async Task WithClientAsync(string tableName, Func<TableClient, Task> action, CancellationToken cancellationToken = default) => 
-        await action(await this.clientFactory.GetTableClientAsync(tableName, cancellationToken));
+    private async Task WithClientAsync(string tableName, Func<TableClient, Task> action, CancellationToken cancellationToken = default) =>
+        await action(await clientFactory.GetTableClientAsync(tableName, cancellationToken));
 }

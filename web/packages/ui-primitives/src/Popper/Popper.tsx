@@ -1,4 +1,4 @@
-import { type HTMLAttributes } from 'react';
+import React, { type HTMLAttributes } from 'react';
 import * as PopoverPrimitive from '@radix-ui/react-popover'
 import { cx } from '../cx';
 
@@ -11,9 +11,10 @@ export type PopperProps = HTMLAttributes<HTMLDivElement> & {
     align?: 'start' | 'center' | 'end';
     alignOffset?: number;
     onOpenChange?: (open: boolean) => void;
+    container?: HTMLElement;
 };
 
-export function Popper({ className, trigger, anchor, side, sideOffset, align, alignOffset, open, onOpenChange, ...rest }: PopperProps) {
+export function Popper({ className, trigger, anchor, side, sideOffset, align, alignOffset, open, onOpenChange, container, ...rest }: PopperProps) {
     return (
         <PopoverPrimitive.Root open={open} onOpenChange={onOpenChange}>
             {trigger && (
@@ -26,7 +27,7 @@ export function Popper({ className, trigger, anchor, side, sideOffset, align, al
                     {anchor}
                 </PopoverPrimitive.Anchor>
             )}
-            <PopoverPrimitive.Portal>
+            <PopoverPrimitive.Portal container={container}>
                 <PopoverPrimitive.Content
                     align={align ?? 'center'}
                     sideOffset={sideOffset ?? 4}

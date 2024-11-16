@@ -1,1 +1,5 @@
-@import '@signalco/ui/index.css';
+@import '@signalco/ui-themes-minimal/styles';
+
+:target {
+    scroll-margin-top: 80px;
+}

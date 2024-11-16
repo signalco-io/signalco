@@ -8,11 +8,12 @@ import { IconButton } from '@signalco/ui-primitives/IconButton';
 import { Avatar } from '@signalco/ui-primitives/Avatar';
 import { Check, MoreHorizontal } from '@signalco/ui-icons';
 import { Timeago } from '@signalco/ui/Timeago';
-import { CommentItemThreadItem } from './Comments';
+import { DeviceInfo } from './info/DeviceInfo';
+import { CommentItem, CommentItemThreadItem } from './@types/Comments';
 
-export function CommentThreadItem({ comment, first, onDone }: { comment: CommentItemThreadItem; first?: boolean; onDone?: () => void; }) {
-    const { text } = comment;
-    const quote: string | undefined = undefined;//'quote';//comment.quote;
+export function CommentThreadItem({ comment, threadItem, first, onDone }: { comment: CommentItem, threadItem: CommentItemThreadItem; first?: boolean; onDone?: () => void; }) {
+    const { text } = threadItem;
+    const quote: string | undefined = threadItem.quotedText;
     const author = 'Guest';//comment.author;
     const avatarFallback = author[0]?.toUpperCase() ?? '';
 
@@ -22,9 +23,14 @@ export function CommentThreadItem({ comment, first, onDone }: { comment: Comment
                 <Row spacing={0.5}>
                     <Avatar size="sm">{avatarFallback}</Avatar>
                     <Typography className="text-sm text-foreground">{author}</Typography>
-                    <span className="text-sm text-secondary-foreground">
+                    {/* TODO Enable when we fix device info UI */}
+                    {/* {first && (
+                        <DeviceInfo device={comment.device} />
+                    )} */}
+                    {/* TODO Enable when we have this info */}
+                    {/* <span className="text-sm text-secondary-foreground">
                         <Timeago format="nano" date={new Date()} />
-                    </span>
+                    </span> */}
                 </Row>
                 <Row>
                     {first && (

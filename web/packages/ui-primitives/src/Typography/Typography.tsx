@@ -16,6 +16,7 @@ export type TypographyProps = HTMLAttributes<HTMLParagraphElement> & {
     color?: ColorVariants;
     gutterBottom?: boolean;
     center?: boolean;
+    mono?: boolean;
 };
 
 export function populateTypographyStylesAndClasses({
@@ -23,6 +24,7 @@ export function populateTypographyStylesAndClasses({
     level,
     center, gutterBottom, noWrap, uppercase,
     secondary, tertiary,
+    mono,
     extraThin, thin, semiBold, bold,
     className,
     ...rest
@@ -34,12 +36,12 @@ export function populateTypographyStylesAndClasses({
             level === 'body1' && 'text-base text-primary',
             level === 'body2' && 'text-sm text-secondary-foreground',
             level === 'body3' && 'text-xs text-tertiary-foreground',
-            level === 'h1' && 'text-5xl',
-            level === 'h2' && 'text-4xl',
-            level === 'h3' && 'text-3xl',
-            level === 'h4' && 'text-2xl',
-            level === 'h5' && 'text-xl',
-            level === 'h6' && 'text-lg',
+            level === 'h1' && 'text-5xl text-balance',
+            level === 'h2' && 'text-4xl text-balance',
+            level === 'h3' && 'text-3xl text-balance',
+            level === 'h4' && 'text-2xl text-balance',
+            level === 'h5' && 'text-xl text-balance',
+            level === 'h6' && 'text-lg text-balance',
             // Color
             color === 'success' && 'text-green-500',
             color === 'warning' && 'text-yellow-500',
@@ -53,6 +55,8 @@ export function populateTypographyStylesAndClasses({
             bold && 'font-bold',
             // Alignment
             center && 'text-center',
+            // Font
+            mono && 'font-mono',
             // Special cases
             noWrap && 'whitespace-nowrap overflow-hidden overflow-ellipsis',
             gutterBottom && 'mb-2',

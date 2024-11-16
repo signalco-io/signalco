@@ -1,6 +1,7 @@
 import { run } from '@pulumi/command/local/index.js';
 
-export async function publishProjectAsync(codePath: string, dotnet: 7 = 7) {
+export async function publishProjectAsync(codePath: string) {
+    const dotnetVersion = 8;
     await run({
         command: 'dotnet clean',
         dir: codePath,
@@ -12,6 +13,6 @@ export async function publishProjectAsync(codePath: string, dotnet: 7 = 7) {
     });
 
     return {
-        releaseDir: `${codePath}/bin/Release/net${dotnet}.0/publish/`,
+        releaseDir: `${codePath}/bin/Release/net${dotnetVersion}.0/publish/`,
     };
 }

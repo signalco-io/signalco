@@ -12,9 +12,6 @@
             "Logout": "Odjava"
         },
         "Components": {
-            "SearchInput": {
-                "Label": "Pretraga..."
-            },
             "AppThemePicker": {
                 "DayTime": "Vrijeme dana",
                 "NightTime": "Noć",

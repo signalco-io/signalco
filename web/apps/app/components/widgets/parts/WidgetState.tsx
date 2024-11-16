@@ -1,11 +1,12 @@
-import React, { useMemo, useState } from 'react';
-import dynamic from 'next/dynamic'
+import React, { useMemo } from 'react';
 import { Typography } from '@signalco/ui-primitives/Typography';
 import { Stack } from '@signalco/ui-primitives/Stack';
 import { Button } from '@signalco/ui-primitives/Button';
 import { showNotification } from '@signalco/ui-notifications';
-import { Loadable } from '@signalco/ui/Loadable';
 import { WidgetSharedProps } from '../Widget';
+import TvVisual from '../../icons/TvVisual';
+import LightBulbVisual from '../../icons/LightBulbVisual';
+import FanVisual from '../../icons/FanVisual';
 import { DefaultLabel, DefaultTargetWithValueMultiple } from '../../../src/widgets/WidgetConfigurationOptions';
 import IWidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
 import useWidgetOptions from '../../../src/hooks/widgets/useWidgetOptions';
@@ -17,6 +18,7 @@ import { entityAsync } from '../../../src/entity/EntityRepository';
 import type IContactPointer from '../../../src/contacts/IContactPointer';
 import IContact from '../../../src/contacts/IContact';
 import ConductsService from '../../../src/conducts/ConductsService';
+import { WidgetSpinner } from './piece/WidgetSpinner';
 
 type ConfigProps = {
     label: string,
@@ -31,10 +33,6 @@ const stateOptions: IWidgetConfigurationOption<ConfigProps>[] = [
     { ...DefaultTargetWithValueMultiple, name: 'off', label: 'Off' },
     { name: 'visual', label: 'Visual', type: 'selectVisual', default: 'lightbulb' },
 ];
-
-const TvVisual = dynamic(() => import('../../icons/TvVisual'));
-const LightBulbVisual = dynamic(() => import('../../icons/LightBulbVisual'));
-const FanVisual = dynamic(() => import('../../icons/FanVisual'));
 
 export type StateAction = IContactPointer & {
     valueSerialized?: string,
@@ -98,7 +96,7 @@ function WidgetState(props: WidgetSharedProps<ConfigProps>) {
     const audioOn = useAudioOn();
     const audioOff = useAudioOff();
 
-    const [isLoading, setIsLoading] = useState(true);
+    const isLoading = !onContacts || onEntity.isLoading || onEntity.isPending;
 
     // Calc state from source value
     // If atleast one contact is true, this widget will set it's state to true
@@ -110,19 +108,15 @@ function WidgetState(props: WidgetSharedProps<ConfigProps>) {
                 continue;
 
             const contactOnValueSerialized = config?.on?.find((e: IContact) =>
-                e.entityId === contact.data.entityId &&
-                e.channelName === contact.data.channelName &&
-                e.contactName === contact.data.contactName)?.valueSerialized;
+                e.entityId === contact.data?.entityId &&
+                e.channelName === contact.data?.channelName &&
+                e.contactName === contact.data?.contactName)?.valueSerialized;
             if (contact.data.valueSerialized === contactOnValueSerialized) {
                 state = true;
                 break;
             }
         }
     }
-
-    // Hide loading when loaded fully
-    if (isLoading && onContacts && !onEntity.isLoading)
-        setIsLoading(false);
 
     const label = props.config?.label || (typeof onEntity !== 'undefined' ? onEntity.data?.alias : '');
     const Visual = useMemo(() => props.config?.visual === 'tv' ? TvVisual : (props.config?.visual === 'fan' ? FanVisual : LightBulbVisual), [props.config]);
@@ -152,20 +146,15 @@ function WidgetState(props: WidgetSharedProps<ConfigProps>) {
         <Button
             onClick={handleStateChangeRequest}
             variant="plain"
-            className="m-0 h-full w-full !items-start !justify-start p-0">
-            <Stack className="h-full py-4">
-                <div className="px-2">
-                    <Visual state={state} size={68} />
+            className="m-0 size-full !items-start !justify-start p-0 text-start"
+            disabled={isLoading}>
+            <Stack className="relative size-full items-start p-2">
+                <div className="grow">
+                    <Visual state={state} size={80} />
                 </div>
-                <div className="px-2">
-                    <Typography semiBold noWrap>{label}</Typography>
-                </div>
+                <Typography semiBold noWrap level="body1">{label}</Typography>
             </Stack>
-            {isLoading && (
-                <div className="absolute right-4 top-4">
-                    <Loadable isLoading loadingLabel="Loading..." />
-                </div>
-            )}
+            <WidgetSpinner isLoading={isLoading} />
         </Button>
     );
 }

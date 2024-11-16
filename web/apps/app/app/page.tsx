@@ -1,10 +1,6 @@
-import { Suspense } from 'react';
-import { RootRedirect } from '../components/RootRedirect';
+import { redirect } from 'next/navigation';
+import { KnownPages } from '../src/knownPages';
 
 export default function Dashboard() {
-    return (
-        <Suspense>
-            <RootRedirect />
-        </Suspense>
-    );
+    redirect(KnownPages.Spaces);
 }

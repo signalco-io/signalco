@@ -1,35 +1,29 @@
-import { UseQueryResult, useQueries, useQueryClient } from '@tanstack/react-query';
-import IEntityDetails from '../../entity/IEntityDetails';
-import { entityAsync } from '../../entity/EntityRepository';
 import IContactPointer from '../../contacts/IContactPointer';
-import IContact from '../../contacts/IContact';
+import { useEntities } from './entity/useEntities';
 
-export default function useContacts(pointers: IContactPointer[] | undefined): UseQueryResult<IContact, Error>[] {
-    const client = useQueryClient();
-    return useQueries({
-        queries: (pointers ?? []).filter(Boolean).map(pointer => {
+export default function useContacts(pointers: (Partial<IContactPointer> | null | undefined)[] | undefined) {
+    const entities = useEntities(pointers?.map(p => p?.entityId));
+    return entities.map((entity, index) => {
+        const pointer = pointers?.[index];
+        if (!entity.data || entity.isLoading || entity.isError || !pointer)
             return {
-                queryKey: ['contact', pointer.entityId, pointer.channelName, pointer.contactName],
-                queryFn: async () => {
-                    const entityKey = ['entity', pointer.entityId];
-                    const entityQuery = client.getQueryState<IEntityDetails>(entityKey);
-                    let entity: IEntityDetails | null | undefined = undefined;
-                    if (entityQuery?.status === 'success' && !entityQuery.isInvalidated)
-                        entity = entityQuery.data;
-                    if (!entity)
-                        entity = await entityAsync(pointer.entityId);
+                isLoading: entity.isLoading,
+                isPending: entity.isFetching,
+                isStale: entity.isStale,
+                error: entity.error,
+                data: undefined
+            };
 
-                    const contact = entity?.contacts?.find(c =>
-                        c.channelName === pointer.channelName &&
-                        c.contactName === pointer.contactName);
+        const contact = entity.data.contacts?.find(c =>
+            c.channelName === pointer.channelName &&
+            c.contactName === pointer.contactName);
 
-                    // TODO: Return `null` instead of throwing an error
-                    if (!contact)
-                        throw new Error('Contact not found');
-
-                    return contact;
-                }
-            }
-        })
+        return {
+            isLoading: entity.isLoading,
+            isPending: entity.isFetching,
+            isStale: entity.isStale,
+            error: entity.error,
+            data: contact
+        };
     });
 }

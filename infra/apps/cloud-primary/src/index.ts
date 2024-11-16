@@ -14,8 +14,8 @@ import {
     createFunctionsStorage,
     createLogWorkspace,
     createAppInsights,
+    acsEmails,
 } from '@infra/pulumi/azure';
-import { createSes } from '@infra/pulumi/aws';
 import { apiStatusCheck } from '@infra/pulumi/checkly';
 import { dnsRecord } from '@infra/pulumi/cloudflare';
 import { publishProjectAsync } from '@infra/pulumi/dotnet';
@@ -25,6 +25,7 @@ import { Dashboard } from '@checkly/pulumi';
 import { nextJsApp, vercelApp } from '@infra/pulumi/vercel';
 import { createChannelFunction } from './createChannelFunction.js';
 import { createInternalFunctionAsync } from './createInternalFunctionAsync.js';
+import { funcAppPlan } from '../../../packages/pulumi/src/azure/funcAppPlan.js';
 
 /*
  * NOTE: `parent` configuration is currently disabled for all resources because
@@ -73,6 +74,9 @@ const up = async () => {
         // Create log workspace
         const logWorkspace = createLogWorkspace(resourceGroup, 'log');
 
+        // Create functions app plan
+        const sharedLinuxConsumptionPlan = funcAppPlan(resourceGroup, 'linux-consumption', false);
+
         // Generate public functions
         const publicApis = [
             { name: '', prefix: 'cpub', subDomain: 'api', cors: corsDomains },
@@ -86,7 +90,8 @@ const up = async () => {
                 api.subDomain,
                 api.cors,
                 currentStack,
-                false);
+                false,
+                sharedLinuxConsumptionPlan.plan.id);
             const apiFuncPublish = await publishProjectAsync([
                 '../../../cloud/src/Signalco.Api.Public',
                 api.name,
@@ -110,7 +115,13 @@ const up = async () => {
         const internalNames = ['UsageProcessor', 'ContactStateProcessor', 'TimeEntityPublic', 'Maintenance', 'Migration'];
         const internalFuncs = [];
         for (const funcName of internalNames) {
-            internalFuncs.push(await createInternalFunctionAsync(resourceGroup, funcName, funcStorage.storageAccount.storageAccount, funcStorage.zipsContainer, false));
+            internalFuncs.push(await createInternalFunctionAsync(
+                resourceGroup,
+                funcName,
+                funcStorage.storageAccount.storageAccount,
+                funcStorage.zipsContainer,
+                false,
+                sharedLinuxConsumptionPlan.plan.id));
         }
 
         // Generate channels functions
@@ -121,7 +132,14 @@ const up = async () => {
             : [...productionChannelNames, ...nextChannelNames];
         const channelsFunctions = [];
         for (const channelName of channelNames) {
-            channelsFunctions.push(await createChannelFunction(channelName, resourceGroup, funcStorage.storageAccount.storageAccount, funcStorage.zipsContainer, currentStack, false));
+            channelsFunctions.push(await createChannelFunction(
+                channelName,
+                resourceGroup,
+                funcStorage.storageAccount.storageAccount,
+                funcStorage.zipsContainer,
+                currentStack,
+                false,
+                sharedLinuxConsumptionPlan.plan.id));
         }
 
         // Generate discrete functions
@@ -129,6 +147,7 @@ const up = async () => {
         const discreteFunctions = [];
         for (const funcName of discreteNames) {
             const discreteResourceGroup = new ResourceGroup(`signalco-discrete-${stack}-${funcName.toLowerCase()}`);
+            const discreteLinuxConsumptionPlan = funcAppPlan(discreteResourceGroup, `linux-consumption-${funcName}`, false);
             const discreteStorage = createFunctionsStorage(discreteResourceGroup, `${funcName.toLowerCase().substring(0, 5)}funcs`, false);
             const func = createPublicFunction(
                 discreteResourceGroup,
@@ -136,8 +155,9 @@ const up = async () => {
                 `${funcName.toLowerCase()}.api`,
                 undefined,
                 currentStack,
-                false);
-            const funcPublish = await publishProjectAsync(`../../../discrete/Signalco.Discrete.Api.${funcName}/cloud`, 7);
+                false,
+                discreteLinuxConsumptionPlan.plan.id);
+            const funcPublish = await publishProjectAsync(`../../../discrete/Signalco.Discrete.Api.${funcName}/cloud`);
             const funcCode = await assignFunctionCodeAsync(
                 discreteResourceGroup,
                 discreteStorage.storageAccount.storageAccount,
@@ -164,8 +184,22 @@ const up = async () => {
         // Create general storage and prepare tables
         const storage = createStorageAccount(resourceGroup, storagePrefix, shouldProtect);
 
-        // Create AWS SES service
-        const ses = createSes(`ses-${stack}`, 'notification');
+        // ACS (Email)
+        // DomainName can be root (e.g. signalco.io) or subdomain (e.g. next.signalco.io)
+        // ACS Domain name should be the root domain (e.g. signalco.io)
+        // Subdomain is used for the ACS subdomain (e.g. next)
+        const acsDomainName = domainName.split('.').length > 2 ? domainName.split('.').slice(1).join('.') : domainName;
+        const acsSubDomain = domainName.split('.').length > 2 ? domainName.split('.')[0] : null;
+        const { acsPrimaryConnectionString } = await acsEmails(
+            'cp',
+            resourceGroup,
+            acsDomainName,
+            acsSubDomain,
+            stack,
+            [
+                { subdomain: 'notifications', displayName: 'Signalco Notifications' },
+                { subdomain: 'system', displayName: 'Signalco' },
+            ]);
 
         // Create and populate vault
         const vault = createKeyVault(resourceGroup, keyvaultPrefix, shouldProtect, [
@@ -192,13 +226,12 @@ const up = async () => {
         };
 
         const internalEnvVariables = {
-            SmtpNotificationServerUrl: ses.smtpServer,
-            SmtpNotificationFromDomain: ses.smtpFromDomain,
-            SmtpNotificationUsername: ses.smtpUsername,
-            SmtpNotificationPassword: ses.smtpPassword,
+            AcsConnectionString: acsPrimaryConnectionString,
+            AcsDomain: acsDomainName,
             'Auth0_ClientId_Station': config.requireSecret('secret-auth0ClientIdStation'),
             'Auth0_ClientSecret_Station': config.requireSecret('secret-auth0ClientSecretStation'),
             'HCaptcha_Secret': config.requireSecret('secret-hcaptchaSecret'),
+            'SignalcoPatSigningToken': config.requireSecret('secret-patSigningToken'),
         };
 
         // Populate public functions settings
@@ -277,12 +310,12 @@ const up = async () => {
         }
 
         // Vercel apps
-        nextJsApp('signalco-blog', 'blog');
-        nextJsApp('signalco-app', 'app');
-        nextJsApp('signalco-web', 'web');
-        nextJsApp('signalco-slco', 'slco');
-        nextJsApp('signalco-brandgrab', 'brandgrab');
-        nextJsApp('doprocess', 'doprocess');
+        nextJsApp('signalco-blog', 'blog', 'web/apps/blog');
+        nextJsApp('signalco-app', 'app', 'web/apps/app');
+        nextJsApp('signalco-web', 'web', 'web/apps/web');
+        nextJsApp('slco', 'slco', 'web/apps/slco');
+        nextJsApp('brandgrab', 'brandgrab', 'web/apps/brandgrab');
+        nextJsApp('doprocess', 'doprocess', 'web/apps/doprocess');
         vercelApp('signalco-ui-docs', 'ui-docs', {
             ignoreCommand: 'npx turbo-ignore',
             outputDirectory: 'storybook-static',

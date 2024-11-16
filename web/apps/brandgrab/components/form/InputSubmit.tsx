@@ -1,15 +1,10 @@
-import { Input } from '@signalco/ui-primitives/Input';
-import { Button } from '@signalco/ui-primitives/Button';
+import { Input, InputProps } from '@signalco/ui-primitives/Input';
 
-type InputSubmitProps = {
-    value: string;
-    onChange: React.ChangeEventHandler<HTMLInputElement>;
-    onSubmit: (value: string) => void;
-    placeholder?: string;
-    isLoading?: boolean;
+export type InputSubmitProps = Omit<InputProps, 'onSubmit'> & {
+    onSubmit: (value: InputProps['value']) => void;
 };
 
-export default function InputSubmit({ value, onChange, onSubmit, placeholder, isLoading }: InputSubmitProps) {
+export default function InputSubmit({ value, onSubmit, ...rest }: InputSubmitProps) {
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         onSubmit(value);
@@ -17,19 +12,7 @@ export default function InputSubmit({ value, onChange, onSubmit, placeholder, is
 
     return (
         <form onSubmit={handleSubmit}>
-            <Input
-                placeholder={placeholder}
-                value={value}
-                onChange={onChange}
-                className="w-full"
-                endDecorator={
-                    <Button
-                        variant="solid"
-                        type="submit"
-                        loading={isLoading}>
-                        Grab
-                    </Button>
-                } />
+            <Input value={value} {...rest} />
         </form>
     )
 }

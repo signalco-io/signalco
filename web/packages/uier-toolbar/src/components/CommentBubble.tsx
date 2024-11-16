@@ -1,6 +1,6 @@
 'use client';
 
-import { Fragment, HTMLAttributes, useEffect, useRef, useState } from 'react';
+import React, { HTMLAttributes, useContext, useState } from 'react';
 import { Stack } from '@signalco/ui-primitives/Stack';
 import { Row } from '@signalco/ui-primitives/Row';
 import { Popper } from '@signalco/ui-primitives/Popper';
@@ -12,10 +12,11 @@ import { Send } from '@signalco/ui-icons';
 import { orderBy } from '@signalco/js';
 import { useComments } from '../hooks/useComments';
 import { useCommentItemRects } from '../hooks/useCommentItemRects';
-import { CommentThreadItem } from './CommentThreadItem';
+import { CommentThread } from './CommentThread';
 import { CommentSelectionHighlight } from './CommentSelectionHighlight';
-import { CommentItem } from './Comments';
+import { CommentsBootstrapperContext } from './CommentsBootstrapperContext';
 import { CommentIcon } from './CommentIcon';
+import { CommentItem } from './@types/Comments';
 
 type CommentBubbleProps = HTMLAttributes<HTMLDivElement> & {
     defaultOpen?: boolean;
@@ -28,6 +29,7 @@ type CommentBubbleProps = HTMLAttributes<HTMLDivElement> & {
 export function CommentBubble({
     defaultOpen, creating, onCreated, onCanceled, commentItem, className, style
 }: CommentBubbleProps) {
+    const { rootElement } = useContext(CommentsBootstrapperContext);
     const selectionRects = useCommentItemRects(commentItem.position);
     const lastRect = orderBy(selectionRects, r => r.bottom).at(-1);
     const { upsert } = useComments();
@@ -43,7 +45,7 @@ export function CommentBubble({
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
         e.currentTarget.reset();
-        const commentId = await upsert.mutateAsync({
+        const { id } = await upsert.mutateAsync({
             ...commentItem,
             thread: {
                 ...commentItem.thread,
@@ -58,7 +60,7 @@ export function CommentBubble({
         });
 
         if (creating) {
-            onCreated?.(commentId);
+            onCreated?.(id);
         }
     };
 
@@ -76,6 +78,7 @@ export function CommentBubble({
                 <CommentSelectionHighlight commentSelection={commentItem.position} />
             )}
             <Popper
+                container={rootElement}
                 trigger={(
                     <div
                         role="button"
@@ -87,6 +90,7 @@ export function CommentBubble({
                             left: (lastRect?.right ?? 0) + 16,
                             top: (lastRect?.bottom ?? 0) + 16,
                             transform: 'translate(-50%, -50%)',
+                            willChange: 'left, top',
                             ...style
                         }}>
                         <CommentIcon className="hover:scale-110 hover:brightness-75" />
@@ -106,26 +110,10 @@ export function CommentBubble({
                 <div>
                     <Stack>
                         <Stack className="max-h-96 overflow-y-scroll">
-                            {commentItem.thread.items.length > 0 && (
-                                <>
-                                    <Stack spacing={1} className="py-2">
-                                        {commentItem.thread.items.map((comment, i) => (
-                                            <Fragment key={comment.id}>
-                                                <div className="px-4 py-2">
-                                                    <CommentThreadItem
-                                                        first={i === 0}
-                                                        comment={comment}
-                                                        onDone={handleResolveComment} />
-                                                </div>
-                                                {i !== commentItem.thread.items.length - 1 && (
-                                                    <Divider />
-                                                )}
-                                            </Fragment>
-                                        ))}
-                                    </Stack>
-                                    <Divider />
-                                </>
-                            )}
+                            <CommentThread
+                                commentItem={commentItem}
+                                onResolve={handleResolveComment} />
+                            <Divider />
                         </Stack>
                         <form onSubmit={handleCreateComment}>
                             <Stack className="bg-card px-1 py-4 pt-2">

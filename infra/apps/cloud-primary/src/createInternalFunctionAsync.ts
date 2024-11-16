@@ -4,6 +4,7 @@ import { publishProjectAsync } from '@infra/pulumi/dotnet';
 import { apiStatusCheck } from '@infra/pulumi/checkly';
 import { ConfInternalApiCheckInterval } from './config.js';
 import { type BlobContainer, type StorageAccount } from '@pulumi/azure-native/storage/index.js';
+import { Output } from '@pulumi/pulumi';
 
 const internalFunctionPrefix = 'cint';
 
@@ -12,7 +13,8 @@ export async function createInternalFunctionAsync(
     name: string,
     storageAccount: StorageAccount,
     zipsContainer: BlobContainer,
-    shouldProtect: boolean): Promise<{
+    shouldProtect: boolean,
+    appPlanId?: Output<string>): Promise<{
         name: string,
         shortName: string,
     } & ReturnType<typeof createFunction> & Awaited<ReturnType<typeof assignFunctionCodeAsync>>> {
@@ -21,7 +23,9 @@ export async function createInternalFunctionAsync(
         resourceGroup,
         `int${shortName}`,
         shouldProtect,
-        false);
+        false,
+        undefined,
+        appPlanId);
 
     const codePath = `../../../cloud/src/Signalco.Func.Internal.${name}`;
     const publishResult = await publishProjectAsync(codePath);

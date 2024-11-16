@@ -1,13 +1,20 @@
-export default function LightBulbVisual(props: { state: boolean, size: number }) {
-    const isActive = props.state;
+import { CSSProperties } from 'react';
+import { cx } from '@signalco/ui-primitives/cx';
+
+export default function LightBulbVisual({ state, size }: { state: boolean, size?: number }) {
+    const isActive = state;
     const bulbColor = isActive ? '#FFDD66' : '#c4c4c4';
 
     return (
         <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="-ml-7 mt-2 [&_*]:transition-all"
-            width={props.size * 1.4}
-            height={props.size * 1.4}
+            className={cx(
+                'mt-2 -mx-4 [&_*]:transition-all',
+                Boolean(size) ? 'w-[--visual-size] h-[--visual-size]' : 'w-full h-full'
+            )}
+            style={{
+                '--visual-size': size ? `${size}px` : undefined
+            } as CSSProperties}
             fill="none"
             viewBox="0 0 78 94">
             <g>

@@ -69,7 +69,7 @@ function WidgetAirConditioning(props: WidgetSharedProps<ConfigProps>) {
     const historyData = usePromise(loadHistoryCallback);
 
     return (
-        <div className="h-full w-full">
+        <div className="size-full">
             <Stack alignItems="center" justifyContent="center" className="h-full">
                 <Button variant="plain" href={`${KnownPages.Entities}/${temperatureDevice?.id}`}>
                     <PrimaryValueLabel
@@ -123,9 +123,10 @@ function WidgetAirConditioning(props: WidgetSharedProps<ConfigProps>) {
                     })) ?? []}
                     durationMs={duration}
                     width={columns * 84 - 2}
-                    height={rows * 25}
+                    height={rows * 25 - 2}
                     hideLegend
                     adaptiveDomain
+                    aggregate={30 * 60 * 1000}
                 />
             </div>
         </div>

@@ -1,15 +1,13 @@
 import React, { PropsWithChildren } from 'react';
-import Footer from '../pages/Footer';
-import { PageNav } from '../PageNav';
+import { PageNav } from '@signalco/ui/Nav';
 
 export function PageFullLayout(props: PropsWithChildren) {
     return (
         <>
-            <PageNav fullWidth />
+            <PageNav logo="BrandGrab.io" />
             <div style={{ paddingTop: '80px' }}>
                 {props.children}
             </div>
-            <Footer />
         </>
     );
 }

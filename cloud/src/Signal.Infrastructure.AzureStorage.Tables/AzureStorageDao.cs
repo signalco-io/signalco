@@ -8,6 +8,7 @@ using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
+using Signal.Core.Auth;
 using Signal.Core.Contacts;
 using Signal.Core.Entities;
 using Signal.Core.Processor;
@@ -42,8 +43,8 @@ internal class AzureStorageDao : IAzureStorageDao
             var client =
                 await this.clientFactory.GetTableClientAsync(ItemTableNames.ContactsHistory, cancellationToken);
             var history = client.QueryAsync<AzureContactHistoryItem>(entry =>
-                entry.PartitionKey ==
-                $"{contactPointer.EntityId}-{contactPointer.ChannelName}-{contactPointer.ContactName}");
+                entry.PartitionKey == contactPointer.ToString(),
+                cancellationToken: cancellationToken);
 
             // Limit history
             // TODO: Move this check to BLL
@@ -77,7 +78,7 @@ internal class AzureStorageDao : IAzureStorageDao
         {
             var client = await this.clientFactory.GetTableClientAsync(ItemTableNames.Users, cancellationToken);
             var query = client.QueryAsync<AzureUser>(
-                u => u.Email == userEmail, 
+                u => u.Email == userEmail,
                 cancellationToken: cancellationToken);
             await foreach (var match in query)
                 return match.RowKey;
@@ -131,6 +132,26 @@ internal class AzureStorageDao : IAzureStorageDao
             cancellationToken: cancellationToken);
     }
 
+    public async Task<bool> PatExistsAsync(string userId, string patHash, CancellationToken cancellationToken = default)
+    {
+        var client = await this.clientFactory.GetTableClientAsync(ItemTableNames.AuthPats, cancellationToken);
+        var patQuery = client.QueryAsync<AzureEntity>(
+            e => e.PartitionKey == userId && e.RowKey == patHash,
+            cancellationToken: cancellationToken);
+        await foreach (var _ in patQuery)
+            return true;
+        return false;
+    }
+
+    public async Task<IEnumerable<IPat>> PatsAsync(string userId, CancellationToken cancellationToken = default)
+    {
+        var client = await this.clientFactory.GetTableClientAsync(ItemTableNames.AuthPats, cancellationToken);
+        var patQuery = client.QueryAsync<AzureAuthPat>(
+            e => e.PartitionKey == userId,
+            cancellationToken: cancellationToken);
+        return await EnumerateAsync(patQuery, null, AzureAuthPat.ToPat, cancellationToken);
+    }
+
     public async Task<IEnumerable<IEntity>> UserEntitiesAsync(string userId, IEnumerable<EntityType>? types, CancellationToken cancellationToken = default)
     {
         var userAssignedEntitiesIds = (await this.UserAssignedAsync(userId, cancellationToken)).Select(uae => uae.EntityId).ToList();
@@ -148,7 +169,7 @@ internal class AzureStorageDao : IAzureStorageDao
 
     private async Task<IEnumerable<IEntityDetailed>> EntitiesDetailedAsync(
         IEnumerable<string> entityIds,
-        IEnumerable<EntityType>? types, 
+        IEnumerable<EntityType>? types,
         CancellationToken cancellationToken)
     {
         var entityIdsList = entityIds.ToList();
@@ -167,7 +188,7 @@ internal class AzureStorageDao : IAzureStorageDao
     }
 
     private async Task<Dictionary<string, IEnumerable<IUserPublic>>> EntityPublicUsersAsync(
-        IEnumerable<string> entityIds, 
+        IEnumerable<string> entityIds,
         CancellationToken cancellationToken = default)
     {
         // TODO: Persist entity users in entity property, use assigned entities table only as cache
@@ -198,7 +219,7 @@ internal class AzureStorageDao : IAzureStorageDao
     {
         try
         {
-            var entityTypesList = entityTypes?.Select(et => et.ToString()).ToList(); 
+            var entityTypesList = entityTypes?.Select(et => et.ToString()).ToList();
             var client = await this.clientFactory.GetTableClientAsync(ItemTableNames.Entities, cancellationToken);
 
             return (await Task.WhenAll(RowsWithKeysAnyFilter(entityIds).Select(async queryFilter =>
@@ -219,10 +240,10 @@ internal class AzureStorageDao : IAzureStorageDao
         }
     }
 
-    public async Task<IEntity?> GetAsync(string entityId, CancellationToken cancellationToken = default) => 
+    public async Task<IEntity?> GetAsync(string entityId, CancellationToken cancellationToken = default) =>
         (await this.EntitiesInternalAsync(new[] {entityId}, null, cancellationToken)).FirstOrDefault();
 
-    public async Task<IEntityDetailed?> GetDetailedAsync(string entityId, CancellationToken cancellationToken = default) => 
+    public async Task<IEntityDetailed?> GetDetailedAsync(string entityId, CancellationToken cancellationToken = default) =>
         (await this.EntitiesDetailedAsync(new[] {entityId}, null, cancellationToken)).FirstOrDefault();
 
     public async Task<IContact?> ContactAsync(IContactPointer pointer, CancellationToken cancellationToken = default)
@@ -372,7 +393,7 @@ internal class AzureStorageDao : IAzureStorageDao
     }
 
     private async Task<bool> IsUserDirectAssignedAsync(
-        string userId, 
+        string userId,
         string entityId,
         CancellationToken cancellationToken = default)
     {

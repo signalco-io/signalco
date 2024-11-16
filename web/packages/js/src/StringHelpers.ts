@@ -10,6 +10,16 @@ export const camelToSentenceCase = (value: string): string => {
     return result.charAt(0).toUpperCase() + result.slice(1);
 };
 
+export const initials = (value: string): string => {
+    const words = value.split(' ');
+    if (words.length === 1) {
+        return value.charAt(0).toUpperCase();
+    } else if (words.length > 1) {
+        return ((words[0]?.charAt(0) ?? '') + words.at(-1)?.charAt(0)).toUpperCase();
+    }
+    return '';
+}
+
 export const isAbsoluteUrl = (value: string | null): boolean => {
     if (value == null) return false;
     const match = value.match(/^https?:\/\//);
@@ -57,4 +67,8 @@ export function slug(value: string | undefined) {
         .replace(/[^\w\s-]/g, '')
         .replace(/[\s_-]+/g, '-')
         .replace(/^-+|-+$/g, '');
+}
+
+export function sanitizeEmail(email: string): string {
+    return email.trim().toLowerCase();
 }

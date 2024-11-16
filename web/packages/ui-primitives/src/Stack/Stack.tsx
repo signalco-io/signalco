@@ -1,11 +1,11 @@
-import { forwardRef, type CSSProperties, type HTMLAttributes } from 'react';
+import { forwardRef, type CSSProperties, type HTMLAttributes, PropsWithChildren } from 'react';
 import { cx } from '../cx';
 
-export type StackProps = HTMLAttributes<HTMLDivElement> & {
+export type StackProps = PropsWithChildren<HTMLAttributes<HTMLDivElement> & {
     spacing?: number;
     alignItems?: 'start' | 'center' | 'stretch' | undefined;
     justifyContent?: 'start' | 'center' | 'end' | 'space-between' | 'stretch' | undefined;
-};
+}>;
 
 const Stack = forwardRef<HTMLDivElement, StackProps>(({ spacing, alignItems, justifyContent, style, className, ...props }: StackProps, ref) => {
     return (
@@ -24,7 +24,7 @@ const Stack = forwardRef<HTMLDivElement, StackProps>(({ spacing, alignItems, jus
                 justifyContent === 'stretch' && 'justify-stretch',
                 className)}
             style={{
-                '--s-gap': `${(spacing ?? 0) * 8}px`,
+                '--s-gap': `${(spacing ?? 0) * 0.5}rem`,
                 ...style
             } as CSSProperties}
             {...props}

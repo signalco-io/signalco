@@ -1,43 +1,63 @@
 {
     "name": "@signalco/ui-primitives",
-    "version": "0.0.0",
-    "private": true,
+    "version": "0.2.0",
     "license": "MIT",
     "type": "module",
     "sideEffects": false,
     "exports": {
         "./*": "./src/*/index.ts"
     },
+    "files": [
+        "dist"
+    ],
+    "publishConfig": {
+        "access": "public",
+        "exports": {
+            "./*": {
+                "import": "./dist/*/index.js",
+                "types": "./dist/*/index.d.ts"
+            }
+        }
+    },
     "scripts": {
-        "lint": "eslint ."
+        "lint": "eslint .",
+        "prepublishOnly": "tsup --env.NODE_ENV production"
     },
     "devDependencies": {
-        "@radix-ui/react-checkbox": "1.0.4",
-        "@radix-ui/react-dialog": "1.0.5",
-        "@radix-ui/react-dropdown-menu": "2.0.6",
-        "@radix-ui/react-menubar": "1.0.4",
-        "@radix-ui/react-popover": "1.0.7",
-        "@radix-ui/react-select": "2.0.0",
-        "@radix-ui/react-slot": "1.0.2",
+        "@microsoft/api-extractor": "7.47.11",
+        "@radix-ui/react-checkbox": "1.1.2",
+        "@radix-ui/react-dialog": "1.1.2",
+        "@radix-ui/react-dropdown-menu": "2.1.2",
+        "@radix-ui/react-menubar": "1.1.2",
+        "@radix-ui/react-popover": "1.1.2",
+        "@radix-ui/react-select": "2.1.2",
+        "@radix-ui/react-slot": "1.1.0",
+        "@radix-ui/react-tabs": "1.1.1",
+        "@radix-ui/react-tooltip": "1.1.4",
         "@signalco/eslint-config-signalco": "workspace:*",
         "@signalco/hooks": "workspace:*",
         "@signalco/js": "workspace:*",
-        "@signalco/ui-icons": "workspace:*",
         "@signalco/tailwindcss-config-signalco": "workspace:*",
         "@signalco/tsconfig": "workspace:*",
-        "@types/react": "18.2.45",
-        "@types/react-dom": "18.2.18",
+        "@signalco/ui-icons": "workspace:*",
+        "@types/react": "npm:types-react@19.0.0-rc.1",
+        "@types/react-dom": "npm:types-react-dom@19.0.0-rc.1",
         "@types/react-timeago": "4.1.7",
-        "autoprefixer": "10.4.16",
-        "classix": "2.1.35",
-        "next": "14.0.4",
-        "postcss": "8.4.32",
-        "postcss-preset-env": "9.3.0",
-        "react": "18.2.0",
-        "react-dom": "18.2.0",
+        "autoprefixer": "10.4.20",
+        "classix": "2.2.0",
+        "next": "15.0.3",
+        "postcss": "8.4.49",
+        "postcss-preset-env": "10.1.0",
+        "react": "19.0.0-rc-65a56d0e-20241020",
+        "react-dom": "19.0.0-rc-65a56d0e-20241020",
         "react-timeago": "7.2.0",
-        "sass": "1.69.5",
-        "tailwind-merge": "2.2.0",
-        "typescript": "5.3.3"
+        "sass": "1.81.0",
+        "tailwind-merge": "2.5.4",
+        "tsup": "8.3.5",
+        "typescript": "5.6.3"
+    },
+    "peerDependencies": {
+        "react": ">=19.0.0-rc-65a56d0e-20241020",
+        "react-dom": ">=19.0.0-rc-65a56d0e-20241020"
     }
 }

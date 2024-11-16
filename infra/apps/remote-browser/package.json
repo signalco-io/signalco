@@ -1,33 +1,30 @@
 {
     "name": "@infra/remote-browser",
     "private": true,
-    "license": "../LICENSE",
+    "license": "MIT",
     "main": "src/index.ts",
     "scripts": {
         "lint": "eslint ./src/**/*.ts"
     },
     "devDependencies": {
         "@infra/pulumi": "workspace:*",
-        "@types/node": "20.10.5",
-        "@typescript-eslint/eslint-plugin": "6.15.0",
-        "@typescript-eslint/parser": "6.15.0",
-        "eslint": "8.56.0",
-        "eslint-config-standard": "17.1.0",
-        "eslint-plugin-import": "2.29.1",
-        "eslint-plugin-n": "16.5.0",
-        "eslint-plugin-node": "11.1.0",
-        "eslint-plugin-promise": "6.1.1",
-        "tsup": "8.0.1",
-        "typescript": "5.3.3"
+        "@types/node": "20.17.6",
+        "@typescript-eslint/eslint-plugin": "8.14.0",
+        "@typescript-eslint/parser": "8.14.0",
+        "eslint": "8.57.1",
+        "eslint-plugin-import": "2.31.0",
+        "eslint-plugin-n": "17.13.2",
+        "eslint-plugin-promise": "7.1.0",
+        "tsup": "8.3.5",
+        "typescript": "5.6.3"
     },
     "dependencies": {
         "@checkly/pulumi": "1.1.4",
-        "@pulumi/aws": "6.17.0",
-        "@pulumi/azure-native": "2.23.0",
-        "@pulumi/cloudflare": "5.16.0",
-        "@pulumi/command": "0.9.2",
-        "@pulumi/docker": "4.5.0",
-        "@pulumi/pulumi": "3.99.0",
-        "@pulumiverse/vercel": "1.0.1"
+        "@pulumi/azure-native": "2.72.0",
+        "@pulumi/cloudflare": "5.43.0",
+        "@pulumi/command": "1.0.1",
+        "@pulumi/docker": "4.5.7",
+        "@pulumi/pulumi": "3.139.0",
+        "@pulumiverse/vercel": "1.14.3"
     }
 }

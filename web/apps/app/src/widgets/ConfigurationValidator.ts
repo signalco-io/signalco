@@ -6,7 +6,7 @@ const isInvalidateDeviceContactTarget = (value: Partial<IContactPointer>) =>
     !value.contactName ||
     !value.channelName;
 
-export function IsConfigurationValid<TConfigProps>(
+export function IsConfigurationValid<TConfigProps extends Record<string, unknown>>(
     config: TConfigProps,
     options: IWidgetConfigurationOption<TConfigProps>[]) {
     if (!config) return false;

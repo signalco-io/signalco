@@ -37,8 +37,32 @@
 			"path": "apps/slco"
 		},
 		{
+			"name": "🚀 workingparty.ai",
+			"path": "apps/workingparty"
+		},
+		{
+			"name": "📦 @signalco/auth-client",
+			"path": "packages/auth-client"
+		},
+		{
+			"name": "📦 @signalco/auth-server",
+			"path": "packages/auth-server"
+		},
+		{
+			"name": "📦 @signalco/cms-core",
+			"path": "packages/cms-core"
+		},
+		{
+			"name": "📦 @signalco/cms-components-marketing",
+			"path": "packages/cms-components-marketing"
+		},
+		{
 			"name": "📦 @signalco/data",
 			"path": "packages/data"
+		},
+		{
+			"name": "📦 @signalco/email-templates",
+			"path": "packages/email-templates"
 		},
 		{
 			"name": "📦 @signalco/hooks",
@@ -57,6 +81,10 @@
 			"path": "packages/ui"
 		},
 		{
+			"name": "📦 @signalco/ui-forms",
+			"path": "packages/ui-forms"
+		},
+		{
 			"name": "📦 @signalco/ui-icons",
 			"path": "packages/ui-icons"
 		},
@@ -67,6 +95,14 @@
 		{
 			"name": "📦 @signalco/ui-primitives",
 			"path": "packages/ui-primitives"
+		},
+		{
+			"name": "📦 @signalco/ui-themes-minimal",
+			"path": "packages/ui-themes-minimal"
+		},
+		{
+			"name": "📦 @signalco/ui-themes-minimal-app",
+			"path": "packages/ui-themes-minimal-app"
 		},
 		{
 			"name": "📦 @uier/toolbar",
@@ -86,7 +122,6 @@
 		},
 	],
 	"settings": {
-		"liveServer.settings.multiRootWorkspaceName": "✨ signalco-monorepo",
 		"tailwindCSS.experimental.classRegex": [
 			["cx\\(([^]*)\\)", "(?:'|\"|`)([^\"'`]*)(?:'|\"|`)"]
 		],

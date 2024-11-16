@@ -25,15 +25,15 @@ export default function ChannelGalleryItem(props: ChannelGalleryItemProps) {
 
     return (
         <Card
-            className="h-full"
+            className="relative aspect-square h-full"
             href={hrefFunc ? hrefFunc(id) : `/channels/${id}`}
         >
-            {planned && <ChannelGalleryItemChip label="Soon" color="neutral" />}
-            {/* {!planned && <ChannelGalleryItemChip label="New" color="info" />} */}
             <Stack alignItems="center" justifyContent="center" style={{ height: '100%', width: '100%' }} spacing={2}>
                 <ChannelLogo channelName={id} label={label} />
                 <Typography center>{label}</Typography>
             </Stack>
+            {/* {!planned && <ChannelGalleryItemChip label="New" color="info" />} */}
+            {planned && <ChannelGalleryItemChip label="Soon" color="neutral" />}
         </Card>
     );
 }

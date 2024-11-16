@@ -33,7 +33,7 @@ type InnerGraphProps = {
     startDateTime?: Date;
     hideLegend?: boolean;
     adaptiveDomain?: boolean;
-    aggregate?: boolean;
+    aggregate?: number;
 }
 
 export type GraphProps = InnerGraphProps & {
@@ -161,7 +161,68 @@ function ChartGenericTooltip({
     return null;
 }
 
-function GraphArea({ data, durationMs, width, height, startDateTime, hideLegend, adaptiveDomain }: InnerGraphProps) {
+function aggregateDataByTime(past: Date, nowTime: Date, data: GraphDataPoint[], durationMs: number, domainGraph: ScaleTime<number, number, never>, interval: number) {
+    // Aggregate data based on the time (5 minutes)
+    const aggregatedData = [];
+    const aggregatedPointsCount = Math.ceil(durationMs / interval);
+    for (let i = 0; i < aggregatedPointsCount; i++) {
+        const aggregatedPoint: { key: number, value: number | null } = {
+            key: domainGraph(new Date(past.getTime() + i * interval).getTime()),
+            value: null
+        };
+
+        const transformedData = data?.map(d => ({ key: domainGraph(new Date(d.id).getTime()), value: d.value })) ?? [];
+        const toAggregate = transformedData.filter(d =>
+            d.key >= domainGraph(new Date(past.getTime() + i * interval).getTime()) &&
+            d.key < domainGraph(new Date(past.getTime() + (i + 1) * interval).getTime()));
+        if (toAggregate.length <= 0) {
+            // aggregatedPoint.value = aggregatedData.at(i - 1)?.value ?? (typeof firstDataPoint?.value === 'string' ? parseFloat(firstDataPoint.value) : 0);
+        } else {
+            toAggregate.forEach(c => {
+                if (aggregatedPoint.value === null) {
+                    aggregatedPoint.value = 0;
+                }
+                aggregatedPoint.value += typeof c.value === 'string' ? parseFloat(c.value) : 0;
+            });
+            if (aggregatedPoint.value !== null) {
+                aggregatedPoint.value /= toAggregate.length;
+            }
+        }
+
+        aggregatedData.push(aggregatedPoint);
+    }
+
+    // Insert last data point
+    const lastDataPoint = data ? data[0] : undefined;
+    aggregatedData.push({
+        key: domainGraph(nowTime.getTime()),
+        value: typeof lastDataPoint?.value === 'string' ? parseFloat(lastDataPoint.value) : 0
+    })
+
+    // Populate missing data points
+    for (let i = 0; i < aggregatedData.length; i++) {
+        const aggregatedDataPoint = aggregatedData[i];
+        if (aggregatedDataPoint && aggregatedDataPoint.value === null) {
+            // Pick middle value between previous and next
+            const previous = aggregatedData[i - 1];
+            const next = aggregatedData[i + 1];
+            if (previous?.value && next?.value) {
+                aggregatedDataPoint.value = (previous.value + next.value) / 2;
+            } else if (previous) {
+                aggregatedDataPoint.value = previous.value;
+            } else if (next) {
+                aggregatedDataPoint.value = next.value;
+            } else {
+                aggregatedDataPoint.value = 0;
+            }
+        }
+    }
+
+    // Map to values 2 decimal places
+    return aggregatedData.map(d => ({ key: d.key, value: d.value !== null ? d.value.toFixed(2) : null }));
+}
+
+function GraphArea({ data, durationMs, width, height, startDateTime, hideLegend, adaptiveDomain, aggregate }: InnerGraphProps) {
     const yKey = 'value';
     const xKey = 'key';
 
@@ -177,8 +238,10 @@ function GraphArea({ data, durationMs, width, height, startDateTime, hideLegend,
     const firstDataPoint = data?.at(-1);
     const lastDataPoint = data ? data[0] : undefined;
 
-    const dataTransformedNumbers = transformedData
-        .map(c => typeof c.value === 'string' ? parseFloat(c.value) : null)
+    const dataTransformedNumbers = transformedData.map(c =>
+        typeof c.value === 'string'
+            ? parseFloat(c.value)
+            : null);
     const isDataNumbers = dataTransformedNumbers.every(c => typeof c === 'number' && !isNaN(c))
     const dataMin = isDataNumbers
         ? Math.min(...dataTransformedNumbers.map(d => typeof d === 'number' ? d : 0))
@@ -186,21 +249,29 @@ function GraphArea({ data, durationMs, width, height, startDateTime, hideLegend,
     const dataMax = isDataNumbers
         ? Math.max(...dataTransformedNumbers.map(d => typeof d === 'number' ? d : 0))
         : undefined;
-    console.debug('dataMin', dataMin, 'dataMax', dataMax)
+
+    const aggregatedData = aggregate
+        ? aggregateDataByTime(past, nowTime, data, durationMs, domainGraph, aggregate)
+        : transformedData;
 
     return (
         <ComposedChart
             width={width}
             height={height}
-            data={transformedData}
+            data={aggregatedData}
             margin={{ top: 0, right: 0, bottom: 0, left: 0 }}>
             <defs>
                 <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="var(--graph-stroke)" stopOpacity={0.35} />
-                    <stop offset="95%" stopColor="var(--graph-stroke)" stopOpacity={0.15} />
+                    <stop offset="5%" stopColor="var(--graph-stroke)" stopOpacity={0.3} />
+                    <stop offset="95%" stopColor="var(--graph-stroke)" stopOpacity={0} />
                 </linearGradient>
             </defs>
-            <XAxis domain={[domainGraph(new Date(firstDataPoint?.id ?? 0).getTime()), domainGraph(new Date(lastDataPoint?.id ?? 0).getTime())]} ticks={ticks || []} dataKey={xKey} type="number" hide />
+            <XAxis
+                domain={[domainGraph(new Date(firstDataPoint?.id ?? 0).getTime()), domainGraph(new Date(lastDataPoint?.id ?? 0).getTime())]}
+                ticks={ticks || []}
+                dataKey={xKey}
+                type="number"
+                hide />
             <YAxis
                 allowDecimals={false}
                 domain={[dataMin ?? 'dataMain', dataMax ?? 'dataMax']}

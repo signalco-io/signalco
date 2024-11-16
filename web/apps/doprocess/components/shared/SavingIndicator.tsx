@@ -22,11 +22,11 @@ export function SavingIndicator({ saving }: SavingIndicatorProps) {
     }, [saving]);
 
     return (
-        <div aria-hidden="true" className="h-5 w-5">
+        <div aria-hidden="true" className="size-5">
             {saving && (
                 <div className="animate-spin">
                     <svg
-                        className=" h-full w-full"
+                        className=" size-full"
                         fill="none"
                         height="24"
                         stroke="currentColor"

@@ -1,8 +1,8 @@
 import { isAbsoluteUrl, trimStartChar } from '@signalco/js';
 import { signalcoApiEndpoint } from './AppSettingsProvider';
 
-export function getApiUrl(url: string): string {
-    return signalcoApiEndpoint() + trimStartChar(url, '/');
+export function getApiUrl(url?: string): string {
+    return signalcoApiEndpoint() + (url ? trimStartChar(url, '/') : '');
 }
 
 let _tokenFactory: (() => Promise<string | undefined>) | undefined = undefined;
@@ -14,7 +14,7 @@ export function getTokenFactory() {
     return _tokenFactory;
 }
 
-async function _getBearerTokenAsync() {
+export async function _getBearerTokenAsync() {
     const tokenFactory = getTokenFactory();
     if (tokenFactory) {
         const token = await tokenFactory();

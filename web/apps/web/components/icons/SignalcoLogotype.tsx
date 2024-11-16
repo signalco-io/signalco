@@ -1,6 +1,10 @@
-import { Ref, forwardRef } from 'react';
+'use client';
+
+import { useTheme } from 'next-themes';
 import Image, { ImageProps } from 'next/image';
+import { cx } from '@signalco/ui-primitives/cx';
 import type { SupportedColorScheme } from '@signalco/ui/theme';
+import { useIsClient } from '@signalco/hooks/useIsClient';
 
 export type SignalcoLogotypeProps = Omit<ImageProps, 'width' | 'height' | 'alt' | 'src'> & {
     width?: number;
@@ -8,7 +12,9 @@ export type SignalcoLogotypeProps = Omit<ImageProps, 'width' | 'height' | 'alt' 
     theme?: SupportedColorScheme;
 }
 
-function SignalcoLogotype({ width, height, theme, ...rest }: SignalcoLogotypeProps, ref: Ref<HTMLImageElement>) {
+export default function SignalcoLogotype({ width, height, theme, ...rest }: SignalcoLogotypeProps) {
+    const { resolvedTheme: activeTheme } = useTheme();
+    const resolvedTheme = theme ?? activeTheme;
     const scale = width ? width / 413 : (height ? height / 98 : undefined);
     if (!scale)
         throw new Error('Either height or width must be provided to SignalcoLogo.')
@@ -17,18 +23,22 @@ function SignalcoLogotype({ width, height, theme, ...rest }: SignalcoLogotypePro
     const h = 98 * scale;
 
     const urlParams = new URLSearchParams({
-        theme: theme ?? 'light',
+        theme: resolvedTheme ?? 'light',
     });
 
+    const isClient = useIsClient();
+
     return (
-        <Image
-            ref={ref}
-            alt="signalco"
-            width={w}
-            height={h}
-            src={`/api/branding/logotype?${urlParams.toString()}`}
-            {...rest} />
+        <div style={{ width: w, height: h }} className={cx('transition-opacity', isClient ? 'opacity-100' : 'opacity-0')}>
+            {isClient && (
+                <Image
+                    alt="signalco"
+                    width={w}
+                    height={h}
+                    src={`/api/branding/logotype?${urlParams.toString()}`}
+                    {...rest} />
+            )}
+        </div>
     );
 }
 
-export default forwardRef<HTMLImageElement, SignalcoLogotypeProps>(SignalcoLogotype);

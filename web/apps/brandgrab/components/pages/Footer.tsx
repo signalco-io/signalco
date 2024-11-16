@@ -20,7 +20,7 @@ const footerSections: FooterSectionType[] = [
 
 export default function Footer() {
     return (
-        <Container maxWidth="lg">
+        <Container>
             <footer style={{ padding: '64px 0 32px 0' }}>
                 <Stack spacing={4}>
                     <FooterLinks footerSections={footerSections} />

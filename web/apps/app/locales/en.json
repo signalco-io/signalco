@@ -156,9 +156,11 @@
             "NoWidgetsHelpTextFirstLine": "Dashboard is a bit empty.",
             "NoWidgetsHelpTextSecondLine": "Start by adding a widget from widget store.",
             "DashboardSettings": "Dashboard settings",
+            "DashboardsLoadingError": "There was an error while loading dashboards. Please refresh the page.",
             "Cancel": "Cancel",
             "SaveChanges": "Save changes",
             "Advanced": "Advanced",
+            "Background": "Background",
             "DeleteButtonLabel": "Delete...",
             "DeleteTitle": "Delete dashboard",
             "ConfirmDialogExpectedText": "confirm",
@@ -189,9 +191,6 @@
             "Confirm": "Confirm"
         },
         "Components": {
-            "SearchInput": {
-                "Label": "Search..."
-            },
             "AppThemePicker": {
                 "PickDayNightTimes": "Pick day and night times",
                 "DayTime": "Day time",

@@ -10,6 +10,8 @@ export const KnownPages = {
     Station: '/station',
     Features: '/features',
     Roadmap: '/roadmap',
+    Products: '/products',
+    Contact: '/contact',
     DocsApi: '/docs/api',
     UiDocs: `https://ui.signalco.${domainTld}`,
     Status: 'https://status.signalco.io',

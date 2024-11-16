@@ -10,6 +10,8 @@ public static class SecretKeys
     
     public const string SignalRConnectionString = "AzureSignalRConnectionString";
 
+    public const string PatSigningToken = "SignalcoPatSigningToken";
+
     public static class Auth0
     {
         public const string ApiIdentifier = "Auth0_ApiIdentifier";
@@ -33,6 +35,12 @@ public static class SecretKeys
         public const string SubscriptionKey = "AzureSpeech--SubscriptionKey";
 
         public const string Region = "AzureSpeech--Region";
+    }
+
+    public static class AzureCommunicationServices
+    {
+        public const string ConnectionString = "AcsConnectionString";
+        public const string Domain = "AcsDomain";
     }
 
     public static class SmtpNotification

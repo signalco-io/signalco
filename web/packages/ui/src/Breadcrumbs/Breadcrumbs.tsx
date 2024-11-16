@@ -1,4 +1,4 @@
-import { CSSProperties, Fragment, type ReactNode } from 'react';
+import { type CSSProperties, Fragment, type ReactNode } from 'react';
 import { BreadcrumbsSeparator } from './BreadcrumbsSeparator';
 import { BreadcrumbsItem } from './BreadcrumbsItem';
 

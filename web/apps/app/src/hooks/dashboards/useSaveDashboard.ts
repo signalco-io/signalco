@@ -1,12 +1,12 @@
 import { UseMutationResult, useMutation, useQueryClient } from '@tanstack/react-query';
-import { entityKey } from '../signalco/entity/useEntity';
+import { entityKey } from '../signalco/entity/useEntities';
 import { allEntitiesKey } from '../signalco/entity/useAllEntities';
-import { IDashboardSetModel, saveDashboardAsync } from '../../dashboards/DashboardsRepository';
+import { DashboardSet, DashboardSetConfiguration, saveDashboardAsync } from '../../dashboards/DashboardsRepository';
 
-export default function useSaveDashboard(): UseMutationResult<string, Error, IDashboardSetModel, unknown> {
+export default function useSaveDashboard(): UseMutationResult<string, Error, DashboardSet | DashboardSetConfiguration, unknown> {
     const client = useQueryClient();
     return useMutation({
-        mutationFn: (dashboard: IDashboardSetModel) => {
+        mutationFn: (dashboard: DashboardSet | DashboardSetConfiguration) => {
             return saveDashboardAsync(dashboard);
         },
         onSuccess: (_, dashboard) => {

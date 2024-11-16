@@ -9,7 +9,7 @@ export function UserProfileAvatar() {
 
     return (
         <DropdownMenu>
-            <DropdownMenuTrigger>
+            <DropdownMenuTrigger asChild>
                 <UserProfileAvatarButton />
             </DropdownMenuTrigger>
             <DropdownMenuContent>

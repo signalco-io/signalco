@@ -31,7 +31,6 @@ module.exports = {
     },
     rules: {
         "@next/next/no-html-link-for-pages": "off",
-        "react/jsx-max-depth": ["warn", { "max": 4 }],
         "react/jsx-max-props-per-line": [1, { "when": "multiline" }],
         "react/jsx-props-no-multi-spaces": "warn",
         "react/jsx-wrap-multilines": "warn",
@@ -50,7 +49,6 @@ module.exports = {
         "no-var": "error",
         "prefer-const": "error",
         "@typescript-eslint/no-inferrable-types": "error",
-        "@typescript-eslint/no-extra-semi": "error",
         "@typescript-eslint/no-unused-vars": "error",
         "@typescript-eslint/no-namespace": 0,
         "import/namespace": 0,

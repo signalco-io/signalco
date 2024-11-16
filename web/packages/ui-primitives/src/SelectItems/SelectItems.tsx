@@ -5,10 +5,13 @@ import { Stack } from '../Stack';
 import { Row } from '../Row';
 import { cx } from '../cx';
 
-export type SelectItemsProps = HTMLAttributes<HTMLDivElement> & ComponentPropsWithoutRef<typeof SelectPrimitive.Root> & {
+export type SelectItemsProps<T extends string> = HTMLAttributes<HTMLDivElement> & Omit<ComponentPropsWithoutRef<typeof SelectPrimitive.Root>, 'value' | 'defaultValue' | 'onValueChange'> & {
+    value?: T;
+    defaultValue?: T;
+    onValueChange?(value: T): void;
     label?: string,
     items: {
-        value: string,
+        value: T,
         icon?: ReactNode,
         label?: ReactNode | string,
         title?: string,
@@ -18,10 +21,10 @@ export type SelectItemsProps = HTMLAttributes<HTMLDivElement> & ComponentPropsWi
     placeholder?: string,
     helperText?: string;
     variant?: 'outlined' | 'plain';
-    onValueChange?: (value: string) => void;
+    container?: HTMLElement;
 }
 
-export function SelectItems(props: SelectItemsProps) {
+export function SelectItems<T extends string>(props: SelectItemsProps<T>) {
     const {
         value,
         items,
@@ -30,6 +33,7 @@ export function SelectItems(props: SelectItemsProps) {
         helperText,
         onValueChange,
         variant,
+        container,
         ...rest
     } = props;
 
@@ -50,10 +54,10 @@ export function SelectItems(props: SelectItemsProps) {
                 >
                     <SelectPrimitive.Value placeholder={label ?? placeholder} />
                     <SelectPrimitive.Icon asChild>
-                        <SelectIcon className="h-4 w-4 opacity-50" />
+                        <SelectIcon className="size-4 opacity-50" />
                     </SelectPrimitive.Icon>
                 </SelectPrimitive.Trigger>
-                <SelectPrimitive.Portal>
+                <SelectPrimitive.Portal container={container}>
                     <SelectPrimitive.Content
                         // Note: Temporary fix for: https://github.com/radix-ui/primitives/issues/1658
                         // TODO: Remove this once the issue is fixed
@@ -78,9 +82,9 @@ export function SelectItems(props: SelectItemsProps) {
                                     className="relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
                                     title={item.title}
                                 >
-                                    <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
+                                    <span className="absolute left-2 flex size-3.5 items-center justify-center">
                                         <SelectPrimitive.ItemIndicator>
-                                            <Check className="h-4 w-4" />
+                                            <Check className="size-4" />
                                         </SelectPrimitive.ItemIndicator>
                                     </span>
                                     <SelectPrimitive.ItemText>

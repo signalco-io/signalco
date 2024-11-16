@@ -1,20 +1,6 @@
-'use client';
-
 import { PropsWithChildren } from 'react';
-import { ThemeProvider, useTheme } from 'next-themes'
-import { NotificationsContainer } from '@signalco/ui-notifications';
-import useAppTheme from '../src/hooks/useAppTheme';
-
-function ThemeChangerWrapper({ children }: PropsWithChildren) {
-    const { resolvedTheme } = useTheme();
-    useAppTheme();
-    return (
-        <>
-            <NotificationsContainer theme={resolvedTheme === 'dark' ? 'dark' : 'light'} />
-            {children}
-        </>
-    );
-}
+import { ThemeProvider } from 'next-themes'
+import { ThemeChangerWrapper } from './ThemeChangerWrapper';
 
 export function LayoutClientWrapper({ children }: PropsWithChildren) {
     return (

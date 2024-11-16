@@ -1,9 +1,0 @@
-# *
-User-agent: *
-Allow: /
-
-# Host
-Host: https://www.brandgrab.io
-
-# Sitemaps
-Sitemap: https://www.brandgrab.io/sitemap.xml

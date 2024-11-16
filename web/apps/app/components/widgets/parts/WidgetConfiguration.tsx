@@ -2,31 +2,32 @@ import { PropsWithChildren } from 'react';
 import { Stack } from '@signalco/ui-primitives/Stack';
 import { SelectItems } from '@signalco/ui-primitives/SelectItems';
 import { Button } from '@signalco/ui-primitives/Button';
+import { GeneralFormProvider } from '@signalco/ui-forms/GeneralFormProvider';
 import { asArray, ObjectDictAny } from '@signalco/js';
-import { extractValues } from '@enterwell/react-form-validation';
+import { extractValues, Fields, submitForm } from '@enterwell/react-form-validation';
 import { FormBuilder, type FormItems, useFormField, FormBuilderProvider, FormBuilderComponents } from '@enterwell/react-form-builder';
 import DisplayEntityTarget from '../../shared/entity/DisplayEntityTarget';
 import ConfigurationDialog from '../../shared/dialog/ConfigurationDialog';
-import GeneralFormProvider from '../../forms/GeneralFormProvider';
 import WidgetConfigurationOption from '../../../src/widgets/IWidgetConfigurationOption';
 
+
 type WidgetConfigurationDialogProps = {
-    form: FormItems,
+    form: FormItems & Fields,
     onCancel: () => void,
-    onSave: (config: object) => void,
+    onSave: (config: Record<string, unknown>) => void,
 }
 
 export type WidgetConfigurationProps = {
     isOpen: boolean,
-    config: object,
+    config: Record<string, unknown>,
     options: WidgetConfigurationOption<unknown>[],
-    onConfiguration: (config: object) => void,
+    onConfiguration: (config: Record<string, unknown>) => void,
 }
 
 const useWidgetConfiguration = (
     options: WidgetConfigurationOption<unknown>[],
-    config: object | undefined,
-    onConfiguration: (config: object) => void) => {
+    config: Record<string, unknown> | undefined,
+    onConfiguration: (config: Record<string, unknown>) => void) => {
     const form: ObjectDictAny = {};
     for (let index = 0; index < options.length; index++) {
         const configOption = options[index];
@@ -47,7 +48,7 @@ const useWidgetConfiguration = (
     };
 
     const handleSaveConfiguration = () => {
-        const values = extractValues(form);
+        const values = extractValues(form as Fields) as Record<string, unknown>;
 
         // Include default values
         options.filter(o => o.default).forEach(defaultOpt => {
@@ -131,7 +132,10 @@ function WidgetConfigurationFormProvider(props: PropsWithChildren) {
 }
 
 function WidgetConfiguration(props: WidgetConfigurationProps) {
-    const configProps = useWidgetConfiguration(props.options, props.config, props.onConfiguration)
+    const configProps = useWidgetConfiguration(props.options, props.config, props.onConfiguration);
+    const handleSave = () => {
+        submitForm(configProps.form, (data) => configProps.onSave(data as Record<string, unknown>));
+    }
     return (
         <ConfigurationDialog
             header="Configure widget"
@@ -140,11 +144,11 @@ function WidgetConfiguration(props: WidgetConfigurationProps) {
             actions={(
                 <>
                     <Button onClick={configProps.onCancel}>Cancel</Button>
-                    <Button autoFocus onClick={configProps.onSave}>Save changes</Button>
+                    <Button autoFocus onClick={handleSave}>Save changes</Button>
                 </>
             )}>
             <WidgetConfigurationFormProvider>
-                <FormBuilder form={configProps.form} onSubmit={configProps.onSave} />
+                <FormBuilder form={configProps.form} onSubmit={(data) => configProps.onSave(data as Record<string, unknown>)} />
             </WidgetConfigurationFormProvider>
         </ConfigurationDialog>
     );

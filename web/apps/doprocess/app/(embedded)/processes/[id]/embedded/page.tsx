@@ -1,16 +1,17 @@
+import { SplitView } from '@signalco/ui/SplitView';
 import { TaskDetails } from '../../../../../components/processes/tasks/TaskDetails';
 import { ProcessDetails } from '../../../../../components/processes/processes/ProcessDetails';
-import { SplitView } from '../../../../../components/layouts/SplitView';
 
-export default function ProcessEmbeddedPage({ params }: { params: { id: string } }) {
+export default async function ProcessEmbeddedPage({ params }: { params: Promise<{ id: string }> }) {
+    const { id } = await params;
     const editable = false;
     return (
         <SplitView>
             <div className="p-2">
-                <ProcessDetails id={params.id} editable={editable} />
+                <ProcessDetails id={id} editable={editable} />
             </div>
             <div className="h-full p-2">
-                <TaskDetails processId={params.id} editable={editable} />
+                <TaskDetails processId={id} editable={editable} />
             </div>
         </SplitView>
     );

@@ -1,10 +1,10 @@
-import { ReactNode } from 'react';
+import { type ReactNode } from 'react';
 import { Typography } from '@signalco/ui-primitives/Typography';
 import { Link } from '@signalco/ui-primitives/Link';
 
 type BreadcrumbsItemProps = {
     href?: string;
-    label: ReactNode | string | undefined;
+    label: ReactNode | undefined;
 };
 
 export function BreadcrumbsItem({ href, label }: BreadcrumbsItemProps) {

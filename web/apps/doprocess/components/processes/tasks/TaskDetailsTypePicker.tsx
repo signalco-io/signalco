@@ -34,8 +34,8 @@ export default function TaskDetailsTypePicker({ processId, taskDefinitionId, onP
                 <Card className="flex h-full items-center" onClick={() => handleTypePicked('blank')}>
                     <CardContent className="px-4 py-2">
                         <div className="flex items-center space-x-4">
-                            <div className="h-6 w-6">
-                                <Empty className="h-6 w-6 text-gray-500 dark:text-gray-400" />
+                            <div className="size-6">
+                                <Empty className="size-6 text-gray-500 dark:text-gray-400" />
                             </div>
                             <div>
                                 <Typography>Empty</Typography>
@@ -47,7 +47,7 @@ export default function TaskDetailsTypePicker({ processId, taskDefinitionId, onP
                 <Card className="flex h-full items-center" onClick={() => handleTypePicked('document')}>
                     <CardContent className="px-4 py-2">
                         <div className="flex items-center space-x-4">
-                            <div className="h-6 w-6">
+                            <div className="size-6">
                                 <FileText className="text-gray-500 dark:text-gray-400" />
                             </div>
                             <div>
@@ -64,7 +64,7 @@ export default function TaskDetailsTypePicker({ processId, taskDefinitionId, onP
                         <Card className="flex h-full items-center">
                             <CardContent className="px-4 py-2">
                                 <div className="flex items-center space-x-4">
-                                    <div className="h-6 w-6">
+                                    <div className="size-6">
                                         <FileInput className="text-gray-500 dark:text-gray-400" />
                                     </div>
                                     <div>

@@ -1,5 +1,5 @@
 import { Stack } from '@signalco/ui-primitives/Stack';
-import { ListHeader } from '../../shared/ListHeader';
+import { ListHeader } from '@signalco/ui-primitives/List';
 import { DocumentsList } from './DocumentsList';
 
 export function DocumentsListView() {

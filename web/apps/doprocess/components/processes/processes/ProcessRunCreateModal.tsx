@@ -1,7 +1,6 @@
 'use client';
 
 import { Typography } from '@signalco/ui-primitives/Typography';
-import { Tooltip } from '@signalco/ui-primitives/Tooltip';
 import { Stack } from '@signalco/ui-primitives/Stack';
 import { Row } from '@signalco/ui-primitives/Row';
 import { Modal } from '@signalco/ui-primitives/Modal';
@@ -16,9 +15,7 @@ type ProcessRunCreateModalProps = {
 export function ProcessRunCreateModal({ processId }: ProcessRunCreateModalProps) {
     return (
         <Modal trigger={(
-            <Tooltip title="Run process">
-                <IconButton variant="solid"><Play /></IconButton>
-            </Tooltip>
+            <IconButton title="Run process" variant="solid"><Play /></IconButton>
         )}>
             <Stack spacing={4}>
                 <Row spacing={2}>

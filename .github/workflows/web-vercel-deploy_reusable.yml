@@ -1,0 +1,86 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+
+name: '[Web] Vercel Deploy'
+
+on:
+    workflow_call:
+        inputs:
+            name:
+                required: true
+                type: string
+                description: 'Name of the package or application to analzye'
+            path:
+                required: true
+                type: string
+                description: 'Path to the package or application to analzye'
+            vercelProjectId:
+                required: true
+                type: string
+                description: 'Vercel Project ID'
+            preview:
+                required: false
+                type: boolean
+                description: 'Whether to deploy to preview or production'
+                default: true
+            environment:
+                required: false
+                type: string
+                description: 'Environment to deploy to, can be preview, development, or production'
+                default: 'preview'
+
+env:
+    VERCEL_PROJECT_ID: ${{ inputs.vercelProjectId }}
+    VERCEL_ORG_ID: team_Ade0MlfC3211ml3wYJZ4c9hn
+
+jobs:
+    ci:
+        timeout-minutes: 15
+        runs-on: ubuntu-latest
+        concurrency:
+          group: ${{ github.workflow }}-${{ github.ref || github.run_id }}-${{ inputs.name }}
+          cancel-in-progress: true
+        steps:
+          - uses: actions/checkout@v4
+            with:
+              fetch-depth: 2
+
+          - name: ✨ Setup Node
+            uses: actions/setup-node@v4
+            with:
+              node-version: "20.x"
+    
+          - uses: pnpm/action-setup@v3
+            name: ✨ Install pnpm
+            with:
+              version: 9.2.0
+    
+          - name: ✨ Get pnpm store directory
+            shell: bash
+            run: |
+              echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+    
+          - uses: actions/cache@v4
+            name: ✨ Setup pnpm cache
+            with:
+              path: ${{ env.STORE_PATH }}
+              key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+              restore-keys: |
+                ${{ runner.os }}-pnpm-store-
+
+          - name: ✨ Setup Vercel CLI
+            run: npm i --g vercel@33.2.0
+
+          - name: ⚙️ Pull Vercel Environment Information
+            run: vercel pull --yes --environment=${{ inputs.environment }} --token=${{ secrets.VERCEL_TOKEN }}
+
+          - name: ⚒️ Build app
+            run: vercel build ${{ inputs.preview == false && '--prod' }} --token=${{ secrets.VERCEL_TOKEN }}
+
+          - name: 🚀 Deploy Preview to Vercel
+            run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
+            if: ${{ inputs.preview == true }}
+
+          - name: 🚀 Deploy Production to Vercel
+            run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }} ${{ inputs.environment == 'development' && '--skip-domain' || ''}}
+            if: ${{ inputs.preview == false }}
+
