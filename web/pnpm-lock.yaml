@@ -490,8 +490,8 @@ importers:
         specifier: 0.19.1
         version: 0.19.1(@types/hast@3.0.4)
       '@blocknote/mantine':
-        specifier: 0.19.0
-        version: 0.19.0(@tiptap/pm@2.7.2)(@types/hast@3.0.4)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(types-react@19.0.0-rc.1)
+        specifier: 0.19.1
+        version: 0.19.1(@tiptap/pm@2.7.2)(@types/hast@3.0.4)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(types-react@19.0.0-rc.1)
       '@blocknote/react':
         specifier: 0.19.1
         version: 0.19.1(@tiptap/pm@2.7.2)(@types/hast@3.0.4)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)
@@ -2165,8 +2165,8 @@ packages:
   '@blocknote/core@0.19.1':
     resolution: {integrity: sha512-iscYwOm5F57wA/d+4YK9Cy3k9Gi4d3uW3/QhMOBGzJ9I1OfxzSBQ45gIMLk/3n5chWz/AzeRdG3hizm3zux8iQ==}
 
-  '@blocknote/mantine@0.19.0':
-    resolution: {integrity: sha512-E8CGID6QcutjpVGxcpjID/q2SEuGsrqv8s5j4yU+Vt6loi81+faQbZyS+aPPW9ifusqxNqW0mZ5Okyj4f8kVZA==}
+  '@blocknote/mantine@0.19.1':
+    resolution: {integrity: sha512-Al0tPTDCIx9fFQZFf7gFB8qjMWYGYWeVZz8I1Dk3wat1SHXPa7IeM/7nvIZFnhovCo9xcZvrBPx3AgrN/RIMPg==}
     peerDependencies:
       react: ^18.0 || ^19.0 || >= 19.0.0-rc
       react-dom: ^18.0 || ^19.0 || >= 19.0.0-rc
@@ -9541,7 +9541,7 @@ snapshots:
       - sugar-high
       - supports-color
 
-  '@blocknote/mantine@0.19.0(@tiptap/pm@2.7.2)(@types/hast@3.0.4)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(types-react@19.0.0-rc.1)':
+  '@blocknote/mantine@0.19.1(@tiptap/pm@2.7.2)(@types/hast@3.0.4)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(types-react@19.0.0-rc.1)':
     dependencies:
       '@blocknote/core': 0.19.1(@types/hast@3.0.4)
       '@blocknote/react': 0.19.1(@tiptap/pm@2.7.2)(@types/hast@3.0.4)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)
