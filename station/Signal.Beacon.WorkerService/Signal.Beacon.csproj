@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Worker">
 
   <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net9.0</TargetFramework>
     <UserSecretsId>dotnet-Signal.Beacon.WorkerService-EDF6EB99-A6EE-4F07-B2B3-BEC456AB65B6</UserSecretsId>
     <Nullable>enable</Nullable>
     <Deterministic>true</Deterministic>
