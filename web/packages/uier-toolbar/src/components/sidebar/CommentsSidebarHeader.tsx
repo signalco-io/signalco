@@ -8,9 +8,10 @@ export function CommentsSidebarHeader({ filterOpen, onClose, onToggleFilter }: {
             <Row spacing={1}>
             </Row>
             <Row>
-                <IconButton variant={filterOpen ? 'soft' : 'plain'} onClick={onToggleFilter} title="Toggle filter">
+                {/* TODO Enable when implemented */}
+                {/* <IconButton variant={filterOpen ? 'soft' : 'plain'} onClick={onToggleFilter} title="Toggle filter">
                     <Filter size={16} />
-                </IconButton>
+                </IconButton> */}
                 <IconButton onClick={onClose} variant="plain" title="Close sidebar">
                     <PanelRightClose />
                 </IconButton>
