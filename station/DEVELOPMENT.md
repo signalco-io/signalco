@@ -19,7 +19,7 @@ Actions status
 
 Requirements:
 
-- [.NET 7 SDK](https://dotnet.microsoft.com/)
+- [.NET 9 SDK](https://dotnet.microsoft.com/)
 
 Running station
 

@@ -4,7 +4,7 @@ import { Card, CardContent } from '@signalco/ui-primitives/Card';
 import { Avatar } from '@signalco/ui-primitives/Avatar';
 import { Shield, Lock, Euro } from '@signalco/ui-icons';
 import { SectionsView } from '@signalco/cms-core/SectionsView';
-import { sectionsComponentRegistry } from '../../page';
+import { sectionsComponentRegistry } from '../page';
 import { KnownPages } from '../../../src/knownPages';
 import PageCenterHeader from '../../../components/pages/PageCenterHeader';
 import CtaSection from '../../../components/pages/CtaSection';

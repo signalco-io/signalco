@@ -25,6 +25,7 @@ import { Dashboard } from '@checkly/pulumi';
 import { nextJsApp, vercelApp } from '@infra/pulumi/vercel';
 import { createChannelFunction } from './createChannelFunction.js';
 import { createInternalFunctionAsync } from './createInternalFunctionAsync.js';
+import { funcAppPlan } from '../../../packages/pulumi/src/azure/funcAppPlan.js';
 
 /*
  * NOTE: `parent` configuration is currently disabled for all resources because
@@ -51,16 +52,16 @@ const up = async () => {
         return {};
     } else {
         const shouldProtect = stack === 'production';
-        const domainName = `${config.require('domain')}`;
 
-        const resourceGroupName = `signalco-cloud-${stack}`;
         const signalrPrefix = 'sr';
         const storagePrefix = 'store';
         const keyvaultPrefix = 'kv';
 
         const currentStack = new StackReference(`signalco/${getProject()}/${getStack()}`);
 
-        const resourceGroup = new ResourceGroup(resourceGroupName);
+        const resourceGroup = new ResourceGroup(`signalco-cloud-${stack}`);
+
+        const domainName = `${config.require('domain')}`;
         const corsDomains = [`app.${domainName}`, `www.${domainName}`, domainName];
 
         const signalr = createSignalR(resourceGroup, signalrPrefix, corsDomains, stack === 'production' ? 'standard1' : 'free', false);
@@ -71,6 +72,9 @@ const up = async () => {
 
         // Create log workspace
         const logWorkspace = createLogWorkspace(resourceGroup, 'log');
+
+        // Create functions app plan
+        const sharedLinuxConsumptionPlan = funcAppPlan(resourceGroup, 'linux-consumption', false);
 
         // Generate public functions
         const publicApis = [
@@ -85,8 +89,12 @@ const up = async () => {
                 api.subDomain,
                 api.cors,
                 currentStack,
-                false);
-            const apiFuncPublish = await publishProjectAsync(['../../../cloud/src/Signalco.Api.Public', api.name].filter(i => i.length).join('.'));
+                false,
+                sharedLinuxConsumptionPlan.plan.id);
+            const apiFuncPublish = await publishProjectAsync([
+                '../../../cloud/src/Signalco.Api.Public',
+                api.name,
+            ].filter(i => i.length).join('.'));
             const apiFuncCode = await assignFunctionCodeAsync(
                 resourceGroup,
                 funcStorage.storageAccount.storageAccount,
@@ -106,7 +114,13 @@ const up = async () => {
         const internalNames = ['UsageProcessor', 'ContactStateProcessor', 'TimeEntityPublic', 'Maintenance', 'Migration'];
         const internalFuncs = [];
         for (const funcName of internalNames) {
-            internalFuncs.push(await createInternalFunctionAsync(resourceGroup, funcName, funcStorage.storageAccount.storageAccount, funcStorage.zipsContainer, false));
+            internalFuncs.push(await createInternalFunctionAsync(
+                resourceGroup,
+                funcName,
+                funcStorage.storageAccount.storageAccount,
+                funcStorage.zipsContainer,
+                false,
+                sharedLinuxConsumptionPlan.plan.id));
         }
 
         // Generate channels functions
@@ -117,7 +131,14 @@ const up = async () => {
             : [...productionChannelNames, ...nextChannelNames];
         const channelsFunctions = [];
         for (const channelName of channelNames) {
-            channelsFunctions.push(await createChannelFunction(channelName, resourceGroup, funcStorage.storageAccount.storageAccount, funcStorage.zipsContainer, currentStack, false));
+            channelsFunctions.push(await createChannelFunction(
+                channelName,
+                resourceGroup,
+                funcStorage.storageAccount.storageAccount,
+                funcStorage.zipsContainer,
+                currentStack,
+                false,
+                sharedLinuxConsumptionPlan.plan.id));
         }
 
         // Generate discrete functions
@@ -125,6 +146,7 @@ const up = async () => {
         const discreteFunctions = [];
         for (const funcName of discreteNames) {
             const discreteResourceGroup = new ResourceGroup(`signalco-discrete-${stack}-${funcName.toLowerCase()}`);
+            const discreteLinuxConsumptionPlan = funcAppPlan(discreteResourceGroup, `linux-consumption-${funcName}`, false);
             const discreteStorage = createFunctionsStorage(discreteResourceGroup, `${funcName.toLowerCase().substring(0, 5)}funcs`, false);
             const func = createPublicFunction(
                 discreteResourceGroup,
@@ -132,7 +154,8 @@ const up = async () => {
                 `${funcName.toLowerCase()}.api`,
                 undefined,
                 currentStack,
-                false);
+                false,
+                discreteLinuxConsumptionPlan.plan.id);
             const funcPublish = await publishProjectAsync(`../../../discrete/Signalco.Discrete.Api.${funcName}/cloud`);
             const funcCode = await assignFunctionCodeAsync(
                 discreteResourceGroup,
@@ -157,7 +180,7 @@ const up = async () => {
         const registry = getContainerRegistry(resourceGroupSharedName, containerRegistryName);
         const appRb = createRemoteBrowser(resourceGroup, 'rb', registry, logWorkspace, false);
 
-        // Create general storage and prepare tables
+        // Create general storage
         const storage = createStorageAccount(resourceGroup, storagePrefix, shouldProtect);
 
         // ACS (Email)

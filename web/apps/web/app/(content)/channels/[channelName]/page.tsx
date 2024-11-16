@@ -10,7 +10,7 @@ import { Breadcrumbs } from '@signalco/ui/Breadcrumbs';
 import { channelCategories as channelCategoriesData, channelsData } from '@signalco/data/data';
 import { SectionsView } from '@signalco/cms-core/SectionsView';
 import { channelsFaq } from '../data';
-import { sectionsComponentRegistry } from '../../../page';
+import { sectionsComponentRegistry } from '../../page';
 import { KnownPages } from '../../../../src/knownPages';
 import ShareSocial from '../../../../components/pages/ShareSocial';
 import CtaSection from '../../../../components/pages/CtaSection';
