@@ -1,7 +1,6 @@
 import { Config, interpolate, type StackReference, Output } from '@pulumi/pulumi';
 import {
     WebApp,
-    AppServicePlan,
     WebAppHostNameBinding,
     Certificate,
     HostNameType,
@@ -14,7 +13,7 @@ import { dnsRecord } from '../cloudflare/dnsRecord.js';
 export function assignCustomDomain(
     resourceGroup: ResourceGroup,
     webApp: WebApp,
-    servicePlan: AppServicePlan,
+    servicePlanId: Output<string>,
     namePrefix: string,
     subDomainName: string,
     currentStack: StackReference,
@@ -56,7 +55,7 @@ export function assignCustomDomain(
         resourceGroupName: resourceGroup.name,
         name: `cert-${namePrefix}`,
         canonicalName: fullDomainName,
-        serverFarmId: servicePlan.id,
+        serverFarmId: servicePlanId,
     }, {
         protect,
     });

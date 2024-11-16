@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import { Stack } from '@signalco/ui-primitives/Stack';
 import { SectionsView } from '@signalco/cms-core/SectionsView';
-import { sectionsComponentRegistry } from '../../page';
+import { sectionsComponentRegistry } from '../page';
 import PageCenterHeader from '../../../components/pages/PageCenterHeader';
 import CtaSection from '../../../components/pages/CtaSection';
 import ChannelsGallery from '../../../components/channels/ChannelsGallery';

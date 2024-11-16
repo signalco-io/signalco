@@ -1,4 +1,4 @@
-import { type StackReference } from '@pulumi/pulumi';
+import { Output, type StackReference } from '@pulumi/pulumi';
 import { type ResourceGroup } from '@pulumi/azure-native/resources/index.js';
 import { createPublicFunction, assignFunctionCodeAsync } from '@infra/pulumi/azure';
 import { apiStatusCheck } from '@infra/pulumi/checkly';
@@ -12,7 +12,8 @@ export async function createChannelFunction(
     storageAccount: StorageAccount,
     zipsContainer: BlobContainer,
     currentStack: StackReference,
-    protect: boolean): Promise<{
+    protect: boolean,
+    appPlanId: Output<string>): Promise<{
         nameLower: string,
         name: string,
     } & ReturnType<typeof createPublicFunction> & Awaited<ReturnType<typeof assignFunctionCodeAsync>>> {
@@ -29,6 +30,7 @@ export async function createChannelFunction(
         corsDomains,
         currentStack,
         protect,
+        appPlanId,
     );
 
     const codePath = `../../../cloud/src/Signalco.Channel.${channelName}`;

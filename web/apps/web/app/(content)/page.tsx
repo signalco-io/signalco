@@ -9,12 +9,12 @@ import { Pricing1 } from '@signalco/cms-components-marketing/Pricing';
 import { Heading1 } from '@signalco/cms-components-marketing/Heading';
 import { Feature2, Feature3, Feature4 } from '@signalco/cms-components-marketing/Feature';
 import { Faq1 } from '@signalco/cms-components-marketing/Faq';
-import { isDeveloper } from '../src/services/EnvProvider';
-import { KnownPages } from '../src/knownPages';
-import { NewsletterSection } from '../components/views/NewsletterSection';
-import DiscoverVisual from '../components/pages/landing/visuals/DiscoverVisual';
-import CtaSection from '../components/pages/CtaSection';
-import SignalcoLogotype from '../components/icons/SignalcoLogotype';
+import { isDeveloper } from '../../src/services/EnvProvider';
+import { KnownPages } from '../../src/knownPages';
+import { NewsletterSection } from '../../components/views/NewsletterSection';
+import DiscoverVisual from '../../components/pages/landing/visuals/DiscoverVisual';
+import CtaSection from '../../components/pages/CtaSection';
+import SignalcoLogotype from '../../components/icons/SignalcoLogotype';
 
 export const sectionsComponentRegistry = {
     'Heading1': memo(Heading1),
