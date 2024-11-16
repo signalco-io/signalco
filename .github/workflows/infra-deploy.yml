@@ -207,7 +207,7 @@ jobs:
   
   deploy_ok:
     name: "[Deploy] OK"
-    needs: [infra_cloud-primary_up, infra_uier_up, infra_workingparty_up, vercel_blog_deploy, vercel_brandgrab_deploy, vercel_slco_deploy, vercel_app_deploy, vercel_web_deploy, vercel_doprocess_deploy, vercel_uidocs_deploy, vercel_uier_deploy, vercel_workingparty_deploy]
+    needs: [infra_cloud-primary_up, infra_uier_up, infra_workingparty_up, infra_doprocess_up, vercel_blog_deploy, vercel_brandgrab_deploy, vercel_slco_deploy, vercel_app_deploy, vercel_web_deploy, vercel_doprocess_deploy, vercel_uidocs_deploy, vercel_uier_deploy, vercel_workingparty_deploy]
     runs-on: ubuntu-latest
     if: always()
     steps:
