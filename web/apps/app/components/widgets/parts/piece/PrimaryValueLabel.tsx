@@ -1,7 +1,6 @@
 import { Typography } from '@signalco/ui-primitives/Typography';
 import { Stack } from '@signalco/ui-primitives/Stack';
 import { Row } from '@signalco/ui-primitives/Row';
-import { cx } from '@signalco/ui-primitives/cx';
 
 export function numberWholeAndDecimal(data: number | string | undefined): [undefined, undefined] | [number, number] {
     if (typeof data === 'undefined')
@@ -17,16 +16,18 @@ export function numberWholeAndDecimal(data: number | string | undefined): [undef
     ];
 }
 
-export function PrimaryValueLabel({ value, unit, size }: { value: number | string | undefined; unit: string; size: 'small' | 'large'; }) {
-    const [degreesWhole, degreesDecimal] = numberWholeAndDecimal(value);
+export function PrimaryValueLabel({ value, unit, size = 'normal' }: { value: number | string | undefined; unit: string; size: 'small' | 'normal' | 'large'; }) {
+    const [valueWhole, degreesDecimal] = numberWholeAndDecimal(value);
+    const valueTextSize = (size === 'large' ? 'text-6xl' : (size === 'normal' ? 'text-5xl' : 'text-4xl'));
+    const detailsTextSize = (size === 'large' ? 'text-lg' : (size === 'normal' ? 'text-base' : 'text-sm'));
     return (
         <Row alignItems="stretch">
             <Stack className="h-full" justifyContent="center" alignItems="center">
-                <Typography extraThin className={cx(size === 'large' ? 'text-6xl' : 'text-4xl')}>{degreesWhole}</Typography>
+                <Typography extraThin className={valueTextSize}>{Number.isNaN(valueWhole) ? 0 : valueWhole}</Typography>
             </Stack>
             <Stack alignItems="start" justifyContent="space-between">
-                <Typography extraThin className={size === 'large' ? 'text-lg' : 'text-xs'} tertiary>{unit}</Typography>
-                <Typography extraThin className={size === 'large' ? 'text-lg' : 'text-sm'} tertiary>.{degreesDecimal}</Typography>
+                <Typography extraThin className={detailsTextSize} tertiary>{unit ?? ''}</Typography>
+                <Typography extraThin className={detailsTextSize} tertiary>.{Number.isNaN(degreesDecimal) ? 0 : degreesDecimal}</Typography>
             </Stack>
         </Row>
     );

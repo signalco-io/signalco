@@ -1,13 +1,12 @@
 import { documentCreate, documentGet, documentsGet } from '../../../src/lib/repo/documentsRepository';
-import { ensureUserId } from '../../../src/lib/auth/apiAuth';
-
-export const runtime = 'edge';
+import { withAuth } from '../../../src/lib/auth/auth';
 
 export async function GET() {
-    const { userId } = ensureUserId();
-    const documents = await documentsGet(userId);
-    const documentsDto = documents.map(p => ({ ...p, id: p.publicId, publicId: undefined }));
-    return Response.json(documentsDto);
+    return await withAuth(async ({ userId }) => {
+        const documents = await documentsGet(userId);
+        const documentsDto = documents.map(p => ({ ...p, id: p.publicId, publicId: undefined }));
+        return Response.json(documentsDto);
+    });
 }
 
 export async function POST(request: Request) {
@@ -17,12 +16,12 @@ export async function POST(request: Request) {
         throw new Error('Missing name');
     }
 
-    const { userId } = ensureUserId();
+    return await withAuth(async ({ accountId, userId }) => {
+        const basedOn = data != null && typeof data === 'object' && 'basedOn' in data && typeof data.basedOn === 'string' ? data.basedOn : undefined;
 
-    const basedOn = data != null && typeof data === 'object' && 'basedOn' in data && typeof data.basedOn === 'string' ? data.basedOn : undefined;
+        const id = await documentCreate(accountId, userId, name, basedOn);
 
-    const id = await documentCreate(userId, name, basedOn);
-
-    const document = await documentGet(userId, id);
-    return Response.json({ id: document?.publicId });
+        const document = await documentGet(userId, id);
+        return Response.json({ id: document?.publicId });
+    });
 }

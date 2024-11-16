@@ -1,0 +1,215 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+
+name: "[Infra] Deploy"
+
+on:
+  push:
+    branches: [main, next]
+    paths:
+      - "cloud/**"
+      - "infra/**"
+      - "web/**"
+      - ".github/workflows/infra-deploy.yml"
+      - ".github/workflows/infra-deploy_reusable.yml"
+      - ".github/workflows/web-vercel-deploy_reusable.yml"
+
+jobs:
+  changes:
+    name: "Detect changes"
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            infrastructure:
+              - cloud/**
+              - infra/**
+              - .github/workflows/ci.yml
+              - .github/workflows/cloud-deploy-preview_reusable.yml
+            web:
+              - web/**
+              - .github/workflows/ci.yml
+              - .github/workflows/web-nextjs_ci_reusable.yml
+              - .github/workflows/web-vercel-deploy_reusable.yml
+    outputs:
+      infra: ${{ steps.filter.outputs.infrastructure }}
+      web: ${{ steps.filter.outputs.web }}
+
+  infra_cloud-primary_up:
+    name: "Cloud Primary infrastructure (deploy)"
+    needs: changes
+    if: success() && needs.changes.outputs.infra == 'true'
+    uses: ./.github/workflows/infra-deploy_reusable.yml
+    with:
+      project: "cloud-primary"
+      packageName: "@infra/cloud-primary"
+      baseRef: ${{ github.ref }}
+      command: "up"
+    secrets: inherit
+
+  infra_uier_up:
+    name: "uier infrastructure (deploy)"
+    needs: changes
+    if: success() && needs.changes.outputs.infra == 'true'
+    uses: ./.github/workflows/infra-deploy_reusable.yml
+    with:
+      project: "uier"
+      packageName: "@infra/uier"
+      baseRef: ${{ github.ref }}
+      command: "up"
+    secrets: inherit
+
+  infra_workingparty_up:
+    name: "WorkingParty infrastructure (deploy)"
+    needs: changes
+    if: success() && needs.changes.outputs.infra == 'true'
+    uses: ./.github/workflows/infra-deploy_reusable.yml
+    with:
+      project: "workingparty"
+      packageName: "@infra/workingparty"
+      baseRef: ${{ github.ref }}
+      command: "up"
+    secrets: inherit
+
+  infra_doprocess_up:
+    name: "DoProcess infrastructure (deploy)"
+    needs: changes
+    if: success() && needs.changes.outputs.infra == 'true'
+    uses: ./.github/workflows/infra-deploy_reusable.yml
+    with:
+      project: "doprocess"
+      packageName: "@infra/doprocess"
+      baseRef: ${{ github.ref }}
+      command: "up"
+    secrets: inherit
+  
+  vercel_blog_deploy:
+    name: "Vercel Blog (deploy)"
+    needs: changes
+    if: success() && needs.changes.outputs.web == 'true'
+    uses: ./.github/workflows/web-vercel-deploy_reusable.yml
+    with:
+      name: 'blog'
+      path: 'web/apps/blog'
+      vercelProjectId: 'prj_VT7qOjkcEvkAsZH7MtSxWcVDWVpr'
+      preview: false
+      environment: ${{ github.ref == 'refs/heads/main' && 'production' || 'development' }}
+    secrets: inherit
+
+  vercel_brandgrab_deploy:
+    name: "Vercel BrandGrab (deploy)"
+    needs: changes
+    if: success() && needs.changes.outputs.web == 'true'
+    uses: ./.github/workflows/web-vercel-deploy_reusable.yml
+    with:
+      name: 'brandgrab'
+      path: 'web/apps/brandgrab'
+      vercelProjectId: 'prj_QHQO9V4WwYqlcpXNufZ4SU3Ryftx'
+      preview: false
+      environment: ${{ github.ref == 'refs/heads/main' && 'production' || 'development' }}
+    secrets: inherit
+
+  vercel_slco_deploy:
+    name: "Vercel slco (deploy)"
+    needs: changes
+    if: success() && needs.changes.outputs.web == 'true'
+    uses: ./.github/workflows/web-vercel-deploy_reusable.yml
+    with:
+      name: 'slco'
+      path: 'web/apps/slco'
+      vercelProjectId: 'prj_GNETZANB7evyT5coH7gptur1G1sN'
+      preview: false
+      environment: ${{ github.ref == 'refs/heads/main' && 'production' || 'development' }}
+    secrets: inherit
+
+  vercel_app_deploy:
+    name: "Vercel app (deploy)"
+    needs: changes
+    if: success() && needs.changes.outputs.web == 'true'
+    uses: ./.github/workflows/web-vercel-deploy_reusable.yml
+    with:
+      name: 'app'
+      path: 'web/apps/app'
+      vercelProjectId: 'prj_q8N5ElZfzvq4BjEMBIsyEfqe4jsI'
+      preview: false
+      environment: ${{ github.ref == 'refs/heads/main' && 'production' || 'development' }}
+    secrets: inherit
+
+  vercel_web_deploy:
+    name: "Vercel web (deploy)"
+    needs: changes
+    if: success() && needs.changes.outputs.web == 'true'
+    uses: ./.github/workflows/web-vercel-deploy_reusable.yml
+    with:
+      name: 'web'
+      path: 'web/apps/web'
+      vercelProjectId: 'prj_PYE8WwpynTfjD6rVMiCp7sZoCPYw'
+      preview: false
+      environment: ${{ github.ref == 'refs/heads/main' && 'production' || 'development' }}
+    secrets: inherit
+
+  vercel_doprocess_deploy:
+    name: "Vercel doprocess (deploy)"
+    needs: changes
+    if: success() && needs.changes.outputs.web == 'true'
+    uses: ./.github/workflows/web-vercel-deploy_reusable.yml
+    with:
+      name: 'doprocess'
+      path: 'web/apps/doprocess'
+      vercelProjectId: 'prj_UoJ8CHr3RAlOya6A9fpJ4oKzQhCJ'
+      preview: false
+      environment: ${{ github.ref == 'refs/heads/main' && 'production' || 'development' }}
+    secrets: inherit
+
+  vercel_uier_deploy:
+    name: "Vercel uier (deploy)"
+    needs: changes
+    if: success() && needs.changes.outputs.web == 'true'
+    uses: ./.github/workflows/web-vercel-deploy_reusable.yml
+    with:
+      name: 'uier'
+      path: 'web/apps/uier'
+      vercelProjectId: 'prj_0uRTXTGHFdN9SlHnFfNiahIgX3mc'
+      preview: false
+      environment: ${{ github.ref == 'refs/heads/main' && 'production' || 'development' }}
+    secrets: inherit
+
+  vercel_workingparty_deploy:
+    name: "Vercel WorkingParty (deploy)"
+    needs: changes
+    if: success() && needs.changes.outputs.web == 'true'
+    uses: ./.github/workflows/web-vercel-deploy_reusable.yml
+    with:
+      name: 'workingparty'
+      path: 'web/apps/workingparty'
+      vercelProjectId: 'prj_iAsm04GKwdR1z95x9ZEnCzeqwlro'
+      preview: false
+      environment: ${{ github.ref == 'refs/heads/main' && 'production' || 'development' }}
+    secrets: inherit
+
+  vercel_uidocs_deploy:
+    name: "Vercel ui-docs (deploy)"
+    needs: changes
+    if: success() && needs.changes.outputs.web == 'true'
+    uses: ./.github/workflows/web-vercel-deploy_reusable.yml
+    with:
+      name: 'ui-docs'
+      path: 'web/apps/ui-docs'
+      vercelProjectId: 'prj_JTG4EUX7sXFIbDmgRxaNarffnq9E'
+      preview: false
+      environment: ${{ github.ref == 'refs/heads/main' && 'production' || 'development' }}
+    secrets: inherit
+  
+  deploy_ok:
+    name: "[Deploy] OK"
+    needs: [infra_cloud-primary_up, infra_uier_up, infra_workingparty_up, infra_doprocess_up, vercel_blog_deploy, vercel_brandgrab_deploy, vercel_slco_deploy, vercel_app_deploy, vercel_web_deploy, vercel_doprocess_deploy, vercel_uidocs_deploy, vercel_uier_deploy, vercel_workingparty_deploy]
+    runs-on: ubuntu-latest
+    if: always()
+    steps:
+      - run: exit 1
+        if: ${{ always() && (contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled')) }}

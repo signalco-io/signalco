@@ -21,7 +21,7 @@ Visit <a aria-label="Signalco learn" href="https://www.signalco.io/learn">https:
 
 | Production | Next |
 |------------|------|
-| [![Deploy Production](https://github.com/signalco-io/signalco/actions/workflows/cloud-deploy.yml/badge.svg?branch=main)](https://github.com/signalco-io/signalco/actions/workflows/cloud-deploy.yml) | [![Deploy Development](https://github.com/signalco-io/signalco/actions/workflows/cloud-deploy.yml/badge.svg?branch=next)](https://github.com/signalco-io/signalco/actions/workflows/cloud-deploy.yml) |
+| [![Deploy Production](https://github.com/signalco-io/signalco/actions/workflows/infra-deploy.yml/badge.svg?branch=main)](https://github.com/signalco-io/signalco/actions/workflows/infra-deploy.yml) | [![Deploy Development](https://github.com/signalco-io/signalco/actions/workflows/infra-deploy.yml/badge.svg?branch=next)](https://github.com/signalco-io/signalco/actions/workflows/infra-deploy.yml) |
 
 ## Development for Cloud
 
@@ -49,7 +49,8 @@ Production API
 ##### **Azure (required for Deploy step)**
 
 - [Get credentials](https://www.pulumi.com/registry/packages/azure-native/installation-configuration/#create-your-service-principal-and-get-your-tokens)
-  - [Reset credentials](https://learn.microsoft.com/en-us/cli/azure/create-an-azure-service-principal-azure-cli?view=azure-cli-latest#6-reset-credentials) if expired, lost or compromised
+  - [Reset credentials](https://learn.microsoft.com/en-us/cli/azure/azure-cli-sp-tutorial-7?view=azure-cli-latest&tabs=bash) if expired, lost or compromised
+  - via CLI example: `az ad sp create-for-rbac -n EXAMPLE_CLIENT_NAME --role Contributor --years 5 --scopes /subscriptions/a49b3c69-b711-4443-a85e-d35ea363a6cc`
 - (optional) [Install Azure CLI](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli)
   - Windows: `winget install Microsoft.AzureCLI`
   - MacOS: `brew install azure-cli`
@@ -62,20 +63,6 @@ Production API
       - `pulumi config set azure-native:tenantId <tenantID>`
       - `pulumi config set azure-native:subscriptionId <subscriptionId>`
   - stacks `next` and `production` already configured
-
-##### **AWS (required for Deploy step)**
-
-- [Get credentials](https://www.pulumi.com/registry/packages/aws/installation-configuration/#get-your-credentials)
-  - [Create IAM user with **Programmatic access**](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html#id_users_create_console)
-  - Retrieve aAccess Key ID and Access Key Secret after you created the user
-- Configure shared
-  - on new stack
-    - `pulumi config set ses-region eu-west-1`
-  - stacks `next` and `production` are already configured
-- Configure
-  - on new stack
-    - `$pulumi config set aws:accessKey <YOUR_ACCESS_KEY_ID> --secret`
-    - `$pulumi config set aws:secretKey <YOUR_ACCESS_KEY_ID> --secret`
 
 ##### **CloudFlare (required for Deploy step)**
 
@@ -100,11 +87,6 @@ Checkly (prereqesite for Pulumi)
 Required secrets for GitHub actions are:
 
 - `PULUMI_ACCESS_TOKEN` [Create a new Pulumi Access Token](https://app.pulumi.com/account/tokens) for Pulumi
-- `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`
-  - To generate go to IAM > Users
-  - Create user to be used with pulumi
-  - Configure permissions: AmazonSESFullAccess, IAMFullAccess
-  - Configure security credentials: Access keys, create new one and retrieve key and secret specified above
 - Azure access is configured as Pulumi secret via [Service Principal](https://www.pulumi.com/registry/packages/azure-native/installation-configuration/#option-2-use-a-service-principal)
 - CloudFlare token is configured as Pulumi secret via [Provider](https://www.pulumi.com/registry/packages/cloudflare/installation-configuration/#configuring-the-provider)
 - Checkly token is configured as Pulumi secret via [API Key](https://www.pulumi.com/registry/packages/checkly/installation-configuration/#configuring-credentials)

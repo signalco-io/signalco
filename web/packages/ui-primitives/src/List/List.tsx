@@ -1,9 +1,20 @@
 import { Stack, StackProps } from '../Stack';
+import { cx } from '../cx';
 
-export type ListProps = StackProps;
+export type ListProps = StackProps & {
+    /**
+     * @default 'plain'
+     */
+    variant?: 'outlined' | 'plain';
+};
 
-export function List({ ...rest }: ListProps) {
+export function List({ variant = 'plain', className, ...rest }: ListProps) {
     return (
-        <Stack {...rest} />
+        <Stack
+            className={cx(
+                variant === 'outlined' && 'divide-y rounded-lg border',
+                className
+            )}
+            {...rest} />
     );
 }

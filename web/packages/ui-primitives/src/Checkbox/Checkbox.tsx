@@ -38,7 +38,7 @@ export function Checkbox({
                 <CheckboxPrimitive.Indicator
                     className={cx('flex items-center justify-center text-current')}
                 >
-                    <Check className="h-4 w-4" />
+                    <Check className="size-4" />
                 </CheckboxPrimitive.Indicator>
             </CheckboxPrimitive.Root>
             {label && (

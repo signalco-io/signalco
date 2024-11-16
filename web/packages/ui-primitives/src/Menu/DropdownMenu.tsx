@@ -1,4 +1,4 @@
-import { Fragment, PropsWithChildren, forwardRef } from 'react'
+import React, { Fragment, PropsWithChildren, forwardRef } from 'react'
 import { cx } from 'classix'
 import { Navigate } from '@signalco/ui-icons'
 import {
@@ -37,7 +37,7 @@ const DropdownMenuSubTrigger = forwardRef<
         {...props}
     >
         {children}
-        <Navigate className="ml-auto h-4 w-4" />
+        <Navigate className="ml-auto size-4" />
     </SubTrigger>
 ))
 DropdownMenuSubTrigger.displayName = SubTrigger.displayName;
@@ -89,6 +89,11 @@ const DropdownMenuItem = forwardRef<
         ? (props: PropsWithChildren) => <a href={href} {...props} />
         : (props: PropsWithChildren) => <Fragment {...props} />;
     const DecoratorWrapper = startDecorator || endDecorator ? Row : Fragment;
+    const decoratorProps: { className?: string, spacing?: number } = {};
+    if (startDecorator || endDecorator) {
+        decoratorProps.className = 'w-full';
+        decoratorProps.spacing = 1;
+    }
 
     return (
         <LinkOrNot>
@@ -100,7 +105,7 @@ const DropdownMenuItem = forwardRef<
                     className
                 )}
                 {...props}>
-                <DecoratorWrapper spacing={1} className="w-full">
+                <DecoratorWrapper {...decoratorProps}>
                     {startDecorator}
                     {children}
                     {endDecorator}

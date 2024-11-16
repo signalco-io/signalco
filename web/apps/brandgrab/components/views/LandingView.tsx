@@ -3,7 +3,6 @@
 import React, { PropsWithChildren, memo, useCallback } from 'react';
 import NextImage from 'next/image';
 import { Typography } from '@signalco/ui-primitives/Typography';
-import { Tooltip } from '@signalco/ui-primitives/Tooltip';
 import { Stack } from '@signalco/ui-primitives/Stack';
 import { Link } from '@signalco/ui-primitives/Link';
 import { Divider } from '@signalco/ui-primitives/Divider';
@@ -13,10 +12,11 @@ import { CompanyGitHub, CompanyReddit, CompanyX } from '@signalco/ui-icons';
 import { Loadable } from '@signalco/ui/Loadable';
 import { orderBy, isImageDataUrl } from '@signalco/js';
 import { useSearchParam } from '@signalco/hooks/useSearchParam';
-import { Footer1 } from '@signalco/cms-components-marketing/Footer';
 import { SectionsView } from '@signalco/cms-core/SectionsView';
 import { SectionData } from '@signalco/cms-core/SectionData';
+import { Footer1 } from '@signalco/cms-components-marketing/Footer';
 import { usePromise } from '@enterwell/react-hooks';
+import InputGrabDomain from '../InputGrabDomain';
 import { KnownPages } from '../../src/knownPages';
 import { ScreenshotResponse } from '../../app/api/screenshot/route';
 import { BrandResources } from '../../app/api/quick/route';
@@ -55,11 +55,9 @@ function OgPreview({ og }: { og: BrandResources['og'] | undefined }) {
                 </div>
                 <CardOverflow className="flex">
                     {!!og.siteName && (
-                        <Tooltip title={og.siteName}>
-                            <Typography noWrap level="body3" semiBold secondary>
-                                {og.siteName}
-                            </Typography>
-                        </Tooltip>
+                        <Typography noWrap level="body3" semiBold secondary title={og.siteName}>
+                            {og.siteName}
+                        </Typography>
                     )}
                     {!!og.type && (
                         <>
@@ -80,11 +78,9 @@ function OgPreview({ og }: { og: BrandResources['og'] | undefined }) {
                     {!!og.url && (
                         <>
                             <Divider orientation="vertical" />
-                            <Tooltip title={og.url}>
-                                <Typography level="body3" noWrap semiBold secondary>
-                                    {og.url}
-                                </Typography>
-                            </Tooltip>
+                            <Typography level="body3" noWrap semiBold secondary title={og.url}>
+                                {og.url}
+                            </Typography>
                         </>
                     )}
                 </CardOverflow>
@@ -343,7 +339,10 @@ export default function LandingPageView() {
     const [domain] = useSearchParam('domain');
 
     return (
-        <Stack style={{ overflowX: 'hidden', paddingBottom: 16 }}>
+        <Stack spacing={8}>
+            <Container maxWidth="md">
+                <InputGrabDomain />
+            </Container>
             <Container maxWidth="md">
                 <BrandView domain={domain} />
             </Container>

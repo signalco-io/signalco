@@ -8,9 +8,9 @@ import { CommentsSidebar } from './sidebar/CommentsSidebar';
 import { CommentToolbar } from './CommentToolbar';
 import { CommentSelectionPopover } from './CommentSelectionPopover';
 import { CommentSelectionHighlight } from './CommentSelectionHighlight';
-import { CommentsGlobalProps, CommentSelection, CommentPoint, CommentItem } from './Comments';
 import { CommentPointOverlay } from './CommentPointOverlay';
 import { CommentBubble } from './CommentBubble';
+import { CommentsGlobalProps, CommentSelection, CommentPoint, CommentItem } from './@types/Comments';
 
 export function CommentsGlobal({
     reviewParamKey = 'review',
@@ -96,15 +96,17 @@ export function CommentsGlobal({
 
     return (
         <>
-            {(creatingComment ? [...(commentItems.data ?? []), creatingComment] : (commentItems.data ?? [])).map((commentItem) => (
-                <CommentBubble
-                    key={commentItem.id}
-                    commentItem={commentItem}
-                    creating={!commentItem.id}
-                    onCreated={() => setCreatingComment(undefined)}
-                    onCanceled={() => setCreatingComment(undefined)}
-                />
-            ))}
+            {(creatingComment ? [...(commentItems.data ?? []), creatingComment] : (commentItems.data ?? [])).map((commentItem) => {
+                console.log('creating comment id', commentItem.id)
+                return (
+                    <CommentBubble
+                        key={commentItem.id ?? 'new'}
+                        commentItem={commentItem}
+                        creating={!commentItem.id}
+                        onCreated={() => setCreatingComment(undefined)}
+                        onCanceled={() => setCreatingComment(undefined)} />
+                );
+            })}
             {creatingCommentSelection && (
                 <CommentSelectionHighlight commentSelection={creatingCommentSelection} />
             )}

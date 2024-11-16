@@ -3,6 +3,7 @@
     "version": "0.0.0",
     "private": true,
     "sideEffects": false,
+    "license": "MIT",
     "exports": {
         "./data": "./src/data/index.ts",
         "./node": "./src/node/index.js"
@@ -12,6 +13,6 @@
     },
     "devDependencies": {
         "@signalco/tsconfig": "workspace:*",
-        "typescript": "5.3.3"
+        "typescript": "5.6.3"
     }
 }

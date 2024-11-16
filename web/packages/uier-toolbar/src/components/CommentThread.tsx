@@ -3,9 +3,9 @@ import { Stack } from '@signalco/ui-primitives/Stack';
 import { Divider } from '@signalco/ui-primitives/Divider';
 import { Button } from '@signalco/ui-primitives/Button';
 import { CommentThreadItem } from './CommentThreadItem';
-import { CommentItem } from './Comments';
+import { CommentItem } from './@types/Comments';
 
-export function CommentThread({ commentItem, onResolve }: { commentItem: CommentItem; onResolve?: () => void; }) {
+export function CommentThread({ commentItem, onResolve }: { commentItem: CommentItem; onResolve: () => void; }) {
     const [expanded, setExpanded] = useState(false);
     if (!commentItem.thread.items.length) return null;
 
@@ -27,7 +27,7 @@ export function CommentThread({ commentItem, onResolve }: { commentItem: Comment
                     {threadLastItem && <Divider />}
                 </>
             )}
-            {expanded && restComments.map((item, i) => (
+            {expanded && restComments.map((item) => (
                 <Fragment key={item.id}>
                     <div className="px-4 py-3">
                         <CommentThreadItem

@@ -36,7 +36,7 @@ export function Footer1({ tagline, asset, features, ctas }: SectionData) {
                                         <Stack spacing={1.5}>
                                             {section.ctas.map(link => (
                                                 <Link key={link.label} href={link.href}>
-                                                    <Typography level="body2" className="text-muted-foreground">{link.label}</Typography>
+                                                    <Typography level="body2" className="text-muted-foreground hover:text-foreground/80">{link.label}</Typography>
                                                 </Link>
                                             ))}
                                         </Stack>

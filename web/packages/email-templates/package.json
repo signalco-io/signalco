@@ -1,0 +1,25 @@
+{
+    "name": "@signalco/email-templates",
+    "version": "1.0.0",
+    "private": true,
+    "license": "MIT",
+    "workspaces": [
+        ".react-email"
+    ],
+    "scripts": {
+        "dev": "email dev -p 3001",
+        "export": "email export"
+    },
+    "devDependencies": {
+        "@signalco/eslint-config-signalco": "workspace:*",
+        "@signalco/tsconfig": "workspace:*",
+        "@types/node": "22.7.9",
+        "@types/react": "npm:types-react@19.0.0-rc.1"
+    },
+    "dependencies": {
+        "@react-email/components": "0.0.28",
+        "react": "19.0.0-rc-65a56d0e-20241020",
+        "react-email": "3.0.2",
+        "typescript": "5.6.3"
+    }
+}

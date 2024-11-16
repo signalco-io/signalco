@@ -8,15 +8,15 @@ export function Ctas2({ ctas }: { ctas: SectionData['ctas']; }) {
     }
 
     return (
-        <Row>
+        <Row spacing={1}>
             {ctas.map(cta => (
-                <IconButton
-                    key={cta.label}
-                    aria-label={cta.label}
-                    variant="plain"
-                    href={cta.href}>
-                    {cta.icon}
-                </IconButton>
+                <a key={cta.label} href={cta.href}>
+                    <IconButton
+                        aria-label={cta.label}
+                        variant="link">
+                        {cta.icon}
+                    </IconButton>
+                </a>
             ))}
         </Row>
     );

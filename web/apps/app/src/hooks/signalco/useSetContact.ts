@@ -2,7 +2,7 @@ import { UseMutationResult, useMutation, useQueryClient } from '@tanstack/react-
 import type IContactPointer from '../../contacts/IContactPointer';
 import { setAsync } from '../../../src/contacts/ContactRepository';
 import { contactKey } from './useContact';
-import { entityKey } from './entity/useEntity';
+import { entityKey } from './entity/useEntities';
 import { allEntitiesKey } from './entity/useAllEntities';
 
 export default function useSetContact(): UseMutationResult<void, Error, {

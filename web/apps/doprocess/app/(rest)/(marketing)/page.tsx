@@ -36,21 +36,6 @@ const data: SectionData[] = [
         ]
     },
     {
-        component: 'Feature2',
-        tagline: 'Efficiency',
-        header: 'Streamline any processes with ease',
-        description: 'Our running process checklist capabilities allow you to automate and manage your workflows efficiently. With our intuitive platform, you can easily create, track, and optimize your processes, ensuring that every step is completed accurately and on time.',
-        features: [
-            {
-                header: '50%',
-                description: 'Save time and reduce errors with automated workflows',
-            }, {
-                header: '50%',
-                description: 'Collaborate seamlessly with your team on document processes'
-            }
-        ]
-    },
-    {
         component: 'Pricing1',
         tagline: 'Pricing',
         header: 'Flexible Pricing Plans for Every Business',

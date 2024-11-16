@@ -439,6 +439,7 @@ yarn-error.log*
 
 # Sitemap
 **/public/sitemap*
+**/public/robots*
 
 # PWA
 **/public/workbox-*.js

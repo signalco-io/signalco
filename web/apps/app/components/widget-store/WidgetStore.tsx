@@ -7,8 +7,8 @@ import { IconButton } from '@signalco/ui-primitives/IconButton';
 import { Card } from '@signalco/ui-primitives/Card';
 import { Add } from '@signalco/ui-icons';
 import { asArray } from '@signalco/js';
+import { useSearch, filterFuncObjectStringProps } from '@signalco/hooks/useSearch';
 import { widgetType } from '../widgets/Widget';
-import useSearch, { filterFuncObjectStringProps } from '../../src/hooks/useSearch';
 
 const availableWidgets: { type: widgetType | widgetType[], name: string, description: string, preview: string }[] = [
     {

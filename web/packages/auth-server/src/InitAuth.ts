@@ -1,0 +1,45 @@
+import { WithAuthContext, withAuth } from './withAuth';
+import { setCookie } from './setCookie';
+import { createJwt } from './createJwt';
+import { clearCookie } from './clearCookie';
+import { auth } from './auth';
+import type { UserBase } from './@types/UserBase';
+import type { AuthContext } from './@types/AuthContext';
+import type { AuthConfigInitialized } from './@types/AuthConfigInitialized';
+import type { AuthConfig } from './@types/AuthConfig';
+
+export function initAuth<TUser extends UserBase>(config: AuthConfig<TUser>): {
+    auth: () => Promise<AuthContext<TUser>>,
+    withAuth: (handler: (ctx: WithAuthContext<TUser>) => Promise<Response>) => Promise<Response>;
+    createJwt: (userId: string, expirationTime?: string | number | Date) => Promise<string>;
+    setCookie: (cookieValue: Promise<string> | string, expiry?: number) => Promise<void>;
+    clearCookie: () => void;
+} {
+    const initializedConfig: AuthConfigInitialized<TUser> = {
+        ...{
+            getUser: async () => { throw new Error('Not implemented'); }
+        },
+        ...config,
+        jwt: {
+            namespace: 'app',
+            issuer: 'api',
+            audience: 'web',
+            jwtSecretFactory: async () => { throw new Error('Not implemented'); },
+            ...config.jwt
+        },
+        cookie: {
+            ...{
+                name: 'auth_session',
+                expiry: 60 * 60 * 1000
+            },
+            ...config.cookie
+        }
+    };
+    return {
+        auth: () => auth(initializedConfig),
+        withAuth: (handler) => withAuth(initializedConfig, handler),
+        createJwt: (userId: string, expirationTime?: string | number | Date) => createJwt(initializedConfig, userId, expirationTime),
+        setCookie: (cookieValue: Promise<string> | string, expiry?: number) => setCookie(initializedConfig, cookieValue, expiry),
+        clearCookie: () => clearCookie(initializedConfig)
+    };
+}

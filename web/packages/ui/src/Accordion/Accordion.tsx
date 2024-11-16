@@ -33,7 +33,7 @@ export function Accordion({ children, defaultOpen, open, disabled, onOpenChanged
     const multipleChildren = otherChildren.length > 0;
 
     return (
-        <Card className={cx(variant === 'plain' && 'bg-transparent border-none p-0', className)} {...props}>
+        <Card className={cx(variant === 'plain' && 'bg-transparent shadow-none border-none p-0', className)} {...props}>
             <CardHeader className={cx(variant==='soft' ? 'p-2' : 'px-0 py-2')}>
                 <button className="text-left" onClick={handleOpen}>
                     <Row spacing={1} justifyContent="space-between">

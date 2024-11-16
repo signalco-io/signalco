@@ -1,28 +1,43 @@
 {
     "name": "@signalco/hooks",
-    "version": "0.0.0",
-    "private": true,
+    "version": "0.2.0",
     "sideEffects": false,
     "type": "module",
+    "license": "MIT",
     "exports": {
         "./*": "./src/*.ts"
     },
+    "files": [
+        "dist"
+    ],
+    "publishConfig": {
+        "access": "public",
+        "exports": {
+            "./*": {
+                "import": "./dist/*.js",
+                "types": "./dist/*.d.ts"
+            }
+        }
+    },
     "scripts": {
-        "lint": "eslint ."
+        "lint": "eslint .",
+        "prepublishOnly": "tsup --env.NODE_ENV production"
     },
     "devDependencies": {
+        "@microsoft/api-extractor": "7.47.11",
+        "@signalco/eslint-config-signalco": "workspace:*",
         "@signalco/js": "workspace:*",
         "@signalco/tsconfig": "workspace:*",
-        "@signalco/eslint-config-signalco": "workspace:*",
-        "@types/react": "18.2.47",
-        "next": "14.0.4",
-        "react": "18.2.0",
-        "react-dom": "18.2.0",
-        "typescript": "5.3.3"
+        "@types/react": "npm:types-react@19.0.0-rc.1",
+        "next": "15.0.3",
+        "react": "19.0.0-rc-65a56d0e-20241020",
+        "react-dom": "19.0.0-rc-65a56d0e-20241020",
+        "tsup": "8.3.5",
+        "typescript": "5.6.3"
     },
     "peerDependencies": {
-        "next": "14.0.4",
-        "react": "18.2.0",
-        "react-dom": "18.2.0"
+        "next": ">=15",
+        "react": ">=19.0.0-rc-65a56d0e-20241020",
+        "react-dom": ">=19.0.0-rc-65a56d0e-20241020"
     }
 }

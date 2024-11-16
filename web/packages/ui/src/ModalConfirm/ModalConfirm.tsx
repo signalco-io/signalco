@@ -1,4 +1,4 @@
-import { ReactNode, useState } from 'react';
+import { FormEvent, ReactNode, useState } from 'react';
 import { Typography } from '@signalco/ui-primitives/Typography';
 import { Stack } from '@signalco/ui-primitives/Stack';
 import { Row } from '@signalco/ui-primitives/Row';
@@ -29,30 +29,48 @@ export function ModalConfirm({
     const [isOpen, setIsOpen] = useControllableState(open, false, onOpenChange);
     const [confirmText, setConfirmText] = useState('');
 
-    const handleConfirm = () => {
+    const handleConfirm = (e?: FormEvent<HTMLFormElement>) => {
+        e?.preventDefault();
         setIsOpen(false);
         onConfirm?.();
     };
 
-    const handleCancel = () => {
+    const handleCancel = (e?: FormEvent<HTMLFormElement>) => {
+        e?.preventDefault();
         setIsOpen(false);
     }
 
     return (
         <Modal open={isOpen} onOpenChange={setIsOpen} {...rest}>
-            <Stack spacing={2}>
-                <Row justifyContent="space-between">
-                    <Typography level="h5">{header}</Typography>
-                </Row>
-                {children}
-                {Boolean(expectedConfirm) && (
-                    <Input value={confirmText} label={promptLabel} onChange={(e) => setConfirmText(e.target.value)} />
-                )}
-                <Row spacing={1} justifyContent="end">
-                    <Button variant="plain" onClick={handleCancel}>Cancel</Button>
-                    <Button variant="solid" onClick={handleConfirm} disabled={Boolean(expectedConfirm) && confirmText !== expectedConfirm}>Confirm</Button>
-                </Row>
-            </Stack>
+            <form onReset={handleCancel} onSubmit={handleConfirm}>
+                <Stack spacing={2}>
+                    <Row justifyContent="space-between">
+                        <Typography level="h5">{header}</Typography>
+                    </Row>
+                    {typeof children === 'string'
+                        ? <Typography level="body1">{children}</Typography>
+                        : children}
+                    {Boolean(expectedConfirm) && (
+                        <Input
+                            value={confirmText}
+                            label={promptLabel}
+                            onChange={(e) => setConfirmText(e.target.value)}
+                            autoFocus />
+                    )}
+                    <Row spacing={1} justifyContent="end">
+                        <Button
+                            variant="plain"
+                            onClick={() => handleCancel()}
+                            autoFocus={!Boolean(expectedConfirm)}
+                            type="reset">Cancel</Button>
+                        <Button
+                            type="submit"
+                            variant="solid"
+                            onClick={() => handleConfirm()}
+                            disabled={Boolean(expectedConfirm) && confirmText !== expectedConfirm}>Confirm</Button>
+                    </Row>
+                </Stack>
+            </form>
         </Modal>
     );
 }

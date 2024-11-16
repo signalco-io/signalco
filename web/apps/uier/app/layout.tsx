@@ -1,22 +1,16 @@
 import Script from 'next/script';
-import { Inter } from 'next/font/google';
 import { Metadata, Viewport } from 'next';
 import './global.css';
 import { Analytics } from '@vercel/analytics/react';
 import { ClientProvider } from '../src/components/providers/ClientProvider';
 import { AuthProvider } from '../src/components/providers/AuthProvider';
 
-const inter = Inter({
-    subsets: ['latin'],
-    variable: '--font-sans',
-});
-
-export default function RootLayout({ children, }: {
+export default function RootLayout({ children }: {
     children: React.ReactNode;
 }) {
     return (
         <html lang="en" suppressHydrationWarning>
-            <body className={`${inter.variable} font-sans`}>
+            <body className={'font-sans'}>
                 <AuthProvider>
                     <ClientProvider>
                         {children}

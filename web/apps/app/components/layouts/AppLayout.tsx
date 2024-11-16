@@ -1,54 +1,31 @@
 'use client';
 
-import React from 'react';
+import React, { PropsWithChildren, Suspense } from 'react';
+import dynamic from 'next/dynamic';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { Stack } from '@signalco/ui-primitives/Stack';
-import { IconButton } from '@signalco/ui-primitives/IconButton';
-import { cx } from '@signalco/ui-primitives/cx';
-import { Minimize } from '@signalco/ui-icons';
-import { useSearchParam } from '@signalco/hooks/useSearchParam';
-import { PageTitle } from '../navigation/titles/PageTitle';
-import NavProfile from '../navigation/NavProfile';
+import { PageContent } from './PageContent';
+import { FullScreenExitButton } from './FullScreenExitButton';
 import { AuthWrapper } from './AuthWrapper';
 import { AppClientWrapper } from './AppClientWrapper';
 
+const NavProfile = dynamic(() => import('../navigation/NavProfile'), { ssr: false });
 
-export function AppLayout(props: React.PropsWithChildren) {
-    const {
-        children
-    } = props;
-    const [isFullScreen, setFullScreen] = useSearchParam('fullscreen');
-
+export function AppLayout({ children }: PropsWithChildren) {
     return (
         <AuthWrapper>
             <AppClientWrapper>
                 <div className="flex w-full flex-col sm:flex-row">
-                    {isFullScreen !== 'true' && (
-                        <NavProfile />
-                    )}
-                    <div className={cx(
-                        'relative w-full grow overflow-hidden',
-                        isFullScreen ? '' : 'mt-[70px] sm:ml-[66px] sm:mt-0'
-                    )}>
-                        <Stack>
-                            <div className="hidden p-2 sm:block">
-                                <PageTitle fullPage />
-                            </div>
+                    <NavProfile />
+                    <Suspense>
+                        <PageContent>
                             {children}
-                        </Stack>
-                    </div>
+                        </PageContent>
+                    </Suspense>
                 </div>
                 <ReactQueryDevtools initialIsOpen={false} />
-                {isFullScreen && (
-                    <div className="fixed bottom-3 right-3">
-                        <IconButton
-                            size="lg"
-                            aria-label="Exit fullscreen"
-                            onClick={() => setFullScreen(undefined)}>
-                            <Minimize />
-                        </IconButton>
-                    </div>
-                )}
+                <Suspense>
+                    <FullScreenExitButton />
+                </Suspense>
             </AppClientWrapper>
         </AuthWrapper>
     );

@@ -1,6 +1,6 @@
 'use client';
 
-import { HTMLAttributes, useContext, useState } from 'react';
+import React, { HTMLAttributes, useContext, useState } from 'react';
 import { Stack } from '@signalco/ui-primitives/Stack';
 import { Row } from '@signalco/ui-primitives/Row';
 import { Popper } from '@signalco/ui-primitives/Popper';
@@ -15,8 +15,8 @@ import { useCommentItemRects } from '../hooks/useCommentItemRects';
 import { CommentThread } from './CommentThread';
 import { CommentSelectionHighlight } from './CommentSelectionHighlight';
 import { CommentsBootstrapperContext } from './CommentsBootstrapperContext';
-import { CommentItem } from './Comments';
 import { CommentIcon } from './CommentIcon';
+import { CommentItem } from './@types/Comments';
 
 type CommentBubbleProps = HTMLAttributes<HTMLDivElement> & {
     defaultOpen?: boolean;
@@ -45,7 +45,7 @@ export function CommentBubble({
         e.preventDefault();
         const formData = new FormData(e.currentTarget);
         e.currentTarget.reset();
-        const commentId = await upsert.mutateAsync({
+        const { id } = await upsert.mutateAsync({
             ...commentItem,
             thread: {
                 ...commentItem.thread,
@@ -60,7 +60,7 @@ export function CommentBubble({
         });
 
         if (creating) {
-            onCreated?.(commentId);
+            onCreated?.(id);
         }
     };
 

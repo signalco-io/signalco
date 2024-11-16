@@ -9,13 +9,36 @@ const withMDX = mdx();
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     reactStrictMode: true,
+    pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
     experimental: {
-        mdxRs: true
+        mdxRs: true,
+        reactCompiler: true
     },
     images: {
         dangerouslyAllowSVG: true,
         contentSecurityPolicy: 'default-src \'self\'; script-src \'none\'; sandbox;',
-        domains: ['blog.signalco.io', 'www.signalco.io']
+        remotePatterns: [
+            {
+                hostname: 'www.signalco.io',
+                pathname: '/images/**',
+                protocol: 'https',
+            },
+            {
+                hostname: 'www.signalco.io',
+                pathname: '/assets/**',
+                protocol: 'https',
+            },
+            {
+                hostname: 'blog.signalco.io',
+                pathname: '/images/**',
+                protocol: 'https',
+            },
+            {
+                hostname: 'blog.signalco.io',
+                pathname: '/assets/**',
+                protocol: 'https',
+            }
+        ]
     },
     eslint: {
         dirs: ['src', 'app', 'locales', 'components']
@@ -29,16 +52,12 @@ const nextConfig = {
                 isDevelopment,
                 [
                     knownSecureHeadersExternalUrls.signalco,
-                    knownSecureHeadersExternalUrls.clarity,
-                    knownSecureHeadersExternalUrls.vercel
+                    knownSecureHeadersExternalUrls.vercel,
+                    knownSecureHeadersExternalUrls.googleFonts,
                 ]
             ))
         }];
     },
 };
 
-export default process.env.ANALYZE ?
-    import('@next/bundle-analyzer')({
-        enabled: process.env.ANALYZE === 'true',
-    })(withMDX(nextConfig)) :
-    withMDX(nextConfig);
+export default withMDX(nextConfig);

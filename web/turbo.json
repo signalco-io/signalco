@@ -1,6 +1,6 @@
 {
     "$schema": "https://turborepo.org/schema.json",
-    "pipeline": {
+    "tasks": {
         "build": {
             "dependsOn": [
                 "^build"
@@ -22,7 +22,13 @@
                 "SITE_URL",
                 "GITHUB_PAT_TOKEN",
                 "URLBOX_KEY",
-                "URLBOX_SECRET"
+                "URLBOX_SECRET",
+                "COSMOSDB_CONNECTION_STRING",
+                "OPENAI_API_KEY",
+                "ACS_CONNECTION_STRING",
+                "WP_JWT_SIGN_SECRET",
+                "STRIPE_SECRETKEY",
+                "NEXT_PUBLIC_STRIPE_PUBLISHABLE"
             ]
         },
         "lint": {

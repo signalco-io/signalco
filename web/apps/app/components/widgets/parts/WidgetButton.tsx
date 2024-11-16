@@ -49,7 +49,10 @@ export default function WidgetButton(props: WidgetSharedProps<ConfigProps>) {
     const LucideIcon = Object.entries(LucideIcons).find(([key]) => key.toLowerCase() === icon.toLowerCase())?.[1];
 
     return (
-        <Button variant="plain" onClick={handleActionRequest} className="m-0 h-full w-full flex-row items-center justify-center p-0">
+        <Button
+            variant="plain"
+            onClick={handleActionRequest}
+            className="m-0 size-full flex-row items-center justify-center p-0">
             {LucideIcon && <LucideIcon size={32} />}
             {(width > 1 && Boolean(label)) && <Typography>{label}</Typography>}
         </Button>

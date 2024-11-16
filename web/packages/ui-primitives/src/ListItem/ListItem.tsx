@@ -1,28 +1,27 @@
-import { Ref, type ReactElement } from 'react';
-import { Row } from '../Row';
+import { Ref, type ReactElement, MouseEventHandler, CSSProperties } from 'react';
 import { cx } from '../cx';
 import { Button } from '../Button';
 
 export type ListItemPropsOptions = {
-    href: string | undefined;
+    href: string;
     nodeId?: never;
     selected?: boolean | undefined;
     onSelected?: never;
-    divRef?: never;
-    buttonRef?: Ref<HTMLButtonElement>;
+    onMouseEnter?: never;
+    buttonRef?: Ref<HTMLAnchorElement>;
 } | {
     href?: never;
     nodeId: string;
     selected?: boolean;
     onSelected: (nodeId: string) => void;
-    divRef?: never;
+    onMouseEnter?: MouseEventHandler<HTMLButtonElement>;
     buttonRef?: Ref<HTMLButtonElement>;
 } | {
     href?: never;
     nodeId?: never;
     selected?: never;
     onSelected?: never;
-    divRef?: Ref<HTMLDivElement>;
+    onMouseEnter?: never;
     buttonRef?: never;
 };
 
@@ -33,13 +32,16 @@ export type ListItemPropsCommon = {
     endDecorator?: ReactElement;
     className?: string;
     title?: string;
-    style?: React.CSSProperties;
+    style?: CSSProperties;
+    /**
+     * @default 'plain'
+     */
+    variant?: 'outlined' | 'plain';
 };
 
 export type ListItemProps = ListItemPropsCommon & ListItemPropsOptions;
 
 export function ListItem({
-    divRef,
     buttonRef,
     nodeId,
     label,
@@ -47,52 +49,56 @@ export function ListItem({
     endDecorator,
     selected,
     onSelected,
+    onMouseEnter,
     disabled,
     href,
     className,
-    title,
-    style
+    variant = 'plain',
+    ...rest
 }: ListItemProps) {
     const handleClick = () => {
-        if (onSelected) {
-            onSelected(nodeId);
-        }
+        onSelected?.(nodeId);
     };
 
-    if (!href && !nodeId && !onSelected) {
+    if (href) {
         return (
-            <Row
-                ref={divRef}
-                spacing={2}
-                className={cx('min-h-[3rem] px-2', className)}
-                title={title}
-                style={style}>
-                {typeof startDecorator === 'string' ? <span>{startDecorator}</span> : startDecorator ?? null}
-                <div className={cx('grow', disabled && 'opacity-60')}>{label}</div>
-                <>
-                    {typeof endDecorator === 'string' ? <span>{endDecorator}</span> : endDecorator ?? null}
-                </>
-            </Row>
+            <Button
+                ref={buttonRef}
+                href={href}
+                fullWidth
+                variant={selected ? 'soft' : 'plain'}
+                onMouseEnter={onMouseEnter}
+                disabled={disabled}
+                className={cx(
+                    'text-start h-auto pl-2',
+                    variant === 'outlined' && 'rounded-none gap-2 first:rounded-t-[calc(var(--radius)-1px)] last:rounded-b-[calc(var(--radius)-1px)]',
+                    className
+                )}
+                startDecorator={startDecorator}
+                endDecorator={endDecorator}
+                {...rest}>
+                {Boolean(label) && <div className="min-w-0 grow">{label}</div>}
+            </Button>
         );
     }
 
     return (
         <Button
             ref={buttonRef}
-            href={href}
+            fullWidth
             variant={selected ? 'soft' : 'plain'}
             onClick={handleClick}
+            onMouseEnter={onMouseEnter}
             disabled={disabled}
-            title={title}
-            style={style}
-            className={cx('text-start h-auto', className)}>
-            {typeof startDecorator === 'string' ? <span>{startDecorator}</span> : startDecorator ?? null}
-            {Boolean(label) && <div className="grow">{label}</div>}
-            {Boolean(endDecorator) && (
-                <>
-                    {typeof endDecorator === 'string' ? <span>{endDecorator}</span> : endDecorator ?? null}
-                </>
+            className={cx(
+                'text-start h-auto pl-2',
+                variant === 'outlined' && 'rounded-none gap-2 first:rounded-t-[calc(var(--radius)-1px)] last:rounded-b-[calc(var(--radius)-1px)]',
+                className
             )}
+            startDecorator={startDecorator}
+            endDecorator={endDecorator}
+            {...rest}>
+            {Boolean(label) && <div className="min-w-0 grow">{label}</div>}
         </Button>
     );
 }

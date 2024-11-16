@@ -1,0 +1,22 @@
+{
+    "$schema": "https://json.schemastore.org/tsconfig",
+    "extends": "@signalco/tsconfig/web.json",
+    "compilerOptions": {
+        "plugins": [
+            {
+                "name": "next"
+            }
+        ]
+    },
+    "exclude": [
+        "node_modules",
+        "worker"
+    ],
+    "include": [
+        "next-env.d.ts",
+        "next.config.ts",
+        "**/*.ts",
+        "**/*.tsx",
+        ".next/types/**/*.ts"
+    ]
+}

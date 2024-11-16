@@ -1,4 +1,4 @@
-import { Children, type PropsWithChildren } from 'react';
+import { Children, FunctionComponent, type PropsWithChildren } from 'react';
 import { useEffect, useState } from 'react';
 import { Typography } from '@signalco/ui-primitives/Typography';
 import { Stack } from '@signalco/ui-primitives/Stack';
@@ -61,7 +61,7 @@ function FilterItem({ item, checked, variant, onToggle }: { item: FilterListItem
     );
 }
 
-type ItemsWrapperProps = PropsWithChildren<LoadableProps & { noItemsPlaceholder: string, itemsWrapper?: React.FunctionComponent | undefined }>;
+type ItemsWrapperProps = PropsWithChildren<LoadableProps & { noItemsPlaceholder: string, itemsWrapper?: FunctionComponent | undefined }>;
 
 export function ItemsWrapper({ children, noItemsPlaceholder, itemsWrapper, ...rest }: ItemsWrapperProps) {
     const ItemsWrapper = itemsWrapper ?? (({ children }: PropsWithChildren) => <>{children}</>);

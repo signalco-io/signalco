@@ -439,12 +439,7 @@ yarn-error.log*
 
 # Sitemap
 **/public/sitemap*
-
-# PWA
-**/public/workbox-*.js
-**/public/sw.js
-**/public/fallback-*.js
-**/public/worker-*.js
+**/public/robots*
 
 .turbo
 .swc

@@ -7,7 +7,7 @@ import { ListItem } from '@signalco/ui-primitives/ListItem';
 import { List } from '@signalco/ui-primitives/List';
 import { cx } from '@signalco/ui-primitives/cx';
 import { FileText, ListTodo, Play } from '@signalco/ui-icons';
-import { UserButton } from '../auth/UserButton';
+import { UserButton } from '@signalco/auth-client/components';
 import { KnownPages } from '../../src/knownPages';
 
 export function Sidebar({ open, onOpenChange }: { open: boolean, onOpenChange?: (open: boolean) => void }) {
@@ -33,7 +33,7 @@ export function Sidebar({ open, onOpenChange }: { open: boolean, onOpenChange?: 
             <div className="flex flex-row items-center justify-between p-2">
                 {open && <Typography semiBold tertiary level="body2" className="hidden md:block">Navigation</Typography>}
                 <div className="px-0.5">
-                    <UserButton afterSignOutUrl="/" />
+                    <UserButton />
                 </div>
             </div>
             <List className={cx('flex-row md:flex-col', open && 'md:gap-2 md:pr-2')}>

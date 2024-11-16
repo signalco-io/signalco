@@ -1,7 +1,7 @@
 import { Row } from '@signalco/ui-primitives/Row';
+import { ListItem } from '@signalco/ui-primitives/ListItem';
 import { ListTodo, Navigate } from '@signalco/ui-icons';
 import { SharedWithIndicator } from '../../shared/SharedWithIndicator';
-import { ListItem } from '../../shared/ListItem';
 import { KnownPages } from '../../../src/knownPages';
 import { ProcessDto } from '../../../app/api/dtos/dtos';
 
@@ -21,6 +21,7 @@ export function ProcessesListItem({ process }: ProcessListItemProps) {
                 </Row>
             )}
             className="group w-full"
-            href={KnownPages.Process(process.id)} />
+            href={KnownPages.Process(process.id)}
+            variant="outlined" />
     );
 }

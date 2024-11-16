@@ -12,7 +12,7 @@ public static class CoreExtensions
 {
     public static IServiceCollection AddCore(this IServiceCollection services) =>
         services
-            .AddTransient<INotificationSmtpService, NotificationSmtpService>()
+            .AddTransient<INotificationSmtpService, NotificationEmailService>()
             .AddTransient<INotificationService, NotificationService>()
             .AddTransient<ISharingService, SharingService>()
             .AddTransient<IEntityService, EntityService>()

@@ -1,11 +1,26 @@
 import { useMemo } from 'react';
-import { IDashboardModel } from '../../dashboards/DashboardsRepository';
-import useDashboards from './useDashboards';
+import useEntity from '../signalco/entity/useEntity';
+import { Dashboard, dashboardModelFromEntity } from '../../dashboards/DashboardsRepository';
 
-export default function useDashboard(id?: string): Omit<ReturnType<typeof useDashboards>, 'data'> & { data: IDashboardModel | undefined } {
-    const dashboards = useDashboards();
-    return useMemo(() => ({
-        ...dashboards,
-        data: dashboards.data?.find(d => d.id === id)
-    }), [dashboards, id]);
+export default function useDashboard(id?: string): Omit<ReturnType<typeof useEntity>, 'data'> & { data: Dashboard | null | undefined } {
+    const dashboardEntity = useEntity(id);
+    const dashboard = useMemo(() =>
+        dashboardEntity.data
+            ? dashboardModelFromEntity(dashboardEntity.data)
+            : null,
+        [dashboardEntity.data]);
+
+    if (!dashboardEntity.isLoading && Boolean(dashboardEntity.data) && dashboardEntity.data?.type !== 2) {
+        return {
+            isLoading: false,
+            error: new Error('Invalid dashboard entity'),
+            isPending: false,
+            isStale: true,
+            data: null
+        };
+    }
+    return {
+        ...dashboardEntity,
+        data: dashboard
+    };
 }

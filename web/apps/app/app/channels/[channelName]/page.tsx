@@ -1,21 +1,16 @@
-'use client';
-
-import { useMemo } from 'react';
+import { notFound } from 'next/navigation';
 import { Typography } from '@signalco/ui-primitives/Typography';
 import { Stack } from '@signalco/ui-primitives/Stack';
 import { Row } from '@signalco/ui-primitives/Row';
-import { ListItem } from '@signalco/ui-primitives/ListItem';
-import { List } from '@signalco/ui-primitives/List';
 import { Link } from '@signalco/ui-primitives/Link';
 import { Container } from '@signalco/ui-primitives/Container';
 import { Bug, Link as LinkIcon } from '@signalco/ui-icons';
 import { NoDataPlaceholder } from '@signalco/ui/NoDataPlaceholder';
 import { Loadable } from '@signalco/ui/Loadable';
 import { channelsData } from '@signalco/data/data';
-import { KnownPages } from '../../../src/knownPages';
-import useAllEntities from '../../../src/hooks/signalco/entity/useAllEntities';
 import ChannelPartialSlack from '../../../components/channels/partials/ChannelPartialSlack';
 import ChannelLogo from '../../../components/channels/ChannelLogo';
+import EntitiesList from './EntitiesList';
 
 function ChannelConnectPartial(props: { channelName: string }) {
     const { channelName } = props;
@@ -42,14 +37,14 @@ function LinkChannelIssues({ channelName }: { channelName: string }) {
     )
 }
 
-export default function AppChannelPage({ params }: { params: { channelName: string } }) {
-    const channelName = params.channelName;
+export default async function AppChannelPage({ params }: { params: Promise<{ channelName: string }> }) {
+    const { channelName } = await params;
     const isLoading = !!!channelName;
 
     const channel = channelsData.find(c => c.channelName === channelName);
-
-    const entities = useAllEntities();
-    const connectedChannels = useMemo(() => entities.data?.filter(e => e?.contacts.filter(c => c.channelName === channel?.channelName).length), [channel?.channelName, entities]);
+    if (!channel) {
+        notFound();
+    };
 
     return (
         <Container maxWidth="md">
@@ -61,23 +56,7 @@ export default function AppChannelPage({ params }: { params: { channelName: stri
                     </Row>
                     <Stack spacing={2}>
                         <Typography level="h3">Connected entities</Typography>
-                        <Loadable isLoading={entities.isLoading} error={entities.error} loadingLabel="Loading entities">
-                            {(connectedChannels?.length ?? 0) > 0
-                                ? (
-                                    <List>
-                                        {connectedChannels?.map(c => (
-                                            <ListItem
-                                                key={c.id}
-                                                href={`${KnownPages.Entities}/${c.id}`}
-                                                label={c.alias || c.id} />
-                                        ))}
-                                    </List>
-                                ) : (
-                                    <NoDataPlaceholder>
-                                        No items
-                                    </NoDataPlaceholder>
-                                )}
-                        </Loadable>
+                        <EntitiesList channel={channel} />
                     </Stack>
                     <Stack spacing={2}>
                         <Typography level="h3">Connect</Typography>

@@ -1,10 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import { Tooltip } from '@signalco/ui-primitives/Tooltip';
 import { IconButton } from '@signalco/ui-primitives/IconButton';
 import { cx } from '@signalco/ui-primitives/cx';
-import styles from './NavLink.module.scss';
 
 export type NavLinkProps = {
     path: string;
@@ -16,18 +14,20 @@ export type NavLinkProps = {
 
 export default function NavLink({ path, Icon, active, label, onClick }: NavLinkProps) {
     return (
-        <Tooltip title={label}>
-            <Link href={path}>
-                <IconButton
-                    className={cx(styles.root, 'relative', active && styles.active)}
-                    aria-label={label}
-                    title={label}
-                    variant="plain"
-                    size="lg"
-                    onClick={onClick}>
-                    <Icon />
-                </IconButton>
-            </Link>
-        </Tooltip>
+        <Link href={path}>
+            <IconButton
+                className={cx(
+                    'relative w-full text-2xl p-4',
+                    'before:absolute before:right-0 before:h-[80%] before:w-0 before:opacity-0 before:bg-foreground before:rounded-sm before:transition-opacity before:transition-width before:duration-200',
+                    active && 'before:opacity-100 before:w-[3px]'
+                )}
+                aria-label={label}
+                title={label}
+                variant="plain"
+                size="lg"
+                onClick={onClick}>
+                <Icon />
+            </IconButton>
+        </Link>
     );
 }

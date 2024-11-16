@@ -1,9 +1,0 @@
-# *
-User-agent: *
-Allow: /
-
-# Host
-Host: https://blog.signalco.io
-
-# Sitemaps
-Sitemap: https://blog.signalco.io/sitemap.xml

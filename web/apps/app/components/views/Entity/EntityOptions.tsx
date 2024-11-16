@@ -1,9 +1,12 @@
+'use client';
+
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@signalco/ui-primitives/Menu';
 import { Button } from '@signalco/ui-primitives/Button';
 import { showNotification } from '@signalco/ui-notifications';
 import { MoreHorizontal } from '@signalco/ui-icons';
+import { useSearchParam } from '@signalco/hooks/useSearchParam';
 import ConfirmDeleteDialog from '../../shared/dialog/ConfirmDeleteDialog';
 import { KnownPages } from '../../../src/knownPages';
 import useLocale from '../../../src/hooks/useLocale';
@@ -12,14 +15,13 @@ import useDeleteEntity from '../../../src/hooks/signalco/entity/useDeleteEntity'
 
 export interface EntityOptionsProps {
     id: string | undefined;
-    canHideRaw: boolean;
-    showRaw: boolean;
-    showRawChanged: (show: boolean) => void;
 }
 
-export default function EntityOptions({ id, canHideRaw, showRaw, showRawChanged, ...rest }: EntityOptionsProps) {
+export default function EntityOptions({ id, ...rest }: EntityOptionsProps) {
     const { t } = useLocale('App', 'Entities');
     const router = useRouter();
+    const [showRawParam, setShowRawParam] = useSearchParam<string>('raw', 'false');
+    const showRaw = showRawParam === 'true';
     const [isDeleteOpen, setIsDeleteOpen] = useState(false);
     const { data: entity } = useEntity(id);
     const deleteEntity = useDeleteEntity();
@@ -29,7 +31,7 @@ export default function EntityOptions({ id, canHideRaw, showRaw, showRawChanged,
     };
 
     const handleShowRaw = () => {
-        showRawChanged(!showRaw);
+        setShowRawParam(!showRaw ? 'true' : undefined);
     };
 
     const handleDeleteConfirm = async () => {
@@ -48,14 +50,14 @@ export default function EntityOptions({ id, canHideRaw, showRaw, showRawChanged,
     return (
         <>
             <DropdownMenu>
-                <DropdownMenuTrigger>
+                <DropdownMenuTrigger asChild>
                     <Button variant="plain" {...rest}>
                         <MoreHorizontal />
                     </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
-                    {canHideRaw && <DropdownMenuItem onSelect={handleShowRaw}>{showRaw ? 'Hide details' : 'Show details'}</DropdownMenuItem>}
-                    {canHideRaw && <DropdownMenuSeparator />}
+                    <DropdownMenuItem onSelect={handleShowRaw}>{showRaw ? 'Hide details' : 'Show details'}</DropdownMenuItem>
+                    <DropdownMenuSeparator />
                     <DropdownMenuItem onSelect={handleDelete}>{t('DeleteButtonLabel')}</DropdownMenuItem>
                 </DropdownMenuContent>
             </DropdownMenu>

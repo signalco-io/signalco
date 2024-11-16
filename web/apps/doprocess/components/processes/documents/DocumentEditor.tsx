@@ -18,9 +18,9 @@ export type DocumentEditorProps = {
 export function DocumentEditor({ id, editable, onSavingChange }: DocumentEditorProps) {
     const { data: document, isLoading, error } = useDocument(id);
     const documentUpdate = useDocumentUpdate();
-    const documentData = document?.data as string | null | undefined;
+    const documentData = document?.dataJson;
 
-    const currentContentId = useRef<string>();
+    const currentContentId = useRef<string>(null);
     const [content, setContent] = useState<string | null>();
     useEffect(() => {
         if (!isLoading && !error && currentContentId.current !== id) {
@@ -41,7 +41,7 @@ export function DocumentEditor({ id, editable, onSavingChange }: DocumentEditorP
                     id,
                     data: content
                 });
-            } catch(err) {
+            } catch {
                 showNotification('Failed to save document', 'error');
             } finally{
                 onSavingChange?.(false);
@@ -64,7 +64,7 @@ export function DocumentEditor({ id, editable, onSavingChange }: DocumentEditorP
             loadingLabel="Loading document..."
             placeholder={<EditorSkeleton />}
             error={error}>
-            {content && (
+            {content && currentContentId.current && (
                 <Editor
                     id={currentContentId.current}
                     content={content}

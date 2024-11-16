@@ -1,1 +1,0 @@
-declare module '@enterwell/react-form-validation';

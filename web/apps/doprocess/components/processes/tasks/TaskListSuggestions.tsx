@@ -2,11 +2,11 @@
 
 import { useState } from 'react';
 import { Stack } from '@signalco/ui-primitives/Stack';
+import { ListItem } from '@signalco/ui-primitives/ListItem';
 import { List } from '@signalco/ui-primitives/List';
 import { cx } from '@signalco/ui-primitives/cx';
 import { Button } from '@signalco/ui-primitives/Button';
 import { AI } from '@signalco/ui-icons';
-import { ListItem } from '../../shared/ListItem';
 import { fetchGetProcessTaskDefinitionsSuggestions } from '../../../src/hooks/useProcessTaskDefinitionsSuggestions';
 import { useProcessTaskDefinitionCreate } from '../../../src/hooks/useProcessTaskDefinitionCreate';
 import { ProcessTaskDefinitionsSuggestionsDto } from '../../../app/api/dtos/dtos';
@@ -71,7 +71,7 @@ export function TaskListSuggestions({ processId }: { processId: string; }) {
                         aiText === aiSuggestionsText && 'w-40'
                     )}
                     startDecorator={(
-                        <div className="flex h-5 w-5 flex-row gap-1">
+                        <div className="flex size-5 flex-row gap-1">
                             <AI
                                 size={20}
                                 className={cx(
@@ -92,6 +92,7 @@ export function TaskListSuggestions({ processId }: { processId: string; }) {
                             nodeId={suggestion}
                             onSelected={() => handleSuggestionSelected(suggestion)}
                             className="w-full gap-2 px-3 text-base"
+                            variant="outlined"
                             startDecorator={(
                                 <div className="text-center">
                                     <AI size={18} className="h-[18px] min-w-[18px]" opacity={0.7} />

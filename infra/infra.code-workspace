@@ -5,29 +5,37 @@
 			"path": "."
 		},
 		{
-			"name": "☁️ Cloud Primary",
+			"name": "🚀 cloud-primary",
 			"path": "apps/cloud-primary"
 		},
 		{
-			"name": "☁️ Remote Browser",
+			"name": "🚀 uier.io",
+			"path": "apps/uier"
+		},
+		{
+			"name": "🚀 doprocess.app",
+			"path": "apps/doprocess"
+		},
+		{
+			"name": "🚀 remote-browser",
 			"path": "apps/remote-browser"
 		},
 		{
-			"name": "☁️ uier",
-			"path": "apps/uier"
+			"name": "🚀 workingparty.ai",
+			"path": "apps/workingparty"
+		},
+		{
+			"name": "📦 @infra/eslint-config",
+			"path": "packages/eslint-config"
 		},
 		{
 			"name": "📦 @infra/pulumi",
 			"path": "packages/pulumi"
 		},
 		{
-			"name": "⚙️ @infra/eslint-config",
-			"path": "packages/eslint-config"
-		},
-		{
-			"name": "⚙️ @infra/typescript-config",
+			"name": "📦 @infra/typescript-config",
 			"path": "packages/typescript-config"
-		},
+		}
 	],
 	"settings": {}
 }

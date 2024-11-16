@@ -1,10 +1,10 @@
 import React, { useMemo, useState } from 'react';
 import { Typography } from '@signalco/ui-primitives/Typography';
+import { Table } from '@signalco/ui-primitives/Table';
 import { Stack } from '@signalco/ui-primitives/Stack';
 import { SelectItems } from '@signalco/ui-primitives/SelectItems';
 import { Row } from '@signalco/ui-primitives/Row';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from '@signalco/ui-primitives/Menu';
-import { ListItem } from '@signalco/ui-primitives/ListItem';
 import { List } from '@signalco/ui-primitives/List';
 import { Input } from '@signalco/ui-primitives/Input';
 import { IconButton } from '@signalco/ui-primitives/IconButton';
@@ -12,7 +12,7 @@ import { cx } from '@signalco/ui-primitives/cx';
 import { Chip } from '@signalco/ui-primitives/Chip';
 import { Card } from '@signalco/ui-primitives/Card';
 import { Button } from '@signalco/ui-primitives/Button';
-import { Add, Code, Delete, Edit, MoreVertical, UI, History, CircleEqual } from '@signalco/ui-icons';
+import { Add, Code, Delete, Edit, UI, History, CircleEqual, MoreHorizontal } from '@signalco/ui-icons';
 import { Timeago } from '@signalco/ui/Timeago';
 import { Loadable } from '@signalco/ui/Loadable';
 import { camelToSentenceCase, isJson, ParsedJson } from '@signalco/js';
@@ -160,13 +160,13 @@ export default function ContactsTable({ entity }: { entity: IEntityDetails | nul
 
     return (
         <>
-            <Card>
-                <Row justifyContent="space-between">
+            <Card className="p-0">
+                <Row justifyContent="space-between" className="px-3 py-2">
                     <Typography>{t('Contacts')}</Typography>
                     <DropdownMenu>
-                        <DropdownMenuTrigger>
-                            <IconButton size="sm">
-                                <MoreVertical />
+                        <DropdownMenuTrigger asChild>
+                            <IconButton size="sm" variant="plain">
+                                <MoreHorizontal />
                             </IconButton>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent>
@@ -177,19 +177,46 @@ export default function ContactsTable({ entity }: { entity: IEntityDetails | nul
                     </DropdownMenu>
                 </Row>
                 <Loadable isLoading={isLoading} loadingLabel="Loading contacts" error={error}>
-                    <List>
+                    <Table>
+                        <Table.Header>
+                            <Table.Row>
+                                <Table.Head>Contact</Table.Head>
+                                <Table.Head>Value</Table.Head>
+                                <Table.Head></Table.Head>
+                            </Table.Row>
+                        </Table.Header>
+                        <Table.Body>
                         {entity?.contacts?.map(c => (
-                            <ListItem
-                                key={`${c.entityId}-${c.channelName}-${c.contactName}`}
-                                className="py-2"
-                                startDecorator={(
+                            <Table.Row key={`${c.entityId}-${c.channelName}-${c.contactName}`}>
+                                <Table.Cell>
+                                    <Row spacing={1}>
                                     <ChannelLogo channelName={c.channelName} size="tiny" label={c.channelName} />
-                                )}
-                                endDecorator={(
+                                        <Stack>
+                                            <Typography noWrap level="body1">{camelToSentenceCase(c.contactName)}</Typography>
+                                            <Row spacing={1}>
+                                                <div className="text-xs text-muted-foreground">
+                                                    <Timeago date={c.timeStamp} live />
+                                                </div>
+                                                {c.metadata?.PersistHistory && (
+                                                    <Chip title="Persist history" size="sm"><History size={14} /></Chip>
+                                                )}
+                                                {c.metadata?.ProcessSameValue && (
+                                                    <Chip size="sm">Process same value</Chip>
+                                                )}
+                                            </Row>
+                                        </Stack>
+                                    </Row>
+                                </Table.Cell>
+                                <Table.Cell>
+                                    {isJson(c.valueSerialized)
+                                        ? <DisplayJson className="grow" json={c.valueSerialized} />
+                                        : <Typography className="grow" level="body1">{c.valueSerialized}</Typography>}
+                                </Table.Cell>
+                                <Table.Cell className="flex justify-end">
                                     <DropdownMenu>
-                                        <DropdownMenuTrigger>
-                                            <IconButton size="sm">
-                                                <MoreVertical />
+                                        <DropdownMenuTrigger asChild>
+                                            <IconButton size="sm" variant="plain">
+                                                <MoreHorizontal />
                                             </IconButton>
                                         </DropdownMenuTrigger>
                                         <DropdownMenuContent>
@@ -229,30 +256,11 @@ export default function ContactsTable({ entity }: { entity: IEntityDetails | nul
                                             </DropdownMenuItem>
                                         </DropdownMenuContent>
                                     </DropdownMenu>
-                                )}
-                                label={(
-                                    <Row spacing={1} className="grow">
-                                        <Stack className="w-1/3 max-w-[200px]">
-                                            <Typography noWrap>{camelToSentenceCase(c.contactName)}</Typography>
-                                            <Row spacing={1}>
-                                                <div className="text-xs text-muted-foreground">
-                                                    <Timeago date={c.timeStamp} live />
-                                                </div>
-                                                {c.metadata?.PersistHistory && (
-                                                    <Chip startDecorator={<History size={14} />} size="sm">History</Chip>
-                                                )}
-                                                {c.metadata?.ProcessSameValue && (
-                                                    <Chip size="sm">Process same value</Chip>
-                                                )}
-                                            </Row>
-                                        </Stack>
-                                        {isJson(c.valueSerialized)
-                                            ? <DisplayJson className="grow" json={c.valueSerialized} />
-                                            : <Typography noWrap className="grow">{c.valueSerialized}</Typography>}
-                                    </Row>
-                                )} />
+                                </Table.Cell>
+                            </Table.Row>
                         ))}
-                    </List>
+                        </Table.Body>
+                    </Table>
                 </Loadable>
             </Card>
             <ConfigurationDialog

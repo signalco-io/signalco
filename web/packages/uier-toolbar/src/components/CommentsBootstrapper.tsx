@@ -1,7 +1,7 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { CommentsGlobal } from './CommentsGlobal';
 import { CommentsBootstrapperContext } from './CommentsBootstrapperContext';
-import { CommentsGlobalProps } from './Comments';
+import { CommentsGlobalProps } from './@types/Comments';
 
 const queryClient = new QueryClient();
 

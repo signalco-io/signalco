@@ -1,6 +1,6 @@
 import { UseMutationResult, useMutation, useQueryClient } from '@tanstack/react-query';
 import { entityUpsertAsync } from '../../../entity/EntityRepository';
-import { entityKey } from './useEntity';
+import { entityKey } from './useEntities';
 import { allEntitiesKey } from './useAllEntities';
 
 type EntityUpsertArgs = { id: string | undefined, type: number, alias: string };

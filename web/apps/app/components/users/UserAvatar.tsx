@@ -12,6 +12,10 @@ export default function UserAvatar({ user }: { user: User | undefined }) {
         userNameInitials = userEmail[0] ? userEmail[0] : 'S';
     }
 
+    if (!user?.picture) {
+        return <Avatar>{userNameInitials}</Avatar>;
+    }
+
     return (
         <Avatar src={user?.picture ?? '#'} alt={userNameInitials} />
     );

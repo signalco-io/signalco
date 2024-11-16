@@ -20,16 +20,6 @@ const data: SectionData[] = [
                 header: 'Product',
                 ctas: [
                     { label: 'uier', href: KnownPages.App },
-                    { label: 'uier', href: KnownPages.App },
-                    { label: 'uier', href: KnownPages.App },
-                ]
-            },
-            {
-                header: 'Product',
-                ctas: [
-                    { label: 'uier', href: KnownPages.App },
-                    { label: 'uier', href: KnownPages.App },
-                    { label: 'uier', href: KnownPages.App },
                 ]
             },
             {

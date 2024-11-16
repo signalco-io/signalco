@@ -6,6 +6,7 @@
     <Nullable>enable</Nullable>
     <Deterministic>true</Deterministic>
     <LangVersion>preview</LangVersion>
+    <PackageLicenseExpression>AGPL-3.0-only</PackageLicenseExpression>
   </PropertyGroup>
 
   <ItemGroup>

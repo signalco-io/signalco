@@ -1,9 +1,0 @@
-# *
-User-agent: *
-Allow: /
-
-# Host
-Host: https://uier.io
-
-# Sitemaps
-Sitemap: https://uier.io/sitemap.xml

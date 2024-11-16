@@ -3,9 +3,10 @@ import { cx } from '../cx';
 
 export type ProgressProps = HTMLAttributes<HTMLDivElement> & {
     value: number | undefined;
+    trackClassName?: string;
 };
 
-export function Progress({ value, className, ...rest }: ProgressProps) {
+export function Progress({ value, className, trackClassName, ...rest }: ProgressProps) {
     return (
         <div
             className={cx(
@@ -15,7 +16,10 @@ export function Progress({ value, className, ...rest }: ProgressProps) {
             {...rest}
         >
             <div
-                className="h-full w-full flex-1 bg-primary transition-all"
+                className={cx(
+                    'size-full flex-1 bg-primary transition-all',
+                    trackClassName
+                )}
                 style={{ transform: `translateX(-${100 - (value || 0)}%)` }}
             />
         </div>

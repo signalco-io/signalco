@@ -1,128 +1,79 @@
 import { arrayMax, objectWithKey } from '@signalco/js';
-import IUser from '../users/IUser';
 import UserSettingsProvider from '../services/UserSettingsProvider';
 import IEntityDetails from '../entity/IEntityDetails';
 import { entityUpsertAsync, entityDeleteAsync } from '../entity/EntityRepository';
 import { setAsync } from '../contacts/ContactRepository';
 import { widgetType } from '../../components/widgets/Widget';
 
-export interface IDashboardSetModel {
-    configurationSerialized?: string;
-    name: string;
+export type DashboardSet = {
     id?: string;
+    alias: string;
 }
 
-export interface IWidget {
+export type DashboardSetConfiguration = DashboardSet & {
+    configuration: DashboardConfiguration;
+}
+
+export type Widget = {
     id: string,
     order: number,
     type: widgetType,
-    config?: object
+    config?: Record<string, unknown>
 }
 
-export class WidgetModel implements IWidget {
-    id: string;
-    order: number;
-    type: widgetType;
-    config?: object | undefined;
-
-    constructor(id: string, order: number, type: widgetType, config?: object | undefined) {
-        this.id = id;
-        this.order = order;
-        this.type = type;
-        this.config = config;
-    }
-}
-
-export interface IDashboardModel {
-    name: string;
-    id: string;
-    timeStamp?: Date;
-    isFavorite: boolean;
-    widgets: IWidget[];
-    sharedWith: IUser[];
-    order: number;
+export type DashboardConfiguration = {
+    widgets: Widget[];
     background?: string | undefined;
-
-    get configurationSerialized() : string;
 }
 
-class DashboardModel implements IDashboardModel {
-    name: string;
-    id: string;
-    isFavorite: boolean;
-    widgets: IWidget[];
-    sharedWith: IUser[];
-    order: number;
-    timeStamp: Date | undefined;
-    background?: string | undefined;
+export type Dashboard = IEntityDetails & {
+    configuration: DashboardConfiguration;
+};
 
-    constructor(
-        id: string,
-        name: string,
-        sharedWith: IUser[],
-        isFavorite: boolean | undefined,
-        timeStamp: Date | undefined,
-        order: number,
-        background: string | undefined) {
-        this.id = id;
-        this.name = name;
-        this.isFavorite = isFavorite ?? false;
-        this.widgets = [];
-        this.sharedWith = sharedWith;
-        this.timeStamp = timeStamp;
-        this.order = order;
-        this.background = background;
-    }
-
-    public get configurationSerialized() : string {
-        return JSON.stringify({
-            widgets: this.widgets,
-            background: this.background
-        });
-    }
-}
-
-export function dashboardModelFromEntity(entity: IEntityDetails, order: number, favorites: string[]): IDashboardModel {
+export function dashboardModelFromEntity(entity: IEntityDetails): Dashboard {
     const configurationSerializedContact = entity.contacts.find(c => c.channelName === 'config' && c.contactName === 'configuration');
     const configurationSerialized = configurationSerializedContact?.valueSerialized;
 
-    const dashboardBackground = configurationSerialized != null
+    const background = configurationSerialized != null
         ? (objectWithKey(JSON.parse(configurationSerialized), 'background')?.background ?? undefined) as (string | undefined)
         : undefined;
 
-    const dashboard = new DashboardModel(
-        entity.id,
-        entity.alias,
-        entity.sharedWith,
-        favorites.indexOf(entity.id) >= 0,
-        entity.timeStamp,
-        order,
-        dashboardBackground);
-
-    dashboard.widgets = (configurationSerialized != null
-        ? (objectWithKey(JSON.parse(configurationSerialized), 'widgets')?.widgets ?? []) as Array<IWidget> // TODO: Construct models
+    const widgets = (configurationSerialized != null
+        ? (objectWithKey(JSON.parse(configurationSerialized), 'widgets')?.widgets ?? []) as Array<Widget> // TODO: Construct models
         : [])
         .map((w, i) => ({ ...w, id: i.toString() }));
 
     // Apply widget order (if not specified)
-    for (const w of dashboard.widgets) {
-        if (typeof w.order === 'undefined'){
-            const maxOrder = arrayMax(dashboard.widgets.filter(w => typeof w.order !== 'undefined').map(i => i.order), (i => i));
+    for (const w of widgets) {
+        if (typeof w.order === 'undefined') {
+            const maxOrder = arrayMax(widgets.filter(w => typeof w.order !== 'undefined').map(i => i.order), (i => i));
             w.order = (maxOrder ?? 0) + 1;
         }
     }
 
-    return dashboard;
+    return {
+        ...entity,
+        configuration: {
+            widgets,
+            background
+        }
+    };
 }
 
-export async function saveDashboardAsync(dashboard: IDashboardSetModel) {
-    const id = await entityUpsertAsync(dashboard.id, 2, dashboard.name);
-    await setAsync({
-        entityId: id,
-        channelName: 'config',
-        contactName: 'configuration'
-    },
-    dashboard.configurationSerialized);
+export async function saveDashboardAsync(dashboard: DashboardSet | DashboardSetConfiguration) {
+    const id = await entityUpsertAsync(dashboard.id, 2, dashboard.alias);
+    if ('widgets' in dashboard && 'background' in dashboard) {
+        const dashboardConfigurationPointer = {
+            entityId: id,
+            channelName: 'config',
+            contactName: 'configuration'
+        };
+        await setAsync(dashboardConfigurationPointer,
+            JSON.stringify({
+                widgets: dashboard.widgets,
+                background: dashboard.background
+            }));
+    }
     return id;
 }
 
@@ -130,41 +81,32 @@ export function deleteDashboardAsync(id: string) {
     return entityDeleteAsync(id);
 }
 
-export const DashboardsFavoritesLocalStorageKey = 'dashboards-favorites';
+const DashboardsFavoritesLocalStorageKey = 'dashboards-favorites';
 const DashboardsOrderLocalStorageKey = 'dashboards-order';
 
-class DashboardsRepository {
-    isLoaded = false;
-    isLoading = false;
-    isUpdateAvailable = false;
+export function dashboardsSetFavorite(id: string, isFavorite: boolean) {
+    const currentFavorites = UserSettingsProvider.value<string[]>(DashboardsFavoritesLocalStorageKey, []);
+    const currentFavoriteIndex = currentFavorites.indexOf(id);
+    const isCurrentlyFavorite = currentFavoriteIndex >= 0;
 
-    async favoriteSetAsync(id: string, newIsFavorite: boolean) {
-        const currentFavorites = UserSettingsProvider.value<string[]>(DashboardsFavoritesLocalStorageKey, []);
-        const currentFavoriteIndex = currentFavorites.indexOf(id);
-        const isCurrentlyFavorite = currentFavoriteIndex >= 0;
-
-        // Set or remove
-        if (!isCurrentlyFavorite && newIsFavorite) {
-            UserSettingsProvider.set(DashboardsFavoritesLocalStorageKey, [...currentFavorites, id]);
-        } else if (isCurrentlyFavorite && !newIsFavorite) {
-            const newFavorites = [...currentFavorites];
-            newFavorites.splice(currentFavoriteIndex, 1)
-            UserSettingsProvider.set(DashboardsFavoritesLocalStorageKey, newFavorites);
-        }
-
-        // Mark favorite locally
-        // const favoritedDashboard = this.dashboards.find(d => d.id === id);
-        // if (favoritedDashboard) {
-        //     favoritedDashboard.isFavorite = newIsFavorite;
-        // }
-        // TODO: Refresh
-    }
-
-    async dashboardsOrderSetAsync(ordered: string[]) {
-        UserSettingsProvider.set(DashboardsOrderLocalStorageKey, ordered);
+    // Set or remove
+    if (!isCurrentlyFavorite && isFavorite) {
+        UserSettingsProvider.set(DashboardsFavoritesLocalStorageKey, [...currentFavorites, id]);
+    } else if (isCurrentlyFavorite && !isFavorite) {
+        const newFavorites = [...currentFavorites];
+        newFavorites.splice(currentFavoriteIndex, 1)
+        UserSettingsProvider.set(DashboardsFavoritesLocalStorageKey, newFavorites);
     }
 }
 
-const instance = new DashboardsRepository();
+export function dashboardsGetFavorites() {
+    return UserSettingsProvider.value<string[]>(DashboardsFavoritesLocalStorageKey, []);
+}
 
-export default instance;
+export function dashboardsSetOrder(ordered: string[]) {
+    UserSettingsProvider.set(DashboardsOrderLocalStorageKey, ordered);
+}
+
+export function dashboardsGetOrder() {
+    return UserSettingsProvider.value<string[]>(DashboardsOrderLocalStorageKey, []);
+}

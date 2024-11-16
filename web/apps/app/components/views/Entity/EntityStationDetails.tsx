@@ -1,7 +1,6 @@
 import { useState, Fragment } from 'react';
-import { Typography } from '@signalco/ui-primitives/Typography';
 import { Stack } from '@signalco/ui-primitives/Stack';
-import { Card, CardContent, CardTitle } from '@signalco/ui-primitives/Card';
+import { Card, CardContent, CardHeader } from '@signalco/ui-primitives/Card';
 import { Button } from '@signalco/ui-primitives/Button';
 import { showNotification } from '@signalco/ui-notifications';
 import EntityStatus from '../../entity/EntityStatus';
@@ -50,7 +49,7 @@ export default function EntityStationDetails({ entity }: { entity: IEntityDetail
     return (
         <div className="flex gap-2">
             <Card>
-                <CardTitle><Typography className="mb-2">Info</Typography></CardTitle>
+                <CardHeader>Info</CardHeader>
                 <CardContent>
                     <div className="grid grid-cols-2 gap-1">
                         {infos.map(info => (
@@ -63,7 +62,7 @@ export default function EntityStationDetails({ entity }: { entity: IEntityDetail
                 </CardContent>
             </Card>
             <Card>
-                <CardTitle><Typography className="mb-4">Actions</Typography></CardTitle>
+                <CardHeader>Actions</CardHeader>
                 <CardContent>
                     <Stack>
                         <ContactButton pointer={stationPointer(entity, 'restartStation')} />

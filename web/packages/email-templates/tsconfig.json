@@ -1,0 +1,18 @@
+{
+    "$schema": "https://json.schemastore.org/tsconfig",
+    "extends": "@signalco/tsconfig/react-library.json",
+    "include": [
+        "./emails/**/*.ts*",
+        "./components/**/*.ts*",
+    ],
+    "compilerOptions": {
+        "strict": true,
+        "jsx": "react-jsx",
+        "allowJs": true
+    },
+    "exclude": [
+        "node_modules",
+        "dist",
+        "build"
+    ]
+}

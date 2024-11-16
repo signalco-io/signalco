@@ -14,6 +14,7 @@ import useContact from '../../../src/hooks/signalco/useContact';
 import useEntity from '../../../src/hooks/signalco/entity/useEntity';
 import IContactPointer from '../../../src/contacts/IContactPointer';
 import { StateAction, executeStateActionsAsync } from './WidgetState';
+import { WidgetSpinner } from './piece/WidgetSpinner';
 
 const WindowVisual = dynamic(() => import('../../icons/WindowVisual'));
 
@@ -41,6 +42,11 @@ function WidgetShades({ config, onOptions }: WidgetSharedProps<ConfigProps>) {
     const upEntity = useEntity(config?.targetUp?.entityId);
     const downEntity = useEntity(config?.targetDown?.entityId);
     const positionContact = useContact(config?.targetPosition)
+
+    const isLoading =
+        (Boolean(config?.targetUp?.entityId) && (upEntity.isPending || upEntity.isLoading)) ||
+        (Boolean(config?.targetDown?.entityId) && (downEntity.isPending || downEntity.isLoading)) ||
+        (Boolean(config?.targetPosition) && (positionContact.isPending || positionContact.isLoading));
 
     const label = config?.label ?? upEntity?.data?.alias ?? downEntity?.data?.alias ?? '';
     const columns = config?.columns ?? 4;
@@ -102,16 +108,17 @@ function WidgetShades({ config, onOptions }: WidgetSharedProps<ConfigProps>) {
     return (
         <div className="grid h-full grid-cols-2">
             {columns > 1 && (
-                <div className="h-full">
+                <div className="relative h-full">
                     <Stack
-                        className="relative h-full w-full items-start p-2"
+                        className="relative size-full items-start p-2"
                         justifyContent={columns > 2 ? 'space-between' : 'center'}>
                         <div className="relative h-3/4 grow">
                             <WindowVisual shadePerc={1 - shadePerc} size={80} />
                         </div>
-                        {columns > 2 && <Typography semiBold noWrap>{label}</Typography>}
+                        {columns > 2 && <Typography semiBold noWrap level="body1">{label}</Typography>}
                     </Stack>
                     <Divider orientation="vertical" />
+                    <WidgetSpinner isLoading={isLoading} />
                 </div>
             )}
             <div className="grow rounded-r-lg border-l">
@@ -120,7 +127,8 @@ function WidgetShades({ config, onOptions }: WidgetSharedProps<ConfigProps>) {
                         className="grow"
                         variant="plain"
                         onClick={() => handleStateChangeRequest('up')}
-                        aria-label="Up">
+                        aria-label="Up"
+                        disabled={isLoading}>
                         <Up />
                     </Button>
                     {stopValueSerialized && (
@@ -128,7 +136,8 @@ function WidgetShades({ config, onOptions }: WidgetSharedProps<ConfigProps>) {
                             className="grow"
                             variant="plain"
                             onClick={() => handleStateChangeRequest('stop')}
-                            aria-label="Stop">
+                            aria-label="Stop"
+                            disabled={isLoading}>
                             <Stop size={18} />
                         </Button>
                     )}
@@ -136,7 +145,8 @@ function WidgetShades({ config, onOptions }: WidgetSharedProps<ConfigProps>) {
                         className="grow"
                         variant="plain"
                         onClick={() => handleStateChangeRequest('down')}
-                        aria-label="Down">
+                        aria-label="Down"
+                        disabled={isLoading}>
                         <Down />
                     </Button>
                 </Stack>

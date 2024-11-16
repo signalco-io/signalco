@@ -59,6 +59,60 @@ NEXT_PUBLIC_MAPBOX_TOKEN=pk.eyJ1IjoiYWxla3NhbmRhcnRvcGxlbGNvIiwiYSI6ImNsMXpiYzhw
 | `NEXT_PUBLIC_APP_ENV` | Optional | Required `production` |
 | `NEXT_PUBLIC_MAPBOX_TOKEN` | Optional | Required `production` |
 
+### Using doppler
+
+Prerequesites:
+
+- install [doppler CLI](https://docs.doppler.com/docs/install-cli)
+
+Navigate to your `./web/apps/*/` directory and run following command to update local env file.
+
+```bash
+doppler secrets download --no-file --format env > .env
+```
+
+To setup project in `./web/apps/*/` directory use:
+
+```bash
+doppler login
+doppler setup
+```
+
+## External services
+
+### Stripe
+
+#### Authentication
+
+Apps using Stripe as payment gateway require 3 secrets:
+
+- Stripe [`Publishable key`](https://dashboard.stripe.com/apikeys)
+- Stripe [`Secret key`](https://dashboard.stripe.com/apikeys)
+- Stripe Webhook [`Signing secret`](https://dashboard.stripe.com/webhooks)
+
+We have Stripe account with "Test mode" active. This account is used in development and staging (`next.<APP>`).
+
+Secrets are managed via Pulumi via Pulumi Secrets (cloud hosted) for deployed stages - see [`infra`](../infra/README.md) for more info.
+
+#### Products and Prices
+
+Products and prices are managed via Stripe UI and are automatically updated in-app via webhook events.
+
+Product catalog is in following format:
+
+- Product (plan)
+  - Price - plan variation, eg. monthly/yearly plans
+    - Metadata - usage limits and enabled features
+
+Special `Free` plan can be created as one-time plan with single price of 0 currency and populated with metadata that match that offering.
+
+##### Price metadata
+
+###### WorkingParty.ai
+
+- `limits_messages_total` - ammount of allowed monthly messages (only assistant messages count)
+- `limits_workers_total` - amount of allowed active workers (all-time limit)
+
 ## Deploy
 
 Apps from this repository are deployed on Vercel.

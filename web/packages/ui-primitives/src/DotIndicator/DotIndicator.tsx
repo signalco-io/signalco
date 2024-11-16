@@ -1,4 +1,4 @@
-import { CSSProperties } from 'react';
+import { CSSProperties, ReactElement } from 'react';
 import type { ColorVariants } from '../theme';
 import { cx } from '../cx';
 
@@ -8,7 +8,7 @@ export type DotIndicatorProps = {
      * @default filled
      */
     variant?: 'outlined' | 'filled';
-    content?: React.ReactElement;
+    content?: ReactElement;
     /**
      * @default 10
      */

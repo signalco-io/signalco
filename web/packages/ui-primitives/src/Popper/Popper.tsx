@@ -1,4 +1,4 @@
-import { type HTMLAttributes } from 'react';
+import React, { type HTMLAttributes } from 'react';
 import * as PopoverPrimitive from '@radix-ui/react-popover'
 import { cx } from '../cx';
 

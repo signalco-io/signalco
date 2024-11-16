@@ -6,9 +6,22 @@ namespace Signal.Infrastructure.AzureStorage.Tables;
 [Serializable]
 internal class AzureAuthPat : AzureTableEntityBase
 {
-    public string PatEnd { get; }
-    public string? Alias { get; }
-    public DateTime? Expire { get; }
+    public string PatEnd { get; set; }
+    
+    public string? Alias { get; set; }
+
+    public DateTime? Expire { get; set; }
+
+    [Obsolete("For serialization only.", true)]
+    public AzureAuthPat() : base(string.Empty, string.Empty)
+    {
+        this.PatEnd = string.Empty;
+    }
+
+    protected AzureAuthPat(string partitionKey, string rowKey) : base(partitionKey, rowKey)
+    {
+        this.PatEnd = string.Empty;
+    }
 
     public AzureAuthPat(string userId, string patHash, string patEnd, string? alias, DateTime? expire)
         : this(userId, patHash)
@@ -16,10 +29,6 @@ internal class AzureAuthPat : AzureTableEntityBase
         this.PatEnd = patEnd;
         this.Alias = alias;
         this.Expire = expire;
-    }
-
-    private AzureAuthPat(string partitionKey, string rowKey) : base(partitionKey, rowKey)
-    {
     }
 
     public static IPat ToPat(AzureAuthPat pat) => new Pat

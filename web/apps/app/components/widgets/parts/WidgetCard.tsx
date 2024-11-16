@@ -1,8 +1,8 @@
-import React, { CSSProperties, useState } from 'react';
+import React, { CSSProperties, ReactNode, useState } from 'react';
 import dynamic from 'next/dynamic';
 import { Stack } from '@signalco/ui-primitives/Stack';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@signalco/ui-primitives/Menu';
-import { Card, CardOverflow } from '@signalco/ui-primitives/Card';
+import { Card } from '@signalco/ui-primitives/Card';
 import { Button } from '@signalco/ui-primitives/Button';
 import { Delete, MoreHorizontal, Settings } from '@signalco/ui-icons';
 import { ErrorBoundary } from '@signalco/ui/ErrorBoundary';
@@ -12,11 +12,11 @@ import { IsConfigurationValid } from '../../../src/widgets/ConfigurationValidato
 const WidgetConfiguration = dynamic(() => import('./WidgetConfiguration'));
 
 interface IWidgetCardProps {
-    children: JSX.Element,
+    children: ReactNode,
     isEditMode?: boolean
-    config: object,
+    config: Record<string, unknown>,
     options?: IWidgetConfigurationOption<unknown>[],
-    onConfigured?: (config: object) => void
+    onConfigured?: (config: Record<string, unknown>) => void
     onRemove?: () => void
 }
 
@@ -42,7 +42,7 @@ export default function WidgetCard(props: IWidgetCardProps) {
     const needsConfiguration = typeof options === 'undefined' || options == null || !IsConfigurationValid(config, options);
 
     const [isConfiguring, setIsConfiguring] = useState<boolean>(false);
-    const handleOnConfiguration = (newConfig: object) => {
+    const handleOnConfiguration = (newConfig: Record<string, unknown>) => {
         if (onConfigured) {
             onConfigured(newConfig);
         }
@@ -76,7 +76,7 @@ export default function WidgetCard(props: IWidgetCardProps) {
                     {isEditMode && (
                         <div className="absolute right-0 top-0">
                             <DropdownMenu>
-                                <DropdownMenuTrigger>
+                            <DropdownMenuTrigger asChild>
                                     <Button className="min-w-[42px]"><MoreHorizontal /></Button>
                                 </DropdownMenuTrigger>
                                 <DropdownMenuContent>

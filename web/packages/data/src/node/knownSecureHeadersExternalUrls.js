@@ -30,9 +30,14 @@ export const knownSecureHeadersExternalUrls = {
         imgSrc: ['https://lh3.googleusercontent.com'],
         connectSrc: ['https://lh3.googleusercontent.com']
     },
-    clarity: {
-        scriptSrc: ['https://*.clarity.ms'],
-        connectSrc: ['https://*.clarity.ms']
+    googleFonts: {
+        fontSrc: ['https://fonts.gstatic.com'],
+        connectSrc: ['https://fonts.gstatic.com']
+    },
+    stripe: {
+        scriptSrc: ['https://js.stripe.com'],
+        frameSrc: ['https://js.stripe.com'],
+        connectSrc: ['https://api.stripe.com']
     },
     vercel: {
         imgSrc: ['https://vercel.com', 'https://vercel.live', 'https://sockjs-mt1.pusher.com', 'data: blob:'],
@@ -45,11 +50,6 @@ export const knownSecureHeadersExternalUrls = {
     },
     checkly: {
         connectSrc: ['https://api.checklyhq.com']
-    },
-    clerk: {
-        imgSrc: ['https://img.clerk.com'],
-        scriptSrc: ['https://*.clerk.accounts.dev'],
-        connectSrc: ['https://*.clerk.accounts.dev', 'https://img.clerk.com']
     }
 };
 

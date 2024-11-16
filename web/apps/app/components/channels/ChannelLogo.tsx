@@ -1,6 +1,7 @@
+'use client';
+
 import { useState } from 'react';
 import Image from 'next/image';
-import { Tooltip } from '@signalco/ui-primitives/Tooltip';
 
 export type ChannelLogoProps = {
     channelName: string;
@@ -20,15 +21,14 @@ export default function ChannelLogo({ channelName, label, size }: ChannelLogoPro
     }
 
     return (
-        <Tooltip title={label}>
-            <Image
-                src={logoUrl}
-                quality={90}
-                alt={`${label ?? channelName}`}
-                width={imageSize}
-                height={imageSize}
-                style={{ objectFit: 'contain' }}
-                onError={() => setNoLogo(true)} />
-        </Tooltip>
+        <Image
+            title={label}
+            src={logoUrl}
+            quality={90}
+            alt={`${label ?? channelName}`}
+            width={imageSize}
+            height={imageSize}
+            style={{ objectFit: 'contain' }}
+            onError={() => setNoLogo(true)} />
     );
 }

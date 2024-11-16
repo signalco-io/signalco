@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Typography, TypographyProps, populateTypographyStylesAndClasses } from '@signalco/ui-primitives/Typography';
 import { cx } from '@signalco/ui-primitives/cx';
 import { Edit } from '@signalco/ui-icons';

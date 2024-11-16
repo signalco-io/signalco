@@ -2,6 +2,7 @@
 
 import { Typography } from '@signalco/ui-primitives/Typography';
 import { Row } from '@signalco/ui-primitives/Row';
+import { ListItem } from '@signalco/ui-primitives/ListItem';
 import { IconButton } from '@signalco/ui-primitives/IconButton';
 import { cx } from '@signalco/ui-primitives/cx';
 import { Checkbox } from '@signalco/ui-primitives/Checkbox';
@@ -10,7 +11,6 @@ import { TypographyEditable } from '@signalco/ui/TypographyEditable';
 import { useSearchParam } from '@signalco/hooks/useSearchParam';
 import { CSS } from '@dnd-kit/utilities';
 import { useSortable } from '@dnd-kit/sortable';
-import { ListItem } from '../../shared/ListItem';
 import { useProcessTaskDefinitionUpdate } from '../../../src/hooks/useProcessTaskDefinitionUpdate';
 import { useProcessRunTaskUpsert } from '../../../src/hooks/useProcessRunTaskUpsert';
 import { ProcessRunTaskDto, ProcessTaskDefinitionDto } from '../../../app/api/dtos/dtos';
@@ -76,12 +76,13 @@ export function TaskListItem({ selected, taskDefinition, runId, task, taskIndex,
                 'relative peer group w-full gap-2 px-3 pr-12 text-base',
                 isComplated && 'text-muted-foreground line-through',
             )}
+            variant="outlined"
             selected={selected}
             startDecorator={(
                 <Row spacing={1}>
                     <div ref={setActivatorNodeRef}
                         {...listeners}
-                        className="h-[18px] w-[18px] text-center">
+                        className="size-[18px] text-center">
                         {(!runId && editable) && (
                             <Drag
                                 size={18}

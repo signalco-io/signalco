@@ -1,0 +1,33 @@
+{
+  "name": "@infra/doprocess",
+  "private": true,
+  "license": "MIT",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "scripts": {
+    "build": "tsc && tsup src/index.ts --format esm --clean",
+    "lint": "eslint ./src/**/*.ts",
+    "preview-next": "pulumi preview --stack signalco/next --non-interactive",
+    "up-next": "pulumi up --stack signalco/next --non-interactive --skip-preview"
+  },
+  "devDependencies": {
+    "@infra/pulumi": "workspace:*",
+    "@types/node": "20.17.6",
+    "@typescript-eslint/eslint-plugin": "8.14.0",
+    "@typescript-eslint/parser": "8.14.0",
+    "eslint": "8.57.1",
+    "eslint-plugin-import": "2.31.0",
+    "eslint-plugin-n": "17.13.2",
+    "eslint-plugin-promise": "7.1.0",
+    "tsup": "8.3.5",
+    "typescript": "5.6.3"
+  },
+  "dependencies": {
+    "@pulumi/pulumi": "3.139.0",
+    "@pulumi/azure-native": "2.72.0",
+    "@pulumi/cloudflare": "5.43.0",
+    "@pulumi/docker": "4.5.7",
+    "@pulumiverse/vercel": "1.14.3"
+  }
+}
