@@ -88,7 +88,7 @@ jobs:
           npx mutex wait signalcoinfra${{ inputs.command }}${{ inputs.project }}
           popd
 
-      - name: ⚡ Preview Deploy Infrastructure
+      - name: ⚡ Deploy Infrastructure
         uses: pulumi/actions@v6
         with:
           command: ${{ inputs.command }}

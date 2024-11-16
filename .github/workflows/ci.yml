@@ -29,6 +29,25 @@ on:
   workflow_dispatch:
 
 jobs:
+  codeql-analysis:
+    name: "[Global] Analyze CodeQL"
+    runs-on: ubuntu-latest
+    strategy:
+        fail-fast: false
+        matrix:
+            language: ["javascript", "csharp"]
+    steps:
+        - name: Checkout repository
+          uses: actions/checkout@v4
+        - name: Initialize CodeQL
+          uses: github/codeql-action/init@v3
+          with:
+              languages: ${{ matrix.language }}
+        - name: Autobuild
+          uses: github/codeql-action/autobuild@v3
+        - name: Perform CodeQL Analysis
+          uses: github/codeql-action/analyze@v3
+
   changes:
     name: "Detect changes"
     runs-on: ubuntu-latest
@@ -366,7 +385,7 @@ jobs:
 
   ci_ok:
     name: "[CI] OK"
-    needs: [station_ci, cloud_infra_preview, doprocess_infra_preview, uier_infra_preview, workingparty_infra_preview, deploy_blog, deploy_app, deploy_brandgrab, deploy_web, deploy_slco, deploy_doprocess, deploy_uidocs, deploy_uier, deploy_workingparty]
+    needs: [codeql-analysis, station_ci, cloud_infra_preview, doprocess_infra_preview, uier_infra_preview, workingparty_infra_preview, deploy_blog, deploy_app, deploy_brandgrab, deploy_web, deploy_slco, deploy_doprocess, deploy_uidocs, deploy_uier, deploy_workingparty]
     if: ${{ always() }}
     runs-on: ubuntu-latest
     steps:
