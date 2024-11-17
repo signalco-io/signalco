@@ -21,20 +21,26 @@ public class EntityRetrieveSingleFunction(
     IFunctionAuthenticator functionAuthenticator,
     IEntityService entityService)
 {
-    [Function("Entity-Retrieve-Single")]
+    [Function("Entities-Retrieve-Single")]
     [OpenApiSecurityAuth0Token]
-    [OpenApiOperation<EntityRetrieveSingleFunction>("Entity", Description = "Retrieves entity.")]
+    [OpenApiOperation<EntityRetrieveSingleFunction>("Entities", Description = "Retrieves single entity.")]
     [OpenApiParameter("id", In = ParameterLocation.Path, Required = true, Type = typeof(Guid), Description = "Entity identifier")]
     [OpenApiOkJsonResponse<EntityDetailsDto>]
     [OpenApiResponseWithoutBody(HttpStatusCode.NotFound)]
     public async Task<HttpResponseData> RunSingle(
         [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "entity/{id:guid}")]
         HttpRequestData req,
-        string id,
+        string? id,
         CancellationToken cancellationToken = default) =>
         await req.UserRequest(cancellationToken, functionAuthenticator, async context =>
-            EntityDetailsDto(await entityService.GetDetailedAsync(context.User.UserId, id, cancellationToken)
-                             ?? throw new ExpectedHttpException(HttpStatusCode.NotFound)));
+        {
+            if (string.IsNullOrWhiteSpace(id))
+                throw new ExpectedHttpException(HttpStatusCode.BadRequest, "Id property is required.");
+
+            return EntityDetailsDto(
+                await entityService.GetDetailedAsync(context.User.UserId, id, cancellationToken)
+                ?? throw new ExpectedHttpException(HttpStatusCode.NotFound));
+        });
     
     // TODO: Use mapper
     private static EntityDetailsDto EntityDetailsDto(IEntityDetailed entity) =>

@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
+using Microsoft.OpenApi.Models;
 using Signal.Api.Common.Auth;
 using Signal.Api.Common.Entities;
 using Signal.Api.Common.Exceptions;
@@ -37,18 +38,19 @@ public class EntityRetrieveFunction(
     [Function("Entities-Retrieve")]
     [OpenApiSecurityAuth0Token]
     [OpenApiOperation<EntityRetrieveFunction>("Entities", Description = "Retrieves entities.")]
+    [OpenApiParameter("types", In = ParameterLocation.Query, Required = false, Type = typeof(EntityType[]), Description = "Types of entities to retrieve.")]
     [OpenApiOkJsonResponse<IEnumerable<EntityDetailsDto>>]
     public async Task<HttpResponseData> RunGet(
         [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "entities")]
         HttpRequestData req,
-        CancellationToken cancellationToken = default)
-    {
-        var typesFilter = req.Query.GetValues("types")?.Select(Enum.Parse<EntityType>);
-        return await req.UserRequest(cancellationToken, functionAuthenticator, async context =>
-            (await entityService.AllDetailedAsync(context.User.UserId, typesFilter, cancellationToken))
+        CancellationToken cancellationToken = default) =>
+        await req.UserRequest(cancellationToken, functionAuthenticator, async context =>
+            (await entityService.AllDetailedAsync(
+                context.User.UserId, 
+                req.Query.GetValues("types")?.Select(Enum.Parse<EntityType>), 
+                cancellationToken))
             .Select(EntityDetailsDto)
             .ToList());
-    }
 
     // TODO: Use mapper
     private static EntityDetailsDto EntityDetailsDto(IEntityDetailed entity) =>
