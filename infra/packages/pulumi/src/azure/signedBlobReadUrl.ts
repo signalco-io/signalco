@@ -10,7 +10,7 @@ export function signedBlobReadUrl(
     account: StorageAccount,
     resourceGroup: ResourceGroup): Output<string> {
 
-    const sharedAccessStartDate = new Date();
+    const sharedAccessStartDate = new Date(new Date().getFullYear(), 0, 1);
     const sharedAccessExpiryDate = new Date(sharedAccessStartDate);
     sharedAccessExpiryDate.setFullYear(sharedAccessExpiryDate.getFullYear() + accessYearsValid);
 

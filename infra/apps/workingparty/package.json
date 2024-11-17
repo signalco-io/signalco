@@ -24,7 +24,7 @@
     },
     "dependencies": {
         "@pulumi/pulumi": "3.139.0",
-        "@pulumi/azure-native": "2.72.0",
+        "@pulumi/azure-native": "2.71.0",
         "@pulumi/cloudflare": "5.43.0",
         "@pulumi/docker": "4.5.7",
         "@pulumiverse/vercel": "1.14.3"
