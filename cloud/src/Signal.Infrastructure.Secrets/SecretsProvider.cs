@@ -23,10 +23,14 @@ public class SecretsProvider(IServiceProvider serviceProvider) : ISecretsProvide
     {
         this.configuration ??= serviceProvider.GetService<Lazy<IConfiguration>?>();
         if (this.configuration == null)
-            throw new Exception("Configuration unavailable in this context - can't key Vault URL.");
+            throw new Exception("Configuration unavailable in this context - no access to configuration");
 
+        var vaultUrl = this.configuration.Value[KeyVaultUrlKey];
+        if (string.IsNullOrWhiteSpace(vaultUrl))
+            throw new Exception("Configuration missing in this context - not access to Vault");
+        
         return client ??= new SecretClient(
-            new Uri(this.configuration.Value[KeyVaultUrlKey]),
+            new Uri(vaultUrl),
             new DefaultAzureCredential());
     }
 

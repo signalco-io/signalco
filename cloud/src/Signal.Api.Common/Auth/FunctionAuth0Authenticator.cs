@@ -26,7 +26,7 @@ public class FunctionAuth0Authenticator(
     {
         var domain = await secretsProvider.GetSecretAsync(SecretKeys.Auth0.Domain, cancellationToken);
         var audience = await secretsProvider.GetSecretAsync(SecretKeys.Auth0.ApiIdentifier, cancellationToken);
-        return new Auth0Authenticator(domain, new[] {audience}, allowExpiredToken, secretsProvider);
+        return new Auth0Authenticator(domain, [audience], allowExpiredToken, secretsProvider);
     }
 
     public async Task<IUserRefreshToken> RefreshTokenAsync(
@@ -50,13 +50,12 @@ public class FunctionAuth0Authenticator(
 
         var refreshTokenUrl = $"https://{domainTask.Result}{RefreshTokenUrlPath}";
         using var response = await new HttpClient().PostAsync(refreshTokenUrl, new FormUrlEncodedContent(
-            new[]
-            {
-                new KeyValuePair<string, string>("grant_type", "refresh_token"),
-                new KeyValuePair<string, string>("client_id", clientIdTask.Result),
-                new KeyValuePair<string, string>("client_secret", clientSecretTask.Result),
-                new KeyValuePair<string, string>("refresh_token", refreshToken)
-            }), cancellationToken);
+        [
+            new KeyValuePair<string, string>("grant_type", "refresh_token"),
+            new KeyValuePair<string, string>("client_id", clientIdTask.Result),
+            new KeyValuePair<string, string>("client_secret", clientSecretTask.Result),
+            new KeyValuePair<string, string>("refresh_token", refreshToken)
+        ]), cancellationToken);
         if (!response.IsSuccessStatusCode)
             throw new Exception(
                 $"Token refresh failed. Reason: {await response.Content.ReadAsStringAsync(cancellationToken)} ({response.StatusCode})");
