@@ -36,8 +36,8 @@ importers:
         specifier: 4.5.7
         version: 4.5.7(ts-node@7.0.1)(typescript@5.6.3)
       '@pulumi/pulumi':
-        specifier: 3.139.0
-        version: 3.139.0(ts-node@7.0.1)(typescript@5.6.3)
+        specifier: 3.140.0
+        version: 3.140.0(ts-node@7.0.1)(typescript@5.6.3)
       '@pulumiverse/vercel':
         specifier: 1.14.3
         version: 1.14.3(ts-node@7.0.1)(typescript@5.6.3)
@@ -85,8 +85,8 @@ importers:
         specifier: 4.5.7
         version: 4.5.7(ts-node@7.0.1)(typescript@5.6.3)
       '@pulumi/pulumi':
-        specifier: 3.139.0
-        version: 3.139.0(ts-node@7.0.1)(typescript@5.6.3)
+        specifier: 3.140.0
+        version: 3.140.0(ts-node@7.0.1)(typescript@5.6.3)
       '@pulumiverse/vercel':
         specifier: 1.14.3
         version: 1.14.3(ts-node@7.0.1)(typescript@5.6.3)
@@ -140,8 +140,8 @@ importers:
         specifier: 4.5.7
         version: 4.5.7(ts-node@7.0.1)(typescript@5.6.3)
       '@pulumi/pulumi':
-        specifier: 3.139.0
-        version: 3.139.0(ts-node@7.0.1)(typescript@5.6.3)
+        specifier: 3.140.0
+        version: 3.140.0(ts-node@7.0.1)(typescript@5.6.3)
       '@pulumiverse/vercel':
         specifier: 1.14.3
         version: 1.14.3(ts-node@7.0.1)(typescript@5.6.3)
@@ -192,8 +192,8 @@ importers:
         specifier: 1.0.1
         version: 1.0.1(ts-node@7.0.1)(typescript@5.6.3)
       '@pulumi/pulumi':
-        specifier: 3.139.0
-        version: 3.139.0(ts-node@7.0.1)(typescript@5.6.3)
+        specifier: 3.140.0
+        version: 3.140.0(ts-node@7.0.1)(typescript@5.6.3)
       '@pulumiverse/vercel':
         specifier: 1.14.3
         version: 1.14.3(ts-node@7.0.1)(typescript@5.6.3)
@@ -241,8 +241,8 @@ importers:
         specifier: 4.5.7
         version: 4.5.7(ts-node@7.0.1)(typescript@5.6.3)
       '@pulumi/pulumi':
-        specifier: 3.139.0
-        version: 3.139.0(ts-node@7.0.1)(typescript@5.6.3)
+        specifier: 3.140.0
+        version: 3.140.0(ts-node@7.0.1)(typescript@5.6.3)
       '@pulumiverse/vercel':
         specifier: 1.14.3
         version: 1.14.3(ts-node@7.0.1)(typescript@5.6.3)
@@ -323,8 +323,8 @@ importers:
         specifier: 4.5.7
         version: 4.5.7(ts-node@7.0.1)(typescript@5.6.3)
       '@pulumi/pulumi':
-        specifier: 3.139.0
-        version: 3.139.0(ts-node@7.0.1)(typescript@5.6.3)
+        specifier: 3.140.0
+        version: 3.140.0(ts-node@7.0.1)(typescript@5.6.3)
       '@pulumiverse/vercel':
         specifier: 1.14.3
         version: 1.14.3(ts-node@7.0.1)(typescript@5.6.3)
@@ -788,8 +788,8 @@ packages:
   '@pulumi/docker@4.5.7':
     resolution: {integrity: sha512-z0rr1PoJXemafrNl0oPjQJlGRNbMKN0z50cKhmcuMVsiNTt36cDLXw7kpclgddgdwkM6ZU5zMRyaA1rcNuXTlg==}
 
-  '@pulumi/pulumi@3.139.0':
-    resolution: {integrity: sha512-0LJnkxoObZuMyu1zi5RJYwYoeYTHhH8aCl+vlhr3rAnGVAI3PqdwvwFpnycGFw2YSS2I1lOPiQIT5yGZD3RVZQ==}
+  '@pulumi/pulumi@3.140.0':
+    resolution: {integrity: sha512-hKGAfVIJBAApF+BmL56NmDUEOZyUHREfYxZ191wMmj+m+HJwm6Q8ux8eLpij8pwNeSqBltYA7EIp1jbNwmGqfw==}
     engines: {node: '>=18'}
     peerDependencies:
       ts-node: '>= 7.0.1 < 12'
@@ -2869,7 +2869,7 @@ snapshots:
 
   '@checkly/pulumi@1.1.4(ts-node@7.0.1)(typescript@5.6.3)':
     dependencies:
-      '@pulumi/pulumi': 3.139.0(ts-node@7.0.1)(typescript@5.6.3)
+      '@pulumi/pulumi': 3.140.0(ts-node@7.0.1)(typescript@5.6.3)
     transitivePeerDependencies:
       - bluebird
       - supports-color
@@ -3275,7 +3275,7 @@ snapshots:
 
   '@pulumi/azure-native@2.71.0(ts-node@7.0.1)(typescript@5.6.3)':
     dependencies:
-      '@pulumi/pulumi': 3.139.0(ts-node@7.0.1)(typescript@5.6.3)
+      '@pulumi/pulumi': 3.140.0(ts-node@7.0.1)(typescript@5.6.3)
     transitivePeerDependencies:
       - bluebird
       - supports-color
@@ -3284,7 +3284,7 @@ snapshots:
 
   '@pulumi/cloudflare@5.43.0(ts-node@7.0.1)(typescript@5.6.3)':
     dependencies:
-      '@pulumi/pulumi': 3.139.0(ts-node@7.0.1)(typescript@5.6.3)
+      '@pulumi/pulumi': 3.140.0(ts-node@7.0.1)(typescript@5.6.3)
     transitivePeerDependencies:
       - bluebird
       - supports-color
@@ -3293,7 +3293,7 @@ snapshots:
 
   '@pulumi/command@1.0.1(ts-node@7.0.1)(typescript@5.6.3)':
     dependencies:
-      '@pulumi/pulumi': 3.139.0(ts-node@7.0.1)(typescript@5.6.3)
+      '@pulumi/pulumi': 3.140.0(ts-node@7.0.1)(typescript@5.6.3)
     transitivePeerDependencies:
       - bluebird
       - supports-color
@@ -3302,7 +3302,7 @@ snapshots:
 
   '@pulumi/docker@4.5.7(ts-node@7.0.1)(typescript@5.6.3)':
     dependencies:
-      '@pulumi/pulumi': 3.139.0(ts-node@7.0.1)(typescript@5.6.3)
+      '@pulumi/pulumi': 3.140.0(ts-node@7.0.1)(typescript@5.6.3)
       semver: 5.7.2
     transitivePeerDependencies:
       - bluebird
@@ -3310,7 +3310,7 @@ snapshots:
       - ts-node
       - typescript
 
-  '@pulumi/pulumi@3.139.0(ts-node@7.0.1)(typescript@5.6.3)':
+  '@pulumi/pulumi@3.140.0(ts-node@7.0.1)(typescript@5.6.3)':
     dependencies:
       '@grpc/grpc-js': 1.10.1
       '@logdna/tail-file': 2.2.0
@@ -3353,7 +3353,7 @@ snapshots:
 
   '@pulumiverse/vercel@1.14.3(ts-node@7.0.1)(typescript@5.6.3)':
     dependencies:
-      '@pulumi/pulumi': 3.139.0(ts-node@7.0.1)(typescript@5.6.3)
+      '@pulumi/pulumi': 3.140.0(ts-node@7.0.1)(typescript@5.6.3)
     transitivePeerDependencies:
       - bluebird
       - supports-color
@@ -3718,7 +3718,7 @@ snapshots:
       fs-minipass: 3.0.3
       glob: 10.3.10
       lru-cache: 10.2.0
-      minipass: 7.0.4
+      minipass: 7.1.2
       minipass-collect: 2.0.1
       minipass-flush: 1.0.5
       minipass-pipeline: 1.2.4
@@ -4275,7 +4275,7 @@ snapshots:
 
   fs-minipass@3.0.3:
     dependencies:
-      minipass: 7.0.4
+      minipass: 7.1.2
 
   fs.realpath@1.0.0: {}
 
@@ -4674,7 +4674,7 @@ snapshots:
       cacache: 18.0.2
       http-cache-semantics: 4.1.1
       is-lambda: 1.0.1
-      minipass: 7.0.4
+      minipass: 7.1.2
       minipass-fetch: 3.0.4
       minipass-flush: 1.0.5
       minipass-pipeline: 1.2.4
@@ -4715,11 +4715,11 @@ snapshots:
 
   minipass-collect@2.0.1:
     dependencies:
-      minipass: 7.0.4
+      minipass: 7.1.2
 
   minipass-fetch@3.0.4:
     dependencies:
-      minipass: 7.0.4
+      minipass: 7.1.2
       minipass-sized: 1.0.3
       minizlib: 2.1.2
     optionalDependencies:
@@ -4839,7 +4839,7 @@ snapshots:
   npm-registry-fetch@16.1.0:
     dependencies:
       make-fetch-happen: 13.0.0
-      minipass: 7.0.4
+      minipass: 7.1.2
       minipass-fetch: 3.0.4
       minipass-json-stream: 1.0.1
       minizlib: 2.1.2
@@ -4940,7 +4940,7 @@ snapshots:
       '@npmcli/run-script': 7.0.4
       cacache: 18.0.2
       fs-minipass: 3.0.3
-      minipass: 7.0.4
+      minipass: 7.1.2
       npm-package-arg: 11.0.1
       npm-packlist: 8.0.2
       npm-pick-manifest: 9.0.0
@@ -4979,7 +4979,7 @@ snapshots:
   path-scurry@1.10.1:
     dependencies:
       lru-cache: 10.2.0
-      minipass: 7.0.4
+      minipass: 7.1.2
 
   path-scurry@2.0.0:
     dependencies:
@@ -5253,7 +5253,7 @@ snapshots:
 
   ssri@10.0.5:
     dependencies:
-      minipass: 7.0.4
+      minipass: 7.1.2
 
   string-width@4.2.3:
     dependencies:
