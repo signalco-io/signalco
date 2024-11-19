@@ -41,7 +41,7 @@
         "@tailwindcss/typography": "0.5.15",
         "@tanstack/react-query": "5.60.5",
         "@tanstack/react-query-devtools": "5.60.5",
-        "@vercel/analytics": "1.4.0",
+        "@vercel/analytics": "1.4.1",
         "classix": "2.2.0",
         "jose": "5.9.6",
         "nanoid": "5.0.8",
