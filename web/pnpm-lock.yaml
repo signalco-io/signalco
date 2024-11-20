@@ -487,8 +487,8 @@ importers:
         specifier: 4.1.1
         version: 4.1.1
       '@blocknote/core':
-        specifier: 0.19.1
-        version: 0.19.1(@types/hast@3.0.4)
+        specifier: 0.19.2
+        version: 0.19.2(@types/hast@3.0.4)
       '@blocknote/mantine':
         specifier: 0.19.1
         version: 0.19.1(@tiptap/pm@2.7.2)(@types/hast@3.0.4)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(types-react@19.0.0-rc.1)
@@ -2168,8 +2168,8 @@ packages:
     resolution: {integrity: sha512-/l42B1qxpG6RdfYf343Uw1vmDjeNhneUXtzhojE7pDgfpEypmRhI6j1kr17XCVv4Cgl9HdAiQY2x0GwKm7rWCw==}
     engines: {node: '>=6.9.0'}
 
-  '@blocknote/core@0.19.1':
-    resolution: {integrity: sha512-iscYwOm5F57wA/d+4YK9Cy3k9Gi4d3uW3/QhMOBGzJ9I1OfxzSBQ45gIMLk/3n5chWz/AzeRdG3hizm3zux8iQ==}
+  '@blocknote/core@0.19.2':
+    resolution: {integrity: sha512-ULX1R2lST8YjSGWzAKZ3BkESUtV+aKa/VJje7E265H5/83L+czkD8H3BHoES4Allec2f/cyLVC9dS5eHbd/YAA==}
 
   '@blocknote/mantine@0.19.1':
     resolution: {integrity: sha512-Al0tPTDCIx9fFQZFf7gFB8qjMWYGYWeVZz8I1Dk3wat1SHXPa7IeM/7nvIZFnhovCo9xcZvrBPx3AgrN/RIMPg==}
@@ -9503,7 +9503,7 @@ snapshots:
       '@babel/helper-validator-identifier': 7.24.7
       to-fast-properties: 2.0.0
 
-  '@blocknote/core@0.19.1(@types/hast@3.0.4)':
+  '@blocknote/core@0.19.2(@types/hast@3.0.4)':
     dependencies:
       '@emoji-mart/data': 1.2.1
       '@tiptap/core': 2.7.2(@tiptap/pm@2.7.2)
@@ -9558,7 +9558,7 @@ snapshots:
 
   '@blocknote/mantine@0.19.1(@tiptap/pm@2.7.2)(@types/hast@3.0.4)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(types-react@19.0.0-rc.1)':
     dependencies:
-      '@blocknote/core': 0.19.1(@types/hast@3.0.4)
+      '@blocknote/core': 0.19.2(@types/hast@3.0.4)
       '@blocknote/react': 0.19.1(@tiptap/pm@2.7.2)(@types/hast@3.0.4)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)
       '@mantine/core': 7.12.0(@mantine/hooks@7.12.0(react@19.0.0-rc-65a56d0e-20241020))(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(types-react@19.0.0-rc.1)
       '@mantine/hooks': 7.12.0(react@19.0.0-rc-65a56d0e-20241020)
@@ -9578,7 +9578,7 @@ snapshots:
 
   '@blocknote/react@0.19.1(@tiptap/pm@2.7.2)(@types/hast@3.0.4)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)':
     dependencies:
-      '@blocknote/core': 0.19.1(@types/hast@3.0.4)
+      '@blocknote/core': 0.19.2(@types/hast@3.0.4)
       '@floating-ui/react': 0.26.22(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)
       '@tiptap/core': 2.7.2(@tiptap/pm@2.7.2)
       '@tiptap/react': 2.7.2(@tiptap/core@2.7.2(@tiptap/pm@2.7.2))(@tiptap/pm@2.7.2)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)
