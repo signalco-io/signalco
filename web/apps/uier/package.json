@@ -17,7 +17,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@azure/cosmos": "4.1.1",
+    "@azure/cosmos": "4.2.0",
     "@enterwell/react-hooks": "0.5.0",
     "@next/env": "15.0.3",
     "@signalco/cms-components-marketing": "workspace:*",
