@@ -33,7 +33,7 @@
         "react": "19.0.0-rc-65a56d0e-20241020",
         "react-dom": "19.0.0-rc-65a56d0e-20241020",
         "tsup": "8.3.5",
-        "typescript": "5.6.3"
+        "typescript": "5.7.2"
     },
     "peerDependencies": {
         "next": ">=15",

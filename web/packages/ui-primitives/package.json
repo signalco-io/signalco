@@ -54,7 +54,7 @@
         "sass": "1.81.0",
         "tailwind-merge": "2.5.4",
         "tsup": "8.3.5",
-        "typescript": "5.6.3"
+        "typescript": "5.7.2"
     },
     "peerDependencies": {
         "react": ">=19.0.0-rc-65a56d0e-20241020",
