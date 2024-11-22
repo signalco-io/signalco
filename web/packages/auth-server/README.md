@@ -7,14 +7,14 @@ Initialize and expose functions that you will later use to protect your applicat
 ```ts
 // file: auth.ts
 
-import { InitAuth } from '@signalco/auth-server';
+import { initAuth } from '@signalco/auth-server';
 
 function jwtSecretFactory() {
     const signSecret = process.env.MYAPP_JWT_SIGN_SECRET;
     return Buffer.from(signSecret, 'base64');
 }
 
-export const { withAuth, createJwt, setCookie, clearCookie } = InitAuth({
+export const { withAuth, createJwt, setCookie, clearCookie } = initAuth({
     jwt: {
         namespace: 'app',
         issues: 'api',
@@ -99,4 +99,38 @@ When you want to log out a user, you should clear the JWT cookie. You can use `c
 import { clearCookie } from './auth';
 
 await clearCookie();
+```
+
+## Extensions
+
+### RBAC
+
+You can implement Role-Based Access Control (RBAC) by wrapping `initAuth` function with `initRbac` function. It will override `auth` and `withAuth` functions to include role checking.
+
+```ts
+import { initRbac } from '@signalco/auth-server';
+
+export const { withAuth, createJwt, setCookie, clearCookie } = initRbac(initAuth(...));
+```
+
+You can then use `withAuth` and `auth` functions as before, but you can also pass a roles to `withAuth` function to check if the user has the required role.
+
+```ts
+export async function GET() {
+    return await withAuth(['admin'], async (user) => {
+        return new Response(JSON.stringify(user), { status: 200 });
+    });
+};
+```
+
+```ts
+import { withAuth } from './auth';
+
+export async function myAction() {
+    'use server';
+
+    const { user } = await auth(['admin']);
+
+    // ... action logic
+};
 ```
