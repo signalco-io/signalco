@@ -36,8 +36,8 @@ importers:
         specifier: 4.5.7
         version: 4.5.7(ts-node@7.0.1)(typescript@5.6.3)
       '@pulumi/pulumi':
-        specifier: 3.140.0
-        version: 3.140.0(ts-node@7.0.1)(typescript@5.6.3)
+        specifier: 3.141.0
+        version: 3.141.0(ts-node@7.0.1)(typescript@5.6.3)
       '@pulumiverse/vercel':
         specifier: 1.14.3
         version: 1.14.3(ts-node@7.0.1)(typescript@5.6.3)
@@ -85,8 +85,8 @@ importers:
         specifier: 4.5.7
         version: 4.5.7(ts-node@7.0.1)(typescript@5.6.3)
       '@pulumi/pulumi':
-        specifier: 3.140.0
-        version: 3.140.0(ts-node@7.0.1)(typescript@5.6.3)
+        specifier: 3.141.0
+        version: 3.141.0(ts-node@7.0.1)(typescript@5.6.3)
       '@pulumiverse/vercel':
         specifier: 1.14.3
         version: 1.14.3(ts-node@7.0.1)(typescript@5.6.3)
@@ -140,8 +140,8 @@ importers:
         specifier: 4.5.7
         version: 4.5.7(ts-node@7.0.1)(typescript@5.6.3)
       '@pulumi/pulumi':
-        specifier: 3.140.0
-        version: 3.140.0(ts-node@7.0.1)(typescript@5.6.3)
+        specifier: 3.141.0
+        version: 3.141.0(ts-node@7.0.1)(typescript@5.6.3)
       '@pulumiverse/vercel':
         specifier: 1.14.3
         version: 1.14.3(ts-node@7.0.1)(typescript@5.6.3)
@@ -192,8 +192,8 @@ importers:
         specifier: 1.0.1
         version: 1.0.1(ts-node@7.0.1)(typescript@5.6.3)
       '@pulumi/pulumi':
-        specifier: 3.140.0
-        version: 3.140.0(ts-node@7.0.1)(typescript@5.6.3)
+        specifier: 3.141.0
+        version: 3.141.0(ts-node@7.0.1)(typescript@5.6.3)
       '@pulumiverse/vercel':
         specifier: 1.14.3
         version: 1.14.3(ts-node@7.0.1)(typescript@5.6.3)
@@ -241,8 +241,8 @@ importers:
         specifier: 4.5.7
         version: 4.5.7(ts-node@7.0.1)(typescript@5.6.3)
       '@pulumi/pulumi':
-        specifier: 3.140.0
-        version: 3.140.0(ts-node@7.0.1)(typescript@5.6.3)
+        specifier: 3.141.0
+        version: 3.141.0(ts-node@7.0.1)(typescript@5.6.3)
       '@pulumiverse/vercel':
         specifier: 1.14.3
         version: 1.14.3(ts-node@7.0.1)(typescript@5.6.3)
@@ -323,8 +323,8 @@ importers:
         specifier: 4.5.7
         version: 4.5.7(ts-node@7.0.1)(typescript@5.6.3)
       '@pulumi/pulumi':
-        specifier: 3.140.0
-        version: 3.140.0(ts-node@7.0.1)(typescript@5.6.3)
+        specifier: 3.141.0
+        version: 3.141.0(ts-node@7.0.1)(typescript@5.6.3)
       '@pulumiverse/vercel':
         specifier: 1.14.3
         version: 1.14.3(ts-node@7.0.1)(typescript@5.6.3)
@@ -788,8 +788,8 @@ packages:
   '@pulumi/docker@4.5.7':
     resolution: {integrity: sha512-z0rr1PoJXemafrNl0oPjQJlGRNbMKN0z50cKhmcuMVsiNTt36cDLXw7kpclgddgdwkM6ZU5zMRyaA1rcNuXTlg==}
 
-  '@pulumi/pulumi@3.140.0':
-    resolution: {integrity: sha512-hKGAfVIJBAApF+BmL56NmDUEOZyUHREfYxZ191wMmj+m+HJwm6Q8ux8eLpij8pwNeSqBltYA7EIp1jbNwmGqfw==}
+  '@pulumi/pulumi@3.141.0':
+    resolution: {integrity: sha512-gJejbOsLMg1KKmzK/yJIzU3gUT7fy42jrsSeR9aRyjteqgtT8vvhV7YKozGrkoumfu2L02SHCnPnAvpf5Rp7UQ==}
     engines: {node: '>=18'}
     peerDependencies:
       ts-node: '>= 7.0.1 < 12'
@@ -2869,7 +2869,7 @@ snapshots:
 
   '@checkly/pulumi@1.1.4(ts-node@7.0.1)(typescript@5.6.3)':
     dependencies:
-      '@pulumi/pulumi': 3.140.0(ts-node@7.0.1)(typescript@5.6.3)
+      '@pulumi/pulumi': 3.141.0(ts-node@7.0.1)(typescript@5.6.3)
     transitivePeerDependencies:
       - bluebird
       - supports-color
@@ -3275,7 +3275,7 @@ snapshots:
 
   '@pulumi/azure-native@2.73.1(ts-node@7.0.1)(typescript@5.6.3)':
     dependencies:
-      '@pulumi/pulumi': 3.140.0(ts-node@7.0.1)(typescript@5.6.3)
+      '@pulumi/pulumi': 3.141.0(ts-node@7.0.1)(typescript@5.6.3)
     transitivePeerDependencies:
       - bluebird
       - supports-color
@@ -3284,7 +3284,7 @@ snapshots:
 
   '@pulumi/cloudflare@5.43.1(ts-node@7.0.1)(typescript@5.6.3)':
     dependencies:
-      '@pulumi/pulumi': 3.140.0(ts-node@7.0.1)(typescript@5.6.3)
+      '@pulumi/pulumi': 3.141.0(ts-node@7.0.1)(typescript@5.6.3)
     transitivePeerDependencies:
       - bluebird
       - supports-color
@@ -3293,7 +3293,7 @@ snapshots:
 
   '@pulumi/command@1.0.1(ts-node@7.0.1)(typescript@5.6.3)':
     dependencies:
-      '@pulumi/pulumi': 3.140.0(ts-node@7.0.1)(typescript@5.6.3)
+      '@pulumi/pulumi': 3.141.0(ts-node@7.0.1)(typescript@5.6.3)
     transitivePeerDependencies:
       - bluebird
       - supports-color
@@ -3302,7 +3302,7 @@ snapshots:
 
   '@pulumi/docker@4.5.7(ts-node@7.0.1)(typescript@5.6.3)':
     dependencies:
-      '@pulumi/pulumi': 3.140.0(ts-node@7.0.1)(typescript@5.6.3)
+      '@pulumi/pulumi': 3.141.0(ts-node@7.0.1)(typescript@5.6.3)
       semver: 5.7.2
     transitivePeerDependencies:
       - bluebird
@@ -3310,7 +3310,7 @@ snapshots:
       - ts-node
       - typescript
 
-  '@pulumi/pulumi@3.140.0(ts-node@7.0.1)(typescript@5.6.3)':
+  '@pulumi/pulumi@3.141.0(ts-node@7.0.1)(typescript@5.6.3)':
     dependencies:
       '@grpc/grpc-js': 1.10.1
       '@logdna/tail-file': 2.2.0
@@ -3353,7 +3353,7 @@ snapshots:
 
   '@pulumiverse/vercel@1.14.3(ts-node@7.0.1)(typescript@5.6.3)':
     dependencies:
-      '@pulumi/pulumi': 3.140.0(ts-node@7.0.1)(typescript@5.6.3)
+      '@pulumi/pulumi': 3.141.0(ts-node@7.0.1)(typescript@5.6.3)
     transitivePeerDependencies:
       - bluebird
       - supports-color
