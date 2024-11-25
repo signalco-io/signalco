@@ -134,3 +134,19 @@ export async function myAction() {
     // ... action logic
 };
 ```
+
+Make sure you pass the roles to auth function when using components that accept auth function as a prop.
+
+```tsx
+import { auth } from './auth';
+
+export async function MyComponent() {
+    const authAdmin = auth.bind(null, ['admin']);
+
+    return (
+        <SignedOut auth={authAdmin}>
+            Not logged in
+        </SignedOut>
+    );
+};
+```
