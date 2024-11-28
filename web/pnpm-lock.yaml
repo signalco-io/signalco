@@ -762,8 +762,8 @@ importers:
         specifier: 19.0.0-rc-65a56d0e-20241020
         version: 19.0.0-rc-65a56d0e-20241020
       react-dom:
-        specifier: 18.3.1
-        version: 18.3.1(react@19.0.0-rc-65a56d0e-20241020)
+        specifier: 19.0.0-rc-65a56d0e-20241020
+        version: 19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020)
     devDependencies:
       '@signalco/tsconfig':
         specifier: workspace:*
@@ -782,10 +782,10 @@ importers:
         version: 8.4.5(storybook@8.4.5)
       '@storybook/react':
         specifier: 8.4.5
-        version: 8.4.5(react-dom@18.3.1(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(storybook@8.4.5)(typescript@5.7.2)
+        version: 8.4.5(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(storybook@8.4.5)(typescript@5.7.2)
       '@storybook/react-vite':
         specifier: 8.4.5
-        version: 8.4.5(react-dom@18.3.1(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(rollup@4.24.0)(storybook@8.4.5)(typescript@5.7.2)(vite@5.4.2(@types/node@22.7.9)(sass@1.81.0)(terser@5.31.6))
+        version: 8.4.5(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(rollup@4.24.0)(storybook@8.4.5)(typescript@5.7.2)(vite@5.4.2(@types/node@22.7.9)(sass@1.81.0)(terser@5.31.6))
       '@storybook/theming':
         specifier: 8.4.5
         version: 8.4.5(storybook@8.4.5)
@@ -11474,9 +11474,9 @@ snapshots:
   '@storybook/addon-docs@8.4.5(storybook@8.4.5)(types-react@19.0.0-rc.1)':
     dependencies:
       '@mdx-js/react': 3.1.0(react@18.3.1)(types-react@19.0.0-rc.1)
-      '@storybook/blocks': 8.4.5(react-dom@18.3.1(react@19.0.0-rc-65a56d0e-20241020))(react@18.3.1)(storybook@8.4.5)
+      '@storybook/blocks': 8.4.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.4.5)
       '@storybook/csf-plugin': 8.4.5(storybook@8.4.5)
-      '@storybook/react-dom-shim': 8.4.5(react-dom@18.3.1(react@19.0.0-rc-65a56d0e-20241020))(react@18.3.1)(storybook@8.4.5)
+      '@storybook/react-dom-shim': 8.4.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.4.5)
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
       storybook: 8.4.5
@@ -11540,15 +11540,15 @@ snapshots:
       memoizerific: 1.11.3
       storybook: 8.4.5
 
-  '@storybook/blocks@8.4.5(react-dom@18.3.1(react@19.0.0-rc-65a56d0e-20241020))(react@18.3.1)(storybook@8.4.5)':
+  '@storybook/blocks@8.4.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.4.5)':
     dependencies:
       '@storybook/csf': 0.1.11
-      '@storybook/icons': 1.2.12(react-dom@18.3.1(react@19.0.0-rc-65a56d0e-20241020))(react@18.3.1)
+      '@storybook/icons': 1.2.12(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       storybook: 8.4.5
       ts-dedent: 2.2.0
     optionalDependencies:
       react: 18.3.1
-      react-dom: 18.3.1(react@19.0.0-rc-65a56d0e-20241020)
+      react-dom: 18.3.1(react@18.3.1)
 
   '@storybook/builder-vite@8.4.5(storybook@8.4.5)(vite@5.4.2(@types/node@22.7.9)(sass@1.81.0)(terser@5.31.6))':
     dependencies:
@@ -11591,10 +11591,10 @@ snapshots:
 
   '@storybook/global@5.0.0': {}
 
-  '@storybook/icons@1.2.12(react-dom@18.3.1(react@19.0.0-rc-65a56d0e-20241020))(react@18.3.1)':
+  '@storybook/icons@1.2.12(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       react: 18.3.1
-      react-dom: 18.3.1(react@19.0.0-rc-65a56d0e-20241020)
+      react-dom: 18.3.1(react@18.3.1)
 
   '@storybook/manager-api@8.4.5(storybook@8.4.5)':
     dependencies:
@@ -11604,29 +11604,29 @@ snapshots:
     dependencies:
       storybook: 8.4.5
 
-  '@storybook/react-dom-shim@8.4.5(react-dom@18.3.1(react@19.0.0-rc-65a56d0e-20241020))(react@18.3.1)(storybook@8.4.5)':
+  '@storybook/react-dom-shim@8.4.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.4.5)':
     dependencies:
       react: 18.3.1
-      react-dom: 18.3.1(react@19.0.0-rc-65a56d0e-20241020)
+      react-dom: 18.3.1(react@18.3.1)
       storybook: 8.4.5
 
-  '@storybook/react-dom-shim@8.4.5(react-dom@18.3.1(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(storybook@8.4.5)':
+  '@storybook/react-dom-shim@8.4.5(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(storybook@8.4.5)':
     dependencies:
       react: 19.0.0-rc-65a56d0e-20241020
-      react-dom: 18.3.1(react@19.0.0-rc-65a56d0e-20241020)
+      react-dom: 19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020)
       storybook: 8.4.5
 
-  '@storybook/react-vite@8.4.5(react-dom@18.3.1(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(rollup@4.24.0)(storybook@8.4.5)(typescript@5.7.2)(vite@5.4.2(@types/node@22.7.9)(sass@1.81.0)(terser@5.31.6))':
+  '@storybook/react-vite@8.4.5(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(rollup@4.24.0)(storybook@8.4.5)(typescript@5.7.2)(vite@5.4.2(@types/node@22.7.9)(sass@1.81.0)(terser@5.31.6))':
     dependencies:
       '@joshwooding/vite-plugin-react-docgen-typescript': 0.3.0(typescript@5.7.2)(vite@5.4.2(@types/node@22.7.9)(sass@1.81.0)(terser@5.31.6))
       '@rollup/pluginutils': 5.1.0(rollup@4.24.0)
       '@storybook/builder-vite': 8.4.5(storybook@8.4.5)(vite@5.4.2(@types/node@22.7.9)(sass@1.81.0)(terser@5.31.6))
-      '@storybook/react': 8.4.5(react-dom@18.3.1(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(storybook@8.4.5)(typescript@5.7.2)
+      '@storybook/react': 8.4.5(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(storybook@8.4.5)(typescript@5.7.2)
       find-up: 5.0.0
       magic-string: 0.30.10
       react: 19.0.0-rc-65a56d0e-20241020
       react-docgen: 7.0.3
-      react-dom: 18.3.1(react@19.0.0-rc-65a56d0e-20241020)
+      react-dom: 19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020)
       resolve: 1.22.8
       storybook: 8.4.5
       tsconfig-paths: 4.2.0
@@ -11637,16 +11637,16 @@ snapshots:
       - supports-color
       - typescript
 
-  '@storybook/react@8.4.5(react-dom@18.3.1(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(storybook@8.4.5)(typescript@5.7.2)':
+  '@storybook/react@8.4.5(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(storybook@8.4.5)(typescript@5.7.2)':
     dependencies:
       '@storybook/components': 8.4.5(storybook@8.4.5)
       '@storybook/global': 5.0.0
       '@storybook/manager-api': 8.4.5(storybook@8.4.5)
       '@storybook/preview-api': 8.4.5(storybook@8.4.5)
-      '@storybook/react-dom-shim': 8.4.5(react-dom@18.3.1(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(storybook@8.4.5)
+      '@storybook/react-dom-shim': 8.4.5(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(storybook@8.4.5)
       '@storybook/theming': 8.4.5(storybook@8.4.5)
       react: 19.0.0-rc-65a56d0e-20241020
-      react-dom: 18.3.1(react@19.0.0-rc-65a56d0e-20241020)
+      react-dom: 19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020)
       storybook: 8.4.5
     optionalDependencies:
       typescript: 5.7.2
@@ -16093,12 +16093,6 @@ snapshots:
     dependencies:
       loose-envify: 1.4.0
       react: 18.3.1
-      scheduler: 0.23.2
-
-  react-dom@18.3.1(react@19.0.0-rc-65a56d0e-20241020):
-    dependencies:
-      loose-envify: 1.4.0
-      react: 19.0.0-rc-65a56d0e-20241020
       scheduler: 0.23.2
 
   react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020):

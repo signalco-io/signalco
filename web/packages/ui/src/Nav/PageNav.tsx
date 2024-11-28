@@ -20,7 +20,7 @@ export function PageNav({ logo, links, children }: PageNavProps) {
     return (
         <div>
             <input type="checkbox" id="mobile-menu-toggle" className="peer hidden" aria-label="Toggle menu" />
-            <header className="fixed inset-x-0 top-0 z-10 flex h-16 items-center border-b backdrop-blur-md">
+            <header className="fixed inset-x-0 top-0 z-10 flex h-16 items-center border-b border-muted/30 backdrop-blur-md transition-all peer-checked:border-border peer-checked:bg-card">
                 <Container>
                     <Row justifyContent="space-between">
                         <div className="flex h-full flex-col items-center">
@@ -55,8 +55,8 @@ export function PageNav({ logo, links, children }: PageNavProps) {
                 </Container>
             </header>
             <nav className="hidden peer-checked:block md:hidden">
-                <div className="fixed inset-x-2 top-16 z-10 mt-2 rounded-md border backdrop-blur-md animate-in fade-in slide-in-from-top-2">
-                    <Stack spacing={1}>
+                <div className="fixed inset-x-2 top-16 z-10 mt-2 rounded-lg border bg-card shadow-lg animate-in fade-in slide-in-from-top-2">
+                    <Stack>
                         {links?.map(nl => (
                             <Button
                                 variant="plain"
