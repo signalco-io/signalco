@@ -45,6 +45,6 @@
     "@signalco/ui-primitives": "workspace:*",
     "@signalco/ui-themes-minimal": "workspace:*",
     "react": "19.0.0-rc-65a56d0e-20241020",
-    "react-dom": "18.3.1"
+    "react-dom": "19.0.0-rc-65a56d0e-20241020"
   }
 }
