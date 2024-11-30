@@ -15,7 +15,7 @@ export default {
     },
     parameters: {
         layout: 'centered',
-      },
+    },
 } satisfies Meta<typeof Chip>;
 
 type Story = StoryObj<typeof Chip>;
