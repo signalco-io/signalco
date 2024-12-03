@@ -1733,8 +1733,8 @@ importers:
         specifier: npm:types-react-dom@19.0.0-rc.1
         version: types-react-dom@19.0.0-rc.1
       lucide-react:
-        specifier: 0.462.0
-        version: 0.462.0(react@19.0.0-rc-65a56d0e-20241020)
+        specifier: 0.463.0
+        version: 0.463.0(react@19.0.0-rc-65a56d0e-20241020)
       react:
         specifier: 19.0.0-rc-65a56d0e-20241020
         version: 19.0.0-rc-65a56d0e-20241020
@@ -6847,8 +6847,8 @@ packages:
     resolution: {integrity: sha512-Jo6dJ04CmSjuznwJSS3pUeWmd/H0ffTlkXXgwZi+eq1UCmqQwCh+eLsYOYCwY991i2Fah4h1BEMCx4qThGbsiA==}
     engines: {node: '>=10'}
 
-  lucide-react@0.462.0:
-    resolution: {integrity: sha512-NTL7EbAao9IFtuSivSZgrAh4fZd09Lr+6MTkqIxuHaH2nnYiYIzXPo06cOxHg9wKLdj6LL8TByG4qpePqwgx/g==}
+  lucide-react@0.463.0:
+    resolution: {integrity: sha512-Ltc6Fpo/5AVnHEsGwU9IbIpoCjZuK/S0Y78k4sl6FzvGlKJyyg44DdaQry7YaLm2sszfZrc9HZ5/4oXqUkzJQQ==}
     peerDependencies:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0-rc
 
@@ -14472,7 +14472,7 @@ snapshots:
     dependencies:
       yallist: 4.0.0
 
-  lucide-react@0.462.0(react@19.0.0-rc-65a56d0e-20241020):
+  lucide-react@0.463.0(react@19.0.0-rc-65a56d0e-20241020):
     dependencies:
       react: 19.0.0-rc-65a56d0e-20241020
 
