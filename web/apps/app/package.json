@@ -47,7 +47,7 @@
         "@tanstack/react-query-devtools": "5.62.2",
         "@vercel/analytics": "1.4.1",
         "@vercel/speed-insights": "1.1.0",
-        "@vvo/tzdb": "6.150.0",
+        "@vvo/tzdb": "6.151.0",
         "autoprefixer": "10.4.20",
         "classix": "2.2.0",
         "cobe": "0.6.3",
