@@ -11,7 +11,7 @@
     "eslint-config-prettier": "9.1.0",
     "eslint-plugin-only-warn": "1.1.0",
     "eslint-plugin-import": "2.31.0",
-    "eslint-import-resolver-typescript": "3.6.3",
+    "eslint-import-resolver-typescript": "3.7.0",
     "@typescript-eslint/parser": "8.17.0",
     "@typescript-eslint/eslint-plugin": "8.17.0",
     "typescript": "5.7.2"
