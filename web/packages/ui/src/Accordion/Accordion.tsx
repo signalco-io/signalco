@@ -33,9 +33,9 @@ export function Accordion({ children, defaultOpen, open, disabled, onOpenChanged
     const multipleChildren = otherChildren.length > 0;
 
     return (
-        <Card className={cx(variant === 'plain' && 'bg-transparent shadow-none border-none p-0', className)} {...props}>
-            <CardHeader className={cx(variant==='soft' ? 'p-2' : 'px-0 py-2')}>
-                <button className="text-left" onClick={handleOpen}>
+        <Card className={cx('p-0', variant === 'plain' && 'bg-transparent shadow-none border-none', className)} {...props}>
+            <CardHeader className="p-0">
+                <button className={cx('text-left', variant === 'plain' ? 'px-2 py-4' : 'p-4')} onClick={handleOpen}>
                     <Row spacing={1} justifyContent="space-between">
                         {multipleChildren && isValidElement(firstChild) ? firstChild : children}
                         {!disabled && (
@@ -47,7 +47,7 @@ export function Accordion({ children, defaultOpen, open, disabled, onOpenChanged
             {(!unmountOnExit || actualOpen) && (
                 <Collapse appear={actualOpen}>
                     {multipleChildren && (
-                        <CardContent className={cx(variant==='soft' ? 'p-2' : 'px-0 py-2')}>
+                        <CardContent className={cx(variant === 'plain' ? 'px-2 pt-2 pb-4' : 'p-4 pt-2')}>
                             {otherChildren?.map((child) => isValidElement(child) ? child : null)}
                         </CardContent>
                     )}

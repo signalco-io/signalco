@@ -95,6 +95,7 @@ export function QueryList<T>({
                                 variant="outlined" />
                         )}
                         <Modal
+                            title={itemCreateLabel}
                             open={showCreateModal}
                             onOpenChange={setShowCreateModal}>
                             <Stack spacing={4}>

@@ -44,7 +44,6 @@
     "@tanstack/react-query": "5.62.2",
     "@tanstack/react-query-devtools": "5.62.2",
     "@vercel/analytics": "1.4.1",
-    "classix": "2.2.0",
     "nanoid": "5.0.9",
     "next": "15.0.3",
     "next-secure-headers": "2.2.0",
