@@ -50,7 +50,7 @@ const Button = forwardRef<HTMLElement, ButtonProps>(({
             className={cx(
                 'select-none inline-flex gap-1 items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background cursor-default',
                 (!variant || variant === 'soft') && 'bg-primary/15 text-primary hover:bg-primary/25 active:bg-primary/35',
-                variant === 'outlined' && 'border border-accent-foreground hover:bg-accent hover:text-accent-foreground active:bg-primary/10',
+                variant === 'outlined' && 'border border-input hover:bg-accent hover:text-accent-foreground active:bg-primary/10',
                 variant === 'plain' && 'hover:bg-primary/10 hover:text-accent-foreground active:bg-primary/20',
                 variant === 'solid' && 'bg-primary text-primary-foreground hover:bg-primary/70 active:bg-primary/80',
                 (!size || size === 'md') && 'h-10 py-2 px-4',

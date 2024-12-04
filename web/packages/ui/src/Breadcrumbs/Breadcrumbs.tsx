@@ -22,7 +22,7 @@ export function Breadcrumbs({ items, endSeparator }: BreadcrumbsProps) {
                 '--cols-template': `minmax(0,auto) ${new Array(items.length - 1).fill('auto minmax(0,auto)').join(' ')}${endSeparator ? ' auto' : ''} 1fr`,
             } as CSSProperties}>
             {items.map((item, index) => (
-                <Fragment key={item.href}>
+                <Fragment key={item.href ?? (typeof item.label === 'string' ? item.label : index)}>
                     <BreadcrumbsItem href={item.href} label={item.label} />
                     {index < items.length - 1 && <BreadcrumbsSeparator />}
                 </Fragment>

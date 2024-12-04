@@ -1,6 +1,6 @@
 {
     "name": "@signalco/ui-primitives",
-    "version": "0.2.2",
+    "version": "0.3.0",
     "license": "MIT",
     "type": "module",
     "sideEffects": false,
@@ -53,11 +53,15 @@
         "react-timeago": "7.2.0",
         "sass": "1.81.1",
         "tailwind-merge": "2.5.5",
+        "tailwindcss": "3.4.16",
+        "tailwindcss-animate": "1.0.7",
         "tsup": "8.3.5",
         "typescript": "5.7.2"
     },
     "peerDependencies": {
         "react": ">=19.0.0-rc-65a56d0e-20241020",
-        "react-dom": ">=19.0.0-rc-65a56d0e-20241020"
+        "react-dom": ">=19.0.0-rc-65a56d0e-20241020",
+        "tailwindcss": ">=3.0.0",
+        "tailwindcss-animate": ">=1.0.0"
     }
 }
