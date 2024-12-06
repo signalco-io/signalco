@@ -18,7 +18,11 @@ function ConfigurationDialog({
     children, header, headerActions, open, onClose, actions, trigger
 }: IConfigurationDialogProps) {
     return (
-        <Modal trigger={trigger} open={open} onOpenChange={(newOpenState: boolean) => !newOpenState && onClose && onClose()}>
+        <Modal
+            title={typeof header === 'string' ? header : 'Configuration'}
+            trigger={trigger}
+            open={open}
+            onOpenChange={(newOpenState: boolean) => !newOpenState && onClose && onClose()}>
             <Stack spacing={2}>
                 <Row justifyContent="space-between">
                     <Typography level="h5">{header}</Typography>

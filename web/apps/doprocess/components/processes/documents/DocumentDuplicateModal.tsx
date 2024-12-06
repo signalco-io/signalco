@@ -38,7 +38,7 @@ export function DocumentDuplicateModal({
     };
 
     return (
-        <Modal open={open} onOpenChange={onOpenChange}>
+        <Modal title="Duplicate document" open={open} onOpenChange={onOpenChange}>
             <Stack spacing={2}>
                 <Row spacing={2}>
                     <Duplicate />

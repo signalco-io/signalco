@@ -31,6 +31,7 @@ export function WorkerDeleteModal({ worker, workerId }: { worker?: { name: strin
         <ModalConfirm
             open={showDeleteConfirmModal === 'true'}
             onOpenChange={(open) => setShowDeleteConfirmModal(open ? 'true' : undefined)}
+            title="Delete Worker"
             header={'Delete Worker'}
             color="danger"
             expectedConfirm={worker?.name ?? 'delete'}
