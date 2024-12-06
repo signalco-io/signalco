@@ -478,8 +478,8 @@ importers:
         specifier: 4.2.0
         version: 4.2.0
       '@blocknote/core':
-        specifier: 0.19.2
-        version: 0.19.2(@types/hast@3.0.4)
+        specifier: 0.20.0
+        version: 0.20.0(@types/hast@3.0.4)
       '@blocknote/mantine':
         specifier: 0.19.2
         version: 0.19.2(@tiptap/pm@2.7.2)(@types/hast@3.0.4)(react-dom@19.0.0-rc-65a56d0e-20241020(react@19.0.0-rc-65a56d0e-20241020))(react@19.0.0-rc-65a56d0e-20241020)(types-react@19.0.0-rc.1)
