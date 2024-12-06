@@ -122,6 +122,7 @@ export function ProcessDetailsHeader({
             <ProcessOrRunDeleteModal
                 processId={processId}
                 runId={runId}
+                title={runId ? 'Delete run' : 'Delete process'}
                 open={deleteOpen}
                 onOpenChange={setDeleteOpen}
                 redirect={runId ? KnownPages.ProcessRuns(processId) : KnownPages.Processes} />

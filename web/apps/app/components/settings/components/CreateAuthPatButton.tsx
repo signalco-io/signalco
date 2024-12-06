@@ -42,6 +42,7 @@ export function CreateAuthPatButton() {
 
     return (
         <Modal
+            title="Create PAT"
             open={open}
             onOpenChange={(newOpen) => newOpen ? handleOpen() : handleClose()}
             trigger={(

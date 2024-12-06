@@ -34,6 +34,7 @@ export function ShareModal({ header, shareableEntity, open, hideTrigger, src, on
 
     return (
         <Modal
+            title="Share"
             open={open}
             onOpenChange={onOpenChange}
             trigger={(

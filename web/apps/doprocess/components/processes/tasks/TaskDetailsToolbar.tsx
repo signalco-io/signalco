@@ -53,12 +53,13 @@ export function TaskDetailsToolbar({ processId, selectedTaskId, saving, editable
             </Toolbar>
             {taskDefinition && (
                 <TaskDeleteModal
+                    title="Delete task definition"
                     taskDefinition={taskDefinition}
                     open={deleteOpen}
                     onOpenChange={setDeleteOpen} />
             )}
             {typePickerOpen && selectedTaskId && (
-                <Modal open={typePickerOpen} onOpenChange={setTypePickerOpen}>
+                <Modal title="Change task type" open={typePickerOpen} onOpenChange={setTypePickerOpen}>
                     <Stack spacing={1}>
                         <Typography level="h5">Change task type</Typography>
                         <TaskDetailsTypePicker

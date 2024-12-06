@@ -27,7 +27,7 @@ export function EmbedModal({
     const customCode = `<iframe src="${src}" width="${iframeSize.width}" height="${iframeSize.height}" frameborder="0" title="doprocess.app"></iframe>`;
 
     return (
-        <Modal open={open} onOpenChange={onOpenChange} className="max-w-2xl p-0">
+        <Modal title={'Embed'} open={open} onOpenChange={onOpenChange} className="max-w-2xl p-0">
             <div className="grid md:grid-cols-[1fr_auto_1fr]">
                 <Stack className="p-6 md:pr-4" spacing={2}>
                     <Typography level="h5">{header}</Typography>

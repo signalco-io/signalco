@@ -14,9 +14,11 @@ type ProcessRunCreateModalProps = {
 
 export function ProcessRunCreateModal({ processId }: ProcessRunCreateModalProps) {
     return (
-        <Modal trigger={(
-            <IconButton title="Run process" variant="solid"><Play /></IconButton>
-        )}>
+        <Modal
+            title="Run process"
+            trigger={(
+                <IconButton title="Run process" variant="solid"><Play /></IconButton>
+            )}>
             <Stack spacing={4}>
                 <Row spacing={2}>
                     <Play />

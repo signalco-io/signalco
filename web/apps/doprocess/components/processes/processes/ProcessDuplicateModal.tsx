@@ -19,6 +19,7 @@ type ProcessDuplicateModalProps = {
     process: ProcessDto;
 };
 
+// TODO: We have similar modals for documents and processes. Consider refactoring to a shared component.
 export function ProcessDuplicateModal({
     open, onOpenChange, process
 }: ProcessDuplicateModalProps) {
@@ -38,7 +39,7 @@ export function ProcessDuplicateModal({
     };
 
     return (
-        <Modal open={open} onOpenChange={onOpenChange}>
+        <Modal title="Duplicate process" open={open} onOpenChange={onOpenChange}>
             <Stack spacing={2}>
                 <Row spacing={2}>
                     <Duplicate />
