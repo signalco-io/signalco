@@ -27,8 +27,8 @@
         "@types/react": "npm:types-react@19.0.0-rc.1",
         "@types/react-dom": "npm:types-react-dom@19.0.0",
         "lucide-react": "0.468.0",
-        "react": "19.0.0-rc-65a56d0e-20241020",
-        "react-dom": "19.0.0-rc-65a56d0e-20241020",
+        "react": "19.0.0",
+        "react-dom": "19.0.0",
         "tsup": "8.3.5",
         "typescript": "5.7.2"
     },
