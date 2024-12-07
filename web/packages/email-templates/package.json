@@ -19,7 +19,7 @@
     "dependencies": {
         "@react-email/components": "0.0.28",
         "react": "19.0.0-rc-65a56d0e-20241020",
-        "react-email": "3.0.2",
+        "react-email": "3.0.3",
         "typescript": "5.7.2"
     }
 }
