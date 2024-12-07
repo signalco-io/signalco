@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "@hcaptcha/react-hcaptcha": "1.11.0",
-    "@next/env": "15.0.3",
+    "@next/env": "15.0.4",
     "@signalco/cms-components-marketing": "workspace:*",
     "@signalco/cms-core": "workspace:*",
     "@signalco/data": "workspace:*",
@@ -27,7 +27,7 @@
     "@signalco/ui-icons": "workspace:*",
     "@signalco/ui-primitives": "workspace:*",
     "@signalco/ui-themes-minimal": "workspace:*",
-    "next": "15.0.3",
+    "next": "15.0.4",
     "next-secure-headers": "2.2.0",
     "react": "19.0.0-rc-65a56d0e-20241020",
     "react-dom": "19.0.0-rc-65a56d0e-20241020",
