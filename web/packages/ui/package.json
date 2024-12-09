@@ -37,7 +37,7 @@
         "@signalco/tsconfig": "workspace:*",
         "@signalco/ui-icons": "workspace:*",
         "@signalco/ui-primitives": "workspace:*",
-        "@types/react": "npm:types-react@19.0.0-rc.1",
+        "@types/react": "19.0.1",
         "@types/react-dom": "npm:types-react-dom@19.0.0",
         "@types/react-timeago": "4.1.7",
         "autoprefixer": "10.4.20",
@@ -53,8 +53,8 @@
     },
     "peerDependencies": {
         "@signalco/ui-primitives": "0",
-        "react": ">=19.0.0-rc-65a56d0e-20241020",
-        "react-dom": ">=19.0.0-rc-65a56d0e-20241020",
+        "react": ">=19.0.0",
+        "react-dom": ">=19.0.0",
         "tailwindcss": ">=3.0.0",
         "tailwindcss-animate": ">=1.0.0"
     }
