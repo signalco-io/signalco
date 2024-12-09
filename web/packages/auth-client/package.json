@@ -34,8 +34,8 @@
     "@signalco/tsconfig": "workspace:*",
     "@signalco/ui-icons": "workspace:*",
     "@tanstack/react-query": "5.62.3",
-    "@types/react": "npm:types-react@19.0.0-rc.1",
-    "@types/react-dom": "npm:types-react-dom@19.0.0",
+    "@types/react": "19.0.1",
+    "@types/react-dom": "19.0.2",
     "next": "15.0.4",
     "react": "19.0.0",
     "react-dom": "19.0.0",
@@ -47,7 +47,7 @@
     "@tanstack/react-query": ">=5",
     "@signalco/ui-primitives": "0",
     "next": ">=15",
-    "react": ">=19.0.0-rc-65a56d0e-20241020",
-    "react-dom": ">=19.0.0-rc-65a56d0e-20241020"
+    "react": ">=19.0.0",
+    "react-dom": ">=19.0.0"
   }
 }

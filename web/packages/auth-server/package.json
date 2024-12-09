@@ -32,8 +32,8 @@
     "@signalco/eslint-config-signalco": "workspace:*",
     "@signalco/js": "workspace:*",
     "@signalco/tsconfig": "workspace:*",
-    "@types/react": "npm:types-react@19.0.0-rc.1",
-    "@types/react-dom": "npm:types-react-dom@19.0.0",
+    "@types/react": "19.0.1",
+    "@types/react-dom": "19.0.2",
     "jose": "5.9.6",
     "next": "15.0.4",
     "react": "19.0.0",
@@ -45,7 +45,7 @@
   "peerDependencies": {
     "jose": ">=5",
     "next": ">=15",
-    "react": ">=19.0.0-rc-65a56d0e-20241020",
-    "react-dom": ">=19.0.0-rc-65a56d0e-20241020"
+    "react": ">=19.0.0",
+    "react-dom": ">=19.0.0"
   }
 }
