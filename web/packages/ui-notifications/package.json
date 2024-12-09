@@ -27,7 +27,7 @@
         "@signalco/tailwindcss-config-signalco": "workspace:*",
         "@signalco/tsconfig": "workspace:*",
         "@types/react": "19.0.1",
-        "@types/react-dom": "npm:types-react-dom@19.0.0",
+        "@types/react-dom": "19.0.2",
         "react": "19.0.0",
         "react-dom": "19.0.0",
         "sonner": "1.7.1",

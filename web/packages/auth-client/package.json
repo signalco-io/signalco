@@ -35,7 +35,7 @@
     "@signalco/ui-icons": "workspace:*",
     "@tanstack/react-query": "5.62.3",
     "@types/react": "19.0.1",
-    "@types/react-dom": "npm:types-react-dom@19.0.0",
+    "@types/react-dom": "19.0.2",
     "next": "15.0.4",
     "react": "19.0.0",
     "react-dom": "19.0.0",
