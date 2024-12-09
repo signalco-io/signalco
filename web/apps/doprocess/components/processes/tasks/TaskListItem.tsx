@@ -105,6 +105,7 @@ export function TaskListItem({ selected, taskDefinition, runId, task, taskIndex,
                 <>
                     {(!runId && editable) && (
                         <TaskDeleteModal
+                            title="Delete task definition"
                             taskDefinition={taskDefinition}
                             trigger={(
                                 <IconButton

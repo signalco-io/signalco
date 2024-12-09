@@ -1,5 +1,4 @@
 import React, { Fragment, PropsWithChildren, forwardRef } from 'react'
-import { cx } from 'classix'
 import { Navigate } from '@signalco/ui-icons'
 import {
     Root, Trigger, Group, Portal, Sub,
@@ -8,6 +7,7 @@ import {
     Label, Separator
 } from '@radix-ui/react-dropdown-menu'
 import { Row } from '../Row'
+import { cx } from '../cx'
 
 const DropdownMenu = Root
 

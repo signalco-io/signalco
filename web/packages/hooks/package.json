@@ -1,6 +1,6 @@
 {
     "name": "@signalco/hooks",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "sideEffects": false,
     "type": "module",
     "license": "MIT",
@@ -29,9 +29,9 @@
         "@signalco/js": "workspace:*",
         "@signalco/tsconfig": "workspace:*",
         "@types/react": "npm:types-react@19.0.0-rc.1",
-        "next": "15.0.3",
-        "react": "19.0.0-rc-65a56d0e-20241020",
-        "react-dom": "19.0.0-rc-65a56d0e-20241020",
+        "next": "15.0.4",
+        "react": "19.0.0",
+        "react-dom": "19.0.0",
         "tsup": "8.3.5",
         "typescript": "5.7.2"
     },

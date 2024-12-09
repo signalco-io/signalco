@@ -1,6 +1,6 @@
 {
     "name": "@signalco/ui",
-    "version": "0.2.1",
+    "version": "0.2.4",
     "license": "MIT",
     "type": "module",
     "sideEffects": false,
@@ -38,17 +38,15 @@
         "@signalco/ui-icons": "workspace:*",
         "@signalco/ui-primitives": "workspace:*",
         "@types/react": "npm:types-react@19.0.0-rc.1",
-        "@types/react-dom": "npm:types-react-dom@19.0.0-rc.1",
+        "@types/react-dom": "npm:types-react-dom@19.0.0",
         "@types/react-timeago": "4.1.7",
         "autoprefixer": "10.4.20",
-        "classix": "2.2.0",
         "postcss": "8.4.49",
         "postcss-preset-env": "10.1.1",
-        "react": "19.0.0-rc-65a56d0e-20241020",
-        "react-dom": "19.0.0-rc-65a56d0e-20241020",
+        "react": "19.0.0",
+        "react-dom": "19.0.0",
         "react-timeago": "7.2.0",
-        "sass": "1.81.0",
-        "tailwind-merge": "2.5.5",
+        "sass": "1.82.0",
         "typescript": "5.7.2",
         "@microsoft/api-extractor": "7.48.0",
         "tsup": "8.3.5"
@@ -56,6 +54,8 @@
     "peerDependencies": {
         "@signalco/ui-primitives": "0",
         "react": ">=19.0.0-rc-65a56d0e-20241020",
-        "react-dom": ">=19.0.0-rc-65a56d0e-20241020"
+        "react-dom": ">=19.0.0-rc-65a56d0e-20241020",
+        "tailwindcss": ">=3.0.0",
+        "tailwindcss-animate": ">=1.0.0"
     }
 }

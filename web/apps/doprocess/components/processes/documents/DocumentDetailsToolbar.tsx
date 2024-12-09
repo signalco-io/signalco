@@ -82,6 +82,7 @@ export function DocumentDetailsToolbar({ id, saving }: DocumentDetailsToolbarPro
             </Toolbar>
             {document && (
                 <DocumentDeleteModal
+                    title="Delete document"
                     document={document}
                     open={deleteModalOpen}
                     onOpenChange={setDeleteModalOpen}

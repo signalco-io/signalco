@@ -1,13 +1,15 @@
 import React, { HTMLAttributes } from 'react';
 import { Close } from '@signalco/ui-icons'
 import * as DialogPrimitive from '@radix-ui/react-dialog'
+import { VisuallyHidden } from '../VisuallyHidden';
 import { cx } from '../cx'
 
-export type ModalProps = HTMLAttributes<HTMLDivElement> & {
+export type ModalProps = Omit<HTMLAttributes<HTMLDivElement>, 'title'> & {
     trigger?: React.ReactNode;
     open?: boolean;
     onOpenChange?: (open: boolean) => void;
     modal?: boolean;
+    title: string;
 };
 
 export function Modal({
@@ -17,6 +19,7 @@ export function Modal({
     open,
     modal,
     onOpenChange,
+    title,
     ...rest
 }: ModalProps) {
     return (
@@ -37,6 +40,11 @@ export function Modal({
                     )}
                     {...rest}
                 >
+                    <VisuallyHidden>
+                        <DialogPrimitive.DialogTitle>
+                            {title}
+                        </DialogPrimitive.DialogTitle>
+                    </VisuallyHidden>
                     {children}
                     <DialogPrimitive.Close className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground">
                         <Close className="size-4" />

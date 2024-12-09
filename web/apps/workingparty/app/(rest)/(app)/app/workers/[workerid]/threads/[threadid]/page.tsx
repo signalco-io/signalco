@@ -69,9 +69,10 @@ export default function WorkerThreadPage() {
                 </div>
             </div>
             <ModalConfirm
+                title="Delete Thread"
+                header={'Delete Thread'}
                 open={showDeleteConfirmModal}
                 onOpenChange={setShowDeleteConfirmModal}
-                header={'Delete Thread'}
                 color="danger"
                 expectedConfirm={thread?.name ?? 'delete'}
                 promptLabel={`To confirm, type the thread name "${thread?.name}" and confirm.`}

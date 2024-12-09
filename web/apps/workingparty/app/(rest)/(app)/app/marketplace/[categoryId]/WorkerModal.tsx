@@ -30,7 +30,7 @@ export function WorkerModal({
     }
 
     return (
-        <Modal open={open} onOpenChange={onOpenChange}>
+        <Modal title={name} open={open} onOpenChange={onOpenChange}>
             <Stack spacing={2}>
                 <div className="grid grid-cols-[auto_minmax(0,1fr)] grid-rows-[auto_auto] gap-x-2">
                     <Avatar className="bg-foreground text-background">{initials(name)}</Avatar>

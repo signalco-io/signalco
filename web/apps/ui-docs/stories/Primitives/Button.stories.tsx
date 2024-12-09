@@ -11,14 +11,63 @@ export const Default: Story = {
     }
 };
 
-export const VariantPlain: Story = {
+export const Plain: Story = {
     args: {
         variant: 'plain',
         ...Default.args
     }
 };
 
-export const VariantSoftOnBackground: Story = {
+export const PlainOnBackground: Story = {
+    args: {
+        variant: 'plain',
+        ...Default.args
+    },
+    decorators: [
+        (Story) => (
+            <div className="p-4 bg-muted">
+                <Story />
+            </div>
+        )
+    ]
+};
+
+export const PlainOnCard: Story = {
+    args: {
+        variant: 'plain',
+        ...Default.args
+    },
+    decorators: [
+        (Story) => (
+            <Card>
+                <Story />
+            </Card>
+        )
+    ]
+};
+
+export const PlainOnMuted: Story = {
+    args: {
+        variant: 'plain',
+        ...Default.args
+    },
+    decorators: [
+        (Story) => (
+            <div className="p-4 bg-muted">
+                <Story />
+            </div>
+        )
+    ]
+};
+
+export const Soft: Story = {
+    args: {
+        variant: 'soft',
+        ...Default.args
+    }
+};
+
+export const SoftOnBackground: Story = {
     args: {
         variant: 'soft',
         ...Default.args
@@ -32,7 +81,7 @@ export const VariantSoftOnBackground: Story = {
     ]
 };
 
-export const VariantSoftOnCard: Story = {
+export const SoftOnCard: Story = {
     args: {
         variant: 'soft',
         ...Default.args
@@ -46,21 +95,35 @@ export const VariantSoftOnCard: Story = {
     ]
 };
 
-export const VariantSolid: Story = {
+export const SoftOnMuted: Story = {
+    args: {
+        variant: 'soft',
+        ...Default.args
+    },
+    decorators: [
+        (Story) => (
+            <div className="p-4 bg-muted">
+                <Story />
+            </div>
+        )
+    ]
+};
+
+export const Solid: Story = {
     args: {
         variant: 'solid',
         ...Default.args
     }
 };
 
-export const VariantOulined: Story = {
+export const Oulined: Story = {
     args: {
         variant: 'outlined',
         ...Default.args
     }
 };
 
-export const VariantLink: Story = {
+export const Link: Story = {
     args: {
         variant: 'link',
         ...Default.args
