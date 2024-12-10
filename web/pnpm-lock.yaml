@@ -51,8 +51,8 @@ importers:
         specifier: 4.6.0
         version: 4.6.0(monaco-editor@0.52.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@next/env':
-        specifier: 15.0.4
-        version: 15.0.4
+        specifier: 15.1.0
+        version: 15.1.0
       '@signalco/data':
         specifier: workspace:*
         version: link:../../packages/data
@@ -81,17 +81,17 @@ importers:
         specifier: workspace:*
         version: link:../../packages/ui-themes-minimal-app
       '@tanstack/react-query':
-        specifier: 5.62.3
-        version: 5.62.3(react@19.0.0)
+        specifier: 5.62.7
+        version: 5.62.7(react@19.0.0)
       '@tanstack/react-query-devtools':
-        specifier: 5.62.3
-        version: 5.62.3(@tanstack/react-query@5.62.3(react@19.0.0))(react@19.0.0)
+        specifier: 5.62.7
+        version: 5.62.7(@tanstack/react-query@5.62.7(react@19.0.0))(react@19.0.0)
       '@vercel/analytics':
         specifier: 1.4.1
-        version: 1.4.1(next@15.0.4(@playwright/test@1.49.0)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0))(react@19.0.0)
+        version: 1.4.1(next@15.1.0(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0))(react@19.0.0)
       '@vercel/speed-insights':
         specifier: 1.1.0
-        version: 1.1.0(next@15.0.4(@playwright/test@1.49.0)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0))(react@19.0.0)
+        version: 1.1.0(next@15.1.0(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0))(react@19.0.0)
       '@vvo/tzdb':
         specifier: 6.152.0
         version: 6.152.0
@@ -120,8 +120,8 @@ importers:
         specifier: 0.52.2
         version: 0.52.2
       next:
-        specifier: 15.0.4
-        version: 15.0.4(@playwright/test@1.49.0)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0)
+        specifier: 15.1.0
+        version: 15.1.0(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0)
       next-secure-headers:
         specifier: 2.2.0
         version: 2.2.0
@@ -167,10 +167,10 @@ importers:
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.10.1
-        version: 4.10.1(playwright-core@1.49.0)
+        version: 4.10.1(playwright-core@1.49.1)
       '@playwright/test':
-        specifier: 1.49.0
-        version: 1.49.0
+        specifier: 1.49.1
+        version: 1.49.1
       '@signalco/eslint-config-signalco':
         specifier: workspace:*
         version: link:../../packages/eslint-config-signalco
@@ -221,7 +221,7 @@ importers:
         version: 11.2.0
       next-sitemap:
         specifier: 4.2.3
-        version: 4.2.3(next@15.0.4(@playwright/test@1.49.0)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0))
+        version: 4.2.3(next@15.1.0(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0))
       openapi-types:
         specifier: 12.1.3
         version: 12.1.3
@@ -247,11 +247,11 @@ importers:
         specifier: 3.1.0
         version: 3.1.0(@types/react@19.0.1)(react@19.0.0)
       '@next/env':
-        specifier: 15.0.4
-        version: 15.0.4
+        specifier: 15.1.0
+        version: 15.1.0
       '@next/mdx':
-        specifier: 15.0.4
-        version: 15.0.4(@mdx-js/loader@3.1.0(webpack@5.94.0))(@mdx-js/react@3.1.0(@types/react@19.0.1)(react@19.0.0))
+        specifier: 15.1.0
+        version: 15.1.0(@mdx-js/loader@3.1.0(webpack@5.94.0))(@mdx-js/react@3.1.0(@types/react@19.0.1)(react@19.0.0))
       '@signalco/cms-components-marketing':
         specifier: workspace:*
         version: link:../../packages/cms-components-marketing
@@ -281,13 +281,13 @@ importers:
         version: link:../../packages/ui-themes-minimal
       '@vercel/analytics':
         specifier: 1.4.1
-        version: 1.4.1(next@15.0.4(@playwright/test@1.49.0)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0))(react@19.0.0)
+        version: 1.4.1(next@15.1.0(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0))(react@19.0.0)
       autoprefixer:
         specifier: 10.4.20
         version: 10.4.20(postcss@8.4.49)
       next:
-        specifier: 15.0.4
-        version: 15.0.4(@playwright/test@1.49.0)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0)
+        specifier: 15.1.0
+        version: 15.1.0(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0)
       next-secure-headers:
         specifier: 2.2.0
         version: 2.2.0
@@ -309,10 +309,10 @@ importers:
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.10.1
-        version: 4.10.1(playwright-core@1.49.0)
+        version: 4.10.1(playwright-core@1.49.1)
       '@playwright/test':
-        specifier: 1.49.0
-        version: 1.49.0
+        specifier: 1.49.1
+        version: 1.49.1
       '@signalco/eslint-config-signalco':
         specifier: workspace:*
         version: link:../../packages/eslint-config-signalco
@@ -348,7 +348,7 @@ importers:
         version: 8.57.1
       next-sitemap:
         specifier: 4.2.3
-        version: 4.2.3(next@15.0.4(@playwright/test@1.49.0)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0))
+        version: 4.2.3(next@15.1.0(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0))
       postcss:
         specifier: 8.4.49
         version: 8.4.49
@@ -365,8 +365,8 @@ importers:
         specifier: 0.5.0
         version: 0.5.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@next/env':
-        specifier: 15.0.4
-        version: 15.0.4
+        specifier: 15.1.0
+        version: 15.1.0
       '@signalco/cms-components-marketing':
         specifier: workspace:*
         version: link:../../packages/cms-components-marketing
@@ -398,8 +398,8 @@ importers:
         specifier: 1.0.0
         version: 1.0.0
       next:
-        specifier: 15.0.4
-        version: 15.0.4(@playwright/test@1.49.0)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0)
+        specifier: 15.1.0
+        version: 15.1.0(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0)
       next-secure-headers:
         specifier: 2.2.0
         version: 2.2.0
@@ -415,10 +415,10 @@ importers:
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.10.1
-        version: 4.10.1(playwright-core@1.49.0)
+        version: 4.10.1(playwright-core@1.49.1)
       '@playwright/test':
-        specifier: 1.49.0
-        version: 1.49.0
+        specifier: 1.49.1
+        version: 1.49.1
       '@signalco/eslint-config-signalco':
         specifier: workspace:*
         version: link:../../packages/eslint-config-signalco
@@ -445,7 +445,7 @@ importers:
         version: 8.57.1
       next-sitemap:
         specifier: 4.2.3
-        version: 4.2.3(next@15.0.4(@playwright/test@1.49.0)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0))
+        version: 4.2.3(next@15.1.0(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0))
       postcss:
         specifier: 8.4.49
         version: 8.4.49
@@ -495,8 +495,8 @@ importers:
         specifier: 1.11.0
         version: 1.11.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@next/env':
-        specifier: 15.0.4
-        version: 15.0.4
+        specifier: 15.1.0
+        version: 15.1.0
       '@signalco/auth-client':
         specifier: workspace:*
         version: link:../../packages/auth-client
@@ -537,20 +537,20 @@ importers:
         specifier: workspace:*
         version: link:../../packages/ui-themes-minimal
       '@tanstack/react-query':
-        specifier: 5.62.3
-        version: 5.62.3(react@19.0.0)
+        specifier: 5.62.7
+        version: 5.62.7(react@19.0.0)
       '@tanstack/react-query-devtools':
-        specifier: 5.62.3
-        version: 5.62.3(@tanstack/react-query@5.62.3(react@19.0.0))(react@19.0.0)
+        specifier: 5.62.7
+        version: 5.62.7(@tanstack/react-query@5.62.7(react@19.0.0))(react@19.0.0)
       '@vercel/analytics':
         specifier: 1.4.1
-        version: 1.4.1(next@15.0.4(@playwright/test@1.49.0)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0))(react@19.0.0)
+        version: 1.4.1(next@15.1.0(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0))(react@19.0.0)
       nanoid:
         specifier: 5.0.9
         version: 5.0.9
       next:
-        specifier: 15.0.4
-        version: 15.0.4(@playwright/test@1.49.0)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0)
+        specifier: 15.1.0
+        version: 15.1.0(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0)
       next-secure-headers:
         specifier: 2.2.0
         version: 2.2.0
@@ -558,8 +558,8 @@ importers:
         specifier: 0.4.4
         version: 0.4.4(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       openai:
-        specifier: 4.76.0
-        version: 4.76.0(encoding@0.1.13)(zod@3.23.8)
+        specifier: 4.76.1
+        version: 4.76.1(encoding@0.1.13)(zod@3.23.8)
       react:
         specifier: 19.0.0
         version: 19.0.0
@@ -578,10 +578,10 @@ importers:
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.10.1
-        version: 4.10.1(playwright-core@1.49.0)
+        version: 4.10.1(playwright-core@1.49.1)
       '@playwright/test':
-        specifier: 1.49.0
-        version: 1.49.0
+        specifier: 1.49.1
+        version: 1.49.1
       '@signalco/eslint-config-signalco':
         specifier: workspace:*
         version: link:../../packages/eslint-config-signalco
@@ -611,7 +611,7 @@ importers:
         version: 8.57.1
       next-sitemap:
         specifier: 4.2.3
-        version: 4.2.3(next@15.0.4(@playwright/test@1.49.0)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0))
+        version: 4.2.3(next@15.1.0(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0))
       postcss:
         specifier: 8.4.49
         version: 8.4.49
@@ -628,8 +628,8 @@ importers:
         specifier: 1.11.0
         version: 1.11.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@next/env':
-        specifier: 15.0.4
-        version: 15.0.4
+        specifier: 15.1.0
+        version: 15.1.0
       '@signalco/cms-components-marketing':
         specifier: workspace:*
         version: link:../../packages/cms-components-marketing
@@ -652,8 +652,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/ui-themes-minimal
       next:
-        specifier: 15.0.4
-        version: 15.0.4(@playwright/test@1.49.0)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0)
+        specifier: 15.1.0
+        version: 15.1.0(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0)
       next-secure-headers:
         specifier: 2.2.0
         version: 2.2.0
@@ -675,10 +675,10 @@ importers:
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.10.1
-        version: 4.10.1(playwright-core@1.49.0)
+        version: 4.10.1(playwright-core@1.49.1)
       '@playwright/test':
-        specifier: 1.49.0
-        version: 1.49.0
+        specifier: 1.49.1
+        version: 1.49.1
       '@signalco/eslint-config-signalco':
         specifier: workspace:*
         version: link:../../packages/eslint-config-signalco
@@ -708,7 +708,7 @@ importers:
         version: 8.57.1
       next-sitemap:
         specifier: 4.2.3
-        version: 4.2.3(next@15.0.4(@playwright/test@1.49.0)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0))
+        version: 4.2.3(next@15.1.0(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0))
       postcss:
         specifier: 8.4.49
         version: 8.4.49
@@ -775,13 +775,13 @@ importers:
         version: 10.4.20(postcss@8.4.49)
       css-loader:
         specifier: 7.1.2
-        version: 7.1.2(webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.13))(esbuild@0.24.0))
+        version: 7.1.2(webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.15))(esbuild@0.24.0))
       postcss:
         specifier: 8.4.49
         version: 8.4.49
       postcss-loader:
         specifier: 8.1.1
-        version: 8.1.1(postcss@8.4.49)(typescript@5.7.2)(webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.13))(esbuild@0.24.0))
+        version: 8.1.1(postcss@8.4.49)(typescript@5.7.2)(webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.15))(esbuild@0.24.0))
       rimraf:
         specifier: 6.0.1
         version: 6.0.1
@@ -790,16 +790,16 @@ importers:
         version: 1.82.0
       sass-loader:
         specifier: 16.0.4
-        version: 16.0.4(sass@1.82.0)(webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.13))(esbuild@0.24.0))
+        version: 16.0.4(sass@1.82.0)(webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.15))(esbuild@0.24.0))
       storybook:
         specifier: 8.4.7
         version: 8.4.7(prettier@3.3.3)
       storybook-addon-swc:
         specifier: 1.2.0
-        version: 1.2.0(@swc/core@1.7.22(@swc/helpers@0.5.13))(terser-webpack-plugin@5.3.10(@swc/core@1.7.22(@swc/helpers@0.5.13))(esbuild@0.24.0)(webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.13))(esbuild@0.24.0)))(webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.13))(esbuild@0.24.0))
+        version: 1.2.0(@swc/core@1.7.22(@swc/helpers@0.5.15))(terser-webpack-plugin@5.3.10(@swc/core@1.7.22(@swc/helpers@0.5.15))(esbuild@0.24.0)(webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.15))(esbuild@0.24.0)))(webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.15))(esbuild@0.24.0))
       style-loader:
         specifier: 4.0.0
-        version: 4.0.0(webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.13))(esbuild@0.24.0))
+        version: 4.0.0(webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.15))(esbuild@0.24.0))
       styled-jsx:
         specifier: 5.1.6
         version: 5.1.6(@babel/core@7.25.2)(react@19.0.0)
@@ -819,8 +819,8 @@ importers:
         specifier: 4.2.0
         version: 4.2.0
       '@next/env':
-        specifier: 15.0.4
-        version: 15.0.4
+        specifier: 15.1.0
+        version: 15.1.0
       '@signalco/cms-components-marketing':
         specifier: workspace:*
         version: link:../../packages/cms-components-marketing
@@ -852,20 +852,20 @@ importers:
         specifier: workspace:*
         version: link:../../packages/ui-themes-minimal
       '@tanstack/react-query':
-        specifier: 5.62.3
-        version: 5.62.3(react@19.0.0)
+        specifier: 5.62.7
+        version: 5.62.7(react@19.0.0)
       '@tanstack/react-query-devtools':
-        specifier: 5.62.3
-        version: 5.62.3(@tanstack/react-query@5.62.3(react@19.0.0))(react@19.0.0)
+        specifier: 5.62.7
+        version: 5.62.7(@tanstack/react-query@5.62.7(react@19.0.0))(react@19.0.0)
       '@vercel/analytics':
         specifier: 1.4.1
-        version: 1.4.1(next@15.0.4(@playwright/test@1.49.0)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0))(react@19.0.0)
+        version: 1.4.1(next@15.1.0(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0))(react@19.0.0)
       nanoid:
         specifier: 5.0.9
         version: 5.0.9
       next:
-        specifier: 15.0.4
-        version: 15.0.4(@playwright/test@1.49.0)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0)
+        specifier: 15.1.0
+        version: 15.1.0(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0)
       next-secure-headers:
         specifier: 2.2.0
         version: 2.2.0
@@ -890,10 +890,10 @@ importers:
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.10.1
-        version: 4.10.1(playwright-core@1.49.0)
+        version: 4.10.1(playwright-core@1.49.1)
       '@playwright/test':
-        specifier: 1.49.0
-        version: 1.49.0
+        specifier: 1.49.1
+        version: 1.49.1
       '@signalco/eslint-config-signalco':
         specifier: workspace:*
         version: link:../../packages/eslint-config-signalco
@@ -923,7 +923,7 @@ importers:
         version: 8.57.1
       next-sitemap:
         specifier: 4.2.3
-        version: 4.2.3(next@15.0.4(@playwright/test@1.49.0)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0))
+        version: 4.2.3(next@15.1.0(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0))
       postcss:
         specifier: 8.4.49
         version: 8.4.49
@@ -943,8 +943,8 @@ importers:
         specifier: 1.11.0
         version: 1.11.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@next/env':
-        specifier: 15.0.4
-        version: 15.0.4
+        specifier: 15.1.0
+        version: 15.1.0
       '@reactflow/background':
         specifier: 11.3.14
         version: 11.3.14(@types/react@19.0.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -986,13 +986,13 @@ importers:
         version: 0.5.15(tailwindcss@3.4.16)
       '@vercel/analytics':
         specifier: 1.4.1
-        version: 1.4.1(next@15.0.4(@babel/core@7.25.2)(@playwright/test@1.49.0)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0))(react@19.0.0)
+        version: 1.4.1(next@15.1.0(@babel/core@7.25.2)(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0))(react@19.0.0)
       autoprefixer:
         specifier: 10.4.20
         version: 10.4.20(postcss@8.4.49)
       next:
-        specifier: 15.0.4
-        version: 15.0.4(@babel/core@7.25.2)(@playwright/test@1.49.0)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0)
+        specifier: 15.1.0
+        version: 15.1.0(@babel/core@7.25.2)(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0)
       next-secure-headers:
         specifier: 2.2.0
         version: 2.2.0
@@ -1020,10 +1020,10 @@ importers:
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.10.1
-        version: 4.10.1(playwright-core@1.49.0)
+        version: 4.10.1(playwright-core@1.49.1)
       '@playwright/test':
-        specifier: 1.49.0
-        version: 1.49.0
+        specifier: 1.49.1
+        version: 1.49.1
       '@signalco/eslint-config-signalco':
         specifier: workspace:*
         version: link:../../packages/eslint-config-signalco
@@ -1059,7 +1059,7 @@ importers:
         version: 8.57.1
       next-sitemap:
         specifier: 4.2.3
-        version: 4.2.3(next@15.0.4(@babel/core@7.25.2)(@playwright/test@1.49.0)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0))
+        version: 4.2.3(next@15.1.0(@babel/core@7.25.2)(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0))
       openapi-types:
         specifier: 12.1.3
         version: 12.1.3
@@ -1088,8 +1088,8 @@ importers:
         specifier: 1.4.0
         version: 1.4.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@react-email/components':
-        specifier: 0.0.30
-        version: 0.0.30(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+        specifier: 0.0.31
+        version: 0.0.31(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@signalco/auth-client':
         specifier: workspace:*
         version: link:../../packages/auth-client
@@ -1139,14 +1139,14 @@ importers:
         specifier: 0.5.15
         version: 0.5.15(tailwindcss@3.4.16)
       '@tanstack/react-query':
-        specifier: 5.62.3
-        version: 5.62.3(react@19.0.0)
+        specifier: 5.62.7
+        version: 5.62.7(react@19.0.0)
       '@tanstack/react-query-devtools':
-        specifier: 5.62.3
-        version: 5.62.3(@tanstack/react-query@5.62.3(react@19.0.0))(react@19.0.0)
+        specifier: 5.62.7
+        version: 5.62.7(@tanstack/react-query@5.62.7(react@19.0.0))(react@19.0.0)
       '@vercel/analytics':
         specifier: 1.4.1
-        version: 1.4.1(next@15.0.4(@playwright/test@1.49.0)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0))(react@19.0.0)
+        version: 1.4.1(next@15.1.0(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0))(react@19.0.0)
       jose:
         specifier: 5.9.6
         version: 5.9.6
@@ -1154,8 +1154,8 @@ importers:
         specifier: 5.0.9
         version: 5.0.9
       next:
-        specifier: 15.0.4
-        version: 15.0.4(@playwright/test@1.49.0)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0)
+        specifier: 15.1.0
+        version: 15.1.0(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0)
       next-secure-headers:
         specifier: 2.2.0
         version: 2.2.0
@@ -1163,8 +1163,8 @@ importers:
         specifier: 0.4.4
         version: 0.4.4(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       openai:
-        specifier: 4.76.0
-        version: 4.76.0(encoding@0.1.13)(zod@3.23.8)
+        specifier: 4.76.1
+        version: 4.76.1(encoding@0.1.13)(zod@3.23.8)
       react:
         specifier: 19.0.0
         version: 19.0.0
@@ -1173,7 +1173,7 @@ importers:
         version: 19.0.0(react@19.0.0)
       react-email:
         specifier: 3.0.4
-        version: 3.0.4(@playwright/test@1.49.0)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0)
+        version: 3.0.4(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0)
       react-markdown:
         specifier: 9.0.1
         version: 9.0.1(@types/react@19.0.1)(react@19.0.0)
@@ -1192,10 +1192,10 @@ importers:
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.10.1
-        version: 4.10.1(playwright-core@1.49.0)
+        version: 4.10.1(playwright-core@1.49.1)
       '@playwright/test':
-        specifier: 1.49.0
-        version: 1.49.0
+        specifier: 1.49.1
+        version: 1.49.1
       '@signalco/eslint-config-signalco':
         specifier: workspace:*
         version: link:../../packages/eslint-config-signalco
@@ -1225,7 +1225,7 @@ importers:
         version: 8.57.1
       next-sitemap:
         specifier: 4.2.3
-        version: 4.2.3(next@15.0.4(@playwright/test@1.49.0)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0))
+        version: 4.2.3(next@15.1.0(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0))
       postcss:
         specifier: 8.4.49
         version: 8.4.49
@@ -1258,8 +1258,8 @@ importers:
         specifier: workspace:*
         version: link:../ui-icons
       '@tanstack/react-query':
-        specifier: 5.62.3
-        version: 5.62.3(react@19.0.0)
+        specifier: 5.62.7
+        version: 5.62.7(react@19.0.0)
       '@types/react':
         specifier: 19.0.1
         version: 19.0.1
@@ -1267,8 +1267,8 @@ importers:
         specifier: 19.0.2
         version: 19.0.2(@types/react@19.0.1)
       next:
-        specifier: 15.0.4
-        version: 15.0.4(@playwright/test@1.49.0)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0)
+        specifier: 15.1.0
+        version: 15.1.0(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0)
       react:
         specifier: 19.0.0
         version: 19.0.0
@@ -1277,7 +1277,7 @@ importers:
         version: 19.0.0(react@19.0.0)
       tsup:
         specifier: 8.3.5
-        version: 8.3.5(@microsoft/api-extractor@7.48.0(@types/node@22.10.1))(@swc/core@1.7.22(@swc/helpers@0.5.13))(jiti@1.21.6)(postcss@8.4.49)(typescript@5.7.2)(yaml@2.5.0)
+        version: 8.3.5(@microsoft/api-extractor@7.48.0(@types/node@22.10.1))(@swc/core@1.7.22(@swc/helpers@0.5.15))(jiti@1.21.6)(postcss@8.4.49)(typescript@5.7.2)(yaml@2.5.0)
       typescript:
         specifier: 5.7.2
         version: 5.7.2
@@ -1306,8 +1306,8 @@ importers:
         specifier: 5.9.6
         version: 5.9.6
       next:
-        specifier: 15.0.4
-        version: 15.0.4(@playwright/test@1.49.0)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0)
+        specifier: 15.1.0
+        version: 15.1.0(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0)
       react:
         specifier: 19.0.0
         version: 19.0.0
@@ -1316,7 +1316,7 @@ importers:
         version: 19.0.0(react@19.0.0)
       tsup:
         specifier: 8.3.5
-        version: 8.3.5(@microsoft/api-extractor@7.48.0(@types/node@22.10.1))(@swc/core@1.7.22(@swc/helpers@0.5.13))(jiti@1.21.6)(postcss@8.4.49)(typescript@5.7.2)(yaml@2.5.0)
+        version: 8.3.5(@microsoft/api-extractor@7.48.0(@types/node@22.10.1))(@swc/core@1.7.22(@swc/helpers@0.5.15))(jiti@1.21.6)(postcss@8.4.49)(typescript@5.7.2)(yaml@2.5.0)
       typescript:
         specifier: 5.7.2
         version: 5.7.2
@@ -1361,7 +1361,7 @@ importers:
         version: 19.0.0(react@19.0.0)
       tsup:
         specifier: 8.3.5
-        version: 8.3.5(@microsoft/api-extractor@7.48.0(@types/node@22.10.1))(@swc/core@1.7.22(@swc/helpers@0.5.13))(jiti@1.21.6)(postcss@8.4.49)(typescript@5.7.2)(yaml@2.5.0)
+        version: 8.3.5(@microsoft/api-extractor@7.48.0(@types/node@22.10.1))(@swc/core@1.7.22(@swc/helpers@0.5.15))(jiti@1.21.6)(postcss@8.4.49)(typescript@5.7.2)(yaml@2.5.0)
       typescript:
         specifier: 5.7.2
         version: 5.7.2
@@ -1400,7 +1400,7 @@ importers:
         version: 19.0.0(react@19.0.0)
       tsup:
         specifier: 8.3.5
-        version: 8.3.5(@microsoft/api-extractor@7.48.0(@types/node@22.10.1))(@swc/core@1.7.22(@swc/helpers@0.5.13))(jiti@1.21.6)(postcss@8.4.49)(typescript@5.7.2)(yaml@2.5.0)
+        version: 8.3.5(@microsoft/api-extractor@7.48.0(@types/node@22.10.1))(@swc/core@1.7.22(@swc/helpers@0.5.15))(jiti@1.21.6)(postcss@8.4.49)(typescript@5.7.2)(yaml@2.5.0)
       typescript:
         specifier: 5.7.2
         version: 5.7.2
@@ -1417,14 +1417,14 @@ importers:
   packages/email-templates:
     dependencies:
       '@react-email/components':
-        specifier: 0.0.30
-        version: 0.0.30(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+        specifier: 0.0.31
+        version: 0.0.31(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       react:
         specifier: 19.0.0
         version: 19.0.0
       react-email:
         specifier: 3.0.4
-        version: 3.0.4(@playwright/test@1.49.0)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0)
+        version: 3.0.4(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0)
       typescript:
         specifier: 5.7.2
         version: 5.7.2
@@ -1454,14 +1454,14 @@ importers:
         specifier: 8.57.1
         version: 8.57.1
       eslint-config-next:
-        specifier: 15.0.4
-        version: 15.0.4(eslint@8.57.1)(typescript@5.7.2)
+        specifier: 15.1.0
+        version: 15.1.0(eslint@8.57.1)(typescript@5.7.2)
       eslint-config-turbo:
         specifier: 2.3.3
         version: 2.3.3(eslint@8.57.1)
       eslint-plugin-import:
         specifier: 2.31.0
-        version: 2.31.0(@typescript-eslint/parser@8.18.0(eslint@8.57.1)(typescript@5.7.2))(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@8.18.0(eslint@8.57.1)(typescript@5.7.2))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.31.0(@typescript-eslint/parser@8.18.0(eslint@8.57.1)(typescript@5.7.2))(eslint@8.57.1))(eslint@8.57.1))(eslint@8.57.1)
+        version: 2.31.0(@typescript-eslint/parser@8.18.0(eslint@8.57.1)(typescript@5.7.2))(eslint-import-resolver-typescript@3.6.1)(eslint@8.57.1)
       eslint-plugin-only-warn:
         specifier: 1.1.0
         version: 1.1.0
@@ -1493,8 +1493,8 @@ importers:
         specifier: 19.0.1
         version: 19.0.1
       next:
-        specifier: 15.0.4
-        version: 15.0.4(@playwright/test@1.49.0)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0)
+        specifier: 15.1.0
+        version: 15.1.0(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0)
       react:
         specifier: 19.0.0
         version: 19.0.0
@@ -1503,7 +1503,7 @@ importers:
         version: 19.0.0(react@19.0.0)
       tsup:
         specifier: 8.3.5
-        version: 8.3.5(@microsoft/api-extractor@7.48.0(@types/node@22.10.1))(@swc/core@1.7.22(@swc/helpers@0.5.13))(jiti@1.21.6)(postcss@8.4.49)(typescript@5.7.2)(yaml@2.5.0)
+        version: 8.3.5(@microsoft/api-extractor@7.48.0(@types/node@22.10.1))(@swc/core@1.7.22(@swc/helpers@0.5.15))(jiti@1.21.6)(postcss@8.4.49)(typescript@5.7.2)(yaml@2.5.0)
       typescript:
         specifier: 5.7.2
         version: 5.7.2
@@ -1521,7 +1521,7 @@ importers:
         version: link:../tsconfig
       tsup:
         specifier: 8.3.5
-        version: 8.3.5(@microsoft/api-extractor@7.48.0(@types/node@22.10.1))(@swc/core@1.7.22(@swc/helpers@0.5.13))(jiti@1.21.6)(postcss@8.4.49)(typescript@5.7.2)(yaml@2.5.0)
+        version: 8.3.5(@microsoft/api-extractor@7.48.0(@types/node@22.10.1))(@swc/core@1.7.22(@swc/helpers@0.5.15))(jiti@1.21.6)(postcss@8.4.49)(typescript@5.7.2)(yaml@2.5.0)
       typescript:
         specifier: 5.7.2
         version: 5.7.2
@@ -1632,7 +1632,7 @@ importers:
         version: 1.82.0
       tsup:
         specifier: 8.3.5
-        version: 8.3.5(@microsoft/api-extractor@7.48.0(@types/node@22.10.1))(@swc/core@1.7.22(@swc/helpers@0.5.13))(jiti@1.21.6)(postcss@8.4.49)(typescript@5.7.2)(yaml@2.5.0)
+        version: 8.3.5(@microsoft/api-extractor@7.48.0(@types/node@22.10.1))(@swc/core@1.7.22(@swc/helpers@0.5.15))(jiti@1.21.6)(postcss@8.4.49)(typescript@5.7.2)(yaml@2.5.0)
       typescript:
         specifier: 5.7.2
         version: 5.7.2
@@ -1704,7 +1704,7 @@ importers:
         version: 19.0.0(react@19.0.0)
       tsup:
         specifier: 8.3.5
-        version: 8.3.5(@microsoft/api-extractor@7.48.0(@types/node@22.10.1))(@swc/core@1.7.22(@swc/helpers@0.5.13))(jiti@1.21.6)(postcss@8.4.49)(typescript@5.7.2)(yaml@2.5.0)
+        version: 8.3.5(@microsoft/api-extractor@7.48.0(@types/node@22.10.1))(@swc/core@1.7.22(@swc/helpers@0.5.15))(jiti@1.21.6)(postcss@8.4.49)(typescript@5.7.2)(yaml@2.5.0)
       typescript:
         specifier: 5.7.2
         version: 5.7.2
@@ -1744,7 +1744,7 @@ importers:
         version: 1.7.1(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       tsup:
         specifier: 8.3.5
-        version: 8.3.5(@microsoft/api-extractor@7.48.0(@types/node@22.10.1))(@swc/core@1.7.22(@swc/helpers@0.5.13))(jiti@1.21.6)(postcss@8.4.49)(typescript@5.7.2)(yaml@2.5.0)
+        version: 8.3.5(@microsoft/api-extractor@7.48.0(@types/node@22.10.1))(@swc/core@1.7.22(@swc/helpers@0.5.15))(jiti@1.21.6)(postcss@8.4.49)(typescript@5.7.2)(yaml@2.5.0)
       typescript:
         specifier: 5.7.2
         version: 5.7.2
@@ -1815,8 +1815,8 @@ importers:
         specifier: 2.2.0
         version: 2.2.0
       next:
-        specifier: 15.0.4
-        version: 15.0.4(@playwright/test@1.49.0)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0)
+        specifier: 15.1.0
+        version: 15.1.0(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0)
       postcss:
         specifier: 8.4.49
         version: 8.4.49
@@ -1846,7 +1846,7 @@ importers:
         version: 1.0.7(tailwindcss@3.4.16)
       tsup:
         specifier: 8.3.5
-        version: 8.3.5(@microsoft/api-extractor@7.48.0(@types/node@22.10.1))(@swc/core@1.7.22(@swc/helpers@0.5.13))(jiti@1.21.6)(postcss@8.4.49)(typescript@5.7.2)(yaml@2.5.0)
+        version: 8.3.5(@microsoft/api-extractor@7.48.0(@types/node@22.10.1))(@swc/core@1.7.22(@swc/helpers@0.5.15))(jiti@1.21.6)(postcss@8.4.49)(typescript@5.7.2)(yaml@2.5.0)
       typescript:
         specifier: 5.7.2
         version: 5.7.2
@@ -1871,7 +1871,7 @@ importers:
         version: link:../tsconfig
       tsup:
         specifier: 8.3.5
-        version: 8.3.5(@microsoft/api-extractor@7.48.0(@types/node@22.10.1))(@swc/core@1.7.22(@swc/helpers@0.5.13))(jiti@1.21.6)(postcss@8.4.49)(typescript@5.7.2)(yaml@2.5.0)
+        version: 8.3.5(@microsoft/api-extractor@7.48.0(@types/node@22.10.1))(@swc/core@1.7.22(@swc/helpers@0.5.15))(jiti@1.21.6)(postcss@8.4.49)(typescript@5.7.2)(yaml@2.5.0)
       typescript:
         specifier: 5.7.2
         version: 5.7.2
@@ -1896,7 +1896,7 @@ importers:
         version: link:../tsconfig
       tsup:
         specifier: 8.3.5
-        version: 8.3.5(@microsoft/api-extractor@7.48.0(@types/node@22.10.1))(@swc/core@1.7.22(@swc/helpers@0.5.13))(jiti@1.21.6)(postcss@8.4.49)(typescript@5.7.2)(yaml@2.5.0)
+        version: 8.3.5(@microsoft/api-extractor@7.48.0(@types/node@22.10.1))(@swc/core@1.7.22(@swc/helpers@0.5.15))(jiti@1.21.6)(postcss@8.4.49)(typescript@5.7.2)(yaml@2.5.0)
       typescript:
         specifier: 5.7.2
         version: 5.7.2
@@ -1931,8 +1931,8 @@ importers:
         specifier: workspace:*
         version: link:../ui-themes-minimal
       '@tanstack/react-query':
-        specifier: 5.62.3
-        version: 5.62.3(react@19.0.0)
+        specifier: 5.62.7
+        version: 5.62.7(react@19.0.0)
       '@types/node':
         specifier: 22.10.1
         version: 22.10.1
@@ -1971,7 +1971,7 @@ importers:
         version: 1.0.7(tailwindcss@3.4.16)
       tsup:
         specifier: 8.3.5
-        version: 8.3.5(@microsoft/api-extractor@7.48.0(@types/node@22.10.1))(@swc/core@1.7.22(@swc/helpers@0.5.13))(jiti@1.21.6)(postcss@8.4.49)(typescript@5.7.2)(yaml@2.5.0)
+        version: 8.3.5(@microsoft/api-extractor@7.48.0(@types/node@22.10.1))(@swc/core@1.7.22(@swc/helpers@0.5.15))(jiti@1.21.6)(postcss@8.4.49)(typescript@5.7.2)(yaml@2.5.0)
       typescript:
         specifier: 5.7.2
         version: 5.7.2
@@ -3145,11 +3145,14 @@ packages:
   '@next/env@15.0.4':
     resolution: {integrity: sha512-WNRvtgnRVDD4oM8gbUcRc27IAhaL4eXQ/2ovGbgLnPGUvdyDr8UdXP4Q/IBDdAdojnD2eScryIDirv0YUCjUVw==}
 
-  '@next/eslint-plugin-next@15.0.4':
-    resolution: {integrity: sha512-rbsF17XGzHtR7SDWzWpavSfum3/UdnF8bAaisnKwP//si3KWPTedVUsflAdjyK1zW3rweBjbALfKcavFneLGvg==}
+  '@next/env@15.1.0':
+    resolution: {integrity: sha512-UcCO481cROsqJuszPPXJnb7GGuLq617ve4xuAyyNG4VSSocJNtMU5Fsx+Lp6mlN8c7W58aZLc5y6D/2xNmaK+w==}
 
-  '@next/mdx@15.0.4':
-    resolution: {integrity: sha512-BeqbM0ShnGQGv0qNM1ac7t0TqerHzjYamhbfE62UDZ35U7dlsqaafeuGUw91kZJWdHBOja1kUgZn1I1xCZQNhQ==}
+  '@next/eslint-plugin-next@15.1.0':
+    resolution: {integrity: sha512-+jPT0h+nelBT6HC9ZCHGc7DgGVy04cv4shYdAe6tKlEbjQUtwU3LzQhzbDHQyY2m6g39m6B0kOFVuLGBrxxbGg==}
+
+  '@next/mdx@15.1.0':
+    resolution: {integrity: sha512-1USYedy2yRmPdIvQC1b2MBVwiJYrcZnCSHHZZETEuV1rAxjjXedbHmo43kwAv6DL3f9AgDHnl1/s1cqI7xhXdA==}
     peerDependencies:
       '@mdx-js/loader': '>=0.15.0'
       '@mdx-js/react': '>=0.15.0'
@@ -3165,8 +3168,20 @@ packages:
     cpu: [arm64]
     os: [darwin]
 
+  '@next/swc-darwin-arm64@15.1.0':
+    resolution: {integrity: sha512-ZU8d7xxpX14uIaFC3nsr4L++5ZS/AkWDm1PzPO6gD9xWhFkOj2hzSbSIxoncsnlJXB1CbLOfGVN4Zk9tg83PUw==}
+    engines: {node: '>= 10'}
+    cpu: [arm64]
+    os: [darwin]
+
   '@next/swc-darwin-x64@15.0.4':
     resolution: {integrity: sha512-pb7Bye3y1Og3PlCtnz2oO4z+/b3pH2/HSYkLbL0hbVuTGil7fPen8/3pyyLjdiTLcFJ+ymeU3bck5hd4IPFFCA==}
+    engines: {node: '>= 10'}
+    cpu: [x64]
+    os: [darwin]
+
+  '@next/swc-darwin-x64@15.1.0':
+    resolution: {integrity: sha512-DQ3RiUoW2XC9FcSM4ffpfndq1EsLV0fj0/UY33i7eklW5akPUCo6OX2qkcLXZ3jyPdo4sf2flwAED3AAq3Om2Q==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [darwin]
@@ -3177,8 +3192,20 @@ packages:
     cpu: [arm64]
     os: [linux]
 
+  '@next/swc-linux-arm64-gnu@15.1.0':
+    resolution: {integrity: sha512-M+vhTovRS2F//LMx9KtxbkWk627l5Q7AqXWWWrfIzNIaUFiz2/NkOFkxCFyNyGACi5YbA8aekzCLtbDyfF/v5Q==}
+    engines: {node: '>= 10'}
+    cpu: [arm64]
+    os: [linux]
+
   '@next/swc-linux-arm64-musl@15.0.4':
     resolution: {integrity: sha512-QARO88fR/a+wg+OFC3dGytJVVviiYFEyjc/Zzkjn/HevUuJ7qGUUAUYy5PGVWY1YgTzeRYz78akQrVQ8r+sMjw==}
+    engines: {node: '>= 10'}
+    cpu: [arm64]
+    os: [linux]
+
+  '@next/swc-linux-arm64-musl@15.1.0':
+    resolution: {integrity: sha512-Qn6vOuwaTCx3pNwygpSGtdIu0TfS1KiaYLYXLH5zq1scoTXdwYfdZtwvJTpB1WrLgiQE2Ne2kt8MZok3HlFqmg==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [linux]
@@ -3189,8 +3216,20 @@ packages:
     cpu: [x64]
     os: [linux]
 
+  '@next/swc-linux-x64-gnu@15.1.0':
+    resolution: {integrity: sha512-yeNh9ofMqzOZ5yTOk+2rwncBzucc6a1lyqtg8xZv0rH5znyjxHOWsoUtSq4cUTeeBIiXXX51QOOe+VoCjdXJRw==}
+    engines: {node: '>= 10'}
+    cpu: [x64]
+    os: [linux]
+
   '@next/swc-linux-x64-musl@15.0.4':
     resolution: {integrity: sha512-7H9C4FAsrTAbA/ENzvFWsVytqRYhaJYKa2B3fyQcv96TkOGVMcvyS6s+sj4jZlacxxTcn7ygaMXUPkEk7b78zw==}
+    engines: {node: '>= 10'}
+    cpu: [x64]
+    os: [linux]
+
+  '@next/swc-linux-x64-musl@15.1.0':
+    resolution: {integrity: sha512-t9IfNkHQs/uKgPoyEtU912MG6a1j7Had37cSUyLTKx9MnUpjj+ZDKw9OyqTI9OwIIv0wmkr1pkZy+3T5pxhJPg==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
@@ -3201,8 +3240,20 @@ packages:
     cpu: [arm64]
     os: [win32]
 
+  '@next/swc-win32-arm64-msvc@15.1.0':
+    resolution: {integrity: sha512-WEAoHyG14t5sTavZa1c6BnOIEukll9iqFRTavqRVPfYmfegOAd5MaZfXgOGG6kGo1RduyGdTHD4+YZQSdsNZXg==}
+    engines: {node: '>= 10'}
+    cpu: [arm64]
+    os: [win32]
+
   '@next/swc-win32-x64-msvc@15.0.4':
     resolution: {integrity: sha512-NGLchGruagh8lQpDr98bHLyWJXOBSmkEAfK980OiNBa7vNm6PsNoPvzTfstT78WyOeMRQphEQ455rggd7Eo+Dw==}
+    engines: {node: '>= 10'}
+    cpu: [x64]
+    os: [win32]
+
+  '@next/swc-win32-x64-msvc@15.1.0':
+    resolution: {integrity: sha512-J1YdKuJv9xcixzXR24Dv+4SaDKc2jj31IVUEMdO5xJivMTXuE6MAdIi4qPjSymHuFG8O5wbfWKnhJUcHHpj5CA==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [win32]
@@ -3406,8 +3457,8 @@ packages:
     resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
     engines: {node: '>=14'}
 
-  '@playwright/test@1.49.0':
-    resolution: {integrity: sha512-DMulbwQURa8rNIQrf94+jPJQ4FmOVdpE5ZppRNvWVjvhC+6sOeo28r8MgIpQRYouXRtt/FCCXU7zn20jnHR4Qw==}
+  '@playwright/test@1.49.1':
+    resolution: {integrity: sha512-Ky+BVzPz8pL6PQxHqNRW1k3mIyv933LML7HktS8uik0bUXNCdPhoS/kLihiO1tMf/egaJb4IutXd7UywvXEW+g==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -3480,7 +3531,7 @@ packages:
   '@radix-ui/react-context@1.1.1':
     resolution: {integrity: sha512-UASk9zi+crv9WteK/NU4PLvOoL3OuE6BWVKNF6hPRBtYBDXQ2u5iu3O59zUlJiTVvkyuycnqrztsHVJwcK9K+Q==}
     peerDependencies:
-      '@types/react': npm:types-react@19.0.0-rc.1
+      '@types/react': '*'
       react: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
     peerDependenciesMeta:
       '@types/react':
@@ -3511,8 +3562,8 @@ packages:
   '@radix-ui/react-dismissable-layer@1.1.1':
     resolution: {integrity: sha512-QSxg29lfr/xcev6kSz7MAlmDnzbP1eI/Dwn3Tp1ip0KT5CUELsxkekFEMVBEoykI3oV39hKT4TKZzBNMbcTZYQ==}
     peerDependencies:
-      '@types/react': npm:types-react@19.0.0-rc.1
-      '@types/react-dom': npm:types-react-dom@19.0.0-rc.1
+      '@types/react': '*'
+      '@types/react-dom': '*'
       react: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
       react-dom: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
     peerDependenciesMeta:
@@ -3537,7 +3588,7 @@ packages:
   '@radix-ui/react-focus-guards@1.1.1':
     resolution: {integrity: sha512-pSIwfrT1a6sIoDASCSpFwOasEwKTZWDw/iBdtnqKO7v6FeOzYJ7U53cPzYFVR3geGGXgVHaH+CdngrrAzqUGxg==}
     peerDependencies:
-      '@types/react': npm:types-react@19.0.0-rc.1
+      '@types/react': '*'
       react: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
     peerDependenciesMeta:
       '@types/react':
@@ -3568,8 +3619,8 @@ packages:
   '@radix-ui/react-menu@2.1.2':
     resolution: {integrity: sha512-lZ0R4qR2Al6fZ4yCCZzu/ReTFrylHFxIqy7OezIpWF4bL0o9biKo0pFIvkaew3TyZ9Fy5gYVrR5zCGZBVbO1zg==}
     peerDependencies:
-      '@types/react': npm:types-react@19.0.0-rc.1
-      '@types/react-dom': npm:types-react-dom@19.0.0-rc.1
+      '@types/react': '*'
+      '@types/react-dom': '*'
       react: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
       react-dom: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
     peerDependenciesMeta:
@@ -3620,8 +3671,8 @@ packages:
   '@radix-ui/react-portal@1.1.2':
     resolution: {integrity: sha512-WeDYLGPxJb/5EGBoedyJbT0MpoULmwnIPMJMSldkuiMsBAv7N1cRdsTWZWht9vpPOiN3qyiGAtbK2is47/uMFg==}
     peerDependencies:
-      '@types/react': npm:types-react@19.0.0-rc.1
-      '@types/react-dom': npm:types-react-dom@19.0.0-rc.1
+      '@types/react': '*'
+      '@types/react-dom': '*'
       react: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
       react-dom: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
     peerDependenciesMeta:
@@ -3633,8 +3684,8 @@ packages:
   '@radix-ui/react-presence@1.1.1':
     resolution: {integrity: sha512-IeFXVi4YS1K0wVZzXNrbaaUvIJ3qdY+/Ih4eHFhWA9SwGR9UDX7Ck8abvL57C4cv3wwMvUE0OG69Qc3NCcTe/A==}
     peerDependencies:
-      '@types/react': npm:types-react@19.0.0-rc.1
-      '@types/react-dom': npm:types-react-dom@19.0.0-rc.1
+      '@types/react': '*'
+      '@types/react-dom': '*'
       react: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
       react-dom: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
     peerDependenciesMeta:
@@ -3825,8 +3876,8 @@ packages:
     peerDependencies:
       react: ^18.0 || ^19.0 || ^19.0.0-rc
 
-  '@react-email/components@0.0.30':
-    resolution: {integrity: sha512-JkPcGE/r3WsHMVO4kjkaQzAyXiSPATg5TgzTImypjGHbwrdLaDMVEBZz1SuLV8GexqCnmzo1qmhVHtHq8E7UWg==}
+  '@react-email/components@0.0.31':
+    resolution: {integrity: sha512-rQsTY9ajobncix9raexhBjC7O6cXUMc87eNez2gnB1FwtkUO8DqWZcktbtwOJi7GKmuAPTx0o/IOFtiBNXziKA==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
       react: ^18.0 || ^19.0 || ^19.0.0-rc
@@ -3909,8 +3960,8 @@ packages:
     peerDependencies:
       react: ^18.0 || ^19.0 || ^19.0.0-rc
 
-  '@react-email/tailwind@1.0.3':
-    resolution: {integrity: sha512-VwRft4u/c0KuD6YlGWr+pltfzLzHS6Qt/L0XvdJf6ij6Iz6kKtuc7ZVZp/CJVbGnkUgWl/uiDlJ4FIAF6IzWTQ==}
+  '@react-email/tailwind@1.0.4':
+    resolution: {integrity: sha512-tJdcusncdqgvTUYZIuhNC6LYTfL9vNTSQpwWdTCQhQ1lsrNCEE4OKCSdzSV3S9F32pi0i0xQ+YPJHKIzGjdTSA==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
       react: ^18.0 || ^19.0 || ^19.0.0-rc
@@ -4349,6 +4400,9 @@ packages:
   '@swc/helpers@0.5.13':
     resolution: {integrity: sha512-UoKGxQ3r5kYI9dALKJapMmuK+1zWM/H17Z1+iwnNmzcJRnfFuevZs375TA5rW31pu4BS4NoSy1fRsexDXfWn5w==}
 
+  '@swc/helpers@0.5.15':
+    resolution: {integrity: sha512-JQ5TuMi45Owi4/BIMAJBoSQoOJu12oOk/gADqlcUL9JEdHB8vyjUSsxqeNXnmXHjYKMi2WcYtezGEEhqUI/E2g==}
+
   '@swc/types@0.1.17':
     resolution: {integrity: sha512-V5gRru+aD8YVyCOMAjMpWR1Ui577DD5KSJsHP8RAxopAH22jFz6GZd/qxqjO6MJHQhcsjvjOFXyDhyLQUnMveQ==}
 
@@ -4357,20 +4411,20 @@ packages:
     peerDependencies:
       tailwindcss: '>=3.0.0 || insiders || >=4.0.0-alpha.20'
 
-  '@tanstack/query-core@5.62.3':
-    resolution: {integrity: sha512-Jp/nYoz8cnO7kqhOlSv8ke/0MJRJVGuZ0P/JO9KQ+f45mpN90hrerzavyTKeSoT/pOzeoOUkv1Xd0wPsxAWXfg==}
+  '@tanstack/query-core@5.62.7':
+    resolution: {integrity: sha512-fgpfmwatsrUal6V+8EC2cxZIQVl9xvL7qYa03gsdsCy985UTUlS4N+/3hCzwR0PclYDqisca2AqR1BVgJGpUDA==}
 
   '@tanstack/query-devtools@5.61.4':
     resolution: {integrity: sha512-21Tw+u8E3IJJj4A/Bct4H0uBaDTEu7zBrR79FeSyY+mS2gx5/m316oDtJiKkILc819VSTYt+sFzODoJNcpPqZQ==}
 
-  '@tanstack/react-query-devtools@5.62.3':
-    resolution: {integrity: sha512-4iaQap/iP5ErS094u1WehFntHtjRo6g5HJMvyHovBVbsxnvgPc6AtKAw7qxPPoKy6Wj5Bew0045eYP5phiiBmw==}
+  '@tanstack/react-query-devtools@5.62.7':
+    resolution: {integrity: sha512-wxXsdTZJRs//hMtJMU5aNlUaTclRFPqLvDNeWbRj8YpGD3aoo4zyu53W55W2DY16+ycg3fti21uCW4N9oyj91w==}
     peerDependencies:
-      '@tanstack/react-query': ^5.62.3
+      '@tanstack/react-query': ^5.62.7
       react: ^18 || ^19
 
-  '@tanstack/react-query@5.62.3':
-    resolution: {integrity: sha512-y2zDNKuhgiuMgsKkqd4AcsLIBiCfEO8U11AdrtAUihmLbRNztPrlcZqx2lH1GacZsx+y1qRRbCcJLYTtF1vKsw==}
+  '@tanstack/react-query@5.62.7':
+    resolution: {integrity: sha512-+xCtP4UAFDTlRTYyEjLx0sRtWyr5GIk7TZjZwBu4YaNahi3Rt2oMyRqfpfVrtwsqY2sayP4iXVCwmC+ZqqFmuw==}
     peerDependencies:
       react: ^18 || ^19
 
@@ -5748,8 +5802,8 @@ packages:
     resolution: {integrity: sha512-/veY75JbMK4j1yjvuUxuVsiS/hr/4iHs9FTT6cgTexxdE0Ly/glccBAkloH/DofkjRbZU3bnoj38mOmhkZ0lHw==}
     engines: {node: '>=12'}
 
-  eslint-config-next@15.0.4:
-    resolution: {integrity: sha512-97mLaAhbJKVQYXUBBrenRtEUAA6bNDPxWfaFEd6mEhKfpajP4wJrW4l7BUlHuYWxR8oQa9W014qBJpumpJQwWA==}
+  eslint-config-next@15.1.0:
+    resolution: {integrity: sha512-gADO+nKVseGso3DtOrYX9H7TxB/MuX7AUYhMlvQMqLYvUWu4HrOQuU7cC1HW74tHIqkAvXdwgAz3TCbczzSEXw==}
     peerDependencies:
       eslint: ^7.23.0 || ^8.0.0 || ^9.0.0
       typescript: '>=3.3.1'
@@ -7069,6 +7123,27 @@ packages:
       sass:
         optional: true
 
+  next@15.1.0:
+    resolution: {integrity: sha512-QKhzt6Y8rgLNlj30izdMbxAwjHMFANnLwDwZ+WQh5sMhyt4lEBqDK9QpvWHtIM4rINKPoJ8aiRZKg5ULSybVHw==}
+    engines: {node: ^18.18.0 || ^19.8.0 || >= 20.0.0}
+    hasBin: true
+    peerDependencies:
+      '@opentelemetry/api': ^1.1.0
+      '@playwright/test': ^1.41.2
+      babel-plugin-react-compiler: '*'
+      react: ^18.2.0 || 19.0.0-rc-de68d2f4-20241204 || ^19.0.0
+      react-dom: ^18.2.0 || 19.0.0-rc-de68d2f4-20241204 || ^19.0.0
+      sass: ^1.3.0
+    peerDependenciesMeta:
+      '@opentelemetry/api':
+        optional: true
+      '@playwright/test':
+        optional: true
+      babel-plugin-react-compiler:
+        optional: true
+      sass:
+        optional: true
+
   node-addon-api@7.1.1:
     resolution: {integrity: sha512-5m3bsyrjFWE1xf7nz7YXdN4udnVtXK6/Yfgn5qnahL6bCkf2yKt4k3nuTKAtT4r3IG8JNR2ncsIMdZuAzJjHQQ==}
 
@@ -7152,8 +7227,8 @@ packages:
     resolution: {integrity: sha512-7x81NCL719oNbsq/3mh+hVrAWmFuEYUqrq/Iw3kUzH8ReypT9QQ0BLoJS7/G9k6N81XjW4qHWtjWwe/9eLy1EQ==}
     engines: {node: '>=12'}
 
-  openai@4.76.0:
-    resolution: {integrity: sha512-QBGIetjX1C9xDp5XGa/3mPnfKI9BgAe2xHQX6PmO98wuW9qQaurBaumcYptQWc9LHZZq7cH/Y1Rjnsr6uUDdVw==}
+  openai@4.76.1:
+    resolution: {integrity: sha512-ci63/WFEMd6QjjEVeH0pV7hnFS6CCqhgJydSti4Aak/8uo2SpgzKjteUDaY+OkwziVj11mi6j+0mRUIiGKUzWw==}
     hasBin: true
     peerDependencies:
       zod: ^3.23.8
@@ -7300,13 +7375,13 @@ packages:
     resolution: {integrity: sha512-Ie9z/WINcxxLp27BKOCHGde4ITq9UklYKDzVo1nhk5sqGEXU3FpkwP5GM2voTGJkGd9B3Otl+Q4uwSOeSUtOBA==}
     engines: {node: '>=14.16'}
 
-  playwright-core@1.49.0:
-    resolution: {integrity: sha512-R+3KKTQF3npy5GTiKH/T+kdhoJfJojjHESR1YEWhYuEKRVfVaxH3+4+GvXE5xyCngCxhxnykk0Vlah9v8fs3jA==}
+  playwright-core@1.49.1:
+    resolution: {integrity: sha512-BzmpVcs4kE2CH15rWfzpjzVGhWERJfmnXmniSyKeRZUs9Ws65m+RGIi7mjJK/euCegfn3i7jvqWeWyHe9y3Vgg==}
     engines: {node: '>=18'}
     hasBin: true
 
-  playwright@1.49.0:
-    resolution: {integrity: sha512-eKpmys0UFDnfNb3vfsf8Vx2LEOtflgRebl0Im2eQQnYMA4Aqd+Zw8bEOB+7ZKvN76901mRnqdsiOGKxzVTbi7A==}
+  playwright@1.49.1:
+    resolution: {integrity: sha512-VYL8zLoNTBxVOrJBbDuRgDWa3i+mfQgDTrL8Ah9QXZ7ax4Dsj0MSq5bYgytRnDVVe+njoKnfsYkH3HzqVj5UZA==}
     engines: {node: '>=18'}
     hasBin: true
 
@@ -8436,6 +8511,9 @@ packages:
   tslib@2.7.0:
     resolution: {integrity: sha512-gLXCKdN1/j47AiHiOkJN69hJmcbGTHI0ImLmbYLHykhgeN0jVGola9yVjFgzCUklsZQMW55o+dW7IXv3RCXDzA==}
 
+  tslib@2.8.1:
+    resolution: {integrity: sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==}
+
   tsup@8.3.5:
     resolution: {integrity: sha512-Tunf6r6m6tnZsG9GYWndg0z8dEV7fD733VBFzFJ5Vcm1FtlXB8xBD/rtrBi2a3YKEV7hHtxiZtW5EAVADoe1pA==}
     engines: {node: '>=18'}
@@ -8973,10 +9051,10 @@ snapshots:
 
   '@auth0/auth0-spa-js@2.1.3': {}
 
-  '@axe-core/playwright@4.10.1(playwright-core@1.49.0)':
+  '@axe-core/playwright@4.10.1(playwright-core@1.49.1)':
     dependencies:
       axe-core: 4.10.2
-      playwright-core: 1.49.0
+      playwright-core: 1.49.1
 
   '@azure/abort-controller@1.1.0':
     dependencies:
@@ -10156,11 +10234,13 @@ snapshots:
 
   '@next/env@15.0.4': {}
 
-  '@next/eslint-plugin-next@15.0.4':
+  '@next/env@15.1.0': {}
+
+  '@next/eslint-plugin-next@15.1.0':
     dependencies:
       fast-glob: 3.3.1
 
-  '@next/mdx@15.0.4(@mdx-js/loader@3.1.0(webpack@5.94.0))(@mdx-js/react@3.1.0(@types/react@19.0.1)(react@19.0.0))':
+  '@next/mdx@15.1.0(@mdx-js/loader@3.1.0(webpack@5.94.0))(@mdx-js/react@3.1.0(@types/react@19.0.1)(react@19.0.0))':
     dependencies:
       source-map: 0.7.4
     optionalDependencies:
@@ -10170,25 +10250,49 @@ snapshots:
   '@next/swc-darwin-arm64@15.0.4':
     optional: true
 
+  '@next/swc-darwin-arm64@15.1.0':
+    optional: true
+
   '@next/swc-darwin-x64@15.0.4':
+    optional: true
+
+  '@next/swc-darwin-x64@15.1.0':
     optional: true
 
   '@next/swc-linux-arm64-gnu@15.0.4':
     optional: true
 
+  '@next/swc-linux-arm64-gnu@15.1.0':
+    optional: true
+
   '@next/swc-linux-arm64-musl@15.0.4':
+    optional: true
+
+  '@next/swc-linux-arm64-musl@15.1.0':
     optional: true
 
   '@next/swc-linux-x64-gnu@15.0.4':
     optional: true
 
+  '@next/swc-linux-x64-gnu@15.1.0':
+    optional: true
+
   '@next/swc-linux-x64-musl@15.0.4':
+    optional: true
+
+  '@next/swc-linux-x64-musl@15.1.0':
     optional: true
 
   '@next/swc-win32-arm64-msvc@15.0.4':
     optional: true
 
+  '@next/swc-win32-arm64-msvc@15.1.0':
+    optional: true
+
   '@next/swc-win32-x64-msvc@15.0.4':
+    optional: true
+
+  '@next/swc-win32-x64-msvc@15.1.0':
     optional: true
 
   '@nodelib/fs.scandir@2.1.5':
@@ -10409,9 +10513,9 @@ snapshots:
   '@pkgjs/parseargs@0.11.0':
     optional: true
 
-  '@playwright/test@1.49.0':
+  '@playwright/test@1.49.1':
     dependencies:
-      playwright: 1.49.0
+      playwright: 1.49.1
 
   '@popperjs/core@2.11.8': {}
 
@@ -10835,7 +10939,7 @@ snapshots:
     dependencies:
       react: 19.0.0
 
-  '@react-email/components@0.0.30(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
+  '@react-email/components@0.0.31(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
     dependencies:
       '@react-email/body': 0.0.11(react@19.0.0)
       '@react-email/button': 0.0.19(react@19.0.0)
@@ -10855,7 +10959,7 @@ snapshots:
       '@react-email/render': 1.0.3(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@react-email/row': 0.0.12(react@19.0.0)
       '@react-email/section': 0.0.16(react@19.0.0)
-      '@react-email/tailwind': 1.0.3(react@19.0.0)
+      '@react-email/tailwind': 1.0.4(react@19.0.0)
       '@react-email/text': 0.0.11(react@19.0.0)
       react: 19.0.0
     transitivePeerDependencies:
@@ -10918,7 +11022,7 @@ snapshots:
     dependencies:
       react: 19.0.0
 
-  '@react-email/tailwind@1.0.3(react@19.0.0)':
+  '@react-email/tailwind@1.0.4(react@19.0.0)':
     dependencies:
       react: 19.0.0
 
@@ -11376,7 +11480,7 @@ snapshots:
   '@swc/core-win32-x64-msvc@1.7.22':
     optional: true
 
-  '@swc/core@1.7.22(@swc/helpers@0.5.13)':
+  '@swc/core@1.7.22(@swc/helpers@0.5.15)':
     dependencies:
       '@swc/counter': 0.1.3
       '@swc/types': 0.1.17
@@ -11391,13 +11495,17 @@ snapshots:
       '@swc/core-win32-arm64-msvc': 1.7.22
       '@swc/core-win32-ia32-msvc': 1.7.22
       '@swc/core-win32-x64-msvc': 1.7.22
-      '@swc/helpers': 0.5.13
+      '@swc/helpers': 0.5.15
 
   '@swc/counter@0.1.3': {}
 
   '@swc/helpers@0.5.13':
     dependencies:
       tslib: 2.7.0
+
+  '@swc/helpers@0.5.15':
+    dependencies:
+      tslib: 2.8.1
 
   '@swc/types@0.1.17':
     dependencies:
@@ -11411,19 +11519,19 @@ snapshots:
       postcss-selector-parser: 6.0.10
       tailwindcss: 3.4.16
 
-  '@tanstack/query-core@5.62.3': {}
+  '@tanstack/query-core@5.62.7': {}
 
   '@tanstack/query-devtools@5.61.4': {}
 
-  '@tanstack/react-query-devtools@5.62.3(@tanstack/react-query@5.62.3(react@19.0.0))(react@19.0.0)':
+  '@tanstack/react-query-devtools@5.62.7(@tanstack/react-query@5.62.7(react@19.0.0))(react@19.0.0)':
     dependencies:
       '@tanstack/query-devtools': 5.61.4
-      '@tanstack/react-query': 5.62.3(react@19.0.0)
+      '@tanstack/react-query': 5.62.7(react@19.0.0)
       react: 19.0.0
 
-  '@tanstack/react-query@5.62.3(react@19.0.0)':
+  '@tanstack/react-query@5.62.7(react@19.0.0)':
     dependencies:
-      '@tanstack/query-core': 5.62.3
+      '@tanstack/query-core': 5.62.7
       react: 19.0.0
 
   '@tiptap/core@2.7.2(@tiptap/pm@2.7.2)':
@@ -11890,19 +11998,19 @@ snapshots:
 
   '@ungap/structured-clone@1.2.0': {}
 
-  '@vercel/analytics@1.4.1(next@15.0.4(@babel/core@7.25.2)(@playwright/test@1.49.0)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0))(react@19.0.0)':
+  '@vercel/analytics@1.4.1(next@15.1.0(@babel/core@7.25.2)(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0))(react@19.0.0)':
     optionalDependencies:
-      next: 15.0.4(@babel/core@7.25.2)(@playwright/test@1.49.0)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0)
+      next: 15.1.0(@babel/core@7.25.2)(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0)
       react: 19.0.0
 
-  '@vercel/analytics@1.4.1(next@15.0.4(@playwright/test@1.49.0)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0))(react@19.0.0)':
+  '@vercel/analytics@1.4.1(next@15.1.0(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0))(react@19.0.0)':
     optionalDependencies:
-      next: 15.0.4(@playwright/test@1.49.0)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0)
+      next: 15.1.0(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0)
       react: 19.0.0
 
-  '@vercel/speed-insights@1.1.0(next@15.0.4(@playwright/test@1.49.0)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0))(react@19.0.0)':
+  '@vercel/speed-insights@1.1.0(next@15.1.0(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0))(react@19.0.0)':
     optionalDependencies:
-      next: 15.0.4(@playwright/test@1.49.0)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0)
+      next: 15.1.0(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0)
       react: 19.0.0
 
   '@vvo/tzdb@6.152.0': {}
@@ -12453,7 +12561,7 @@ snapshots:
       postcss-selector-parser: 7.0.0
       postcss-value-parser: 4.2.0
 
-  css-loader@7.1.2(webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.13))(esbuild@0.24.0)):
+  css-loader@7.1.2(webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.15))(esbuild@0.24.0)):
     dependencies:
       icss-utils: 5.1.0(postcss@8.4.49)
       postcss: 8.4.49
@@ -12464,7 +12572,7 @@ snapshots:
       postcss-value-parser: 4.2.0
       semver: 7.6.3
     optionalDependencies:
-      webpack: 5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.13))(esbuild@0.24.0)
+      webpack: 5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.15))(esbuild@0.24.0)
 
   css-prefers-color-scheme@10.0.0(postcss@8.4.49):
     dependencies:
@@ -12998,16 +13106,16 @@ snapshots:
 
   escape-string-regexp@5.0.0: {}
 
-  eslint-config-next@15.0.4(eslint@8.57.1)(typescript@5.7.2):
+  eslint-config-next@15.1.0(eslint@8.57.1)(typescript@5.7.2):
     dependencies:
-      '@next/eslint-plugin-next': 15.0.4
+      '@next/eslint-plugin-next': 15.1.0
       '@rushstack/eslint-patch': 1.10.4
       '@typescript-eslint/eslint-plugin': 8.18.0(@typescript-eslint/parser@8.18.0(eslint@8.57.1)(typescript@5.7.2))(eslint@8.57.1)(typescript@5.7.2)
       '@typescript-eslint/parser': 8.18.0(eslint@8.57.1)(typescript@5.7.2)
       eslint: 8.57.1
       eslint-import-resolver-node: 0.3.9
-      eslint-import-resolver-typescript: 3.6.1(@typescript-eslint/parser@8.18.0(eslint@8.57.1)(typescript@5.7.2))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.31.0(@typescript-eslint/parser@8.18.0(eslint@8.57.1)(typescript@5.7.2))(eslint@8.57.1))(eslint@8.57.1)
-      eslint-plugin-import: 2.31.0(@typescript-eslint/parser@8.18.0(eslint@8.57.1)(typescript@5.7.2))(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@8.18.0(eslint@8.57.1)(typescript@5.7.2))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.31.0(@typescript-eslint/parser@8.18.0(eslint@8.57.1)(typescript@5.7.2))(eslint@8.57.1))(eslint@8.57.1))(eslint@8.57.1)
+      eslint-import-resolver-typescript: 3.6.1(@typescript-eslint/parser@8.18.0(eslint@8.57.1)(typescript@5.7.2))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.31.0)(eslint@8.57.1)
+      eslint-plugin-import: 2.31.0(@typescript-eslint/parser@8.18.0(eslint@8.57.1)(typescript@5.7.2))(eslint-import-resolver-typescript@3.6.1)(eslint@8.57.1)
       eslint-plugin-jsx-a11y: 6.10.2(eslint@8.57.1)
       eslint-plugin-react: 7.37.2(eslint@8.57.1)
       eslint-plugin-react-hooks: 5.0.0(eslint@8.57.1)
@@ -13030,13 +13138,13 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@8.18.0(eslint@8.57.1)(typescript@5.7.2))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.31.0(@typescript-eslint/parser@8.18.0(eslint@8.57.1)(typescript@5.7.2))(eslint@8.57.1))(eslint@8.57.1):
+  eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@8.18.0(eslint@8.57.1)(typescript@5.7.2))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.31.0)(eslint@8.57.1):
     dependencies:
       debug: 4.3.7(supports-color@9.4.0)
       enhanced-resolve: 5.17.1
       eslint: 8.57.1
-      eslint-module-utils: 2.12.0(@typescript-eslint/parser@8.18.0(eslint@8.57.1)(typescript@5.7.2))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@8.18.0(eslint@8.57.1)(typescript@5.7.2))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.31.0(@typescript-eslint/parser@8.18.0(eslint@8.57.1)(typescript@5.7.2))(eslint@8.57.1))(eslint@8.57.1))(eslint@8.57.1)
-      eslint-plugin-import: 2.31.0(@typescript-eslint/parser@8.18.0(eslint@8.57.1)(typescript@5.7.2))(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@8.18.0(eslint@8.57.1)(typescript@5.7.2))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.31.0(@typescript-eslint/parser@8.18.0(eslint@8.57.1)(typescript@5.7.2))(eslint@8.57.1))(eslint@8.57.1))(eslint@8.57.1)
+      eslint-module-utils: 2.12.0(@typescript-eslint/parser@8.18.0(eslint@8.57.1)(typescript@5.7.2))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1)(eslint@8.57.1)
+      eslint-plugin-import: 2.31.0(@typescript-eslint/parser@8.18.0(eslint@8.57.1)(typescript@5.7.2))(eslint-import-resolver-typescript@3.6.1)(eslint@8.57.1)
       fast-glob: 3.3.2
       get-tsconfig: 4.7.3
       is-core-module: 2.15.1
@@ -13047,18 +13155,18 @@ snapshots:
       - eslint-import-resolver-webpack
       - supports-color
 
-  eslint-module-utils@2.12.0(@typescript-eslint/parser@8.18.0(eslint@8.57.1)(typescript@5.7.2))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@8.18.0(eslint@8.57.1)(typescript@5.7.2))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.31.0(@typescript-eslint/parser@8.18.0(eslint@8.57.1)(typescript@5.7.2))(eslint@8.57.1))(eslint@8.57.1))(eslint@8.57.1):
+  eslint-module-utils@2.12.0(@typescript-eslint/parser@8.18.0(eslint@8.57.1)(typescript@5.7.2))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1)(eslint@8.57.1):
     dependencies:
       debug: 3.2.7
     optionalDependencies:
       '@typescript-eslint/parser': 8.18.0(eslint@8.57.1)(typescript@5.7.2)
       eslint: 8.57.1
       eslint-import-resolver-node: 0.3.9
-      eslint-import-resolver-typescript: 3.6.1(@typescript-eslint/parser@8.18.0(eslint@8.57.1)(typescript@5.7.2))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.31.0(@typescript-eslint/parser@8.18.0(eslint@8.57.1)(typescript@5.7.2))(eslint@8.57.1))(eslint@8.57.1)
+      eslint-import-resolver-typescript: 3.6.1(@typescript-eslint/parser@8.18.0(eslint@8.57.1)(typescript@5.7.2))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.31.0)(eslint@8.57.1)
     transitivePeerDependencies:
       - supports-color
 
-  eslint-plugin-import@2.31.0(@typescript-eslint/parser@8.18.0(eslint@8.57.1)(typescript@5.7.2))(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@8.18.0(eslint@8.57.1)(typescript@5.7.2))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.31.0(@typescript-eslint/parser@8.18.0(eslint@8.57.1)(typescript@5.7.2))(eslint@8.57.1))(eslint@8.57.1))(eslint@8.57.1):
+  eslint-plugin-import@2.31.0(@typescript-eslint/parser@8.18.0(eslint@8.57.1)(typescript@5.7.2))(eslint-import-resolver-typescript@3.6.1)(eslint@8.57.1):
     dependencies:
       '@rtsao/scc': 1.1.0
       array-includes: 3.1.8
@@ -13069,7 +13177,7 @@ snapshots:
       doctrine: 2.1.0
       eslint: 8.57.1
       eslint-import-resolver-node: 0.3.9
-      eslint-module-utils: 2.12.0(@typescript-eslint/parser@8.18.0(eslint@8.57.1)(typescript@5.7.2))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@8.18.0(eslint@8.57.1)(typescript@5.7.2))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.31.0(@typescript-eslint/parser@8.18.0(eslint@8.57.1)(typescript@5.7.2))(eslint@8.57.1))(eslint@8.57.1))(eslint@8.57.1)
+      eslint-module-utils: 2.12.0(@typescript-eslint/parser@8.18.0(eslint@8.57.1)(typescript@5.7.2))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1)(eslint@8.57.1)
       hasown: 2.0.2
       is-core-module: 2.15.1
       is-glob: 4.0.3
@@ -14814,28 +14922,28 @@ snapshots:
 
   next-secure-headers@2.2.0: {}
 
-  next-sitemap@4.2.3(next@15.0.4(@babel/core@7.25.2)(@playwright/test@1.49.0)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0)):
+  next-sitemap@4.2.3(next@15.1.0(@babel/core@7.25.2)(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0)):
     dependencies:
       '@corex/deepmerge': 4.0.43
       '@next/env': 13.5.6
       fast-glob: 3.3.2
       minimist: 1.2.8
-      next: 15.0.4(@babel/core@7.25.2)(@playwright/test@1.49.0)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0)
+      next: 15.1.0(@babel/core@7.25.2)(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0)
 
-  next-sitemap@4.2.3(next@15.0.4(@playwright/test@1.49.0)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0)):
+  next-sitemap@4.2.3(next@15.1.0(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0)):
     dependencies:
       '@corex/deepmerge': 4.0.43
       '@next/env': 13.5.6
       fast-glob: 3.3.2
       minimist: 1.2.8
-      next: 15.0.4(@playwright/test@1.49.0)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0)
+      next: 15.1.0(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0)
 
   next-themes@0.4.4(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
     dependencies:
       react: 19.0.0
       react-dom: 19.0.0(react@19.0.0)
 
-  next@15.0.4(@babel/core@7.24.5)(@playwright/test@1.49.0)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0):
+  next@15.0.4(@babel/core@7.24.5)(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0):
     dependencies:
       '@next/env': 15.0.4
       '@swc/counter': 0.1.3
@@ -14855,7 +14963,7 @@ snapshots:
       '@next/swc-linux-x64-musl': 15.0.4
       '@next/swc-win32-arm64-msvc': 15.0.4
       '@next/swc-win32-x64-msvc': 15.0.4
-      '@playwright/test': 1.49.0
+      '@playwright/test': 1.49.1
       babel-plugin-react-compiler: 19.0.0-beta-df7b47d-20241124
       sass: 1.82.0
       sharp: 0.33.5
@@ -14863,11 +14971,11 @@ snapshots:
       - '@babel/core'
       - babel-plugin-macros
 
-  next@15.0.4(@babel/core@7.25.2)(@playwright/test@1.49.0)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0):
+  next@15.1.0(@babel/core@7.25.2)(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0):
     dependencies:
-      '@next/env': 15.0.4
+      '@next/env': 15.1.0
       '@swc/counter': 0.1.3
-      '@swc/helpers': 0.5.13
+      '@swc/helpers': 0.5.15
       busboy: 1.6.0
       caniuse-lite: 1.0.30001687
       postcss: 8.4.31
@@ -14875,15 +14983,15 @@ snapshots:
       react-dom: 19.0.0(react@19.0.0)
       styled-jsx: 5.1.6(@babel/core@7.25.2)(react@19.0.0)
     optionalDependencies:
-      '@next/swc-darwin-arm64': 15.0.4
-      '@next/swc-darwin-x64': 15.0.4
-      '@next/swc-linux-arm64-gnu': 15.0.4
-      '@next/swc-linux-arm64-musl': 15.0.4
-      '@next/swc-linux-x64-gnu': 15.0.4
-      '@next/swc-linux-x64-musl': 15.0.4
-      '@next/swc-win32-arm64-msvc': 15.0.4
-      '@next/swc-win32-x64-msvc': 15.0.4
-      '@playwright/test': 1.49.0
+      '@next/swc-darwin-arm64': 15.1.0
+      '@next/swc-darwin-x64': 15.1.0
+      '@next/swc-linux-arm64-gnu': 15.1.0
+      '@next/swc-linux-arm64-musl': 15.1.0
+      '@next/swc-linux-x64-gnu': 15.1.0
+      '@next/swc-linux-x64-musl': 15.1.0
+      '@next/swc-win32-arm64-msvc': 15.1.0
+      '@next/swc-win32-x64-msvc': 15.1.0
+      '@playwright/test': 1.49.1
       babel-plugin-react-compiler: 19.0.0-beta-df7b47d-20241124
       sass: 1.82.0
       sharp: 0.33.5
@@ -14891,11 +14999,11 @@ snapshots:
       - '@babel/core'
       - babel-plugin-macros
 
-  next@15.0.4(@playwright/test@1.49.0)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0):
+  next@15.1.0(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0):
     dependencies:
-      '@next/env': 15.0.4
+      '@next/env': 15.1.0
       '@swc/counter': 0.1.3
-      '@swc/helpers': 0.5.13
+      '@swc/helpers': 0.5.15
       busboy: 1.6.0
       caniuse-lite: 1.0.30001687
       postcss: 8.4.31
@@ -14903,15 +15011,15 @@ snapshots:
       react-dom: 19.0.0(react@19.0.0)
       styled-jsx: 5.1.6(@babel/core@7.24.5)(react@19.0.0)
     optionalDependencies:
-      '@next/swc-darwin-arm64': 15.0.4
-      '@next/swc-darwin-x64': 15.0.4
-      '@next/swc-linux-arm64-gnu': 15.0.4
-      '@next/swc-linux-arm64-musl': 15.0.4
-      '@next/swc-linux-x64-gnu': 15.0.4
-      '@next/swc-linux-x64-musl': 15.0.4
-      '@next/swc-win32-arm64-msvc': 15.0.4
-      '@next/swc-win32-x64-msvc': 15.0.4
-      '@playwright/test': 1.49.0
+      '@next/swc-darwin-arm64': 15.1.0
+      '@next/swc-darwin-x64': 15.1.0
+      '@next/swc-linux-arm64-gnu': 15.1.0
+      '@next/swc-linux-arm64-musl': 15.1.0
+      '@next/swc-linux-x64-gnu': 15.1.0
+      '@next/swc-linux-x64-musl': 15.1.0
+      '@next/swc-win32-arm64-msvc': 15.1.0
+      '@next/swc-win32-x64-msvc': 15.1.0
+      '@playwright/test': 1.49.1
       babel-plugin-react-compiler: 19.0.0-beta-df7b47d-20241124
       sass: 1.82.0
       sharp: 0.33.5
@@ -15011,7 +15119,7 @@ snapshots:
       is-docker: 2.2.1
       is-wsl: 2.2.0
 
-  openai@4.76.0(encoding@0.1.13)(zod@3.23.8):
+  openai@4.76.1(encoding@0.1.13)(zod@3.23.8):
     dependencies:
       '@types/node': 18.19.67
       '@types/node-fetch': 2.6.11
@@ -15182,11 +15290,11 @@ snapshots:
     dependencies:
       find-up: 6.3.0
 
-  playwright-core@1.49.0: {}
+  playwright-core@1.49.1: {}
 
-  playwright@1.49.0:
+  playwright@1.49.1:
     dependencies:
-      playwright-core: 1.49.0
+      playwright-core: 1.49.1
     optionalDependencies:
       fsevents: 2.3.2
 
@@ -15326,14 +15434,14 @@ snapshots:
       postcss: 8.4.49
       yaml: 2.5.0
 
-  postcss-loader@8.1.1(postcss@8.4.49)(typescript@5.7.2)(webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.13))(esbuild@0.24.0)):
+  postcss-loader@8.1.1(postcss@8.4.49)(typescript@5.7.2)(webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.15))(esbuild@0.24.0)):
     dependencies:
       cosmiconfig: 9.0.0(typescript@5.7.2)
       jiti: 1.21.6
       postcss: 8.4.49
       semver: 7.6.3
     optionalDependencies:
-      webpack: 5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.13))(esbuild@0.24.0)
+      webpack: 5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.15))(esbuild@0.24.0)
     transitivePeerDependencies:
       - typescript
 
@@ -15687,7 +15795,7 @@ snapshots:
       react: 19.0.0
       react-dom: 19.0.0(react@19.0.0)
 
-  react-email@3.0.4(@playwright/test@1.49.0)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0):
+  react-email@3.0.4(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0):
     dependencies:
       '@babel/core': 7.24.5
       '@babel/parser': 7.24.5
@@ -15699,7 +15807,7 @@ snapshots:
       glob: 10.3.4
       log-symbols: 4.1.0
       mime-types: 2.1.35
-      next: 15.0.4(@babel/core@7.24.5)(@playwright/test@1.49.0)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0)
+      next: 15.0.4(@babel/core@7.24.5)(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.82.0)
       normalize-path: 3.0.0
       ora: 5.4.1
       socket.io: 4.8.0
@@ -16093,12 +16201,12 @@ snapshots:
 
   safer-buffer@2.1.2: {}
 
-  sass-loader@16.0.4(sass@1.82.0)(webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.13))(esbuild@0.24.0)):
+  sass-loader@16.0.4(sass@1.82.0)(webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.15))(esbuild@0.24.0)):
     dependencies:
       neo-async: 2.6.2
     optionalDependencies:
       sass: 1.82.0
-      webpack: 5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.13))(esbuild@0.24.0)
+      webpack: 5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.15))(esbuild@0.24.0)
 
   sass-loader@16.0.4(sass@1.82.0)(webpack@5.94.0):
     dependencies:
@@ -16282,15 +16390,15 @@ snapshots:
 
   state-local@1.0.7: {}
 
-  storybook-addon-swc@1.2.0(@swc/core@1.7.22(@swc/helpers@0.5.13))(terser-webpack-plugin@5.3.10(@swc/core@1.7.22(@swc/helpers@0.5.13))(esbuild@0.24.0)(webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.13))(esbuild@0.24.0)))(webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.13))(esbuild@0.24.0)):
+  storybook-addon-swc@1.2.0(@swc/core@1.7.22(@swc/helpers@0.5.15))(terser-webpack-plugin@5.3.10(@swc/core@1.7.22(@swc/helpers@0.5.15))(esbuild@0.24.0)(webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.15))(esbuild@0.24.0)))(webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.15))(esbuild@0.24.0)):
     dependencies:
       '@babel/runtime': 7.25.0
-      '@swc/core': 1.7.22(@swc/helpers@0.5.13)
+      '@swc/core': 1.7.22(@swc/helpers@0.5.15)
       deepmerge: 4.3.1
-      swc-loader: 0.1.16(@swc/core@1.7.22(@swc/helpers@0.5.13))(webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.13))(esbuild@0.24.0))
+      swc-loader: 0.1.16(@swc/core@1.7.22(@swc/helpers@0.5.15))(webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.15))(esbuild@0.24.0))
     optionalDependencies:
-      terser-webpack-plugin: 5.3.10(@swc/core@1.7.22(@swc/helpers@0.5.13))(esbuild@0.24.0)(webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.13))(esbuild@0.24.0))
-      webpack: 5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.13))(esbuild@0.24.0)
+      terser-webpack-plugin: 5.3.10(@swc/core@1.7.22(@swc/helpers@0.5.15))(esbuild@0.24.0)(webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.15))(esbuild@0.24.0))
+      webpack: 5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.15))(esbuild@0.24.0)
 
   storybook@8.4.7(prettier@3.3.3):
     dependencies:
@@ -16393,9 +16501,9 @@ snapshots:
       '@types/node': 22.10.1
       qs: 6.13.0
 
-  style-loader@4.0.0(webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.13))(esbuild@0.24.0)):
+  style-loader@4.0.0(webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.15))(esbuild@0.24.0)):
     dependencies:
-      webpack: 5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.13))(esbuild@0.24.0)
+      webpack: 5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.15))(esbuild@0.24.0)
 
   style-to-object@0.4.4:
     dependencies:
@@ -16447,10 +16555,10 @@ snapshots:
 
   supports-preserve-symlinks-flag@1.0.0: {}
 
-  swc-loader@0.1.16(@swc/core@1.7.22(@swc/helpers@0.5.13))(webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.13))(esbuild@0.24.0)):
+  swc-loader@0.1.16(@swc/core@1.7.22(@swc/helpers@0.5.15))(webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.15))(esbuild@0.24.0)):
     dependencies:
-      '@swc/core': 1.7.22(@swc/helpers@0.5.13)
-      webpack: 5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.13))(esbuild@0.24.0)
+      '@swc/core': 1.7.22(@swc/helpers@0.5.15)
+      webpack: 5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.15))(esbuild@0.24.0)
 
   tabbable@6.2.0: {}
 
@@ -16489,16 +16597,16 @@ snapshots:
 
   tapable@2.2.1: {}
 
-  terser-webpack-plugin@5.3.10(@swc/core@1.7.22(@swc/helpers@0.5.13))(esbuild@0.24.0)(webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.13))(esbuild@0.24.0)):
+  terser-webpack-plugin@5.3.10(@swc/core@1.7.22(@swc/helpers@0.5.15))(esbuild@0.24.0)(webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.15))(esbuild@0.24.0)):
     dependencies:
       '@jridgewell/trace-mapping': 0.3.25
       jest-worker: 27.5.1
       schema-utils: 3.3.0
       serialize-javascript: 6.0.2
       terser: 5.37.0
-      webpack: 5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.13))(esbuild@0.24.0)
+      webpack: 5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.15))(esbuild@0.24.0)
     optionalDependencies:
-      '@swc/core': 1.7.22(@swc/helpers@0.5.13)
+      '@swc/core': 1.7.22(@swc/helpers@0.5.15)
       esbuild: 0.24.0
 
   terser-webpack-plugin@5.3.10(webpack@5.94.0):
@@ -16592,7 +16700,9 @@ snapshots:
 
   tslib@2.7.0: {}
 
-  tsup@8.3.5(@microsoft/api-extractor@7.48.0(@types/node@22.10.1))(@swc/core@1.7.22(@swc/helpers@0.5.13))(jiti@1.21.6)(postcss@8.4.49)(typescript@5.7.2)(yaml@2.5.0):
+  tslib@2.8.1: {}
+
+  tsup@8.3.5(@microsoft/api-extractor@7.48.0(@types/node@22.10.1))(@swc/core@1.7.22(@swc/helpers@0.5.15))(jiti@1.21.6)(postcss@8.4.49)(typescript@5.7.2)(yaml@2.5.0):
     dependencies:
       bundle-require: 5.0.0(esbuild@0.24.0)
       cac: 6.7.14
@@ -16612,7 +16722,7 @@ snapshots:
       tree-kill: 1.2.2
     optionalDependencies:
       '@microsoft/api-extractor': 7.48.0(@types/node@22.10.1)
-      '@swc/core': 1.7.22(@swc/helpers@0.5.13)
+      '@swc/core': 1.7.22(@swc/helpers@0.5.15)
       postcss: 8.4.49
       typescript: 5.7.2
     transitivePeerDependencies:
@@ -17003,7 +17113,7 @@ snapshots:
       - esbuild
       - uglify-js
 
-  webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.13))(esbuild@0.24.0):
+  webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.15))(esbuild@0.24.0):
     dependencies:
       '@types/estree': 1.0.6
       '@webassemblyjs/ast': 1.14.1
@@ -17025,7 +17135,7 @@ snapshots:
       neo-async: 2.6.2
       schema-utils: 3.3.0
       tapable: 2.2.1
-      terser-webpack-plugin: 5.3.10(@swc/core@1.7.22(@swc/helpers@0.5.13))(esbuild@0.24.0)(webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.13))(esbuild@0.24.0))
+      terser-webpack-plugin: 5.3.10(@swc/core@1.7.22(@swc/helpers@0.5.15))(esbuild@0.24.0)(webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.15))(esbuild@0.24.0))
       watchpack: 2.4.2
       webpack-sources: 3.2.3
     transitivePeerDependencies:
