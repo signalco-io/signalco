@@ -93,8 +93,8 @@ importers:
         specifier: 1.1.0
         version: 1.1.0(next@15.1.0(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0))(react@19.0.0)
       '@vvo/tzdb':
-        specifier: 6.152.0
-        version: 6.152.0
+        specifier: 6.153.0
+        version: 6.153.0
       autoprefixer:
         specifier: 10.4.20
         version: 10.4.20(postcss@8.4.49)
@@ -4868,8 +4868,8 @@ packages:
       vue-router:
         optional: true
 
-  '@vvo/tzdb@6.152.0':
-    resolution: {integrity: sha512-PSHIgDk6LjYTyAK7fPLZIliB1vSQg2OXxfkAkRJzUkwuR/Xp5FzmQNx9SmHVZhw/W/Y1x6TE6yO89PFPossswQ==}
+  '@vvo/tzdb@6.153.0':
+    resolution: {integrity: sha512-qtHnfGowiiLjSC5wTI63ICEVgN2tR5s1ZeVGEsnwaWTJSaE3hRbiCsS5ArEuWnhCT0ZUrk+N9pL6yC4RNiaVcQ==}
 
   '@webassemblyjs/ast@1.14.1':
     resolution: {integrity: sha512-nuBEDgQfm1ccRp/8bCQrx1frohyufl4JlbMMZ4P1wpeOfDhF6FQkxZJ1b/e+PLwr6X1Nhw6OLme5usuBWYBvuQ==}
@@ -11998,7 +11998,7 @@ snapshots:
       next: 15.1.0(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0)
       react: 19.0.0
 
-  '@vvo/tzdb@6.152.0': {}
+  '@vvo/tzdb@6.153.0': {}
 
   '@webassemblyjs/ast@1.14.1':
     dependencies:
