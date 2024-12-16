@@ -48,7 +48,7 @@
         "react-timeago": "7.2.0",
         "sass": "1.83.0",
         "typescript": "5.7.2",
-        "@microsoft/api-extractor": "7.48.0",
+        "@microsoft/api-extractor": "7.48.1",
         "tsup": "8.3.5"
     },
     "peerDependencies": {
