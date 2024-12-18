@@ -51,8 +51,8 @@ importers:
         specifier: 4.6.0
         version: 4.6.0(monaco-editor@0.52.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@next/env':
-        specifier: 15.1.0
-        version: 15.1.0
+        specifier: 15.1.1
+        version: 15.1.1
       '@signalco/data':
         specifier: workspace:*
         version: link:../../packages/data
@@ -81,17 +81,17 @@ importers:
         specifier: workspace:*
         version: link:../../packages/ui-themes-minimal-app
       '@tanstack/react-query':
-        specifier: 5.62.7
-        version: 5.62.7(react@19.0.0)
+        specifier: 5.62.8
+        version: 5.62.8(react@19.0.0)
       '@tanstack/react-query-devtools':
-        specifier: 5.62.7
-        version: 5.62.7(@tanstack/react-query@5.62.7(react@19.0.0))(react@19.0.0)
+        specifier: 5.62.8
+        version: 5.62.8(@tanstack/react-query@5.62.8(react@19.0.0))(react@19.0.0)
       '@vercel/analytics':
         specifier: 1.4.1
-        version: 1.4.1(next@15.1.0(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0))(react@19.0.0)
+        version: 1.4.1(next@15.1.1(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0))(react@19.0.0)
       '@vercel/speed-insights':
         specifier: 1.1.0
-        version: 1.1.0(next@15.1.0(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0))(react@19.0.0)
+        version: 1.1.0(next@15.1.1(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0))(react@19.0.0)
       '@vvo/tzdb':
         specifier: 6.154.0
         version: 6.154.0
@@ -120,8 +120,8 @@ importers:
         specifier: 0.52.2
         version: 0.52.2
       next:
-        specifier: 15.1.0
-        version: 15.1.0(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0)
+        specifier: 15.1.1
+        version: 15.1.1(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0)
       next-secure-headers:
         specifier: 2.2.0
         version: 2.2.0
@@ -221,7 +221,7 @@ importers:
         version: 11.2.0
       next-sitemap:
         specifier: 4.2.3
-        version: 4.2.3(next@15.1.0(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0))
+        version: 4.2.3(next@15.1.1(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0))
       openapi-types:
         specifier: 12.1.3
         version: 12.1.3
@@ -247,11 +247,11 @@ importers:
         specifier: 3.1.0
         version: 3.1.0(@types/react@19.0.2)(react@19.0.0)
       '@next/env':
-        specifier: 15.1.0
-        version: 15.1.0
+        specifier: 15.1.1
+        version: 15.1.1
       '@next/mdx':
-        specifier: 15.1.0
-        version: 15.1.0(@mdx-js/loader@3.1.0(webpack@5.94.0))(@mdx-js/react@3.1.0(@types/react@19.0.2)(react@19.0.0))
+        specifier: 15.1.1
+        version: 15.1.1(@mdx-js/loader@3.1.0(webpack@5.94.0))(@mdx-js/react@3.1.0(@types/react@19.0.2)(react@19.0.0))
       '@signalco/cms-components-marketing':
         specifier: workspace:*
         version: link:../../packages/cms-components-marketing
@@ -281,13 +281,13 @@ importers:
         version: link:../../packages/ui-themes-minimal
       '@vercel/analytics':
         specifier: 1.4.1
-        version: 1.4.1(next@15.1.0(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0))(react@19.0.0)
+        version: 1.4.1(next@15.1.1(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0))(react@19.0.0)
       autoprefixer:
         specifier: 10.4.20
         version: 10.4.20(postcss@8.4.49)
       next:
-        specifier: 15.1.0
-        version: 15.1.0(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0)
+        specifier: 15.1.1
+        version: 15.1.1(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0)
       next-secure-headers:
         specifier: 2.2.0
         version: 2.2.0
@@ -348,7 +348,7 @@ importers:
         version: 8.57.1
       next-sitemap:
         specifier: 4.2.3
-        version: 4.2.3(next@15.1.0(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0))
+        version: 4.2.3(next@15.1.1(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0))
       postcss:
         specifier: 8.4.49
         version: 8.4.49
@@ -365,8 +365,8 @@ importers:
         specifier: 0.5.0
         version: 0.5.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@next/env':
-        specifier: 15.1.0
-        version: 15.1.0
+        specifier: 15.1.1
+        version: 15.1.1
       '@signalco/cms-components-marketing':
         specifier: workspace:*
         version: link:../../packages/cms-components-marketing
@@ -398,8 +398,8 @@ importers:
         specifier: 1.0.0
         version: 1.0.0
       next:
-        specifier: 15.1.0
-        version: 15.1.0(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0)
+        specifier: 15.1.1
+        version: 15.1.1(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0)
       next-secure-headers:
         specifier: 2.2.0
         version: 2.2.0
@@ -445,7 +445,7 @@ importers:
         version: 8.57.1
       next-sitemap:
         specifier: 4.2.3
-        version: 4.2.3(next@15.1.0(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0))
+        version: 4.2.3(next@15.1.1(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0))
       postcss:
         specifier: 8.4.49
         version: 8.4.49
@@ -495,8 +495,8 @@ importers:
         specifier: 1.11.0
         version: 1.11.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@next/env':
-        specifier: 15.1.0
-        version: 15.1.0
+        specifier: 15.1.1
+        version: 15.1.1
       '@signalco/auth-client':
         specifier: workspace:*
         version: link:../../packages/auth-client
@@ -537,20 +537,20 @@ importers:
         specifier: workspace:*
         version: link:../../packages/ui-themes-minimal
       '@tanstack/react-query':
-        specifier: 5.62.7
-        version: 5.62.7(react@19.0.0)
+        specifier: 5.62.8
+        version: 5.62.8(react@19.0.0)
       '@tanstack/react-query-devtools':
-        specifier: 5.62.7
-        version: 5.62.7(@tanstack/react-query@5.62.7(react@19.0.0))(react@19.0.0)
+        specifier: 5.62.8
+        version: 5.62.8(@tanstack/react-query@5.62.8(react@19.0.0))(react@19.0.0)
       '@vercel/analytics':
         specifier: 1.4.1
-        version: 1.4.1(next@15.1.0(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0))(react@19.0.0)
+        version: 1.4.1(next@15.1.1(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0))(react@19.0.0)
       nanoid:
         specifier: 5.0.9
         version: 5.0.9
       next:
-        specifier: 15.1.0
-        version: 15.1.0(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0)
+        specifier: 15.1.1
+        version: 15.1.1(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0)
       next-secure-headers:
         specifier: 2.2.0
         version: 2.2.0
@@ -611,7 +611,7 @@ importers:
         version: 8.57.1
       next-sitemap:
         specifier: 4.2.3
-        version: 4.2.3(next@15.1.0(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0))
+        version: 4.2.3(next@15.1.1(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0))
       postcss:
         specifier: 8.4.49
         version: 8.4.49
@@ -628,8 +628,8 @@ importers:
         specifier: 1.11.0
         version: 1.11.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@next/env':
-        specifier: 15.1.0
-        version: 15.1.0
+        specifier: 15.1.1
+        version: 15.1.1
       '@signalco/cms-components-marketing':
         specifier: workspace:*
         version: link:../../packages/cms-components-marketing
@@ -652,8 +652,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/ui-themes-minimal
       next:
-        specifier: 15.1.0
-        version: 15.1.0(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0)
+        specifier: 15.1.1
+        version: 15.1.1(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0)
       next-secure-headers:
         specifier: 2.2.0
         version: 2.2.0
@@ -708,7 +708,7 @@ importers:
         version: 8.57.1
       next-sitemap:
         specifier: 4.2.3
-        version: 4.2.3(next@15.1.0(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0))
+        version: 4.2.3(next@15.1.1(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0))
       postcss:
         specifier: 8.4.49
         version: 8.4.49
@@ -819,8 +819,8 @@ importers:
         specifier: 4.2.0
         version: 4.2.0
       '@next/env':
-        specifier: 15.1.0
-        version: 15.1.0
+        specifier: 15.1.1
+        version: 15.1.1
       '@signalco/cms-components-marketing':
         specifier: workspace:*
         version: link:../../packages/cms-components-marketing
@@ -852,20 +852,20 @@ importers:
         specifier: workspace:*
         version: link:../../packages/ui-themes-minimal
       '@tanstack/react-query':
-        specifier: 5.62.7
-        version: 5.62.7(react@19.0.0)
+        specifier: 5.62.8
+        version: 5.62.8(react@19.0.0)
       '@tanstack/react-query-devtools':
-        specifier: 5.62.7
-        version: 5.62.7(@tanstack/react-query@5.62.7(react@19.0.0))(react@19.0.0)
+        specifier: 5.62.8
+        version: 5.62.8(@tanstack/react-query@5.62.8(react@19.0.0))(react@19.0.0)
       '@vercel/analytics':
         specifier: 1.4.1
-        version: 1.4.1(next@15.1.0(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0))(react@19.0.0)
+        version: 1.4.1(next@15.1.1(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0))(react@19.0.0)
       nanoid:
         specifier: 5.0.9
         version: 5.0.9
       next:
-        specifier: 15.1.0
-        version: 15.1.0(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0)
+        specifier: 15.1.1
+        version: 15.1.1(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0)
       next-secure-headers:
         specifier: 2.2.0
         version: 2.2.0
@@ -923,7 +923,7 @@ importers:
         version: 8.57.1
       next-sitemap:
         specifier: 4.2.3
-        version: 4.2.3(next@15.1.0(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0))
+        version: 4.2.3(next@15.1.1(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0))
       postcss:
         specifier: 8.4.49
         version: 8.4.49
@@ -943,8 +943,8 @@ importers:
         specifier: 1.11.0
         version: 1.11.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@next/env':
-        specifier: 15.1.0
-        version: 15.1.0
+        specifier: 15.1.1
+        version: 15.1.1
       '@reactflow/background':
         specifier: 11.3.14
         version: 11.3.14(@types/react@19.0.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -986,13 +986,13 @@ importers:
         version: 0.5.15(tailwindcss@3.4.16)
       '@vercel/analytics':
         specifier: 1.4.1
-        version: 1.4.1(next@15.1.0(@babel/core@7.25.2)(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0))(react@19.0.0)
+        version: 1.4.1(next@15.1.1(@babel/core@7.25.2)(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0))(react@19.0.0)
       autoprefixer:
         specifier: 10.4.20
         version: 10.4.20(postcss@8.4.49)
       next:
-        specifier: 15.1.0
-        version: 15.1.0(@babel/core@7.25.2)(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0)
+        specifier: 15.1.1
+        version: 15.1.1(@babel/core@7.25.2)(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0)
       next-secure-headers:
         specifier: 2.2.0
         version: 2.2.0
@@ -1059,7 +1059,7 @@ importers:
         version: 8.57.1
       next-sitemap:
         specifier: 4.2.3
-        version: 4.2.3(next@15.1.0(@babel/core@7.25.2)(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0))
+        version: 4.2.3(next@15.1.1(@babel/core@7.25.2)(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0))
       openapi-types:
         specifier: 12.1.3
         version: 12.1.3
@@ -1139,14 +1139,14 @@ importers:
         specifier: 0.5.15
         version: 0.5.15(tailwindcss@3.4.16)
       '@tanstack/react-query':
-        specifier: 5.62.7
-        version: 5.62.7(react@19.0.0)
+        specifier: 5.62.8
+        version: 5.62.8(react@19.0.0)
       '@tanstack/react-query-devtools':
-        specifier: 5.62.7
-        version: 5.62.7(@tanstack/react-query@5.62.7(react@19.0.0))(react@19.0.0)
+        specifier: 5.62.8
+        version: 5.62.8(@tanstack/react-query@5.62.8(react@19.0.0))(react@19.0.0)
       '@vercel/analytics':
         specifier: 1.4.1
-        version: 1.4.1(next@15.1.0(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0))(react@19.0.0)
+        version: 1.4.1(next@15.1.1(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0))(react@19.0.0)
       jose:
         specifier: 5.9.6
         version: 5.9.6
@@ -1154,8 +1154,8 @@ importers:
         specifier: 5.0.9
         version: 5.0.9
       next:
-        specifier: 15.1.0
-        version: 15.1.0(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0)
+        specifier: 15.1.1
+        version: 15.1.1(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0)
       next-secure-headers:
         specifier: 2.2.0
         version: 2.2.0
@@ -1225,7 +1225,7 @@ importers:
         version: 8.57.1
       next-sitemap:
         specifier: 4.2.3
-        version: 4.2.3(next@15.1.0(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0))
+        version: 4.2.3(next@15.1.1(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0))
       postcss:
         specifier: 8.4.49
         version: 8.4.49
@@ -1258,8 +1258,8 @@ importers:
         specifier: workspace:*
         version: link:../ui-icons
       '@tanstack/react-query':
-        specifier: 5.62.7
-        version: 5.62.7(react@19.0.0)
+        specifier: 5.62.8
+        version: 5.62.8(react@19.0.0)
       '@types/react':
         specifier: 19.0.2
         version: 19.0.2
@@ -1267,8 +1267,8 @@ importers:
         specifier: 19.0.2
         version: 19.0.2(@types/react@19.0.2)
       next:
-        specifier: 15.1.0
-        version: 15.1.0(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0)
+        specifier: 15.1.1
+        version: 15.1.1(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0)
       react:
         specifier: 19.0.0
         version: 19.0.0
@@ -1306,8 +1306,8 @@ importers:
         specifier: 5.9.6
         version: 5.9.6
       next:
-        specifier: 15.1.0
-        version: 15.1.0(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0)
+        specifier: 15.1.1
+        version: 15.1.1(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0)
       react:
         specifier: 19.0.0
         version: 19.0.0
@@ -1454,8 +1454,8 @@ importers:
         specifier: 8.57.1
         version: 8.57.1
       eslint-config-next:
-        specifier: 15.1.0
-        version: 15.1.0(eslint@8.57.1)(typescript@5.7.2)
+        specifier: 15.1.1
+        version: 15.1.1(eslint@8.57.1)(typescript@5.7.2)
       eslint-config-turbo:
         specifier: 2.3.3
         version: 2.3.3(eslint@8.57.1)
@@ -1493,8 +1493,8 @@ importers:
         specifier: 19.0.2
         version: 19.0.2
       next:
-        specifier: 15.1.0
-        version: 15.1.0(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0)
+        specifier: 15.1.1
+        version: 15.1.1(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0)
       react:
         specifier: 19.0.0
         version: 19.0.0
@@ -1815,8 +1815,8 @@ importers:
         specifier: 2.2.0
         version: 2.2.0
       next:
-        specifier: 15.1.0
-        version: 15.1.0(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0)
+        specifier: 15.1.1
+        version: 15.1.1(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0)
       postcss:
         specifier: 8.4.49
         version: 8.4.49
@@ -1931,8 +1931,8 @@ importers:
         specifier: workspace:*
         version: link:../ui-themes-minimal
       '@tanstack/react-query':
-        specifier: 5.62.7
-        version: 5.62.7(react@19.0.0)
+        specifier: 5.62.8
+        version: 5.62.8(react@19.0.0)
       '@types/node':
         specifier: 22.10.1
         version: 22.10.1
@@ -3145,14 +3145,14 @@ packages:
   '@next/env@15.0.4':
     resolution: {integrity: sha512-WNRvtgnRVDD4oM8gbUcRc27IAhaL4eXQ/2ovGbgLnPGUvdyDr8UdXP4Q/IBDdAdojnD2eScryIDirv0YUCjUVw==}
 
-  '@next/env@15.1.0':
-    resolution: {integrity: sha512-UcCO481cROsqJuszPPXJnb7GGuLq617ve4xuAyyNG4VSSocJNtMU5Fsx+Lp6mlN8c7W58aZLc5y6D/2xNmaK+w==}
+  '@next/env@15.1.1':
+    resolution: {integrity: sha512-ldU8IpUqxa87LsWyMh8eIqAzejt8+ZuEsdtCV+fpDog++cBO5b/PWaI7wQQwun8LKJeFFpnY4kv/6r+/dCON6A==}
 
-  '@next/eslint-plugin-next@15.1.0':
-    resolution: {integrity: sha512-+jPT0h+nelBT6HC9ZCHGc7DgGVy04cv4shYdAe6tKlEbjQUtwU3LzQhzbDHQyY2m6g39m6B0kOFVuLGBrxxbGg==}
+  '@next/eslint-plugin-next@15.1.1':
+    resolution: {integrity: sha512-yACipsS2HI9ktcfz/1UsO0/sDbVjXWKDE/fzzMLnYES+K4KJyqHChyBQeaxiK7/NDnxrdk7Ow2i9LRm3ZTAWow==}
 
-  '@next/mdx@15.1.0':
-    resolution: {integrity: sha512-1USYedy2yRmPdIvQC1b2MBVwiJYrcZnCSHHZZETEuV1rAxjjXedbHmo43kwAv6DL3f9AgDHnl1/s1cqI7xhXdA==}
+  '@next/mdx@15.1.1':
+    resolution: {integrity: sha512-Kg7SWpscs6fiSbIOJB3tCd5LT+XOixucia9QoeM34Z9HLiLZfYpSAnXtLysptxfZC9Dm43PR8HnmtxFXRm3fNw==}
     peerDependencies:
       '@mdx-js/loader': '>=0.15.0'
       '@mdx-js/react': '>=0.15.0'
@@ -3168,8 +3168,8 @@ packages:
     cpu: [arm64]
     os: [darwin]
 
-  '@next/swc-darwin-arm64@15.1.0':
-    resolution: {integrity: sha512-ZU8d7xxpX14uIaFC3nsr4L++5ZS/AkWDm1PzPO6gD9xWhFkOj2hzSbSIxoncsnlJXB1CbLOfGVN4Zk9tg83PUw==}
+  '@next/swc-darwin-arm64@15.1.1':
+    resolution: {integrity: sha512-pq7Hzu0KaaH6UYcCQ22mOuj2mWCD6iqGvYprp/Ep1EcCxbdNOSS+8EJADFbPHsaXLkaonIJ8lTKBGWXaFxkeNQ==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [darwin]
@@ -3180,8 +3180,8 @@ packages:
     cpu: [x64]
     os: [darwin]
 
-  '@next/swc-darwin-x64@15.1.0':
-    resolution: {integrity: sha512-DQ3RiUoW2XC9FcSM4ffpfndq1EsLV0fj0/UY33i7eklW5akPUCo6OX2qkcLXZ3jyPdo4sf2flwAED3AAq3Om2Q==}
+  '@next/swc-darwin-x64@15.1.1':
+    resolution: {integrity: sha512-h567/b/AHAnMpaJ1D3l3jKLrzNOgN9bmDSRd+Gb0hXTkLZh8mE0Kd9MbIw39QeTZQJ3192uFRFWlDjWiifwVhQ==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [darwin]
@@ -3192,8 +3192,8 @@ packages:
     cpu: [arm64]
     os: [linux]
 
-  '@next/swc-linux-arm64-gnu@15.1.0':
-    resolution: {integrity: sha512-M+vhTovRS2F//LMx9KtxbkWk627l5Q7AqXWWWrfIzNIaUFiz2/NkOFkxCFyNyGACi5YbA8aekzCLtbDyfF/v5Q==}
+  '@next/swc-linux-arm64-gnu@15.1.1':
+    resolution: {integrity: sha512-I5Q6M3T9jzTUM2JlwTBy/VBSX+YCDvPLnSaJX5wE5GEPeaJkipMkvTA9+IiFK5PG5ljXTqVFVUj5BSHiYLCpoQ==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [linux]
@@ -3204,8 +3204,8 @@ packages:
     cpu: [arm64]
     os: [linux]
 
-  '@next/swc-linux-arm64-musl@15.1.0':
-    resolution: {integrity: sha512-Qn6vOuwaTCx3pNwygpSGtdIu0TfS1KiaYLYXLH5zq1scoTXdwYfdZtwvJTpB1WrLgiQE2Ne2kt8MZok3HlFqmg==}
+  '@next/swc-linux-arm64-musl@15.1.1':
+    resolution: {integrity: sha512-4cPMSYmyXlOAk8U04ouEACEGnOwYM9uJOXZnm9GBXIKRbNEvBOH9OePhHiDWqOws6iaHvGayaKr+76LmM41yJA==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [linux]
@@ -3216,8 +3216,8 @@ packages:
     cpu: [x64]
     os: [linux]
 
-  '@next/swc-linux-x64-gnu@15.1.0':
-    resolution: {integrity: sha512-yeNh9ofMqzOZ5yTOk+2rwncBzucc6a1lyqtg8xZv0rH5znyjxHOWsoUtSq4cUTeeBIiXXX51QOOe+VoCjdXJRw==}
+  '@next/swc-linux-x64-gnu@15.1.1':
+    resolution: {integrity: sha512-KgIiKDdV35KwL9TrTxPFGsPb3J5RuDpw828z3MwMQbWaOmpp/T4MeWQCwo+J2aOxsyAcfsNE334kaWXCb6YTTA==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
@@ -3228,8 +3228,8 @@ packages:
     cpu: [x64]
     os: [linux]
 
-  '@next/swc-linux-x64-musl@15.1.0':
-    resolution: {integrity: sha512-t9IfNkHQs/uKgPoyEtU912MG6a1j7Had37cSUyLTKx9MnUpjj+ZDKw9OyqTI9OwIIv0wmkr1pkZy+3T5pxhJPg==}
+  '@next/swc-linux-x64-musl@15.1.1':
+    resolution: {integrity: sha512-aHP/29x8loFhB3WuW2YaWaYFJN389t6/SBsug19aNwH+PRLzDEQfCvtuP6NxRCido9OAoExd+ZuYJKF9my1Kpg==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
@@ -3240,8 +3240,8 @@ packages:
     cpu: [arm64]
     os: [win32]
 
-  '@next/swc-win32-arm64-msvc@15.1.0':
-    resolution: {integrity: sha512-WEAoHyG14t5sTavZa1c6BnOIEukll9iqFRTavqRVPfYmfegOAd5MaZfXgOGG6kGo1RduyGdTHD4+YZQSdsNZXg==}
+  '@next/swc-win32-arm64-msvc@15.1.1':
+    resolution: {integrity: sha512-klbzXYwqHMwiucNFF0tWiWJyPb45MBX1q/ATmxrMjEYgA+V/0OXc9KmNVRIn6G/ab0ASUk4uWqxik5m6wvm1sg==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [win32]
@@ -3252,8 +3252,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@next/swc-win32-x64-msvc@15.1.0':
-    resolution: {integrity: sha512-J1YdKuJv9xcixzXR24Dv+4SaDKc2jj31IVUEMdO5xJivMTXuE6MAdIi4qPjSymHuFG8O5wbfWKnhJUcHHpj5CA==}
+  '@next/swc-win32-x64-msvc@15.1.1':
+    resolution: {integrity: sha512-V5fm4aULqHSlMQt3U1rWAWuwJTFsb6Yh4P8p1kQFoayAF9jAQtjBvHku4zCdrtQuw9u9crPC0FNML00kN4WGhA==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [win32]
@@ -4402,20 +4402,20 @@ packages:
     peerDependencies:
       tailwindcss: '>=3.0.0 || insiders || >=4.0.0-alpha.20'
 
-  '@tanstack/query-core@5.62.7':
-    resolution: {integrity: sha512-fgpfmwatsrUal6V+8EC2cxZIQVl9xvL7qYa03gsdsCy985UTUlS4N+/3hCzwR0PclYDqisca2AqR1BVgJGpUDA==}
+  '@tanstack/query-core@5.62.8':
+    resolution: {integrity: sha512-4fV31vDsUyvNGrKIOUNPrZztoyL187bThnoQOvAXEVlZbSiuPONpfx53634MKKdvsDir5NyOGm80ShFaoHS/mw==}
 
   '@tanstack/query-devtools@5.61.4':
     resolution: {integrity: sha512-21Tw+u8E3IJJj4A/Bct4H0uBaDTEu7zBrR79FeSyY+mS2gx5/m316oDtJiKkILc819VSTYt+sFzODoJNcpPqZQ==}
 
-  '@tanstack/react-query-devtools@5.62.7':
-    resolution: {integrity: sha512-wxXsdTZJRs//hMtJMU5aNlUaTclRFPqLvDNeWbRj8YpGD3aoo4zyu53W55W2DY16+ycg3fti21uCW4N9oyj91w==}
+  '@tanstack/react-query-devtools@5.62.8':
+    resolution: {integrity: sha512-SwjXjQTRONd9WPeKVQQ9framG7YNqPV8PS+EGNVNXAyz2XThulMRCvZnh2+3DggnjcYM7YcpnuoZ4RH7q13p0g==}
     peerDependencies:
-      '@tanstack/react-query': ^5.62.7
+      '@tanstack/react-query': ^5.62.8
       react: ^18 || ^19
 
-  '@tanstack/react-query@5.62.7':
-    resolution: {integrity: sha512-+xCtP4UAFDTlRTYyEjLx0sRtWyr5GIk7TZjZwBu4YaNahi3Rt2oMyRqfpfVrtwsqY2sayP4iXVCwmC+ZqqFmuw==}
+  '@tanstack/react-query@5.62.8':
+    resolution: {integrity: sha512-8TUstKxF/fysHonZsWg/hnlDVgasTdHx6Q+f1/s/oPKJBJbKUWPZEHwLTMOZgrZuroLMiqYKJ9w69Abm8mWP0Q==}
     peerDependencies:
       react: ^18 || ^19
 
@@ -5793,8 +5793,8 @@ packages:
     resolution: {integrity: sha512-/veY75JbMK4j1yjvuUxuVsiS/hr/4iHs9FTT6cgTexxdE0Ly/glccBAkloH/DofkjRbZU3bnoj38mOmhkZ0lHw==}
     engines: {node: '>=12'}
 
-  eslint-config-next@15.1.0:
-    resolution: {integrity: sha512-gADO+nKVseGso3DtOrYX9H7TxB/MuX7AUYhMlvQMqLYvUWu4HrOQuU7cC1HW74tHIqkAvXdwgAz3TCbczzSEXw==}
+  eslint-config-next@15.1.1:
+    resolution: {integrity: sha512-St2CvkRaqwbEXot9XdivAqeznlZt5bACFyOy821k67SVJEgw4ansmrwhtlFUTRdYGmgmqapFKy4RN2yz/znHcg==}
     peerDependencies:
       eslint: ^7.23.0 || ^8.0.0 || ^9.0.0
       typescript: '>=3.3.1'
@@ -7114,8 +7114,8 @@ packages:
       sass:
         optional: true
 
-  next@15.1.0:
-    resolution: {integrity: sha512-QKhzt6Y8rgLNlj30izdMbxAwjHMFANnLwDwZ+WQh5sMhyt4lEBqDK9QpvWHtIM4rINKPoJ8aiRZKg5ULSybVHw==}
+  next@15.1.1:
+    resolution: {integrity: sha512-SBZlcvdIxajw8//H3uOR1G3iu3jxsra/77m2ulRIxi3m89p+s3ACsoOXR49JEAbaun/DVoRJ9cPKq8eF/oNB5g==}
     engines: {node: ^18.18.0 || ^19.8.0 || >= 20.0.0}
     hasBin: true
     peerDependencies:
@@ -10265,13 +10265,13 @@ snapshots:
 
   '@next/env@15.0.4': {}
 
-  '@next/env@15.1.0': {}
+  '@next/env@15.1.1': {}
 
-  '@next/eslint-plugin-next@15.1.0':
+  '@next/eslint-plugin-next@15.1.1':
     dependencies:
       fast-glob: 3.3.1
 
-  '@next/mdx@15.1.0(@mdx-js/loader@3.1.0(webpack@5.94.0))(@mdx-js/react@3.1.0(@types/react@19.0.2)(react@19.0.0))':
+  '@next/mdx@15.1.1(@mdx-js/loader@3.1.0(webpack@5.94.0))(@mdx-js/react@3.1.0(@types/react@19.0.2)(react@19.0.0))':
     dependencies:
       source-map: 0.7.4
     optionalDependencies:
@@ -10281,49 +10281,49 @@ snapshots:
   '@next/swc-darwin-arm64@15.0.4':
     optional: true
 
-  '@next/swc-darwin-arm64@15.1.0':
+  '@next/swc-darwin-arm64@15.1.1':
     optional: true
 
   '@next/swc-darwin-x64@15.0.4':
     optional: true
 
-  '@next/swc-darwin-x64@15.1.0':
+  '@next/swc-darwin-x64@15.1.1':
     optional: true
 
   '@next/swc-linux-arm64-gnu@15.0.4':
     optional: true
 
-  '@next/swc-linux-arm64-gnu@15.1.0':
+  '@next/swc-linux-arm64-gnu@15.1.1':
     optional: true
 
   '@next/swc-linux-arm64-musl@15.0.4':
     optional: true
 
-  '@next/swc-linux-arm64-musl@15.1.0':
+  '@next/swc-linux-arm64-musl@15.1.1':
     optional: true
 
   '@next/swc-linux-x64-gnu@15.0.4':
     optional: true
 
-  '@next/swc-linux-x64-gnu@15.1.0':
+  '@next/swc-linux-x64-gnu@15.1.1':
     optional: true
 
   '@next/swc-linux-x64-musl@15.0.4':
     optional: true
 
-  '@next/swc-linux-x64-musl@15.1.0':
+  '@next/swc-linux-x64-musl@15.1.1':
     optional: true
 
   '@next/swc-win32-arm64-msvc@15.0.4':
     optional: true
 
-  '@next/swc-win32-arm64-msvc@15.1.0':
+  '@next/swc-win32-arm64-msvc@15.1.1':
     optional: true
 
   '@next/swc-win32-x64-msvc@15.0.4':
     optional: true
 
-  '@next/swc-win32-x64-msvc@15.1.0':
+  '@next/swc-win32-x64-msvc@15.1.1':
     optional: true
 
   '@nodelib/fs.scandir@2.1.5':
@@ -11544,19 +11544,19 @@ snapshots:
       postcss-selector-parser: 6.0.10
       tailwindcss: 3.4.16
 
-  '@tanstack/query-core@5.62.7': {}
+  '@tanstack/query-core@5.62.8': {}
 
   '@tanstack/query-devtools@5.61.4': {}
 
-  '@tanstack/react-query-devtools@5.62.7(@tanstack/react-query@5.62.7(react@19.0.0))(react@19.0.0)':
+  '@tanstack/react-query-devtools@5.62.8(@tanstack/react-query@5.62.8(react@19.0.0))(react@19.0.0)':
     dependencies:
       '@tanstack/query-devtools': 5.61.4
-      '@tanstack/react-query': 5.62.7(react@19.0.0)
+      '@tanstack/react-query': 5.62.8(react@19.0.0)
       react: 19.0.0
 
-  '@tanstack/react-query@5.62.7(react@19.0.0)':
+  '@tanstack/react-query@5.62.8(react@19.0.0)':
     dependencies:
-      '@tanstack/query-core': 5.62.7
+      '@tanstack/query-core': 5.62.8
       react: 19.0.0
 
   '@tiptap/core@2.7.2(@tiptap/pm@2.7.2)':
@@ -12023,19 +12023,19 @@ snapshots:
 
   '@ungap/structured-clone@1.2.0': {}
 
-  '@vercel/analytics@1.4.1(next@15.1.0(@babel/core@7.25.2)(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0))(react@19.0.0)':
+  '@vercel/analytics@1.4.1(next@15.1.1(@babel/core@7.25.2)(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0))(react@19.0.0)':
     optionalDependencies:
-      next: 15.1.0(@babel/core@7.25.2)(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0)
+      next: 15.1.1(@babel/core@7.25.2)(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0)
       react: 19.0.0
 
-  '@vercel/analytics@1.4.1(next@15.1.0(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0))(react@19.0.0)':
+  '@vercel/analytics@1.4.1(next@15.1.1(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0))(react@19.0.0)':
     optionalDependencies:
-      next: 15.1.0(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0)
+      next: 15.1.1(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0)
       react: 19.0.0
 
-  '@vercel/speed-insights@1.1.0(next@15.1.0(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0))(react@19.0.0)':
+  '@vercel/speed-insights@1.1.0(next@15.1.1(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0))(react@19.0.0)':
     optionalDependencies:
-      next: 15.1.0(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0)
+      next: 15.1.1(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0)
       react: 19.0.0
 
   '@vvo/tzdb@6.154.0': {}
@@ -13131,9 +13131,9 @@ snapshots:
 
   escape-string-regexp@5.0.0: {}
 
-  eslint-config-next@15.1.0(eslint@8.57.1)(typescript@5.7.2):
+  eslint-config-next@15.1.1(eslint@8.57.1)(typescript@5.7.2):
     dependencies:
-      '@next/eslint-plugin-next': 15.1.0
+      '@next/eslint-plugin-next': 15.1.1
       '@rushstack/eslint-patch': 1.10.4
       '@typescript-eslint/eslint-plugin': 8.18.1(@typescript-eslint/parser@8.18.1(eslint@8.57.1)(typescript@5.7.2))(eslint@8.57.1)(typescript@5.7.2)
       '@typescript-eslint/parser': 8.18.1(eslint@8.57.1)(typescript@5.7.2)
@@ -14947,21 +14947,21 @@ snapshots:
 
   next-secure-headers@2.2.0: {}
 
-  next-sitemap@4.2.3(next@15.1.0(@babel/core@7.25.2)(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0)):
+  next-sitemap@4.2.3(next@15.1.1(@babel/core@7.25.2)(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0)):
     dependencies:
       '@corex/deepmerge': 4.0.43
       '@next/env': 13.5.6
       fast-glob: 3.3.2
       minimist: 1.2.8
-      next: 15.1.0(@babel/core@7.25.2)(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0)
+      next: 15.1.1(@babel/core@7.25.2)(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0)
 
-  next-sitemap@4.2.3(next@15.1.0(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0)):
+  next-sitemap@4.2.3(next@15.1.1(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0)):
     dependencies:
       '@corex/deepmerge': 4.0.43
       '@next/env': 13.5.6
       fast-glob: 3.3.2
       minimist: 1.2.8
-      next: 15.1.0(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0)
+      next: 15.1.1(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0)
 
   next-themes@0.4.4(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
     dependencies:
@@ -14996,9 +14996,9 @@ snapshots:
       - '@babel/core'
       - babel-plugin-macros
 
-  next@15.1.0(@babel/core@7.25.2)(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0):
+  next@15.1.1(@babel/core@7.25.2)(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0):
     dependencies:
-      '@next/env': 15.1.0
+      '@next/env': 15.1.1
       '@swc/counter': 0.1.3
       '@swc/helpers': 0.5.15
       busboy: 1.6.0
@@ -15008,14 +15008,14 @@ snapshots:
       react-dom: 19.0.0(react@19.0.0)
       styled-jsx: 5.1.6(@babel/core@7.25.2)(react@19.0.0)
     optionalDependencies:
-      '@next/swc-darwin-arm64': 15.1.0
-      '@next/swc-darwin-x64': 15.1.0
-      '@next/swc-linux-arm64-gnu': 15.1.0
-      '@next/swc-linux-arm64-musl': 15.1.0
-      '@next/swc-linux-x64-gnu': 15.1.0
-      '@next/swc-linux-x64-musl': 15.1.0
-      '@next/swc-win32-arm64-msvc': 15.1.0
-      '@next/swc-win32-x64-msvc': 15.1.0
+      '@next/swc-darwin-arm64': 15.1.1
+      '@next/swc-darwin-x64': 15.1.1
+      '@next/swc-linux-arm64-gnu': 15.1.1
+      '@next/swc-linux-arm64-musl': 15.1.1
+      '@next/swc-linux-x64-gnu': 15.1.1
+      '@next/swc-linux-x64-musl': 15.1.1
+      '@next/swc-win32-arm64-msvc': 15.1.1
+      '@next/swc-win32-x64-msvc': 15.1.1
       '@playwright/test': 1.49.1
       babel-plugin-react-compiler: 19.0.0-beta-df7b47d-20241124
       sass: 1.83.0
@@ -15024,9 +15024,9 @@ snapshots:
       - '@babel/core'
       - babel-plugin-macros
 
-  next@15.1.0(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0):
+  next@15.1.1(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-df7b47d-20241124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.0):
     dependencies:
-      '@next/env': 15.1.0
+      '@next/env': 15.1.1
       '@swc/counter': 0.1.3
       '@swc/helpers': 0.5.15
       busboy: 1.6.0
@@ -15036,14 +15036,14 @@ snapshots:
       react-dom: 19.0.0(react@19.0.0)
       styled-jsx: 5.1.6(@babel/core@7.24.5)(react@19.0.0)
     optionalDependencies:
-      '@next/swc-darwin-arm64': 15.1.0
-      '@next/swc-darwin-x64': 15.1.0
-      '@next/swc-linux-arm64-gnu': 15.1.0
-      '@next/swc-linux-arm64-musl': 15.1.0
-      '@next/swc-linux-x64-gnu': 15.1.0
-      '@next/swc-linux-x64-musl': 15.1.0
-      '@next/swc-win32-arm64-msvc': 15.1.0
-      '@next/swc-win32-x64-msvc': 15.1.0
+      '@next/swc-darwin-arm64': 15.1.1
+      '@next/swc-darwin-x64': 15.1.1
+      '@next/swc-linux-arm64-gnu': 15.1.1
+      '@next/swc-linux-arm64-musl': 15.1.1
+      '@next/swc-linux-x64-gnu': 15.1.1
+      '@next/swc-linux-x64-musl': 15.1.1
+      '@next/swc-win32-arm64-msvc': 15.1.1
+      '@next/swc-win32-x64-msvc': 15.1.1
       '@playwright/test': 1.49.1
       babel-plugin-react-compiler: 19.0.0-beta-df7b47d-20241124
       sass: 1.83.0
