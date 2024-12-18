@@ -38,7 +38,6 @@ export function Editor({ id, content, editable, onChange }: EditorProps) {
     return (
         <div className="p-2">
             <BlockNoteView
-                // @ts-expect-error TODO: Remove when types are updated
                 id={id}
                 contentEditable={editable ?? false}
                 onChange={handleDocumentChange}
