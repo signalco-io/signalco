@@ -50,7 +50,7 @@
     "@types/color": "4.2.0",
     "@types/mdx": "2.0.13",
     "@types/node": "22.10.1",
-    "@types/react": "19.0.1",
+    "@types/react": "19.0.2",
     "@types/react-dom": "npm:types-react-dom@19.0.0",
     "babel-plugin-react-compiler": "19.0.0-beta-df7b47d-20241124",
     "colorette": "2.0.20",
