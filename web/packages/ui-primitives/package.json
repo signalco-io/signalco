@@ -40,7 +40,7 @@
         "@signalco/tailwindcss-config-signalco": "workspace:*",
         "@signalco/tsconfig": "workspace:*",
         "@signalco/ui-icons": "workspace:*",
-        "@types/react": "19.0.1",
+        "@types/react": "19.0.2",
         "@types/react-dom": "19.0.2",
         "@types/react-timeago": "4.1.7",
         "autoprefixer": "10.4.20",
