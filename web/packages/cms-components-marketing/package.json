@@ -31,12 +31,12 @@
         "@signalco/js": "workspace:*",
         "@signalco/ui-primitives": "workspace:*",
         "@signalco/ui": "workspace:*",
-        "@types/react": "19.0.1",
+        "@types/react": "19.0.2",
         "@types/react-dom": "19.0.2",
         "react": "19.0.0",
         "react-dom": "19.0.0",
         "typescript": "5.7.2",
-        "@microsoft/api-extractor": "7.48.0",
+        "@microsoft/api-extractor": "7.48.1",
         "tsup": "8.3.5"
     },
     "peerDependencies": {
