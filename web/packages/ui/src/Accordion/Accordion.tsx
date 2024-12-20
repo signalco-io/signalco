@@ -39,7 +39,7 @@ export function Accordion({ children, defaultOpen, open, disabled, onOpenChanged
                     <Row spacing={1} justifyContent="space-between">
                         {multipleChildren && isValidElement(firstChild) ? firstChild : children}
                         {!disabled && (
-                            <ExpandDown className={cx('transition-transform', actualOpen && 'scale-y-[-1]')} />
+                            <ExpandDown className={cx('transition-transform', actualOpen && '-scale-y-100')} />
                         )}
                     </Row>
                 </button>
