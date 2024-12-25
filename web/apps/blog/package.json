@@ -54,7 +54,7 @@
     "@types/react-dom": "npm:types-react-dom@19.0.0",
     "babel-plugin-react-compiler": "19.0.0-beta-df7b47d-20241124",
     "colorette": "2.0.20",
-    "eslint": "8.57.1",
+    "eslint": "9.17.0",
     "next-sitemap": "4.2.3",
     "postcss": "8.4.49",
     "sass": "1.83.0",
