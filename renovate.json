@@ -5,6 +5,17 @@
     ],
     "packageRules": [
         {
+            "matchUpdateTypes": [
+                "minor",
+                "patch",
+                "pin",
+                "digest"
+            ],
+            "matchManagers": [
+                "nuget"
+            ]
+        },
+        {
             "automerge": true,
             "matchUpdateTypes": [
                 "minor",
@@ -70,20 +81,31 @@
                 "typescript",
                 "@typescript-eslint/eslint-plugin",
                 "@typescript-eslint/parser"
+            ],
+            "matchManagers": [
+                "npm",
+                "github-actions"
             ]
         },
         {
             "matchPackagePatterns": [
                 "*"
             ],
-            "rangeStrategy": "pin"
+            "rangeStrategy": "pin",
+            "matchManagers": [
+                "npm"
+            ]
         },
         {
             "matchDepTypes": [
                 "engines",
                 "peerDependencies"
             ],
-            "rangeStrategy": "auto"
+            "rangeStrategy": "auto",
+            "matchManagers": [
+                "npm",
+                "github-actions"
+            ]
         }
     ],
     "dependencyDashboard": true,
@@ -94,5 +116,5 @@
     ],
     "prHourlyLimit": 6,
     "platformAutomerge": true,
-    "platformCommit": true
+    "platformCommit": "enabled"
 }

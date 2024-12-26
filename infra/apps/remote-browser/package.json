@@ -9,11 +9,11 @@
     "devDependencies": {
         "@infra/pulumi": "workspace:*",
         "@types/node": "20.17.10",
-        "@typescript-eslint/eslint-plugin": "8.18.1",
-        "@typescript-eslint/parser": "8.18.1",
+        "@typescript-eslint/eslint-plugin": "8.18.2",
+        "@typescript-eslint/parser": "8.18.2",
         "eslint": "8.57.1",
         "eslint-plugin-import": "2.31.0",
-        "eslint-plugin-n": "17.15.0",
+        "eslint-plugin-n": "17.15.1",
         "eslint-plugin-promise": "7.2.1",
         "tsup": "8.3.5",
         "typescript": "5.7.2"
@@ -24,7 +24,7 @@
         "@pulumi/cloudflare": "5.45.0",
         "@pulumi/command": "1.0.1",
         "@pulumi/docker": "4.5.8",
-        "@pulumi/pulumi": "3.143.0",
+        "@pulumi/pulumi": "3.144.1",
         "@pulumiverse/vercel": "1.14.3"
     }
 }
