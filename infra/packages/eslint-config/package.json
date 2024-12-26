@@ -12,8 +12,8 @@
     "eslint-plugin-only-warn": "1.1.0",
     "eslint-plugin-import": "2.31.0",
     "eslint-import-resolver-typescript": "3.7.0",
-    "@typescript-eslint/parser": "8.18.1",
-    "@typescript-eslint/eslint-plugin": "8.18.1",
+    "@typescript-eslint/parser": "8.18.2",
+    "@typescript-eslint/eslint-plugin": "8.18.2",
     "typescript": "5.7.2"
   }
 }
