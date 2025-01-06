@@ -34,7 +34,7 @@
     "@signalco/tsconfig": "workspace:*",
     "@signalco/ui-icons": "workspace:*",
     "@tanstack/react-query": "5.62.11",
-    "@types/react": "19.0.2",
+    "@types/react": "19.0.3",
     "@types/react-dom": "19.0.2",
     "next": "15.1.3",
     "react": "19.0.0",
