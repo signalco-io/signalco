@@ -33,7 +33,7 @@
         "@signalco/ui-icons": "workspace:*",
         "@signalco/ui-primitives": "workspace:*",
         "@signalco/ui-themes-minimal": "workspace:*",
-        "@tailwindcss/typography": "0.5.15",
+        "@tailwindcss/typography": "0.5.16",
         "@vercel/analytics": "1.4.1",
         "autoprefixer": "10.4.20",
         "next": "15.1.3",
