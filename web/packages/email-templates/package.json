@@ -17,7 +17,7 @@
         "@types/react": "19.0.3"
     },
     "dependencies": {
-        "@react-email/components": "0.0.31",
+        "@react-email/components": "0.0.32",
         "react": "19.0.0",
         "react-email": "3.0.4",
         "typescript": "5.7.2"
