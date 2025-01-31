@@ -1812,8 +1812,8 @@ importers:
         specifier: 10.4.20
         version: 10.4.20(postcss@8.4.49)
       classix:
-        specifier: 2.2.0
-        version: 2.2.0
+        specifier: 2.2.1
+        version: 2.2.1
       next:
         specifier: 15.1.3
         version: 15.1.3(@playwright/test@1.49.1)(babel-plugin-react-compiler@19.0.0-beta-e552027-20250112)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.83.4)
@@ -5278,8 +5278,8 @@ packages:
   classcat@5.0.5:
     resolution: {integrity: sha512-JhZUT7JFcQy/EzW605k/ktHtncoo9vnyW/2GspNYwFlN1C/WmjuV/xtS04e9SOkL2sTdw0VAZ2UGCcQ9lR6p6w==}
 
-  classix@2.2.0:
-    resolution: {integrity: sha512-RBvlC0wwmDxyPjA+i1e09KuVQEGcJJz/w/bQ1Hxbz2I4NDetFOvrtIBknRhmO2gBUdOrIkMnYZWiGIjdBcNRVA==}
+  classix@2.2.1:
+    resolution: {integrity: sha512-eav484oEAEa8k0JlaCZtQkAjZ/a/+zs6Sr/U5kgxNdxdrC26D4DqGq7tX6SxfYAGfBK8YbUGNKTOoXs3gVqQoQ==}
 
   cli-cursor@3.1.0:
     resolution: {integrity: sha512-I/zHAwsKf9FqGoXM4WWRACob9+SNukZTd94DWF57E4toouRulbCxcUh6RKUEOQlYTHJnzkPMySvPNaaSLNfLZw==}
@@ -12709,7 +12709,7 @@ snapshots:
 
   classcat@5.0.5: {}
 
-  classix@2.2.0: {}
+  classix@2.2.1: {}
 
   cli-cursor@3.1.0:
     dependencies:
