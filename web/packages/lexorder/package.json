@@ -14,8 +14,8 @@
         "lint": "eslint ."
     },
     "devDependencies": {
-        "@signalco/tsconfig": "workspace:*",
         "@signalco/eslint-config-signalco": "workspace:*",
-        "typescript": "5.7.2"
+        "@signalco/tsconfig": "workspace:*",
+        "typescript": "5.7.3"
     }
 }

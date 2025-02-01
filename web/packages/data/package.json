@@ -9,10 +9,9 @@
         "./node": "./src/node/index.js"
     },
     "type": "module",
-    "scripts": {
-    },
+    "scripts": {},
     "devDependencies": {
         "@signalco/tsconfig": "workspace:*",
-        "typescript": "5.7.2"
+        "typescript": "5.7.3"
     }
 }

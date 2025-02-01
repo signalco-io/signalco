@@ -29,18 +29,18 @@
     "prepublishOnly": "tsup --env.NODE_ENV production"
   },
   "devDependencies": {
+    "@microsoft/api-extractor": "7.49.2",
     "@signalco/eslint-config-signalco": "workspace:*",
     "@signalco/js": "workspace:*",
     "@signalco/tsconfig": "workspace:*",
     "@types/react": "19.0.8",
     "@types/react-dom": "19.0.3",
     "jose": "5.9.6",
-    "next": "15.1.3",
+    "next": "15.1.6",
     "react": "19.0.0",
     "react-dom": "19.0.0",
-    "typescript": "5.7.2",
-    "@microsoft/api-extractor": "7.48.1",
-    "tsup": "8.3.5"
+    "tsup": "8.3.6",
+    "typescript": "5.7.3"
   },
   "peerDependencies": {
     "jose": ">=5",
