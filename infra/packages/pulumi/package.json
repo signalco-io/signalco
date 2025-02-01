@@ -26,7 +26,7 @@
     "devDependencies": {
         "@infra/typescript-config": "workspace:*",
         "@infra/eslint-config": "workspace:*",
-        "@types/node": "20.17.11",
+        "@types/node": "20.17.16",
         "@typescript-eslint/eslint-plugin": "8.19.0",
         "@typescript-eslint/parser": "8.19.0",
         "eslint": "8.57.1",
