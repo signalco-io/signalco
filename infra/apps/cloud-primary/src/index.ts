@@ -64,7 +64,7 @@ const up = async () => {
         const domainName = `${config.require('domain')}`;
         const corsDomains = [`app.${domainName}`, `www.${domainName}`, domainName];
 
-        const signalr = createSignalR(resourceGroup, signalrPrefix, corsDomains, stack === 'production' ? 'standard1' : 'free', false);
+        const signalr = createSignalR(resourceGroup, signalrPrefix, corsDomains, 'free', false);
         apiStatusCheck(signalrPrefix, 'SignalR', signalr.signalr.hostName, ConfPublicSignalRCheckInterval, '/api/v1/health');
 
         // Create functions storage
