@@ -10,5 +10,5 @@ config:
   uier:zoneid:
     secure: AAABAJK2ySr7F+7XlKpMjtxnW6fzUm06HdbFbM5lVT6isD2OQ36zJO+sg5NVhGrF+SnbDe4wYL1TIyDsDR7Sxw==
   vercel:apiToken:
-    secure: AAABAA4uxruLwvuYUDigNjy8yKK8Q3fYt/nM8JmX+RWMNsAMCiDNTbw8uFgFetLzaM4ZkQyLh/8=
+    secure: AAABAHSKTxqe8XeID/RzkDXbcDJfXj160EL8WdulCSF/a0ufwimxDyklpBI/jC0QjFFb7sQslL0=
   vercel:team: team_Ade0MlfC3211ml3wYJZ4c9hn

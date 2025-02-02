@@ -47,7 +47,7 @@ jobs:
           - name: ✨ Setup Node
             uses: actions/setup-node@v4
             with:
-              node-version: "20.x"
+              node-version: "22.x"
     
           - uses: pnpm/action-setup@v3
             name: ✨ Install pnpm
@@ -68,7 +68,7 @@ jobs:
                 ${{ runner.os }}-pnpm-store-
 
           - name: ✨ Setup Vercel CLI
-            run: npm i --g vercel@33.2.0
+            run: npm i --g vercel@latest
 
           - name: ⚙️ Pull Vercel Environment Information
             run: vercel pull --yes --environment=${{ inputs.environment }} --token=${{ secrets.VERCEL_TOKEN }}

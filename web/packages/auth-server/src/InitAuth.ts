@@ -13,7 +13,7 @@ export function initAuth<TUser extends UserBase>(config: AuthConfig<TUser>): {
     withAuth: (handler: (ctx: WithAuthContext<TUser>) => Promise<Response>) => Promise<Response>;
     createJwt: (userId: string, expirationTime?: string | number | Date) => Promise<string>;
     setCookie: (cookieValue: Promise<string> | string, expiry?: number) => Promise<void>;
-    clearCookie: () => void;
+    clearCookie: () => Promise<void>;
 } {
     const initializedConfig: AuthConfigInitialized<TUser> = {
         ...{
