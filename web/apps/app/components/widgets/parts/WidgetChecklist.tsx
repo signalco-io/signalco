@@ -45,7 +45,7 @@ function ChecklistItem(props: { item: IChecklistItem; onChange: (id: string, don
                 <Checkbox checked={item.done ?? false} onCheckedChange={(checked) => onChange(item.id, checked === true)} label={item.text} />
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
-                        <IconButton>
+                        <IconButton title="More">
                             <MoreHorizontal className="opacity-30" />
                         </IconButton>
                     </DropdownMenuTrigger>
@@ -137,7 +137,7 @@ function WidgetChecklist(props: WidgetSharedProps<ConfigProps>) {
                             }
                         }}
                         endDecorator={isInputFocusedOrFilled &&
-                            <IconButton type="submit"><Check /></IconButton>
+                            <IconButton type="submit" title="Add new"><Check /></IconButton>
                         }
                         value={newItemText}
                         onChange={(e) => setNewItemText(e.currentTarget.value)} />

@@ -161,7 +161,7 @@ export default function EntityProcessDetails(props: { entity: IEntityDetails; })
                         color="danger"
                         startDecorator={<Warning />}
                         endDecorator={
-                            <IconButton size="sm" color="danger" onClick={handleDismissError}>
+                            <IconButton size="sm" color="danger" onClick={handleDismissError} title="Dismiss">
                                 <Close />
                             </IconButton>
                         }>

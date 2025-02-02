@@ -60,6 +60,7 @@ function DashboardSortableItem(props: IDashboardSortableItemProps) {
                     {dashboard.alias}
                 </Button>
                 <IconButton
+                    title={isFacorite ? 'Remove from favorites' : 'Add to favorites'}
                     className={cx(
                         'absolute right-0 hover:opacity-100 peer-hover:opacity-100',
                         isFacorite ? 'opacity-60' : 'opacity-0'

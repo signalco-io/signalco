@@ -21,6 +21,7 @@ export function SectionsEditor({ sectionsData, componentsRegistry }: { sectionsD
                     <div className="group relative" key={index}>
                         <div className="pointer-events-none absolute inset-0 rounded-md border opacity-0 transition-opacity group-hover:opacity-100" />
                         <IconButton
+                            title="Section options..."
                             onClick={() => handleSectionEdit(sectionData)}
                             variant="soft"
                             className="absolute left-0 top-0 rounded-r-none rounded-bl-none opacity-0 transition-opacity group-hover:opacity-100">
