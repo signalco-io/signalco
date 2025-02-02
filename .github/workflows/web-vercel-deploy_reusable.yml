@@ -68,7 +68,7 @@ jobs:
                 ${{ runner.os }}-pnpm-store-
 
           - name: ✨ Setup Vercel CLI
-            run: npm i --g vercel@33.2.0
+            run: npm i --g vercel@latest
 
           - name: ⚙️ Pull Vercel Environment Information
             run: vercel pull --yes --environment=${{ inputs.environment }} --token=${{ secrets.VERCEL_TOKEN }}
