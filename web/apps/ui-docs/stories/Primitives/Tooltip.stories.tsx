@@ -8,7 +8,6 @@ export default {
     component: Tooltip,
     tags: ['autodocs'],
     args: {
-        delayDuration: 0,
         children: (
             <>
                 <TooltipTrigger>

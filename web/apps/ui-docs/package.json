@@ -15,6 +15,7 @@
   },
   "devDependencies": {
     "@signalco/tsconfig": "workspace:*",
+    "@storybook/addon-a11y": "8.5.3",
     "@storybook/addon-essentials": "8.5.3",
     "@storybook/addon-links": "8.5.3",
     "@storybook/addon-themes": "8.5.3",

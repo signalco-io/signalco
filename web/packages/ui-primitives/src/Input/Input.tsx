@@ -1,4 +1,4 @@
-import { InputHTMLAttributes, PropsWithChildren, ReactNode, useMemo } from 'react';
+import { InputHTMLAttributes, PropsWithChildren, ReactNode, useId, useMemo } from 'react';
 import { Stack } from '../Stack';
 import { Row } from '../Row';
 import { cx } from '../cx';
@@ -9,10 +9,16 @@ export type InputProps = InputHTMLAttributes<HTMLInputElement> & {
     label?: string;
     helperText?: string;
     fullWidth?: boolean;
-    variant?: 'outlined' | 'plain';
+    /**
+     * The variant to use.
+     * @default 'outlined'
+     **/
+    variant?: 'soft' | 'outlined' | 'plain';
 };
 
 export function Input({
+    id,
+    name,
     label,
     helperText,
     className,
@@ -22,8 +28,10 @@ export function Input({
     variant,
     ...rest
 }: InputProps) {
+    const customId = useId();
+    const labelId = label ? `label-${id ?? name ?? customId}` : undefined;
     const VerticalContainer = useMemo(() => label || helperText
-        ? (props: PropsWithChildren) => <Stack spacing={1} {...props} />
+        ? (props: PropsWithChildren) => <Stack spacing={0.5} {...props} />
         : (props: PropsWithChildren) => <>{props.children}</>
     , [label, helperText]);
     const HorizontalContainer = useMemo(() => startDecorator || endDecorator
@@ -33,7 +41,7 @@ export function Input({
 
     return (
         <VerticalContainer>
-            {label && <label className="text-sm font-medium">{label}</label>}
+            {label && <label className="text-sm font-medium" id={labelId}>{label}</label>}
             <HorizontalContainer className={cx(
                 fullWidth && 'w-full',
                 'rounded-md ring-offset-background',
@@ -43,10 +51,14 @@ export function Input({
                 'disabled:cursor-not-allowed disabled:opacity-50',
                 (!variant || variant === 'outlined') && 'border border-input bg-background focus-visible:ring-2 focus-visible:ring-ring',
                 variant === 'plain' && 'border-0 bg-transparent disabled:bg-muted/30',
+                variant === 'soft' && 'border focus-visible:ring-2 focus-visible:ring-ring border-muted-foreground/10 bg-primary/10',
                 className
             )}>
                 {startDecorator ?? null}
                 <input
+                    id={id}
+                    name={name}
+                    aria-labelledby={labelId}
                     className={cx(
                         'bg-transparent w-full',
                         'ring-0 outline-none',
@@ -56,7 +68,7 @@ export function Input({
                 />
                 {endDecorator ?? null}
             </HorizontalContainer>
-            {helperText && <p className="text-sm text-muted-foreground">{helperText}</p>}
+            {helperText && <span className="text-sm text-red-400 dark:text-red-300">{helperText}</span>}
         </VerticalContainer>
     );
 }

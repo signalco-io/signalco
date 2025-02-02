@@ -318,6 +318,7 @@ const up = async () => {
         vercelApp('signalco-ui-docs', 'ui-docs', {
             ignoreCommand: 'npx turbo-ignore',
             outputDirectory: 'storybook-static',
+            rootDirectory: 'web/apps/ui-docs',
         });
 
         // Vercel - Domains
