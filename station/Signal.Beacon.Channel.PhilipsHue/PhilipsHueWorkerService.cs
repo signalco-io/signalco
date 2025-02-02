@@ -9,6 +9,7 @@ using HueApi;
 using HueApi.BridgeLocator;
 using HueApi.Models;
 using HueApi.Models.Exceptions;
+using HueApi.Models.Requests;
 using HueApi.Models.Responses;
 using Microsoft.Extensions.Logging;
 using Signal.Beacon.Core.Conducts;
@@ -19,38 +20,24 @@ using Signal.Beacon.Core.Workers;
 
 namespace Signal.Beacon.Channel.PhilipsHue;
 
-internal class PhilipsHueWorkerService : IWorkerService
+internal class PhilipsHueWorkerService(
+    IEntitiesDao entitiesDao,
+    IEntityService entityService,
+    IConductSubscriberClient conductSubscriberClient,
+    ILogger<PhilipsHueWorkerService> logger,
+    IChannelConfigurationService configurationService)
+    : IWorkerService
 {
     private const int RegisterBridgeRetryTimes = 12;
     private const string LightStateContactName = "on";
     private const string BrightnessContactName = "brightness";
     private const string ColorTemperatureContactName = "color-temperature";
 
-    private readonly IEntitiesDao entitiesDao;
-    private readonly IEntityService entityService;
-    private readonly IConductSubscriberClient conductSubscriberClient;
-    private readonly ILogger<PhilipsHueWorkerService> logger;
-    private readonly IChannelConfigurationService configurationService;
-
     private PhilipsHueWorkerServiceConfiguration configuration = new();
-    private readonly List<BridgeConnection> bridges = new();
+    private readonly List<BridgeConnection> bridges = [];
     private readonly Dictionary<Guid, PhilipsHueLight> lights = new();
-    private readonly List<LocalHueApi> clipClients = new();
+    private readonly List<LocalHueApi> clipClients = [];
     private string? channelEntityId;
-
-    public PhilipsHueWorkerService(
-        IEntitiesDao entitiesDao,
-        IEntityService entityService,
-        IConductSubscriberClient conductSubscriberClient,
-        ILogger<PhilipsHueWorkerService> logger,
-        IChannelConfigurationService configurationService)
-    {
-        this.entitiesDao = entitiesDao ?? throw new ArgumentNullException(nameof(entitiesDao));
-        this.entityService = entityService ?? throw new ArgumentNullException(nameof(entityService));
-        this.conductSubscriberClient = conductSubscriberClient ?? throw new ArgumentNullException(nameof(conductSubscriberClient));
-        this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
-        this.configurationService = configurationService ?? throw new ArgumentNullException(nameof(configurationService));
-    }
 
     public async Task StartAsync(string entityId, CancellationToken cancellationToken)
     {
@@ -65,7 +52,7 @@ internal class PhilipsHueWorkerService : IWorkerService
             if (ipAddresses.Contains(currentIpAddress))
             {
                 this.configuration.Bridges.RemoveAt(i);
-                this.logger.LogInformation("Removed bridge because IP address {IpAddress} already assigned", currentIpAddress);
+                logger.LogInformation("Removed bridge because IP address {IpAddress} already assigned", currentIpAddress);
             }
             else ipAddresses.Add(currentIpAddress);
         }
@@ -74,7 +61,7 @@ internal class PhilipsHueWorkerService : IWorkerService
         foreach (var bridgeConfig in this.configuration.Bridges.ToList())
             _ = this.ConnectBridgeAsync(bridgeConfig, cancellationToken);
 
-        this.conductSubscriberClient.Subscribe(PhilipsHueChannels.DeviceChannel, this.ConductHandlerAsync);
+        conductSubscriberClient.Subscribe(PhilipsHueChannels.DeviceChannel, this.ConductHandlerAsync);
     }
 
     private void BeginStreamClip(BridgeConfig config, CancellationToken cancellationToken)
@@ -135,14 +122,14 @@ internal class PhilipsHueWorkerService : IWorkerService
                 bridgeLight == null)
             {
                 // TODO: Log response errors
-                this.logger.LogWarning(
+                logger.LogWarning(
                     "No light with specified identifier found on bridge. Target identifier: {TargetIdentifier}.",
                     light.Id);
                 return;
             }
 
             // Construct light command from conducts
-            var lightCommand = new LightCommand();
+            var lightCommand = new UpdateLight();
             foreach (var conduct in lightConducts)
             {
                 try
@@ -159,15 +146,18 @@ internal class PhilipsHueWorkerService : IWorkerService
                             if (!double.TryParse(conduct.ValueSerialized, out var temp))
                                 throw new Exception("Invalid temperature contact value.");
 
-                            if (bridgeLight.ColorTemperature != null)
+                            if (bridgeLight.ColorTemperature == null)
                             {
-                                bridgeLight.ColorTemperature = new ColorTemperature
-                                {
-                                    Mirek = temp.NormalizedToMirek(
-                                        bridgeLight.ColorTemperature.MirekSchema.MirekMinimum,
-                                        bridgeLight.ColorTemperature.MirekSchema.MirekMaximum)
-                                };
+                                logger.LogWarning("Light doesn't support color temperature.");
+                                break;
                             }
+
+                            lightCommand.ColorTemperature = new ColorTemperature
+                            {
+                                Mirek = temp.NormalizedToMirek(
+                                    bridgeLight.ColorTemperature.MirekSchema.MirekMinimum,
+                                    bridgeLight.ColorTemperature.MirekSchema.MirekMaximum)
+                            };
 
                             break;
                         case BrightnessContactName:
@@ -185,13 +175,13 @@ internal class PhilipsHueWorkerService : IWorkerService
                 }
                 catch (Exception ex)
                 {
-                    this.logger.LogTrace(ex, "Couldn't handle conduct {@Conduct}", conduct);
-                    this.logger.LogWarning("Conduct error message: {Message} for conduct: {@Conduct}", ex.Message, conduct);
+                    logger.LogTrace(ex, "Couldn't handle conduct {@Conduct}", conduct);
+                    logger.LogWarning("Conduct error message: {Message} for conduct: {@Conduct}", ex.Message, conduct);
                 }
             }
 
             // Send the constructed command to the bridge
-            this.logger.LogDebug(
+            logger.LogDebug(
                 "Sending command to the bridge {BridgeId}: {@Command}",
                 light.BridgeId, lightCommand);
             await bridgeConnection.LocalClient.UpdateLightAsync(light.Id, lightCommand);
@@ -201,8 +191,8 @@ internal class PhilipsHueWorkerService : IWorkerService
         }
         catch (Exception ex)
         {
-            this.logger.LogTrace(ex, "Failed to execute conduct {@Conducts}", lightConducts);
-            this.logger.LogWarning("Failed to execute conduct {@Conducts}", lightConducts);
+            logger.LogTrace(ex, "Failed to execute conduct {@Conducts}", lightConducts);
+            logger.LogWarning("Failed to execute conduct {@Conducts}", lightConducts);
         }
     }
 
@@ -227,30 +217,29 @@ internal class PhilipsHueWorkerService : IWorkerService
         if (!updatedLightResponse.HasErrors &&
             updatedLight != null)
         {
-            this.lights.TryGetValue(light.Id, out var oldLight);
             var newLight = updatedLight.AsPhilipsHueLight(bridge.Config.Id, light.EntityId);
             this.lights[light.Id] = newLight;
 
             // Sync state
-            await this.entityService.ContactSetAsync(
+            await entityService.ContactSetAsync(
                 new ContactPointer(newLight.EntityId, PhilipsHueChannels.DeviceChannel, LightStateContactName),
                 updatedLight.On.IsOn.ToString().ToLowerInvariant(), cancellationToken);
-            await this.entityService.ContactSetAsync(
+            await entityService.ContactSetAsync(
                 new ContactPointer(newLight.EntityId, PhilipsHueChannels.DeviceChannel, ColorTemperatureContactName),
                 newLight.State.Temperature?.ToString(), cancellationToken);
-            await this.entityService.ContactSetAsync(
+            await entityService.ContactSetAsync(
                 new ContactPointer(newLight.EntityId, PhilipsHueChannels.DeviceChannel, BrightnessContactName),
                 newLight.State.Brightness?.ToString(), cancellationToken);
             var connectivity = await bridge.LocalClient.GetZigbeeConnectivityAsync();
-            var isConnected = connectivity.Data.FirstOrDefault(c => updatedLight.Owner.Rid == c.Owner?.Rid)?.Status == ConnectivityStatus.connected;
-            await this.entityService.ContactSetAsync(
+            var isConnected = connectivity.Data.FirstOrDefault(c => updatedLight.Owner?.Rid == c.Owner?.Rid)?.Status == ConnectivityStatus.connected;
+            await entityService.ContactSetAsync(
                 new ContactPointer(newLight.EntityId, PhilipsHueChannels.DeviceChannel, KnownContacts.Offline),
                 (!isConnected).ToString().ToLowerInvariant(), cancellationToken);
         }
         else
         {
             // TODO: Log errors from response
-            this.logger.LogWarning(
+            logger.LogWarning(
                 "Light with ID {LightId} not found on bridge {BridgeName}.",
                 light.Id,
                 bridge.Config.Id);
@@ -258,16 +247,16 @@ internal class PhilipsHueWorkerService : IWorkerService
     }
 
     private async Task<PhilipsHueWorkerServiceConfiguration> LoadBridgeConfigsAsync(CancellationToken cancellationToken) => 
-        await this.configurationService.LoadAsync<PhilipsHueWorkerServiceConfiguration>(this.channelEntityId, PhilipsHueChannels.DeviceChannel, cancellationToken);
+        await configurationService.LoadAsync<PhilipsHueWorkerServiceConfiguration>(this.channelEntityId, PhilipsHueChannels.DeviceChannel, cancellationToken);
 
     private async Task SaveBridgeConfigsAsync(CancellationToken cancellationToken) => 
-        await this.configurationService.SaveAsync(this.channelEntityId, PhilipsHueChannels.DeviceChannel, this.configuration, cancellationToken);
+        await configurationService.SaveAsync(this.channelEntityId, PhilipsHueChannels.DeviceChannel, this.configuration, cancellationToken);
 
     private async Task ConnectBridgeAsync(BridgeConfig config, CancellationToken cancellationToken)
     {
         try
         {
-            this.logger.LogInformation("Connecting to bridge {BridgeId} {BridgeIpAddress}...",
+            logger.LogInformation("Connecting to bridge {BridgeId} {BridgeIpAddress}...",
                 config.Id,
                 config.IpAddress);
 
@@ -288,14 +277,14 @@ internal class PhilipsHueWorkerService : IWorkerService
                                        SocketErrorCode: SocketError.TimedOut
                                    })
         {
-            this.logger.LogWarning(
+            logger.LogWarning(
                 "Bridge {BridgeIp} ({BridgeId}) didn't respond in time. Trying to rediscover on another IP address...",
                 config.IpAddress, config.Id);
             _ = this.DiscoverBridgesAsync(false, cancellationToken);
         }
         catch (Exception ex)
         {
-            this.logger.LogWarning(ex, "Failed to connect to bridge.");
+            logger.LogWarning(ex, "Failed to connect to bridge.");
         }
     }
 
@@ -314,8 +303,8 @@ internal class PhilipsHueWorkerService : IWorkerService
                 }
                 catch (Exception ex)
                 {
-                    this.logger.LogTrace(ex, "Failed to configure device {Address}", light.Id);
-                    this.logger.LogWarning(
+                    logger.LogTrace(ex, "Failed to configure device {Address}", light.Id);
+                    logger.LogWarning(
                         "Failed to configure device {Address}", 
                         light.Id);
                 }
@@ -323,7 +312,7 @@ internal class PhilipsHueWorkerService : IWorkerService
         }
         catch (Exception ex)
         {
-            this.logger.LogWarning(ex, "Failed to sync devices.");
+            logger.LogWarning(ex, "Failed to sync devices.");
         }
     }
         
@@ -331,15 +320,15 @@ internal class PhilipsHueWorkerService : IWorkerService
     private async Task LightDiscoveredAsync(string bridgeId, Light light, CancellationToken cancellationToken)
     {
         // Discover light entity
-        var entityId = (await this.entitiesDao.GetByContactValueAsync(
+        var entityId = (await entitiesDao.GetByContactValueAsync(
             PhilipsHueChannels.DeviceChannel,
             "identifier",
             light.Id.ToString(),
             cancellationToken)).FirstOrDefault()?.Id;
         if (entityId == null)
         {
-            entityId = await this.entityService.UpsertAsync(EntityType.Device, null, light.Metadata?.Name ?? "Light", cancellationToken);
-            await this.entityService.ContactSetAsync(
+            entityId = await entityService.UpsertAsync(EntityType.Device, null, light.Metadata?.Name ?? "Light", cancellationToken);
+            await entityService.ContactSetAsync(
                 new ContactPointer(entityId, PhilipsHueChannels.DeviceChannel, "identifier"), light.Id.ToString(), cancellationToken);
         }
         
@@ -348,16 +337,16 @@ internal class PhilipsHueWorkerService : IWorkerService
 
     private async Task DiscoverBridgesAsync(bool acceptNewBridges, CancellationToken cancellationToken)
     {
-        this.logger.LogInformation("Scanning for bridge...");
+        logger.LogInformation("Scanning for bridge...");
 
         var discoveredBridges = (await new MdnsBridgeLocator()
                 .LocateBridgesAsync(TimeSpan.FromSeconds(30)))
             .ToList();
-        this.logger.LogInformation("Bridges found: {BridgesCount}", discoveredBridges.Count);
+        logger.LogInformation("Bridges found: {BridgesCount}", discoveredBridges.Count);
 
         if (discoveredBridges.Count <= 0)
         {
-            this.logger.LogInformation("No bridges found.");
+            logger.LogInformation("No bridges found.");
             return;
         }
 
@@ -372,7 +361,7 @@ internal class PhilipsHueWorkerService : IWorkerService
                 if (existingConnection != null)
                 {
                     existingConnection.Config.IpAddress = bridge.IpAddress;
-                    this.logger.LogInformation(
+                    logger.LogInformation(
                         "Bridge rediscovered {BridgeIp} ({BridgeId}).",
                         existingConnection.Config.IpAddress, existingConnection.Config.Id);
 
@@ -404,8 +393,8 @@ internal class PhilipsHueWorkerService : IWorkerService
             }
             catch (LinkButtonNotPressedException ex)
             {
-                this.logger.LogTrace(ex, "Bridge not connected. Waiting for user button press.");
-                this.logger.LogInformation("Press button on Philips Hue bridge to connect...");
+                logger.LogTrace(ex, "Bridge not connected. Waiting for user button press.");
+                logger.LogInformation("Press button on Philips Hue bridge to connect...");
                 // TODO: Broadcast CTA on UI (ask user to press button on bridge)
                 retryCounter++;
 
