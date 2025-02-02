@@ -7,7 +7,7 @@
   "license": "AGPL-3.0-only",
   "packageManager": "npm@11.1.0",
   "engines": {
-    "node": ">=22"
+    "node": "22.x"
   },
   "bin": {
     "mutex": "index.js"
