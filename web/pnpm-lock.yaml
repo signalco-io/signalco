@@ -756,7 +756,7 @@ importers:
         specifier: 8.5.3
         version: 8.5.3(storybook@8.5.3(prettier@3.4.2))
       '@storybook/experimental-addon-test':
-        specifier: ^8.5.3
+        specifier: 8.5.3
         version: 8.5.3(@vitest/browser@3.0.4)(@vitest/runner@3.0.4)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(storybook@8.5.3(prettier@3.4.2))(vitest@3.0.4)
       '@storybook/manager-api':
         specifier: 8.5.3
@@ -777,10 +777,10 @@ importers:
         specifier: 19.0.3
         version: 19.0.3(@types/react@19.0.8)
       '@vitest/browser':
-        specifier: ^3.0.4
+        specifier: 3.0.4
         version: 3.0.4(@types/node@22.13.0)(playwright@1.50.1)(typescript@5.7.3)(vite@5.4.2(@types/node@22.13.0)(sass@1.83.4)(terser@5.37.0))(vitest@3.0.4)
       '@vitest/coverage-v8':
-        specifier: ^3.0.4
+        specifier: 3.0.4
         version: 3.0.4(@vitest/browser@3.0.4)(vitest@3.0.4)
       autoprefixer:
         specifier: 10.4.20
@@ -789,7 +789,7 @@ importers:
         specifier: 7.1.2
         version: 7.1.2(webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.15))(esbuild@0.24.2))
       playwright:
-        specifier: ^1.50.1
+        specifier: 1.50.1
         version: 1.50.1
       postcss:
         specifier: 8.5.1
@@ -828,7 +828,7 @@ importers:
         specifier: 5.7.3
         version: 5.7.3
       vitest:
-        specifier: ^3.0.4
+        specifier: 3.0.4
         version: 3.0.4(@types/debug@4.1.12)(@types/node@22.13.0)(@vitest/browser@3.0.4)(msw@2.7.0(@types/node@22.13.0)(typescript@5.7.3))(sass@1.83.4)(terser@5.37.0)
 
   apps/uier:
