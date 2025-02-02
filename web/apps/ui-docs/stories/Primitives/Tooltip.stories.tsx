@@ -10,7 +10,7 @@ export default {
     args: {
         children: (
             <>
-                <TooltipTrigger>
+                <TooltipTrigger asChild>
                     <Info />
                 </TooltipTrigger>
                 <TooltipContent>

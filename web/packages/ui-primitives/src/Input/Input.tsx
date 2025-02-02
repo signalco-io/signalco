@@ -68,7 +68,7 @@ export function Input({
                 />
                 {endDecorator ?? null}
             </HorizontalContainer>
-            {helperText && <span className="text-sm text-red-400 dark:text-red-300">{helperText}</span>}
+            {helperText && <span className="text-sm text-red-600 dark:text-red-300">{helperText}</span>}
         </VerticalContainer>
     );
 }
