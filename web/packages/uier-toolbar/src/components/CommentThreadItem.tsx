@@ -40,7 +40,7 @@ export function CommentThreadItem({ comment, threadItem, first, onDone }: { comm
                     )}
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
-                            <IconButton size="xs" variant="plain">
+                            <IconButton size="xs" variant="plain" title="More options...">
                                 <MoreHorizontal />
                             </IconButton>
                         </DropdownMenuTrigger>

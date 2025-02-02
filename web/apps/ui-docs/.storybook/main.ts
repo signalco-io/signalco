@@ -12,9 +12,11 @@ import type { StorybookConfig } from '@storybook/react-vite';
 const config: StorybookConfig = {
   stories: ["../stories"],
   addons: [
+    '@storybook/addon-a11y',
     '@storybook/addon-links',
     '@storybook/addon-essentials',
-    '@storybook/addon-themes'
+    '@storybook/addon-themes',
+    '@storybook/experimental-addon-test'
   ],
   framework: '@storybook/react-vite',
   docs: {

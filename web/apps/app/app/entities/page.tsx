@@ -91,8 +91,8 @@ export default function Entities() {
                                 { value: 'table', label: <LayoutList /> },
                                 { value: 'cards', label: <LayoutGrid /> }
                             ]} />
-                        <IconButton onClick={handleCreateEntity}><Add /></IconButton>
-                        <IconButton onClick={handleToggleSelection}><Check /></IconButton>
+                        <IconButton title="Add" onClick={handleCreateEntity}><Add /></IconButton>
+                        <IconButton title="Selection" onClick={handleToggleSelection}><Check /></IconButton>
                     </Row>
                 </Row>
                 {isSelecting && (

@@ -4,7 +4,12 @@ import { Link } from '../Link';
 import { cx } from '../cx';
 import { ButtonButtonProps } from '../Button';
 
-export type IconButtonProps = ButtonButtonProps;
+// Enforce accessibility best practices (must have one of: aria-label, title, aria-labelledby)
+export type IconButtonProps = ButtonButtonProps & (
+    { 'aria-label': string } |
+    { title: string } |
+    { 'aria-labelledby': string }
+);
 
 const IconButton = forwardRef<HTMLElement, IconButtonProps>(({
     disabled, loading, variant, children, fullWidth, className, size, ...rest

@@ -84,7 +84,7 @@ export function WorkerThreadMessagesList({
                 ))}
             </Stack>
             {!autoScroll && (
-                <IconButton className="absolute bottom-7 z-10" onClick={handleScrollToBottom}>
+                <IconButton className="absolute bottom-7 z-10" onClick={handleScrollToBottom} title="Scroll to bottom">
                     <Down />
                 </IconButton>
             )}

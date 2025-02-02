@@ -165,7 +165,7 @@ export default function ContactsTable({ entity }: { entity: IEntityDetails | nul
                     <Typography>{t('Contacts')}</Typography>
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
-                            <IconButton size="sm" variant="plain">
+                            <IconButton size="sm" variant="plain" title="More">
                                 <MoreHorizontal />
                             </IconButton>
                         </DropdownMenuTrigger>
@@ -215,7 +215,7 @@ export default function ContactsTable({ entity }: { entity: IEntityDetails | nul
                                 <Table.Cell className="flex justify-end">
                                     <DropdownMenu>
                                         <DropdownMenuTrigger asChild>
-                                            <IconButton size="sm" variant="plain">
+                                            <IconButton size="sm" variant="plain" title="More">
                                                 <MoreHorizontal />
                                             </IconButton>
                                         </DropdownMenuTrigger>
