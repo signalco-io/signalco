@@ -26,6 +26,8 @@ export type SelectItemsProps<T extends string> = HTMLAttributes<HTMLDivElement> 
 
 export function SelectItems<T extends string>(props: SelectItemsProps<T>) {
     const {
+        id,
+        name,
         value,
         items,
         label,
@@ -37,22 +39,26 @@ export function SelectItems<T extends string>(props: SelectItemsProps<T>) {
         ...rest
     } = props;
 
-    const uid = useId();
-    const id = `select-field-${label ?? placeholder}-${uid}`;
+    const customId = useId();
+    const labelId = label ? `label-${id ?? name ?? customId}` : undefined;
 
     return (
-        <Stack {...rest}>
-            {label && <label className="text-sm font-medium">{label}</label>}
-            <SelectPrimitive.Root value={value} onValueChange={onValueChange}>
+        <Stack spacing={0.5} {...rest}>
+            {label && <label className="text-sm font-medium" id={labelId}>{label}</label>}
+            <SelectPrimitive.Root
+                value={value}
+                onValueChange={onValueChange}
+                name={name}
+                aria-labelledby={labelId}>
                 <SelectPrimitive.Trigger
                     id={id}
                     className={cx(
-                        'flex h-10 w-full items-center justify-between rounded-md bg-transparent px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
+                        'flex h-10 w-full items-center data-[placeholder]:text-muted-foreground justify-between rounded-md bg-transparent px-3 py-2 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
                         (!variant || variant === 'outlined') && 'border border-input'
                     )}
                     aria-label={label ?? placeholder}
                 >
-                    <SelectPrimitive.Value placeholder={label ?? placeholder} />
+                    <SelectPrimitive.Value placeholder={placeholder} />
                     <SelectPrimitive.Icon asChild>
                         <SelectIcon className="size-4 opacity-50" />
                     </SelectPrimitive.Icon>
@@ -99,7 +105,7 @@ export function SelectItems<T extends string>(props: SelectItemsProps<T>) {
                     </SelectPrimitive.Content>
                 </SelectPrimitive.Portal>
             </SelectPrimitive.Root>
-            {helperText && <p className="text-sm text-muted-foreground">{helperText}</p>}
+            {helperText && <span className="text-sm text-red-400 dark:text-red-300">{helperText}</span>}
         </Stack>
     );
 }

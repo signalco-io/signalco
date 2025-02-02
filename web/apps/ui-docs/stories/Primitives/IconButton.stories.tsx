@@ -8,7 +8,8 @@ type Story = StoryObj<typeof IconButton>;
 
 export const Default: Story = {
     args: {
-        children: <CompanyGitHub />
+        children: <CompanyGitHub />,
+        title: 'GitHub',
     }
 };
 
