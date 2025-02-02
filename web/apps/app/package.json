@@ -7,7 +7,7 @@
     "type": "module",
     "license": "AGPL-3.0-only",
     "engines": {
-        "node": "20.x"
+        "node": "22.x"
     },
     "scripts": {
         "prepare:api": "pnpm dlx openapi-typescript https://api.signalco.io/api/swagger.yaml -o ./src/api/signalco/schema.d.ts",
