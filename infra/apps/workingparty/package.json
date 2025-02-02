@@ -23,10 +23,10 @@
         "typescript": "5.7.3"
     },
     "dependencies": {
+        "@pulumi/pulumi": "3.148.0",
         "@pulumi/azure-native": "2.85.0",
         "@pulumi/cloudflare": "5.49.0",
         "@pulumi/docker": "4.6.1",
-        "@pulumi/pulumi": "3.148.0",
         "@pulumiverse/vercel": "1.14.3"
     }
 }
