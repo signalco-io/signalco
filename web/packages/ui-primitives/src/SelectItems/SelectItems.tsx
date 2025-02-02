@@ -105,7 +105,7 @@ export function SelectItems<T extends string>(props: SelectItemsProps<T>) {
                     </SelectPrimitive.Content>
                 </SelectPrimitive.Portal>
             </SelectPrimitive.Root>
-            {helperText && <span className="text-sm text-red-400 dark:text-red-300">{helperText}</span>}
+            {helperText && <span className="text-sm text-red-600 dark:text-red-300">{helperText}</span>}
         </Stack>
     );
 }
