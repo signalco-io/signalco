@@ -125,7 +125,7 @@ export function CommentBubble({
                                     autoComplete={'off'} />
                                 <Row justifyContent="space-between" className="px-3">
                                     <div></div>
-                                    <IconButton variant="solid" size="xs" type="submit">
+                                    <IconButton variant="solid" size="xs" type="submit" aria-label="Leave comment">
                                         <Send />
                                     </IconButton>
                                 </Row>

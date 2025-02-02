@@ -109,6 +109,7 @@ export function TaskListItem({ selected, taskDefinition, runId, task, taskIndex,
                             taskDefinition={taskDefinition}
                             trigger={(
                                 <IconButton
+                                    title="Delete task definition"
                                     size="sm"
                                     variant="plain"
                                     className="absolute inset-y-1/2 right-[2px] -translate-y-1/2 opacity-0 hover:opacity-100 group-hover:opacity-100">

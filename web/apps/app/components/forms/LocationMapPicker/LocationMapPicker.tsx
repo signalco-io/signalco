@@ -87,7 +87,7 @@ export default function LocationMapPicker(props: LocationMapPickerProps) {
                 )}
             <Stack spacing={2}>
                 <Row spacing={1}>
-                    <IconButton onClick={handleGetLocation} size="lg">
+                    <IconButton onClick={handleGetLocation} size="lg" title="Get location">
                         <MyLocation />
                     </IconButton>
                     <Input value={placeName.item ?? ''} readOnly />

@@ -41,7 +41,7 @@ export default function WorkerLayout({ children, params }: PropsWithChildren & {
                             actions={([
                                 <DropdownMenu key="menu">
                                     <DropdownMenuTrigger asChild>
-                                        <IconButton variant="plain">
+                                        <IconButton variant="plain" title="Worker options...">
                                             <Settings color="gray" />
                                         </IconButton>
                                     </DropdownMenuTrigger>

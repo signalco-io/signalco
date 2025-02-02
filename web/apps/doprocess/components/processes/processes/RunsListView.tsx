@@ -26,7 +26,7 @@ export function RunsListView({ processId }: { processId?: string }) {
                 actions={[(
                     <DropdownMenu key="filter-actions">
                         <DropdownMenuTrigger asChild>
-                            <IconButton variant="plain">
+                            <IconButton variant="plain" title="Filter">
                                 <Filter className={cx(isShowCompleted && 'fill-primary')} />
                             </IconButton>
                         </DropdownMenuTrigger>

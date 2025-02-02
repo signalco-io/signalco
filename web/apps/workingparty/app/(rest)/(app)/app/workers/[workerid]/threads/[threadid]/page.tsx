@@ -37,7 +37,7 @@ export default function WorkerThreadPage() {
                     <Typography>{thread?.name}</Typography>
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
-                            <IconButton variant="plain">
+                            <IconButton variant="plain" title="Thread options...">
                                 <Settings color="gray" />
                             </IconButton>
                         </DropdownMenuTrigger>
