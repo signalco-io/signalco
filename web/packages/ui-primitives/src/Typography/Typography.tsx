@@ -58,7 +58,7 @@ export function populateTypographyStylesAndClasses({
             // Font
             mono && 'font-mono',
             // Special cases
-            noWrap && 'whitespace-nowrap overflow-hidden overflow-ellipsis',
+            noWrap && 'whitespace-nowrap overflow-x-hidden overflow-ellipsis',
             gutterBottom && 'mb-2',
             uppercase && 'uppercase',
             secondary && 'text-secondary-foreground',
