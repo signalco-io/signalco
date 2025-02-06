@@ -19,7 +19,7 @@ const Row = forwardRef<HTMLDivElement, RowProps>(({ spacing, alignItems, justify
                 justifyContent === 'center' && 'justify-center',
                 justifyContent === 'end' && 'justify-end',
                 justifyContent === 'space-between' && 'justify-between',
-                (!justifyContent || justifyContent === 'stretch') && 'justify-stretch',
+                justifyContent === 'stretch' && 'justify-stretch',
                 alignItems === 'start' && 'items-start',
                 (!alignItems || alignItems === 'center') && 'items-center',
                 alignItems === 'end' && 'items-end',
