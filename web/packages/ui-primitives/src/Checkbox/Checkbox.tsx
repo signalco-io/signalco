@@ -44,7 +44,7 @@ export function Checkbox({
             {label && (
                 <label
                     htmlFor={id}
-                    className="grow text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                    className="grow text-sm font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                 >
                     {label}
                 </label>

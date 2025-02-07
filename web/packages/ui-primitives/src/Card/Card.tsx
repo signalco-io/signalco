@@ -40,7 +40,7 @@ export function CardHeader({ className, ...props }: HTMLAttributes<HTMLDivElemen
 
 export function CardTitle({ children, className, ...props }: HTMLAttributes<HTMLHeadingElement>) {
     return (
-        <div id={typeof children === 'string' ? slug(children) : undefined} className={cx('text-2xl font-semibold leading-none tracking-tight', className)} {...props}>
+        <div id={typeof children === 'string' ? slug(children) : undefined} className={cx('text-2xl font-semibold tracking-tight', className)} {...props}>
             {children}
         </div>
     );
