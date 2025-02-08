@@ -48,13 +48,13 @@ export function DashboardSelector({ onEditWidgets, onSettings }: DashboardSelect
                 loadingLabel="Loading spaces..."
                 placeholder="skeletonRect"
                 height={30}
-                width={120}>
+                width={176}>
                 {(dashboards?.length ?? 0) > 0 && (
                     <Popper
                         open={isOpen}
                         onOpenChange={setIsOpen}
                         trigger={(
-                            <ButtonDropdown className="w-12 font-semibold sm:w-24 md:w-44">{currentName}</ButtonDropdown>
+                            <ButtonDropdown variant="plain" className="w-12 font-semibold sm:w-24 md:w-44">{currentName}</ButtonDropdown>
                         )}>
                         <DashboardSelectorMenu
                             selectedId={selectedId}
