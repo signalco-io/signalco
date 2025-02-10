@@ -40,7 +40,7 @@
         "@tailwindcss/typography": "0.5.16",
         "@tanstack/react-query": "5.66.0",
         "@tanstack/react-query-devtools": "5.66.0",
-        "@vercel/analytics": "1.4.1",
+        "@vercel/analytics": "1.5.0",
         "jose": "5.9.6",
         "nanoid": "5.0.9",
         "next": "15.1.6",
