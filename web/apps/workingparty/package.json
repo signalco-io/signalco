@@ -69,7 +69,7 @@
         "babel-plugin-react-compiler": "19.0.0-beta-e552027-20250112",
         "eslint": "8.57.1",
         "next-sitemap": "4.2.3",
-        "postcss": "8.5.1",
+        "postcss": "8.5.2",
         "sass": "1.84.0",
         "typescript": "5.7.3"
     }
