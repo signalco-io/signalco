@@ -34,7 +34,7 @@
         "@signalco/ui-primitives": "workspace:*",
         "@signalco/ui-themes-minimal": "workspace:*",
         "@tailwindcss/typography": "0.5.16",
-        "@vercel/analytics": "1.4.1",
+        "@vercel/analytics": "1.5.0",
         "autoprefixer": "10.4.20",
         "next": "15.1.6",
         "next-secure-headers": "2.2.0",
