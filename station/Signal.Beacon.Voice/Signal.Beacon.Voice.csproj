@@ -20,8 +20,8 @@
     <PackageReference Include="Google.Apis" Version="1.69.0" />
     <PackageReference Include="Google.Cloud.Speech.V1" Version="3.8.0" />
     <PackageReference Include="OpenTK.Audio.OpenAL" Version="5.0.0-pre.13" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.1" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.2" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.2" />
     <PackageReference Include="Porcupine" Version="3.0.6" />
   </ItemGroup>
 
