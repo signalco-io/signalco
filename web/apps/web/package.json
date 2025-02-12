@@ -20,7 +20,7 @@
     "dependencies": {
         "@enterwell/react-hooks": "0.5.0",
         "@hcaptcha/react-hcaptcha": "1.11.1",
-        "@next/env": "15.1.6",
+        "@next/env": "15.1.7",
         "@reactflow/background": "11.3.14",
         "@reactflow/controls": "11.2.14",
         "@reactflow/core": "11.11.4",
@@ -36,7 +36,7 @@
         "@tailwindcss/typography": "0.5.16",
         "@vercel/analytics": "1.5.0",
         "autoprefixer": "10.4.20",
-        "next": "15.1.6",
+        "next": "15.1.7",
         "next-secure-headers": "2.2.0",
         "next-themes": "0.4.4",
         "octokit": "4.1.1",
