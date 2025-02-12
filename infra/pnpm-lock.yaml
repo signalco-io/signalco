@@ -30,8 +30,8 @@ importers:
         specifier: 5.49.0
         version: 5.49.0(ts-node@7.0.1)(typescript@5.7.3)
       '@pulumi/command':
-        specifier: 1.0.1
-        version: 1.0.1(ts-node@7.0.1)(typescript@5.7.3)
+        specifier: 1.0.2
+        version: 1.0.2(ts-node@7.0.1)(typescript@5.7.3)
       '@pulumi/docker':
         specifier: 4.6.1
         version: 4.6.1(ts-node@7.0.1)(typescript@5.7.3)
@@ -134,8 +134,8 @@ importers:
         specifier: 5.49.0
         version: 5.49.0(ts-node@7.0.1)(typescript@5.7.3)
       '@pulumi/command':
-        specifier: 1.0.1
-        version: 1.0.1(ts-node@7.0.1)(typescript@5.7.3)
+        specifier: 1.0.2
+        version: 1.0.2(ts-node@7.0.1)(typescript@5.7.3)
       '@pulumi/docker':
         specifier: 4.6.1
         version: 4.6.1(ts-node@7.0.1)(typescript@5.7.3)
@@ -189,8 +189,8 @@ importers:
         specifier: 5.49.0
         version: 5.49.0(ts-node@7.0.1)(typescript@5.7.3)
       '@pulumi/command':
-        specifier: 1.0.1
-        version: 1.0.1(ts-node@7.0.1)(typescript@5.7.3)
+        specifier: 1.0.2
+        version: 1.0.2(ts-node@7.0.1)(typescript@5.7.3)
       '@pulumi/pulumi':
         specifier: 3.149.0
         version: 3.149.0(ts-node@7.0.1)(typescript@5.7.3)
@@ -317,8 +317,8 @@ importers:
         specifier: 5.49.0
         version: 5.49.0(ts-node@7.0.1)(typescript@5.7.3)
       '@pulumi/command':
-        specifier: 1.0.1
-        version: 1.0.1(ts-node@7.0.1)(typescript@5.7.3)
+        specifier: 1.0.2
+        version: 1.0.2(ts-node@7.0.1)(typescript@5.7.3)
       '@pulumi/docker':
         specifier: 4.6.1
         version: 4.6.1(ts-node@7.0.1)(typescript@5.7.3)
@@ -783,8 +783,8 @@ packages:
   '@pulumi/cloudflare@5.49.0':
     resolution: {integrity: sha512-MSbERpnmqX85gOiAqYQsheT3M01eVAfZGfxHmZ3DcpeVNEqDkWhCwvoRNQPNCWYA1nGSKbQ9tI2G7lWe2Io9ww==}
 
-  '@pulumi/command@1.0.1':
-    resolution: {integrity: sha512-PqqcMp80Y9dc7Lt0epXqvqha76S4XF08NB8lpMA0zJ9zWvkkssQ8lq8XdHuZOrAGHXj7gKBs6JBrhhltoovUTQ==}
+  '@pulumi/command@1.0.2':
+    resolution: {integrity: sha512-1Pge79T3E2bzIAvLXuYI4uczhjpqQYgnpkvLHRag/idyCmhXCV7JP+NOXLA/7RARdr8ftuZL+BEvXpJibju7jA==}
 
   '@pulumi/docker@4.6.1':
     resolution: {integrity: sha512-csJWLgwq+kAQzJSNbCknXydxDXz9xhss7nI6Crq3hbz/TYifrUImpV22rNSp0dieJz7vGx2QoW+8vxjIBs+HnA==}
@@ -3199,7 +3199,7 @@ snapshots:
       - ts-node
       - typescript
 
-  '@pulumi/command@1.0.1(ts-node@7.0.1)(typescript@5.7.3)':
+  '@pulumi/command@1.0.2(ts-node@7.0.1)(typescript@5.7.3)':
     dependencies:
       '@pulumi/pulumi': 3.149.0(ts-node@7.0.1)(typescript@5.7.3)
     transitivePeerDependencies:
