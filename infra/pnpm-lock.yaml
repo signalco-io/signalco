@@ -21,8 +21,8 @@ importers:
   apps/cloud-primary:
     dependencies:
       '@checkly/pulumi':
-        specifier: 1.1.4
-        version: 1.1.4(ts-node@7.0.1)(typescript@5.7.3)
+        specifier: 2.0.0
+        version: 2.0.0(ts-node@7.0.1)(typescript@5.7.3)
       '@pulumi/azure-native':
         specifier: 2.87.0
         version: 2.87.0(ts-node@7.0.1)(typescript@5.7.3)
@@ -125,8 +125,8 @@ importers:
   apps/remote-browser:
     dependencies:
       '@checkly/pulumi':
-        specifier: 1.1.4
-        version: 1.1.4(ts-node@7.0.1)(typescript@5.7.3)
+        specifier: 2.0.0
+        version: 2.0.0(ts-node@7.0.1)(typescript@5.7.3)
       '@pulumi/azure-native':
         specifier: 2.87.0
         version: 2.87.0(ts-node@7.0.1)(typescript@5.7.3)
@@ -180,8 +180,8 @@ importers:
   apps/uier:
     dependencies:
       '@checkly/pulumi':
-        specifier: 1.1.4
-        version: 1.1.4(ts-node@7.0.1)(typescript@5.7.3)
+        specifier: 2.0.0
+        version: 2.0.0(ts-node@7.0.1)(typescript@5.7.3)
       '@pulumi/azure-native':
         specifier: 2.87.0
         version: 2.87.0(ts-node@7.0.1)(typescript@5.7.3)
@@ -308,8 +308,8 @@ importers:
   packages/pulumi:
     dependencies:
       '@checkly/pulumi':
-        specifier: 1.1.4
-        version: 1.1.4(ts-node@7.0.1)(typescript@5.7.3)
+        specifier: 2.0.0
+        version: 2.0.0(ts-node@7.0.1)(typescript@5.7.3)
       '@pulumi/azure-native':
         specifier: 2.87.0
         version: 2.87.0(ts-node@7.0.1)(typescript@5.7.3)
@@ -374,8 +374,8 @@ packages:
     resolution: {integrity: sha512-1Yjs2SvM8TflER/OD3cOjhWWOZb58A2t7wpE2S9XfBYTiIl+XFhQG2bjy4Pu1I+EAlCNUzRDYDdFwFYUKvXcIA==}
     engines: {node: '>=0.10.0'}
 
-  '@checkly/pulumi@1.1.4':
-    resolution: {integrity: sha512-YPNYtwEnKu23VDHNFu91xd/Ueu5zYONHcYwKDA5qTvtgZZ1nzrvPJgrO15KF0fLRVlGo7yckirDS26GpvBTe6w==}
+  '@checkly/pulumi@2.0.0':
+    resolution: {integrity: sha512-jYbH1RcMtJEmZy28liVLqwjAjVBXGZ76DGCUMkViRzlU2gQaldYFw8r/TlED7h43NsyDCpPlhmkH//DLd2vEbw==}
 
   '@esbuild/aix-ppc64@0.24.0':
     resolution: {integrity: sha512-WtKdFM7ls47zkKHFVzMz8opM7LkcsIp9amDUBIAWirg70RM71WRSjdILPsY5Uv1D42ZpUfaPILDlfactHgsRkw==}
@@ -2771,7 +2771,7 @@ snapshots:
 
   '@aashutoshrathi/word-wrap@1.2.6': {}
 
-  '@checkly/pulumi@1.1.4(ts-node@7.0.1)(typescript@5.7.3)':
+  '@checkly/pulumi@2.0.0(ts-node@7.0.1)(typescript@5.7.3)':
     dependencies:
       '@pulumi/pulumi': 3.150.0(ts-node@7.0.1)(typescript@5.7.3)
     transitivePeerDependencies:
