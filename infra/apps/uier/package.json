@@ -26,7 +26,7 @@
         "@checkly/pulumi": "1.1.4",
         "@pulumi/azure-native": "2.86.0",
         "@pulumi/cloudflare": "5.49.0",
-        "@pulumi/command": "1.0.1",
+        "@pulumi/command": "1.0.2",
         "@pulumi/pulumi": "3.149.0",
         "@pulumiverse/vercel": "1.14.3"
     }
