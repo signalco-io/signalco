@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="HueApi" Version="1.7.0" />
+    <PackageReference Include="HueApi" Version="1.8.0" />
     <PackageReference Include="HueApi.ColorConverters" Version="1.7.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.2" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.2" />
