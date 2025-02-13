@@ -14,7 +14,9 @@ async function signJwt(
         .setIssuedAt()
         .setIssuer(`urn:${namespace}:issuer:${issuer}`)
         .setAudience(`urn:${namespace}:audience:${audience}`)
-        .setExpirationTime(expirationTime)
+        .setExpirationTime(typeof expirationTime === 'number'
+            ? new Date(Date.now() + expirationTime)
+            : expirationTime)
         .setSubject(userId)
         .sign(jwtSecret);
 }
