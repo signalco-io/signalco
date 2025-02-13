@@ -15,6 +15,9 @@ function jwtSecretFactory() {
 }
 
 export const { withAuth, createJwt, setCookie, clearCookie } = initAuth({
+    security: {
+        expiry: 60 * 60 * 1000
+    },
     jwt: {
         namespace: 'app',
         issues: 'api',
@@ -22,8 +25,7 @@ export const { withAuth, createJwt, setCookie, clearCookie } = initAuth({
         jwtSecretFactory: jwtSecretFactory,
     },
     cookie: {
-        name: 'auth_session',
-        expiry: 60 * 60 * 1000
+        name: 'auth_session'
     },
     getUser: storageGetUser
 });

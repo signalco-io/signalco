@@ -19,12 +19,12 @@ async function signJwt(
         .sign(jwtSecret);
 }
 
-export async function createJwt<TUser extends UserBase>(config: AuthConfigInitialized<TUser>, userId: string, expirationTime: string | number | Date = '1h') {
+export async function createJwt<TUser extends UserBase>(config: AuthConfigInitialized<TUser>, userId: string, expirationTime?: string | number | Date) {
     return signJwt(
         userId,
         config.jwt.namespace,
         config.jwt.issuer,
         config.jwt.audience,
-        expirationTime,
+        expirationTime ?? config.jwt.expiry,
         await config.jwt.jwtSecretFactory());
 }
