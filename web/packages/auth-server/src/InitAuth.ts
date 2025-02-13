@@ -20,17 +20,22 @@ export function initAuth<TUser extends UserBase>(config: AuthConfig<TUser>): {
             getUser: async () => { throw new Error('Not implemented'); }
         },
         ...config,
+        security: {
+            expiry: 60 * 60 * 1000,
+            ...config.security
+        },
         jwt: {
             namespace: 'app',
             issuer: 'api',
             audience: 'web',
             jwtSecretFactory: async () => { throw new Error('Not implemented'); },
+            expiry: config.security?.expiry ?? 60 * 60 * 1000,
             ...config.jwt
         },
         cookie: {
             ...{
                 name: 'auth_session',
-                expiry: 60 * 60 * 1000
+                expiry: config.security?.expiry ?? 60 * 60 * 1000
             },
             ...config.cookie
         }
