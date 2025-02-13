@@ -1,0 +1,41 @@
+config:
+  azure-native:clientId: 931030e8-502c-4bae-a7d2-18c2509fc744
+  azure-native:clientSecret:
+    secure: v1:BaYwbFr6NN2j03jF:6AiROevzSJRvcwEW0LxL92+hTDxSG+fqzu9LRrOU/62yz3llpwe3Eh9K73/p2/vO/o0hvia7WNg=
+  azure-native:location: westeurope
+  azure-native:subscriptionId: d22db5bd-ca9a-447c-9b1b-dc56aca401d7
+  azure-native:tenantId: c7837eb3-77ca-413b-8653-c97b08886678
+  checkly:accountId: 40dcbe54-1c1c-4e60-95ba-6ad5fe515b0d
+  checkly:apiKey:
+    secure: v1:MeejGrn3eMULx1O8:nQ9LgL4Ep9ry5h6IOM3dmCFp9bQaspLDfxMvs2M+69TyEtjWfFJbTqOspLJg3AEpS0T3
+  cloud-primary:domain: signalco.io
+  cloud-primary:secret-auth0ApiIdentifier:
+    secure: v1:rKI9yl9yTSvkuM5G:KQOmCDZoTjMNeVFXofQWqioiVZWL7t2/D7ZafnKFpYP6C/ofyV45
+  cloud-primary:secret-auth0ClientIdStation:
+    secure: v1:9xafEcX8JsCs2uXe:urfW3F7vwugIIb3qcrdkrzh9TScjVUKLKuPArsCV9md2HbfS1RMOgByplqZ7IWbX
+  cloud-primary:secret-auth0ClientSecretStation:
+    secure: v1:WnKAL95ttIrREdHI:a1fPfR1ebO32w4qdFTHJptZ78qDfa8391q/0SoAlGdy1fu/XuVcrIc3ZlOjq+5c6AIMG5TaoeyVi8PVnYxLK3c35tHqhZUYmxJu7tvi1K3E=
+  cloud-primary:secret-auth0Domain: dfnoise.eu.auth0.com
+  cloud-primary:secret-hcaptchaSecret:
+    secure: v1:SCTp1/JwM4AAJ3RO:epJkJul+Jy0ezmIr7xbCIbEio/N56E8W01PT34vX5uE2IRjeqxer0aMg2BqdBJeO8zJQPfcdlU9HQw==
+  cloud-primary:secret-hcaptchaSiteKey:
+    secure: v1:8t5pbO8fGKSKghQT:Ad+QxFyrnAs4BNHPp2VsZnofD11FCfU1n3DxFbroyQXTRPHz2RSY0k3/vJQJeEAmwtfjSg==
+  cloud-primary:secret-patSigningToken:
+    secure: v1:SkBntU2cpvVY6qNB:wVyF/qpHZW66qrn6x71IvtbqnX+rj3ayAHav+y+quVbRthbWPxJGP5oCIVpvWj/AtiMoexUIp0o24yv0mo1y2XCAaAi9pC6EP5u5/qB1Ax6BCGQ9cTtraqvrptLWi7gKcA5RBBd+cWuLaCsELjL4idQtWEOCd/lrFHNGqhzVwQU/XMM2mXZkaLX69lH7Hgmi
+  cloud-primary:secret-processorAccessCode:
+    secure: v1:JXazGaJ4V+waqQNk:Lj8IBf+M9J4+DyKXkzADhP+jXI3PtzJlpE0LCfSz8tKYbXY4YIenTUJv2V0mWHIycmEQqq5H1StE2ACT66MMxh31sFaGQIJjohj6UCGBaeMi92tBLDSFJJElBgt2tAz8X6rd0DxkX8py6Jg0zlqH1SfEq4k2NSV48svM3bKRhjQ63Q9kGBAPAXeERtQ=
+  cloud-primary:secret-slackClientId: "3583799076214.3587521393493"
+  cloud-primary:secret-slackClientSecret:
+    secure: v1:te3POPgGgyR89jAk:j258u7NVOorGd+qJeD7Txs2RGPmeQCgh4o859YkcHVBUDHtsIWBu/VMhSIaiTK6v
+  cloud-primary:secret-slackSigningSecret:
+    secure: v1:Zlur8OoRL8sEcPVb:J381wb754zMUiBNbDXaVjTdf+tY3ixJ3RG5N7MacZp34YJwvvotkX7PvjPSossYP
+  cloud-primary:ses-region: eu-west-1
+  cloud-primary:zoneid:
+    secure: v1:d/PO1d30wxFY3aW4:JP+yrDVwh54z+EDSPYdGDFKWfW3wQe74loLXvmP5fcJ2NAAlMMFzX/cMKo65KYAk
+  cloudflare:apiToken:
+    secure: v1:fHrlQIw+MX1lFtuI:Ou+DklLrwTbYSXcTgGFx9QAwGZVU9xAq+oRz1BHCHsDHDHDAVpI7UQEyVvehrjLgGtFKUpgHoII=
+  vercel:apiToken:
+    secure: v1:44NBMvBuNxrpiO8r:D5jSr9PHiUGikjosfRJeL2gOXlD/m+VC0MFbNC2C1R0kOqMbxBMqQQ==
+  vercel:team: team_Ade0MlfC3211ml3wYJZ4c9hn
+secretsprovider: azurekeyvault://vault-pulumib5f713d9.vault.azure.net/keys/pulumi-backend/31ac989112f948b299b6e92d2ba96695
+encryptedkey: VDRRZXJnYVBPMDNpYldIdTN1Z0hXNkdoWWhXRHp0b0tDRVVycEx6aWVOZGMxWWtqZXVjdVhoNll4UWhUNXZRTTBfbU91NXBuakJMS1N1Zl96eWVQeDhyUDZMSFFOVUVDU3RLTkpqNTdMd2xFbGI4VzdGdExhNUZvODl0bFdRWG9paTczOW9MWU80YlZ2QWFieHY3bXBMQk1CWUQwNm5iUkU1UkJXYVpJeHE0TGxMdzhtWFk3TUQ2TkxOZkY3bGtOd2V4bkRsbV8yZVl1UVdhSFdBTHVnXzZDYUhZOFM5d09pWURMYk5Qa0VHSG0yb3BaeFJlRjVoaW40aEdrYll3ZmhxNnlOMHNTY0JELXAwd0xES0FJVkNGVUxtNXBxb05kM3JpUHNjczUxNzNBUy1hZ2RzV0drWnhvVlNjOS1kYUZMTzBFX25USWN5OGtBUzRhWHM5WThR

@@ -9,7 +9,7 @@ import { createStorageAccount, acsEmails } from '@infra/pulumi/azure';
 
 const up = async () => {
     const config = new Config();
-    const stack = getStack();
+    const stack = getStack().replace('workingparty-', '');
     const resourceGroupName = `workingparty-${stack}`;
 
     let domainName = undefined;

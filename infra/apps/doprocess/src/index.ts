@@ -8,7 +8,7 @@ import { CommunicationService, EmailService, Domain, DomainManagement, UserEngag
 
 const up = async () => {
     const config = new Config();
-    const stack = getStack();
+    const stack = getStack().replace('doprocess-', '');
     const resourceGroupName = `doprocess-${stack}`;
 
     let domainName = undefined;
