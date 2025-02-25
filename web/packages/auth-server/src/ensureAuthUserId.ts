@@ -25,7 +25,7 @@ export async function ensureAuthUserId<TUser extends UserBase>(authConfig: AuthC
         throw new UnauthorizedError('Unauthorized: No token provided');
     }
 
-    const verify = await verifyToken(authConfig, token);
+    const verify = await verifyToken(authConfig.jwt, token);
     if (verify.error) {
         console.error('JWT verification error:', verify.error);
         throw new UnauthorizedError('Unauthorized: Invalid token');
