@@ -1,6 +1,6 @@
 {
   "name": "@signalco/auth-server",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "sideEffects": false,
   "type": "module",
   "license": "MIT",
@@ -43,7 +43,6 @@
     "typescript": "5.7.3"
   },
   "peerDependencies": {
-    "jose": ">=5",
     "next": ">=15",
     "react": ">=19.0.0",
     "react-dom": ">=19.0.0"
