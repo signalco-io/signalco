@@ -6,7 +6,7 @@ export async function setCookie<TUser extends UserBase>(
     config: AuthConfigInitialized<TUser>['cookie'],
     cookieValue: Promise<string> | string,
     expiry?: number
-) {
+): Promise<void> {
     (await cookies()).set(
         config.name,
         await cookieValue,

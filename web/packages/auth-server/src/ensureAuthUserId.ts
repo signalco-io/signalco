@@ -10,7 +10,9 @@ class UnauthorizedError extends Error {
     }
 }
 
-export async function ensureAuthUserId<TUser extends UserBase>(authConfig: AuthConfigInitialized<TUser>) {
+export async function ensureAuthUserId<TUser extends UserBase>(authConfig: AuthConfigInitialized<TUser>): Promise<{
+    userId: string;
+}> {
     const sessionCookie = (await cookies()).get(authConfig.cookie.name);
     let token = sessionCookie?.value;
 
