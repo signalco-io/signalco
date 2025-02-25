@@ -21,7 +21,7 @@ async function signJwt(
         .sign(jwtSecret);
 }
 
-export async function createJwt<TUser extends UserBase>(config: AuthConfigInitialized<TUser>['jwt'], userId: string, expirationTime?: string | number | Date) {
+export async function createJwt<TUser extends UserBase>(config: AuthConfigInitialized<TUser>['jwt'], userId: string, expirationTime?: string | number | Date): Promise<string> {
     return signJwt(
         userId,
         config.namespace,

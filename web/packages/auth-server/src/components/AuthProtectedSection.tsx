@@ -1,4 +1,4 @@
-import { PropsWithChildren } from 'react';
+import { PropsWithChildren, ReactElement } from 'react';
 import { redirect } from 'next/navigation';
 import { auth as authAuth } from '../auth';
 
@@ -13,7 +13,7 @@ type AuthProtectedSectionProps = PropsWithChildren<{
         redirectUrl: string;
     })>;
 
-export async function AuthProtectedSection({ children, auth, mode = 'hide', redirectUrl }: AuthProtectedSectionProps) {
+export async function AuthProtectedSection({ children, auth, mode = 'hide', redirectUrl }: AuthProtectedSectionProps): Promise<ReactElement | null> {
     try {
         await auth();
         return <>{children}</>;

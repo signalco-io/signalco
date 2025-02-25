@@ -45,9 +45,8 @@ export function initAuth<TUser extends UserBase>(config: AuthConfig<TUser>): ini
         }
     };
     return {
-        auth: () =>
-            auth(initializedConfig),
-        withAuth: (handler) =>
+        auth: () => auth(initializedConfig),
+        withAuth: (handler: (ctx: WithAuthContext<TUser>) => Promise<Response>) =>
             withAuth(initializedConfig, handler),
         createJwt: (userId: string, expirationTime?: string | number | Date, overrideConfig?: Partial<AuthConfig<TUser>['jwt']>) =>
             createJwt({ ...initializedConfig.jwt, ...overrideConfig }, userId, expirationTime),
