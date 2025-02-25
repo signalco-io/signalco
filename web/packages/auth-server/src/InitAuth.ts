@@ -1,4 +1,3 @@
-import { JWTVerifyResult } from 'jose';
 import { WithAuthContext, withAuth } from './withAuth';
 import { verifyToken } from './verifyToken';
 import { setCookie } from './setCookie';
@@ -7,16 +6,17 @@ import { clearCookie } from './clearCookie';
 import { auth } from './auth';
 import type { UserBase } from './@types/UserBase';
 import type { AuthContext } from './@types/AuthContext';
+import type { AuthConfigOverride } from './@types/AuthConfigOverride';
 import type { AuthConfigInitialized } from './@types/AuthConfigInitialized';
 import type { AuthConfig } from './@types/AuthConfig';
 
 export type initAuthResult<TUser extends UserBase> = {
     auth: () => Promise<AuthContext<TUser>>,
     withAuth: (handler: (ctx: WithAuthContext<TUser>) => Promise<Response>) => Promise<Response>;
-    createJwt: (userId: string, expirationTime?: string | number | Date, overrideConfig?: AuthConfig<TUser>['jwt']) => Promise<string>;
-    verifyJwt: (token: string, overrideConfig?: AuthConfig<TUser>['jwt']) => Promise<{ result?: JWTVerifyResult; error?: unknown }>;
-    setCookie: (cookieValue: Promise<string> | string, expiry?: number, overrideConfig?: AuthConfig<TUser>['cookie']) => Promise<void>;
-    clearCookie: (overrideConfig?: AuthConfig<TUser>['cookie']) => Promise<void>;
+    createJwt: (userId: string, expirationTime?: string | number | Date, overrideConfig?: AuthConfigOverride<TUser>['jwt']) => Promise<string>;
+    verifyJwt: (token: string, overrideConfig?: AuthConfigOverride<TUser>['jwt']) => ReturnType<typeof verifyToken>;
+    setCookie: (cookieValue: Promise<string> | string, expiry?: number, overrideConfig?: AuthConfigOverride<TUser>['cookie']) => Promise<void>;
+    clearCookie: (overrideConfig?: AuthConfigOverride<TUser>['cookie']) => Promise<void>;
 }
 
 export function initAuth<TUser extends UserBase>(config: AuthConfig<TUser>): initAuthResult<TUser> {
@@ -50,13 +50,13 @@ export function initAuth<TUser extends UserBase>(config: AuthConfig<TUser>): ini
             auth(initializedConfig),
         withAuth: (handler) =>
             withAuth(initializedConfig, handler),
-        createJwt: (userId: string, expirationTime?: string | number | Date, overrideConfig?: AuthConfig<TUser>['jwt']) =>
+        createJwt: (userId: string, expirationTime?: string | number | Date, overrideConfig?: AuthConfigOverride<TUser>['jwt']) =>
             createJwt({ ...initializedConfig.jwt, ...overrideConfig }, userId, expirationTime),
-        verifyJwt: (token: string, overrideConfig?: AuthConfig<TUser>['jwt']) =>
+        verifyJwt: (token: string, overrideConfig?: AuthConfigOverride<TUser>['jwt']) =>
             verifyToken({ ...initializedConfig.jwt, ...overrideConfig }, token),
-        setCookie: (cookieValue: Promise<string> | string, expiry?: number, overrideConfig?: AuthConfig<TUser>['cookie']) =>
+        setCookie: (cookieValue: Promise<string> | string, expiry?: number, overrideConfig?: AuthConfigOverride<TUser>['cookie']) =>
             setCookie({ ...initializedConfig.cookie, ...overrideConfig }, cookieValue, expiry),
-        clearCookie: (overrideConfig?: AuthConfig<TUser>['cookie']) =>
+        clearCookie: (overrideConfig?: AuthConfigOverride<TUser>['cookie']) =>
             clearCookie({ ...initializedConfig.cookie, ...overrideConfig })
     };
 }
