@@ -1,5 +1,5 @@
 import { cookies, headers } from 'next/headers';
-import { jwtVerify } from 'jose';
+import { verifyToken } from './verifyToken';
 import type { UserBase } from './@types/UserBase';
 import type { AuthConfigInitialized } from './@types/AuthConfigInitialized';
 
@@ -16,7 +16,7 @@ export async function ensureAuthUserId<TUser extends UserBase>(authConfig: AuthC
 
     if (!token) {
         const authorizationHeader = (await headers()).get('Authorization');
-        if (authorizationHeader?.startsWith('Bearer ')) {
+        if (authorizationHeader?.toLowerCase().startsWith('bearer ')) {
             token = authorizationHeader.substring(7);
         }
     }
@@ -25,18 +25,13 @@ export async function ensureAuthUserId<TUser extends UserBase>(authConfig: AuthC
         throw new UnauthorizedError('Unauthorized: No token provided');
     }
 
-    let result;
-    try {
-        result = await jwtVerify(token, await authConfig.jwt.jwtSecretFactory(), {
-            issuer: `urn:${authConfig.jwt.namespace}:issuer:${authConfig.jwt.issuer}`,
-            audience: `urn:${authConfig.jwt.namespace}:audience:${authConfig.jwt.audience}`,
-        });
-    } catch (error) {
-        console.warn('JWT verification failed:', error);
+    const verify = await verifyToken(authConfig, token);
+    if (verify.error) {
+        console.error('JWT verification error:', verify.error);
         throw new UnauthorizedError('Unauthorized: Invalid token');
     }
 
-    const userId = result.payload.sub;
+    const userId = verify.result?.payload.sub;
     if (!userId || typeof userId !== 'string' || userId.length === 0) {
         throw new UnauthorizedError('Unauthorized: Invalid user ID');
     }

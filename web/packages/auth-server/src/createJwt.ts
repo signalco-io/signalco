@@ -21,12 +21,12 @@ async function signJwt(
         .sign(jwtSecret);
 }
 
-export async function createJwt<TUser extends UserBase>(config: AuthConfigInitialized<TUser>, userId: string, expirationTime?: string | number | Date) {
+export async function createJwt<TUser extends UserBase>(config: AuthConfigInitialized<TUser>['jwt'], userId: string, expirationTime?: string | number | Date) {
     return signJwt(
         userId,
-        config.jwt.namespace,
-        config.jwt.issuer,
-        config.jwt.audience,
-        expirationTime ?? config.jwt.expiry,
-        await config.jwt.jwtSecretFactory());
+        config.namespace,
+        config.issuer,
+        config.audience,
+        expirationTime ?? config.expiry,
+        await config.jwtSecretFactory());
 }
