@@ -104,9 +104,9 @@ jobs:
         with:
           cloud-url: azblob://states
           command: ${{ inputs.command }}
-          stack-name: organization/${{ inputs.project }}/${{ inputs.project }}-${{ steps.extract_branch.outputs.stack }}
+          stack-name: organization/${{ inputs.project }}/${{ steps.extract_branch.outputs.stack }}
           work-dir: ./infra/apps/${{ inputs.project }}
-          comment-on-pr: true
+          comment-on-pr: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           AZURE_STORAGE_ACCOUNT: ${{ secrets.AZURE_STORAGE_ACCOUNT }}
