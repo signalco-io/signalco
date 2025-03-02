@@ -1,3 +1,4 @@
+import { Bug, Device, Cloud } from "@signalco/ui-icons";
 import { SelectItems } from "@signalco/ui-primitives/SelectItems";
 import { Meta, StoryObj } from "@storybook/react";
 
@@ -50,5 +51,23 @@ export const Scroll: Story = {
     args: {
         defaultValue: "1",
         items: Array.from({ length: 100 }, (_, i) => ({ label: `Option ${i + 1}`, value: `${i + 1}` }))
+    }
+};
+
+export const Icons: Story = {
+    parameters: {
+        docs: {
+            description: {
+                story: 'Select with icons.'
+            }
+        }
+    },
+    args: {
+        defaultValue: "1",
+        items: [
+            { label: 'Option 1', value: '1', icon: <Cloud /> },
+            { label: 'Option 2', value: '2', icon: <Bug /> },
+            { label: 'Option 3', value: '3', icon: <Device /> },
+        ]
     }
 };

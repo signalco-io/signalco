@@ -131,9 +131,11 @@ export function SelectItems<T extends string>(props: SelectItemsProps<T>) {
                                             <Check className="size-4" />
                                         </SelectPrimitive.ItemIndicator>
                                     </span>
-                                    <SelectPrimitive.ItemText className="flex items-center gap-2">
-                                        {item.icon}
-                                        {item.content ?? (item.label ?? item.value)}
+                                    <SelectPrimitive.ItemText>
+                                        <span className="flex items-center gap-2">
+                                            {item.icon}
+                                            <span className="line-clamp-1">{item.content ?? (item.label ?? item.value)}</span>
+                                        </span>
                                     </SelectPrimitive.ItemText>
                                 </SelectPrimitive.Item>
                             ))}
