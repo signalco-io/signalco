@@ -29,6 +29,9 @@ defaults:
 jobs:
   infra-build-and-execute:
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
     steps:
       - name: "Checkout GitHub Action"
         uses: actions/checkout@v4
