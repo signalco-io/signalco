@@ -33,7 +33,7 @@ jobs:
       - name: "Checkout GitHub Action"
         uses: actions/checkout@v4
 
-      - name: ✨ Setup DotNet ${{ env.DOTNET_VERSION }} Environment
+      - name: ✨ Setup DotNet 9.0.x Environment
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 9.0.x
@@ -91,13 +91,15 @@ jobs:
       - name: ⚡ Deploy Infrastructure
         uses: pulumi/actions@v6
         with:
+          cloud-url: azblob://states
           command: ${{ inputs.command }}
-          stack-name: signalco/${{ inputs.project }}/${{ steps.extract_branch.outputs.stack }}
+          stack-name: ${{ inputs.project }}/${{ inputs.project }}-${{ steps.extract_branch.outputs.stack }}
           work-dir: ./infra/apps/${{ inputs.project }}
           comment-on-pr: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
+          AZURE_STORAGE_ACCOUNT: ${{ secrets.AZURE_STORAGE_ACCOUNT }}
+          AZURE_STORAGE_KEY: ${{ secrets.AZURE_STORAGE_KEY }}
 
       - name: ✋ Release mutex
         if: always() && steps.mutex-setup.outcome == 'success'
