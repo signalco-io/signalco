@@ -45,6 +45,9 @@ jobs:
     needs: changes
     if: success() && needs.changes.outputs.infra == 'true'
     uses: ./.github/workflows/infra-deploy_reusable.yml
+    permissions:
+      id-token: write
+      contents: read
     with:
       project: "cloud-primary"
       packageName: "@infra/cloud-primary"
@@ -57,6 +60,9 @@ jobs:
     needs: changes
     if: success() && needs.changes.outputs.infra == 'true'
     uses: ./.github/workflows/infra-deploy_reusable.yml
+    permissions:
+      id-token: write
+      contents: read
     with:
       project: "uier"
       packageName: "@infra/uier"
@@ -69,6 +75,9 @@ jobs:
     needs: changes
     if: success() && needs.changes.outputs.infra == 'true'
     uses: ./.github/workflows/infra-deploy_reusable.yml
+    permissions:
+      id-token: write
+      contents: read
     with:
       project: "workingparty"
       packageName: "@infra/workingparty"
@@ -81,6 +90,9 @@ jobs:
     needs: changes
     if: success() && needs.changes.outputs.infra == 'true'
     uses: ./.github/workflows/infra-deploy_reusable.yml
+    permissions:
+      id-token: write
+      contents: read
     with:
       project: "doprocess"
       packageName: "@infra/doprocess"
