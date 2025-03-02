@@ -93,7 +93,7 @@ jobs:
         with:
           cloud-url: azblob://states
           command: ${{ inputs.command }}
-          stack-name: ${{ inputs.project }}/${{ inputs.project }}-${{ steps.extract_branch.outputs.stack }}
+          stack-name: organization/${{ inputs.project }}/${{ inputs.project }}-${{ steps.extract_branch.outputs.stack }}
           work-dir: ./infra/apps/${{ inputs.project }}
           comment-on-pr: true
         env:
