@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
@@ -43,7 +44,7 @@ public class ProcessorTests
     public async Task Processor_NoContacts()
     {
         var mock = new Mock<IEntityService>();
-        mock.Setup(s => s.ContactsAsync("", default)).Returns(Task.FromResult(Enumerable.Empty<IContact>()));
+        mock.Setup(s => s.ContactsAsync("", CancellationToken.None)).Returns(Task.FromResult(Enumerable.Empty<IContact>()));
 
         var processor = Processor((typeof(IEntityService), mock.Object));
         await processor.RunProcessAsync("", new ContactPointer(null!, null!, null!), false);
@@ -53,7 +54,7 @@ public class ProcessorTests
     public async Task Processor_EmptyConfiguration()
     {
         var mock = new Mock<IEntityService>();
-        mock.Setup(s => s.ContactsAsync("", default)).Returns(Task.FromResult(new List<IContact>
+        mock.Setup(s => s.ContactsAsync("", CancellationToken.None)).Returns(Task.FromResult(new List<IContact>
         {
             new Contact("", "signalco", "configuration", "", DateTime.UtcNow, null)
         }.AsEnumerable()));

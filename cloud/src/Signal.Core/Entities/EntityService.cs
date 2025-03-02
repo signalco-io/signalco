@@ -140,7 +140,9 @@ internal class EntityService(
         string? valueSerialized,
         DateTime? timeStamp = null,
         CancellationToken cancellationToken = default,
-        bool doNotProcess = false)
+        bool doNotProcess = false,
+        bool doNotNotify = false,
+        bool doNotCache = false)
     {
         try
         {
@@ -186,28 +188,31 @@ internal class EntityService(
                 updateCurrentStateTask);
 
             // Notify listeners
-            var notifyStateChangeTask = this.BroadcastToEntityUsersAsync(
-                pointer.EntityId,
-                "contacts",
-                "contact",
-                new object[]
-                {
-                    JsonSerializer.Serialize(new ContactValueChangedDto(
-                        pointer.EntityId,
-                        pointer.ContactName,
-                        pointer.ChannelName,
-                        valueSerialized,
-                        timeStamp ?? DateTime.UtcNow))
-                },
-                cancellationToken);
+            var notifyStateChangeTask = doNotNotify
+                ? Task.CompletedTask
+                : this.BroadcastToEntityUsersAsync(
+                    pointer.EntityId,
+                    "contacts",
+                    "contact",
+                    [
+                        JsonSerializer.Serialize(new ContactValueChangedDto(
+                            pointer.EntityId,
+                            pointer.ContactName,
+                            pointer.ChannelName,
+                            valueSerialized,
+                            timeStamp ?? DateTime.UtcNow))
+                    ],
+                    cancellationToken);
 
             // Processing
-            var queueStateProcessingTask = Task.CompletedTask;
-            if (!doNotProcess)
-                queueStateProcessingTask = this.processManager.AddAsync(pointer, cancellationToken);
+            var queueStateProcessingTask = doNotProcess
+                ? Task.CompletedTask
+                : this.processManager.AddAsync(pointer, cancellationToken);
 
             // Caching
-            var cacheTask = this.CacheEntityAsync(pointer, cancellationToken);
+            var cacheTask = doNotCache
+                ? Task.CompletedTask
+                : this.CacheEntityAsync(pointer, cancellationToken);
 
             // Wait for all to finish
             await Task.WhenAll(
