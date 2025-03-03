@@ -18,7 +18,7 @@
     "test": "playwright test"
   },
   "dependencies": {
-    "@hcaptcha/react-hcaptcha": "1.11.2",
+    "@hcaptcha/react-hcaptcha": "1.12.0",
     "@next/env": "15.1.7",
     "@signalco/cms-components-marketing": "workspace:*",
     "@signalco/cms-core": "workspace:*",
