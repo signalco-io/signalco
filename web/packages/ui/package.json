@@ -47,7 +47,7 @@
         "react": "19.0.0",
         "react-dom": "19.0.0",
         "react-timeago": "7.2.0",
-        "sass": "1.85.0",
+        "sass": "1.85.1",
         "tsup": "8.3.6",
         "typescript": "5.7.3"
     },
