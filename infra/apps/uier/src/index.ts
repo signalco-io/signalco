@@ -8,7 +8,7 @@ import { createStorageAccount } from '@infra/pulumi/azure';
 import { Profile, Endpoint, SkuName } from '@pulumi/azure-native/cdn/index.js';
 
 const up = async () => {
-    const stack = getStack();
+    const stack = getStack().replace('uier-', '');
     const shouldProtect = stack === 'production';
     const app = nextJsApp('uier', 'uier', 'web/apps/uier');
 

@@ -122,6 +122,61 @@ importers:
         specifier: 5.7.3
         version: 5.7.3
 
+  apps/pulumi-backend:
+    dependencies:
+      '@checkly/pulumi':
+        specifier: 2.0.0
+        version: 2.0.0(ts-node@7.0.1)(typescript@5.7.3)
+      '@pulumi/azure-native':
+        specifier: 2.87.0
+        version: 2.87.0(ts-node@7.0.1)(typescript@5.7.3)
+      '@pulumi/cloudflare':
+        specifier: 5.49.0
+        version: 5.49.0(ts-node@7.0.1)(typescript@5.7.3)
+      '@pulumi/command':
+        specifier: 1.0.2
+        version: 1.0.2(ts-node@7.0.1)(typescript@5.7.3)
+      '@pulumi/docker':
+        specifier: 4.6.1
+        version: 4.6.1(ts-node@7.0.1)(typescript@5.7.3)
+      '@pulumi/pulumi':
+        specifier: 3.150.0
+        version: 3.150.0(ts-node@7.0.1)(typescript@5.7.3)
+      '@pulumiverse/vercel':
+        specifier: 1.14.3
+        version: 1.14.3(ts-node@7.0.1)(typescript@5.7.3)
+    devDependencies:
+      '@infra/pulumi':
+        specifier: workspace:*
+        version: link:../../packages/pulumi
+      '@types/node':
+        specifier: 22.13.2
+        version: 22.13.2
+      '@typescript-eslint/eslint-plugin':
+        specifier: 8.24.0
+        version: 8.24.0(@typescript-eslint/parser@8.24.0(eslint@8.57.1)(typescript@5.7.3))(eslint@8.57.1)(typescript@5.7.3)
+      '@typescript-eslint/parser':
+        specifier: 8.24.0
+        version: 8.24.0(eslint@8.57.1)(typescript@5.7.3)
+      eslint:
+        specifier: 8.57.1
+        version: 8.57.1
+      eslint-plugin-import:
+        specifier: 2.31.0
+        version: 2.31.0(@typescript-eslint/parser@8.24.0(eslint@8.57.1)(typescript@5.7.3))(eslint-import-resolver-typescript@3.7.0)(eslint@8.57.1)
+      eslint-plugin-n:
+        specifier: 17.15.1
+        version: 17.15.1(eslint@8.57.1)
+      eslint-plugin-promise:
+        specifier: 7.2.1
+        version: 7.2.1(eslint@8.57.1)
+      tsup:
+        specifier: 8.3.6
+        version: 8.3.6(typescript@5.7.3)
+      typescript:
+        specifier: 5.7.3
+        version: 5.7.3
+
   apps/remote-browser:
     dependencies:
       '@checkly/pulumi':
@@ -376,6 +431,9 @@ packages:
 
   '@checkly/pulumi@1.1.4':
     resolution: {integrity: sha512-YPNYtwEnKu23VDHNFu91xd/Ueu5zYONHcYwKDA5qTvtgZZ1nzrvPJgrO15KF0fLRVlGo7yckirDS26GpvBTe6w==}
+
+  '@checkly/pulumi@2.0.0':
+    resolution: {integrity: sha512-jYbH1RcMtJEmZy28liVLqwjAjVBXGZ76DGCUMkViRzlU2gQaldYFw8r/TlED7h43NsyDCpPlhmkH//DLd2vEbw==}
 
   '@esbuild/aix-ppc64@0.24.0':
     resolution: {integrity: sha512-WtKdFM7ls47zkKHFVzMz8opM7LkcsIp9amDUBIAWirg70RM71WRSjdILPsY5Uv1D42ZpUfaPILDlfactHgsRkw==}
@@ -2772,6 +2830,15 @@ snapshots:
   '@aashutoshrathi/word-wrap@1.2.6': {}
 
   '@checkly/pulumi@1.1.4(ts-node@7.0.1)(typescript@5.7.3)':
+    dependencies:
+      '@pulumi/pulumi': 3.150.0(ts-node@7.0.1)(typescript@5.7.3)
+    transitivePeerDependencies:
+      - bluebird
+      - supports-color
+      - ts-node
+      - typescript
+
+  '@checkly/pulumi@2.0.0(ts-node@7.0.1)(typescript@5.7.3)':
     dependencies:
       '@pulumi/pulumi': 3.150.0(ts-node@7.0.1)(typescript@5.7.3)
     transitivePeerDependencies:
