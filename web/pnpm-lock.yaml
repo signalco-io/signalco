@@ -1151,8 +1151,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/ui-themes-minimal-app
       '@stripe/stripe-js':
-        specifier: 5.6.0
-        version: 5.6.0
+        specifier: 5.8.0
+        version: 5.8.0
       '@tailwindcss/typography':
         specifier: 0.5.16
         version: 0.5.16(tailwindcss@3.4.17)
@@ -4448,8 +4448,8 @@ packages:
     peerDependencies:
       storybook: ^8.2.0 || ^8.3.0-0 || ^8.4.0-0 || ^8.5.0-0 || ^8.6.0-0
 
-  '@stripe/stripe-js@5.6.0':
-    resolution: {integrity: sha512-w8CEY73X/7tw2KKlL3iOk679V9bWseE4GzNz3zlaYxcTjmcmWOathRb0emgo/QQ3eoNzmq68+2Y2gxluAv3xGw==}
+  '@stripe/stripe-js@5.8.0':
+    resolution: {integrity: sha512-o41SYzMDu/aE7iXSW6dNH9XGLfMJyj5sfazbkMz6LdNI1vDPs1h1aldtXJNLKH22RGxjvFUd5AlEw2G2OA7bug==}
     engines: {node: '>=12.16'}
 
   '@swc/core-darwin-arm64@1.7.22':
@@ -12094,7 +12094,7 @@ snapshots:
     dependencies:
       storybook: 8.5.6(prettier@3.4.2)
 
-  '@stripe/stripe-js@5.6.0': {}
+  '@stripe/stripe-js@5.8.0': {}
 
   '@swc/core-darwin-arm64@1.7.22':
     optional: true
