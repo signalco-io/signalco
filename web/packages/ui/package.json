@@ -49,7 +49,7 @@
         "react-timeago": "7.2.0",
         "sass": "1.85.1",
         "tsup": "8.3.6",
-        "typescript": "5.7.3"
+        "typescript": "5.8.2"
     },
     "peerDependencies": {
         "@signalco/ui-primitives": "0",

@@ -28,6 +28,6 @@
         "@signalco/eslint-config-signalco": "workspace:*",
         "@signalco/tsconfig": "workspace:*",
         "tsup": "8.3.6",
-        "typescript": "5.7.3"
+        "typescript": "5.8.2"
     }
 }
