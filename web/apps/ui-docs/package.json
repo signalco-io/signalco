@@ -42,7 +42,7 @@
     "styled-jsx": "5.1.6",
     "tailwindcss": "3.4.17",
     "tailwindcss-animate": "1.0.7",
-    "typescript": "5.7.3",
+    "typescript": "5.8.2",
     "vitest": "3.0.5"
   },
   "dependencies": {
