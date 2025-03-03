@@ -474,8 +474,8 @@ importers:
         specifier: 0.24.2
         version: 0.24.2(@tiptap/pm@2.11.5)(@types/hast@3.0.4)(@types/react@19.0.10)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@blocknote/react':
-        specifier: 0.24.1
-        version: 0.24.1(@tiptap/pm@2.11.5)(@types/hast@3.0.4)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+        specifier: 0.24.2
+        version: 0.24.2(@tiptap/pm@2.11.5)(@types/hast@3.0.4)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@dnd-kit/core':
         specifier: 6.3.1
         version: 6.3.1(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -2157,12 +2157,6 @@ packages:
 
   '@blocknote/mantine@0.24.2':
     resolution: {integrity: sha512-J1/xt1tfSBifJFdK5wbZE9qG4DI5f+DcMEVz5bKURVBmd+8BuMyVBM9NiA8mbywZLS4Qd6tN/VszYfKKyWuKJg==}
-    peerDependencies:
-      react: ^18.0 || ^19.0 || >= 19.0.0-rc
-      react-dom: ^18.0 || ^19.0 || >= 19.0.0-rc
-
-  '@blocknote/react@0.24.1':
-    resolution: {integrity: sha512-Bt3NtMQ6dZ/uaNjTj93NgNnQm+aOscFppUjPDX6QyIjETJrdeWRYbcwJMOSjy7m5VmkUVKo9uyoejeXhVGdmqA==}
     peerDependencies:
       react: ^18.0 || ^19.0 || >= 19.0.0-rc
       react-dom: ^18.0 || ^19.0 || >= 19.0.0-rc
@@ -9941,25 +9935,6 @@ snapshots:
       - '@tiptap/pm'
       - '@types/hast'
       - '@types/react'
-      - highlight.js
-      - lowlight
-      - refractor
-      - sugar-high
-      - supports-color
-
-  '@blocknote/react@0.24.1(@tiptap/pm@2.11.5)(@types/hast@3.0.4)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
-    dependencies:
-      '@blocknote/core': 0.24.2(@types/hast@3.0.4)
-      '@floating-ui/react': 0.26.28(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
-      '@tiptap/core': 2.11.5(@tiptap/pm@2.11.5)
-      '@tiptap/react': 2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
-      lodash.merge: 4.6.2
-      react: 19.0.0
-      react-dom: 19.0.0(react@19.0.0)
-      react-icons: 5.4.0(react@19.0.0)
-    transitivePeerDependencies:
-      - '@tiptap/pm'
-      - '@types/hast'
       - highlight.js
       - lowlight
       - refractor
