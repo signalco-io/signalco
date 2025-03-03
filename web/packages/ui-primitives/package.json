@@ -47,7 +47,7 @@
         "autoprefixer": "10.4.20",
         "classix": "2.2.2",
         "next": "15.1.7",
-        "postcss": "8.5.2",
+        "postcss": "8.5.3",
         "postcss-preset-env": "10.1.4",
         "react": "19.0.0",
         "react-dom": "19.0.0",
