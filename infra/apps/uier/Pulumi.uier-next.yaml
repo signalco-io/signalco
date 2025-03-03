@@ -1,0 +1,16 @@
+config:
+  azure-native:clientId: f72781c2-20ca-47bf-bdfc-a39343fbaede
+  azure-native:clientSecret:
+    secure: v1:0ebXeQ57ExRG/tbb:a9CgBgu5oN9fiIAbH2V358k+rzUfFm+Dg0HeT9QsaJjxKtteD0qFRZ4xRoruyI+rh0DUdUoZ/4I=
+  azure-native:location: westeurope
+  azure-native:subscriptionId: d22db5bd-ca9a-447c-9b1b-dc56aca401d7
+  azure-native:tenantId: c7837eb3-77ca-413b-8653-c97b08886678
+  cloudflare:apiToken:
+    secure: v1:B7gFC/k1jXCvm/3X:TZmZyuAKKcvEuklsbIfCeefJDQoBMfnFqa06/kzjz59GPSmsm69tXXtYOPIOskeGbqsPYs0GgvU=
+  uier:zoneid:
+    secure: v1:N1SP2jX1mjXRMxHy:/aeDnEXVe/yjWGbLcy18stm/dlwL2bH00GPOuMPg4Ei88LPVnPNQhwl9KBDO2slJ
+  vercel:apiToken:
+    secure: v1:a+zbJts9lSMlVtKf:mdxjsdFIpsrI0ZyhyP+8VUNvqNf8z+P5SL52aiMOjXK6/6BmvlBb+w==
+  vercel:team: team_Ade0MlfC3211ml3wYJZ4c9hn
+secretsprovider: azurekeyvault://vault-pulumib5f713d9.vault.azure.net/keys/pulumi-backend/31ac989112f948b299b6e92d2ba96695
+encryptedkey: ZUJNNTItUmhfUGw1ajhBMGxaWkFvMGVBQVNxcVB2V0MwUkQ3aU01MWJmVXVuMmJ2VVBRTVV2MkRPNUxqOS1tS0ZTUGl6cnRxU1VYanVKSkhIbVJET1NZeEdreWFaaDZzaFY3T0Q4Yk1hVmtYVzdZVmgwOTFKaVZ4dlhhSEl2OGFpNm11YWJyU3JzbmtjR2o5WUtNR0Y2MFdrcnkwSEpMTFMyTU1pVXpkMGRiY0dKbEJVb2R0M0lUcjJTdzdzSVVyQ3RScTVkOXRhV1FQREcwQ2RFcTMtMFEwaWtCdFRybWw3SzM4czNnNUR0U3BVcEN0UU9WeDhBWXEtbXpKYmZRZnR6Z2sxMEJZR1pwTTE1QzcyLWJUSTF0X2R3bklITE5rVGo0enp3MnFibnI3eldfQk54Rlo1bkx2b0E2Rno0Tml0aGNTY2JHVUxpWnJkeWRKT0UwSHd3

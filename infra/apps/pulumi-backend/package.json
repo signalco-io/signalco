@@ -1,5 +1,5 @@
 {
-  "name": "@infra/doprocess",
+  "name": "@infra/pulumi-backend",
   "private": true,
   "license": "MIT",
   "main": "dist/index.js",
@@ -8,8 +8,7 @@
   "scripts": {
     "build": "tsc && tsup src/index.ts --format esm --clean",
     "lint": "eslint ./src/**/*.ts",
-    "preview-next": "pulumi preview --stack signalco/next --non-interactive",
-    "up-next": "pulumi up --stack signalco/next --non-interactive --skip-preview"
+    "preview": "pulumi preview"
   },
   "devDependencies": {
     "@infra/pulumi": "workspace:*",
@@ -24,10 +23,12 @@
     "typescript": "5.7.3"
   },
   "dependencies": {
-    "@pulumi/pulumi": "3.153.1",
+    "@checkly/pulumi": "2.0.0",
     "@pulumi/azure-native": "2.87.0",
     "@pulumi/cloudflare": "5.49.0",
+    "@pulumi/command": "1.0.2",
     "@pulumi/docker": "4.6.1",
+    "@pulumi/pulumi": "3.153.1",
     "@pulumiverse/vercel": "1.14.3"
   }
 }

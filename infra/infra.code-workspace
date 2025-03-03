@@ -5,6 +5,10 @@
 			"path": "."
 		},
 		{
+			"name": "☁️ pulumi-backend",
+			"path": "apps/pulumi-backend"
+		},
+		{
 			"name": "🚀 cloud-primary",
 			"path": "apps/cloud-primary"
 		},

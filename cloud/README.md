@@ -43,7 +43,7 @@ Production API
   - MacOS: `brew install pulumi`
 - Navigate to `./infrastructure`
 - `yarn install`
-- [`pulumi login`](https://www.pulumi.com/docs/reference/cli/pulumi_login/)
+- [`pulumi login azblob://states`](https://www.pulumi.com/docs/reference/cli/pulumi_login/)
 - [`pulumi stack select`](https://www.pulumi.com/docs/reference/cli/pulumi_stack_select/) or [`pulumi stack init`](https://www.pulumi.com/docs/reference/cli/pulumi_stack_init/) to create your new stack
 
 ##### **Azure (required for Deploy step)**

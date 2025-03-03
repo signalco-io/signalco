@@ -40,7 +40,7 @@ const up = async () => {
     const containerRegistryName = 'signalco';
 
     const config = new Config();
-    const stack = getStack();
+    const stack = getStack().replace('cloud-primary-', '');
 
     if (stack === 'shared') {
         const resourceGroupShared = new ResourceGroup(resourceGroupSharedName, {
@@ -57,7 +57,7 @@ const up = async () => {
         const storagePrefix = 'store';
         const keyvaultPrefix = 'kv';
 
-        const currentStack = new StackReference(`signalco/${getProject()}/${getStack()}`);
+        const currentStack = new StackReference(`organization/${getProject()}/${getStack()}`);
 
         const resourceGroup = new ResourceGroup(`signalco-cloud-${stack}`);
 

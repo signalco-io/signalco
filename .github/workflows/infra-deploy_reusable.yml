@@ -29,11 +29,21 @@ defaults:
 jobs:
   infra-build-and-execute:
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
     steps:
       - name: "Checkout GitHub Action"
         uses: actions/checkout@v4
 
-      - name: ✨ Setup DotNet ${{ env.DOTNET_VERSION }} Environment
+      - name: Login to Azure
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: ✨ Setup DotNet 9.0.x Environment
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 9.0.x
@@ -52,6 +62,7 @@ jobs:
         shell: bash
         run: |
           echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+
       - uses: actions/cache@v4
         name: ✨ Setup pnpm cache
         with:
@@ -91,13 +102,19 @@ jobs:
       - name: ⚡ Deploy Infrastructure
         uses: pulumi/actions@v6
         with:
+          cloud-url: azblob://states
           command: ${{ inputs.command }}
-          stack-name: signalco/${{ inputs.project }}/${{ steps.extract_branch.outputs.stack }}
+          stack-name: organization/${{ inputs.project }}/${{ inputs.project }}-${{ steps.extract_branch.outputs.stack }}
           work-dir: ./infra/apps/${{ inputs.project }}
-          comment-on-pr: true
+          comment-on-pr: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
+          AZURE_STORAGE_ACCOUNT: ${{ secrets.AZURE_STORAGE_ACCOUNT }}
+          AZURE_STORAGE_KEY: ${{ secrets.AZURE_STORAGE_KEY }}
+          ARM_USE_OIDC: true
+          ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+          ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+          ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
       - name: ✋ Release mutex
         if: always() && steps.mutex-setup.outcome == 'success'

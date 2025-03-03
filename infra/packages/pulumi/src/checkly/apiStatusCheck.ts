@@ -4,7 +4,7 @@ import { Check } from '@checkly/pulumi';
 export type CheckFrequency = 15 | 30 | 60 | 120 | 180 | 360 | 720 | 1440;
 
 export function apiStatusCheck(prefix: string, name: string, domain: Input<string>, frequency: CheckFrequency, route?: string) {
-    const stack = getStack();
+    const stack = getStack().split('-').at(-1);
     new Check(`apicheck-${prefix}`, {
         name: `${name}`,
         activated: true,
