@@ -10,7 +10,7 @@ const ButtonDropdown = forwardRef<HTMLButtonElement, ButtonProps>(({ className, 
             className={cx(
                 'flex-none grid text-start',
                 Boolean(rest.startDecorator) && 'grid-cols-[auto,1fr,auto]',
-                !Boolean(rest.startDecorator) && 'grid-cols-[1fr,auto]',
+                !rest.startDecorator && 'grid-cols-[1fr,auto]',
                 className)}
             endDecorator={<Select className="size-4" />}
             {...rest} />

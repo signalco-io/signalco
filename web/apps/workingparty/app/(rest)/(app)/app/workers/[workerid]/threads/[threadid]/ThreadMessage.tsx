@@ -15,7 +15,11 @@ const ThreadMessage = forwardRef<HTMLDivElement, { message: Message; }>(({ messa
             )}>
             {contents?.map((content, j) => (
                 <div key={j}>
-                    {content.type === 'text' && <Markdown className="prose prose-sm px-1 dark:prose-invert">{content.text?.value}</Markdown>}
+                    {content.type === 'text' && (
+                        <div className="prose prose-sm px-1 dark:prose-invert">
+                            <Markdown>{content.text?.value}</Markdown>
+                        </div>
+                    )}
                     {content.type === 'image_file' && <div>Image: {content.image_file?.file_id}</div>}
                 </div>
             ))}

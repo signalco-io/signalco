@@ -61,7 +61,7 @@ export function ModalConfirm({
                         <Button
                             variant="plain"
                             onClick={() => handleCancel()}
-                            autoFocus={!Boolean(expectedConfirm)}
+                            autoFocus={!expectedConfirm}
                             type="reset">Cancel</Button>
                         <Button
                             type="submit"
