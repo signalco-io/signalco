@@ -5,7 +5,9 @@ import type { AuthConfigInitialized } from './@types/AuthConfigInitialized';
 
 export type WithAuthContext<TUser extends UserBase> = AuthContext<TUser>;
 
-export async function withAuth<TUser extends UserBase>(config: AuthConfigInitialized<TUser>, handler: (ctx: WithAuthContext<TUser>) => Promise<Response>) {
+export async function withAuth<TUser extends UserBase>(
+    config: AuthConfigInitialized<TUser>,
+    handler: (ctx: WithAuthContext<TUser>) => Promise<Response>): Promise<Response> {
     try {
         const authContext = await auth(config);
         return await handler(authContext);

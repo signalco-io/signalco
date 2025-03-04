@@ -13,13 +13,13 @@
     "devDependencies": {
         "@signalco/eslint-config-signalco": "workspace:*",
         "@signalco/tsconfig": "workspace:*",
-        "@types/node": "22.13.1",
-        "@types/react": "19.0.8"
+        "@types/node": "22.13.9",
+        "@types/react": "19.0.10"
     },
     "dependencies": {
-        "@react-email/components": "0.0.32",
+        "@react-email/components": "0.0.33",
         "react": "19.0.0",
-        "react-email": "3.0.6",
-        "typescript": "5.7.3"
+        "react-email": "3.0.7",
+        "typescript": "5.8.2"
     }
 }

@@ -2,6 +2,7 @@
     "extends": "@infra/typescript-config/base.json",
     "compilerOptions": {
         "outDir": "dist",
+        "rootDir": "./"
     },
     "include": [
         "./src/**/*.ts",

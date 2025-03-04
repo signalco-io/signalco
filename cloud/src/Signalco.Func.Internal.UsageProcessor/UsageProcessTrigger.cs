@@ -66,7 +66,10 @@ public class UsageProcessTrigger(
         // Update contact
         await entityService.ContactSetAsync(
             new ContactPointer(userEntity.Id, "signalco", contactName),
-            JsonSerializer.Serialize(usage), 
-            cancellationToken: cancellationToken);
+            JsonSerializer.Serialize(usage),
+            cancellationToken: cancellationToken,
+            doNotProcess: true,
+            doNotNotify: true,
+            doNotCache: true);
     }
 }

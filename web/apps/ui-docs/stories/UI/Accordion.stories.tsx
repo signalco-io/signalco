@@ -2,7 +2,13 @@ import { Typography } from "@signalco/ui-primitives/Typography";
 import { Accordion } from "@signalco/ui/Accordion";
 import { Meta, StoryObj } from "@storybook/react";
 
-export default { component: Accordion, tags: ['autodocs'] } satisfies Meta<typeof Accordion>;
+const meta: Meta<typeof Accordion> = {
+    component: Accordion,
+    tags: ['autodocs']
+};
+
+export default meta;
+
 type Story = StoryObj<typeof Accordion>;
 
 const Template: Story = {

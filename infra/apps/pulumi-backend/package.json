@@ -1,0 +1,34 @@
+{
+  "name": "@infra/pulumi-backend",
+  "private": true,
+  "license": "MIT",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "scripts": {
+    "build": "tsc && tsup src/index.ts --format esm --clean",
+    "lint": "eslint ./src/**/*.ts",
+    "preview": "pulumi preview"
+  },
+  "devDependencies": {
+    "@infra/pulumi": "workspace:*",
+    "@types/node": "22.13.9",
+    "@typescript-eslint/eslint-plugin": "8.26.0",
+    "@typescript-eslint/parser": "8.26.0",
+    "eslint": "8.57.1",
+    "eslint-plugin-import": "2.31.0",
+    "eslint-plugin-n": "17.16.1",
+    "eslint-plugin-promise": "7.2.1",
+    "tsup": "8.4.0",
+    "typescript": "5.8.2"
+  },
+  "dependencies": {
+    "@checkly/pulumi": "2.0.0",
+    "@pulumi/azure-native": "2.89.1",
+    "@pulumi/cloudflare": "5.49.1",
+    "@pulumi/command": "1.0.2",
+    "@pulumi/docker": "4.6.1",
+    "@pulumi/pulumi": "3.153.1",
+    "@pulumiverse/vercel": "1.14.3"
+  }
+}

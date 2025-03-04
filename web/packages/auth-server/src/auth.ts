@@ -2,7 +2,11 @@ import { ensureAuthUserId } from './ensureAuthUserId';
 import type { UserBase } from './@types/UserBase';
 import { AuthConfigInitialized } from './@types/AuthConfigInitialized';
 
-export async function auth<TUser extends UserBase>(config: AuthConfigInitialized<TUser>) {
+export async function auth<TUser extends UserBase>(config: AuthConfigInitialized<TUser>): Promise<{
+    userId: string;
+    user: TUser;
+    accountId: string;
+}> {
     const userInfo = await ensureAuthUserId(config);
 
     const user = await config.getUser(userInfo.userId);

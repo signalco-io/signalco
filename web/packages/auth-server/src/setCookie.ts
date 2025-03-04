@@ -3,17 +3,17 @@ import type { UserBase } from './@types/UserBase';
 import type { AuthConfigInitialized } from './@types/AuthConfigInitialized';
 
 export async function setCookie<TUser extends UserBase>(
-    config: AuthConfigInitialized<TUser>,
+    config: AuthConfigInitialized<TUser>['cookie'],
     cookieValue: Promise<string> | string,
     expiry?: number
-) {
+): Promise<void> {
     (await cookies()).set(
-        config.cookie.name,
+        config.name,
         await cookieValue,
         {
             secure: true,
             httpOnly: true,
             sameSite: 'strict',
-            expires: new Date(Date.now() + (expiry ?? config.cookie.expiry)),
+            expires: new Date(Date.now() + (expiry ?? config.expiry)),
         });
 }

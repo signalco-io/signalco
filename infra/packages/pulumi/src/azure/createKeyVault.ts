@@ -10,7 +10,8 @@ export function createKeyVault(
     policies: Output<{
         tenantId: Output<string>;
         objectId: Output<string>;
-    }>[] = []) {
+    }>[] = [],
+    rbac = false) {
     const current = Output.create(getClientConfig());
     const vault = new Vault(`vault-${namePrefix}`, {
         resourceGroupName: resourceGroup.name,
@@ -20,6 +21,7 @@ export function createKeyVault(
                 name: SkuName.Standard,
             },
             tenantId: current.tenantId,
+            enableRbacAuthorization: rbac,
             accessPolicies: [
                 {
                     objectId: current.objectId,

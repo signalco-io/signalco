@@ -24,16 +24,16 @@
         "prepublishOnly": "tsup --env.NODE_ENV production"
     },
     "devDependencies": {
-        "@microsoft/api-extractor": "7.49.2",
+        "@microsoft/api-extractor": "7.51.1",
         "@signalco/eslint-config-signalco": "workspace:*",
         "@signalco/js": "workspace:*",
         "@signalco/tsconfig": "workspace:*",
-        "@types/react": "19.0.8",
-        "next": "15.1.6",
+        "@types/react": "19.0.10",
+        "next": "15.2.1",
         "react": "19.0.0",
         "react-dom": "19.0.0",
-        "tsup": "8.3.6",
-        "typescript": "5.7.3"
+        "tsup": "8.4.0",
+        "typescript": "5.8.2"
     },
     "peerDependencies": {
         "next": ">=15",

@@ -14,17 +14,19 @@ async function signJwt(
         .setIssuedAt()
         .setIssuer(`urn:${namespace}:issuer:${issuer}`)
         .setAudience(`urn:${namespace}:audience:${audience}`)
-        .setExpirationTime(expirationTime)
+        .setExpirationTime(typeof expirationTime === 'number'
+            ? new Date(Date.now() + expirationTime)
+            : expirationTime)
         .setSubject(userId)
         .sign(jwtSecret);
 }
 
-export async function createJwt<TUser extends UserBase>(config: AuthConfigInitialized<TUser>, userId: string, expirationTime: string | number | Date = '1h') {
+export async function createJwt<TUser extends UserBase>(config: AuthConfigInitialized<TUser>['jwt'], userId: string, expirationTime?: string | number | Date): Promise<string> {
     return signJwt(
         userId,
-        config.jwt.namespace,
-        config.jwt.issuer,
-        config.jwt.audience,
-        expirationTime,
-        await config.jwt.jwtSecretFactory());
+        config.namespace,
+        config.issuer,
+        config.audience,
+        expirationTime ?? config.expiry,
+        await config.jwtSecretFactory());
 }
