@@ -27,7 +27,7 @@ export function LoadableStatusLabel({ successLabel, isLoading, loadingLabel, err
                 {!isLoading && Boolean(displayError) && (
                     <Error className="size-4 text-red-400" />
                 )}
-                {!isLoading && !Boolean(displayError) && (
+                {!isLoading && !displayError && (
                     <Check className="size-4 text-green-400" />
                 )}
                 <Typography level="body2" className={className}>
