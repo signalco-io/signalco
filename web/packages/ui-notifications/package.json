@@ -1,6 +1,6 @@
 {
     "name": "@signalco/ui-notifications",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "license": "MIT",
     "type": "module",
     "exports": {
@@ -12,9 +12,9 @@
     "publishConfig": {
         "access": "public",
         "exports": {
-            "./*": {
+            ".": {
                 "import": "./dist/index.js",
-                "types": "./dist/src/index.d.ts"
+                "types": "./dist/index.d.ts"
             }
         }
     },

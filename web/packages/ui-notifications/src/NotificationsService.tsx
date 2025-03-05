@@ -1,5 +1,5 @@
 import { toast } from 'sonner';
-import { ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import { Row } from '@signalco/ui-primitives/Row';
 import { Button } from '@signalco/ui-primitives/Button';
 

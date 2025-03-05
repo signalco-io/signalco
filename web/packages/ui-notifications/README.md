@@ -7,13 +7,15 @@ Use `NotificationsContainer` at the application root to provide notifications in
 ```tsx
 'use client';
 
+import { PropsWithChildren } from 'react';
 import { NotificationsContainer } from '@signalco/ui-notifications';
 
-export function ClientProviders() {
+export function ClientProviders({ children }: PropsWithChildren<{}>) {
     return (
         <>
             {/*  ...other provider components */}
             <NotificationsContainer />
+            {children}
         </>
     )
 }
