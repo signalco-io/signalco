@@ -36,7 +36,7 @@
         "@signalco/ui-notifications": "workspace:*",
         "@signalco/ui-primitives": "workspace:*",
         "@signalco/ui-themes-minimal-app": "workspace:*",
-        "@stripe/stripe-js": "5.8.0",
+        "@stripe/stripe-js": "5.10.0",
         "@tailwindcss/typography": "0.5.16",
         "@tanstack/react-query": "5.67.1",
         "@tanstack/react-query-devtools": "5.67.1",
