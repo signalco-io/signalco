@@ -13,7 +13,7 @@
     "devDependencies": {
         "@signalco/eslint-config-signalco": "workspace:*",
         "@signalco/tsconfig": "workspace:*",
-        "@types/node": "22.13.9",
+        "@types/node": "22.13.10",
         "@types/react": "19.0.10"
     },
     "dependencies": {
