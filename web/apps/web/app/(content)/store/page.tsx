@@ -7,7 +7,7 @@ import { Stack } from '@signalco/ui-primitives/Stack';
 import { SelectItems } from '@signalco/ui-primitives/SelectItems';
 import { Row } from '@signalco/ui-primitives/Row';
 import { Chip } from '@signalco/ui-primitives/Chip';
-import { Card } from '@signalco/ui-primitives/Card';
+import { Card, CardContent } from '@signalco/ui-primitives/Card';
 import { Check, Close, ExternalLink, Hourglass } from '@signalco/ui-icons';
 import type { ColorVariants } from '@signalco/ui/theme';
 import { Gallery } from '@signalco/ui/Gallery';
@@ -19,7 +19,6 @@ import contentData from './content.json';
 
 function StoreStockStatusBadge(props: { status: number | undefined }) {
     let Icon = Close;
-    let opacity = 0.6;
     let text = 'Out of stock';
     let color: ColorVariants = 'neutral';
     switch (props.status) {
@@ -28,26 +27,23 @@ function StoreStockStatusBadge(props: { status: number | undefined }) {
             break;
         case 1:
             Icon = Check;
-            opacity = 1;
             text = 'In stock';
             color = 'success';
             break;
         case 2:
             Icon = ExternalLink;
-            opacity = 1;
             text = 'Sold elsewhere';
             color = 'neutral';
             break;
         case 3:
             Icon = Hourglass;
-            opacity = 1;
             text = 'On backorder';
             color = 'warning';
             break;
     }
 
     return (
-        <Row justifyItems="center" style={{ opacity: opacity }}>
+        <Row>
             <Icon color={color} />
             &nbsp;
             <Typography level="body2" color={color}>{text}</Typography>
@@ -59,29 +55,31 @@ function StoreItemThumb(props: { id: string, name: string, features?: string[], 
     const { name, features, imageSrc, price, stockStatus } = props;
 
     return (
-        <Card className="w-56">
-            <Stack spacing={2}>
-                {imageSrc
-                    ? <Image src={imageSrc} alt={`${name} image`} width={180} height={180} />
-                    : (
-                        <Stack alignItems="center" justifyContent="center" spacing={2} style={{ width: 180, height: 180, textAlign: 'center' }}>
-                            <SignalcoLogo width={80} className="opacity-20" />
-                            <Typography level="body2">Image unavailable</Typography>
-                        </Stack>
-                    )}
+        <Card>
+            <CardContent className="pt-2">
                 <Stack spacing={2}>
-                    <Typography bold secondary>{name}</Typography>
-                    <Row spacing={2} justifyContent="space-between" alignItems="center">
-                        <Typography level="h5" bold>€&nbsp;{price ?? '-'}</Typography>
-                        <StoreStockStatusBadge status={stockStatus} />
-                    </Row>
-                    {features && (
-                        <Row spacing={1}>
-                            {features.map(f => <Chip size="sm" key={f}>{f}</Chip>)}
-                        </Row>
-                    )}
+                    {imageSrc
+                        ? <Image src={imageSrc} alt={`${name} image`} width={180} height={180} />
+                        : (
+                            <Stack alignItems="center" justifyContent="center" spacing={2}>
+                                <SignalcoLogo width={80} className="opacity-20" />
+                                <Typography level="body2">No Image</Typography>
+                            </Stack>
+                        )}
+                    <Stack spacing={2}>
+                        <Typography bold secondary>{name}</Typography>
+                        <div className="flex flex-col items-start">
+                            <Typography level="h5" bold>€&nbsp;{price ?? '-'}</Typography>
+                            <StoreStockStatusBadge status={stockStatus} />
+                        </div>
+                        {features && (
+                            <Row spacing={1} className="flex-wrap">
+                                {features.map(f => <Chip size="sm" key={f}>{f}</Chip>)}
+                            </Row>
+                        )}
+                    </Stack>
                 </Stack>
-            </Stack>
+            </CardContent>
         </Card>
     );
 }

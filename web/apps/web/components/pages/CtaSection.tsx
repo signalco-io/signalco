@@ -6,7 +6,7 @@ import { KnownPages } from '../../src/knownPages';
 
 export default function CtaSection() {
     return (
-        <Card className="py-8">
+        <Card className="bg-transparent py-8">
             <Stack alignItems="center" spacing={4}>
                 <Typography level="h4" component="p">Automate your life</Typography>
                 <Typography>Focus on things that matter to you.</Typography>

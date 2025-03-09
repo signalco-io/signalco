@@ -43,7 +43,8 @@ export function ModalConfirm({
     return (
         <Modal open={isOpen} onOpenChange={setIsOpen} {...rest}>
             <form onReset={handleCancel} onSubmit={handleConfirm}>
-                <Stack spacing={2}>
+                <Stack spacing={4}>
+                    <Stack spacing={2}>
                     <Row justifyContent="space-between">
                         <Typography level="h5">{header}</Typography>
                     </Row>
@@ -57,6 +58,7 @@ export function ModalConfirm({
                             onChange={(e) => setConfirmText(e.target.value)}
                             autoFocus />
                     )}
+                    </Stack>
                     <Row spacing={1} justifyContent="end">
                         <Button
                             variant="plain"

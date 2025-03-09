@@ -23,7 +23,7 @@ export function InsightsUsageCard() {
 
     return (
         <UsageCard>
-            <div className="-m-8 grid grid-cols-[1fr_auto_1fr] grid-rows-[auto_auto_1fr]">
+            <div className="-m-4 grid grid-cols-[1fr_auto_1fr] grid-rows-[auto_auto_1fr]">
                 <div className="col-span-5 px-4 py-2">
                     <Row justifyContent="space-between">
                         <Typography level="body1">Usage in the current billing cycle</Typography>

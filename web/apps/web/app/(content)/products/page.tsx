@@ -6,10 +6,10 @@ import PageCenterHeader from '../../../components/pages/PageCenterHeader';
 const products = [
     { id: 'signalco', tags: ['platform'], name: 'signalco', logo: 'https://www.signalco.io/images/icon_x512.png', url: 'https://www.signalco.io' },
     { id: 'workingparty', tags: ['platform'], name: 'WorkingParty', logo: 'https://workingparty.ai/android-chrome-192x192.png', url: 'https://workingparty.ai' },
-    { id: 'doprocess', tags: ['platform'], name: 'do process', logo: 'https://doprocess.app/android-chrome-192x192.png', url: 'https://doprocess.app' },
+    { id: 'doprocess', tags: ['platform'], name: 'DoProcess', logo: 'https://doprocess.app/android-chrome-192x192.png', url: 'https://doprocess.app' },
     { id: 'slco', tags: ['platform'], name: 'slco', logo: undefined, url: 'https://slco.io' },
     { id: 'brandgrab', tags: ['platform'], name: 'Brand Grab', logo: undefined, url: 'https://brandgrab.io' },
-    { id: 'uier', tags: ['platform'], name: 'UIer', logo: undefined, url: 'https://uier.io' },
+    { id: 'uier', tags: ['platform'], name: 'uier', logo: undefined, url: 'https://uier.io' },
     { id: 'modrobots', tags: ['platform'], name: 'MODROBOTS', logo: 'https://modrobots.com/android-chrome-192x192.png', url: 'https://modrobots.com' },
 
     { id: 'mutex', tags: ['apiaas'], name: 'Mutex', logo: undefined, url: 'https://mutex.api.signalco.io' },
@@ -32,7 +32,7 @@ function GridSection({ header, subHeader, tag }: { header: string, subHeader?: s
             <div className="grid grid-cols-4 gap-12">
                 {products.filter(p => p.tags.includes(tag)).map(product => (
                     <Card key={product.id}
-                        className="flex aspect-square h-full items-center justify-center bg-cover bg-no-repeat bg-blend-color-dodge [background-color:#f3f3f3]"
+                        className="flex aspect-square h-full items-center justify-center bg-cover bg-no-repeat bg-blend-color-dodge [background-color:#f3f3f3] dark:bg-blend-color-burn dark:[background-color:#0a0a0a]"
                         style={{ backgroundImage: `url(${product.logo})` }}
                         href={product.url}>
                         <Typography level="h3">{product.name}</Typography>
