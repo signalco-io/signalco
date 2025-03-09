@@ -34,7 +34,7 @@ export default function WorkerLayout({ children, params }: PropsWithChildren & {
         <>
             <SplitView>
                 <Stack className="h-screen overflow-hidden">
-                    <div className="flex h-[58px] items-center border-b p-2">
+                    <div className="flex h-[58px] items-center border-b p-2 px-4">
                         <ListHeader
                             isLoading={isLoading}
                             header={worker?.name}

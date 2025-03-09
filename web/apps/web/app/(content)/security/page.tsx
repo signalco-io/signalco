@@ -1,3 +1,4 @@
+import { Typography } from '@signalco/ui-primitives/Typography';
 import { Stack } from '@signalco/ui-primitives/Stack';
 import { Container } from '@signalco/ui-primitives/Container';
 import { Card, CardContent } from '@signalco/ui-primitives/Card';
@@ -69,7 +70,7 @@ function InformationalCardShort({ icon, header, description }: { icon?: React.Re
     return (
         <Card>
             <CardContent>
-                <div className="flex flex-row pt-6">
+                <div className="flex flex-row pt-2">
                     {icon && (
                         <Avatar className="mr-4">
                             {icon}
@@ -77,7 +78,7 @@ function InformationalCardShort({ icon, header, description }: { icon?: React.Re
                     )}
                     <div>
                         <h2 className="text-xl font-bold">{header}</h2>
-                        <p className="text-gray-600">{description}</p>
+                        <Typography level="body2" tertiary>{description}</Typography>
                     </div>
                 </div>
             </CardContent>
