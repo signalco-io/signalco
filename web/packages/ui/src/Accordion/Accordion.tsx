@@ -6,7 +6,7 @@ import { Collapse } from '@signalco/ui-primitives/Collapse';
 import { Card, CardContent, CardHeader } from '@signalco/ui-primitives/Card';
 import { ExpandDown } from '@signalco/ui-icons';
 
-export type AccordionProps = ComponentProps<typeof Card> & {
+export type AccordionProps = Omit<ComponentProps<typeof Card>, 'variant'> & {
     open?: boolean;
     defaultOpen?: boolean;
     disabled?: boolean;
