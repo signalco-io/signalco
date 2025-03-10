@@ -7,7 +7,7 @@
         "packages/*"
     ],
     "license": "MIT",
-    "packageManager": "pnpm@10.6.1",
+    "packageManager": "pnpm@10.6.2",
     "scripts": {
         "build": "turbo run build",
         "clean": "turbo run clean",
