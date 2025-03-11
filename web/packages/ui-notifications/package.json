@@ -23,7 +23,7 @@
         "prepublishOnly": "tsup --env.NODE_ENV production"
     },
     "devDependencies": {
-        "@microsoft/api-extractor": "7.51.1",
+        "@microsoft/api-extractor": "7.52.1",
         "@signalco/eslint-config-signalco": "workspace:*",
         "@signalco/tailwindcss-config-signalco": "workspace:*",
         "@signalco/tsconfig": "workspace:*",
