@@ -7,11 +7,11 @@
     "library.js"
   ],
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "8.26.0",
-    "@typescript-eslint/parser": "8.26.0",
-    "eslint-config-prettier": "10.0.2",
+    "@typescript-eslint/eslint-plugin": "8.26.1",
+    "@typescript-eslint/parser": "8.26.1",
+    "eslint-config-prettier": "10.1.1",
     "eslint-config-turbo": "2.4.2",
-    "eslint-import-resolver-typescript": "3.8.3",
+    "eslint-import-resolver-typescript": "3.8.5",
     "eslint-plugin-import": "2.31.0",
     "eslint-plugin-only-warn": "1.1.0",
     "typescript": "5.8.2"

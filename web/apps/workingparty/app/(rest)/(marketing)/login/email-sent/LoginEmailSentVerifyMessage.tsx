@@ -56,7 +56,7 @@ export function LoginEmailSentVerifyMessage() {
     useEffect(() => {
         let timeoutId: NodeJS.Timeout;
         if (isConfirmed) {
-            timeoutId = setTimeout(() => router.push(KnownPages.App), 1000);
+            timeoutId = setTimeout(() => window.location.href = KnownPages.App, 1000);
         }
         return () => clearTimeout(timeoutId);
     }, [isConfirmed, router]);

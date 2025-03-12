@@ -34,7 +34,7 @@ export default function WorkerThreadPage() {
         <>
             <div className="relative h-full overflow-hidden py-0">
                 <div className="flex h-14 flex-row items-center justify-between overflow-hidden border-b px-4">
-                    <Typography>{thread?.name}</Typography>
+                    <Typography level="body1">{thread?.name}</Typography>
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                             <IconButton variant="plain" title="Thread options...">

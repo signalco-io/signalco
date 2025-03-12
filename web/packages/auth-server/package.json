@@ -29,14 +29,14 @@
     "prepublishOnly": "tsup --env.NODE_ENV production"
   },
   "devDependencies": {
-    "@microsoft/api-extractor": "7.51.1",
+    "@microsoft/api-extractor": "7.52.1",
     "@signalco/eslint-config-signalco": "workspace:*",
     "@signalco/js": "workspace:*",
     "@signalco/tsconfig": "workspace:*",
     "@types/react": "19.0.10",
     "@types/react-dom": "19.0.4",
-    "jose": "6.0.8",
-    "next": "15.2.1",
+    "jose": "6.0.9",
+    "next": "15.2.2",
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "tsup": "8.4.0",

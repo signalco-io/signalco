@@ -13,7 +13,7 @@ export function UsageCard({ header, children }: PropsWithChildren<{ header?: str
                     </CardTitle>
                 </CardHeader>
             )}
-            <CardContent className={cx(!header && 'pt-6')}>
+            <CardContent className={cx(!header && 'pt-2')}>
                 <Stack spacing={3}>
                     {children}
                 </Stack>

@@ -29,15 +29,15 @@
     "prepublishOnly": "tsup --env.NODE_ENV production"
   },
   "devDependencies": {
-    "@microsoft/api-extractor": "7.51.1",
+    "@microsoft/api-extractor": "7.52.1",
     "@signalco/eslint-config-signalco": "workspace:*",
     "@signalco/tailwindcss-config-signalco": "workspace:*",
     "@signalco/tsconfig": "workspace:*",
     "@signalco/ui-icons": "workspace:*",
-    "@tanstack/react-query": "5.67.1",
+    "@tanstack/react-query": "5.67.3",
     "@types/react": "19.0.10",
     "@types/react-dom": "19.0.4",
-    "next": "15.2.1",
+    "next": "15.2.2",
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "tsup": "8.4.0",
