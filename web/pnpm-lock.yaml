@@ -471,8 +471,8 @@ importers:
         specifier: 0.25.2
         version: 0.25.2(@hocuspocus/provider@2.15.2(y-protocols@1.0.6(yjs@13.6.23))(yjs@13.6.23))(@types/hast@3.0.4)
       '@blocknote/mantine':
-        specifier: 0.25.1
-        version: 0.25.1(@hocuspocus/provider@2.15.2(y-protocols@1.0.6(yjs@13.6.23))(yjs@13.6.23))(@types/hast@3.0.4)(@types/react@19.0.10)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+        specifier: 0.25.2
+        version: 0.25.2(@hocuspocus/provider@2.15.2(y-protocols@1.0.6(yjs@13.6.23))(yjs@13.6.23))(@types/hast@3.0.4)(@types/react@19.0.10)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@blocknote/react':
         specifier: 0.25.2
         version: 0.25.2(@hocuspocus/provider@2.15.2(y-protocols@1.0.6(yjs@13.6.23))(yjs@13.6.23))(@types/hast@3.0.4)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -2160,8 +2160,8 @@ packages:
       '@hocuspocus/provider':
         optional: true
 
-  '@blocknote/mantine@0.25.1':
-    resolution: {integrity: sha512-oILa+bP7Xh10M67x/pw07rkBsTo8n80lhNpvyCS81q33NSiKEZ33z3603Jcagf/LBUQU+m8rKSfWBFcAlePmCw==}
+  '@blocknote/mantine@0.25.2':
+    resolution: {integrity: sha512-1fJ4puiVTNdz9g8KfraHruFd8ePa2H9TKRgPiDwoRWAq9F8KqQDvrTb7yUDoFxOwz29Ex5vH2Kv/BfEtrm89MA==}
     peerDependencies:
       react: ^18.0 || ^19.0 || >= 19.0.0-rc
       react-dom: ^18.0 || ^19.0 || >= 19.0.0-rc
@@ -9996,7 +9996,7 @@ snapshots:
       - sugar-high
       - supports-color
 
-  '@blocknote/mantine@0.25.1(@hocuspocus/provider@2.15.2(y-protocols@1.0.6(yjs@13.6.23))(yjs@13.6.23))(@types/hast@3.0.4)(@types/react@19.0.10)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
+  '@blocknote/mantine@0.25.2(@hocuspocus/provider@2.15.2(y-protocols@1.0.6(yjs@13.6.23))(yjs@13.6.23))(@types/hast@3.0.4)(@types/react@19.0.10)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
     dependencies:
       '@blocknote/core': 0.25.2(@hocuspocus/provider@2.15.2(y-protocols@1.0.6(yjs@13.6.23))(yjs@13.6.23))(@types/hast@3.0.4)
       '@blocknote/react': 0.25.2(@hocuspocus/provider@2.15.2(y-protocols@1.0.6(yjs@13.6.23))(yjs@13.6.23))(@types/hast@3.0.4)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
