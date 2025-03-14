@@ -81,11 +81,11 @@ importers:
         specifier: workspace:*
         version: link:../../packages/ui-themes-minimal-app
       '@tanstack/react-query':
-        specifier: 5.67.3
-        version: 5.67.3(react@19.0.0)
+        specifier: 5.68.0
+        version: 5.68.0(react@19.0.0)
       '@tanstack/react-query-devtools':
         specifier: 5.68.0
-        version: 5.68.0(@tanstack/react-query@5.67.3(react@19.0.0))(react@19.0.0)
+        version: 5.68.0(@tanstack/react-query@5.68.0(react@19.0.0))(react@19.0.0)
       '@vercel/analytics':
         specifier: 1.5.0
         version: 1.5.0(next@15.2.2(@playwright/test@1.51.0)(babel-plugin-react-compiler@19.0.0-beta-e552027-20250112)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.85.1))(react@19.0.0)
@@ -537,11 +537,11 @@ importers:
         specifier: workspace:*
         version: link:../../packages/ui-themes-minimal
       '@tanstack/react-query':
-        specifier: 5.67.3
-        version: 5.67.3(react@19.0.0)
+        specifier: 5.68.0
+        version: 5.68.0(react@19.0.0)
       '@tanstack/react-query-devtools':
         specifier: 5.68.0
-        version: 5.68.0(@tanstack/react-query@5.67.3(react@19.0.0))(react@19.0.0)
+        version: 5.68.0(@tanstack/react-query@5.68.0(react@19.0.0))(react@19.0.0)
       '@vercel/analytics':
         specifier: 1.5.0
         version: 1.5.0(next@15.2.2(@playwright/test@1.51.0)(babel-plugin-react-compiler@19.0.0-beta-e552027-20250112)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.85.1))(react@19.0.0)
@@ -870,11 +870,11 @@ importers:
         specifier: workspace:*
         version: link:../../packages/ui-themes-minimal
       '@tanstack/react-query':
-        specifier: 5.67.3
-        version: 5.67.3(react@19.0.0)
+        specifier: 5.68.0
+        version: 5.68.0(react@19.0.0)
       '@tanstack/react-query-devtools':
         specifier: 5.68.0
-        version: 5.68.0(@tanstack/react-query@5.67.3(react@19.0.0))(react@19.0.0)
+        version: 5.68.0(@tanstack/react-query@5.68.0(react@19.0.0))(react@19.0.0)
       '@vercel/analytics':
         specifier: 1.5.0
         version: 1.5.0(next@15.2.2(@playwright/test@1.51.0)(babel-plugin-react-compiler@19.0.0-beta-e552027-20250112)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.85.1))(react@19.0.0)
@@ -1157,11 +1157,11 @@ importers:
         specifier: 0.5.16
         version: 0.5.16(tailwindcss@3.4.17)
       '@tanstack/react-query':
-        specifier: 5.67.3
-        version: 5.67.3(react@19.0.0)
+        specifier: 5.68.0
+        version: 5.68.0(react@19.0.0)
       '@tanstack/react-query-devtools':
         specifier: 5.68.0
-        version: 5.68.0(@tanstack/react-query@5.67.3(react@19.0.0))(react@19.0.0)
+        version: 5.68.0(@tanstack/react-query@5.68.0(react@19.0.0))(react@19.0.0)
       '@vercel/analytics':
         specifier: 1.5.0
         version: 1.5.0(next@15.2.2(@playwright/test@1.51.0)(babel-plugin-react-compiler@19.0.0-beta-e552027-20250112)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)(sass@1.85.1))(react@19.0.0)
@@ -1276,8 +1276,8 @@ importers:
         specifier: workspace:*
         version: link:../ui-icons
       '@tanstack/react-query':
-        specifier: 5.67.3
-        version: 5.67.3(react@19.0.0)
+        specifier: 5.68.0
+        version: 5.68.0(react@19.0.0)
       '@types/react':
         specifier: 19.0.10
         version: 19.0.10
@@ -1952,8 +1952,8 @@ importers:
         specifier: workspace:*
         version: link:../ui-themes-minimal
       '@tanstack/react-query':
-        specifier: 5.67.3
-        version: 5.67.3(react@19.0.0)
+        specifier: 5.68.0
+        version: 5.68.0(react@19.0.0)
       '@types/node':
         specifier: 22.13.10
         version: 22.13.10
@@ -4652,8 +4652,8 @@ packages:
     peerDependencies:
       tailwindcss: '>=3.0.0 || insiders || >=4.0.0-alpha.20 || >=4.0.0-beta.1'
 
-  '@tanstack/query-core@5.67.3':
-    resolution: {integrity: sha512-pq76ObpjcaspAW4OmCbpXLF6BCZP2Zr/J5ztnyizXhSlNe7fIUp0QKZsd0JMkw9aDa+vxDX/OY7N+hjNY/dCGg==}
+  '@tanstack/query-core@5.68.0':
+    resolution: {integrity: sha512-r8rFYYo8/sY/LNaOqX84h12w7EQev4abFXDWy4UoDVUJzJ5d9Fbmb8ayTi7ScG+V0ap44SF3vNs/45mkzDGyGw==}
 
   '@tanstack/query-devtools@5.67.2':
     resolution: {integrity: sha512-O4QXFFd7xqp6EX7sdvc9tsVO8nm4lpWBqwpgjpVLW5g7IeOY6VnS/xvs/YzbRhBVkKTMaJMOUGU7NhSX+YGoNg==}
@@ -4664,8 +4664,8 @@ packages:
       '@tanstack/react-query': ^5.68.0
       react: ^18 || ^19
 
-  '@tanstack/react-query@5.67.3':
-    resolution: {integrity: sha512-u/n2HsQeH1vpZIOzB/w2lqKlXUDUKo6BxTdGXSMvNzIq5MHYFckRMVuFABp+QB7RN8LFXWV6X1/oSkuDq+MPIA==}
+  '@tanstack/react-query@5.68.0':
+    resolution: {integrity: sha512-mMOdGDKlwTP/WV72QqSNf4PAMeoBp/DqBHQ222wBfb51Looi8QUqnCnb9O98ZgvNISmy6fzxRGBJdZ+9IBvX2Q==}
     peerDependencies:
       react: ^18 || ^19
 
@@ -12408,19 +12408,19 @@ snapshots:
       postcss-selector-parser: 6.0.10
       tailwindcss: 3.4.17
 
-  '@tanstack/query-core@5.67.3': {}
+  '@tanstack/query-core@5.68.0': {}
 
   '@tanstack/query-devtools@5.67.2': {}
 
-  '@tanstack/react-query-devtools@5.68.0(@tanstack/react-query@5.67.3(react@19.0.0))(react@19.0.0)':
+  '@tanstack/react-query-devtools@5.68.0(@tanstack/react-query@5.68.0(react@19.0.0))(react@19.0.0)':
     dependencies:
       '@tanstack/query-devtools': 5.67.2
-      '@tanstack/react-query': 5.67.3(react@19.0.0)
+      '@tanstack/react-query': 5.68.0(react@19.0.0)
       react: 19.0.0
 
-  '@tanstack/react-query@5.67.3(react@19.0.0)':
+  '@tanstack/react-query@5.68.0(react@19.0.0)':
     dependencies:
-      '@tanstack/query-core': 5.67.3
+      '@tanstack/query-core': 5.68.0
       react: 19.0.0
 
   '@testing-library/dom@10.4.0':
