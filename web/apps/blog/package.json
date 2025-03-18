@@ -57,7 +57,7 @@
     "eslint": "8.57.1",
     "next-sitemap": "4.2.3",
     "postcss": "8.5.3",
-    "sass": "1.85.1",
+    "sass": "1.86.0",
     "typescript": "5.8.2"
   }
 }
