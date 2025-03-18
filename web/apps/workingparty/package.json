@@ -18,7 +18,7 @@
     },
     "dependencies": {
         "@azure/communication-email": "1.0.0",
-        "@azure/cosmos": "4.2.0",
+        "@azure/cosmos": "4.3.0",
         "@enterwell/react-form-builder": "0.3.2",
         "@enterwell/react-form-validation": "1.4.0",
         "@react-email/components": "0.0.34",

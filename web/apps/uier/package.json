@@ -17,7 +17,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@azure/cosmos": "4.2.0",
+    "@azure/cosmos": "4.3.0",
     "@next/env": "15.2.3",
     "@signalco/cms-components-marketing": "workspace:*",
     "@signalco/cms-core": "workspace:*",
