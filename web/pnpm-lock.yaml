@@ -471,8 +471,8 @@ importers:
         specifier: 0.26.0
         version: 0.26.0(@hocuspocus/provider@2.15.2(y-protocols@1.0.6(yjs@13.6.23))(yjs@13.6.23))(@types/hast@3.0.4)
       '@blocknote/mantine':
-        specifier: 0.25.2
-        version: 0.25.2(@hocuspocus/provider@2.15.2(y-protocols@1.0.6(yjs@13.6.23))(yjs@13.6.23))(@types/hast@3.0.4)(@types/react@19.0.11)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+        specifier: 0.26.0
+        version: 0.26.0(@hocuspocus/provider@2.15.2(y-protocols@1.0.6(yjs@13.6.23))(yjs@13.6.23))(@types/hast@3.0.4)(@types/react@19.0.11)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@blocknote/react':
         specifier: 0.25.2
         version: 0.25.2(@hocuspocus/provider@2.15.2(y-protocols@1.0.6(yjs@13.6.23))(yjs@13.6.23))(@types/hast@3.0.4)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -2200,14 +2200,20 @@ packages:
       '@hocuspocus/provider':
         optional: true
 
-  '@blocknote/mantine@0.25.2':
-    resolution: {integrity: sha512-1fJ4puiVTNdz9g8KfraHruFd8ePa2H9TKRgPiDwoRWAq9F8KqQDvrTb7yUDoFxOwz29Ex5vH2Kv/BfEtrm89MA==}
+  '@blocknote/mantine@0.26.0':
+    resolution: {integrity: sha512-LaIlpR/Ce0zCxojURLS9ok78GG921V9zv0e/NQDGQM+rd2ZkMY7zbVMFjJSVKXs6voHQhBy5ZIiH/7ig3lbLCw==}
     peerDependencies:
       react: ^18.0 || ^19.0 || >= 19.0.0-rc
       react-dom: ^18.0 || ^19.0 || >= 19.0.0-rc
 
   '@blocknote/react@0.25.2':
     resolution: {integrity: sha512-7n8LQfKiw4CImiWqrpetTLMcUZioA2uBUzkc7ZL9fvUCOA2mYf9B7gWfUpKmd8NJtu8m+FPYn0t5Ak8lE6G1dg==}
+    peerDependencies:
+      react: ^18.0 || ^19.0 || >= 19.0.0-rc
+      react-dom: ^18.0 || ^19.0 || >= 19.0.0-rc
+
+  '@blocknote/react@0.26.0':
+    resolution: {integrity: sha512-D6/ZexM53jStW9bFRF7469teYXJUN6HFS6apgO8TujflI/PITXtuVL39WxNkZUwN0I0dbum+1qNxV9GWXQXakA==}
     peerDependencies:
       react: ^18.0 || ^19.0 || >= 19.0.0-rc
       react-dom: ^18.0 || ^19.0 || >= 19.0.0-rc
@@ -10162,10 +10168,10 @@ snapshots:
       - sugar-high
       - supports-color
 
-  '@blocknote/mantine@0.25.2(@hocuspocus/provider@2.15.2(y-protocols@1.0.6(yjs@13.6.23))(yjs@13.6.23))(@types/hast@3.0.4)(@types/react@19.0.11)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
+  '@blocknote/mantine@0.26.0(@hocuspocus/provider@2.15.2(y-protocols@1.0.6(yjs@13.6.23))(yjs@13.6.23))(@types/hast@3.0.4)(@types/react@19.0.11)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
     dependencies:
-      '@blocknote/core': 0.25.2(@hocuspocus/provider@2.15.2(y-protocols@1.0.6(yjs@13.6.23))(yjs@13.6.23))(@types/hast@3.0.4)
-      '@blocknote/react': 0.25.2(@hocuspocus/provider@2.15.2(y-protocols@1.0.6(yjs@13.6.23))(yjs@13.6.23))(@types/hast@3.0.4)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      '@blocknote/core': 0.26.0(@hocuspocus/provider@2.15.2(y-protocols@1.0.6(yjs@13.6.23))(yjs@13.6.23))(@types/hast@3.0.4)
+      '@blocknote/react': 0.26.0(@hocuspocus/provider@2.15.2(y-protocols@1.0.6(yjs@13.6.23))(yjs@13.6.23))(@types/hast@3.0.4)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@mantine/core': 7.16.2(@mantine/hooks@7.16.2(react@19.0.0))(@types/react@19.0.11)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@mantine/hooks': 7.16.2(react@19.0.0)
       '@mantine/utils': 6.0.22(react@19.0.0)
@@ -10185,6 +10191,28 @@ snapshots:
   '@blocknote/react@0.25.2(@hocuspocus/provider@2.15.2(y-protocols@1.0.6(yjs@13.6.23))(yjs@13.6.23))(@types/hast@3.0.4)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
     dependencies:
       '@blocknote/core': 0.25.2(@hocuspocus/provider@2.15.2(y-protocols@1.0.6(yjs@13.6.23))(yjs@13.6.23))(@types/hast@3.0.4)
+      '@emoji-mart/data': 1.2.1
+      '@floating-ui/react': 0.26.28(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      '@tiptap/core': 2.11.5(@tiptap/pm@2.11.5)
+      '@tiptap/pm': 2.11.5
+      '@tiptap/react': 2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      emoji-mart: 5.6.0
+      lodash.merge: 4.6.2
+      react: 19.0.0
+      react-dom: 19.0.0(react@19.0.0)
+      react-icons: 5.4.0(react@19.0.0)
+    transitivePeerDependencies:
+      - '@hocuspocus/provider'
+      - '@types/hast'
+      - highlight.js
+      - lowlight
+      - refractor
+      - sugar-high
+      - supports-color
+
+  '@blocknote/react@0.26.0(@hocuspocus/provider@2.15.2(y-protocols@1.0.6(yjs@13.6.23))(yjs@13.6.23))(@types/hast@3.0.4)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
+    dependencies:
+      '@blocknote/core': 0.26.0(@hocuspocus/provider@2.15.2(y-protocols@1.0.6(yjs@13.6.23))(yjs@13.6.23))(@types/hast@3.0.4)
       '@emoji-mart/data': 1.2.1
       '@floating-ui/react': 0.26.28(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@tiptap/core': 2.11.5(@tiptap/pm@2.11.5)
