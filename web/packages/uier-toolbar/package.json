@@ -26,7 +26,7 @@
         "@signalco/ui-primitives": "workspace:*",
         "@signalco/ui-themes-minimal": "workspace:*",
         "@tanstack/react-query": "5.69.0",
-        "@types/node": "22.13.11",
+        "@types/node": "22.13.12",
         "@types/react": "19.0.11",
         "@types/react-dom": "19.0.4",
         "autoprefixer": "10.4.21",
