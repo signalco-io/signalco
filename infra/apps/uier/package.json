@@ -27,7 +27,7 @@
         "@pulumi/azure-native": "2.89.3",
         "@pulumi/cloudflare": "5.49.1",
         "@pulumi/command": "1.0.2",
-        "@pulumi/pulumi": "3.158.0",
+        "@pulumi/pulumi": "3.159.0",
         "@pulumiverse/vercel": "1.14.3"
     }
 }
