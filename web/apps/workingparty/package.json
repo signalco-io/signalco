@@ -49,7 +49,7 @@
         "openai": "4.90.0",
         "react": "19.1.0",
         "react-dom": "19.1.0",
-        "react-email": "3.0.7",
+        "react-email": "4.0.2",
         "react-markdown": "10.1.0",
         "sharp": "0.33.5",
         "stripe": "17.7.0",
