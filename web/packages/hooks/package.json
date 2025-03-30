@@ -29,7 +29,7 @@
         "@signalco/js": "workspace:*",
         "@signalco/tsconfig": "workspace:*",
         "@types/react": "19.0.12",
-        "next": "15.2.3",
+        "next": "15.2.4",
         "react": "19.1.0",
         "react-dom": "19.1.0",
         "tsup": "8.4.0",
