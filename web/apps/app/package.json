@@ -86,7 +86,7 @@
         "@types/recharts": "1.8.29",
         "@types/suncalc": "1.9.2",
         "@types/uuid": "10.0.0",
-        "babel-plugin-react-compiler": "19.0.0-beta-e552027-20250112",
+        "babel-plugin-react-compiler": "19.0.0-beta-e993439-20250328",
         "colorette": "2.0.20",
         "eslint": "8.57.1",
         "fs-extra": "11.3.0",
