@@ -52,7 +52,7 @@
     "@types/node": "22.13.14",
     "@types/react": "19.0.12",
     "@types/react-dom": "19.0.4",
-    "babel-plugin-react-compiler": "19.0.0-beta-e552027-20250112",
+    "babel-plugin-react-compiler": "19.0.0-beta-e993439-20250328",
     "eslint": "8.57.1",
     "next-sitemap": "4.2.3",
     "postcss": "8.5.3",
