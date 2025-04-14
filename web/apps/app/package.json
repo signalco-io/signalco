@@ -95,6 +95,6 @@
         "postcss": "8.5.3",
         "sass": "1.86.3",
         "sass-loader": "16.0.5",
-        "typescript": "5.8.2"
+        "typescript": "5.8.3"
     }
 }
