@@ -1,5 +1,5 @@
 import { type ResourceGroup } from '@pulumi/azure-native/resources/index.js';
-import { ComponentCurrentBillingFeature, Component, ApplicationType, type ComponentArgs } from '@pulumi/azure-native/insights/index.js';
+import { ComponentCurrentBillingFeature, Component, ApplicationType, type ComponentArgs } from '@pulumi/azure-native/applicationinsights/index.js';
 import { createLogWorkspace } from './createLogWorkspace.js';
 
 export function createAppInsights(
