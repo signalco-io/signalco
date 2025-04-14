@@ -3,7 +3,7 @@ import { dnsRecord } from '@infra/pulumi/cloudflare';
 import { ProjectDomain, ProjectEnvironmentVariable } from '@pulumiverse/vercel';
 import { getStack } from '@pulumi/pulumi';
 import { ResourceGroup } from '@pulumi/azure-native/resources/index.js';
-import { DatabaseAccount, SqlResourceSqlDatabase, SqlResourceSqlContainer, DatabaseAccountOfferType, listDatabaseAccountConnectionStringsOutput } from '@pulumi/azure-native/documentdb/index.js';
+import { DatabaseAccount, SqlResourceSqlDatabase, SqlResourceSqlContainer, DatabaseAccountOfferType, listDatabaseAccountConnectionStringsOutput } from '@pulumi/azure-native/cosmosdb/index.js';
 import { createStorageAccount } from '@infra/pulumi/azure';
 import { Profile, Endpoint, SkuName } from '@pulumi/azure-native/cdn/index.js';
 
