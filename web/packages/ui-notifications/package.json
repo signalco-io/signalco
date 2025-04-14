@@ -27,7 +27,7 @@
         "@signalco/eslint-config-signalco": "workspace:*",
         "@signalco/tailwindcss-config-signalco": "workspace:*",
         "@signalco/tsconfig": "workspace:*",
-        "@types/react": "19.1.1",
+        "@types/react": "19.1.2",
         "@types/react-dom": "19.1.2",
         "react": "19.1.0",
         "react-dom": "19.1.0",

@@ -24,7 +24,7 @@
         "@microsoft/api-extractor": "7.52.3",
         "@signalco/eslint-config-signalco": "workspace:*",
         "@signalco/tsconfig": "workspace:*",
-        "@types/react": "19.1.1",
+        "@types/react": "19.1.2",
         "@types/react-dom": "19.1.2",
         "lucide-react": "0.487.0",
         "react": "19.1.0",
