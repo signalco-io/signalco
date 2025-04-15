@@ -39,8 +39,8 @@ importers:
         specifier: 1.4.0
         version: 1.4.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@enterwell/react-hooks':
-        specifier: 0.6.0
-        version: 0.6.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+        specifier: 0.7.0
+        version: 0.7.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@hcaptcha/react-hcaptcha':
         specifier: 1.12.0
         version: 1.12.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -362,8 +362,8 @@ importers:
   apps/brandgrab:
     dependencies:
       '@enterwell/react-hooks':
-        specifier: 0.6.0
-        version: 0.6.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+        specifier: 0.7.0
+        version: 0.7.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@next/env':
         specifier: 15.2.4
         version: 15.2.4
@@ -489,8 +489,8 @@ importers:
         specifier: 3.2.2
         version: 3.2.2(react@19.1.0)
       '@enterwell/react-hooks':
-        specifier: 0.6.0
-        version: 0.6.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+        specifier: 0.7.0
+        version: 0.7.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@hcaptcha/react-hcaptcha':
         specifier: 1.12.0
         version: 1.12.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -955,8 +955,8 @@ importers:
   apps/web:
     dependencies:
       '@enterwell/react-hooks':
-        specifier: 0.6.0
-        version: 0.6.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+        specifier: 0.7.0
+        version: 0.7.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@hcaptcha/react-hcaptcha':
         specifier: 1.12.0
         version: 1.12.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -1925,8 +1925,8 @@ importers:
   packages/uier-toolbar:
     devDependencies:
       '@enterwell/react-hooks':
-        specifier: 0.6.0
-        version: 0.6.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
+        specifier: 0.7.0
+        version: 0.7.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@signalco/eslint-config-signalco':
         specifier: workspace:*
         version: link:../eslint-config-signalco
@@ -2517,11 +2517,11 @@ packages:
       react: ^16.13.1 || ^17 || ^18
       react-dom: ^16.13.1 || ^17 || ^18
 
-  '@enterwell/react-hooks@0.6.0':
-    resolution: {integrity: sha512-MaEdLXAXyE4duVmZa7BfERqPhZ0xCnhhoSGXx0sAoU1828mD9sAQbEtAhSH+Hs3f1bB3jnQcVYdQMIBXLo1/dQ==}
+  '@enterwell/react-hooks@0.7.0':
+    resolution: {integrity: sha512-TiKECmRV0g7H0j1/SeJrhnl/jGrwouFHyM2u718/nKRoLl983IdqliLQptnY2+rCj50OljIxROK5RaCLsqZKBA==}
     peerDependencies:
-      react: ^18
-      react-dom: ^18
+      react: ^19
+      react-dom: ^19
 
   '@esbuild/aix-ppc64@0.21.5':
     resolution: {integrity: sha512-1SDgH6ZSPTlggy1yI6+Dbkiz8xzpHJEVAlF/AM1tHPLsf5STom9rwtjE4hKAF20FfXXNTFqEYXyJNWh1GiZedQ==}
@@ -10268,7 +10268,7 @@ snapshots:
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
 
-  '@enterwell/react-hooks@0.6.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
+  '@enterwell/react-hooks@0.7.0(react-dom@19.1.0(react@19.1.0))(react@19.1.0)':
     dependencies:
       react: 19.1.0
       react-dom: 19.1.0(react@19.1.0)
