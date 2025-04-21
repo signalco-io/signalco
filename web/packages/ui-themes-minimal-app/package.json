@@ -27,7 +27,7 @@
     "prepublishOnly": "tsup"
   },
   "devDependencies": {
-    "@microsoft/api-extractor": "7.52.3",
+    "@microsoft/api-extractor": "7.52.4",
     "@signalco/tailwindcss-config-signalco": "workspace:*",
     "@signalco/tsconfig": "workspace:*",
     "tsup": "8.4.0",
