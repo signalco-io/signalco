@@ -81,11 +81,11 @@ importers:
         specifier: workspace:*
         version: link:../../packages/ui-themes-minimal-app
       '@tanstack/react-query':
-        specifier: 5.74.3
-        version: 5.74.3(react@19.1.0)
+        specifier: 5.74.4
+        version: 5.74.4(react@19.1.0)
       '@tanstack/react-query-devtools':
-        specifier: 5.74.3
-        version: 5.74.3(@tanstack/react-query@5.74.3(react@19.1.0))(react@19.1.0)
+        specifier: 5.74.4
+        version: 5.74.4(@tanstack/react-query@5.74.4(react@19.1.0))(react@19.1.0)
       '@vercel/analytics':
         specifier: 1.5.0
         version: 1.5.0(next@15.3.1(@playwright/test@1.52.0)(babel-plugin-react-compiler@19.0.0-beta-ebf51a3-20250411)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.86.3))(react@19.1.0)
@@ -537,11 +537,11 @@ importers:
         specifier: workspace:*
         version: link:../../packages/ui-themes-minimal
       '@tanstack/react-query':
-        specifier: 5.74.3
-        version: 5.74.3(react@19.1.0)
+        specifier: 5.74.4
+        version: 5.74.4(react@19.1.0)
       '@tanstack/react-query-devtools':
-        specifier: 5.74.3
-        version: 5.74.3(@tanstack/react-query@5.74.3(react@19.1.0))(react@19.1.0)
+        specifier: 5.74.4
+        version: 5.74.4(@tanstack/react-query@5.74.4(react@19.1.0))(react@19.1.0)
       '@vercel/analytics':
         specifier: 1.5.0
         version: 1.5.0(next@15.3.1(@playwright/test@1.52.0)(babel-plugin-react-compiler@19.0.0-beta-ebf51a3-20250411)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.86.3))(react@19.1.0)
@@ -870,11 +870,11 @@ importers:
         specifier: workspace:*
         version: link:../../packages/ui-themes-minimal
       '@tanstack/react-query':
-        specifier: 5.74.3
-        version: 5.74.3(react@19.1.0)
+        specifier: 5.74.4
+        version: 5.74.4(react@19.1.0)
       '@tanstack/react-query-devtools':
-        specifier: 5.74.3
-        version: 5.74.3(@tanstack/react-query@5.74.3(react@19.1.0))(react@19.1.0)
+        specifier: 5.74.4
+        version: 5.74.4(@tanstack/react-query@5.74.4(react@19.1.0))(react@19.1.0)
       '@vercel/analytics':
         specifier: 1.5.0
         version: 1.5.0(next@15.3.1(@playwright/test@1.52.0)(babel-plugin-react-compiler@19.0.0-beta-ebf51a3-20250411)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.86.3))(react@19.1.0)
@@ -1157,11 +1157,11 @@ importers:
         specifier: 0.5.16
         version: 0.5.16(tailwindcss@3.4.17)
       '@tanstack/react-query':
-        specifier: 5.74.3
-        version: 5.74.3(react@19.1.0)
+        specifier: 5.74.4
+        version: 5.74.4(react@19.1.0)
       '@tanstack/react-query-devtools':
-        specifier: 5.74.3
-        version: 5.74.3(@tanstack/react-query@5.74.3(react@19.1.0))(react@19.1.0)
+        specifier: 5.74.4
+        version: 5.74.4(@tanstack/react-query@5.74.4(react@19.1.0))(react@19.1.0)
       '@vercel/analytics':
         specifier: 1.5.0
         version: 1.5.0(next@15.3.1(@playwright/test@1.52.0)(babel-plugin-react-compiler@19.0.0-beta-ebf51a3-20250411)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(sass@1.86.3))(react@19.1.0)
@@ -1276,8 +1276,8 @@ importers:
         specifier: workspace:*
         version: link:../ui-icons
       '@tanstack/react-query':
-        specifier: 5.74.3
-        version: 5.74.3(react@19.1.0)
+        specifier: 5.74.4
+        version: 5.74.4(react@19.1.0)
       '@types/react':
         specifier: 19.1.2
         version: 19.1.2
@@ -1952,8 +1952,8 @@ importers:
         specifier: workspace:*
         version: link:../ui-themes-minimal
       '@tanstack/react-query':
-        specifier: 5.74.3
-        version: 5.74.3(react@19.1.0)
+        specifier: 5.74.4
+        version: 5.74.4(react@19.1.0)
       '@types/node':
         specifier: 22.14.1
         version: 22.14.1
@@ -4688,20 +4688,20 @@ packages:
     peerDependencies:
       tailwindcss: '>=3.0.0 || insiders || >=4.0.0-alpha.20 || >=4.0.0-beta.1'
 
-  '@tanstack/query-core@5.74.3':
-    resolution: {integrity: sha512-Mqk+5o3qTuAiZML248XpNH8r2cOzl15+LTbUsZQEwvSvn1GU4VQhvqzAbil36p+MBxpr/58oBSnRzhrBevDhfg==}
+  '@tanstack/query-core@5.74.4':
+    resolution: {integrity: sha512-YuG0A0+3i9b2Gfo9fkmNnkUWh5+5cFhWBN0pJAHkHilTx6A0nv8kepkk4T4GRt4e5ahbtFj2eTtkiPcVU1xO4A==}
 
   '@tanstack/query-devtools@5.73.3':
     resolution: {integrity: sha512-hBQyYwsOuO7QOprK75NzfrWs/EQYjgFA0yykmcvsV62q0t6Ua97CU3sYgjHx0ZvxkXSOMkY24VRJ5uv9f5Ik4w==}
 
-  '@tanstack/react-query-devtools@5.74.3':
-    resolution: {integrity: sha512-H7TsOBB1fRCuuawrBzKMoIszqqILr2IN5oGLYMl7QG7ERJpMdc4hH8OwzBhVxJnmKeGwgtTQgcdKepfoJCWvFg==}
+  '@tanstack/react-query-devtools@5.74.4':
+    resolution: {integrity: sha512-PGCAcytQMmeagoeGG45ccBhrC1x0/5OlNjsM1FAb9OfsQZIhPzjwjhGcwmMu6TbT4RIHgvjxLwC5NHgkUwJQzw==}
     peerDependencies:
-      '@tanstack/react-query': ^5.74.3
+      '@tanstack/react-query': ^5.74.4
       react: ^18 || ^19
 
-  '@tanstack/react-query@5.74.3':
-    resolution: {integrity: sha512-QrycUn0wxjVPzITvQvOxFRdhlAwIoOQSuav7qWD4SWCoKCdLbyRZ2vji2GuBq/glaxbF4wBx3fqcYRDOt8KDTA==}
+  '@tanstack/react-query@5.74.4':
+    resolution: {integrity: sha512-mAbxw60d4ffQ4qmRYfkO1xzRBPUEf/72Dgo3qqea0J66nIKuDTLEqQt0ku++SDFlMGMnB6uKDnEG1xD/TDse4Q==}
     peerDependencies:
       react: ^18 || ^19
 
@@ -12536,19 +12536,19 @@ snapshots:
       postcss-selector-parser: 6.0.10
       tailwindcss: 3.4.17
 
-  '@tanstack/query-core@5.74.3': {}
+  '@tanstack/query-core@5.74.4': {}
 
   '@tanstack/query-devtools@5.73.3': {}
 
-  '@tanstack/react-query-devtools@5.74.3(@tanstack/react-query@5.74.3(react@19.1.0))(react@19.1.0)':
+  '@tanstack/react-query-devtools@5.74.4(@tanstack/react-query@5.74.4(react@19.1.0))(react@19.1.0)':
     dependencies:
       '@tanstack/query-devtools': 5.73.3
-      '@tanstack/react-query': 5.74.3(react@19.1.0)
+      '@tanstack/react-query': 5.74.4(react@19.1.0)
       react: 19.1.0
 
-  '@tanstack/react-query@5.74.3(react@19.1.0)':
+  '@tanstack/react-query@5.74.4(react@19.1.0)':
     dependencies:
-      '@tanstack/query-core': 5.74.3
+      '@tanstack/query-core': 5.74.4
       react: 19.1.0
 
   '@testing-library/dom@10.4.0':
