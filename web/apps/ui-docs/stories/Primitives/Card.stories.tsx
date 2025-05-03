@@ -128,6 +128,7 @@ export const Actions: Story = {
                         <span>Content</span>
                         <CardActions>
                             <Button>Button</Button>
+                            <Button>Button</Button>
                         </CardActions>
                     </Stack>
                 </CardContent>

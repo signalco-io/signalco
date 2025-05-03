@@ -1,4 +1,4 @@
-import { PropsWithChildren, ReactNode } from 'react';
+import { PropsWithChildren, ReactElement, ReactNode } from 'react';
 import { Stack } from '@signalco/ui-primitives/Stack';
 import { Row } from '@signalco/ui-primitives/Row';
 import { Link } from '@signalco/ui-primitives/Link';
@@ -8,7 +8,7 @@ import { Menu } from '@signalco/ui-icons';
 
 type PageNavProps = PropsWithChildren<{
     logo: ReactNode;
-    links?: NavLinkItem[];
+    links?: (NavLinkItem | ReactElement)[];
 }>;
 
 export type NavLinkItem = {
@@ -31,7 +31,7 @@ export function PageNav({ logo, links, children }: PageNavProps) {
                         <Row spacing={1}>
                             <nav className="hidden md:block">
                                 <Row spacing={1}>
-                                    {links?.map(nl => (
+                                    {links?.map(nl => 'text' in nl ? (
                                         <Button
                                             variant="plain"
                                             size="lg"
@@ -39,6 +39,8 @@ export function PageNav({ logo, links, children }: PageNavProps) {
                                             key={nl.href}>
                                             {nl.text}
                                         </Button>
+                                    ) : (
+                                        nl
                                     ))}
                                 </Row>
                             </nav>
@@ -57,7 +59,7 @@ export function PageNav({ logo, links, children }: PageNavProps) {
             <nav className="hidden peer-checked:block md:hidden">
                 <div className="fixed inset-x-2 top-16 z-10 mt-2 rounded-lg border bg-card shadow-lg animate-in fade-in slide-in-from-top-2">
                     <Stack>
-                        {links?.map(nl => (
+                        {links?.map(nl => 'text' in nl ? (
                             <Button
                                 variant="plain"
                                 size="lg"
@@ -66,7 +68,7 @@ export function PageNav({ logo, links, children }: PageNavProps) {
                                 key={nl.href}>
                                 {nl.text}
                             </Button>
-                        ))}
+                        ) : (nl))}
                     </Stack>
                 </div>
             </nav>
