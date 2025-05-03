@@ -18,7 +18,7 @@ const config: StorybookConfig = {
     '@storybook/addon-themes',
     '@storybook/experimental-addon-test'
   ],
-  framework: '@storybook/react-vite',
+  framework: '@storybook/experimental-nextjs-vite',
   docs: {
     autodocs: true
   }

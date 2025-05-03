@@ -1,6 +1,6 @@
 import storybookSignalcoTheme from './signalco-theme';
 import { withThemeByClassName } from '@storybook/addon-themes';
-import '../global.css';
+import '../styles/global.css';
 import { Preview } from '@storybook/react';
 
 const preview: Preview = {
