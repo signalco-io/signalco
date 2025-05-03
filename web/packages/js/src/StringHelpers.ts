@@ -20,8 +20,9 @@ export const initials = (value: string): string => {
     return '';
 }
 
-export const isAbsoluteUrl = (value: string | null): boolean => {
+export const isAbsoluteUrl = (value: object | string | null): boolean => {
     if (value == null) return false;
+    if (typeof value !== 'string') return false;
     const match = value.match(/^https?:\/\//);
     return match != null && match.length > 0;
 };
