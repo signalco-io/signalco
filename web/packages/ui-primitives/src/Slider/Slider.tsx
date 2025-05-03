@@ -1,6 +1,6 @@
 import { ComponentProps } from 'react'
 import * as SliderPrimitive from '@radix-ui/react-slider'
-import { cx } from '@signalco/ui-primitives/cx'
+import { cx } from '../cx'
 
 export type SliderProps = ComponentProps<typeof SliderPrimitive.Root>;
 
