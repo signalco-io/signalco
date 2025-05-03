@@ -1,5 +1,7 @@
+import { Drawer } from 'vaul';
 import React, { HTMLAttributes } from 'react';
 import { Close } from '@signalco/ui-icons'
+import { useWindowRect } from '@signalco/hooks/useWindowRect';
 import * as DialogPrimitive from '@radix-ui/react-dialog'
 import { VisuallyHidden } from '../VisuallyHidden';
 import { cx } from '../cx'
@@ -11,9 +13,11 @@ export type ModalProps = Omit<HTMLAttributes<HTMLDivElement>, 'title'> & {
     modal?: boolean;
     title: string;
     hideClose?: boolean;
+    disableMobile?: boolean;
+    mobileOverride?: boolean;
 };
 
-export function Modal({
+function DesktopModal({
     children,
     className,
     trigger,
@@ -58,4 +62,56 @@ export function Modal({
             </DialogPrimitive.Portal>
         </DialogPrimitive.Root>
     )
+}
+
+function MobileModal({
+    children,
+    className,
+    trigger,
+    open,
+    modal,
+    onOpenChange,
+    title,
+    ...rest
+}: ModalProps) {
+    return (
+        <Drawer.Root open={open} onOpenChange={onOpenChange} modal={modal} shouldScaleBackground>
+            {trigger && (
+                <Drawer.Trigger asChild>
+                    {trigger}
+                </Drawer.Trigger>
+            )}
+            <Drawer.Portal>
+                <Drawer.Overlay className="fixed inset-0 z-50 bg-black/50 " />
+                <Drawer.Content
+                    className={cx(
+                        'fixed inset-x-0 bottom-0 z-50 mt-24 flex h-auto flex-col rounded-t-[10px] border bg-background',
+                        className)}
+                    {...rest}>
+                    <VisuallyHidden>
+                        <Drawer.Title>
+                            {title}
+                        </Drawer.Title>
+                    </VisuallyHidden>
+                    <div className="mx-auto mt-4 h-2 w-[100px] rounded-full bg-muted" />
+                    <div className="p-4">
+                        {children}
+                    </div>
+                </Drawer.Content>
+            </Drawer.Portal>
+        </Drawer.Root>
+    );
+}
+
+export function Modal(props: ModalProps) {
+    const {
+        disableMobile,
+        mobileOverride
+    } = props;
+    const { width } = useWindowRect() ?? { width: 9999 };
+    const isMobile = width < 768;
+    if (mobileOverride || (isMobile && !disableMobile)) {
+        return <MobileModal {...props} />;
+    }
+    return <DesktopModal {...props} />;
 }
