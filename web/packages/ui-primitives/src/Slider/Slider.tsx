@@ -2,7 +2,9 @@ import { ComponentProps } from 'react'
 import * as SliderPrimitive from '@radix-ui/react-slider'
 import { cx } from '@signalco/ui-primitives/cx'
 
-export function Slider({ className, ...props }: ComponentProps<typeof SliderPrimitive.Root>) {
+export type SliderProps = ComponentProps<typeof SliderPrimitive.Root>;
+
+export function Slider({ className, ...props }: SliderProps) {
     return (
         <SliderPrimitive.Root
             className={cx(
