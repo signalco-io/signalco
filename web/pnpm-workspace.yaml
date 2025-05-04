@@ -3,6 +3,8 @@ packages:
   - packages/*
 
 onlyBuiltDependencies:
+  - '@parcel/watcher'
+  - '@swc/core'
   - '@vercel/speed-insights'
   - esbuild
   - msw
