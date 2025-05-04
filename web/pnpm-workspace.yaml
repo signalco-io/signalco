@@ -1,3 +1,9 @@
 packages:
-    - "apps/*"
-    - "packages/*"
+  - apps/*
+  - packages/*
+
+onlyBuiltDependencies:
+  - '@vercel/speed-insights'
+  - esbuild
+  - msw
+  - sharp
