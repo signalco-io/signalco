@@ -45,19 +45,19 @@ export function ModalConfirm({
             <form onReset={handleCancel} onSubmit={handleConfirm}>
                 <Stack spacing={4}>
                     <Stack spacing={2}>
-                    <Row justifyContent="space-between">
-                        <Typography level="h5">{header}</Typography>
-                    </Row>
-                    {typeof children === 'string'
-                        ? <Typography level="body1">{children}</Typography>
-                        : children}
-                    {Boolean(expectedConfirm) && (
-                        <Input
-                            value={confirmText}
-                            label={promptLabel}
-                            onChange={(e) => setConfirmText(e.target.value)}
-                            autoFocus />
-                    )}
+                        <Row justifyContent="space-between">
+                            <Typography level="h5">{header}</Typography>
+                        </Row>
+                        {typeof children === 'string'
+                            ? <Typography level="body1">{children}</Typography>
+                            : children}
+                        {Boolean(expectedConfirm) && (
+                            <Input
+                                value={confirmText}
+                                label={promptLabel}
+                                onChange={(e) => setConfirmText(e.target.value)}
+                                autoFocus />
+                        )}
                     </Stack>
                     <Row spacing={1} justifyContent="end">
                         <Button
@@ -68,7 +68,6 @@ export function ModalConfirm({
                         <Button
                             type="submit"
                             variant="solid"
-                            onClick={() => handleConfirm()}
                             disabled={Boolean(expectedConfirm) && confirmText !== expectedConfirm}>Confirm</Button>
                     </Row>
                 </Stack>

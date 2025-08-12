@@ -54,7 +54,7 @@ function DesktopModal({
                         </DialogPrimitive.DialogTitle>
                     </VisuallyHidden>
                     {children}
-                    {(!dismissible || !hideClose) && (
+                    {(dismissible && !hideClose) && (
                         <DialogPrimitive.Close className="ring-offset-background focus:ring-ring data-[state=open]:bg-accent data-[state=open]:text-muted-foreground absolute right-4 top-4 rounded-sm opacity-70 transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:pointer-events-none">
                             <Close className="size-4" />
                             <span className="sr-only">Close</span>
@@ -109,7 +109,6 @@ function MobileModal({
 export function Modal({ disableMobile, mobileOverride, ...rest }: ModalProps) {
     const { width } = useWindowRect() ?? { width: 9999 };
     const isMobile = width < 768;
-    console.log('isMobile', isMobile, 'disableMobile', disableMobile, 'mobileOverride', mobileOverride, width);
     if (mobileOverride || (isMobile && !disableMobile)) {
         return <MobileModal {...rest} />;
     }
