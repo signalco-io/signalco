@@ -56,7 +56,7 @@ export function Input({
             )}>
                 {startDecorator ?? null}
                 <input
-                    id={id}
+                    id={id ?? name ?? customId}
                     name={name}
                     aria-labelledby={labelId}
                     className={cx(
