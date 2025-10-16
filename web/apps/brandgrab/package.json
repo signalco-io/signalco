@@ -37,7 +37,7 @@
         "sharp": "0.34.1"
     },
     "devDependencies": {
-        "@axe-core/playwright": "4.10.1",
+        "@axe-core/playwright": "4.10.2",
         "@playwright/test": "1.52.0",
         "@signalco/eslint-config-signalco": "workspace:*",
         "@signalco/tsconfig": "workspace:*",
