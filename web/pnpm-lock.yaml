@@ -102,8 +102,8 @@ importers:
         specifier: 0.6.3
         version: 0.6.3
       color:
-        specifier: 5.0.0
-        version: 5.0.0
+        specifier: 5.0.2
+        version: 5.0.2
       compare-versions:
         specifier: 6.1.1
         version: 6.1.1
@@ -6008,8 +6008,8 @@ packages:
     resolution: {integrity: sha512-1rXeuUUiGGrykh+CeBdu5Ie7OJwinCgQY0bc7GCRxy5xVHy+moaqkpL/jqQq0MtQOeYcrqEz4abc5f0KtU7W4A==}
     engines: {node: '>=12.5.0'}
 
-  color@5.0.0:
-    resolution: {integrity: sha512-16BlyiuyLq3MLxpRWyOTiWsO3ii/eLQLJUQXBSNcxMBBSnyt1ee9YUdaozQp03ifwm5woztEZGDbk9RGVuCsdw==}
+  color@5.0.2:
+    resolution: {integrity: sha512-e2hz5BzbUPcYlIRHo8ieAhYgoajrJr+hWoceg6E345TPsATMUKqDgzt8fSXZJJbxfpiPzkWyphz8yn8At7q3fA==}
     engines: {node: '>=18'}
 
   colorette@1.4.0:
@@ -14181,7 +14181,7 @@ snapshots:
       color-convert: 2.0.1
       color-string: 1.9.1
 
-  color@5.0.0:
+  color@5.0.2:
     dependencies:
       color-convert: 3.0.1
       color-string: 2.0.0
