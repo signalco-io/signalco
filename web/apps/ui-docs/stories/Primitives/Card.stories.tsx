@@ -5,12 +5,12 @@ import { IconButton } from "@signalco/ui-primitives/IconButton";
 import { Input } from "@signalco/ui-primitives/Input";
 import { Row } from "@signalco/ui-primitives/Row";
 import { Stack } from "@signalco/ui-primitives/Stack";
-import { StoryObj } from "@storybook/react";
+import { StoryObj } from "@storybook/nextjs";
 
 export default {
     component: Card,
     tags: ['autodocs'],
-    
+
 };
 type Story = StoryObj<typeof Card>;
 
@@ -20,17 +20,17 @@ export const Default: Story = {
             <>
                 <CardHeader>
                     <Row justifyContent="space-between">
-                    <CardTitle>Information</CardTitle>
-                    <IconButton title="More options" variant="plain" size="sm">
-                        <MoreHorizontal />
-                    </IconButton>
+                        <CardTitle>Information</CardTitle>
+                        <IconButton title="More options" variant="plain" size="sm">
+                            <MoreHorizontal />
+                        </IconButton>
                     </Row>
                 </CardHeader>
                 <CardContent>
                     <Stack spacing={2}>
                         <Stack spacing={1}>
-                        <Input label="Name" placeholder="Enter your name..." />
-                        <Input label="Email" placeholder="Enter your email..." />
+                            <Input label="Name" placeholder="Enter your name..." />
+                            <Input label="Email" placeholder="Enter your email..." />
                         </Stack>
                         <CardActions>
                             <Button>Save</Button>

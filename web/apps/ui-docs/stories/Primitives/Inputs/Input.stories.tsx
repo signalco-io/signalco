@@ -1,5 +1,5 @@
 import { Input } from "@signalco/ui-primitives/Input";
-import { StoryObj } from "@storybook/react";
+import { StoryObj } from "@storybook/nextjs";
 import { Comment, Send } from '@signalco/ui-icons';
 import { IconButton } from "@signalco/ui-primitives/IconButton";
 import { Stack } from "@signalco/ui-primitives/Stack";

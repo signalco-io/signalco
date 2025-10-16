@@ -1,26 +1,27 @@
-// import { join, dirname } from "path";
-import type { StorybookConfig } from '@storybook/react-vite';
+import type { StorybookConfig } from '@storybook/nextjs';
+import path from 'path';
 
-// /**
-//  * This function is used to resolve the absolute path of a package.
-//  * It is needed in projects that use Yarn PnP or are set up within a monorepo.
-//  */
-// function getAbsolutePath(value: string) {
-//   return dirname(require.resolve(join(value, "package.json")));
-// }
+const _require = typeof require === 'undefined' ? import.meta : require;
+const getAbsolutePath = (packageName: string): any =>
+  path.dirname(_require.resolve(path.join(packageName, 'package.json'))).replace(/^file:\/\//, '');
 
 const config: StorybookConfig = {
-  stories: ["../stories"],
-  addons: [
-    '@storybook/addon-a11y',
-    '@storybook/addon-links',
-    '@storybook/addon-essentials',
-    '@storybook/addon-themes',
-    '@storybook/experimental-addon-test'
+  stories: [
+    "../stories/**/*.stories.@(js|jsx|ts|tsx)"
   ],
-  framework: '@storybook/experimental-nextjs-vite',
-  docs: {
-    autodocs: true
+
+  addons: [
+    getAbsolutePath("@storybook/addon-a11y"),
+    getAbsolutePath("@storybook/addon-links"),
+    getAbsolutePath("@storybook/addon-themes"),
+    getAbsolutePath("@storybook/addon-docs"),
+    getAbsolutePath("@storybook/addon-vitest"),
+    getAbsolutePath("@storybook/addon-styling-webpack")
+  ],
+
+  framework: {
+    name: getAbsolutePath("@storybook/nextjs"),
+    options: {}
   }
 };
 

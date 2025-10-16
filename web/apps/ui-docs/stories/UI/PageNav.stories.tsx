@@ -1,6 +1,6 @@
 import { PageNav } from "@signalco/ui/Nav";
 import { NavigatingButton } from "@signalco/ui/NavigatingButton";
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/nextjs";
 
 const Component = PageNav;
 

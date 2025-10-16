@@ -1,8 +1,8 @@
 import { Slider } from "@signalco/ui-primitives/Slider";
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/nextjs";
 
-const meta: Meta<typeof Slider> =  { 
-    component: Slider, 
+const meta: Meta<typeof Slider> = {
+    component: Slider,
     tags: ['autodocs'],
     args: {
     }

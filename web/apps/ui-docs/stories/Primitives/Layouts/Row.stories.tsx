@@ -1,8 +1,8 @@
 import { Row } from "@signalco/ui-primitives/Row";
-import { StoryObj } from "@storybook/react";
+import { StoryObj } from "@storybook/nextjs";
 
-export default { 
-    component: Row, 
+export default {
+    component: Row,
     tags: ['autodocs'],
     args: {
         children: [
@@ -10,7 +10,7 @@ export default {
             <span>Second</span>,
             <span>Third</span>
         ]
-    }    
+    }
 };
 type Story = StoryObj<typeof Row>;
 

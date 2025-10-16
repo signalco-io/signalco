@@ -1,22 +1,22 @@
 {
-    "name": "signalco-monorepo",
-    "version": "1.0.0",
-    "private": true,
-    "workspaces": [
-        "apps/*",
-        "packages/*"
-    ],
-    "license": "MIT",
-    "packageManager": "pnpm@10.18.3",
-    "scripts": {
-        "build": "turbo run build",
-        "clean": "turbo run clean",
-        "dev": "turbo run dev --ui tui",
-        "start": "turbo run start",
-        "lint": "turbo run lint",
-        "test": "turbo run test"
-    },
-    "devDependencies": {
-        "turbo": "2.5.8"
-    }
+  "name": "signalco-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "license": "MIT",
+  "packageManager": "pnpm@10.18.3",
+  "scripts": {
+    "build": "turbo run build",
+    "clean": "turbo run clean",
+    "dev": "turbo run dev --ui tui",
+    "start": "turbo run start",
+    "lint": "turbo run lint",
+    "test": "turbo run test"
+  },
+  "devDependencies": {
+    "turbo": "2.5.8"
+  }
 }

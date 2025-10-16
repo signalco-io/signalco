@@ -2,7 +2,7 @@ import { Card } from "@signalco/ui-primitives/Card";
 import { GentleSlide } from "@signalco/ui/GentleSlide";
 import { Stack } from "@signalco/ui-primitives/Stack";
 import { Row } from "@signalco/ui-primitives/Row";
-import { StoryObj } from "@storybook/react";
+import { StoryObj } from "@storybook/nextjs";
 
 export default { component: GentleSlide, tags: ['autodocs'] };
 type Story = StoryObj<typeof GentleSlide>;
@@ -14,14 +14,14 @@ const Template: Story = {
                 <Stack>
                     <Row spacing={1}>
                         {new Array(3).fill(0).map((_, i) => (
-                            <GentleSlide 
-                            index={i} 
-                            direction={props.direction} 
-                            appear={props.appear} 
-                            duration={props.duration} 
-                            collapsedWhenHidden={props.collapsedWhenHidden}
-                            appearDelayPerIndex={props.appearDelayPerIndex}
-                            amount={props.amount}>
+                            <GentleSlide
+                                index={i}
+                                direction={props.direction}
+                                appear={props.appear}
+                                duration={props.duration}
+                                collapsedWhenHidden={props.collapsedWhenHidden}
+                                appearDelayPerIndex={props.appearDelayPerIndex}
+                                amount={props.amount}>
                                 <div style={{ width: 50, height: 50, backgroundColor: 'gray' }}>{i}</div>
                             </GentleSlide>
                         ))}

@@ -1,6 +1,6 @@
 import { Button } from "@signalco/ui-primitives/Button";
 import { Modal } from "@signalco/ui-primitives/Modal";
-import { StoryObj } from "@storybook/react";
+import { StoryObj } from "@storybook/nextjs";
 
 export default {
     component: Modal,

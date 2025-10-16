@@ -6,6 +6,7 @@ onlyBuiltDependencies:
   - '@parcel/watcher'
   - '@swc/core'
   - '@vercel/speed-insights'
+  - core-js-pure
   - esbuild
   - msw
   - sharp

@@ -2,10 +2,11 @@
     "$schema": "https://json.schemastore.org/tsconfig",
     "extends": "@signalco/tsconfig/web.json",
     "compilerOptions": {
-        "jsx": "react-jsx"
+        "jsx": "preserve"
     },
     "include": [
-        ".storybook/*",
+        ".storybook/*.ts",
+        ".storybook/*.tsx",
         "./stories/**/*.ts",
         "./stories/**/*.tsx"
     ]

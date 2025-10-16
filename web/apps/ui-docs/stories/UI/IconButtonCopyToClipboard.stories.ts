@@ -1,5 +1,5 @@
 import { IconButtonCopyToClipboard } from "@signalco/ui/IconButtonCopyToClipboard";
-import { StoryObj } from "@storybook/react";
+import { StoryObj } from "@storybook/nextjs";
 
 export default {
     component: IconButtonCopyToClipboard,
