@@ -48,7 +48,7 @@
         "@vercel/speed-insights": "1.2.0",
         "@vvo/tzdb": "6.161.0",
         "autoprefixer": "10.4.21",
-        "cobe": "0.6.3",
+        "cobe": "0.6.5",
         "color": "5.0.0",
         "compare-versions": "6.1.1",
         "d3": "7.9.0",
