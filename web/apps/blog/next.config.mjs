@@ -40,9 +40,6 @@ const nextConfig = {
             }
         ]
     },
-    eslint: {
-        dirs: ['src', 'app', 'locales', 'components']
-    },
     async headers() {
         return [{
             source: '/(.*)',

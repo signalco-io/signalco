@@ -10,11 +10,8 @@
     "files": [
         "dist"
     ],
-    "scripts": {
-        "lint": "eslint ."
-    },
+    "scripts": {},
     "devDependencies": {
-        "@signalco/eslint-config-signalco": "workspace:*",
         "@signalco/tsconfig": "workspace:*",
         "typescript": "5.9.3"
     }

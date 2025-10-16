@@ -34,7 +34,6 @@ const useWidgetConfiguration = (
         if (!configOption) {
             continue;
         }
-        // eslint-disable-next-line react-hooks/rules-of-hooks
         const field = useFormField(
             config ? config[configOption.name] : undefined,
             () => true,

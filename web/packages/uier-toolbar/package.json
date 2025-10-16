@@ -12,12 +12,10 @@
         "dev:build": "tsup --watch ./src --env.NODE_ENV development",
         "dev:serve": "pnpm dlx serve dist -l 4005",
         "dev": "pnpm run /^dev:.*/",
-        "build": "tsup --minify --env.NODE_ENV production",
-        "lint": "eslint ."
+        "build": "tsup --minify --env.NODE_ENV production"
     },
     "devDependencies": {
         "@enterwell/react-hooks": "0.7.0",
-        "@signalco/eslint-config-signalco": "workspace:*",
         "@signalco/hooks": "workspace:*",
         "@signalco/js": "workspace:*",
         "@signalco/tsconfig": "workspace:*",

@@ -14,7 +14,6 @@ export interface InputContactValueProps {
 export default function InputContactValue(props: InputContactValueProps) {
     const { value, onChange } = props;
 
-    // eslint-disable-next-line @typescript-eslint/no-inferrable-types
     const dataType: string = 'string'; // TODO: Add data type to contact props.pointer.dataType;
     // const dataValues: ({ value: any })[] | undefined = []; // TODO: Use info from contact
     // const dataValuesMultiple = false; // TODO: Use info from contact
@@ -77,28 +76,28 @@ export default function InputContactValue(props: InputContactValueProps) {
                 <IconButton onClick={handleActionClick} size="lg"><Play /></IconButton> */}
             </Row>
         );
-    // } else if (dataType === 'double') {
-    //     const resolvedSliderValue = sliderValue ?? (typeof value !== 'undefined' ? Number.parseFloat(value) || undefined : undefined);
-    //     return <Slider
-    //         step={0.01}
-    //         sx={{ width: '100px', color: sliderColor, mr: 2 }} min={0} max={1} value={resolvedSliderValue}
-    //         marks={[
-    //             { label: 'Low', value: 0 },
-    //             { label: 'High', value: 1 }
-    //         ]}
-    //         onChange={handleDoubleChange}
-    //         onChangeCommitted={handleDoubleChange} />
-    // } else if (dataType === 'colortemp') {
-    //     const resolvedSliderValue = sliderValue ?? (typeof value !== 'undefined' ? Number.parseFloat(value) || undefined : undefined);
-    //     return <Slider
-    //         step={0.01}
-    //         sx={{ width: '100px', color: sliderColor, mr: 2 }} min={0} max={1} value={resolvedSliderValue}
-    //         marks={[
-    //             { label: 'Cold', value: 0 },
-    //             { label: 'Warm', value: 1 }
-    //         ]}
-    //         onChange={handleColorTemperatureChange}
-    //         onChangeCommitted={handleColorTemperatureChange} />
+        // } else if (dataType === 'double') {
+        //     const resolvedSliderValue = sliderValue ?? (typeof value !== 'undefined' ? Number.parseFloat(value) || undefined : undefined);
+        //     return <Slider
+        //         step={0.01}
+        //         sx={{ width: '100px', color: sliderColor, mr: 2 }} min={0} max={1} value={resolvedSliderValue}
+        //         marks={[
+        //             { label: 'Low', value: 0 },
+        //             { label: 'High', value: 1 }
+        //         ]}
+        //         onChange={handleDoubleChange}
+        //         onChangeCommitted={handleDoubleChange} />
+        // } else if (dataType === 'colortemp') {
+        //     const resolvedSliderValue = sliderValue ?? (typeof value !== 'undefined' ? Number.parseFloat(value) || undefined : undefined);
+        //     return <Slider
+        //         step={0.01}
+        //         sx={{ width: '100px', color: sliderColor, mr: 2 }} min={0} max={1} value={resolvedSliderValue}
+        //         marks={[
+        //             { label: 'Cold', value: 0 },
+        //             { label: 'Warm', value: 1 }
+        //         ]}
+        //         onChange={handleColorTemperatureChange}
+        //         onChangeCommitted={handleColorTemperatureChange} />
     } else {
         return <Typography level="body2">Action for this contact not supported yet.</Typography>
     }
