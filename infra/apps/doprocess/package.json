@@ -7,19 +7,12 @@
   "type": "module",
   "scripts": {
     "build": "tsc && tsup src/index.ts --format esm --clean",
-    "lint": "eslint ./src/**/*.ts",
     "preview-next": "pulumi preview --stack signalco/next --non-interactive",
     "up-next": "pulumi up --stack signalco/next --non-interactive --skip-preview"
   },
   "devDependencies": {
     "@infra/pulumi": "workspace:*",
     "@types/node": "22.15.18",
-    "@typescript-eslint/eslint-plugin": "8.30.1",
-    "@typescript-eslint/parser": "8.30.1",
-    "eslint": "8.57.1",
-    "eslint-plugin-import": "2.31.0",
-    "eslint-plugin-n": "17.17.0",
-    "eslint-plugin-promise": "7.2.1",
     "tsup": "8.4.0",
     "typescript": "5.8.3"
   },

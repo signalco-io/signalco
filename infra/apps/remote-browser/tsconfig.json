@@ -4,8 +4,7 @@
         "project": "./tsconfig.json"
     },
     "include": [
-        "./src/**/*.ts",
-        "./.eslintrc.cjs"
+        "./src/**/*.ts"
     ],
     "exclude": [
         "node_modules",
