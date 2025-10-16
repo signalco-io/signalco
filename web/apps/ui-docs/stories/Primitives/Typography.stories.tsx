@@ -1,5 +1,5 @@
 import { Typography } from "@signalco/ui-primitives/Typography";
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/nextjs";
 
 export default {
     component: Typography,

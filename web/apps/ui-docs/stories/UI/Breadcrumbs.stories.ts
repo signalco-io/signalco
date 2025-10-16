@@ -1,5 +1,5 @@
 import { Breadcrumbs } from "@signalco/ui/Breadcrumbs";
-import { StoryObj } from "@storybook/react";
+import { StoryObj } from "@storybook/nextjs";
 
 export default { component: Breadcrumbs, tags: ['autodocs'] };
 type Story = StoryObj<typeof Breadcrumbs>;

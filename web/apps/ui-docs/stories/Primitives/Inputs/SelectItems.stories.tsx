@@ -1,6 +1,6 @@
 import { Bug, Device, Cloud } from "@signalco/ui-icons";
 import { SelectItems } from "@signalco/ui-primitives/SelectItems";
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/nextjs";
 
 export default {
     component: SelectItems,

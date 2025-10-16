@@ -1,5 +1,5 @@
 import { Loadable } from "@signalco/ui/Loadable";
-import { StoryObj } from "@storybook/react";
+import { StoryObj } from "@storybook/nextjs";
 
 export default { component: Loadable, tags: ['autodocs'], args: { isLoading: true, loadingLabel: 'Loading...' } };
 type Story = StoryObj<typeof Loadable>;

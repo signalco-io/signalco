@@ -1,9 +1,9 @@
 import { Chip } from "@signalco/ui-primitives/Chip";
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/nextjs";
 
 export default {
     component: Chip, tags: ['autodocs'],
-    args: { 
+    args: {
         children: 'Chip',
         color: 'neutral',
         size: 'md',

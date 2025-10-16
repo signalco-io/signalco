@@ -1,7 +1,7 @@
 import { Card } from "@signalco/ui-primitives/Card";
 import { Fade } from "@signalco/ui/Fade";
 import { Stack } from "@signalco/ui-primitives/Stack";
-import { StoryObj } from "@storybook/react";
+import { StoryObj } from "@storybook/nextjs";
 
 export default { component: Fade, tags: ['autodocs'] };
 type Story = StoryObj<typeof Fade>;

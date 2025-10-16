@@ -1,5 +1,5 @@
 import { NoDataPlaceholder } from "@signalco/ui/NoDataPlaceholder";
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/nextjs";
 
 const Component = NoDataPlaceholder;
 

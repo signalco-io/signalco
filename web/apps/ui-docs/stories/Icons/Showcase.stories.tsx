@@ -1,7 +1,7 @@
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/nextjs";
 import * as Icons from "@signalco/ui-icons"
 
-const meta: Meta =  { 
+const meta: Meta = {
     tags: ['autodocs']
 };
 export default meta;
@@ -21,7 +21,7 @@ export const Default: Story = {
                         </div>
                     );
                 }
-            )}
+                )}
             </div>
         );
     }

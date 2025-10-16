@@ -1,7 +1,8 @@
 import storybookSignalcoTheme from './signalco-theme';
 import { withThemeByClassName } from '@storybook/addon-themes';
+import '!style-loader!css-loader!postcss-loader!tailwindcss/tailwind.css';
 import '../styles/global.css';
-import { Preview } from '@storybook/react';
+import { Preview } from '@storybook/nextjs';
 
 const preview: Preview = {
   parameters: {
@@ -15,6 +16,7 @@ const preview: Preview = {
       theme: storybookSignalcoTheme
     }
   },
+
   decorators: [
     withThemeByClassName({
       themes: {
@@ -23,7 +25,9 @@ const preview: Preview = {
       },
       defaultTheme: 'dark',
     })
-  ]
+  ],
+
+  tags: ['autodocs']
 };
 
 export default preview;
