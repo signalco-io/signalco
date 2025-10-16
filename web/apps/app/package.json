@@ -63,7 +63,7 @@
         "pigeon-maps": "0.22.1",
         "react": "19.1.0",
         "react-dom": "19.1.0",
-        "react-grid-layout": "1.5.1",
+        "react-grid-layout": "1.5.2",
         "recharts": "2.15.3",
         "sharp": "0.34.1",
         "suncalc": "1.9.0",
