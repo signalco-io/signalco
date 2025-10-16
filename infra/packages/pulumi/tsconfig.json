@@ -5,8 +5,7 @@
         "rootDir": "./"
     },
     "include": [
-        "./src/**/*.ts",
-        "./.eslintrc.cjs"
+        "./src/**/*.ts"
     ],
     "exclude": [
         "node_modules",

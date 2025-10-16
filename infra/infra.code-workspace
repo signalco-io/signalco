@@ -29,10 +29,6 @@
 			"path": "apps/workingparty"
 		},
 		{
-			"name": "📦 @infra/eslint-config",
-			"path": "packages/eslint-config"
-		},
-		{
 			"name": "📦 @infra/pulumi",
 			"path": "packages/pulumi"
 		},

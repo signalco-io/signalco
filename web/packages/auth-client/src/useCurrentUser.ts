@@ -23,7 +23,7 @@ export function useCurrentUser<T extends AuthCurrentUserBase>(): UseQueryResult<
             return {
                 isLogginedIn: !!user,
                 userId: user?.id,
-                user
+                user: user as T
             };
         }
     });
