@@ -27,7 +27,7 @@
     "@signalco/ui-icons": "workspace:*",
     "@signalco/ui-primitives": "workspace:*",
     "@signalco/ui-themes-minimal": "workspace:*",
-    "next": "15.3.1",
+    "next": "15.4.7",
     "next-secure-headers": "2.2.0",
     "react": "19.1.0",
     "react-dom": "19.1.0",
