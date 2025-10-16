@@ -59,7 +59,6 @@ function AppThemeColorPicker() {
     const [themeMode] = useUserSetting<AppThemeMode>('themeMode', 'system');
     // const { colorScheme, setMode } = useColorScheme();
     const colorScheme: DefaultColorScheme = 'dark';
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
     const setMode = (mode: DefaultColorScheme) => { };
 
     const handleThemeSelect = (newTheme: DefaultColorScheme | undefined) => {
@@ -107,7 +106,6 @@ export default function AppThemePicker() {
 
     // const { mode, setMode } = useColorScheme();
     const mode: unknown = 'dark';
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
     const setMode = (mode: DefaultColorScheme | 'system') => { };
     const [themeMode, setThemeMode] = useUserSetting<AppThemeMode>('themeMode', 'system');
 

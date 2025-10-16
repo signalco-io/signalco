@@ -25,9 +25,6 @@ const nextConfig = {
     experimental: {
         reactCompiler: true
     },
-    eslint: {
-        dirs: ['worker', 'tools', 'src', 'pages', 'app', 'locales', 'components']
-    },
     async headers() {
         return [{
             source: '/(.*)',

@@ -20,12 +20,10 @@
         }
     },
     "scripts": {
-        "lint": "eslint .",
         "prepublishOnly": "tsup --env.NODE_ENV production"
     },
     "devDependencies": {
         "@microsoft/api-extractor": "7.53.1",
-        "@signalco/eslint-config-signalco": "workspace:*",
         "@signalco/tailwindcss-config-signalco": "workspace:*",
         "@signalco/tsconfig": "workspace:*",
         "@signalco/ui-icons": "workspace:*",

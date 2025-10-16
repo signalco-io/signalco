@@ -20,7 +20,6 @@
         }
     },
     "scripts": {
-        "lint": "eslint .",
         "prepublishOnly": "tsup --env.NODE_ENV production"
     },
     "devDependencies": {
@@ -31,7 +30,6 @@
         "@radix-ui/react-menubar": "1.1.16",
         "@radix-ui/react-popover": "1.1.15",
         "@radix-ui/react-select": "2.2.6",
-        "@signalco/eslint-config-signalco": "workspace:*",
         "@signalco/hooks": "workspace:*",
         "@signalco/js": "workspace:*",
         "@signalco/tailwindcss-config-signalco": "workspace:*",

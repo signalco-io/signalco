@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic';
 import IWidgetConfigurationOption from '../../src/widgets/IWidgetConfigurationOption';
 import WidgetCard from './parts/WidgetCard';
 const WidgetUnresolved = dynamic(() => import('./parts/WidgetUnresolved'));
-const WidgetState = dynamic(() => import( './parts/WidgetState'));
+const WidgetState = dynamic(() => import('./parts/WidgetState'));
 const WidgetButton = dynamic(() => import('./parts/WidgetButton'));
 const WidgetChecklist = dynamic(() => import('./parts/WidgetChecklist'));
 const WidgetIndicator = dynamic(() => import('./parts/WidgetIndicator'));
@@ -49,7 +49,6 @@ function Widget(props: WidgetProps) {
         onOptions: handleOptions
     };
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let WidgetResolved: ComponentType<any> = WidgetUnresolved;
     if (props.type === 'state') {
         WidgetResolved = WidgetState;

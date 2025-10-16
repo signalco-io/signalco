@@ -206,7 +206,6 @@ function PagePreview({ domain }: { domain: string }) {
                             height: ((width + 38) / (pageScreenshot.item?.w ?? 1)) * (pageScreenshot.item?.h ?? 0),
                             borderRadius: 0
                         }}>
-                            {/* eslint-disable-next-line @next/next/no-img-element  */}
                             <img
                                 src={pageScreenshot.item?.data || ''}
                                 alt="Page preview"

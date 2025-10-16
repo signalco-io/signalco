@@ -1,5 +1,3 @@
-/* eslint-disable tailwindcss/enforces-shorthand */
-/* eslint-disable tailwindcss/classnames-order */
 import {
     Head,
     Html,
