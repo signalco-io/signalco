@@ -1,7 +1,8 @@
 import { Link } from "@signalco/ui-primitives/Link";
-import { StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/react";
 
-export default { component: Link, tags: ['autodocs'] };
+const meta: Meta<typeof Link> = { component: Link, tags: ['autodocs'] };
+export default meta;
 type Story = StoryObj<typeof Link>;
 
 export const Default: Story = {};
