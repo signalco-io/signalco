@@ -18,8 +18,8 @@ importers:
   apps/cloud-primary:
     dependencies:
       '@checkly/pulumi':
-        specifier: 1.1.4
-        version: 1.1.4(ts-node@7.0.1)(typescript@5.8.3)
+        specifier: 2.6.0
+        version: 2.6.0(ts-node@7.0.1)(typescript@5.8.3)
       '@pulumi/azure-native':
         specifier: 3.1.0
         version: 3.1.0(ts-node@7.0.1)(typescript@5.8.3)
@@ -86,8 +86,8 @@ importers:
   apps/pulumi-backend:
     dependencies:
       '@checkly/pulumi':
-        specifier: 2.0.0
-        version: 2.0.0(ts-node@7.0.1)(typescript@5.8.3)
+        specifier: 2.6.0
+        version: 2.6.0(ts-node@7.0.1)(typescript@5.8.3)
       '@pulumi/azure-native':
         specifier: 3.1.0
         version: 3.1.0(ts-node@7.0.1)(typescript@5.8.3)
@@ -123,8 +123,8 @@ importers:
   apps/remote-browser:
     dependencies:
       '@checkly/pulumi':
-        specifier: 1.1.4
-        version: 1.1.4(ts-node@7.0.1)(typescript@5.8.3)
+        specifier: 2.6.0
+        version: 2.6.0(ts-node@7.0.1)(typescript@5.8.3)
       '@pulumi/azure-native':
         specifier: 3.1.0
         version: 3.1.0(ts-node@7.0.1)(typescript@5.8.3)
@@ -160,8 +160,8 @@ importers:
   apps/uier:
     dependencies:
       '@checkly/pulumi':
-        specifier: 1.1.4
-        version: 1.1.4(ts-node@7.0.1)(typescript@5.8.3)
+        specifier: 2.6.0
+        version: 2.6.0(ts-node@7.0.1)(typescript@5.8.3)
       '@pulumi/azure-native':
         specifier: 3.1.0
         version: 3.1.0(ts-node@7.0.1)(typescript@5.8.3)
@@ -225,8 +225,8 @@ importers:
   packages/pulumi:
     dependencies:
       '@checkly/pulumi':
-        specifier: 1.1.4
-        version: 1.1.4(ts-node@7.0.1)(typescript@5.8.3)
+        specifier: 2.6.0
+        version: 2.6.0(ts-node@7.0.1)(typescript@5.8.3)
       '@pulumi/azure-native':
         specifier: 3.1.0
         version: 3.1.0(ts-node@7.0.1)(typescript@5.8.3)
@@ -266,11 +266,8 @@ importers:
 
 packages:
 
-  '@checkly/pulumi@1.1.4':
-    resolution: {integrity: sha512-YPNYtwEnKu23VDHNFu91xd/Ueu5zYONHcYwKDA5qTvtgZZ1nzrvPJgrO15KF0fLRVlGo7yckirDS26GpvBTe6w==}
-
-  '@checkly/pulumi@2.0.0':
-    resolution: {integrity: sha512-jYbH1RcMtJEmZy28liVLqwjAjVBXGZ76DGCUMkViRzlU2gQaldYFw8r/TlED7h43NsyDCpPlhmkH//DLd2vEbw==}
+  '@checkly/pulumi@2.6.0':
+    resolution: {integrity: sha512-9bUV91Mlp3GHZ1uODeKt9e8jAIB6s5SdfofyEE9CBw6jIGoSXLdi0WnQr0bxjbOkBh00RtGqykBEVH8EVfWoDw==}
 
   '@esbuild/aix-ppc64@0.25.0':
     resolution: {integrity: sha512-O7vun9Sf8DFjH2UtqK8Ku3LkquL9SZL8OLY1T5NZkA34+wG3OQF7cl4Ql8vdNzM6fzBbYfLaiRLIOZ+2FOCgBQ==}
@@ -1878,16 +1875,7 @@ packages:
 
 snapshots:
 
-  '@checkly/pulumi@1.1.4(ts-node@7.0.1)(typescript@5.8.3)':
-    dependencies:
-      '@pulumi/pulumi': 3.162.0(ts-node@7.0.1)(typescript@5.8.3)
-    transitivePeerDependencies:
-      - bluebird
-      - supports-color
-      - ts-node
-      - typescript
-
-  '@checkly/pulumi@2.0.0(ts-node@7.0.1)(typescript@5.8.3)':
+  '@checkly/pulumi@2.6.0(ts-node@7.0.1)(typescript@5.8.3)':
     dependencies:
       '@pulumi/pulumi': 3.162.0(ts-node@7.0.1)(typescript@5.8.3)
     transitivePeerDependencies:
