@@ -9,7 +9,7 @@ on:
     paths:
       - "station/**"
       - ".github/workflows/station-build-test.yml"
-      - ".github/workflows/station-release-binaries.yml"      
+      - ".github/workflows/station-release-binaries.yml"
   release:
     types: [published]
 

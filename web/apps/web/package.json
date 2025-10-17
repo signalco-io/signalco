@@ -14,7 +14,6 @@
         "build": "next build",
         "postbuild": "next-sitemap --config next-sitemap.config.cjs",
         "start": "next start",
-        "lint": "next lint",
         "test": "playwright test"
     },
     "dependencies": {

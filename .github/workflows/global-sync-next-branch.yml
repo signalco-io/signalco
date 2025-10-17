@@ -1,6 +1,6 @@
 # yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
 
-name: '[Global] Sync `next` Branch'
+name: "[Global] Sync `next` Branch"
 
 # This workflow attempts to merge updates from `main` into the long-standing next branch.
 
@@ -23,13 +23,12 @@ jobs:
         uses: repo-sync/pull-request@v2
         id: cpr
         with:
-          destination_branch: 'next'
-          pr_title: '[Automated] Merge `main` into target `next`'
+          destination_branch: "next"
+          pr_title: "[Automated] Merge `main` into target `next`"
           pr_allow_empty: true
           github_token: ${{ secrets.GITHUB_TOKEN }}
       - name: Enable Pull Request Automerge
         if: steps.cpr.outputs.pr_created == 'true'
         run: gh pr merge --merge --auto "${{ steps.cpr.outputs.pr_number }}"
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}     
-        
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

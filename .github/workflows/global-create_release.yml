@@ -3,18 +3,18 @@
 name: "[Global] Create new release"
 
 on:
-    push:
-        branches: [main, next]
+  push:
+    branches: [main, next]
 
 jobs:
-    release:
-        name: "[Global] Create new release"
-        runs-on: ubuntu-latest
+  release:
+    name: "[Global] Create new release"
+    runs-on: ubuntu-latest
 
-        steps:
-            - name: Checkout
-              uses: actions/checkout@v4
-            - name: Semantic Release
-              uses: cycjimmy/semantic-release-action@v3
-              env:
-                  GITHUB_TOKEN: ${{ secrets.AT_GH_CD_REPO_PAT }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Semantic Release
+        uses: cycjimmy/semantic-release-action@v3
+        env:
+          GITHUB_TOKEN: ${{ secrets.AT_GH_CD_REPO_PAT }}
