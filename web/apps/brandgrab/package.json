@@ -38,7 +38,7 @@
     },
     "devDependencies": {
         "@axe-core/playwright": "4.10.2",
-        "@playwright/test": "1.56.0",
+        "@playwright/test": "1.56.1",
         "@signalco/tsconfig": "workspace:*",
         "@types/color": "4.2.0",
         "@types/node": "22.15.18",
