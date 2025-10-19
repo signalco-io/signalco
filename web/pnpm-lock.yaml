@@ -537,8 +537,8 @@ importers:
         specifier: 0.4.6
         version: 0.4.6(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       openai:
-        specifier: 4.97.0
-        version: 4.97.0(encoding@0.1.13)(ws@8.18.2)(zod@3.23.8)
+        specifier: 4.104.0
+        version: 4.104.0(encoding@0.1.13)(ws@8.18.2)(zod@3.23.8)
       react:
         specifier: 19.2.0
         version: 19.2.0
@@ -1133,8 +1133,8 @@ importers:
         specifier: 0.4.6
         version: 0.4.6(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       openai:
-        specifier: 4.97.0
-        version: 4.97.0(encoding@0.1.13)(ws@8.18.2)(zod@3.23.8)
+        specifier: 4.104.0
+        version: 4.104.0(encoding@0.1.13)(ws@8.18.2)(zod@3.23.8)
       react:
         specifier: 19.2.0
         version: 19.2.0
@@ -7415,8 +7415,8 @@ packages:
     resolution: {integrity: sha512-7x81NCL719oNbsq/3mh+hVrAWmFuEYUqrq/Iw3kUzH8ReypT9QQ0BLoJS7/G9k6N81XjW4qHWtjWwe/9eLy1EQ==}
     engines: {node: '>=12'}
 
-  openai@4.97.0:
-    resolution: {integrity: sha512-LRoiy0zvEf819ZUEJhgfV8PfsE8G5WpQi4AwA1uCV8SKvvtXQkoWUFkepD6plqyJQRghy2+AEPQ07FrJFKHZ9Q==}
+  openai@4.104.0:
+    resolution: {integrity: sha512-p99EFNsA/yX6UhVO93f5kJsDRLAg+CTA2RBqdHK4RtK8u5IJw32Hyb2dTGKbnnFmnuoBv5r7Z2CURI9sGZpSuA==}
     hasBin: true
     peerDependencies:
       ws: ^8.18.0
@@ -16043,7 +16043,7 @@ snapshots:
       is-docker: 2.2.1
       is-wsl: 2.2.0
 
-  openai@4.97.0(encoding@0.1.13)(ws@8.18.2)(zod@3.23.8):
+  openai@4.104.0(encoding@0.1.13)(ws@8.18.2)(zod@3.23.8):
     dependencies:
       '@types/node': 18.19.87
       '@types/node-fetch': 2.6.12
