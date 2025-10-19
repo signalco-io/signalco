@@ -20,7 +20,7 @@
         "@azure/cosmos": "4.6.0",
         "@enterwell/react-form-builder": "0.3.2",
         "@enterwell/react-form-validation": "1.4.0",
-        "@react-email/components": "0.5.6",
+        "@react-email/components": "0.5.7",
         "@signalco/auth-client": "workspace:*",
         "@signalco/auth-server": "workspace:*",
         "@signalco/cms-components-marketing": "workspace:*",
