@@ -33,7 +33,7 @@ config:
   cloud-primary:zoneid:
     secure: v1:rtsp5wx6FUtWbbro:bt22CDUsPQ2/bPj1DI81BIvNGWRp9eJJvUNuR9mQPyvg73rbQyonZLix80pRvybl
   cloudflare:apiToken:
-    secure: v1:G2K18hm0zxtYixcN:/PbVHyY8ZifM7CBbXwWNGRGdhhQANRL1yS2/CwuH0Ahn82R0MasF2KzXsQXU+TicFjZYZbapTpw=
+    secure: v1:lp+xg3Gt1LPcAytn:jOkvdNUHivyksGCkl4D6GqQczNsqmVprnxaXWdjeM4eOP+mThsQsXRbj74hh8ag8ooaT9qLV1ZQ=
   vercel:apiToken:
     secure: v1:kgcEq7tRd/aa0Wjr:v13Q2aBqNGALIIIN80CFATgbXXEP0LBgsJQEt/gDmDscJWRAnHrzpQ==
   vercel:team: team_Ade0MlfC3211ml3wYJZ4c9hn
