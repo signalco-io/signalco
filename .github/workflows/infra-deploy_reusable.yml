@@ -72,7 +72,7 @@ jobs:
             ${{ runner.os }}-pnpm-store-
 
       - name: 📦️ Installing dependencies
-        run: pnpm i --frozen-lockfile --filter=${{ inputs.project }}
+        run: pnpm i --frozen-lockfile
 
       - name: 🔎 Determine stack
         shell: bash
