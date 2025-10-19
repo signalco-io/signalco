@@ -7,7 +7,7 @@ config:
   azure-native:tenantId: c7837eb3-77ca-413b-8653-c97b08886678
   checkly:accountId: 40dcbe54-1c1c-4e60-95ba-6ad5fe515b0d
   checkly:apiKey:
-    secure: v1:NHqyoUfvJjYJoREm:GXcpYhh8u6ZP3g3xVt1g21bnyjim8pHBa7FszH8DTFM2qIKAjdpCdcs8e85zHo7l7PLI
+    secure: v1:3qXKWXb+UgHbB3K0:ABqC1TMbuJ1zmRTRbDPGjV+qG6pF/j6pswyq67s4E8QArwkOFzCtc59G4BVpckpMBo5h
   cloud-primary:domain: signalco.dev
   cloud-primary:secret-auth0ApiIdentifier:
     secure: v1:EdjsLHoX2wEKkOHm:9ryP4yaILSSJyyQ3Z+4xMC3WUMwOLY+OXxjCAY8SINuoOcMwnBxJLQLGjy4=
