@@ -38,7 +38,7 @@ jobs:
         language: ["javascript", "csharp"]
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Initialize CodeQL
         uses: github/codeql-action/init@v3
         with:
@@ -55,7 +55,7 @@ jobs:
       pull-requests: read
       contents: read
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: dorny/paths-filter@v3
         id: filter
         with:
@@ -129,7 +129,7 @@ jobs:
     needs: changes
     if: success() && github.event_name == 'pull_request' && needs.changes.outputs.station == 'true'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:

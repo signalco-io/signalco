@@ -40,7 +40,7 @@ jobs:
       group: ${{ github.workflow }}-${{ github.ref || github.run_id }}-${{ inputs.name }}
       cancel-in-progress: true
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 2
 
