@@ -6,6 +6,7 @@ onlyBuiltDependencies:
   - '@parcel/watcher'
   - '@swc/core'
   - '@vercel/speed-insights'
+  - browser-tabs-lock
   - core-js-pure
   - esbuild
   - msw
