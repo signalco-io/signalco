@@ -1,4 +1,4 @@
-import { Message } from 'openai/resources/beta/threads/messages';
+import type { DbMessage } from '../../../lib/openAiMessages';
 import { InfiniteData, UseInfiniteQueryResult, useInfiniteQuery } from '@tanstack/react-query';
 import { orderBy } from '@signalco/js';
 
@@ -15,11 +15,11 @@ export async function getThreadMessages(workerId: string, threadId: string, page
     if (response.status === 404)
         return null;
 
-    const messages = await response.json() as Message[] | undefined;
-    return messages ? orderBy(messages, (da, db) => da.created_at - db.created_at) : [];
+    const messages = await response.json() as DbMessage[] | undefined;
+    return messages ? orderBy(messages, (da, db) => da.createdAt - db.createdAt) : [];
 }
 
-export function useThreadMessages(workerId: string, threadId: string): UseInfiniteQueryResult<InfiniteData<Message[] | null, unknown>, Error> {
+export function useThreadMessages(workerId: string, threadId: string): UseInfiniteQueryResult<InfiniteData<DbMessage[] | null, unknown>, Error> {
     return useInfiniteQuery({
         queryKey: ['threadMessages', threadId],
         queryFn: ({ pageParam }: { pageParam: GetThreadMessagesPageParams; }) => getThreadMessages(workerId, threadId, pageParam),

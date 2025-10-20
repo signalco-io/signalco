@@ -70,11 +70,11 @@ export function WorkerThreadMessagesList({
                 )}
                 {flatMessages?.map((message, i) => (
                     <Fragment key={message.id}>
-                        {i === 0 || message.created_at - (flatMessages[i - 1]?.created_at ?? 0) > 3600 ? (
+                        {i === 0 || message.createdAt - (flatMessages[i - 1]?.createdAt ?? 0) > 3600 ? (
                             <Typography
                                 level="body1"
                                 className="py-8 text-center font-semibold text-muted-foreground">
-                                {new Date(message.created_at * 1000).toLocaleString()}
+                                {new Date(message.createdAt * 1000).toLocaleString()}
                             </Typography>
                         ) : null}
                         <ThreadMessage

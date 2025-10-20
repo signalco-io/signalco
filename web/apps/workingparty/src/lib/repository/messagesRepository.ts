@@ -4,19 +4,17 @@ import { workersGet } from './workersRepository';
 import { threadsGet } from './threadsRepository';
 
 export async function messagesGetAll(accountId: string, threadId: string, before?: string, after?: string) {
-    const { oaiThreadId } = await threadsGet(accountId, threadId);
-    const threadMessages = await openAiListMessages(oaiThreadId, before, after);
+    const threadMessages = await openAiListMessages(accountId, threadId, before, after);
     return threadMessages;
 }
 
 export async function messagesCreateAndPoll(accountId: string, workerId: string, threadId: string, message: string) {
-    const [{ oaiThreadId }, { oaiAssistantId }] = await Promise.all([
-        threadsGet(accountId, threadId),
+    const [{ model, instructions }] = await Promise.all([
         workersGet(accountId, workerId)
     ]);
 
-    await openAiCreateMessage(oaiThreadId, message);
-    const { runId, status, usage } = await openAiCreateRunAndPoll(oaiThreadId, oaiAssistantId);
+    await openAiCreateMessage(accountId, threadId, message, 'user');
+    const { runId, status, usage } = await openAiCreateRunAndPoll(accountId, threadId, model, instructions);
 
     return {
         runId,
