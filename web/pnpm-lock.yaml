@@ -474,7 +474,7 @@ importers:
         specifier: 1.13.0
         version: 1.13.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       '@mantine/core':
-        specifier: ^8.3.5
+        specifier: 8.3.5
         version: 8.3.5(@mantine/hooks@7.17.7(react@19.2.0))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       '@next/env':
         specifier: 15.5.6
