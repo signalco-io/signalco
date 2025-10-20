@@ -1,4 +1,4 @@
-import { Message } from 'openai/resources/beta/threads/messages';
+import type { DbMessage } from '../../../lib/openAiMessages';
 import { UseMutationResult, useMutation, useQueryClient, QueryClient, QueryKey } from '@tanstack/react-query';
 import { User } from '../../../components/providers/AppAuthProvider';
 import { useCurrentUser } from '../../../../../../packages/auth-client/src/useCurrentUser';
@@ -35,23 +35,13 @@ export function useThreadMessageSend(workerId: string, threadId: string): UseMut
     return useMutation({
         mutationFn: (message: string) => sendThreadMessage(workerId, threadId, message),
         onMutate: async (newItem) => ({
-            previousItems: await handleArrayOptimisticInsert<Message, Message>(client, ['threadMessages', threadId], {
+            previousItems: await handleArrayOptimisticInsert<DbMessage, DbMessage>(client, ['threadMessages', threadId], {
                 id: 'optimistic',
-                content: [
-                    { type: 'text', text: { value: newItem, annotations: [] } }
-                ],
+                accountId: 'optimistic',
+                threadId,
                 role: 'user',
-                created_at: Date.now() / 1000, // to UNIX seconds
-                assistant_id: workerId,
-                attachments: null,
-                thread_id: threadId,
-                metadata: null,
-                object: 'thread.message',
-                run_id: null,
-                completed_at: Date.now() / 1000, // to UNIX seconds
-                incomplete_at: null,
-                incomplete_details: null,
-                status: 'completed'
+                content: newItem,
+                createdAt: Math.floor(Date.now() / 1000)
             })
         }),
         onError: (_, __, context) => {

@@ -11,6 +11,7 @@ let usageContainer: Container | null = null;
 let subscriptionsContainer: Container | null = null;
 let workersContainer: Container | null = null;
 let threadsContainer: Container | null = null;
+let messagesContainer: Container | null = null;
 
 function cosmosClient() {
     if (client == null) {
@@ -62,5 +63,9 @@ export function cosmosDataContainerWorkers() {
 
 export function cosmosDataContainerThreads() {
     return threadsContainer = threadsContainer ?? cosmosDataDb().container('threads');
+}
+
+export function cosmosDataContainerMessages() {
+    return messagesContainer = messagesContainer ?? cosmosDataDb().container('messages');
 }
 
