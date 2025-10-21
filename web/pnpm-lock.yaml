@@ -1157,8 +1157,8 @@ importers:
         specifier: 0.34.4
         version: 0.34.4
       stripe:
-        specifier: 18.5.0
-        version: 18.5.0(@types/node@22.18.11)
+        specifier: 19.1.0
+        version: 19.1.0(@types/node@22.18.11)
       tailwindcss:
         specifier: 3.4.18
         version: 3.4.18(yaml@2.5.0)
@@ -8619,11 +8619,11 @@ packages:
   strip-literal@3.1.0:
     resolution: {integrity: sha512-8r3mkIM/2+PpjHoOtiAW8Rg3jJLHaV7xPwG+YRGrv6FP0wwk/toTpATxWYOW0BKdWwl82VT2tFYi5DlROa0Mxg==}
 
-  stripe@18.5.0:
-    resolution: {integrity: sha512-Hp+wFiEQtCB0LlNgcFh5uVyKznpDjzyUZ+CNVEf+I3fhlYvh7rZruIg+jOwzJRCpy0ZTPMjlzm7J2/M2N6d+DA==}
-    engines: {node: '>=12.*'}
+  stripe@19.1.0:
+    resolution: {integrity: sha512-FjgIiE98dMMTNssfdjMvFdD4eZyEzdWAOwPYqzhPRNZeg9ggFWlPXmX1iJKD5pPIwZBaPlC3SayQQkwsPo6/YQ==}
+    engines: {node: '>=16'}
     peerDependencies:
-      '@types/node': '>=12.x.x'
+      '@types/node': '>=16'
     peerDependenciesMeta:
       '@types/node':
         optional: true
@@ -17474,7 +17474,7 @@ snapshots:
     dependencies:
       js-tokens: 9.0.1
 
-  stripe@18.5.0(@types/node@22.18.11):
+  stripe@19.1.0(@types/node@22.18.11):
     dependencies:
       qs: 6.14.0
     optionalDependencies:
