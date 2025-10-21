@@ -29,7 +29,7 @@
         "@enterwell/react-form-validation": "1.4.0",
         "@enterwell/react-hooks": "0.7.0",
         "@hcaptcha/react-hcaptcha": "1.13.0",
-        "@microsoft/signalr": "8.0.17",
+        "@microsoft/signalr": "9.0.6",
         "@monaco-editor/react": "4.7.0",
         "@next/env": "15.5.6",
         "@signalco/data": "workspace:*",
