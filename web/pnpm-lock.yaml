@@ -45,8 +45,8 @@ importers:
         specifier: 1.13.0
         version: 1.13.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       '@microsoft/signalr':
-        specifier: 8.0.17
-        version: 8.0.17(encoding@0.1.13)
+        specifier: 9.0.6
+        version: 9.0.6(encoding@0.1.13)
       '@monaco-editor/react':
         specifier: 4.7.0
         version: 4.7.0(monaco-editor@0.54.0)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
@@ -3341,8 +3341,8 @@ packages:
     resolution: {integrity: sha512-bul5eTNxijLdDBqLye74u9494sRmf+9QULtec9Od0uHnifahGeNt8CC4/xCdn7mVyEBrXIQyQ5+sc4Uc0QfBSA==}
     hasBin: true
 
-  '@microsoft/signalr@8.0.17':
-    resolution: {integrity: sha512-5pM6xPtKZNJLO0Tq5nQasVyPFwi/WBY3QB5uc/v3dIPTpS1JXQbaXAQAPxFoQ5rTBFE094w8bbqkp17F9ReQvA==}
+  '@microsoft/signalr@9.0.6':
+    resolution: {integrity: sha512-DrhgzFWI9JE4RPTsHYRxh4yr+OhnwKz8bnJe7eIi7mLLjqhJpEb62CiUy/YbFvLqLzcGzlzz1QWgVAW0zyipMQ==}
 
   '@microsoft/tsdoc-config@0.17.1':
     resolution: {integrity: sha512-UtjIFe0C6oYgTnad4q1QP4qXwLhe6tIpNTRStJ2RZEPIkqQPREAwE5spzVxsdn9UaEMUqhh0AqSx3X4nWAKXWw==}
@@ -11221,7 +11221,7 @@ snapshots:
     transitivePeerDependencies:
       - '@types/node'
 
-  '@microsoft/signalr@8.0.17(encoding@0.1.13)':
+  '@microsoft/signalr@9.0.6(encoding@0.1.13)':
     dependencies:
       abort-controller: 3.0.0
       eventsource: 2.0.2
