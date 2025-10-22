@@ -1213,8 +1213,8 @@ importers:
         version: 0.1.9(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
     devDependencies:
       '@microsoft/api-extractor':
-        specifier: 7.53.1
-        version: 7.53.1(@types/node@24.8.0)
+        specifier: 7.53.2
+        version: 7.53.2(@types/node@24.8.0)
       '@signalco/tailwindcss-config-signalco':
         specifier: workspace:*
         version: link:../tailwindcss-config-signalco
@@ -1244,7 +1244,7 @@ importers:
         version: 19.2.0(react@19.2.0)
       tsup:
         specifier: 8.5.0
-        version: 8.5.0(@microsoft/api-extractor@7.53.1(@types/node@24.8.0))(@swc/core@1.7.22(@swc/helpers@0.5.15))(jiti@2.6.1)(postcss@8.5.6)(typescript@5.9.3)(yaml@2.5.0)
+        version: 8.5.0(@microsoft/api-extractor@7.53.2(@types/node@24.8.0))(@swc/core@1.7.22(@swc/helpers@0.5.15))(jiti@2.6.1)(postcss@8.5.6)(typescript@5.9.3)(yaml@2.5.0)
       typescript:
         specifier: 5.9.3
         version: 5.9.3
@@ -1252,8 +1252,8 @@ importers:
   packages/auth-server:
     devDependencies:
       '@microsoft/api-extractor':
-        specifier: 7.53.1
-        version: 7.53.1(@types/node@24.8.0)
+        specifier: 7.53.2
+        version: 7.53.2(@types/node@24.8.0)
       '@signalco/js':
         specifier: workspace:*
         version: link:../js
@@ -1280,7 +1280,7 @@ importers:
         version: 19.2.0(react@19.2.0)
       tsup:
         specifier: 8.5.0
-        version: 8.5.0(@microsoft/api-extractor@7.53.1(@types/node@24.8.0))(@swc/core@1.7.22(@swc/helpers@0.5.15))(jiti@2.6.1)(postcss@8.5.6)(typescript@5.9.3)(yaml@2.5.0)
+        version: 8.5.0(@microsoft/api-extractor@7.53.2(@types/node@24.8.0))(@swc/core@1.7.22(@swc/helpers@0.5.15))(jiti@2.6.1)(postcss@8.5.6)(typescript@5.9.3)(yaml@2.5.0)
       typescript:
         specifier: 5.9.3
         version: 5.9.3
@@ -1288,8 +1288,8 @@ importers:
   packages/cms-components-marketing:
     devDependencies:
       '@microsoft/api-extractor':
-        specifier: 7.53.1
-        version: 7.53.1(@types/node@24.8.0)
+        specifier: 7.53.2
+        version: 7.53.2(@types/node@24.8.0)
       '@signalco/cms-core':
         specifier: workspace:*
         version: link:../cms-core
@@ -1322,7 +1322,7 @@ importers:
         version: 19.2.0(react@19.2.0)
       tsup:
         specifier: 8.5.0
-        version: 8.5.0(@microsoft/api-extractor@7.53.1(@types/node@24.8.0))(@swc/core@1.7.22(@swc/helpers@0.5.15))(jiti@2.6.1)(postcss@8.5.6)(typescript@5.9.3)(yaml@2.5.0)
+        version: 8.5.0(@microsoft/api-extractor@7.53.2(@types/node@24.8.0))(@swc/core@1.7.22(@swc/helpers@0.5.15))(jiti@2.6.1)(postcss@8.5.6)(typescript@5.9.3)(yaml@2.5.0)
       typescript:
         specifier: 5.9.3
         version: 5.9.3
@@ -1330,8 +1330,8 @@ importers:
   packages/cms-core:
     devDependencies:
       '@microsoft/api-extractor':
-        specifier: 7.53.1
-        version: 7.53.1(@types/node@24.8.0)
+        specifier: 7.53.2
+        version: 7.53.2(@types/node@24.8.0)
       '@signalco/tailwindcss-config-signalco':
         specifier: workspace:*
         version: link:../tailwindcss-config-signalco
@@ -1358,7 +1358,7 @@ importers:
         version: 19.2.0(react@19.2.0)
       tsup:
         specifier: 8.5.0
-        version: 8.5.0(@microsoft/api-extractor@7.53.1(@types/node@24.8.0))(@swc/core@1.7.22(@swc/helpers@0.5.15))(jiti@2.6.1)(postcss@8.5.6)(typescript@5.9.3)(yaml@2.5.0)
+        version: 8.5.0(@microsoft/api-extractor@7.53.2(@types/node@24.8.0))(@swc/core@1.7.22(@swc/helpers@0.5.15))(jiti@2.6.1)(postcss@8.5.6)(typescript@5.9.3)(yaml@2.5.0)
       typescript:
         specifier: 5.9.3
         version: 5.9.3
@@ -1400,8 +1400,8 @@ importers:
   packages/hooks:
     devDependencies:
       '@microsoft/api-extractor':
-        specifier: 7.53.1
-        version: 7.53.1(@types/node@24.8.0)
+        specifier: 7.53.2
+        version: 7.53.2(@types/node@24.8.0)
       '@signalco/js':
         specifier: workspace:*
         version: link:../js
@@ -1422,7 +1422,7 @@ importers:
         version: 19.2.0(react@19.2.0)
       tsup:
         specifier: 8.5.0
-        version: 8.5.0(@microsoft/api-extractor@7.53.1(@types/node@24.8.0))(@swc/core@1.7.22(@swc/helpers@0.5.15))(jiti@2.6.1)(postcss@8.5.6)(typescript@5.9.3)(yaml@2.5.0)
+        version: 8.5.0(@microsoft/api-extractor@7.53.2(@types/node@24.8.0))(@swc/core@1.7.22(@swc/helpers@0.5.15))(jiti@2.6.1)(postcss@8.5.6)(typescript@5.9.3)(yaml@2.5.0)
       typescript:
         specifier: 5.9.3
         version: 5.9.3
@@ -1430,14 +1430,14 @@ importers:
   packages/js:
     devDependencies:
       '@microsoft/api-extractor':
-        specifier: 7.53.1
-        version: 7.53.1(@types/node@24.8.0)
+        specifier: 7.53.2
+        version: 7.53.2(@types/node@24.8.0)
       '@signalco/tsconfig':
         specifier: workspace:*
         version: link:../tsconfig
       tsup:
         specifier: 8.5.0
-        version: 8.5.0(@microsoft/api-extractor@7.53.1(@types/node@24.8.0))(@swc/core@1.7.22(@swc/helpers@0.5.15))(jiti@2.6.1)(postcss@8.5.6)(typescript@5.9.3)(yaml@2.5.0)
+        version: 8.5.0(@microsoft/api-extractor@7.53.2(@types/node@24.8.0))(@swc/core@1.7.22(@swc/helpers@0.5.15))(jiti@2.6.1)(postcss@8.5.6)(typescript@5.9.3)(yaml@2.5.0)
       typescript:
         specifier: 5.9.3
         version: 5.9.3
@@ -1472,8 +1472,8 @@ importers:
         version: 1.0.7(tailwindcss@3.4.17)
     devDependencies:
       '@microsoft/api-extractor':
-        specifier: 7.53.1
-        version: 7.53.1(@types/node@24.8.0)
+        specifier: 7.53.2
+        version: 7.53.2(@types/node@24.8.0)
       '@radix-ui/react-checkbox':
         specifier: 1.3.3
         version: 1.3.3(@types/react-dom@19.2.2(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
@@ -1542,7 +1542,7 @@ importers:
         version: 1.93.2
       tsup:
         specifier: 8.5.0
-        version: 8.5.0(@microsoft/api-extractor@7.53.1(@types/node@24.8.0))(@swc/core@1.7.22(@swc/helpers@0.5.15))(jiti@2.6.1)(postcss@8.5.6)(typescript@5.9.3)(yaml@2.5.0)
+        version: 8.5.0(@microsoft/api-extractor@7.53.2(@types/node@24.8.0))(@swc/core@1.7.22(@swc/helpers@0.5.15))(jiti@2.6.1)(postcss@8.5.6)(typescript@5.9.3)(yaml@2.5.0)
       typescript:
         specifier: 5.9.3
         version: 5.9.3
@@ -1586,8 +1586,8 @@ importers:
   packages/ui-icons:
     devDependencies:
       '@microsoft/api-extractor':
-        specifier: 7.53.1
-        version: 7.53.1(@types/node@24.8.0)
+        specifier: 7.53.2
+        version: 7.53.2(@types/node@24.8.0)
       '@signalco/tsconfig':
         specifier: workspace:*
         version: link:../tsconfig
@@ -1608,7 +1608,7 @@ importers:
         version: 19.2.0(react@19.2.0)
       tsup:
         specifier: 8.5.0
-        version: 8.5.0(@microsoft/api-extractor@7.53.1(@types/node@24.8.0))(@swc/core@1.7.22(@swc/helpers@0.5.15))(jiti@2.6.1)(postcss@8.5.6)(typescript@5.9.3)(yaml@2.5.0)
+        version: 8.5.0(@microsoft/api-extractor@7.53.2(@types/node@24.8.0))(@swc/core@1.7.22(@swc/helpers@0.5.15))(jiti@2.6.1)(postcss@8.5.6)(typescript@5.9.3)(yaml@2.5.0)
       typescript:
         specifier: 5.9.3
         version: 5.9.3
@@ -1620,8 +1620,8 @@ importers:
         version: 0.1.9(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
     devDependencies:
       '@microsoft/api-extractor':
-        specifier: 7.53.1
-        version: 7.53.1(@types/node@24.8.0)
+        specifier: 7.53.2
+        version: 7.53.2(@types/node@24.8.0)
       '@signalco/tailwindcss-config-signalco':
         specifier: workspace:*
         version: link:../tailwindcss-config-signalco
@@ -1645,7 +1645,7 @@ importers:
         version: 2.0.7(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       tsup:
         specifier: 8.5.0
-        version: 8.5.0(@microsoft/api-extractor@7.53.1(@types/node@24.8.0))(@swc/core@1.7.22(@swc/helpers@0.5.15))(jiti@2.6.1)(postcss@8.5.6)(typescript@5.9.3)(yaml@2.5.0)
+        version: 8.5.0(@microsoft/api-extractor@7.53.2(@types/node@24.8.0))(@swc/core@1.7.22(@swc/helpers@0.5.15))(jiti@2.6.1)(postcss@8.5.6)(typescript@5.9.3)(yaml@2.5.0)
       typescript:
         specifier: 5.9.3
         version: 5.9.3
@@ -1653,8 +1653,8 @@ importers:
   packages/ui-primitives:
     devDependencies:
       '@microsoft/api-extractor':
-        specifier: 7.53.1
-        version: 7.53.1(@types/node@24.8.0)
+        specifier: 7.53.2
+        version: 7.53.2(@types/node@24.8.0)
       '@radix-ui/react-checkbox':
         specifier: 1.3.3
         version: 1.3.3(@types/react-dom@19.2.2(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
@@ -1750,7 +1750,7 @@ importers:
         version: 1.0.7(tailwindcss@3.4.18(yaml@2.5.0))
       tsup:
         specifier: 8.5.0
-        version: 8.5.0(@microsoft/api-extractor@7.53.1(@types/node@24.8.0))(@swc/core@1.7.22(@swc/helpers@0.5.15))(jiti@2.6.1)(postcss@8.5.6)(typescript@5.9.3)(yaml@2.5.0)
+        version: 8.5.0(@microsoft/api-extractor@7.53.2(@types/node@24.8.0))(@swc/core@1.7.22(@swc/helpers@0.5.15))(jiti@2.6.1)(postcss@8.5.6)(typescript@5.9.3)(yaml@2.5.0)
       typescript:
         specifier: 5.9.3
         version: 5.9.3
@@ -1768,8 +1768,8 @@ importers:
         version: 1.0.7(tailwindcss@3.4.17)
     devDependencies:
       '@microsoft/api-extractor':
-        specifier: 7.53.1
-        version: 7.53.1(@types/node@24.8.0)
+        specifier: 7.53.2
+        version: 7.53.2(@types/node@24.8.0)
       '@signalco/tailwindcss-config-signalco':
         specifier: workspace:*
         version: link:../tailwindcss-config-signalco
@@ -1778,7 +1778,7 @@ importers:
         version: link:../tsconfig
       tsup:
         specifier: 8.5.0
-        version: 8.5.0(@microsoft/api-extractor@7.53.1(@types/node@24.8.0))(@swc/core@1.7.22(@swc/helpers@0.5.15))(jiti@2.6.1)(postcss@8.5.6)(typescript@5.9.3)(yaml@2.5.0)
+        version: 8.5.0(@microsoft/api-extractor@7.53.2(@types/node@24.8.0))(@swc/core@1.7.22(@swc/helpers@0.5.15))(jiti@2.6.1)(postcss@8.5.6)(typescript@5.9.3)(yaml@2.5.0)
       typescript:
         specifier: 5.9.3
         version: 5.9.3
@@ -1793,8 +1793,8 @@ importers:
         version: 1.0.7(tailwindcss@3.4.17)
     devDependencies:
       '@microsoft/api-extractor':
-        specifier: 7.53.1
-        version: 7.53.1(@types/node@24.8.0)
+        specifier: 7.53.2
+        version: 7.53.2(@types/node@24.8.0)
       '@signalco/tailwindcss-config-signalco':
         specifier: workspace:*
         version: link:../tailwindcss-config-signalco
@@ -1803,7 +1803,7 @@ importers:
         version: link:../tsconfig
       tsup:
         specifier: 8.5.0
-        version: 8.5.0(@microsoft/api-extractor@7.53.1(@types/node@24.8.0))(@swc/core@1.7.22(@swc/helpers@0.5.15))(jiti@2.6.1)(postcss@8.5.6)(typescript@5.9.3)(yaml@2.5.0)
+        version: 8.5.0(@microsoft/api-extractor@7.53.2(@types/node@24.8.0))(@swc/core@1.7.22(@swc/helpers@0.5.15))(jiti@2.6.1)(postcss@8.5.6)(typescript@5.9.3)(yaml@2.5.0)
       typescript:
         specifier: 5.9.3
         version: 5.9.3
@@ -1875,7 +1875,7 @@ importers:
         version: 1.0.7(tailwindcss@3.4.18(yaml@2.5.0))
       tsup:
         specifier: 8.5.0
-        version: 8.5.0(@microsoft/api-extractor@7.53.1(@types/node@22.18.12))(@swc/core@1.7.22(@swc/helpers@0.5.15))(jiti@2.6.1)(postcss@8.5.6)(typescript@5.9.3)(yaml@2.5.0)
+        version: 8.5.0(@microsoft/api-extractor@7.53.2(@types/node@22.18.12))(@swc/core@1.7.22(@swc/helpers@0.5.15))(jiti@2.6.1)(postcss@8.5.6)(typescript@5.9.3)(yaml@2.5.0)
       typescript:
         specifier: 5.9.3
         version: 5.9.3
@@ -3334,11 +3334,11 @@ packages:
       '@types/react': '>=16'
       react: '>=16'
 
-  '@microsoft/api-extractor-model@7.31.1':
-    resolution: {integrity: sha512-Dhnip5OFKbl85rq/ICHBFGhV4RA5UQSl8AC/P/zoGvs+CBudPkatt5kIhMGiYgVPnUWmfR6fcp38+1AFLYNtUw==}
+  '@microsoft/api-extractor-model@7.31.2':
+    resolution: {integrity: sha512-d0WwxwBLZaHokTrOngqHVkQK59NlveV5RE4wEpjaybhSNmEK9N7KPCcT5n8JcpH6k5o6AhxG47g1km2D7BZw8Q==}
 
-  '@microsoft/api-extractor@7.53.1':
-    resolution: {integrity: sha512-bul5eTNxijLdDBqLye74u9494sRmf+9QULtec9Od0uHnifahGeNt8CC4/xCdn7mVyEBrXIQyQ5+sc4Uc0QfBSA==}
+  '@microsoft/api-extractor@7.53.2':
+    resolution: {integrity: sha512-hG3+wJY6aZlkQhGpUbhq1C5F1uJLsmDjrwVea+WT18RbD1XtIGn/c4uyMF7gdXLjLNwErB47hnRk9QNjpEHUWA==}
     hasBin: true
 
   '@microsoft/signalr@8.0.17':
@@ -4351,8 +4351,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@rushstack/node-core-library@5.17.0':
-    resolution: {integrity: sha512-24vt1GbHN6kyIglRMTVpyEiNRRRJK8uZHc1XoGAhmnTDKnrWet8OmOpImMswJIe6gM78eV8cMg1HXwuUHkSSgg==}
+  '@rushstack/node-core-library@5.17.1':
+    resolution: {integrity: sha512-Mtcsa0aRJgYJOpeTe4qElLTRBlijNohdliq/xOhqce5rlzMIfLr73j9wUuj6GYPZPbG0S+is/RL2l0m/vnL55A==}
     peerDependencies:
       '@types/node': '*'
     peerDependenciesMeta:
@@ -4370,16 +4370,16 @@ packages:
   '@rushstack/rig-package@0.6.0':
     resolution: {integrity: sha512-ZQmfzsLE2+Y91GF15c65L/slMRVhF6Hycq04D4TwtdGaUAbIXXg9c5pKA5KFU7M4QMaihoobp9JJYpYcaY3zOw==}
 
-  '@rushstack/terminal@0.19.1':
-    resolution: {integrity: sha512-jsBuSad67IDVMO2yp0hDfs0OdE4z3mDIjIL2pclDT3aEJboeZXE85e1HjuD0F6JoW3XgHvDwoX+WOV+AVTDQeA==}
+  '@rushstack/terminal@0.19.2':
+    resolution: {integrity: sha512-SJLC+6oUrJ0OOpuuwXxhktCTE3jeYVIwtvREdNhbcnVQrYGaDJpAoBgNVfw+VH0pTPpFLBqoPHsRRz7mj7WlbA==}
     peerDependencies:
       '@types/node': '*'
     peerDependenciesMeta:
       '@types/node':
         optional: true
 
-  '@rushstack/ts-command-line@5.1.1':
-    resolution: {integrity: sha512-HPzFsUcr+wZ3oQI08Ec/E6cuiAVHKzrXZGHhwiwIGygAFiqN5QzX+ff30n70NU2WyE26CykgMwBZZSSyHCJrzA==}
+  '@rushstack/ts-command-line@5.1.2':
+    resolution: {integrity: sha512-jn0EnSefYrkZDrBGd6KGuecL84LI06DgzL4hVQ46AUijNBt2nRU/ST4HhrfII/w91siCd1J/Okvxq/BS75Me/A==}
 
   '@selderee/plugin-htmlparser2@0.11.0':
     resolution: {integrity: sha512-P33hHGdldxGabLFjPPpaTxVolMrzrcegejx+0GxjrIb9Zv48D8yAIA/QTDR2dFl7Uz7urX8aX6+5bCZslr+gWQ==}
@@ -11167,32 +11167,32 @@ snapshots:
       '@types/react': 19.2.2
       react: 19.2.0
 
-  '@microsoft/api-extractor-model@7.31.1(@types/node@22.18.12)':
+  '@microsoft/api-extractor-model@7.31.2(@types/node@22.18.12)':
     dependencies:
       '@microsoft/tsdoc': 0.15.1
       '@microsoft/tsdoc-config': 0.17.1
-      '@rushstack/node-core-library': 5.17.0(@types/node@22.18.12)
+      '@rushstack/node-core-library': 5.17.1(@types/node@22.18.12)
     transitivePeerDependencies:
       - '@types/node'
     optional: true
 
-  '@microsoft/api-extractor-model@7.31.1(@types/node@24.8.0)':
+  '@microsoft/api-extractor-model@7.31.2(@types/node@24.8.0)':
     dependencies:
       '@microsoft/tsdoc': 0.15.1
       '@microsoft/tsdoc-config': 0.17.1
-      '@rushstack/node-core-library': 5.17.0(@types/node@24.8.0)
+      '@rushstack/node-core-library': 5.17.1(@types/node@24.8.0)
     transitivePeerDependencies:
       - '@types/node'
 
-  '@microsoft/api-extractor@7.53.1(@types/node@22.18.12)':
+  '@microsoft/api-extractor@7.53.2(@types/node@22.18.12)':
     dependencies:
-      '@microsoft/api-extractor-model': 7.31.1(@types/node@22.18.12)
+      '@microsoft/api-extractor-model': 7.31.2(@types/node@22.18.12)
       '@microsoft/tsdoc': 0.15.1
       '@microsoft/tsdoc-config': 0.17.1
-      '@rushstack/node-core-library': 5.17.0(@types/node@22.18.12)
+      '@rushstack/node-core-library': 5.17.1(@types/node@22.18.12)
       '@rushstack/rig-package': 0.6.0
-      '@rushstack/terminal': 0.19.1(@types/node@22.18.12)
-      '@rushstack/ts-command-line': 5.1.1(@types/node@22.18.12)
+      '@rushstack/terminal': 0.19.2(@types/node@22.18.12)
+      '@rushstack/ts-command-line': 5.1.2(@types/node@22.18.12)
       lodash: 4.17.21
       minimatch: 10.0.3
       resolve: 1.22.10
@@ -11203,15 +11203,15 @@ snapshots:
       - '@types/node'
     optional: true
 
-  '@microsoft/api-extractor@7.53.1(@types/node@24.8.0)':
+  '@microsoft/api-extractor@7.53.2(@types/node@24.8.0)':
     dependencies:
-      '@microsoft/api-extractor-model': 7.31.1(@types/node@24.8.0)
+      '@microsoft/api-extractor-model': 7.31.2(@types/node@24.8.0)
       '@microsoft/tsdoc': 0.15.1
       '@microsoft/tsdoc-config': 0.17.1
-      '@rushstack/node-core-library': 5.17.0(@types/node@24.8.0)
+      '@rushstack/node-core-library': 5.17.1(@types/node@24.8.0)
       '@rushstack/rig-package': 0.6.0
-      '@rushstack/terminal': 0.19.1(@types/node@24.8.0)
-      '@rushstack/ts-command-line': 5.1.1(@types/node@24.8.0)
+      '@rushstack/terminal': 0.19.2(@types/node@24.8.0)
+      '@rushstack/ts-command-line': 5.1.2(@types/node@24.8.0)
       lodash: 4.17.21
       minimatch: 10.0.3
       resolve: 1.22.10
@@ -12233,7 +12233,7 @@ snapshots:
   '@rollup/rollup-win32-x64-msvc@4.52.4':
     optional: true
 
-  '@rushstack/node-core-library@5.17.0(@types/node@22.18.12)':
+  '@rushstack/node-core-library@5.17.1(@types/node@22.18.12)':
     dependencies:
       ajv: 8.13.0
       ajv-draft-04: 1.0.0(ajv@8.13.0)
@@ -12247,7 +12247,7 @@ snapshots:
       '@types/node': 22.18.12
     optional: true
 
-  '@rushstack/node-core-library@5.17.0(@types/node@24.8.0)':
+  '@rushstack/node-core-library@5.17.1(@types/node@24.8.0)':
     dependencies:
       ajv: 8.13.0
       ajv-draft-04: 1.0.0(ajv@8.13.0)
@@ -12274,26 +12274,26 @@ snapshots:
       resolve: 1.22.10
       strip-json-comments: 3.1.1
 
-  '@rushstack/terminal@0.19.1(@types/node@22.18.12)':
+  '@rushstack/terminal@0.19.2(@types/node@22.18.12)':
     dependencies:
-      '@rushstack/node-core-library': 5.17.0(@types/node@22.18.12)
+      '@rushstack/node-core-library': 5.17.1(@types/node@22.18.12)
       '@rushstack/problem-matcher': 0.1.1(@types/node@22.18.12)
       supports-color: 8.1.1
     optionalDependencies:
       '@types/node': 22.18.12
     optional: true
 
-  '@rushstack/terminal@0.19.1(@types/node@24.8.0)':
+  '@rushstack/terminal@0.19.2(@types/node@24.8.0)':
     dependencies:
-      '@rushstack/node-core-library': 5.17.0(@types/node@24.8.0)
+      '@rushstack/node-core-library': 5.17.1(@types/node@24.8.0)
       '@rushstack/problem-matcher': 0.1.1(@types/node@24.8.0)
       supports-color: 8.1.1
     optionalDependencies:
       '@types/node': 24.8.0
 
-  '@rushstack/ts-command-line@5.1.1(@types/node@22.18.12)':
+  '@rushstack/ts-command-line@5.1.2(@types/node@22.18.12)':
     dependencies:
-      '@rushstack/terminal': 0.19.1(@types/node@22.18.12)
+      '@rushstack/terminal': 0.19.2(@types/node@22.18.12)
       '@types/argparse': 1.0.38
       argparse: 1.0.10
       string-argv: 0.3.2
@@ -12301,9 +12301,9 @@ snapshots:
       - '@types/node'
     optional: true
 
-  '@rushstack/ts-command-line@5.1.1(@types/node@24.8.0)':
+  '@rushstack/ts-command-line@5.1.2(@types/node@24.8.0)':
     dependencies:
-      '@rushstack/terminal': 0.19.1(@types/node@24.8.0)
+      '@rushstack/terminal': 0.19.2(@types/node@24.8.0)
       '@types/argparse': 1.0.38
       argparse: 1.0.10
       string-argv: 0.3.2
@@ -17719,7 +17719,7 @@ snapshots:
 
   tslib@2.8.1: {}
 
-  tsup@8.5.0(@microsoft/api-extractor@7.53.1(@types/node@22.18.12))(@swc/core@1.7.22(@swc/helpers@0.5.15))(jiti@2.6.1)(postcss@8.5.6)(typescript@5.9.3)(yaml@2.5.0):
+  tsup@8.5.0(@microsoft/api-extractor@7.53.2(@types/node@22.18.12))(@swc/core@1.7.22(@swc/helpers@0.5.15))(jiti@2.6.1)(postcss@8.5.6)(typescript@5.9.3)(yaml@2.5.0):
     dependencies:
       bundle-require: 5.1.0(esbuild@0.25.11)
       cac: 6.7.14
@@ -17739,7 +17739,7 @@ snapshots:
       tinyglobby: 0.2.15
       tree-kill: 1.2.2
     optionalDependencies:
-      '@microsoft/api-extractor': 7.53.1(@types/node@22.18.12)
+      '@microsoft/api-extractor': 7.53.2(@types/node@22.18.12)
       '@swc/core': 1.7.22(@swc/helpers@0.5.15)
       postcss: 8.5.6
       typescript: 5.9.3
@@ -17749,7 +17749,7 @@ snapshots:
       - tsx
       - yaml
 
-  tsup@8.5.0(@microsoft/api-extractor@7.53.1(@types/node@24.8.0))(@swc/core@1.7.22(@swc/helpers@0.5.15))(jiti@2.6.1)(postcss@8.5.6)(typescript@5.9.3)(yaml@2.5.0):
+  tsup@8.5.0(@microsoft/api-extractor@7.53.2(@types/node@24.8.0))(@swc/core@1.7.22(@swc/helpers@0.5.15))(jiti@2.6.1)(postcss@8.5.6)(typescript@5.9.3)(yaml@2.5.0):
     dependencies:
       bundle-require: 5.1.0(esbuild@0.25.11)
       cac: 6.7.14
@@ -17769,7 +17769,7 @@ snapshots:
       tinyglobby: 0.2.15
       tree-kill: 1.2.2
     optionalDependencies:
-      '@microsoft/api-extractor': 7.53.1(@types/node@24.8.0)
+      '@microsoft/api-extractor': 7.53.2(@types/node@24.8.0)
       '@swc/core': 1.7.22(@swc/helpers@0.5.15)
       postcss: 8.5.6
       typescript: 5.9.3
