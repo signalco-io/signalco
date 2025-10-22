@@ -42,8 +42,8 @@ importers:
         specifier: 0.7.0
         version: 0.7.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       '@hcaptcha/react-hcaptcha':
-        specifier: 1.13.0
-        version: 1.13.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+        specifier: 1.13.1
+        version: 1.13.1(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       '@microsoft/signalr':
         specifier: 9.0.6
         version: 9.0.6(encoding@0.1.13)
@@ -471,8 +471,8 @@ importers:
         specifier: 0.7.0
         version: 0.7.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       '@hcaptcha/react-hcaptcha':
-        specifier: 1.13.0
-        version: 1.13.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+        specifier: 1.13.1
+        version: 1.13.1(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       '@mantine/core':
         specifier: 8.3.5
         version: 8.3.5(@mantine/hooks@7.17.7(react@19.2.0))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
@@ -604,8 +604,8 @@ importers:
   apps/slco:
     dependencies:
       '@hcaptcha/react-hcaptcha':
-        specifier: 1.13.0
-        version: 1.13.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+        specifier: 1.13.1
+        version: 1.13.1(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       '@next/env':
         specifier: 15.5.6
         version: 15.5.6
@@ -922,8 +922,8 @@ importers:
         specifier: 0.7.0
         version: 0.7.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       '@hcaptcha/react-hcaptcha':
-        specifier: 1.13.0
-        version: 1.13.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+        specifier: 1.13.1
+        version: 1.13.1(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       '@next/env':
         specifier: 15.5.6
         version: 15.5.6
@@ -3083,11 +3083,11 @@ packages:
   '@floating-ui/utils@0.2.10':
     resolution: {integrity: sha512-aGTxbpbg8/b5JfU1HXSrbH3wXZuLPJcNEcZQFMxLs3oSzgtVu6nFPkbbGGUvBcUjKV2YyB9Wxxabo+HEH9tcRQ==}
 
-  '@hcaptcha/loader@2.1.0':
-    resolution: {integrity: sha512-9HagrYGQmHD4zvZ3H5z/2U9MObl/q+ls0SRj/JVzl6L3cNFJp6LsxBL9Sg+8YjRDdtj/e7xWBgHuIgZ9cggY7w==}
+  '@hcaptcha/loader@2.2.0':
+    resolution: {integrity: sha512-LAd0XRt1Mu0hLpUpWAx5OS9FS0d6V+V0aCSYUKFAz0a6tTDHeAuwm5iO81mp2HIEhXFOSSB8AwCCOU9zq695lg==}
 
-  '@hcaptcha/react-hcaptcha@1.13.0':
-    resolution: {integrity: sha512-9h4XsYL9qjy5tUnr12xgywMDzU/1Kphsx0QZYDDZkd+h+RwNpEoOkwW5pf7C9tKiOKKdVPT8mqynQZJkhS1EWQ==}
+  '@hcaptcha/react-hcaptcha@1.13.1':
+    resolution: {integrity: sha512-uBnuraDoR+u7ImoVawPmoJCsj4zwMyoL8Tm6YBZzneKv5WGz5Hldb/eBjbbX5tPIxjehHixLfmxPXfai7zpUIw==}
     peerDependencies:
       react: '>= 16.3.0'
       react-dom: '>= 16.3.0'
@@ -10908,12 +10908,12 @@ snapshots:
 
   '@floating-ui/utils@0.2.10': {}
 
-  '@hcaptcha/loader@2.1.0': {}
+  '@hcaptcha/loader@2.2.0': {}
 
-  '@hcaptcha/react-hcaptcha@1.13.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)':
+  '@hcaptcha/react-hcaptcha@1.13.1(react-dom@19.2.0(react@19.2.0))(react@19.2.0)':
     dependencies:
       '@babel/runtime': 7.27.1
-      '@hcaptcha/loader': 2.1.0
+      '@hcaptcha/loader': 2.2.0
       react: 19.2.0
       react-dom: 19.2.0(react@19.2.0)
 
