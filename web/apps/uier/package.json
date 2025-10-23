@@ -16,7 +16,7 @@
     "start": "next start -p 4004"
   },
   "dependencies": {
-    "@azure/cosmos": "4.6.0",
+    "@azure/cosmos": "4.7.0",
     "@next/env": "15.5.6",
     "@signalco/cms-components-marketing": "workspace:*",
     "@signalco/cms-core": "workspace:*",
