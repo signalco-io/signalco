@@ -93,8 +93,8 @@ importers:
         specifier: 1.2.0
         version: 1.2.0(next@15.5.6(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.2))(react@19.2.0)
       '@vvo/tzdb':
-        specifier: 6.187.0
-        version: 6.187.0
+        specifier: 6.188.0
+        version: 6.188.0
       autoprefixer:
         specifier: 10.4.21
         version: 10.4.21(postcss@8.5.6)
@@ -5078,8 +5078,8 @@ packages:
   '@vitest/utils@3.2.4':
     resolution: {integrity: sha512-fB2V0JFrQSMsCo9HiSq3Ezpdv4iYaXRG1Sx8edX3MwxfyNn83mKiGzOcH+Fkxt4MHxr3y42fQi1oeAInqgX2QA==}
 
-  '@vvo/tzdb@6.187.0':
-    resolution: {integrity: sha512-SkGZLQyHT3dYxv0HyUHX+h1lDwTMfJs/nXT6BrLdl1nXdpcCEeGJPGiVf/9uv8uD8mCeMok1MM5CcG67VoEypQ==}
+  '@vvo/tzdb@6.188.0':
+    resolution: {integrity: sha512-lMAs7asKqt3ChVqw94TAzWYCqqPoIxg6HFcm/QfahVhoff1UeIdVghMpSG/hWkEx4EWAGReOFhvVjJMHSQPj2w==}
 
   '@webassemblyjs/ast@1.14.1':
     resolution: {integrity: sha512-nuBEDgQfm1ccRp/8bCQrx1frohyufl4JlbMMZ4P1wpeOfDhF6FQkxZJ1b/e+PLwr6X1Nhw6OLme5usuBWYBvuQ==}
@@ -13114,7 +13114,7 @@ snapshots:
       loupe: 3.1.4
       tinyrainbow: 2.0.0
 
-  '@vvo/tzdb@6.187.0': {}
+  '@vvo/tzdb@6.188.0': {}
 
   '@webassemblyjs/ast@1.14.1':
     dependencies:
