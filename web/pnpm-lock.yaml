@@ -223,8 +223,8 @@ importers:
         specifier: 1.93.2
         version: 1.93.2
       sass-loader:
-        specifier: 16.0.5
-        version: 16.0.5(sass@1.93.2)(webpack@5.94.0)
+        specifier: 16.0.6
+        version: 16.0.6(sass@1.93.2)(webpack@5.94.0)
       typescript:
         specifier: 5.9.3
         version: 5.9.3
@@ -774,8 +774,8 @@ importers:
         specifier: 1.93.2
         version: 1.93.2
       sass-loader:
-        specifier: 16.0.5
-        version: 16.0.5(sass@1.93.2)(webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.15))(esbuild@0.25.11))
+        specifier: 16.0.6
+        version: 16.0.6(sass@1.93.2)(webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.15))(esbuild@0.25.11))
       storybook:
         specifier: 9.1.13
         version: 9.1.13(@testing-library/dom@10.4.0)(msw@2.7.0(@types/node@24.8.0)(typescript@5.9.3))(prettier@3.5.3)(vite@6.3.4(@types/node@24.8.0)(jiti@1.21.7)(sass@1.93.2)(terser@5.44.0)(yaml@2.5.0))
@@ -8352,8 +8352,8 @@ packages:
   safer-buffer@2.1.2:
     resolution: {integrity: sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==}
 
-  sass-loader@16.0.5:
-    resolution: {integrity: sha512-oL+CMBXrj6BZ/zOq4os+UECPL+bWqt6OAC6DWS8Ln8GZRcMDjlJ4JC3FBDuHJdYaFWIdKNIBYmtZtK2MaMkNIw==}
+  sass-loader@16.0.6:
+    resolution: {integrity: sha512-sglGzId5gmlfxNs4gK2U3h7HlVRfx278YK6Ono5lwzuvi1jxig80YiuHkaDBVsYIKFhx8wN7XSCI0M2IDS/3qA==}
     engines: {node: '>= 18.12.0'}
     peerDependencies:
       '@rspack/core': 0.x || 1.x
@@ -12456,7 +12456,7 @@ snapshots:
       react-dom: 19.2.0(react@19.2.0)
       react-refresh: 0.14.2
       resolve-url-loader: 5.0.0
-      sass-loader: 16.0.5(sass@1.93.2)(webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.15))(esbuild@0.25.11))
+      sass-loader: 16.0.6(sass@1.93.2)(webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.15))(esbuild@0.25.11))
       semver: 7.7.3
       storybook: 9.1.13(@testing-library/dom@10.4.0)(msw@2.7.0(@types/node@24.8.0)(typescript@5.9.3))(prettier@3.5.3)(vite@6.3.4(@types/node@24.8.0)(jiti@1.21.7)(sass@1.93.2)(terser@5.44.0)(yaml@2.5.0))
       style-loader: 3.3.4(webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.15))(esbuild@0.25.11))
@@ -17146,14 +17146,14 @@ snapshots:
 
   safer-buffer@2.1.2: {}
 
-  sass-loader@16.0.5(sass@1.93.2)(webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.15))(esbuild@0.25.11)):
+  sass-loader@16.0.6(sass@1.93.2)(webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.15))(esbuild@0.25.11)):
     dependencies:
       neo-async: 2.6.2
     optionalDependencies:
       sass: 1.93.2
       webpack: 5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.15))(esbuild@0.25.11)
 
-  sass-loader@16.0.5(sass@1.93.2)(webpack@5.94.0):
+  sass-loader@16.0.6(sass@1.93.2)(webpack@5.94.0):
     dependencies:
       neo-async: 2.6.2
     optionalDependencies:
