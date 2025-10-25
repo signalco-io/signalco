@@ -543,8 +543,8 @@ importers:
         specifier: 0.4.6
         version: 0.4.6(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       openai:
-        specifier: 6.6.0
-        version: 6.6.0(ws@8.18.3)
+        specifier: 6.7.0
+        version: 6.7.0(ws@8.18.3)
       react:
         specifier: 19.2.0
         version: 19.2.0
@@ -1139,8 +1139,8 @@ importers:
         specifier: 0.4.6
         version: 0.4.6(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       openai:
-        specifier: 6.6.0
-        version: 6.6.0(ws@8.18.3)
+        specifier: 6.7.0
+        version: 6.7.0(ws@8.18.3)
       react:
         specifier: 19.2.0
         version: 19.2.0
@@ -7391,8 +7391,8 @@ packages:
     resolution: {integrity: sha512-7x81NCL719oNbsq/3mh+hVrAWmFuEYUqrq/Iw3kUzH8ReypT9QQ0BLoJS7/G9k6N81XjW4qHWtjWwe/9eLy1EQ==}
     engines: {node: '>=12'}
 
-  openai@6.6.0:
-    resolution: {integrity: sha512-1yWk4cBsHF5Bq9TreHYOHY7pbqdlT74COnm8vPx7WKn36StS+Hyk8DdAitnLaw67a5Cudkz5EmlFQjSrNnrA2w==}
+  openai@6.7.0:
+    resolution: {integrity: sha512-mgSQXa3O/UXTbA8qFzoa7aydbXBJR5dbLQXCRapAOtoNT+v69sLdKMZzgiakpqhclRnhPggPAXoniVGn2kMY2A==}
     hasBin: true
     peerDependencies:
       ws: ^8.18.0
@@ -16005,7 +16005,7 @@ snapshots:
       is-docker: 2.2.1
       is-wsl: 2.2.0
 
-  openai@6.6.0(ws@8.18.3):
+  openai@6.7.0(ws@8.18.3):
     optionalDependencies:
       ws: 8.18.3
 
