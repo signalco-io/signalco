@@ -28,7 +28,7 @@
     "prepublishOnly": "tsup --env.NODE_ENV production"
   },
   "devDependencies": {
-    "@microsoft/api-extractor": "7.53.2",
+    "@microsoft/api-extractor": "7.53.3",
     "@signalco/js": "workspace:*",
     "@signalco/tsconfig": "workspace:*",
     "@types/react": "19.2.2",
