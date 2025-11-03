@@ -6,7 +6,7 @@
     "scripts": {},
     "devDependencies": {
         "@infra/pulumi": "workspace:*",
-        "@types/node": "22.18.13",
+        "@types/node": "22.19.0",
         "tsup": "8.5.0",
         "typescript": "5.9.3"
     },
