@@ -16,7 +16,7 @@
     "typescript": "5.9.3"
   },
   "dependencies": {
-    "@checkly/pulumi": "2.6.0",
+    "@checkly/pulumi": "2.7.0",
     "@pulumi/azure-native": "3.8.0",
     "@pulumi/cloudflare": "6.11.0",
     "@pulumi/command": "1.1.3",
