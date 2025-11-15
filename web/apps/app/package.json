@@ -48,7 +48,7 @@
         "@vvo/tzdb": "6.192.0",
         "autoprefixer": "10.4.21",
         "cobe": "0.6.5",
-        "color": "5.0.2",
+        "color": "5.0.3",
         "compare-versions": "6.1.1",
         "d3": "7.9.0",
         "date-fns": "4.1.0",
