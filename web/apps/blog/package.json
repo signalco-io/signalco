@@ -47,7 +47,7 @@
     "@total-typescript/ts-reset": "0.6.1",
     "@types/color": "4.2.0",
     "@types/mdx": "2.0.13",
-    "@types/node": "22.19.0",
+    "@types/node": "22.19.1",
     "@types/react": "19.2.2",
     "@types/react-dom": "npm:types-react-dom@19.0.0",
     "babel-plugin-react-compiler": "19.1.0-rc.3",
