@@ -88,10 +88,10 @@ importers:
         version: 5.90.2(@tanstack/react-query@5.90.5(react@19.2.0))(react@19.2.0)
       '@vercel/analytics':
         specifier: 1.5.0
-        version: 1.5.0(next@15.5.6(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3))(react@19.2.0)
+        version: 1.5.0(next@15.5.13(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3))(react@19.2.0)
       '@vercel/speed-insights':
         specifier: 1.2.0
-        version: 1.2.0(next@15.5.6(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3))(react@19.2.0)
+        version: 1.2.0(next@15.5.13(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3))(react@19.2.0)
       '@vvo/tzdb':
         specifier: 6.192.0
         version: 6.192.0
@@ -120,8 +120,8 @@ importers:
         specifier: 0.54.0
         version: 0.54.0
       next:
-        specifier: 15.5.6
-        version: 15.5.6(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3)
+        specifier: 15.5.13
+        version: 15.5.13(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3)
       next-secure-headers:
         specifier: 2.2.0
         version: 2.2.0
@@ -212,7 +212,7 @@ importers:
         version: 11.3.2
       next-sitemap:
         specifier: 4.2.3
-        version: 4.2.3(next@15.5.6(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3))
+        version: 4.2.3(next@15.5.13(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3))
       openapi-types:
         specifier: 12.1.3
         version: 12.1.3
@@ -272,13 +272,13 @@ importers:
         version: link:../../packages/ui-themes-minimal
       '@vercel/analytics':
         specifier: 1.5.0
-        version: 1.5.0(next@15.5.6(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3))(react@19.2.0)
+        version: 1.5.0(next@15.5.13(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3))(react@19.2.0)
       autoprefixer:
         specifier: 10.4.21
         version: 10.4.21(postcss@8.5.6)
       next:
-        specifier: 15.5.6
-        version: 15.5.6(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3)
+        specifier: 15.5.13
+        version: 15.5.13(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3)
       next-secure-headers:
         specifier: 2.2.0
         version: 2.2.0
@@ -333,7 +333,7 @@ importers:
         version: 2.0.20
       next-sitemap:
         specifier: 4.2.3
-        version: 4.2.3(next@15.5.6(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3))
+        version: 4.2.3(next@15.5.13(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3))
       postcss:
         specifier: 8.5.6
         version: 8.5.6
@@ -383,8 +383,8 @@ importers:
         specifier: 1.1.2
         version: 1.1.2
       next:
-        specifier: 15.5.6
-        version: 15.5.6(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3)
+        specifier: 15.5.13
+        version: 15.5.13(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3)
       next-secure-headers:
         specifier: 2.2.0
         version: 2.2.0
@@ -424,7 +424,7 @@ importers:
         version: 19.1.0-rc.3
       next-sitemap:
         specifier: 4.2.3
-        version: 4.2.3(next@15.5.6(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3))
+        version: 4.2.3(next@15.5.13(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3))
       postcss:
         specifier: 8.5.6
         version: 8.5.6
@@ -526,7 +526,7 @@ importers:
         version: 5.90.2(@tanstack/react-query@5.90.5(react@19.2.0))(react@19.2.0)
       '@vercel/analytics':
         specifier: 1.5.0
-        version: 1.5.0(next@15.5.6(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3))(react@19.2.0)
+        version: 1.5.0(next@15.5.13(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3))(react@19.2.0)
       autoprefixer:
         specifier: 10.4.21
         version: 10.4.21(postcss@8.5.6)
@@ -534,8 +534,8 @@ importers:
         specifier: 5.1.6
         version: 5.1.6
       next:
-        specifier: 15.5.6
-        version: 15.5.6(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3)
+        specifier: 15.5.13
+        version: 15.5.13(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3)
       next-secure-headers:
         specifier: 2.2.0
         version: 2.2.0
@@ -590,7 +590,7 @@ importers:
         version: 19.1.0-rc.3
       next-sitemap:
         specifier: 4.2.3
-        version: 4.2.3(next@15.5.6(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3))
+        version: 4.2.3(next@15.5.13(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3))
       postcss:
         specifier: 8.5.6
         version: 8.5.6
@@ -631,8 +631,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/ui-themes-minimal
       next:
-        specifier: 15.5.6
-        version: 15.5.6(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3)
+        specifier: 15.5.13
+        version: 15.5.13(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3)
       next-secure-headers:
         specifier: 2.2.0
         version: 2.2.0
@@ -681,7 +681,7 @@ importers:
         version: 19.1.0-rc.3
       next-sitemap:
         specifier: 4.2.3
-        version: 4.2.3(next@15.5.6(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3))
+        version: 4.2.3(next@15.5.13(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3))
       postcss:
         specifier: 8.5.6
         version: 8.5.6
@@ -707,8 +707,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/ui-themes-minimal
       next:
-        specifier: 15.5.6
-        version: 15.5.6(@babel/core@7.28.4)(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3)
+        specifier: 15.5.13
+        version: 15.5.13(@babel/core@7.28.4)(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3)
       react:
         specifier: 19.2.0
         version: 19.2.0
@@ -739,7 +739,7 @@ importers:
         version: 10.0.3(@vitest/browser@4.0.6(msw@2.7.0(@types/node@24.8.0)(typescript@5.9.3))(vite@6.3.4(@types/node@24.8.0)(jiti@1.21.7)(sass@1.93.3)(terser@5.44.0)(yaml@2.5.0))(vitest@4.0.6(@types/debug@4.1.12)(@types/node@24.8.0)(jiti@1.21.7)(msw@2.7.0(@types/node@24.8.0)(typescript@5.9.3))(sass@1.93.3)(terser@5.44.0)(yaml@2.5.0)))(@vitest/runner@4.0.6)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(storybook@10.0.3(@testing-library/dom@10.4.0)(msw@2.7.0(@types/node@24.8.0)(typescript@5.9.3))(prettier@3.5.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(vite@6.3.4(@types/node@24.8.0)(jiti@1.21.7)(sass@1.93.3)(terser@5.44.0)(yaml@2.5.0)))(vitest@4.0.6(@types/debug@4.1.12)(@types/node@24.8.0)(jiti@1.21.7)(msw@2.7.0(@types/node@24.8.0)(typescript@5.9.3))(sass@1.93.3)(terser@5.44.0)(yaml@2.5.0))
       '@storybook/nextjs':
         specifier: 10.0.3
-        version: 10.0.3(@swc/core@1.7.22(@swc/helpers@0.5.15))(esbuild@0.25.11)(next@15.5.6(@babel/core@7.28.4)(@playwright/test@1.56.1)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3))(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3)(storybook@10.0.3(@testing-library/dom@10.4.0)(msw@2.7.0(@types/node@24.8.0)(typescript@5.9.3))(prettier@3.5.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(vite@6.3.4(@types/node@24.8.0)(jiti@1.21.7)(sass@1.93.3)(terser@5.44.0)(yaml@2.5.0)))(type-fest@4.41.0)(typescript@5.9.3)(webpack-hot-middleware@2.26.1)(webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.15))(esbuild@0.25.11))
+        version: 10.0.3(@swc/core@1.7.22(@swc/helpers@0.5.15))(esbuild@0.25.11)(next@15.5.13(@babel/core@7.28.4)(@playwright/test@1.56.1)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3))(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3)(storybook@10.0.3(@testing-library/dom@10.4.0)(msw@2.7.0(@types/node@24.8.0)(typescript@5.9.3))(prettier@3.5.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(vite@6.3.4(@types/node@24.8.0)(jiti@1.21.7)(sass@1.93.3)(terser@5.44.0)(yaml@2.5.0)))(type-fest@4.41.0)(typescript@5.9.3)(webpack-hot-middleware@2.26.1)(webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.15))(esbuild@0.25.11))
       '@types/react':
         specifier: 19.2.2
         version: 19.2.2
@@ -847,13 +847,13 @@ importers:
         version: 5.90.2(@tanstack/react-query@5.90.5(react@19.2.0))(react@19.2.0)
       '@vercel/analytics':
         specifier: 1.5.0
-        version: 1.5.0(next@15.5.6(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3))(react@19.2.0)
+        version: 1.5.0(next@15.5.13(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3))(react@19.2.0)
       nanoid:
         specifier: 5.1.6
         version: 5.1.6
       next:
-        specifier: 15.5.6
-        version: 15.5.6(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3)
+        specifier: 15.5.13
+        version: 15.5.13(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3)
       next-secure-headers:
         specifier: 2.2.0
         version: 2.2.0
@@ -905,7 +905,7 @@ importers:
         version: 19.1.0-rc.3
       next-sitemap:
         specifier: 4.2.3
-        version: 4.2.3(next@15.5.6(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3))
+        version: 4.2.3(next@15.5.13(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3))
       postcss:
         specifier: 8.5.6
         version: 8.5.6
@@ -968,13 +968,13 @@ importers:
         version: 0.5.19(tailwindcss@3.4.18(yaml@2.5.0))
       '@vercel/analytics':
         specifier: 1.5.0
-        version: 1.5.0(next@15.5.6(@babel/core@7.28.4)(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3))(react@19.2.0)
+        version: 1.5.0(next@15.5.13(@babel/core@7.28.4)(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3))(react@19.2.0)
       autoprefixer:
         specifier: 10.4.21
         version: 10.4.21(postcss@8.5.6)
       next:
-        specifier: 15.5.6
-        version: 15.5.6(@babel/core@7.28.4)(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3)
+        specifier: 15.5.13
+        version: 15.5.13(@babel/core@7.28.4)(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3)
       next-secure-headers:
         specifier: 2.2.0
         version: 2.2.0
@@ -1035,7 +1035,7 @@ importers:
         version: 2.0.20
       next-sitemap:
         specifier: 4.2.3
-        version: 4.2.3(next@15.5.6(@babel/core@7.28.4)(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3))
+        version: 4.2.3(next@15.5.13(@babel/core@7.28.4)(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3))
       openapi-types:
         specifier: 12.1.3
         version: 12.1.3
@@ -1122,7 +1122,7 @@ importers:
         version: 5.90.2(@tanstack/react-query@5.90.5(react@19.2.0))(react@19.2.0)
       '@vercel/analytics':
         specifier: 1.5.0
-        version: 1.5.0(next@15.5.6(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3))(react@19.2.0)
+        version: 1.5.0(next@15.5.13(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3))(react@19.2.0)
       jose:
         specifier: 6.1.0
         version: 6.1.0
@@ -1130,8 +1130,8 @@ importers:
         specifier: 5.1.6
         version: 5.1.6
       next:
-        specifier: 15.5.6
-        version: 15.5.6(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3)
+        specifier: 15.5.13
+        version: 15.5.13(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3)
       next-secure-headers:
         specifier: 2.2.0
         version: 2.2.0
@@ -1195,7 +1195,7 @@ importers:
         version: 19.1.0-rc.3
       next-sitemap:
         specifier: 4.2.3
-        version: 4.2.3(next@15.5.6(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3))
+        version: 4.2.3(next@15.5.13(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3))
       postcss:
         specifier: 8.5.6
         version: 8.5.6
@@ -1234,8 +1234,8 @@ importers:
         specifier: 19.2.2
         version: 19.2.2(@types/react@19.2.2)
       next:
-        specifier: 15.5.6
-        version: 15.5.6(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3)
+        specifier: 15.5.13
+        version: 15.5.13(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3)
       react:
         specifier: 19.2.0
         version: 19.2.0
@@ -1270,8 +1270,8 @@ importers:
         specifier: 6.1.0
         version: 6.1.0
       next:
-        specifier: 15.5.6
-        version: 15.5.6(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3)
+        specifier: 15.5.13
+        version: 15.5.13(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3)
       react:
         specifier: 19.2.0
         version: 19.2.0
@@ -1412,8 +1412,8 @@ importers:
         specifier: 19.2.2
         version: 19.2.2
       next:
-        specifier: 15.5.6
-        version: 15.5.6(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3)
+        specifier: 15.5.13
+        version: 15.5.13(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3)
       react:
         specifier: 19.2.0
         version: 19.2.0
@@ -1719,8 +1719,8 @@ importers:
         specifier: 2.2.6
         version: 2.2.6
       next:
-        specifier: 15.5.6
-        version: 15.5.6(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3)
+        specifier: 15.5.13
+        version: 15.5.13(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3)
       postcss:
         specifier: 8.5.6
         version: 8.5.6
@@ -3359,6 +3359,9 @@ packages:
   '@next/env@13.5.11':
     resolution: {integrity: sha512-fbb2C7HChgM7CemdCY+y3N1n8pcTKdqtQLbC7/EQtPdLvlMUT9JX/dBYl8MMZAtYG4uVMyPFHXckb68q/NRwqg==}
 
+  '@next/env@15.5.13':
+    resolution: {integrity: sha512-6h7Fm29+/u1WBPcPaQl0xBov7KXB6i0c8oFlSlehD+PuZJQjzXQBuYzfkM32G5iWOlKsXXyRtcMaaqwspRBujA==}
+
   '@next/env@15.5.6':
     resolution: {integrity: sha512-3qBGRW+sCGzgbpc5TS1a0p7eNxnOarGVQhZxfvTdnV0gFI61lX7QNtQ4V1TSREctXzYn5NetbUsLvyqwLFJM6Q==}
 
@@ -3373,50 +3376,50 @@ packages:
       '@mdx-js/react':
         optional: true
 
-  '@next/swc-darwin-arm64@15.5.6':
-    resolution: {integrity: sha512-ES3nRz7N+L5Umz4KoGfZ4XX6gwHplwPhioVRc25+QNsDa7RtUF/z8wJcbuQ2Tffm5RZwuN2A063eapoJ1u4nPg==}
+  '@next/swc-darwin-arm64@15.5.13':
+    resolution: {integrity: sha512-XrBbj2iY1mQSsJ8RoFClNpUB9uuZejP94v9pJuSAzdzwFVHeP+Vu2vzBCHwSObozgYNuTVwKhLukG1rGCgj8xA==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [darwin]
 
-  '@next/swc-darwin-x64@15.5.6':
-    resolution: {integrity: sha512-JIGcytAyk9LQp2/nuVZPAtj8uaJ/zZhsKOASTjxDug0SPU9LAM3wy6nPU735M1OqacR4U20LHVF5v5Wnl9ptTA==}
+  '@next/swc-darwin-x64@15.5.13':
+    resolution: {integrity: sha512-Ey3fuUeWDWtVdgiLHajk2aJ74Y8EWLeqvfwlkB5RvWsN7F1caQ6TjifsQzrAcOuNSnogGvFNYzjQlu7tu0kyWg==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [darwin]
 
-  '@next/swc-linux-arm64-gnu@15.5.6':
-    resolution: {integrity: sha512-qvz4SVKQ0P3/Im9zcS2RmfFL/UCQnsJKJwQSkissbngnB/12c6bZTCB0gHTexz1s6d/mD0+egPKXAIRFVS7hQg==}
+  '@next/swc-linux-arm64-gnu@15.5.13':
+    resolution: {integrity: sha512-aLtu/WxDeL3188qx3zyB3+iw8nAB9F+2Mhyz9nNZpzsREc2t8jQTuiWY4+mtOgWp1d+/Q4eXuy9m3dwh3n1IyQ==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [linux]
 
-  '@next/swc-linux-arm64-musl@15.5.6':
-    resolution: {integrity: sha512-FsbGVw3SJz1hZlvnWD+T6GFgV9/NYDeLTNQB2MXoPN5u9VA9OEDy6fJEfePfsUKAhJufFbZLgp0cPxMuV6SV0w==}
+  '@next/swc-linux-arm64-musl@15.5.13':
+    resolution: {integrity: sha512-9VZ0OsVx9PEL72W50QD15iwSCF3GD/dwj42knfF5C4aiBPXr95etGIOGhb8rU7kpnzZuPNL81CY4vIyUKa2xvg==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [linux]
 
-  '@next/swc-linux-x64-gnu@15.5.6':
-    resolution: {integrity: sha512-3QnHGFWlnvAgyxFxt2Ny8PTpXtQD7kVEeaFat5oPAHHI192WKYB+VIKZijtHLGdBBvc16tiAkPTDmQNOQ0dyrA==}
+  '@next/swc-linux-x64-gnu@15.5.13':
+    resolution: {integrity: sha512-3knsu9H33e99ZfiWh0Bb04ymEO7YIiopOpXKX89ZZ/ER0iyfV1YLoJFxJJQNUD7OR8O7D7eiLI/TXPryPGv3+A==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
 
-  '@next/swc-linux-x64-musl@15.5.6':
-    resolution: {integrity: sha512-OsGX148sL+TqMK9YFaPFPoIaJKbFJJxFzkXZljIgA9hjMjdruKht6xDCEv1HLtlLNfkx3c5w2GLKhj7veBQizQ==}
+  '@next/swc-linux-x64-musl@15.5.13':
+    resolution: {integrity: sha512-AVPb6+QZ0pPanJFc1hpx81I5tTiBF4VITw5+PMaR1CrboAUUxtxn3IsV0h48xI7fzd6/zw9D9i6khRwME5NKUw==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [linux]
 
-  '@next/swc-win32-arm64-msvc@15.5.6':
-    resolution: {integrity: sha512-ONOMrqWxdzXDJNh2n60H6gGyKed42Ieu6UTVPZteXpuKbLZTH4G4eBMsr5qWgOBA+s7F+uB4OJbZnrkEDnZ5Fg==}
+  '@next/swc-win32-arm64-msvc@15.5.13':
+    resolution: {integrity: sha512-FZ/HXuTxn+e5Lp6oRZMvHaMJx22gAySveJdJE0//91Nb9rMuh2ftgKlEwBFJxhkw5kAF/yIXz3iBf0tvDXRmCA==}
     engines: {node: '>= 10'}
     cpu: [arm64]
     os: [win32]
 
-  '@next/swc-win32-x64-msvc@15.5.6':
-    resolution: {integrity: sha512-pxK4VIjFRx1MY92UycLOOw7dTdvccWsNETQ0kDHkBlcFH1GrTLUjSiHU1ohrznnux6TqRHgv5oflhfIWZwVROQ==}
+  '@next/swc-win32-x64-msvc@15.5.13':
+    resolution: {integrity: sha512-B5E82pX3VXu6Ib5mDuZEqGwT8asocZe3OMMnaM+Yfs0TRlmSQCBQUUXR9BkXQeGVboOWS1pTsRkS9wzFd8PABw==}
     engines: {node: '>= 10'}
     cpu: [x64]
     os: [win32]
@@ -6447,11 +6450,13 @@ packages:
 
   glob@10.4.5:
     resolution: {integrity: sha512-7Bv8RF0k6xjo7d4A/PxYLbUCfb6c+Vpd2/mB2yRDlew7Jb5hEXiCD9ibfO7wpk8i4sevK6DFny9h7EYbM3/sHg==}
+    deprecated: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
     hasBin: true
 
   glob@11.0.3:
     resolution: {integrity: sha512-2Nim7dha1KVkaiF4q6Dj+ngPPMdfvLJEOpZk/jKiUAkqKebpGAWQXAq9z1xu9HKu5lWfqw/FASuccEjyznjPaA==}
     engines: {node: 20 || >=22}
+    deprecated: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
     hasBin: true
 
   glob@13.0.0:
@@ -6460,7 +6465,7 @@ packages:
 
   glob@7.2.3:
     resolution: {integrity: sha512-nFR0zLpU2YCaRxwoCJvL6UvCH2JFyFVIvwTLsIf21AuHlMskA1hhTdk+LlYJtOlYt9v6dvszD2BGRqBL+iQK9Q==}
-    deprecated: Glob versions prior to v9 are no longer supported
+    deprecated: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
 
   gopd@1.2.0:
     resolution: {integrity: sha512-ZUKRh6/kUFoAiTAtTYPZJ3hw9wNxx+BIBOijnlG9PnrJsCcSjs1wyyD6vJpaYtgnzDrKYRSqf3OO6Rfa93xsRg==}
@@ -7313,8 +7318,8 @@ packages:
       react: ^16.8 || ^17 || ^18 || ^19 || ^19.0.0-rc
       react-dom: ^16.8 || ^17 || ^18 || ^19 || ^19.0.0-rc
 
-  next@15.5.6:
-    resolution: {integrity: sha512-zTxsnI3LQo3c9HSdSf91O1jMNsEzIXDShXd4wVdg9y5shwLqBXi4ZtUUJyB86KGVSJLZx0PFONvO54aheGX8QQ==}
+  next@15.5.13:
+    resolution: {integrity: sha512-n0AXf6vlTwGuM93Z++POtjMsRuQ9pT5v2URPciXKUQIl/EB2WjXF0YiIUxaa9AEMFaMpZlaG3KPK6i4UVnx9eQ==}
     engines: {node: ^18.18.0 || ^19.8.0 || >= 20.0.0}
     hasBin: true
     peerDependencies:
@@ -9276,6 +9281,7 @@ packages:
   whatwg-encoding@3.1.1:
     resolution: {integrity: sha512-6qN4hJdMwfYBtE3YBTTHhoeuUrDBPZmbQaxWAqSALV/MeEnR5z1xd8UKud2RAkFoPkmB+hli1TZSnyi84xz1vQ==}
     engines: {node: '>=18'}
+    deprecated: Use @exodus/bytes instead for a more spec-conformant and faster implementation
 
   whatwg-mimetype@4.0.0:
     resolution: {integrity: sha512-QaKxh0eNIi2mE9p2vEdzfagOKHCcj1pJ56EEHGQOVxp8r9/iszLUUV7v89x9O1p/T+NlTM5W7jW6+cz4Fq1YVg==}
@@ -11291,6 +11297,8 @@ snapshots:
 
   '@next/env@13.5.11': {}
 
+  '@next/env@15.5.13': {}
+
   '@next/env@15.5.6': {}
 
   '@next/mdx@15.5.6(@mdx-js/loader@3.1.1(webpack@5.94.0))(@mdx-js/react@3.1.1(@types/react@19.2.2)(react@19.2.0))':
@@ -11300,28 +11308,28 @@ snapshots:
       '@mdx-js/loader': 3.1.1(webpack@5.94.0)
       '@mdx-js/react': 3.1.1(@types/react@19.2.2)(react@19.2.0)
 
-  '@next/swc-darwin-arm64@15.5.6':
+  '@next/swc-darwin-arm64@15.5.13':
     optional: true
 
-  '@next/swc-darwin-x64@15.5.6':
+  '@next/swc-darwin-x64@15.5.13':
     optional: true
 
-  '@next/swc-linux-arm64-gnu@15.5.6':
+  '@next/swc-linux-arm64-gnu@15.5.13':
     optional: true
 
-  '@next/swc-linux-arm64-musl@15.5.6':
+  '@next/swc-linux-arm64-musl@15.5.13':
     optional: true
 
-  '@next/swc-linux-x64-gnu@15.5.6':
+  '@next/swc-linux-x64-gnu@15.5.13':
     optional: true
 
-  '@next/swc-linux-x64-musl@15.5.6':
+  '@next/swc-linux-x64-musl@15.5.13':
     optional: true
 
-  '@next/swc-win32-arm64-msvc@15.5.6':
+  '@next/swc-win32-arm64-msvc@15.5.13':
     optional: true
 
-  '@next/swc-win32-x64-msvc@15.5.6':
+  '@next/swc-win32-x64-msvc@15.5.13':
     optional: true
 
   '@nodelib/fs.scandir@2.1.5':
@@ -12515,7 +12523,7 @@ snapshots:
       react: 19.2.0
       react-dom: 19.2.0(react@19.2.0)
 
-  '@storybook/nextjs@10.0.3(@swc/core@1.7.22(@swc/helpers@0.5.15))(esbuild@0.25.11)(next@15.5.6(@babel/core@7.28.4)(@playwright/test@1.56.1)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3))(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3)(storybook@10.0.3(@testing-library/dom@10.4.0)(msw@2.7.0(@types/node@24.8.0)(typescript@5.9.3))(prettier@3.5.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(vite@6.3.4(@types/node@24.8.0)(jiti@1.21.7)(sass@1.93.3)(terser@5.44.0)(yaml@2.5.0)))(type-fest@4.41.0)(typescript@5.9.3)(webpack-hot-middleware@2.26.1)(webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.15))(esbuild@0.25.11))':
+  '@storybook/nextjs@10.0.3(@swc/core@1.7.22(@swc/helpers@0.5.15))(esbuild@0.25.11)(next@15.5.13(@babel/core@7.28.4)(@playwright/test@1.56.1)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3))(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3)(storybook@10.0.3(@testing-library/dom@10.4.0)(msw@2.7.0(@types/node@24.8.0)(typescript@5.9.3))(prettier@3.5.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(vite@6.3.4(@types/node@24.8.0)(jiti@1.21.7)(sass@1.93.3)(terser@5.44.0)(yaml@2.5.0)))(type-fest@4.41.0)(typescript@5.9.3)(webpack-hot-middleware@2.26.1)(webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.15))(esbuild@0.25.11))':
     dependencies:
       '@babel/core': 7.28.4
       '@babel/plugin-syntax-bigint': 7.8.3(@babel/core@7.28.4)
@@ -12539,7 +12547,7 @@ snapshots:
       css-loader: 6.11.0(webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.15))(esbuild@0.25.11))
       image-size: 2.0.2
       loader-utils: 3.3.1
-      next: 15.5.6(@babel/core@7.28.4)(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3)
+      next: 15.5.13(@babel/core@7.28.4)(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3)
       node-polyfill-webpack-plugin: 2.0.1(webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.15))(esbuild@0.25.11))
       postcss: 8.5.6
       postcss-loader: 8.2.0(postcss@8.5.6)(typescript@5.9.3)(webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.15))(esbuild@0.25.11))
@@ -13104,19 +13112,19 @@ snapshots:
 
   '@ungap/structured-clone@1.3.0': {}
 
-  '@vercel/analytics@1.5.0(next@15.5.6(@babel/core@7.28.4)(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3))(react@19.2.0)':
+  '@vercel/analytics@1.5.0(next@15.5.13(@babel/core@7.28.4)(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3))(react@19.2.0)':
     optionalDependencies:
-      next: 15.5.6(@babel/core@7.28.4)(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3)
+      next: 15.5.13(@babel/core@7.28.4)(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3)
       react: 19.2.0
 
-  '@vercel/analytics@1.5.0(next@15.5.6(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3))(react@19.2.0)':
+  '@vercel/analytics@1.5.0(next@15.5.13(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3))(react@19.2.0)':
     optionalDependencies:
-      next: 15.5.6(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3)
+      next: 15.5.13(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3)
       react: 19.2.0
 
-  '@vercel/speed-insights@1.2.0(next@15.5.6(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3))(react@19.2.0)':
+  '@vercel/speed-insights@1.2.0(next@15.5.13(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3))(react@19.2.0)':
     optionalDependencies:
-      next: 15.5.6(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3)
+      next: 15.5.13(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3)
       react: 19.2.0
 
   '@vitest/browser@4.0.6(msw@2.7.0(@types/node@24.8.0)(typescript@5.9.3))(vite@6.3.4(@types/node@24.8.0)(jiti@1.21.7)(sass@1.93.3)(terser@5.44.0)(yaml@2.5.0))(vitest@4.0.6(@types/debug@4.1.12)(@types/node@24.8.0)(jiti@1.21.7)(msw@2.7.0(@types/node@24.8.0)(typescript@5.9.3))(sass@1.93.3)(terser@5.44.0)(yaml@2.5.0))':
@@ -15857,30 +15865,30 @@ snapshots:
 
   next-secure-headers@2.2.0: {}
 
-  next-sitemap@4.2.3(next@15.5.6(@babel/core@7.28.4)(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3)):
+  next-sitemap@4.2.3(next@15.5.13(@babel/core@7.28.4)(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3)):
     dependencies:
       '@corex/deepmerge': 4.0.43
       '@next/env': 13.5.11
       fast-glob: 3.3.3
       minimist: 1.2.8
-      next: 15.5.6(@babel/core@7.28.4)(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3)
+      next: 15.5.13(@babel/core@7.28.4)(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3)
 
-  next-sitemap@4.2.3(next@15.5.6(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3)):
+  next-sitemap@4.2.3(next@15.5.13(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3)):
     dependencies:
       '@corex/deepmerge': 4.0.43
       '@next/env': 13.5.11
       fast-glob: 3.3.3
       minimist: 1.2.8
-      next: 15.5.6(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3)
+      next: 15.5.13(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3)
 
   next-themes@0.4.6(react-dom@19.2.0(react@19.2.0))(react@19.2.0):
     dependencies:
       react: 19.2.0
       react-dom: 19.2.0(react@19.2.0)
 
-  next@15.5.6(@babel/core@7.28.4)(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3):
+  next@15.5.13(@babel/core@7.28.4)(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3):
     dependencies:
-      '@next/env': 15.5.6
+      '@next/env': 15.5.13
       '@swc/helpers': 0.5.15
       caniuse-lite: 1.0.30001751
       postcss: 8.4.31
@@ -15888,14 +15896,14 @@ snapshots:
       react-dom: 19.2.0(react@19.2.0)
       styled-jsx: 5.1.6(@babel/core@7.28.4)(react@19.2.0)
     optionalDependencies:
-      '@next/swc-darwin-arm64': 15.5.6
-      '@next/swc-darwin-x64': 15.5.6
-      '@next/swc-linux-arm64-gnu': 15.5.6
-      '@next/swc-linux-arm64-musl': 15.5.6
-      '@next/swc-linux-x64-gnu': 15.5.6
-      '@next/swc-linux-x64-musl': 15.5.6
-      '@next/swc-win32-arm64-msvc': 15.5.6
-      '@next/swc-win32-x64-msvc': 15.5.6
+      '@next/swc-darwin-arm64': 15.5.13
+      '@next/swc-darwin-x64': 15.5.13
+      '@next/swc-linux-arm64-gnu': 15.5.13
+      '@next/swc-linux-arm64-musl': 15.5.13
+      '@next/swc-linux-x64-gnu': 15.5.13
+      '@next/swc-linux-x64-musl': 15.5.13
+      '@next/swc-win32-arm64-msvc': 15.5.13
+      '@next/swc-win32-x64-msvc': 15.5.13
       '@playwright/test': 1.56.1
       babel-plugin-react-compiler: 19.1.0-rc.3
       sass: 1.93.3
@@ -15904,9 +15912,9 @@ snapshots:
       - '@babel/core'
       - babel-plugin-macros
 
-  next@15.5.6(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3):
+  next@15.5.13(@playwright/test@1.56.1)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3):
     dependencies:
-      '@next/env': 15.5.6
+      '@next/env': 15.5.13
       '@swc/helpers': 0.5.15
       caniuse-lite: 1.0.30001751
       postcss: 8.4.31
@@ -15914,14 +15922,14 @@ snapshots:
       react-dom: 19.2.0(react@19.2.0)
       styled-jsx: 5.1.6(@babel/core@7.28.4)(react@19.2.0)
     optionalDependencies:
-      '@next/swc-darwin-arm64': 15.5.6
-      '@next/swc-darwin-x64': 15.5.6
-      '@next/swc-linux-arm64-gnu': 15.5.6
-      '@next/swc-linux-arm64-musl': 15.5.6
-      '@next/swc-linux-x64-gnu': 15.5.6
-      '@next/swc-linux-x64-musl': 15.5.6
-      '@next/swc-win32-arm64-msvc': 15.5.6
-      '@next/swc-win32-x64-msvc': 15.5.6
+      '@next/swc-darwin-arm64': 15.5.13
+      '@next/swc-darwin-x64': 15.5.13
+      '@next/swc-linux-arm64-gnu': 15.5.13
+      '@next/swc-linux-arm64-musl': 15.5.13
+      '@next/swc-linux-x64-gnu': 15.5.13
+      '@next/swc-linux-x64-musl': 15.5.13
+      '@next/swc-win32-arm64-msvc': 15.5.13
+      '@next/swc-win32-x64-msvc': 15.5.13
       '@playwright/test': 1.56.1
       babel-plugin-react-compiler: 19.1.0-rc.3
       sass: 1.93.3
