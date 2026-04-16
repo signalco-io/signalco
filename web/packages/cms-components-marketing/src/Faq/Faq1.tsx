@@ -22,7 +22,13 @@ export function Faq1({ tagline, header, description, features, ctas }: SectionDa
                             {featureIndex > 0 && <Divider />}
                             <Accordion defaultOpen variant="plain">
                                 <Typography semiBold>{feature.header}</Typography>
-                                <p>{feature.description}</p>
+                                {typeof feature.description === 'string' ? (
+                                    <Typography level='body1'>{feature.description}</Typography>
+                                ) : (
+                                    <>
+                                        {feature.description ?? null}
+                                    </>
+                                )}
                             </Accordion>
                         </Fragment>
                     ))}
