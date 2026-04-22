@@ -25,9 +25,7 @@ export function Faq1({ tagline, header, description, features, ctas }: SectionDa
                                 {typeof feature.description === 'string' ? (
                                     <Typography level="body1">{feature.description}</Typography>
                                 ) : (
-                                    <>
-                                        {feature.description ?? null}
-                                    </>
+                                    feature.description
                                 )}
                             </Accordion>
                         </Fragment>
