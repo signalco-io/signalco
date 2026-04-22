@@ -23,7 +23,7 @@ export function Faq1({ tagline, header, description, features, ctas }: SectionDa
                             <Accordion defaultOpen variant="plain">
                                 <Typography semiBold>{feature.header}</Typography>
                                 {typeof feature.description === 'string' ? (
-                                    <Typography level='body1'>{feature.description}</Typography>
+                                    <Typography level="body1">{feature.description}</Typography>
                                 ) : (
                                     <>
                                         {feature.description ?? null}
