@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@azure/cosmos": "4.7.0",
-    "@next/env": "15.5.6",
+    "@next/env": "16.3.4",
     "@signalco/cms-components-marketing": "workspace:*",
     "@signalco/cms-core": "workspace:*",
     "@signalco/data": "workspace:*",
