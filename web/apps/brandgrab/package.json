@@ -7,7 +7,7 @@
     "type": "module",
     "license": "AGPL-3.0-only",
     "engines": {
-        "node": "22.x"
+        "node": "24.x"
     },
     "scripts": {
         "dev": "next -p 4001 --turbo",
@@ -40,7 +40,7 @@
         "@playwright/test": "1.56.1",
         "@signalco/tsconfig": "workspace:*",
         "@types/color": "4.2.0",
-        "@types/node": "22.19.1",
+        "@types/node": "24.13.3",
         "@types/react": "19.2.2",
         "@types/react-dom": "19.2.2",
         "babel-plugin-react-compiler": "19.1.0-rc.3",
