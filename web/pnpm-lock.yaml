@@ -1109,8 +1109,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/ui-themes-minimal-app
       '@stripe/stripe-js':
-        specifier: 8.1.0
-        version: 8.1.0
+        specifier: 8.11.0
+        version: 8.11.0
       '@tailwindcss/typography':
         specifier: 0.5.19
         version: 0.5.19(tailwindcss@3.4.18(yaml@2.5.0))
@@ -4737,8 +4737,8 @@ packages:
       typescript:
         optional: true
 
-  '@stripe/stripe-js@8.1.0':
-    resolution: {integrity: sha512-bhhi0iSHDFRa2pPVv3WOHC6x/iGEu5AZqIiAvXsT8VOucsEre9gzgsK0jFzbzfGW2eeubF+mCdTTYwNAQCMJKg==}
+  '@stripe/stripe-js@8.11.0':
+    resolution: {integrity: sha512-3fVF4z3efsgwgyj64nFK+6F4/vMw0mUXD2TBbOfftJtKVNx4JNv3CSfe1fY4DCtCk0JFp8/YPNcRkzgV0HJ8cg==}
     engines: {node: '>=12.16'}
 
   '@swc/core-darwin-arm64@1.7.22':
@@ -12926,7 +12926,7 @@ snapshots:
     optionalDependencies:
       typescript: 5.9.3
 
-  '@stripe/stripe-js@8.1.0': {}
+  '@stripe/stripe-js@8.11.0': {}
 
   '@swc/core-darwin-arm64@1.7.22':
     optional: true
