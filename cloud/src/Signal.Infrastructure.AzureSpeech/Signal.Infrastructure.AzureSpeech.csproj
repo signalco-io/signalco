@@ -11,7 +11,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.CognitiveServices.Speech" Version="1.46.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions"
-      Version="9.0.10" />
+      Version="9.0.19" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
   </ItemGroup>
 
