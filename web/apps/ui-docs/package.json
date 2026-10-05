@@ -29,7 +29,7 @@
     "autoprefixer": "10.4.21",
     "css-loader": "7.1.2",
     "playwright": "1.56.1",
-    "postcss": "8.5.6",
+    "postcss": "8.5.23",
     "postcss-loader": "8.2.0",
     "rimraf": "6.1.2",
     "sass": "1.93.3",
