@@ -104,6 +104,8 @@ jobs:
         with:
           cloud-url: azblob://states
           command: ${{ inputs.command }}
+          # App Service hostname bindings and app settings can conflict when updated concurrently.
+          parallel: ${{ inputs.project == 'cloud-primary' && inputs.command == 'up' && '1' || '' }}
           stack-name: organization/${{ inputs.project }}/${{ inputs.project }}-${{ steps.extract_branch.outputs.stack }}
           work-dir: ./infra/apps/${{ inputs.project }}
           comment-on-pr: false

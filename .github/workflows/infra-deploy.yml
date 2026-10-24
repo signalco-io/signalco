@@ -30,7 +30,7 @@ jobs:
               - cloud/**
               - infra/**
               - .github/workflows/ci.yml
-              - .github/workflows/cloud-deploy-preview_reusable.yml
+              - .github/workflows/infra-deploy_reusable.yml
             web:
               - web/**
               - .github/workflows/ci.yml
