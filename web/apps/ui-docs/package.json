@@ -41,7 +41,7 @@
     "tailwindcss": "3.4.18",
     "tailwindcss-animate": "1.0.7",
     "typescript": "5.9.3",
-    "vitest": "4.0.6"
+    "vitest": "4.1.11"
   },
   "dependencies": {
     "@signalco/ui": "workspace:*",
