@@ -94,9 +94,6 @@ jobs:
             app_ui_docs:
               - web/apps/ui-docs/**
               - web/packages/**
-            app_uier:
-              - web/apps/uier/**
-              - web/packages/**
             app_workingparty:
               - web/apps/workingparty/**
               - web/packages/**
@@ -111,7 +108,6 @@ jobs:
       app_slco: ${{ steps.filter.outputs.app_slco }}
       app_doprocess: ${{ steps.filter.outputs.app_doprocess }}
       app_ui_docs: ${{ steps.filter.outputs.app_ui_docs }}
-      app_uier: ${{ steps.filter.outputs.app_uier }}
       app_workingparty: ${{ steps.filter.outputs.app_workingparty }}
 
   station_ci:
@@ -148,18 +144,6 @@ jobs:
     with:
       project: "cloud-primary"
       packageName: "@infra/cloud-primary"
-      baseRef: ${{ github.base_ref }}
-      command: "preview"
-    secrets: inherit
-
-  uier_infra_preview:
-    name: "uier infrastructure (preview)"
-    uses: ./.github/workflows/infra-deploy_reusable.yml
-    needs: changes
-    if: success() && github.event_name == 'pull_request' && needs.changes.outputs.infra == 'true'
-    with:
-      project: "uier"
-      packageName: "@infra/uier"
       baseRef: ${{ github.base_ref }}
       command: "preview"
     secrets: inherit
@@ -337,29 +321,6 @@ jobs:
       vercelProjectId: "prj_JTG4EUX7sXFIbDmgRxaNarffnq9E"
     secrets: inherit
 
-  analyze_uier:
-    name: "uier (analysis)"
-    needs: changes
-    if: success() && needs.changes.outputs.web == 'true' && needs.changes.outputs.app_uier == 'true'
-    uses: ./.github/workflows/web-nextjs_ci_reusable.yml
-    with:
-      workflowName: "ci.yml"
-      name: "uier"
-      path: "web/apps/uier"
-      vercelProjectId: "prj_0uRTXTGHFdN9SlHnFfNiahIgX3mc"
-    secrets: inherit
-
-  deploy_uier:
-    name: "uier (preview)"
-    needs: analyze_uier
-    if: ${{ success() }}
-    uses: ./.github/workflows/web-vercel-deploy_reusable.yml
-    with:
-      name: "uier"
-      path: "web/apps/uier"
-      vercelProjectId: "prj_0uRTXTGHFdN9SlHnFfNiahIgX3mc"
-    secrets: inherit
-
   analyze_workingparty:
     name: "WorkingParty (analysis)"
     needs: changes
@@ -369,7 +330,7 @@ jobs:
       workflowName: "ci.yml"
       name: "workingparty"
       path: "web/apps/workingparty"
-      vercelProjectId: "prj_0uRTXTGHFdN9SlHnFfNiahIgX3mc"
+      vercelProjectId: "prj_iAsm04GKwdR1z95x9ZEnCzeqwlro"
     secrets: inherit
 
   deploy_workingparty:
@@ -380,7 +341,7 @@ jobs:
     with:
       name: "workingparty"
       path: "web/apps/workingparty"
-      vercelProjectId: "prj_0uRTXTGHFdN9SlHnFfNiahIgX3mc"
+      vercelProjectId: "prj_iAsm04GKwdR1z95x9ZEnCzeqwlro"
     secrets: inherit
 
   ci_ok:
@@ -391,7 +352,6 @@ jobs:
         station_ci,
         cloud_infra_preview,
         doprocess_infra_preview,
-        uier_infra_preview,
         workingparty_infra_preview,
         deploy_blog,
         deploy_app,
@@ -400,7 +360,6 @@ jobs:
         deploy_slco,
         deploy_doprocess,
         deploy_uidocs,
-        deploy_uier,
         deploy_workingparty,
       ]
     if: ${{ always() }}

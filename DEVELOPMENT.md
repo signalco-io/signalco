@@ -8,6 +8,8 @@ _Note: Other development guides are coming soon_
 - [Web Development](./web/DEVELOPMENT.md)
 - [Infrastructure Development](./infra/README.md)
 
+_Note: [uier.io](https://uier.io) (website, review toolbar and infrastructure) moved to its own repository: [signalco-io/uier](https://github.com/signalco-io/uier)._
+
 ## Conventions
 
 ### Changelog and commits
