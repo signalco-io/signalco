@@ -14,7 +14,7 @@ on:
       - ".github/workflows/ci.yml"
       - ".github/workflows/global-smart-pr.yml"
       - ".github/workflows/web-nextjs_ci_reusable.yml"
-      - ".github/workflows/cloud-deploy-preview_reusable.yml"
+      - ".github/workflows/infra-deploy_reusable.yml"
       - ".github/workflows/web-vercel-deploy_reusable.yml"
   push:
     branches:
@@ -30,7 +30,7 @@ on:
       - ".github/workflows/ci.yml"
       - ".github/workflows/global-smart-pr.yml"
       - ".github/workflows/web-nextjs_ci_reusable.yml"
-      - ".github/workflows/cloud-deploy-preview_reusable.yml"
+      - ".github/workflows/infra-deploy_reusable.yml"
       - ".github/workflows/web-vercel-deploy_reusable.yml"
   workflow_dispatch:
 
@@ -70,7 +70,7 @@ jobs:
               - cloud/**
               - infra/**
               - .github/workflows/ci.yml
-              - .github/workflows/cloud-deploy-preview_reusable.yml
+              - .github/workflows/infra-deploy_reusable.yml
             web:
               - web/**
               - .github/workflows/ci.yml
