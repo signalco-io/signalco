@@ -144,7 +144,11 @@ jobs:
         run: |
           docker run --detach --name remote-browser --publish 127.0.0.1:18086:80 signalco-remote-browser:ci
           trap 'docker logs remote-browser; docker rm --force remote-browser' EXIT
-          curl --fail --silent --show-error --retry 20 --retry-connrefused --retry-delay 1 \
+          for _readiness_attempt in {1..30}; do
+            if curl --silent --max-time 1 --output /dev/null http://127.0.0.1:18086/; then break; fi
+            sleep 1
+          done
+          curl --fail --silent --show-error --max-time 30 \
             --get http://127.0.0.1:18086/api/screenshot \
             --data-urlencode 'url=data:text/html,<h1>Container smoke test</h1>' \
             --data-urlencode 'width=64' --data-urlencode 'height=64' --data-urlencode 'wait=0' \
