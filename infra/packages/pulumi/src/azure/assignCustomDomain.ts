@@ -49,6 +49,8 @@ export function assignCustomDomain(
         thumbprint: certOutput.apply(c => c?.thumbprint ?? ''),
     }, {
         protect,
+        // Hostname verification needs the DNS records in place
+        dependsOn: [txtVerifyRecord, cname],
     });
 
     const cert = new Certificate(`func-cert-${namePrefix}`, {
@@ -58,6 +60,8 @@ export function assignCustomDomain(
         serverFarmId: servicePlanId,
     }, {
         protect,
+        // Managed certificates can only be issued for a hostname already bound to the app
+        dependsOn: [binding],
     });
 
     return {
