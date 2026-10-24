@@ -50,6 +50,12 @@ the routing DNS and adopted destinations. Cloudflare manages its locked MX/SPF
 records through `EmailRoutingDns`; do not declare these again as `DnsRecord`
 resources or unlock them during adoption.
 
+Cloud Primary disables ACS SPF record management when an Email Routing inventory
+is configured. For an older stack that still tracks a deleted ACS SPF record,
+release this ownership change first, then retire only the obsolete SPF state entry
+under the deployment mutex. Cloudflare
+continues to own its routing DNS.
+
 Destination addresses belong to a Cloudflare account, not a zone. Each address
 must have exactly one owning Pulumi stack, even when rules in other zones use it.
 The production inventory only adopts the destination used by `signalco.io`;
