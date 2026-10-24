@@ -81,6 +81,9 @@ jobs:
             mutex:
               - discrete/Signalco.Discrete.Api.Mutex/**
               - .github/workflows/ci.yml
+            remote_browser:
+              - cloud/src/Signalco.Api.RemoteBrowser/**
+              - .github/workflows/ci.yml
             station:
               - station/**
               - .github/workflows/ci.yml
@@ -116,6 +119,7 @@ jobs:
       infra: ${{ steps.filter.outputs.infrastructure }}
       web: ${{ steps.filter.outputs.web }}
       mutex: ${{ steps.filter.outputs.mutex }}
+      remote_browser: ${{ steps.filter.outputs.remote_browser }}
       station: ${{ steps.filter.outputs.station }}
       companion_maui: ${{ steps.filter.outputs.companion_maui }}
       app_app: ${{ steps.filter.outputs.app_app }}
@@ -126,6 +130,26 @@ jobs:
       app_doprocess: ${{ steps.filter.outputs.app_doprocess }}
       app_ui_docs: ${{ steps.filter.outputs.app_ui_docs }}
       app_workingparty: ${{ steps.filter.outputs.app_workingparty }}
+
+  remote_browser_ci:
+    name: "Remote Browser (container)"
+    runs-on: ubuntu-latest
+    needs: changes
+    if: success() && needs.changes.outputs.remote_browser == 'true'
+    steps:
+      - uses: actions/checkout@v5
+      - name: Build container
+        run: docker build --platform linux/amd64 -t signalco-remote-browser:ci cloud/src/Signalco.Api.RemoteBrowser
+      - name: Verify screenshot endpoint on the ingress port
+        run: |
+          docker run --detach --name remote-browser --publish 127.0.0.1:18086:80 signalco-remote-browser:ci
+          trap 'docker logs remote-browser; docker rm --force remote-browser' EXIT
+          curl --fail --silent --show-error --retry 20 --retry-connrefused --retry-delay 1 \
+            --get http://127.0.0.1:18086/api/screenshot \
+            --data-urlencode 'url=data:text/html,<h1>Container smoke test</h1>' \
+            --data-urlencode 'width=64' --data-urlencode 'height=64' --data-urlencode 'wait=0' \
+            --output /tmp/remote-browser-screenshot.png
+          python3 -c 'import pathlib, struct; data = pathlib.Path("/tmp/remote-browser-screenshot.png").read_bytes(); assert data[:8] == bytes.fromhex("89504e470d0a1a0a"); assert struct.unpack(">II", data[16:24]) == (64, 64)'
 
   companion_maui_ci:
     name: "Companion Android"
@@ -402,6 +426,7 @@ jobs:
         codeql-analysis,
         station_ci,
         mutex_ci,
+        remote_browser_ci,
         companion_maui_ci,
         cloud_infra_preview,
         doprocess_infra_preview,
