@@ -15,7 +15,7 @@ jobs:
       contents: read
       pull-requests: write
     steps:
-      # Read configuration from the base branch through the API. Never check out
+      # Read configuration from the default branch through the API. Never check out
       # PR code in this privileged workflow, so fork PRs can be labeled safely.
       - uses: actions/labeler@b8dd2d9be0f68b860e7dae5dae7d772984eacd6d # v6.2.0
         with:

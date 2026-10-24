@@ -22,7 +22,8 @@ _Note: [uier.io](https://uier.io) (website, review toolbar and infrastructure) m
 Pull requests are labeled automatically from changed file paths using
 [`.github/labeler.yml`](./.github/labeler.yml). The labeler runs when a PR is
 opened, reopened, updated, or edited, including PRs from forks. It uses the
-configuration from the PR's base branch without checking out PR code.
+workflow and configuration from the default `main` branch without checking out
+PR code. Changes merged into `next` take effect when released to `main`.
 
 When adding an app or package, update the path rules using existing repository
 labels. Configured labels are removed if their paths no longer match; labels
