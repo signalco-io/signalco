@@ -7,6 +7,7 @@ on:
     paths:
       - "web/**"
       - "cloud/**"
+      - "discrete/Signalco.Discrete.Api.Mutex/**"
       - "infra/**"
       - "station/**"
       - "companions/maui/**"
@@ -23,6 +24,7 @@ on:
     paths:
       - "web/**"
       - "cloud/**"
+      - "discrete/Signalco.Discrete.Api.Mutex/**"
       - "infra/**"
       - "station/**"
       - "companions/maui/**"
@@ -76,6 +78,9 @@ jobs:
               - .github/workflows/ci.yml
               - .github/workflows/web-nextjs_ci_reusable.yml
               - .github/workflows/web-vercel-deploy_reusable.yml
+            mutex:
+              - discrete/Signalco.Discrete.Api.Mutex/**
+              - .github/workflows/ci.yml
             station:
               - station/**
               - .github/workflows/ci.yml
@@ -110,6 +115,7 @@ jobs:
     outputs:
       infra: ${{ steps.filter.outputs.infrastructure }}
       web: ${{ steps.filter.outputs.web }}
+      mutex: ${{ steps.filter.outputs.mutex }}
       station: ${{ steps.filter.outputs.station }}
       companion_maui: ${{ steps.filter.outputs.companion_maui }}
       app_app: ${{ steps.filter.outputs.app_app }}
@@ -152,6 +158,34 @@ jobs:
         run: |
           dotnet build ./Signal.Beacon.WorkerService/Signal.Beacon.csproj -r "${{ matrix.target }}" --self-contained true
         working-directory: ./station
+
+  mutex_ci:
+    name: "Mutex (tests)"
+    runs-on: ubuntu-latest
+    needs: changes
+    if: success() && needs.changes.outputs.mutex == 'true'
+    services:
+      azurite:
+        image: mcr.microsoft.com/azure-storage/azurite:3.37.0
+        env:
+          AZURITE_ACCOUNTS: mutexlocal:bG9jYWwtdGVzdC1rZXk=
+        ports:
+          - 10032:10002
+        options: >-
+          --health-cmd "node -e \"require('net').connect(10002, '127.0.0.1').on('connect', () => process.exit(0)).on('error', () => process.exit(1))\""
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    steps:
+      - uses: actions/checkout@v5
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: 8.0.x
+      - name: Test Mutex API
+        run: dotnet test discrete/Signalco.Discrete.Api.Mutex/tests/Signalco.Discrete.Api.Mutex.Tests.csproj --configuration Release --nologo
+        env:
+          MUTEX_AZURITE: "1"
 
   cloud_infra_preview:
     name: "Cloud Primary infrastructure (preview)"
@@ -367,6 +401,7 @@ jobs:
       [
         codeql-analysis,
         station_ci,
+        mutex_ci,
         companion_maui_ci,
         cloud_infra_preview,
         doprocess_infra_preview,
