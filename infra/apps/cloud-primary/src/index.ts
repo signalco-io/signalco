@@ -63,7 +63,7 @@ const up = async () => {
         const corsDomains = [`app.${domainName}`, `www.${domainName}`, domainName];
 
         // Routing is zone-wide. Adopt only an explicitly captured inventory for this stack.
-        emailRoutingFromConfig('cp-email');
+        const mailRouting = emailRoutingFromConfig('cp-email');
 
         const signalr = createSignalR(resourceGroup, signalrPrefix, corsDomains, 'free', false);
         apiStatusCheck(signalrPrefix, 'SignalR', signalr.signalr.hostName, ConfPublicSignalRCheckInterval, '/api/v1/health');
@@ -196,7 +196,7 @@ const up = async () => {
             [
                 { subdomain: 'notifications', displayName: 'Signalco Notifications' },
                 { subdomain: 'system', displayName: 'Signalco' },
-            ]);
+            ], { manageSpf: !mailRouting });
 
         // Create and populate vault
         const vault = createKeyVault(resourceGroup, keyvaultPrefix, shouldProtect, [
