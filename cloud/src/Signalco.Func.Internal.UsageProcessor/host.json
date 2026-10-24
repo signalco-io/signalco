@@ -1,5 +1,6 @@
 {
   "version": "2.0",
+  "functionTimeout": "00:05:00",
   "logging": {
     "applicationInsights": {
       "samplingSettings": {
@@ -7,11 +8,6 @@
         "excludedTypes": "Request",
         "maxSamplingPercentage": 10
       }
-    }
-  },
-  "extensions": {
-    "queues": {
-      "maxPollingInterval": "00:10:00"
     }
   }
 }
