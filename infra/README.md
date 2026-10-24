@@ -52,8 +52,8 @@ resources or unlock them during adoption.
 
 Cloud Primary disables ACS SPF record management when an Email Routing inventory
 is configured. For an older stack that still tracks a deleted ACS SPF record,
-release this ownership change first, then refresh only the obsolete SPF resource
-under the deployment mutex. This retires the stale state entry while Cloudflare
+release this ownership change first, then retire only the obsolete SPF state entry
+under the deployment mutex. Cloudflare
 continues to own its routing DNS.
 
 Destination addresses belong to a Cloudflare account, not a zone. Each address
