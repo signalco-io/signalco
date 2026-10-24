@@ -1,4 +1,4 @@
-import { InputHTMLAttributes, PropsWithChildren, ReactNode, useId, useMemo } from 'react';
+import { InputHTMLAttributes, PropsWithChildren, ReactNode, useId } from 'react';
 import { Stack } from '../Stack';
 import { Row } from '../Row';
 import { cx } from '../cx';
@@ -16,6 +16,16 @@ export type InputProps = InputHTMLAttributes<HTMLInputElement> & {
     variant?: 'soft' | 'outlined' | 'plain';
 };
 
+function VerticalContainer({ enabled, children }: PropsWithChildren<{ enabled: boolean }>) {
+    return enabled ? <Stack spacing={0.5}>{children}</Stack> : <>{children}</>;
+}
+
+function HorizontalContainer({ enabled, className, ...props }: PropsWithChildren<{ enabled: boolean; className: string }>) {
+    return enabled
+        ? <Row className={cx('pr-[1px]', className)} {...props} />
+        : <div className={className} {...props} />;
+}
+
 export function Input({
     id,
     name,
@@ -30,19 +40,11 @@ export function Input({
 }: InputProps) {
     const customId = useId();
     const labelId = label ? `label-${id ?? name ?? customId}` : undefined;
-    const VerticalContainer = useMemo(() => label || helperText
-        ? (props: PropsWithChildren) => <Stack spacing={0.5} {...props} />
-        : (props: PropsWithChildren) => <>{props.children}</>
-    , [label, helperText]);
-    const HorizontalContainer = useMemo(() => startDecorator || endDecorator
-        ? ({ className, ...propsRest }: PropsWithChildren & { className: string }) => <Row className={cx('pr-[1px]', className)} {...propsRest} />
-        : ({ ...propsRest }: PropsWithChildren & { className: string }) => <div {...propsRest} />
-    , [startDecorator, endDecorator]);
 
     return (
-        <VerticalContainer>
+        <VerticalContainer enabled={Boolean(label || helperText)}>
             {label && <label className="text-sm font-medium" id={labelId}>{label}</label>}
-            <HorizontalContainer className={cx(
+            <HorizontalContainer enabled={Boolean(startDecorator || endDecorator)} className={cx(
                 fullWidth && 'w-full',
                 'rounded-md ring-offset-background',
                 'file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground',

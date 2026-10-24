@@ -1,6 +1,8 @@
 import { Bug, Device, Cloud } from "@signalco/ui-icons";
 import { SelectItems } from "@signalco/ui-primitives/SelectItems";
 import { Meta, StoryObj } from "@storybook/nextjs";
+import { expect, fn, userEvent, within } from 'storybook/test';
+import { useState } from 'react';
 
 export default {
     component: SelectItems,
@@ -10,7 +12,8 @@ type Story = StoryObj<typeof SelectItems>;
 
 export const Default: Story = {
     args: {
-        defaultValue: "1",
+        defaultValue: "2",
+        onValueChange: fn(),
         label: 'Select an option',
         placeholder: "Please select an option...",
         helperText: "This is a helper text",
@@ -18,6 +21,105 @@ export const Default: Story = {
             { label: 'Option 1', value: '1' },
             { label: 'Option 2', value: '2' },
         ]
+    },
+    play: async ({ canvasElement, args }) => {
+        const canvas = within(canvasElement);
+        const trigger = canvas.getByRole('combobox');
+        await expect(trigger).toHaveTextContent('Option 2');
+        await expect(args.onValueChange).not.toHaveBeenCalled();
+        await userEvent.click(trigger);
+        const menu = within(canvasElement.ownerDocument.body);
+        await expect(menu.getByRole('option', { name: 'Option 2' })).toHaveAttribute('data-state', 'checked');
+        await userEvent.click(menu.getByRole('option', { name: 'Option 1' }));
+        await expect(trigger).toHaveTextContent('Option 1');
+        await expect(args.onValueChange).toHaveBeenLastCalledWith('1');
+    }
+};
+
+export const Controlled: Story = {
+    args: {
+        ...Default.args,
+        value: '1',
+        defaultValue: '2',
+    },
+    render: function ControlledSelect(args) {
+        const [value, setValue] = useState(args.value);
+        return <SelectItems {...args} value={value} onValueChange={(nextValue) => {
+            setValue(nextValue);
+            args.onValueChange?.(nextValue);
+        }} />;
+    },
+    play: async ({ canvasElement, args }) => {
+        const trigger = within(canvasElement).getByRole('combobox');
+        await expect(trigger).toHaveTextContent('Option 1');
+        await userEvent.click(trigger);
+        await userEvent.click(within(canvasElement.ownerDocument.body).getByRole('option', { name: 'Option 2' }));
+        await expect(trigger).toHaveTextContent('Option 2');
+        await expect(args.onValueChange).toHaveBeenLastCalledWith('2');
+    }
+};
+
+export const InForm: Story = {
+    args: {
+        ...Default.args,
+        name: 'selection',
+    },
+    render: (args) => <form><SelectItems {...args} /></form>,
+    play: async (context) => {
+        const form = context.canvasElement.querySelector('form')!;
+        await expect(new FormData(form).get('selection')).toBe('2');
+        await Default.play?.(context);
+        await expect(new FormData(form).get('selection')).toBe('1');
+    }
+};
+
+export const ControlledInForm: Story = {
+    args: {
+        ...Controlled.args,
+        name: 'selection',
+    },
+    render: function ControlledForm(args) {
+        const [value, setValue] = useState(args.value);
+        return <form><SelectItems {...args} value={value} onValueChange={(nextValue) => {
+            setValue(nextValue);
+            args.onValueChange?.(nextValue);
+        }} /></form>;
+    },
+    play: async (context) => {
+        const form = context.canvasElement.querySelector('form')!;
+        await expect(new FormData(form).get('selection')).toBe('1');
+        await Controlled.play?.(context);
+        await expect(new FormData(form).get('selection')).toBe('2');
+    }
+};
+
+export const Placeholder: Story = {
+    args: {
+        ...Default.args,
+        defaultValue: undefined,
+    },
+    play: async ({ canvasElement, args }) => {
+        const trigger = within(canvasElement).getByRole('combobox');
+        await expect(trigger).toHaveTextContent('Please select an option...');
+        await userEvent.click(trigger);
+        await userEvent.click(within(canvasElement.ownerDocument.body).getByRole('option', { name: 'Option 2' }));
+        await expect(trigger).toHaveTextContent('Option 2');
+        await expect(args.onValueChange).toHaveBeenLastCalledWith('2');
+    }
+};
+
+export const PlaceholderInForm: Story = {
+    args: {
+        ...Placeholder.args,
+        name: 'selection',
+    },
+    render: (args) => <form><SelectItems {...args} /></form>,
+    play: async (context) => {
+        const form = context.canvasElement.querySelector('form')!;
+        await expect(new FormData(form).get('selection')).toBe('');
+        await expect(context.args.onValueChange).not.toHaveBeenCalled();
+        await Placeholder.play?.(context);
+        await expect(new FormData(form).get('selection')).toBe('2');
     }
 };
 
