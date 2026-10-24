@@ -89,7 +89,8 @@ export function SelectItems<T extends string>(props: SelectItemsProps<T>) {
         <Stack spacing={0.5} {...rest}>
             {label && <label className="text-sm font-medium" id={labelId}>{label}</label>}
             <SelectPrimitive.Root
-                value={selectedValue ?? ''}
+                value={value}
+                defaultValue={defaultValue}
                 onValueChange={handleValueChange}
                 name={name}
                 aria-labelledby={labelId}>

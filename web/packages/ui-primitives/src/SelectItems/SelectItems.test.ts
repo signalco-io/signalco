@@ -53,4 +53,13 @@ describe('SelectItems initial rendering', () => {
         expect(html).toContain('Choose an option');
         expect(html).not.toContain('Default option');
     });
+
+    it('includes an empty native option for an unselected form field', () => {
+        const html = renderToStaticMarkup(createElement('form', null,
+            createElement(SelectItems, { name: 'selection', placeholder: 'Choose an option', items })));
+
+        expect(html).toContain('name="selection"');
+        expect(html).toContain('<option value=""></option>');
+        expect(html).toContain('Choose an option');
+    });
 });

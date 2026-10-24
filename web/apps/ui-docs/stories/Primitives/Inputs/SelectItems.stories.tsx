@@ -73,6 +73,26 @@ export const InForm: Story = {
     }
 };
 
+export const ControlledInForm: Story = {
+    args: {
+        ...Controlled.args,
+        name: 'selection',
+    },
+    render: function ControlledForm(args) {
+        const [value, setValue] = useState(args.value);
+        return <form><SelectItems {...args} value={value} onValueChange={(nextValue) => {
+            setValue(nextValue);
+            args.onValueChange?.(nextValue);
+        }} /></form>;
+    },
+    play: async (context) => {
+        const form = context.canvasElement.querySelector('form')!;
+        await expect(new FormData(form).get('selection')).toBe('1');
+        await Controlled.play?.(context);
+        await expect(new FormData(form).get('selection')).toBe('2');
+    }
+};
+
 export const Placeholder: Story = {
     args: {
         ...Default.args,
@@ -85,6 +105,21 @@ export const Placeholder: Story = {
         await userEvent.click(within(canvasElement.ownerDocument.body).getByRole('option', { name: 'Option 2' }));
         await expect(trigger).toHaveTextContent('Option 2');
         await expect(args.onValueChange).toHaveBeenLastCalledWith('2');
+    }
+};
+
+export const PlaceholderInForm: Story = {
+    args: {
+        ...Placeholder.args,
+        name: 'selection',
+    },
+    render: (args) => <form><SelectItems {...args} /></form>,
+    play: async (context) => {
+        const form = context.canvasElement.querySelector('form')!;
+        await expect(new FormData(form).get('selection')).toBe('');
+        await expect(context.args.onValueChange).not.toHaveBeenCalled();
+        await Placeholder.play?.(context);
+        await expect(new FormData(form).get('selection')).toBe('2');
     }
 };
 
