@@ -9,6 +9,8 @@ on:
       - "cloud/**"
       - "infra/**"
       - "station/**"
+      - "companions/maui/**"
+      - ".github/workflows/companions-maui-build-android.yml"
       - ".github/workflows/ci.yml"
       - ".github/workflows/web-nextjs_ci_reusable.yml"
       - ".github/workflows/cloud-deploy-preview_reusable.yml"
@@ -22,6 +24,8 @@ on:
       - "cloud/**"
       - "infra/**"
       - "station/**"
+      - "companions/maui/**"
+      - ".github/workflows/companions-maui-build-android.yml"
       - ".github/workflows/ci.yml"
       - ".github/workflows/web-nextjs_ci_reusable.yml"
       - ".github/workflows/cloud-deploy-preview_reusable.yml"
@@ -73,6 +77,10 @@ jobs:
             station:
               - station/**
               - .github/workflows/ci.yml
+            companion_maui:
+              - companions/maui/**
+              - .github/workflows/ci.yml
+              - .github/workflows/companions-maui-build-android.yml
             app_app:
               - web/apps/app/**
               - web/packages/**
@@ -101,6 +109,7 @@ jobs:
       infra: ${{ steps.filter.outputs.infrastructure }}
       web: ${{ steps.filter.outputs.web }}
       station: ${{ steps.filter.outputs.station }}
+      companion_maui: ${{ steps.filter.outputs.companion_maui }}
       app_app: ${{ steps.filter.outputs.app_app }}
       app_web: ${{ steps.filter.outputs.app_web }}
       app_brandgrab: ${{ steps.filter.outputs.app_brandgrab }}
@@ -109,6 +118,12 @@ jobs:
       app_doprocess: ${{ steps.filter.outputs.app_doprocess }}
       app_ui_docs: ${{ steps.filter.outputs.app_ui_docs }}
       app_workingparty: ${{ steps.filter.outputs.app_workingparty }}
+
+  companion_maui_ci:
+    name: "Companion Android"
+    needs: changes
+    if: success() && needs.changes.outputs.companion_maui == 'true'
+    uses: ./.github/workflows/companions-maui-build-android.yml
 
   station_ci:
     strategy:
@@ -350,6 +365,7 @@ jobs:
       [
         codeql-analysis,
         station_ci,
+        companion_maui_ci,
         cloud_infra_preview,
         doprocess_infra_preview,
         workingparty_infra_preview,
