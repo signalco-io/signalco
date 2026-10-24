@@ -17,7 +17,7 @@ import {
     acsEmails,
 } from '@infra/pulumi/azure';
 import { apiStatusCheck } from '@infra/pulumi/checkly';
-import { dnsRecord } from '@infra/pulumi/cloudflare';
+import { dnsRecord, emailRoutingFromConfig } from '@infra/pulumi/cloudflare';
 import { publishProjectAsync } from '@infra/pulumi/dotnet';
 import { ConfCloudApiCheckInterval, ConfPublicSignalRCheckInterval } from './config.js';
 import { createRemoteBrowser } from './createRemoteBrowser.js';
@@ -61,6 +61,9 @@ const up = async () => {
 
         const domainName = `${config.require('domain')}`;
         const corsDomains = [`app.${domainName}`, `www.${domainName}`, domainName];
+
+        // Routing is zone-wide. Adopt only an explicitly captured inventory for this stack.
+        emailRoutingFromConfig('cp-email');
 
         const signalr = createSignalR(resourceGroup, signalrPrefix, corsDomains, 'free', false);
         apiStatusCheck(signalrPrefix, 'SignalR', signalr.signalr.hostName, ConfPublicSignalRCheckInterval, '/api/v1/health');

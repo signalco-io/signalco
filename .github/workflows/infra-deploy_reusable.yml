@@ -90,6 +90,10 @@ jobs:
       - name: ⚒️ Build Infrastructure
         run: pnpm build --filter=${{ inputs.packageName }}
 
+      - name: Test email routing adoption
+        if: inputs.project == 'cloud-primary'
+        run: pnpm --filter @infra/cloud-primary test
+
       - name: ✋ Set up mutex
         id: mutex-setup
         run: |
