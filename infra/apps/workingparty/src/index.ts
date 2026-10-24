@@ -1,7 +1,13 @@
 import { Config, getStack } from '@pulumi/pulumi';
 import { ResourceGroup } from '@pulumi/azure-native/resources/index.js';
 import { Queue } from '@pulumi/azure-native/storage/index.js';
-import { DatabaseAccount, SqlResourceSqlDatabase, SqlResourceSqlContainer, DatabaseAccountOfferType, listDatabaseAccountConnectionStringsOutput } from '@pulumi/azure-native/documentdb/index.js';
+import {
+    DatabaseAccount,
+    SqlResourceSqlDatabase,
+    SqlResourceSqlContainer,
+    DatabaseAccountOfferType,
+    listDatabaseAccountConnectionStringsOutput
+} from '@pulumi/azure-native/cosmosdb/index.js';
 import { nextJsApp } from '@infra/pulumi/vercel';
 import { dnsRecord } from '@infra/pulumi/cloudflare';
 import { ProjectDomain, ProjectEnvironmentVariable } from '@pulumiverse/vercel';

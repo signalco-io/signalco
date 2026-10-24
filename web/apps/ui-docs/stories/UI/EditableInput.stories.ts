@@ -1,5 +1,5 @@
 import { EditableInput } from "@signalco/ui/EditableInput";
-import { StoryObj } from "@storybook/react";
+import { StoryObj } from "@storybook/nextjs";
 
 export default { component: EditableInput, tags: ['autodocs'] };
 type Story = StoryObj<typeof EditableInput>;

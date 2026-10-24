@@ -69,7 +69,7 @@ export function CardActions({ children, className, ...rest }: RowProps) {
     return (
         <Stack spacing={2} className="-mx-4">
             <Divider />
-            <Row className={cx('px-4 pb-0', className)} {...rest}>
+            <Row className={cx('px-4 pb-0 gap-2', className)} {...rest}>
                 {children}
             </Row>
         </Stack>

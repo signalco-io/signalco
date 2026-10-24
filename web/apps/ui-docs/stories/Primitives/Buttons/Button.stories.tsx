@@ -1,6 +1,6 @@
 import { Button } from "@signalco/ui-primitives/Button";
 import { Card } from "@signalco/ui-primitives/Card";
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/nextjs";
 
 export default { component: Button, tags: ['autodocs'] } satisfies Meta<typeof Button>;
 type Story = StoryObj<typeof Button>;

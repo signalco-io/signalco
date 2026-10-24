@@ -8,7 +8,7 @@ export type GalleryProps<TItem extends GalleryItem> = {
     items: TItem[];
     itemComponent: GalleryItemComponent<TItem>,
     filters?: () => React.ReactElement;
-    gridHeader: string;
+    gridHeader?: string;
     gridFilters?: React.ReactElement;
 }
 
@@ -19,7 +19,7 @@ export function Gallery<TItem extends GalleryItem>(props: GalleryProps<TItem>) {
         <div className="flex flex-col gap-2 sm:flex-row">
             {filters && <GalleryFilters filters={filters()} />}
             <Stack spacing={2} className="w-full">
-                <GalleryGridFilter header={gridHeader} filters={gridFilters} />
+                {gridFilters && <GalleryGridFilter header={gridHeader} filters={gridFilters} />}
                 <GalleryGrid items={items} itemComponent={itemComponent} />
             </Stack>
         </div>

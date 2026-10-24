@@ -1,16 +1,13 @@
-import { forwardRef, type AnchorHTMLAttributes } from 'react';
+import { ComponentProps, forwardRef } from 'react';
+import NextLink from 'next/link';
 import { isAbsoluteUrl } from '@signalco/js';
 import { cx } from '../cx';
 
-export type LinkProps = AnchorHTMLAttributes<HTMLAnchorElement> & {
-    href: string;
-    className?: string | undefined;
-    'aria-label'?: string | undefined;
-};
+export type LinkProps = ComponentProps<typeof NextLink>;
 
 const Link = forwardRef<HTMLAnchorElement, LinkProps>(({ className, href, children, ...rest }: LinkProps, ref) => {
     return (
-        <a
+        <NextLink
             ref={ref}
             href={href}
             className={cx(
@@ -20,8 +17,8 @@ const Link = forwardRef<HTMLAnchorElement, LinkProps>(({ className, href, childr
             target={isAbsoluteUrl(href) ? '_blank' : '_self'}
             {...rest}>
             {children}
-        </a>
+        </NextLink>
     );
 });
-Link.displayName = 'Button'
+Link.displayName = 'Link';
 export { Link };

@@ -42,7 +42,7 @@ export async function createChannelFunction(
         zipsContainer,
         publicFunctionStoragePrefix,
         publishResult.releaseDir);
-    apiStatusCheck(publicFunctionPrefix, `Channel - ${channelName}`, channelFunc.dnsCname.hostname, ConfChannelApiCheckInterval);
+    apiStatusCheck(publicFunctionPrefix, `Channel - ${channelName}`, channelFunc.fullDomainName, ConfChannelApiCheckInterval);
 
     return {
         nameLower: channelNameLower,

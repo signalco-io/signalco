@@ -36,9 +36,6 @@ const nextConfig = {
             }
         ]
     },
-    eslint: {
-        dirs: ['worker', 'tools', 'src', 'app', 'locales', 'components']
-    },
     async headers() {
         return [{
             source: '/(.*)',

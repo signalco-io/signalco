@@ -73,8 +73,8 @@ export async function stripeCheckout(
             throw new Error('Unable to create checkout session.');
         }
 
-        if (session) {
-            return { sessionId: session.id };
+        if (session?.url) {
+            return { sessionId: session.id, url: session.url };
         }
 
         throw new Error('Unable to create checkout session.');

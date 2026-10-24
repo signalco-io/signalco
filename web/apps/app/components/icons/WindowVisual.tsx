@@ -1,4 +1,3 @@
-/* eslint-disable tailwindcss/no-custom-classname */
 import { CSSProperties, useState } from 'react';
 import { cx } from '@signalco/ui-primitives/cx';
 import { useInterval } from '@signalco/hooks/useInterval';

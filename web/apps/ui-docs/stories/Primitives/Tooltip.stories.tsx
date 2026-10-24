@@ -2,7 +2,7 @@ import { Info } from "@signalco/ui-icons";
 import { Stack } from "@signalco/ui-primitives/Stack";
 import { Tooltip, TooltipTrigger, TooltipContent } from "@signalco/ui-primitives/Tooltip";
 import { Typography } from "@signalco/ui-primitives/Typography";
-import { StoryObj } from "@storybook/react";
+import { StoryObj } from "@storybook/nextjs";
 
 export default {
     component: Tooltip,

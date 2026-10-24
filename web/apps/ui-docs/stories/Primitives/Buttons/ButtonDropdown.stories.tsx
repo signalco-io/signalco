@@ -1,8 +1,8 @@
 import { ButtonDropdown } from "@signalco/ui-primitives/ButtonDropdown";
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/nextjs";
 
-export default { 
-    component: ButtonDropdown, 
+export default {
+    component: ButtonDropdown,
     tags: ['autodocs'],
     args: {
         children: 'Select an option'
@@ -10,7 +10,7 @@ export default {
 } satisfies Meta<typeof ButtonDropdown>;
 type Story = StoryObj<typeof ButtonDropdown>;
 
-export const Default: Story = { };
+export const Default: Story = {};
 
 export const Loading: Story = {
     args: { loading: true }

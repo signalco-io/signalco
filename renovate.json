@@ -1,7 +1,7 @@
 {
     "$schema": "https://docs.renovatebot.com/renovate-schema.json",
     "extends": [
-        "config:base"
+        "config:recommended"
     ],
     "packageRules": [
         {
@@ -88,12 +88,12 @@
             ]
         },
         {
-            "matchPackagePatterns": [
-                "*"
-            ],
             "rangeStrategy": "pin",
             "matchManagers": [
                 "npm"
+            ],
+            "matchPackageNames": [
+                "*"
             ]
         },
         {
@@ -111,7 +111,7 @@
     "dependencyDashboard": true,
     "assigneesFromCodeOwners": true,
     "reviewersFromCodeOwners": true,
-    "baseBranches": [
+    "baseBranchPatterns": [
         "next"
     ],
     "prHourlyLimit": 6,

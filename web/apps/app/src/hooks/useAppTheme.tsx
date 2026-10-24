@@ -11,8 +11,7 @@ import { localizer } from './useLocale';
 export default function useAppTheme() {
     // const { mode, setMode } = useColorScheme();
     const mode: unknown = 'dark';
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
-    const setMode = (mode: DefaultColorScheme) => {};
+    const setMode = (mode: DefaultColorScheme) => { };
 
     const [themeMode] = useUserSetting<AppThemeMode>('themeMode', 'manual');
     const [themeTimeRange] = useUserSetting<[string, string] | undefined>('themeTimeRange', undefined);

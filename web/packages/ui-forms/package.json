@@ -7,21 +7,18 @@
     "exports": {
         "./*": "./src/*/index.ts"
     },
-    "scripts": {
-        "lint": "eslint ."
-    },
+    "scripts": {},
     "devDependencies": {
         "@enterwell/react-form-builder": "0.3.2",
         "@enterwell/react-form-validation": "1.4.0",
-        "@signalco/eslint-config-signalco": "workspace:*",
         "@signalco/tailwindcss-config-signalco": "workspace:*",
         "@signalco/tsconfig": "workspace:*",
         "@signalco/ui": "workspace:*",
         "@signalco/ui-primitives": "workspace:*",
-        "@types/react": "19.0.10",
-        "@types/react-dom": "19.0.4",
-        "react": "19.0.0",
-        "react-dom": "19.0.0",
-        "typescript": "5.8.2"
+        "@types/react": "19.2.2",
+        "@types/react-dom": "19.2.2",
+        "react": "19.2.0",
+        "react-dom": "19.2.0",
+        "typescript": "5.9.3"
     }
 }

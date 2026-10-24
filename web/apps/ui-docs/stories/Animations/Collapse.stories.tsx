@@ -1,7 +1,7 @@
 import { Card } from "@signalco/ui-primitives/Card";
 import { Collapse } from "@signalco/ui-primitives/Collapse";
 import { Stack } from "@signalco/ui-primitives/Stack";
-import { StoryObj } from "@storybook/react";
+import { StoryObj } from "@storybook/nextjs";
 
 export default { component: Collapse, tags: ['autodocs'] };
 type Story = StoryObj<typeof Collapse>;

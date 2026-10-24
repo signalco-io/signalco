@@ -1,5 +1,5 @@
 import { ScrollArea } from "@signalco/ui-primitives/ScrollArea";
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/nextjs";
 
 export default {
     component: ScrollArea,
@@ -11,4 +11,4 @@ export default {
 } satisfies Meta<typeof ScrollArea>;
 type Story = StoryObj<typeof ScrollArea>;
 
-export const Default: Story = { };
+export const Default: Story = {};

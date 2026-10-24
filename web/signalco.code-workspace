@@ -29,10 +29,6 @@
 			"path": "apps/doprocess"
 		},
 		{
-			"name": "🚀 uier.io",
-			"path": "apps/uier"
-		},
-		{
 			"name": "🚀 slco.io",
 			"path": "apps/slco"
 		},
@@ -105,14 +101,6 @@
 			"path": "packages/ui-themes-minimal-app"
 		},
 		{
-			"name": "📦 @uier/toolbar",
-			"path": "packages/uier-toolbar"
-		},
-		{
-			"name": "⚙️ @signalco/eslint-config-signalco",
-			"path": "packages/eslint-config-signalco"
-		},
-		{
 			"name": "⚙️ @signalco/tailwindcss-config-signalco",
 			"path": "packages/tailwindcss-config-signalco"
 		},
@@ -123,7 +111,10 @@
 	],
 	"settings": {
 		"tailwindCSS.experimental.classRegex": [
-			["cx\\(([^]*)\\)", "(?:'|\"|`)([^\"'`]*)(?:'|\"|`)"]
+			[
+				"cx\\(([^]*)\\)",
+				"(?:'|\"|`)([^\"'`]*)(?:'|\"|`)"
+			]
 		],
 		"typescript.tsdk": "🚀 app/node_modules/typescript/lib"
 	}

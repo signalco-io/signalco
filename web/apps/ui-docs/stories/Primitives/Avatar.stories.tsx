@@ -1,8 +1,8 @@
 import { Avatar } from "@signalco/ui-primitives/Avatar";
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/nextjs";
 
-const meta: Meta<typeof Avatar> =  { 
-    component: Avatar, 
+const meta: Meta<typeof Avatar> = {
+    component: Avatar,
     tags: ['autodocs'],
     args: {
         children: 'SU'

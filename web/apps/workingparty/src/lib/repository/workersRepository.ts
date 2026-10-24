@@ -1,6 +1,4 @@
-import { AssistantUpdateParams } from 'openai/resources/beta/assistants.mjs';
 import { nanoid } from 'nanoid';
-import { openAiClient } from '../openAiClient';
 import { cosmosDataContainerWorkers } from '../cosmosClient';
 import { marketplaceWorkers } from '../../data/markerplaceWorkers';
 
@@ -9,7 +7,8 @@ export type DbWorker = {
     accountId: string;
     name: string;
     marketplaceWorkerId?: string;
-    oaiAssistantId: string;
+    model: string;
+    instructions: string;
     isCustom: boolean;
     createdAt: number;
 };
@@ -40,12 +39,16 @@ export async function workersGet(accountId: string, workerId: string): Promise<D
     const dbWorkers = cosmosDataContainerWorkers();
     const { resource: workerDbItem } = await dbWorkers.item(workerId, accountId).read();
 
+    // Fallback for legacy records that stored assistant id only
+    const marketplaceInfo = marketplaceWorkers.find((w) => w.id === workerDbItem.marketplaceWorkerId);
+
     return {
         id: workerDbItem.id,
         accountId: workerDbItem.accountId,
         name: workerDbItem.name,
         marketplaceWorkerId: workerDbItem.marketplaceWorkerId,
-        oaiAssistantId: workerDbItem.oaiAssistantId,
+        model: workerDbItem.model ?? marketplaceInfo?.model ?? 'gpt-4o',
+        instructions: workerDbItem.instructions ?? ('You are a worker for Working Party. You are an expert in your field.' + (marketplaceInfo?.instructions ?? '')),
         isCustom: workerDbItem.isCustom ?? false,
         createdAt: workerDbItem.createdAt,
     };
@@ -64,43 +67,13 @@ export async function workersCreate({ accountId, marketplaceWorkerId }: { accoun
 
     const assistantMarketplaceInstructions = 'You are a worker for Working Party. You are an expert in your field.' + workerMarketplaceInfo.instructions;
 
-    // Find assistant in OpenAI if exists,
-    // otherwise create a new one
-    const openai = openAiClient();
-    const assistants = await openai.beta.assistants.list();
-    let oaiAssistant = assistants.data.find((assistant) => assistant.name === `WPMarketplace-${workerMarketplaceInfo.id}`);
-    if (!oaiAssistant) {
-        oaiAssistant = await openai.beta.assistants.create({
-            model: workerMarketplaceInfo.model,
-            name: `WPMarketplace-${workerMarketplaceInfo.id}`,
-            description: `Working Party Assistant - Marketplace Model ${workerMarketplaceInfo.id}`,
-            instructions: assistantMarketplaceInstructions,
-        });
-    }
-
-    const assistantUpdates: AssistantUpdateParams = {};
-
-    // Update assistant model if not matching with marketplace model
-    if (oaiAssistant.model !== workerMarketplaceInfo.model) {
-        assistantUpdates.model = workerMarketplaceInfo.model;
-    }
-
-    // Update assistant instructions if not matching with marketplace instructions
-    if (oaiAssistant.instructions !== assistantMarketplaceInstructions) {
-        assistantUpdates.instructions = assistantMarketplaceInstructions;
-    }
-
-    // Update assistant if needed
-    if (Object.keys(assistantUpdates).length > 0) {
-        await openai.beta.assistants.update(oaiAssistant.id, assistantUpdates);
-    }
-
     const newWorker: DbWorker = {
         id: wid,
         accountId: accountId,
         name: workerMarketplaceInfo.name,
         marketplaceWorkerId: workerMarketplaceInfo.id,
-        oaiAssistantId: oaiAssistant.id,
+        model: workerMarketplaceInfo.model,
+        instructions: assistantMarketplaceInstructions,
         isCustom: isCustom,
         createdAt: new Date().getTime() / 1000, // UNIX seconds timestamp
     };
@@ -113,18 +86,6 @@ export async function workersCreate({ accountId, marketplaceWorkerId }: { accoun
 
 export async function workersDelete(accountId: string, workerId: string) {
     const dbWorkers = cosmosDataContainerWorkers();
-    const worker = await workersGet(accountId, workerId);
-
     // TODO: Removed from all assigned threads
-
     await dbWorkers.item(workerId, accountId).delete();
-
-    // Delete from OpenAI (only custom assistants, marketplace workers use shared assistant)
-    if (worker.isCustom && worker.oaiAssistantId) {
-        try {
-            await openAiClient().beta.assistants.del(worker.oaiAssistantId);
-        } catch (error) {
-            console.error('Failed to delete OpenAI assistant', error);
-        }
-    }
 }

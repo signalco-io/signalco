@@ -1,31 +1,31 @@
 # yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
 
-name: 'CI'
+name: "CI"
 
 on:
   pull_request:
     paths:
-      - 'web/**'
-      - 'cloud/**'
-      - 'infra/**'
+      - "web/**"
+      - "cloud/**"
+      - "infra/**"
       - "station/**"
-      - '.github/workflows/ci.yml'
-      - '.github/workflows/web-nextjs_ci_reusable.yml'
-      - '.github/workflows/cloud-deploy-preview_reusable.yml'
-      - '.github/workflows/web-vercel-deploy_reusable.yml'
+      - ".github/workflows/ci.yml"
+      - ".github/workflows/web-nextjs_ci_reusable.yml"
+      - ".github/workflows/cloud-deploy-preview_reusable.yml"
+      - ".github/workflows/web-vercel-deploy_reusable.yml"
   push:
     branches:
       - main
       - next
     paths:
-      - 'web/**'
-      - 'cloud/**'
-      - 'infra/**'
+      - "web/**"
+      - "cloud/**"
+      - "infra/**"
       - "station/**"
-      - '.github/workflows/ci.yml'
-      - '.github/workflows/web-nextjs_ci_reusable.yml'
-      - '.github/workflows/cloud-deploy-preview_reusable.yml'
-      - '.github/workflows/web-vercel-deploy_reusable.yml'
+      - ".github/workflows/ci.yml"
+      - ".github/workflows/web-nextjs_ci_reusable.yml"
+      - ".github/workflows/cloud-deploy-preview_reusable.yml"
+      - ".github/workflows/web-vercel-deploy_reusable.yml"
   workflow_dispatch:
 
 jobs:
@@ -33,20 +33,20 @@ jobs:
     name: "[Global] Analyze CodeQL"
     runs-on: ubuntu-latest
     strategy:
-        fail-fast: false
-        matrix:
-            language: ["javascript", "csharp"]
+      fail-fast: false
+      matrix:
+        language: ["javascript", "csharp"]
     steps:
-        - name: Checkout repository
-          uses: actions/checkout@v4
-        - name: Initialize CodeQL
-          uses: github/codeql-action/init@v3
-          with:
-              languages: ${{ matrix.language }}
-        - name: Autobuild
-          uses: github/codeql-action/autobuild@v3
-        - name: Perform CodeQL Analysis
-          uses: github/codeql-action/analyze@v3
+      - name: Checkout repository
+        uses: actions/checkout@v5
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v4
+        with:
+          languages: ${{ matrix.language }}
+      - name: Autobuild
+        uses: github/codeql-action/autobuild@v4
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v4
 
   changes:
     name: "Detect changes"
@@ -55,7 +55,7 @@ jobs:
       pull-requests: read
       contents: read
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: dorny/paths-filter@v3
         id: filter
         with:
@@ -94,9 +94,6 @@ jobs:
             app_ui_docs:
               - web/apps/ui-docs/**
               - web/packages/**
-            app_uier:
-              - web/apps/uier/**
-              - web/packages/**
             app_workingparty:
               - web/apps/workingparty/**
               - web/packages/**
@@ -111,7 +108,6 @@ jobs:
       app_slco: ${{ steps.filter.outputs.app_slco }}
       app_doprocess: ${{ steps.filter.outputs.app_doprocess }}
       app_ui_docs: ${{ steps.filter.outputs.app_ui_docs }}
-      app_uier: ${{ steps.filter.outputs.app_uier }}
       app_workingparty: ${{ steps.filter.outputs.app_workingparty }}
 
   station_ci:
@@ -129,9 +125,9 @@ jobs:
     needs: changes
     if: success() && github.event_name == 'pull_request' && needs.changes.outputs.station == 'true'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Setup .NET
-        uses: actions/setup-dotnet@v4
+        uses: actions/setup-dotnet@v5
         with:
           dotnet-version: 9.0.x
       - name: Build
@@ -148,18 +144,6 @@ jobs:
     with:
       project: "cloud-primary"
       packageName: "@infra/cloud-primary"
-      baseRef: ${{ github.base_ref }}
-      command: "preview"
-    secrets: inherit
-
-  uier_infra_preview:
-    name: "uier infrastructure (preview)"
-    uses: ./.github/workflows/infra-deploy_reusable.yml
-    needs: changes
-    if: success() && github.event_name == 'pull_request' && needs.changes.outputs.infra == 'true'
-    with:
-      project: "uier"
-      packageName: "@infra/uier"
       baseRef: ${{ github.base_ref }}
       command: "preview"
     secrets: inherit
@@ -194,10 +178,10 @@ jobs:
     if: success() && needs.changes.outputs.web == 'true' && needs.changes.outputs.app_blog == 'true'
     uses: ./.github/workflows/web-nextjs_ci_reusable.yml
     with:
-      workflowName: 'ci.yml'
-      name: 'blog'
-      path: 'web/apps/blog'
-      vercelProjectId: 'prj_VT7qOjkcEvkAsZH7MtSxWcVDWVpr'
+      workflowName: "ci.yml"
+      name: "blog"
+      path: "web/apps/blog"
+      vercelProjectId: "prj_VT7qOjkcEvkAsZH7MtSxWcVDWVpr"
     secrets: inherit
 
   deploy_blog:
@@ -206,9 +190,9 @@ jobs:
     if: ${{ success() }}
     uses: ./.github/workflows/web-vercel-deploy_reusable.yml
     with:
-      name: 'blog'
-      path: 'web/apps/blog'
-      vercelProjectId: 'prj_VT7qOjkcEvkAsZH7MtSxWcVDWVpr'
+      name: "blog"
+      path: "web/apps/blog"
+      vercelProjectId: "prj_VT7qOjkcEvkAsZH7MtSxWcVDWVpr"
     secrets: inherit
 
   analyze_app:
@@ -217,10 +201,10 @@ jobs:
     if: success() && needs.changes.outputs.web == 'true' && needs.changes.outputs.app_app == 'true'
     uses: ./.github/workflows/web-nextjs_ci_reusable.yml
     with:
-      workflowName: 'ci.yml'
-      name: 'app'
-      path: 'web/apps/app'
-      vercelProjectId: 'prj_q8N5ElZfzvq4BjEMBIsyEfqe4jsI'
+      workflowName: "ci.yml"
+      name: "app"
+      path: "web/apps/app"
+      vercelProjectId: "prj_q8N5ElZfzvq4BjEMBIsyEfqe4jsI"
     secrets: inherit
 
   deploy_app:
@@ -229,9 +213,9 @@ jobs:
     if: ${{ success() }}
     uses: ./.github/workflows/web-vercel-deploy_reusable.yml
     with:
-      name: 'app'
-      path: 'web/apps/app'
-      vercelProjectId: 'prj_q8N5ElZfzvq4BjEMBIsyEfqe4jsI'
+      name: "app"
+      path: "web/apps/app"
+      vercelProjectId: "prj_q8N5ElZfzvq4BjEMBIsyEfqe4jsI"
     secrets: inherit
 
   analyze_brandgrab:
@@ -240,10 +224,10 @@ jobs:
     if: success() && needs.changes.outputs.web == 'true' && needs.changes.outputs.app_brandgrab == 'true'
     uses: ./.github/workflows/web-nextjs_ci_reusable.yml
     with:
-      workflowName: 'ci.yml'
-      name: 'brandgrab'
-      path: 'web/apps/brandgrab'
-      vercelProjectId: 'prj_QHQO9V4WwYqlcpXNufZ4SU3Ryftx'
+      workflowName: "ci.yml"
+      name: "brandgrab"
+      path: "web/apps/brandgrab"
+      vercelProjectId: "prj_QHQO9V4WwYqlcpXNufZ4SU3Ryftx"
     secrets: inherit
 
   deploy_brandgrab:
@@ -252,9 +236,9 @@ jobs:
     if: ${{ success() }}
     uses: ./.github/workflows/web-vercel-deploy_reusable.yml
     with:
-      name: 'brandgrab'
-      path: 'web/apps/brandgrab'
-      vercelProjectId: 'prj_QHQO9V4WwYqlcpXNufZ4SU3Ryftx'
+      name: "brandgrab"
+      path: "web/apps/brandgrab"
+      vercelProjectId: "prj_QHQO9V4WwYqlcpXNufZ4SU3Ryftx"
     secrets: inherit
 
   analyze_web:
@@ -263,10 +247,10 @@ jobs:
     if: success() && needs.changes.outputs.web == 'true' && needs.changes.outputs.app_web == 'true'
     uses: ./.github/workflows/web-nextjs_ci_reusable.yml
     with:
-      workflowName: 'ci.yml'
-      name: 'web'
-      path: 'web/apps/web'
-      vercelProjectId: 'prj_PYE8WwpynTfjD6rVMiCp7sZoCPYw'
+      workflowName: "ci.yml"
+      name: "web"
+      path: "web/apps/web"
+      vercelProjectId: "prj_PYE8WwpynTfjD6rVMiCp7sZoCPYw"
     secrets: inherit
 
   deploy_web:
@@ -275,9 +259,9 @@ jobs:
     if: ${{ success() }}
     uses: ./.github/workflows/web-vercel-deploy_reusable.yml
     with:
-      name: 'web'
-      path: 'web/apps/web'
-      vercelProjectId: 'prj_PYE8WwpynTfjD6rVMiCp7sZoCPYw'
+      name: "web"
+      path: "web/apps/web"
+      vercelProjectId: "prj_PYE8WwpynTfjD6rVMiCp7sZoCPYw"
     secrets: inherit
 
   analyze_slco:
@@ -286,10 +270,10 @@ jobs:
     if: success() && needs.changes.outputs.web == 'true' && needs.changes.outputs.app_slco == 'true'
     uses: ./.github/workflows/web-nextjs_ci_reusable.yml
     with:
-      workflowName: 'ci.yml'
-      name: 'slco'
-      path: 'web/apps/slco'
-      vercelProjectId: 'prj_GNETZANB7evyT5coH7gptur1G1sN'
+      workflowName: "ci.yml"
+      name: "slco"
+      path: "web/apps/slco"
+      vercelProjectId: "prj_GNETZANB7evyT5coH7gptur1G1sN"
     secrets: inherit
 
   deploy_slco:
@@ -298,9 +282,9 @@ jobs:
     if: ${{ success() }}
     uses: ./.github/workflows/web-vercel-deploy_reusable.yml
     with:
-      name: 'slco'
-      path: 'web/apps/slco'
-      vercelProjectId: 'prj_GNETZANB7evyT5coH7gptur1G1sN'
+      name: "slco"
+      path: "web/apps/slco"
+      vercelProjectId: "prj_GNETZANB7evyT5coH7gptur1G1sN"
     secrets: inherit
 
   analyze_doprocess:
@@ -309,10 +293,10 @@ jobs:
     if: success() && needs.changes.outputs.web == 'true' && needs.changes.outputs.app_doprocess == 'true'
     uses: ./.github/workflows/web-nextjs_ci_reusable.yml
     with:
-      workflowName: 'ci.yml'
-      name: 'doprocess'
-      path: 'web/apps/doprocess'
-      vercelProjectId: 'prj_UoJ8CHr3RAlOya6A9fpJ4oKzQhCJ'
+      workflowName: "ci.yml"
+      name: "doprocess"
+      path: "web/apps/doprocess"
+      vercelProjectId: "prj_UoJ8CHr3RAlOya6A9fpJ4oKzQhCJ"
     secrets: inherit
 
   deploy_doprocess:
@@ -321,9 +305,9 @@ jobs:
     if: ${{ success() }}
     uses: ./.github/workflows/web-vercel-deploy_reusable.yml
     with:
-      name: 'doprocess'
-      path: 'web/apps/doprocess'
-      vercelProjectId: 'prj_UoJ8CHr3RAlOya6A9fpJ4oKzQhCJ'
+      name: "doprocess"
+      path: "web/apps/doprocess"
+      vercelProjectId: "prj_UoJ8CHr3RAlOya6A9fpJ4oKzQhCJ"
     secrets: inherit
 
   deploy_uidocs:
@@ -332,32 +316,9 @@ jobs:
     if: success() && needs.changes.outputs.web == 'true' && needs.changes.outputs.app_ui_docs == 'true'
     uses: ./.github/workflows/web-vercel-deploy_reusable.yml
     with:
-      name: 'ui-docs'
-      path: 'web/apps/ui-docs'
-      vercelProjectId: 'prj_JTG4EUX7sXFIbDmgRxaNarffnq9E'
-    secrets: inherit
-
-  analyze_uier:
-    name: "uier (analysis)"
-    needs: changes
-    if: success() && needs.changes.outputs.web == 'true' && needs.changes.outputs.app_uier == 'true'
-    uses: ./.github/workflows/web-nextjs_ci_reusable.yml
-    with:
-      workflowName: 'ci.yml'
-      name: 'uier'
-      path: 'web/apps/uier'
-      vercelProjectId: 'prj_0uRTXTGHFdN9SlHnFfNiahIgX3mc'
-    secrets: inherit
-
-  deploy_uier:
-    name: "uier (preview)"
-    needs: analyze_uier
-    if: ${{ success() }}
-    uses: ./.github/workflows/web-vercel-deploy_reusable.yml
-    with:
-      name: 'uier'
-      path: 'web/apps/uier'
-      vercelProjectId: 'prj_0uRTXTGHFdN9SlHnFfNiahIgX3mc'
+      name: "ui-docs"
+      path: "web/apps/ui-docs"
+      vercelProjectId: "prj_JTG4EUX7sXFIbDmgRxaNarffnq9E"
     secrets: inherit
 
   analyze_workingparty:
@@ -366,10 +327,10 @@ jobs:
     if: success() && needs.changes.outputs.web == 'true' && needs.changes.outputs.app_workingparty == 'true'
     uses: ./.github/workflows/web-nextjs_ci_reusable.yml
     with:
-      workflowName: 'ci.yml'
-      name: 'workingparty'
-      path: 'web/apps/workingparty'
-      vercelProjectId: 'prj_0uRTXTGHFdN9SlHnFfNiahIgX3mc'
+      workflowName: "ci.yml"
+      name: "workingparty"
+      path: "web/apps/workingparty"
+      vercelProjectId: "prj_iAsm04GKwdR1z95x9ZEnCzeqwlro"
     secrets: inherit
 
   deploy_workingparty:
@@ -378,14 +339,29 @@ jobs:
     if: ${{ success() }}
     uses: ./.github/workflows/web-vercel-deploy_reusable.yml
     with:
-      name: 'workingparty'
-      path: 'web/apps/workingparty'
-      vercelProjectId: 'prj_0uRTXTGHFdN9SlHnFfNiahIgX3mc'
+      name: "workingparty"
+      path: "web/apps/workingparty"
+      vercelProjectId: "prj_iAsm04GKwdR1z95x9ZEnCzeqwlro"
     secrets: inherit
 
   ci_ok:
     name: "[CI] OK"
-    needs: [codeql-analysis, station_ci, cloud_infra_preview, doprocess_infra_preview, uier_infra_preview, workingparty_infra_preview, deploy_blog, deploy_app, deploy_brandgrab, deploy_web, deploy_slco, deploy_doprocess, deploy_uidocs, deploy_uier, deploy_workingparty]
+    needs:
+      [
+        codeql-analysis,
+        station_ci,
+        cloud_infra_preview,
+        doprocess_infra_preview,
+        workingparty_infra_preview,
+        deploy_blog,
+        deploy_app,
+        deploy_brandgrab,
+        deploy_web,
+        deploy_slco,
+        deploy_doprocess,
+        deploy_uidocs,
+        deploy_workingparty,
+      ]
     if: ${{ always() }}
     runs-on: ubuntu-latest
     steps:

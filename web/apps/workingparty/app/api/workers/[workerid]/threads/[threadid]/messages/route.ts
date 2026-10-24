@@ -1,7 +1,6 @@
 import { threadsGet } from '../../../../../../../src/lib/repository/threadsRepository';
 import { messagesCreateAndPoll, messagesGetAll } from '../../../../../../../src/lib/repository/messagesRepository';
 import { accountUsageIncrement, accountUsageOverLimit } from '../../../../../../../src/lib/repository/accountsRepository';
-import { openAiCreateThread } from '../../../../../../../src/lib/openAiThreads';
 import { openAiCreateRunAndPoll } from '../../../../../../../src/lib/openAiRuns';
 import { openAiCreateMessage, openAiListMessages } from '../../../../../../../src/lib/openAiMessages';
 import { cosmosDataContainerThreads } from '../../../../../../../src/lib/cosmosClient';
@@ -77,27 +76,24 @@ export async function POST(request: Request, { params }: { params: Promise<{ wor
             try {
                 const messages = await messagesGetAll(accountId, threadid);
                 const messagesExtract = messages
-                    .flatMap(m => m.content)
-                    .filter(c => c.type === 'text')
-                    .map(c => c.type === 'text' ? c.text.value : '')
+                    .map(m => `${m.role}: ${m.content}`)
                     .join('\n');
 
                 console.debug('Captioning conversation' + messagesExtract)
-
-                const captionThreadId = await openAiCreateThread();
-                await openAiCreateMessage(captionThreadId, messagesExtract);
-                const { status: oaiCaptionStatus } = await openAiCreateRunAndPoll(captionThreadId, 'asst_k3WyBmipDob1EpNLS85oTgnx');
+                // Use a one-off completion to caption
+                await openAiCreateMessage(accountId, threadid, `Summarize this conversation in < 8 words:
+${messagesExtract}`, 'user');
+                const { status: oaiCaptionStatus } = await openAiCreateRunAndPoll(accountId, threadid, 'gpt-4o-mini');
                 if (oaiCaptionStatus !== 'completed') {
-                    console.warn('OpenAI captioning run failed', oaiCaptionStatus);
-                    throw new Error('OpenAI captioning run failed');
+                    console.warn('Captioning run failed', oaiCaptionStatus);
+                    throw new Error('Captioning run failed');
                 }
 
-                const captionMessages = await openAiListMessages(captionThreadId);
-                const captionAnswerMessageContent = captionMessages.at(0)?.content.at(0);
-                if (captionAnswerMessageContent?.type === 'text' &&
-                    captionAnswerMessageContent.text.value.length > 0) {
+                const captionMessages = await openAiListMessages(accountId, threadid);
+                const captionAnswer = captionMessages.find(m => m.role === 'assistant')?.content;
+                if (captionAnswer && captionAnswer.length > 0) {
                     await cosmosDataContainerThreads().item(threadid, accountId).patch([
-                        { op: 'set', path: '/name', value: captionAnswerMessageContent.text.value }
+                        { op: 'set', path: '/name', value: captionAnswer }
                     ]);
                     updatedThread = true;
                 }

@@ -101,7 +101,7 @@ const up = async () => {
                 funcStorage.zipsContainer,
                 api.prefix,
                 apiFuncPublish.releaseDir);
-            apiStatusCheck(api.prefix, [api.name, 'API'].filter(i => i.length).join(' '), apiFunc.dnsCname.hostname, ConfCloudApiCheckInterval);
+            apiStatusCheck(api.prefix, [api.name, 'API'].filter(i => i.length).join(' '), apiFunc.fullDomainName, ConfCloudApiCheckInterval);
             publicFuncs.push({
                 name: api.name,
                 shortName: api.prefix,
@@ -333,8 +333,8 @@ const up = async () => {
         return {
             signalrUrl: signalr.signalr.hostName,
             internalFunctionUrls: internalFuncs.map(f => f.webApp.hostNames[0]),
-            publicUrls: publicFuncs.map(c => c.dnsCname.hostname),
-            channelsUrls: channelsFunctions.map(c => c.dnsCname.hostname),
+            publicUrls: publicFuncs.map(c => c.fullDomainName),
+            channelsUrls: channelsFunctions.map(c => c.fullDomainName),
             appUrls: [
                 appRb.app.url,
             ],

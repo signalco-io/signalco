@@ -11,15 +11,14 @@
         "export": "email export"
     },
     "devDependencies": {
-        "@signalco/eslint-config-signalco": "workspace:*",
         "@signalco/tsconfig": "workspace:*",
-        "@types/node": "22.13.10",
-        "@types/react": "19.0.10"
+        "@types/node": "22.19.1",
+        "@types/react": "19.2.2"
     },
     "dependencies": {
-        "@react-email/components": "0.0.33",
-        "react": "19.0.0",
-        "react-email": "3.0.7",
-        "typescript": "5.8.2"
+        "@react-email/components": "0.5.7",
+        "react": "19.2.0",
+        "react-email": "4.3.2",
+        "typescript": "5.9.3"
     }
 }

@@ -1,6 +1,6 @@
 import { IconButton } from "@signalco/ui-primitives/IconButton";
 import { Card } from "@signalco/ui-primitives/Card";
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/nextjs";
 import { CompanyGitHub } from "@signalco/ui-icons";
 
 export default { component: IconButton, tags: ['autodocs'] } satisfies Meta<typeof IconButton>;

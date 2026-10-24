@@ -20,22 +20,20 @@
         }
     },
     "scripts": {
-        "lint": "eslint .",
         "prepublishOnly": "tsup --env.NODE_ENV production"
     },
     "devDependencies": {
-        "@microsoft/api-extractor": "7.52.1",
-        "@signalco/eslint-config-signalco": "workspace:*",
+        "@microsoft/api-extractor": "7.53.3",
         "@signalco/tailwindcss-config-signalco": "workspace:*",
         "@signalco/tsconfig": "workspace:*",
         "@signalco/ui-icons": "workspace:*",
         "@signalco/ui-primitives": "workspace:*",
-        "@types/react": "19.0.10",
-        "@types/react-dom": "19.0.4",
-        "react": "19.0.0",
-        "react-dom": "19.0.0",
-        "tsup": "8.4.0",
-        "typescript": "5.8.2"
+        "@types/react": "19.2.2",
+        "@types/react-dom": "19.2.2",
+        "react": "19.2.0",
+        "react-dom": "19.2.0",
+        "tsup": "8.5.0",
+        "typescript": "5.9.3"
     },
     "peerDependencies": {
         "@signalco/ui-primitives": "0",

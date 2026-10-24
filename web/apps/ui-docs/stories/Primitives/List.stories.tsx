@@ -1,7 +1,7 @@
 import { List } from "@signalco/ui-primitives/List";
 import { ListItem } from "@signalco/ui-primitives/ListItem";
 import { ListTreeItem } from "@signalco/ui-primitives/ListTreeItem";
-import { StoryObj } from "@storybook/react";
+import { StoryObj } from "@storybook/nextjs";
 import { FileInput } from "@signalco/ui-icons";
 
 export default {

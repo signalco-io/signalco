@@ -7,7 +7,7 @@ config:
   azure-native:tenantId: c7837eb3-77ca-413b-8653-c97b08886678
   checkly:accountId: 40dcbe54-1c1c-4e60-95ba-6ad5fe515b0d
   checkly:apiKey:
-    secure: v1:NHqyoUfvJjYJoREm:GXcpYhh8u6ZP3g3xVt1g21bnyjim8pHBa7FszH8DTFM2qIKAjdpCdcs8e85zHo7l7PLI
+    secure: v1:3qXKWXb+UgHbB3K0:ABqC1TMbuJ1zmRTRbDPGjV+qG6pF/j6pswyq67s4E8QArwkOFzCtc59G4BVpckpMBo5h
   cloud-primary:domain: signalco.dev
   cloud-primary:secret-auth0ApiIdentifier:
     secure: v1:EdjsLHoX2wEKkOHm:9ryP4yaILSSJyyQ3Z+4xMC3WUMwOLY+OXxjCAY8SINuoOcMwnBxJLQLGjy4=
@@ -33,9 +33,9 @@ config:
   cloud-primary:zoneid:
     secure: v1:rtsp5wx6FUtWbbro:bt22CDUsPQ2/bPj1DI81BIvNGWRp9eJJvUNuR9mQPyvg73rbQyonZLix80pRvybl
   cloudflare:apiToken:
-    secure: v1:G2K18hm0zxtYixcN:/PbVHyY8ZifM7CBbXwWNGRGdhhQANRL1yS2/CwuH0Ahn82R0MasF2KzXsQXU+TicFjZYZbapTpw=
+    secure: v1:4z9x3S4f4G4DBdlH:6t78WavrIdLhoiNgtsPSo97MRj+qfHHa3HdTVq75dKDx2RR4vLeGV1DETo9iydWzeY9nP4fnf/XLU0bIX27VuPlijqJr
   vercel:apiToken:
-    secure: v1:kgcEq7tRd/aa0Wjr:v13Q2aBqNGALIIIN80CFATgbXXEP0LBgsJQEt/gDmDscJWRAnHrzpQ==
+    secure: v1:0vOV5WfxvIobC3wt:DnsyvbMHYbGZ/xx/W14QLl0ZnYZfJUKXaFLyWzcG//rB/BJkVBIOov6BvD28+UpssA8oEzuUJitZUKZFqBrstuxbqEDRlTCWtQKLcg==
   vercel:team: team_Ade0MlfC3211ml3wYJZ4c9hn
 secretsprovider: azurekeyvault://vault-pulumib5f713d9.vault.azure.net/keys/pulumi-backend/31ac989112f948b299b6e92d2ba96695
 encryptedkey: cEc5T1Q4VEFNTHdyYzB3ZXozcEF6TC1TRVNFTm12aVB2YjNLMDlDUEZIdmdGdWtYUkVCbWYzb1dkQUJmYnp3Z0hBbkJfQXZkdnZVWE03dXBMT0tBY3RESzQ4dEZSZDEySTVqQnJZaXNZYldSUXo0ZGEwSm9vVEtaaFp3a2FnV0RXNjRlcmNod0xyeUdMQlRnZEhMMmtGa3lHNlBWcVRCanRETkhrbkVaLXd3NVlrV3Fnd3lDLUpKWVYtTm5NZ1RNS0lyTEJtbzZSNGJLb21GdC1EVmtkN0Z5RkJqWUJqRGlRaTU5cW81SWVlWUZFaGdWclctRW9FbVk2Q2pORmNZM2tMRHE5QkRscVJWWkRMRGV3UU1uMlhsYnZqVHF1dDVfUUpfNHJRUUhxdW5RRG1TX2VLUHBjUEhzU0RxSEV6ZWpBdFBrQXY2dDE3R0dFemR6SnFxVjBR

@@ -1,5 +1,4 @@
 import { nanoid } from 'nanoid';
-import { openAiCreateThread, openAiDeleteThread } from '../openAiThreads';
 import { cosmosDataContainerThreads } from '../cosmosClient';
 
 export async function threadsGetAll(accountId: string, workerId: string) {
@@ -35,15 +34,13 @@ export async function threadsGet(accountId: string, threadId: string) {
 }
 
 export async function threadsCreate(accountId: string, workerId: string) {
-    const oaiThreadId = await openAiCreateThread();
-
     const newItem = {
         id: nanoid(16),
         accountId: accountId,
         name: 'New Thread',
         assignedWorkers: [workerId],
         createdAt: new Date().getTime() / 1000, // UNIX seconds
-        oaiThreadId
+        oaiThreadId: null as string | null
     };
 
     const container = cosmosDataContainerThreads();
@@ -62,12 +59,5 @@ export async function threadsDelete(accountId: string, threadId: string) {
     const container = cosmosDataContainerThreads();
     await container.item(threadId, accountId).delete();
 
-    // Delete OpenAI thread
-    if (dbItem.oaiThreadId) {
-        try {
-            await openAiDeleteThread(dbItem.oaiThreadId);
-        } catch (error) {
-            console.error('Failed to delete OpenAI thread', error);
-        }
-    }
+    // No remote OpenAI thread to delete anymore
 }

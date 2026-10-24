@@ -1,4 +1,4 @@
-import { create } from '@storybook/theming/create';
+import { create } from 'storybook/theming/create';
 export type ThemeVars = ReturnType<typeof create>;
 export default create({
     base: 'dark',

@@ -1,6 +1,6 @@
 import { Typography } from "@signalco/ui-primitives/Typography";
 import { Accordion } from "@signalco/ui/Accordion";
-import { Meta, StoryObj } from "@storybook/react";
+import { Meta, StoryObj } from "@storybook/nextjs";
 
 const meta: Meta<typeof Accordion> = {
     component: Accordion,
