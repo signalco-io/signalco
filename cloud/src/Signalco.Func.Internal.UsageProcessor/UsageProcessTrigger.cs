@@ -31,7 +31,7 @@ public class UsageProcessTrigger(
 
     [Function("UsageProcessTrigger")]
     public async Task Run(
-        [TimerTrigger("0 * * * * *")] TimerInfo timer,
+        [TimerTrigger("0 */15 * * * *")] TimerInfo timer,
         CancellationToken cancellationToken = default)
     {
         var queue = await clientFactory.GetQueueClientAsync(QueueName, cancellationToken);
