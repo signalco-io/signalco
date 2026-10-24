@@ -1,4 +1,4 @@
-import { Config, getStack, interpolate, StackReference, getProject } from '@pulumi/pulumi';
+import { Config, getStack, interpolate } from '@pulumi/pulumi';
 import { ResourceGroup } from '@pulumi/azure-native/resources/index.js';
 import {
     createSignalR,
@@ -57,8 +57,6 @@ const up = async () => {
         const storagePrefix = 'store';
         const keyvaultPrefix = 'kv';
 
-        const currentStack = new StackReference(`organization/${getProject()}/${getStack()}`);
-
         const resourceGroup = new ResourceGroup(`signalco-cloud-${stack}`);
 
         const domainName = `${config.require('domain')}`;
@@ -88,7 +86,6 @@ const up = async () => {
                 api.prefix,
                 api.subDomain,
                 api.cors,
-                currentStack,
                 false,
                 sharedLinuxConsumptionPlan.plan.id);
             const apiFuncPublish = await publishProjectAsync([
@@ -136,7 +133,6 @@ const up = async () => {
                 resourceGroup,
                 funcStorage.storageAccount.storageAccount,
                 funcStorage.zipsContainer,
-                currentStack,
                 false,
                 sharedLinuxConsumptionPlan.plan.id));
         }
@@ -153,7 +149,6 @@ const up = async () => {
                 funcName.toLowerCase().substring(0, 5),
                 `${funcName.toLowerCase()}.api`,
                 undefined,
-                currentStack,
                 false,
                 discreteLinuxConsumptionPlan.plan.id);
             const funcPublish = await publishProjectAsync(`../../../discrete/Signalco.Discrete.Api.${funcName}/cloud`);
