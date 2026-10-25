@@ -25,7 +25,8 @@ export function useSetSearchParam(parameterName: string): (value: string | undef
 
         const search = currentSearch.toString();
         const query = search ? `?${search}` : '';
-        const url = `${pathname}${query}`;
+        const hash = typeof window !== 'undefined' ? window.location.hash : '';
+        const url = `${pathname}${query}${hash}`;
 
         console.debug(`useSearchParam: ${parameterName}=${value}`, url);
 

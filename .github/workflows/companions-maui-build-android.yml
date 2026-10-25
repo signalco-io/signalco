@@ -3,8 +3,11 @@
 name: "[Companions] Signalco.Companion.Maui Build for Android"
 
 on:
-  push:
-    branches: [ main ]
+  workflow_call:
+  workflow_dispatch:
+
+permissions:
+  contents: read
 
 defaults:
   run:
@@ -15,6 +18,7 @@ jobs:
     name: Build ${{ matrix.configuration }}
     runs-on: windows-latest
     strategy:
+      fail-fast: false
       matrix:
         configuration: ['Debug', 'Release']
     steps:
@@ -22,18 +26,20 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v5
       with:
-        dotnet-version: 6.x
+        dotnet-version: 10.0.x
     - name: Install workload
       run: dotnet workload install maui-android
     - name: Setup Java JDK
       uses: actions/setup-java@v5
       with:
         distribution: 'temurin'
-        java-version: '11'
+        java-version: '21'
+    - name: Install Android SDK dependencies
+      run: dotnet build ./Signalco.Companion.Maui/Signalco.Companion.Maui.csproj -t:InstallAndroidDependencies -f net10.0-android -p:TargetFrameworks=net10.0-android -p:AcceptAndroidSdkLicenses=True
     - name: Build
-      run: dotnet build -c ${{ matrix.configuration }} -f net6.0-android
+      run: dotnet build ./Signalco.Companion.Maui/Signalco.Companion.Maui.csproj -c ${{ matrix.configuration }} -f net10.0-android -p:TargetFrameworks=net10.0-android
     - name: Publish
-      run: dotnet publish -c ${{ matrix.configuration }} -f net6.0-android -o ./artifacts
+      run: dotnet publish ./Signalco.Companion.Maui/Signalco.Companion.Maui.csproj -c ${{ matrix.configuration }} -f net10.0-android -p:TargetFrameworks=net10.0-android -o ./artifacts
     - name: Pack files
       shell: bash
       run: |
@@ -46,4 +52,5 @@ jobs:
       uses: actions/upload-artifact@v5
       with:
         name: "artifact-${{ matrix.configuration }}"
-        path: "companion-maui-android-${{ matrix.configuration }}.zip"
+        path: "companions/maui/companion-maui-android-${{ matrix.configuration }}.zip"
+        if-no-files-found: error
