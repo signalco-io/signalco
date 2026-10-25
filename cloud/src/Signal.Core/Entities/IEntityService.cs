@@ -62,7 +62,8 @@ public interface IEntityService
         CancellationToken cancellationToken = default,
         bool doNotProcess = false,
         bool doNotNotify = false,
-        bool doNotCache = false);
+        bool doNotCache = false,
+        bool throwOnError = false);
 
     Task ContactSetMetadataAsync(
         IContactPointer pointer,

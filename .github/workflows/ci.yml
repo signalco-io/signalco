@@ -7,11 +7,17 @@ on:
     paths:
       - "web/**"
       - "cloud/**"
+      - "discrete/Signalco.Discrete.Api.Mutex/**"
       - "infra/**"
       - "station/**"
+      - "companions/maui/**"
+      - ".github/labeler.yml"
+      - ".github/workflows/global-pr-labeler.yml"
+      - ".github/workflows/companions-maui-build-android.yml"
       - ".github/workflows/ci.yml"
+      - ".github/workflows/global-smart-pr.yml"
       - ".github/workflows/web-nextjs_ci_reusable.yml"
-      - ".github/workflows/cloud-deploy-preview_reusable.yml"
+      - ".github/workflows/infra-deploy_reusable.yml"
       - ".github/workflows/web-vercel-deploy_reusable.yml"
   push:
     branches:
@@ -20,11 +26,17 @@ on:
     paths:
       - "web/**"
       - "cloud/**"
+      - "discrete/Signalco.Discrete.Api.Mutex/**"
       - "infra/**"
       - "station/**"
+      - "companions/maui/**"
+      - ".github/labeler.yml"
+      - ".github/workflows/global-pr-labeler.yml"
+      - ".github/workflows/companions-maui-build-android.yml"
       - ".github/workflows/ci.yml"
+      - ".github/workflows/global-smart-pr.yml"
       - ".github/workflows/web-nextjs_ci_reusable.yml"
-      - ".github/workflows/cloud-deploy-preview_reusable.yml"
+      - ".github/workflows/infra-deploy_reusable.yml"
       - ".github/workflows/web-vercel-deploy_reusable.yml"
   workflow_dispatch:
 
@@ -64,15 +76,28 @@ jobs:
               - cloud/**
               - infra/**
               - .github/workflows/ci.yml
-              - .github/workflows/cloud-deploy-preview_reusable.yml
+              - .github/workflows/infra-deploy_reusable.yml
+            cloud:
+              - cloud/**
+              - .github/workflows/ci.yml
             web:
               - web/**
               - .github/workflows/ci.yml
               - .github/workflows/web-nextjs_ci_reusable.yml
               - .github/workflows/web-vercel-deploy_reusable.yml
+            mutex:
+              - discrete/Signalco.Discrete.Api.Mutex/**
+              - .github/workflows/ci.yml
+            remote_browser:
+              - cloud/src/Signalco.Api.RemoteBrowser/**
+              - .github/workflows/ci.yml
             station:
               - station/**
               - .github/workflows/ci.yml
+            companion_maui:
+              - companions/maui/**
+              - .github/workflows/ci.yml
+              - .github/workflows/companions-maui-build-android.yml
             app_app:
               - web/apps/app/**
               - web/packages/**
@@ -94,16 +119,17 @@ jobs:
             app_ui_docs:
               - web/apps/ui-docs/**
               - web/packages/**
-            app_uier:
-              - web/apps/uier/**
-              - web/packages/**
             app_workingparty:
               - web/apps/workingparty/**
               - web/packages/**
     outputs:
       infra: ${{ steps.filter.outputs.infrastructure }}
+      cloud: ${{ steps.filter.outputs.cloud }}
       web: ${{ steps.filter.outputs.web }}
+      mutex: ${{ steps.filter.outputs.mutex }}
+      remote_browser: ${{ steps.filter.outputs.remote_browser }}
       station: ${{ steps.filter.outputs.station }}
+      companion_maui: ${{ steps.filter.outputs.companion_maui }}
       app_app: ${{ steps.filter.outputs.app_app }}
       app_web: ${{ steps.filter.outputs.app_web }}
       app_brandgrab: ${{ steps.filter.outputs.app_brandgrab }}
@@ -111,8 +137,52 @@ jobs:
       app_slco: ${{ steps.filter.outputs.app_slco }}
       app_doprocess: ${{ steps.filter.outputs.app_doprocess }}
       app_ui_docs: ${{ steps.filter.outputs.app_ui_docs }}
-      app_uier: ${{ steps.filter.outputs.app_uier }}
       app_workingparty: ${{ steps.filter.outputs.app_workingparty }}
+
+  remote_browser_ci:
+    name: "Remote Browser (container)"
+    runs-on: ubuntu-latest
+    needs: changes
+    if: success() && needs.changes.outputs.remote_browser == 'true'
+    steps:
+      - uses: actions/checkout@v5
+      - name: Build container
+        run: docker build --platform linux/amd64 -t signalco-remote-browser:ci cloud/src/Signalco.Api.RemoteBrowser
+      - name: Verify screenshot endpoint on the ingress port
+        run: |
+          docker run --detach --name remote-browser --publish 127.0.0.1:18086:80 signalco-remote-browser:ci
+          trap 'docker logs remote-browser; docker rm --force remote-browser' EXIT
+          for _readiness_attempt in {1..30}; do
+            if curl --silent --max-time 1 --output /dev/null http://127.0.0.1:18086/; then break; fi
+            sleep 1
+          done
+          curl --fail --silent --show-error --max-time 30 \
+            --get http://127.0.0.1:18086/api/screenshot \
+            --data-urlencode 'url=data:text/html,<h1>Container smoke test</h1>' \
+            --data-urlencode 'width=64' --data-urlencode 'height=64' --data-urlencode 'wait=0' \
+            --output /tmp/remote-browser-screenshot.png
+          python3 -c 'import pathlib, struct; data = pathlib.Path("/tmp/remote-browser-screenshot.png").read_bytes(); assert data[:8] == bytes.fromhex("89504e470d0a1a0a"); assert struct.unpack(">II", data[16:24]) == (64, 64)'
+
+  companion_maui_ci:
+    name: "Companion Android"
+    needs: changes
+    if: success() && needs.changes.outputs.companion_maui == 'true'
+    uses: ./.github/workflows/companions-maui-build-android.yml
+
+  cloud_usage_processor_tests:
+    name: "[Cloud] Usage processor tests"
+    runs-on: ubuntu-latest
+    needs: changes
+    if: success() && needs.changes.outputs.cloud == 'true'
+    steps:
+      - uses: actions/checkout@v5
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: 8.0.x
+      - name: Test
+        run: dotnet test --configuration Release --nologo
+        working-directory: ./cloud/src/Signalco.Func.Internal.UsageProcessor.Tests
 
   station_ci:
     strategy:
@@ -140,6 +210,34 @@ jobs:
           dotnet build ./Signal.Beacon.WorkerService/Signal.Beacon.csproj -r "${{ matrix.target }}" --self-contained true
         working-directory: ./station
 
+  mutex_ci:
+    name: "Mutex (tests)"
+    runs-on: ubuntu-latest
+    needs: changes
+    if: success() && needs.changes.outputs.mutex == 'true'
+    services:
+      azurite:
+        image: mcr.microsoft.com/azure-storage/azurite:3.37.0
+        env:
+          AZURITE_ACCOUNTS: mutexlocal:bG9jYWwtdGVzdC1rZXk=
+        ports:
+          - 10032:10002
+        options: >-
+          --health-cmd "node -e \"require('net').connect(10002, '127.0.0.1').on('connect', () => process.exit(0)).on('error', () => process.exit(1))\""
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    steps:
+      - uses: actions/checkout@v5
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: 8.0.x
+      - name: Test Mutex API
+        run: dotnet test discrete/Signalco.Discrete.Api.Mutex/tests/Signalco.Discrete.Api.Mutex.Tests.csproj --configuration Release --nologo
+        env:
+          MUTEX_AZURITE: "1"
+
   cloud_infra_preview:
     name: "Cloud Primary infrastructure (preview)"
     uses: ./.github/workflows/infra-deploy_reusable.yml
@@ -148,18 +246,6 @@ jobs:
     with:
       project: "cloud-primary"
       packageName: "@infra/cloud-primary"
-      baseRef: ${{ github.base_ref }}
-      command: "preview"
-    secrets: inherit
-
-  uier_infra_preview:
-    name: "uier infrastructure (preview)"
-    uses: ./.github/workflows/infra-deploy_reusable.yml
-    needs: changes
-    if: success() && github.event_name == 'pull_request' && needs.changes.outputs.infra == 'true'
-    with:
-      project: "uier"
-      packageName: "@infra/uier"
       baseRef: ${{ github.base_ref }}
       command: "preview"
     secrets: inherit
@@ -337,29 +423,6 @@ jobs:
       vercelProjectId: "prj_JTG4EUX7sXFIbDmgRxaNarffnq9E"
     secrets: inherit
 
-  analyze_uier:
-    name: "uier (analysis)"
-    needs: changes
-    if: success() && needs.changes.outputs.web == 'true' && needs.changes.outputs.app_uier == 'true'
-    uses: ./.github/workflows/web-nextjs_ci_reusable.yml
-    with:
-      workflowName: "ci.yml"
-      name: "uier"
-      path: "web/apps/uier"
-      vercelProjectId: "prj_0uRTXTGHFdN9SlHnFfNiahIgX3mc"
-    secrets: inherit
-
-  deploy_uier:
-    name: "uier (preview)"
-    needs: analyze_uier
-    if: ${{ success() }}
-    uses: ./.github/workflows/web-vercel-deploy_reusable.yml
-    with:
-      name: "uier"
-      path: "web/apps/uier"
-      vercelProjectId: "prj_0uRTXTGHFdN9SlHnFfNiahIgX3mc"
-    secrets: inherit
-
   analyze_workingparty:
     name: "WorkingParty (analysis)"
     needs: changes
@@ -369,7 +432,7 @@ jobs:
       workflowName: "ci.yml"
       name: "workingparty"
       path: "web/apps/workingparty"
-      vercelProjectId: "prj_0uRTXTGHFdN9SlHnFfNiahIgX3mc"
+      vercelProjectId: "prj_iAsm04GKwdR1z95x9ZEnCzeqwlro"
     secrets: inherit
 
   deploy_workingparty:
@@ -380,7 +443,7 @@ jobs:
     with:
       name: "workingparty"
       path: "web/apps/workingparty"
-      vercelProjectId: "prj_0uRTXTGHFdN9SlHnFfNiahIgX3mc"
+      vercelProjectId: "prj_iAsm04GKwdR1z95x9ZEnCzeqwlro"
     secrets: inherit
 
   ci_ok:
@@ -388,10 +451,13 @@ jobs:
     needs:
       [
         codeql-analysis,
+        cloud_usage_processor_tests,
         station_ci,
+        mutex_ci,
+        remote_browser_ci,
+        companion_maui_ci,
         cloud_infra_preview,
         doprocess_infra_preview,
-        uier_infra_preview,
         workingparty_infra_preview,
         deploy_blog,
         deploy_app,
@@ -400,7 +466,6 @@ jobs:
         deploy_slco,
         deploy_doprocess,
         deploy_uidocs,
-        deploy_uier,
         deploy_workingparty,
       ]
     if: ${{ always() }}

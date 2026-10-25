@@ -1,4 +1,4 @@
-import { Config, interpolate, type StackReference, Output } from '@pulumi/pulumi';
+import { Config, interpolate, Output } from '@pulumi/pulumi';
 import {
     WebApp,
     WebAppHostNameBinding,
@@ -6,9 +6,23 @@ import {
     HostNameType,
     SslState,
     CustomHostNameDnsRecordType,
+    getCertificate,
 } from '@pulumi/azure-native/web/index.js';
 import { ResourceGroup } from '@pulumi/azure-native/resources/index.js';
 import { dnsRecord } from '../cloudflare/dnsRecord.js';
+
+// Read live because Azure renews managed certificates (with a new thumbprint) on its own.
+// Undefined until the certificate is first created.
+async function managedCertificateThumbprint(resourceGroupName: string, name: string) {
+    try {
+        return (await getCertificate({ resourceGroupName, name })).thumbprint;
+    } catch (error) {
+        // Only a missing certificate may leave SSL disabled; anything else must fail the deploy
+        if (/Status=404|NotFound/.test(String(error)))
+            return undefined;
+        throw error;
+    }
+}
 
 export function assignCustomDomain(
     resourceGroup: ResourceGroup,
@@ -16,7 +30,6 @@ export function assignCustomDomain(
     servicePlanId: Output<string>,
     namePrefix: string,
     subDomainName: string,
-    currentStack: StackReference,
     protect: boolean) {
     const config = new Config();
     const fullDomainName = `${subDomainName}.${config.require('domain')}`;
@@ -36,8 +49,8 @@ export function assignCustomDomain(
         protect,
     );
 
-    const certsOutput = currentStack.getOutput('certs') as Output<{ fullDomainName: string, thumbprint: string }[]>;
-    const certOutput = certsOutput.apply(certs => certs?.find(c => c.fullDomainName === fullDomainName));
+    const certName = `cert-${namePrefix}`;
+    const certThumbprint = resourceGroup.name.apply(name => managedCertificateThumbprint(name, certName));
 
     const binding = new WebAppHostNameBinding(`func-hostnamebind-${namePrefix}`, {
         name: webApp.name,
@@ -45,19 +58,23 @@ export function assignCustomDomain(
         hostName: fullDomainName,
         customHostNameDnsRecordType: CustomHostNameDnsRecordType.CName,
         hostNameType: HostNameType.Verified,
-        sslState: certOutput.apply(c => c?.thumbprint ? SslState.SniEnabled : SslState.Disabled),
-        thumbprint: certOutput.apply(c => c?.thumbprint ?? ''),
+        sslState: certThumbprint.apply(t => t ? SslState.SniEnabled : SslState.Disabled),
+        thumbprint: certThumbprint.apply(t => t ?? ''),
     }, {
         protect,
+        // Hostname verification needs the DNS records in place
+        dependsOn: [txtVerifyRecord, cname],
     });
 
     const cert = new Certificate(`func-cert-${namePrefix}`, {
         resourceGroupName: resourceGroup.name,
-        name: `cert-${namePrefix}`,
+        name: certName,
         canonicalName: fullDomainName,
         serverFarmId: servicePlanId,
     }, {
         protect,
+        // Managed certificates can only be issued for a hostname already bound to the app
+        dependsOn: [binding],
     });
 
     return {

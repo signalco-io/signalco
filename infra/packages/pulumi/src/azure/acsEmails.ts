@@ -2,7 +2,7 @@ import { dnsRecord } from '@infra/pulumi/cloudflare';
 import { EmailService, Domain, DomainManagement, UserEngagementTracking, SenderUsername, CommunicationService, listCommunicationServiceKeysOutput } from '@pulumi/azure-native/communication/index.js';
 import { ResourceGroup } from '@pulumi/azure-native/resources/index.js';
 
-export async function acsEmails(prefix: string, resourceGroup: ResourceGroup, domainName: string, subdomain: string | null | undefined, stack: string, emails: { subdomain: string; displayName: string; }[]) {
+export async function acsEmails(prefix: string, resourceGroup: ResourceGroup, domainName: string, subdomain: string | null | undefined, stack: string, emails: { subdomain: string; displayName: string; }[], options: { manageSpf?: boolean } = {}) {
     // Create ACS
     const aes = new EmailService(`${prefix}-azure-email-service`, {
         dataLocation: 'Europe',
@@ -23,7 +23,7 @@ export async function acsEmails(prefix: string, resourceGroup: ResourceGroup, do
         const aesDomainVerifyDataValue = aesDomain.verificationRecords.domain.apply(domainVerification => domainVerification?.value ?? '');
         dnsRecord(`${prefix}-aes-domain-domainverify`, aesDomainVerifyDataName, aesDomainVerifyDataValue, 'TXT', false);
     }
-    if (aesDomain.verificationRecords.sPF) {
+    if (options.manageSpf !== false && aesDomain.verificationRecords.sPF) {
         const aesDomainVerifySpfName = aesDomain.verificationRecords.sPF.apply(dkimVerification => dkimVerification?.name ?? '');
         const aesDomainVerifySpfValue = aesDomain.verificationRecords.sPF.apply(dkimVerification => dkimVerification?.value ?? '');
         dnsRecord(`${prefix}-aes-domain-spf`, aesDomainVerifySpfName, aesDomainVerifySpfValue, 'TXT', false);

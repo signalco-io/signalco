@@ -29,10 +29,6 @@
 			"path": "apps/doprocess"
 		},
 		{
-			"name": "🚀 uier.io",
-			"path": "apps/uier"
-		},
-		{
 			"name": "🚀 slco.io",
 			"path": "apps/slco"
 		},
@@ -103,10 +99,6 @@
 		{
 			"name": "📦 @signalco/ui-themes-minimal-app",
 			"path": "packages/ui-themes-minimal-app"
-		},
-		{
-			"name": "📦 @uier/toolbar",
-			"path": "packages/uier-toolbar"
 		},
 		{
 			"name": "⚙️ @signalco/tailwindcss-config-signalco",

@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef, forwardRef, HTMLAttributes, ReactNode, useId } from 'react';
+import { ComponentPropsWithoutRef, forwardRef, HTMLAttributes, ReactNode, useId, useState } from 'react';
 import { Check, Select as SelectIcon, Up, Down } from '@signalco/ui-icons';
 import * as SelectPrimitive from '@radix-ui/react-select'
 import { Stack } from '../Stack';
@@ -76,6 +76,14 @@ export function SelectItems<T extends string>(props: SelectItemsProps<T>) {
 
     const customId = useId();
     const labelId = label ? `label-${id ?? name ?? customId}` : undefined;
+    const [internalValue, setInternalValue] = useState(defaultValue);
+    const selectedValue = value !== undefined ? value : internalValue;
+    const selectedItem = items.find(item => item.value === selectedValue);
+
+    const handleValueChange = (nextValue: string) => {
+        if (value === undefined) setInternalValue(nextValue as T);
+        onValueChange?.(nextValue as T);
+    };
 
     return (
         <Stack spacing={0.5} {...rest}>
@@ -83,7 +91,7 @@ export function SelectItems<T extends string>(props: SelectItemsProps<T>) {
             <SelectPrimitive.Root
                 value={value}
                 defaultValue={defaultValue}
-                onValueChange={onValueChange}
+                onValueChange={handleValueChange}
                 name={name}
                 aria-labelledby={labelId}>
                 <SelectPrimitive.Trigger
@@ -98,7 +106,14 @@ export function SelectItems<T extends string>(props: SelectItemsProps<T>) {
                     )}
                     aria-label={label ?? placeholder}
                 >
-                    <SelectPrimitive.Value placeholder={placeholder} />
+                    <SelectPrimitive.Value placeholder={placeholder}>
+                        {selectedItem && (
+                            <span className="flex items-center gap-2">
+                                {selectedItem.icon}
+                                <span className="line-clamp-1">{selectedItem.content ?? (selectedItem.label ?? selectedItem.value)}</span>
+                            </span>
+                        )}
+                    </SelectPrimitive.Value>
                     <SelectPrimitive.Icon asChild>
                         <SelectIcon className="size-4 shrink-0 opacity-50" />
                     </SelectPrimitive.Icon>
