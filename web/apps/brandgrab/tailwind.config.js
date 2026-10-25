@@ -3,6 +3,7 @@ import { config } from '@signalco/ui-themes-minimal/config';
 /** @type {import('tailwindcss').Config} */
 export default {
     presets: [config],
+    darkMode: 'media',
     content: [
         './app/**/*.{ts,tsx}',
         './components/**/*.{ts,tsx}',

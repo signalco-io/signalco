@@ -14,7 +14,8 @@
         "build": "next build",
         "postbuild": "next-sitemap --config next-sitemap.config.cjs",
         "start": "next start -p 4001",
-        "test": "playwright test"
+        "test": "pnpm test:api && playwright test",
+        "test:api": "node --experimental-vm-modules --test tests/*.test.mjs"
     },
     "dependencies": {
         "@enterwell/react-hooks": "0.7.0",
