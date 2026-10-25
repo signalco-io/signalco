@@ -13,7 +13,6 @@ import { NavigatingButton } from '@signalco/ui/NavigatingButton';
 import { Loadable } from '@signalco/ui/Loadable';
 import { useSearchParam } from '@signalco/hooks/useSearchParam';
 import { CheckoutSessionDto } from '../../../../../../../api/accounts/[accountId]/billing/checkout/[planId]/route';
-import { clientStripe } from '../../../../../../../../src/lib/stripe/clientStripe';
 import { usePlans } from '../../../../../../../../src/hooks/data/plans/usePlans';
 import { useAccountSubscriptions } from '../../../../../../../../src/hooks/data/account/useAccountSubscriptions';
 import { SettingsCardActions } from '../../../../../../../../src/components/settings/SettingsCardActions';
@@ -50,8 +49,7 @@ export function SettingsAccountBillingPlanCard() {
             }
 
             const session = await sessionResponse.json() as CheckoutSessionDto;
-            const stripe = await clientStripe();
-            stripe?.redirectToCheckout({ sessionId: session.sessionId });
+            window.location.assign(session.url);
         } finally {
             setCheckoutLoading(false);
         }

@@ -8,6 +8,8 @@ _Note: Other development guides are coming soon_
 - [Web Development](./web/DEVELOPMENT.md)
 - [Infrastructure Development](./infra/README.md)
 
+_Note: [uier.io](https://uier.io) (website, review toolbar and infrastructure) moved to its own repository: [signalco-io/uier](https://github.com/signalco-io/uier)._
+
 ## Conventions
 
 ### Changelog and commits
@@ -16,6 +18,16 @@ _Note: Other development guides are coming soon_
 - Commits from core contributors and forks should be done against `next` branch
 
 ## GitHub actions
+
+Pull requests are labeled automatically from changed file paths using
+[`.github/labeler.yml`](./.github/labeler.yml). The labeler runs when a PR is
+opened, reopened, updated, or edited, including PRs from forks. It uses the
+workflow and configuration from the default `main` branch without checking out
+PR code. Changes merged into `next` take effect when released to `main`.
+
+When adding an app or package, update the path rules using existing repository
+labels. Configured labels are removed if their paths no longer match; labels
+outside the configuration (such as bug, feature, and status labels) are preserved.
 
 You can use [`act`](https://github.com/nektos/act) to develop actions locally.
 

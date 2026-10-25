@@ -109,3 +109,5 @@ Legend
 💡 Ideating
 🧪 Working on POC
 🏗️ In progress (preparing MVP)
+
+_Note: uier.io is developed in its own repository: [signalco-io/uier](https://github.com/signalco-io/uier)._

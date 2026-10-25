@@ -4,18 +4,21 @@ import { Row } from '@signalco/ui-primitives/Row';
 import { Input } from '@signalco/ui-primitives/Input';
 import { IconButton } from '@signalco/ui-primitives/IconButton';
 import { cx } from '@signalco/ui-primitives/cx';
+import { Skeleton } from '@signalco/ui-primitives/Skeleton';
 import { Close, Save, Edit } from '@signalco/ui-icons';
 
 export type EditableInputProps = {
     value: string,
     onChange: (text: string) => void
     className?: string;
+    isLoading?: boolean;
 }
 
 export function EditableInput({
     value,
     onChange,
-    className
+    className,
+    isLoading = false
 }: EditableInputProps) {
     const [isEditing, setIsEditing] = useState(false);
     const [editingText, setEditingText] = useState(value);
@@ -42,6 +45,18 @@ export function EditableInput({
         if (e.key === 'Enter') handleConfirm();
         else if (e.key === 'Escape') handleCancel();
     };
+
+    if (isLoading) {
+        return (
+            <Row
+                role="status"
+                aria-label="Loading editable input"
+                aria-busy="true"
+                className={cx('py-1', className)}>
+                <Skeleton aria-hidden="true" className="h-[1em] w-[10em] max-w-full" />
+            </Row>
+        );
+    }
 
     if (isEditing) {
         return (

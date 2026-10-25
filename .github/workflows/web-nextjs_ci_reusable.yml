@@ -82,11 +82,10 @@ jobs:
       - name: ⚒️ Build app
         run: pnpm build --filter=${{ inputs.name }}
 
+      # Use the app's own Playwright so the browser build matches @playwright/test
       - name: 📦️ Install playwright browsers
         if: success() && github.event_name == 'pull_request'
-        run: |
-          pnpm install --global playwright
-          pnpm playwright install --with-deps
+        run: pnpm --filter=${{ inputs.name }} exec playwright install --with-deps chromium
 
       - name: ⚒️ Test app
         if: success() && github.event_name == 'pull_request'

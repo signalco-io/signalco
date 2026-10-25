@@ -53,6 +53,7 @@ More info on development can be found in [Development](/DEVELOPMENT.md) document
 - [🌐 Website](https://www.signalco.io)
 - [✔️ Status page](https://status.signalco.io)
 - [🖌️ Figma files](https://www.figma.com/file/8cMJOfjFdQBiGdWTvr2SB1/Signalco.io-Design?node-id=78%3A684)
+- [🧩 uier](https://github.com/signalco-io/uier) - [uier.io](https://uier.io) (website, review toolbar and infrastructure) now lives in its own repository
 
 ## License
 

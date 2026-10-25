@@ -10,7 +10,7 @@ export function apiStatusCheck(prefix: string, name: string, domain: Input<strin
         activated: true,
         frequency,
         type: 'API',
-        locations: ['eu-west-1'],
+        locations: ['eu-central-1'],
         tags: [stack === 'production' ? 'prod' : 'next'],
         request: {
             method: 'GET',

@@ -1,4 +1,4 @@
-import { Config, getStack, interpolate, StackReference, getProject } from '@pulumi/pulumi';
+import { Config, getStack, interpolate } from '@pulumi/pulumi';
 import { ResourceGroup } from '@pulumi/azure-native/resources/index.js';
 import {
     createSignalR,
@@ -17,7 +17,7 @@ import {
     acsEmails,
 } from '@infra/pulumi/azure';
 import { apiStatusCheck } from '@infra/pulumi/checkly';
-import { dnsRecord } from '@infra/pulumi/cloudflare';
+import { dnsRecord, emailRoutingFromConfig } from '@infra/pulumi/cloudflare';
 import { publishProjectAsync } from '@infra/pulumi/dotnet';
 import { ConfCloudApiCheckInterval, ConfPublicSignalRCheckInterval } from './config.js';
 import { createRemoteBrowser } from './createRemoteBrowser.js';
@@ -57,12 +57,13 @@ const up = async () => {
         const storagePrefix = 'store';
         const keyvaultPrefix = 'kv';
 
-        const currentStack = new StackReference(`organization/${getProject()}/${getStack()}`);
-
         const resourceGroup = new ResourceGroup(`signalco-cloud-${stack}`);
 
         const domainName = `${config.require('domain')}`;
         const corsDomains = [`app.${domainName}`, `www.${domainName}`, domainName];
+
+        // Routing is zone-wide. Adopt only an explicitly captured inventory for this stack.
+        const mailRouting = emailRoutingFromConfig('cp-email');
 
         const signalr = createSignalR(resourceGroup, signalrPrefix, corsDomains, 'free', false);
         apiStatusCheck(signalrPrefix, 'SignalR', signalr.signalr.hostName, ConfPublicSignalRCheckInterval, '/api/v1/health');
@@ -88,7 +89,6 @@ const up = async () => {
                 api.prefix,
                 api.subDomain,
                 api.cors,
-                currentStack,
                 false,
                 sharedLinuxConsumptionPlan.plan.id);
             const apiFuncPublish = await publishProjectAsync([
@@ -136,7 +136,6 @@ const up = async () => {
                 resourceGroup,
                 funcStorage.storageAccount.storageAccount,
                 funcStorage.zipsContainer,
-                currentStack,
                 false,
                 sharedLinuxConsumptionPlan.plan.id));
         }
@@ -153,7 +152,6 @@ const up = async () => {
                 funcName.toLowerCase().substring(0, 5),
                 `${funcName.toLowerCase()}.api`,
                 undefined,
-                currentStack,
                 false,
                 discreteLinuxConsumptionPlan.plan.id);
             const funcPublish = await publishProjectAsync(`../../../discrete/Signalco.Discrete.Api.${funcName}/cloud`);
@@ -198,7 +196,7 @@ const up = async () => {
             [
                 { subdomain: 'notifications', displayName: 'Signalco Notifications' },
                 { subdomain: 'system', displayName: 'Signalco' },
-            ]);
+            ], { manageSpf: !mailRouting });
 
         // Create and populate vault
         const vault = createKeyVault(resourceGroup, keyvaultPrefix, shouldProtect, [
