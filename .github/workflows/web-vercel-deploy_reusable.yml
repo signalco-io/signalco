@@ -77,7 +77,7 @@ jobs:
         run: vercel build ${{ inputs.preview == false && '--prod' }} --token=${{ secrets.VERCEL_TOKEN }}
 
       - name: 🚀 Deploy Preview to Vercel
-        run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }}
+        run: vercel deploy --prebuilt --archive=tgz --token=${{ secrets.VERCEL_TOKEN }}
         if: ${{ inputs.preview == true }}
 
       - name: 🚀 Deploy Production to Vercel
