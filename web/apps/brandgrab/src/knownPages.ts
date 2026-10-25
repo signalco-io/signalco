@@ -2,9 +2,9 @@ export const KnownPages = {
     Landing: '/',
     Status: 'https://status.signalco.io',
 
-    LegalPrivacyPolicy: '/legal/privacy-policy',
-    LegalTermsOfService: '/legal/terms-of-service',
-    LegalCookiePolicy: '/legal/cookie-policy',
-    LegalAcceptableUsePolicy: '/legal/acceptable-use-policy',
-    LegalSla: '/legal/sla'
+    LegalPrivacyPolicy: 'https://www.signalco.io/legal/privacy-policy',
+    LegalTermsOfService: 'https://www.signalco.io/legal/terms-of-service',
+    LegalCookiePolicy: 'https://www.signalco.io/legal/cookie-policy',
+    LegalAcceptableUsePolicy: 'https://www.signalco.io/legal/acceptable-use-policy',
+    LegalSla: 'https://www.signalco.io/legal/sla'
 } as const;

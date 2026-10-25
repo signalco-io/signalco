@@ -1,4 +1,4 @@
-import { TooltipProps } from 'recharts/types/component/Tooltip';
+import type { TooltipContentProps } from 'recharts';
 import { Area, Bar, BarChart, CartesianGrid, ComposedChart, LabelList, LabelProps, Legend, Line, ReferenceLine, Tooltip, XAxis, YAxis } from 'recharts';
 import { type SVGProps } from 'react';
 import { ScaleTime, scaleTime, timeHour } from 'd3';
@@ -145,7 +145,7 @@ function ChartGenericTooltip({
     payload,
     domain,
     units
-}: TooltipProps<string | number | (string | number)[], string | number> &
+}: TooltipContentProps &
     { domain: ScaleTime<number, number, never>, units?: string }) {
     if (active && payload && payload.length) {
         const dateTime = domain.invert(payload[0]?.payload.key) as Date;
@@ -250,7 +250,7 @@ function GraphArea({ data, durationMs, width, height, startDateTime, hideLegend,
         ? Math.max(...dataTransformedNumbers.map(d => typeof d === 'number' ? d : 0))
         : undefined;
 
-    const aggregatedData = aggregate
+    const aggregatedData: { key: number; value: GraphDataPoint['value'] | null }[] = aggregate
         ? aggregateDataByTime(past, nowTime, data, durationMs, domainGraph, aggregate)
         : transformedData;
 
@@ -312,7 +312,7 @@ function GraphArea({ data, durationMs, width, height, startDateTime, hideLegend,
                     strokeWidth={2}
                     strokeDasharray="5 3" />
             )}
-            <Tooltip content={<ChartGenericTooltip domain={domainGraph} />} />
+            <Tooltip content={(props) => <ChartGenericTooltip {...props} domain={domainGraph} />} />
         </ComposedChart>
     );
 }
