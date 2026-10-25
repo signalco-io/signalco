@@ -910,8 +910,8 @@ importers:
         specifier: 19.2.2
         version: 19.2.2(@types/react@19.2.2)
       babel-loader:
-        specifier: 10.0.0
-        version: 10.0.0(@babel/core@7.29.7)(webpack@5.94.0(postcss@8.5.31))
+        specifier: 10.1.1
+        version: 10.1.1(@babel/core@7.29.7)(webpack@5.94.0(postcss@8.5.31))
       babel-plugin-react-compiler:
         specifier: 19.1.0-rc.3
         version: 19.1.0-rc.3
@@ -5898,12 +5898,18 @@ packages:
     resolution: {integrity: sha512-9WTZxEjsZ7b13TH8JPmbV2z8CHbl80/2hm3XPEG4JgNdQLK81IBRXmSxHfMAOkSqQeRxT/0dwNDz2GOm3zzpcQ==}
     engines: {node: '>=4'}
 
-  babel-loader@10.0.0:
-    resolution: {integrity: sha512-z8jt+EdS61AMw22nSfoNJAZ0vrtmhPRVi6ghL3rCeRZI8cdNYFiV5xeV3HbE7rlZZNmGH8BVccwWt8/ED0QOHA==}
+  babel-loader@10.1.1:
+    resolution: {integrity: sha512-JwKSzk2kjIe7mgPK+/lyZ2QAaJcpahNAdM+hgR2HI8D0OJVkdj8Rl6J3kaLYki9pwF7P2iWnD8qVv80Lq1ABtg==}
     engines: {node: ^18.20.0 || ^20.10.0 || >=22.0.0}
     peerDependencies:
-      '@babel/core': ^7.12.0
+      '@babel/core': ^7.12.0 || ^8.0.0-beta.1
+      '@rspack/core': ^1.0.0 || ^2.0.0-0
       webpack: '>=5.61.0'
+    peerDependenciesMeta:
+      '@rspack/core':
+        optional: true
+      webpack:
+        optional: true
 
   babel-loader@9.2.1:
     resolution: {integrity: sha512-fqe8naHt46e0yIdkjUZYqddSXfej3AHajX+CSO5X7oy0EmPc6o5Xh+RClNoHjnieWz9AW4kZxW9yyFMhVB1QLA==}
@@ -14823,10 +14829,11 @@ snapshots:
 
   axe-core@4.14.0: {}
 
-  babel-loader@10.0.0(@babel/core@7.29.7)(webpack@5.94.0(postcss@8.5.31)):
+  babel-loader@10.1.1(@babel/core@7.29.7)(webpack@5.94.0(postcss@8.5.31)):
     dependencies:
       '@babel/core': 7.29.7
       find-up: 5.0.0
+    optionalDependencies:
       webpack: 5.94.0(postcss@8.5.31)
 
   babel-loader@9.2.1(@babel/core@7.29.7)(webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.23))(postcss@8.5.31)):
@@ -19349,6 +19356,7 @@ snapshots:
       webpack: 5.94.0(postcss@8.5.31)
     optionalDependencies:
       postcss: 8.5.31
+    optional: true
 
   terser@5.44.0:
     dependencies:
@@ -19898,6 +19906,7 @@ snapshots:
       - lightningcss
       - postcss
       - uglify-js
+    optional: true
 
   whatwg-encoding@3.1.1:
     dependencies:
