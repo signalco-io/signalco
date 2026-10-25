@@ -40,7 +40,7 @@
         "@tanstack/react-query-devtools": "5.90.2",
         "@vercel/analytics": "1.5.0",
         "jose": "6.1.0",
-        "nanoid": "5.1.6",
+        "nanoid": "5.1.16",
         "next": "15.5.28",
         "next-secure-headers": "2.2.0",
         "next-themes": "0.4.6",
@@ -49,7 +49,7 @@
         "react-dom": "19.2.0",
         "react-email": "4.3.2",
         "react-markdown": "10.1.0",
-        "sharp": "0.35.4",
+        "sharp": "0.35.5",
         "stripe": "19.1.0",
         "tailwindcss": "3.4.18",
         "tailwindcss-animate": "1.0.7"
