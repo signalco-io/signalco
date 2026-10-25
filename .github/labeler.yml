@@ -1,0 +1,132 @@
+# Use existing repository labels. Rules describe changed files, not PR intent.
+# Keep bug/feature, priority, and status labels under manual control.
+
+"area:app":
+  - changed-files:
+      - any-glob-to-any-file: "web/apps/app/**"
+
+"area:website":
+  - changed-files:
+      - any-glob-to-any-file: "web/apps/web/**"
+
+"area:blog":
+  - changed-files:
+      - any-glob-to-any-file: "web/apps/blog/**"
+
+"area:docs":
+  - changed-files:
+      - any-glob-to-any-file: ["docs/**", "web/apps/ui-docs/**", "**/*.md", "**/*.mdx"]
+
+"area:cloud":
+  - changed-files:
+      - any-glob-to-any-file: ["cloud/**", "discrete/*/cloud/**"]
+
+"area:channel-cloud":
+  - changed-files:
+      - any-glob-to-any-file: "cloud/src/Signalco.Channel.*/**"
+
+"area:station":
+  - changed-files:
+      - any-glob-to-any-file: "station/**"
+
+"area:channel-station":
+  - changed-files:
+      - any-glob-to-any-file:
+          - "station/Signal.Beacon.Channel.*/**"
+          - "station/Signalco.Station.Channel.*/**"
+
+"area:companion/maui":
+  - changed-files:
+      - any-glob-to-any-file:
+          - "companions/maui/**"
+          - ".github/workflows/companions-maui-*.yml"
+
+"area:cli":
+  - changed-files:
+      - any-glob-to-any-file: "discrete/*/node-cli/**"
+
+"area:infrastructure":
+  - changed-files:
+      - any-glob-to-any-file: "infra/**"
+
+"area:dx":
+  - changed-files:
+      - any-glob-to-any-file:
+          - ".github/**"
+          - ".releaserc"
+          - "renovate.json"
+          - "config/**"
+          - "web/tools/**"
+          - "web/packages/tsconfig/**"
+          - "**/pnpm-workspace.yaml"
+          - "**/turbo.json"
+
+"app:brandgrab":
+  - changed-files:
+      - any-glob-to-any-file: "web/apps/brandgrab/**"
+
+"app:doprocess":
+  - changed-files:
+      - any-glob-to-any-file: ["web/apps/doprocess/**", "infra/apps/doprocess/**"]
+
+"app:slco":
+  - changed-files:
+      - any-glob-to-any-file: "web/apps/slco/**"
+
+"app:workingparty":
+  - changed-files:
+      - any-glob-to-any-file: ["web/apps/workingparty/**", "infra/apps/workingparty/**"]
+
+"app:remote-browser":
+  - changed-files:
+      - any-glob-to-any-file:
+          - "infra/apps/remote-browser/**"
+          - "cloud/src/Signalco.Api.RemoteBrowser/**"
+          - "cloud/src/Signalco.Api.Public.RemoteBrowser/**"
+
+"package:ui":
+  - changed-files:
+      - any-glob-to-any-file: "web/packages/ui/**"
+
+"package:ui-icons":
+  - changed-files:
+      - any-glob-to-any-file: "web/packages/ui-icons/**"
+
+"package:ui-primitives":
+  - changed-files:
+      - any-glob-to-any-file: "web/packages/ui-primitives/**"
+
+"documentation":
+  - changed-files:
+      - any-glob-to-any-file: ["docs/**", "**/*.md", "**/*.mdx"]
+
+"dependencies":
+  - changed-files:
+      - any-glob-to-any-file:
+          - "**/package.json"
+          - "**/pnpm-lock.yaml"
+          - "**/package-lock.json"
+          - "**/yarn.lock"
+          - "**/*.csproj"
+          - "**/packages.lock.json"
+          - "**/Directory.Packages.props"
+          - "renovate.json"
+
+"github_actions":
+  - changed-files:
+      - any-glob-to-any-file: ".github/workflows/**"
+
+"javascript":
+  - changed-files:
+      - any-glob-to-any-file: "**/*.{js,jsx,mjs,cjs,ts,tsx,mts,cts}"
+
+".NET":
+  - changed-files:
+      - any-glob-to-any-file:
+          - "**/*.cs"
+          - "**/*.csproj"
+          - "**/*.sln"
+          - "**/*.props"
+          - "**/*.targets"
+          - "**/*.xaml"
+          - "**/global.json"

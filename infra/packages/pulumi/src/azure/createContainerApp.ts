@@ -26,7 +26,7 @@ export function createContainerApp(resourceGroup: ResourceGroup, namePrefix: str
         template: {
             containers: [{
                 name: 'app',
-                image: image.imageName,
+                image: image.repoDigest,
             }],
             scale: {
                 minReplicas: 0,

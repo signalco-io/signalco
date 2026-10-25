@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS base
+FROM mcr.microsoft.com/dotnet/aspnet:8.0-bookworm-slim AS base
 WORKDIR /app
 EXPOSE 80
 EXPOSE 443
@@ -6,7 +6,7 @@ EXPOSE 443
 RUN apt-get update && \
     apt install -y libglib2.0-0 libnss3 libatk1.0-0 libatk-bridge2.0-0 libcups2 libdrm2 libxkbcommon0 libxcomposite1 libxdamage1 libxfixes3 libxrandr2 libgbm1 libasound2 libpango-1.0-0 libpangocairo-1.0-0
 
-FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:8.0-bookworm-slim AS build
 WORKDIR /src
 
 COPY . .
@@ -18,5 +18,6 @@ RUN dotnet publish "Signalco.Api.RemoteBrowser.csproj" -c Release -o /app/publis
 
 FROM base AS final
 WORKDIR /app
+ENV ASPNETCORE_HTTP_PORTS=80
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "Signalco.Api.RemoteBrowser.dll"]
