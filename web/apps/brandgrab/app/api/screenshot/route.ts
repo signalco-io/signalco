@@ -1,9 +1,13 @@
 import sharp from 'sharp';
 import { NextResponse } from 'next/server';
 import { isDeveloper } from '../../../src/services/EnvProvider';
+import { siteUrl } from '../../../src/siteUrl';
+import { publicSiteUrl } from '../../../src/services/fetchSite';
 
 export type ScreenshotResponse = {
     data: string;
+    width: number;
+    height: number;
     colors: {
         hex: string;
         area: number;
@@ -17,7 +21,7 @@ function extractColor(data: Buffer, channels: number) {
         const green = data[i + 1];
         const blue = data[i + 2];
         const alpha = data[i + 3];
-        if ((alpha ?? 0) > 0) {
+        if (channels < 4 || (alpha ?? 0) > 0) {
             colors.push(`#${red?.toString(16).padStart(2, '0')}${green?.toString(16).padStart(2, '0')}${blue?.toString(16).padStart(2, '0')}`);
         }
     }
@@ -44,6 +48,8 @@ function topColors(colors: Map<string, number>, count: number, minArea = 0.0001)
     return topColors.map(([color, area]) => ({ hex: color, area }));
 }
 
+export const maxDuration = 60;
+
 export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
     const domain = searchParams.get('domain');
@@ -51,34 +57,53 @@ export async function GET(request: Request) {
         return NextResponse.json({ error: 'No domain provided' }, { status: 400 });
     }
 
-    const query = `url=https://${domain}&fullPage=true&width=1280`;
-    const browserApiUrl = 'https://browser.api.signalco.' + (isDeveloper ? 'dev' : 'io');
-    const screenshotUrl = `${browserApiUrl}/api/screenshot?${query}`;
-    console.info('Requesting screenshot', screenshotUrl);
-
-    const response = await fetch(screenshotUrl, { cache: 'no-store' });
-    const isSuccessResponse = response.status >= 200 && response.status < 300;
-    if (!isSuccessResponse) {
-        return NextResponse.json({ error: 'Failed to get screenshot' }, { status: 500 });
-    }
-
-    const data = Buffer.from(await response.arrayBuffer());
-    const dataUrlDataPng = `data:image/png;base64,${data.toString('base64')}`;
-
-    let colors: ScreenshotResponse['colors'] = [];
+    let url: URL;
     try {
-        const start = performance.now();
-        const img = sharp(data);
-        const imgBuffer = await img.raw().toBuffer({ resolveWithObject: true });
-        const imgColors = extractColor(imgBuffer.data, imgBuffer.info.channels);
-        const palette = colorsPalette(imgColors);
-        colors = topColors(palette, 16);
-        const end = performance.now() - start;
-        console.debug(colors);
-        console.info('Extracted colors in', end, 'ms');
-    } catch (e) {
-        console.error('Error extracting colors', e);
+        url = siteUrl(domain);
+    } catch {
+        return NextResponse.json({ error: 'Enter a public website domain or an HTTP(S) URL.' }, { status: 400 });
     }
 
-    return NextResponse.json({ data: dataUrlDataPng, colors });
+    try {
+        await publicSiteUrl(url.href);
+        const query = new URLSearchParams({ url: url.href, fullPage: 'true', width: '1280' });
+        const browserApiUrl = 'https://browser.api.signalco.' + (isDeveloper ? 'dev' : 'io');
+        const screenshotUrl = new URL(process.env.SCREENSHOT_API_URL || `${browserApiUrl}/api/screenshot`);
+        screenshotUrl.search = query.toString();
+
+        const response = await fetch(screenshotUrl, { cache: 'no-store', signal: AbortSignal.timeout(40_000) });
+        const isSuccessResponse = response.status >= 200 && response.status < 300;
+        if (!isSuccessResponse) {
+            return NextResponse.json({ error: 'Failed to get screenshot' }, { status: 502 });
+        }
+
+        const data = Buffer.from(await response.arrayBuffer());
+        const dataUrlDataPng = `data:image/png;base64,${data.toString('base64')}`;
+
+        const metadata = await sharp(data).metadata();
+        if (!metadata.width || !metadata.height) throw new Error('Invalid screenshot');
+
+        let colors: ScreenshotResponse['colors'] = [];
+        try {
+            const start = performance.now();
+            // Quantize near-identical shades so backgrounds do not fill the entire palette.
+            const paletteImage = await sharp(data)
+                .resize({ width: 256, withoutEnlargement: true })
+                .png({ palette: true, colours: 16, dither: 0 })
+                .toBuffer();
+            const imgBuffer = await sharp(paletteImage).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+            const imgColors = extractColor(imgBuffer.data, imgBuffer.info.channels);
+            const palette = colorsPalette(imgColors);
+            colors = topColors(palette, 16);
+            const end = performance.now() - start;
+            console.debug(colors);
+            console.info('Extracted colors in', end, 'ms');
+        } catch (e) {
+            console.error('Error extracting colors', e);
+        }
+
+        return NextResponse.json({ data: dataUrlDataPng, width: metadata.width, height: metadata.height, colors } satisfies ScreenshotResponse);
+    } catch {
+        return NextResponse.json({ error: 'The page preview is unavailable. Please try again later.' }, { status: 502 });
+    }
 }

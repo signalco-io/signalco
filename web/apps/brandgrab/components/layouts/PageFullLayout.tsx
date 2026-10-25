@@ -5,9 +5,9 @@ export function PageFullLayout(props: PropsWithChildren) {
     return (
         <>
             <PageNav logo="BrandGrab.io" />
-            <div style={{ paddingTop: '80px' }}>
+            <main style={{ paddingTop: '80px' }}>
                 {props.children}
-            </div>
+            </main>
         </>
     );
 }

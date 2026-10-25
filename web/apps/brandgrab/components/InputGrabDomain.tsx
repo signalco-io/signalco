@@ -1,32 +1,46 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button } from '@signalco/ui-primitives/Button';
 import { Rocket } from '@signalco/ui-icons';
 import { useSearchParam } from '@signalco/hooks/useSearchParam';
 import InputSubmit from './form/InputSubmit';
+import { siteUrl } from '../src/siteUrl';
 
-function stripDomain(domain: string | number | readonly string[] | undefined) {
-    return typeof domain === 'string' ? domain.replace(/https?:\/\//, '') : '';
-}
-
-export default function InputGrabDomain({ placeholder }: { placeholder?: string }) {
+export default function InputGrabDomain({ placeholder, onRetry }: { placeholder?: string; onRetry?: () => void }) {
     const [domain, setDomain] = useSearchParam('domain');
     const [domainInput, setDomainInput] = useState(domain || '');
+    const [error, setError] = useState<string>();
 
-    const handleDomainChange = (domain: string | number | readonly string[] | undefined) => {
-        setDomain(stripDomain(domain));
+    useEffect(() => { setDomainInput(domain || ''); }, [domain]);
+
+    const handleDomainChange = (input: string | number | readonly string[] | undefined) => {
+        try {
+            const value = typeof input === 'string' ? input.trim() : '';
+            const nextDomain = value ? siteUrl(value).href : undefined;
+            if (nextDomain && nextDomain === domain) onRetry?.();
+            else setDomain(nextDomain);
+            setError(undefined);
+        } catch {
+            setError('Enter a public website domain or an HTTP(S) URL.');
+        }
     }
 
     return (
         <InputSubmit
-            placeholder={placeholder}
+            placeholder={placeholder ?? 'example.com or https://example.com'}
             aria-label="Domain"
+            aria-invalid={Boolean(error)}
+            helperText={error}
+            autoCapitalize="none"
+            autoCorrect="off"
+            spellCheck={false}
             value={domainInput}
             onChange={(e) => setDomainInput(e.target.value)}
             onSubmit={handleDomainChange}
             endDecorator={
                 <Button
+                    className="shrink-0 whitespace-nowrap"
                     variant="solid"
                     type="submit"
                     startDecorator={<Rocket className="mr-1 size-5" />}>
