@@ -1,9 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net7.0-android</TargetFrameworks>
+		<TargetFrameworks>net10.0-android</TargetFrameworks>
 		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">
-			$(TargetFrameworks);net7.0-windows10.0.22000.0
+			$(TargetFrameworks);net10.0-windows10.0.22000.0
 		</TargetFrameworks>
 		<OutputType>Exe</OutputType>
 		<RootNamespace>Signalco.Companion.Maui</RootNamespace>
@@ -31,6 +31,10 @@
 		<Platforms>AnyCPU;x64</Platforms>
 		<PackageLicenseExpression>AGPL-3.0-only</PackageLicenseExpression>
   </PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
+	</ItemGroup>
 
 	<ItemGroup>
 		<!-- App Icon -->

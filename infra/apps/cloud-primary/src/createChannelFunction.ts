@@ -1,4 +1,4 @@
-import { Output, type StackReference } from '@pulumi/pulumi';
+import { Output } from '@pulumi/pulumi';
 import { type ResourceGroup } from '@pulumi/azure-native/resources/index.js';
 import { createPublicFunction, assignFunctionCodeAsync } from '@infra/pulumi/azure';
 import { apiStatusCheck } from '@infra/pulumi/checkly';
@@ -11,7 +11,6 @@ export async function createChannelFunction(
     resourceGroup: ResourceGroup,
     storageAccount: StorageAccount,
     zipsContainer: BlobContainer,
-    currentStack: StackReference,
     protect: boolean,
     appPlanId: Output<string>): Promise<{
         nameLower: string,
@@ -28,7 +27,6 @@ export async function createChannelFunction(
         publicFunctionPrefix,
         publicFunctionSubDomain,
         corsDomains,
-        currentStack,
         protect,
         appPlanId,
     );

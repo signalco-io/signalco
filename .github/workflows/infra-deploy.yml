@@ -30,7 +30,7 @@ jobs:
               - cloud/**
               - infra/**
               - .github/workflows/ci.yml
-              - .github/workflows/cloud-deploy-preview_reusable.yml
+              - .github/workflows/infra-deploy_reusable.yml
             web:
               - web/**
               - .github/workflows/ci.yml
@@ -48,18 +48,6 @@ jobs:
     with:
       project: "cloud-primary"
       packageName: "@infra/cloud-primary"
-      baseRef: ${{ github.ref }}
-      command: "up"
-    secrets: inherit
-
-  infra_uier_up:
-    name: "uier infrastructure (deploy)"
-    needs: changes
-    if: success() && needs.changes.outputs.infra == 'true'
-    uses: ./.github/workflows/infra-deploy_reusable.yml
-    with:
-      project: "uier"
-      packageName: "@infra/uier"
       baseRef: ${{ github.ref }}
       command: "up"
     secrets: inherit
@@ -166,19 +154,6 @@ jobs:
       environment: ${{ github.ref == 'refs/heads/main' && 'production' || 'development' }}
     secrets: inherit
 
-  vercel_uier_deploy:
-    name: "Vercel uier (deploy)"
-    needs: changes
-    if: success() && needs.changes.outputs.web == 'true'
-    uses: ./.github/workflows/web-vercel-deploy_reusable.yml
-    with:
-      name: "uier"
-      path: "web/apps/uier"
-      vercelProjectId: "prj_0uRTXTGHFdN9SlHnFfNiahIgX3mc"
-      preview: false
-      environment: ${{ github.ref == 'refs/heads/main' && 'production' || 'development' }}
-    secrets: inherit
-
   vercel_workingparty_deploy:
     name: "Vercel WorkingParty (deploy)"
     needs: changes
@@ -210,7 +185,6 @@ jobs:
     needs:
       [
         infra_cloud-primary_up,
-        infra_uier_up,
         infra_workingparty_up,
         infra_doprocess_up,
         vercel_blog_deploy,
@@ -220,7 +194,6 @@ jobs:
         vercel_web_deploy,
         vercel_doprocess_deploy,
         vercel_uidocs_deploy,
-        vercel_uier_deploy,
         vercel_workingparty_deploy,
       ]
     runs-on: ubuntu-latest

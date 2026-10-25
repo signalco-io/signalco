@@ -142,7 +142,8 @@ internal class EntityService(
         CancellationToken cancellationToken = default,
         bool doNotProcess = false,
         bool doNotNotify = false,
-        bool doNotCache = false)
+        bool doNotCache = false,
+        bool throwOnError = false)
     {
         try
         {
@@ -220,7 +221,7 @@ internal class EntityService(
                 queueStateProcessingTask,
                 cacheTask);
         }
-        catch
+        catch when (!throwOnError)
         {
             // TODO: Log
         }

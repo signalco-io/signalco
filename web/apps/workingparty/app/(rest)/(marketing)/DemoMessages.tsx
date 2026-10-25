@@ -22,22 +22,8 @@ export function DemoMessages() {
                     startDecorator={<Avatar size="sm" className="bg-foreground text-background">{initials('Artifical Inteligence')}</Avatar>}
                     className="group w-full" />
                 <ThreadMessage message={{
-                    id: '',
-                    assistant_id: '',
-                    completed_at: 0,
-                    created_at: 0,
-                    incomplete_at: 0,
-                    incomplete_details: null,
-                    metadata: null,
-                    run_id: '',
-                    status: 'completed',
-                    thread_id: '',
-                    object: 'thread.message',
                     role: 'assistant',
-                    attachments: [],
-                    content: [
-                        { type: 'text', text: { value: 'Hello! How can I help you today?', annotations: [] } }
-                    ]
+                    content: 'Hello! How can I help you today?'
                 }} />
             </Stack>
             <Stack spacing={0.5}>

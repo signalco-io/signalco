@@ -7,12 +7,13 @@
     "type": "module",
     "scripts": {
         "build": "tsc && tsup src/index.ts --format esm --clean",
-        "preview": "pulumi preview"
+        "preview": "pulumi preview",
+        "test": "tsup ../../packages/pulumi/src/cloudflare/emailRouting.ts --format esm --out-dir dist/email-routing-tests && node --test test/*.test.mjs"
     },
     "devDependencies": {
         "@infra/pulumi": "workspace:*",
         "@types/node": "22.19.1",
-        "tsup": "8.5.0",
+        "tsup": "8.5.1",
         "typescript": "5.9.3"
     },
     "dependencies": {
