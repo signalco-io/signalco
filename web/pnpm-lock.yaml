@@ -166,8 +166,8 @@ importers:
         version: 13.0.2
     devDependencies:
       '@axe-core/playwright':
-        specifier: 4.11.0
-        version: 4.11.0(playwright-core@1.56.1)
+        specifier: 4.14.0
+        version: 4.14.0(playwright-core@1.56.1)
       '@playwright/test':
         specifier: 1.56.1
         version: 1.56.1
@@ -299,8 +299,8 @@ importers:
         version: 1.0.7(tailwindcss@3.4.19(yaml@2.5.0))
     devDependencies:
       '@axe-core/playwright':
-        specifier: 4.11.0
-        version: 4.11.0(playwright-core@1.56.1)
+        specifier: 4.14.0
+        version: 4.14.0(playwright-core@1.56.1)
       '@playwright/test':
         specifier: 1.56.1
         version: 1.56.1
@@ -399,8 +399,8 @@ importers:
         version: 0.35.5(@types/node@24.19.2)
     devDependencies:
       '@axe-core/playwright':
-        specifier: 4.11.0
-        version: 4.11.0(playwright-core@1.56.1)
+        specifier: 4.14.0
+        version: 4.14.0(playwright-core@1.56.1)
       '@playwright/test':
         specifier: 1.56.1
         version: 1.56.1
@@ -562,8 +562,8 @@ importers:
         version: 1.0.7(tailwindcss@3.4.19(yaml@2.5.0))
     devDependencies:
       '@axe-core/playwright':
-        specifier: 4.11.0
-        version: 4.11.0(playwright-core@1.56.1)
+        specifier: 4.14.0
+        version: 4.14.0(playwright-core@1.56.1)
       '@playwright/test':
         specifier: 1.56.1
         version: 1.56.1
@@ -653,8 +653,8 @@ importers:
         version: 1.0.7(tailwindcss@3.4.19(yaml@2.5.0))
     devDependencies:
       '@axe-core/playwright':
-        specifier: 4.11.0
-        version: 4.11.0(playwright-core@1.56.1)
+        specifier: 4.14.0
+        version: 4.14.0(playwright-core@1.56.1)
       '@playwright/test':
         specifier: 1.56.1
         version: 1.56.1
@@ -886,8 +886,8 @@ importers:
         version: 1.0.7(tailwindcss@3.4.19(yaml@2.5.0))
     devDependencies:
       '@axe-core/playwright':
-        specifier: 4.11.0
-        version: 4.11.0(playwright-core@1.56.1)
+        specifier: 4.14.0
+        version: 4.14.0(playwright-core@1.56.1)
       '@playwright/test':
         specifier: 1.56.1
         version: 1.56.1
@@ -1049,8 +1049,8 @@ importers:
         version: 1.0.7(tailwindcss@3.4.19(yaml@2.5.0))
     devDependencies:
       '@axe-core/playwright':
-        specifier: 4.11.0
-        version: 4.11.0(playwright-core@1.56.1)
+        specifier: 4.14.0
+        version: 4.14.0(playwright-core@1.56.1)
       '@playwright/test':
         specifier: 1.56.1
         version: 1.56.1
@@ -1711,8 +1711,9 @@ packages:
   '@auth0/auth0-spa-js@2.8.0':
     resolution: {integrity: sha512-Lu3dBius0CMRHNAWtw/RyIZH0b5B4jV9ZlVjpp5s7A11AO/XyABkNl0VW7Cz5ZHpAkXEba1CMnkxDG1/9LNIqg==}
 
-  '@axe-core/playwright@4.11.0':
-    resolution: {integrity: sha512-70vBT/Ylqpm65RQz2iCG2o0JJCEG/WCNyefTr2xcOcr1CoSee60gNQYUMZZ7YukoKkFLv26I/jjlsvwwp532oQ==}
+  '@axe-core/playwright@4.14.0':
+    resolution: {integrity: sha512-SGUhG5PIHd2eMdpgBF2PyQLOhX+qyDR2PT4cmoS4Qk2ak+jX/rrSvst9l0PGv5WTHolKpUMvVmoHpr4cZgf1RQ==}
+    engines: {node: '>=22.12.0'}
     peerDependencies:
       playwright-core: '>= 1.0.0'
 
@@ -5873,6 +5874,10 @@ packages:
 
   axe-core@4.11.0:
     resolution: {integrity: sha512-ilYanEU8vxxBexpJd8cWM4ElSQq4QctCLKih0TSfjIfCQTeyH/6zVrmIJfLPrKTKJRbiG+cfnZbQIjAlJmF1jQ==}
+    engines: {node: '>=4'}
+
+  axe-core@4.14.0:
+    resolution: {integrity: sha512-9WTZxEjsZ7b13TH8JPmbV2z8CHbl80/2hm3XPEG4JgNdQLK81IBRXmSxHfMAOkSqQeRxT/0dwNDz2GOm3zzpcQ==}
     engines: {node: '>=4'}
 
   babel-loader@10.0.0:
@@ -10100,9 +10105,9 @@ snapshots:
       dpop: 2.1.1
       es-cookie: 1.3.2
 
-  '@axe-core/playwright@4.11.0(playwright-core@1.56.1)':
+  '@axe-core/playwright@4.14.0(playwright-core@1.56.1)':
     dependencies:
-      axe-core: 4.11.0
+      axe-core: 4.14.0
       playwright-core: 1.56.1
 
   '@azure-rest/core-client@2.5.1':
@@ -14574,6 +14579,8 @@ snapshots:
       possible-typed-array-names: 1.0.0
 
   axe-core@4.11.0: {}
+
+  axe-core@4.14.0: {}
 
   babel-loader@10.0.0(@babel/core@7.28.4)(webpack@5.94.0):
     dependencies:
