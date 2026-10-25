@@ -162,8 +162,8 @@ importers:
         specifier: 1.0.7
         version: 1.0.7(tailwindcss@3.4.18(yaml@2.5.0))
       uuid:
-        specifier: 13.0.0
-        version: 13.0.0
+        specifier: 13.0.1
+        version: 13.0.1
     devDependencies:
       '@axe-core/playwright':
         specifier: 4.11.0
@@ -9302,8 +9302,8 @@ packages:
   utila@0.4.0:
     resolution: {integrity: sha512-Z0DbgELS9/L/75wZbro8xAnT50pBVFQZ+hUEueGDU5FN51YSCYM+jdxsfCiHjwNP/4LCDD0i/graKpeBnOXKRA==}
 
-  uuid@13.0.0:
-    resolution: {integrity: sha512-XQegIaBTVUjSHliKqcnFqYypAd4S+WCYt5NIeRs6w/UAry7z8Y9j5ZwRRL4kzq9U3sD6v+85er9FvkEaBpji2w==}
+  uuid@13.0.1:
+    resolution: {integrity: sha512-9ezox2roIft6ExBVTVqibSd5dc5/47Sw/uY6b4SjQUT2TzQ0tltNquWA46y4xPQmdZYqvnio22SgWd41M86+jw==}
     hasBin: true
 
   uuid@8.3.2:
@@ -13408,7 +13408,7 @@ snapshots:
 
   '@types/uuid@11.0.0':
     dependencies:
-      uuid: 13.0.0
+      uuid: 13.0.1
 
   '@typespec/ts-http-runtime@0.3.1':
     dependencies:
@@ -18439,7 +18439,7 @@ snapshots:
 
   utila@0.4.0: {}
 
-  uuid@13.0.0: {}
+  uuid@13.0.1: {}
 
   uuid@8.3.2: {}
 
