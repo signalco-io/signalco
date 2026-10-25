@@ -7,14 +7,15 @@
     "type": "module",
     "license": "AGPL-3.0-only",
     "engines": {
-        "node": "22.x"
+        "node": "24.x"
     },
     "scripts": {
         "dev": "next -p 4001 --turbo",
         "build": "next build",
         "postbuild": "next-sitemap --config next-sitemap.config.cjs",
         "start": "next start -p 4001",
-        "test": "playwright test"
+        "test": "pnpm test:api && playwright test",
+        "test:api": "node --experimental-vm-modules --test tests/*.test.mjs"
     },
     "dependencies": {
         "@enterwell/react-hooks": "0.7.0",
@@ -40,12 +41,12 @@
         "@playwright/test": "1.56.1",
         "@signalco/tsconfig": "workspace:*",
         "@types/color": "4.2.1",
-        "@types/node": "22.19.1",
+        "@types/node": "24.19.2",
         "@types/react": "19.2.2",
         "@types/react-dom": "19.2.2",
         "babel-plugin-react-compiler": "19.1.0-rc.3",
         "next-sitemap": "4.2.3",
-        "postcss": "8.5.23",
+        "postcss": "8.5.31",
         "sass": "1.93.3",
         "tailwindcss": "3.4.18",
         "tailwindcss-animate": "1.0.7",

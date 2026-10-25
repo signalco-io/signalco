@@ -1,13 +1,13 @@
 'use client';
 
-import React, { PropsWithChildren, memo, useCallback } from 'react';
+import React, { PropsWithChildren, memo, useCallback, useState } from 'react';
 import NextImage from 'next/image';
 import { Typography } from '@signalco/ui-primitives/Typography';
 import { Stack } from '@signalco/ui-primitives/Stack';
 import { Link } from '@signalco/ui-primitives/Link';
 import { Divider } from '@signalco/ui-primitives/Divider';
 import { Container } from '@signalco/ui-primitives/Container';
-import { Card, CardContent, CardCover, CardOverflow } from '@signalco/ui-primitives/Card';
+import { Card, CardContent, CardOverflow } from '@signalco/ui-primitives/Card';
 import { CompanyGitHub, CompanyReddit, CompanyX } from '@signalco/ui-icons';
 import { Loadable } from '@signalco/ui/Loadable';
 import { orderBy, isImageDataUrl } from '@signalco/js';
@@ -17,79 +17,89 @@ import { SectionData } from '@signalco/cms-core/SectionData';
 import { Footer1 } from '@signalco/cms-components-marketing/Footer';
 import { usePromise } from '@enterwell/react-hooks';
 import InputGrabDomain from '../InputGrabDomain';
+import { siteUrl } from '../../src/siteUrl';
 import { KnownPages } from '../../src/knownPages';
-import { ScreenshotResponse } from '../../app/api/screenshot/route';
-import { BrandResources } from '../../app/api/quick/route';
+import type { ScreenshotResponse } from '../../app/api/screenshot/route';
+import type { BrandResources } from '../../app/api/quick/route';
 
 function OgPreview({ og }: { og: BrandResources['og'] | undefined }) {
     if (!og?.title && !og?.image && !og?.url)
         return <>-</>;
 
-    return (
-        <Link href={og.url}>
-            <Card style={{
-                width: 400,
-                minHeight: 209,
-                overflow: 'hidden',
-            }}>
-                {isImageDataUrl(og.imageBase64) &&
-                    <CardOverflow>
-                        <NextImage
-                            src={og.imageBase64}
-                            alt="og:image"
-                            width={400}
-                            height={209}
-                            style={{
-                                objectFit: 'cover',
-                            }} />
-                    </CardOverflow>
-                }
-                <CardContent style={{ justifyContent: 'flex-end' }}>
-                    <Stack style={{ paddingTop: 8 }}>
-                        <Typography level="h5">{og.title}</Typography>
-                        <Typography level="body2">{og.description}</Typography>
-                    </Stack>
-                </CardContent>
-                <div className="mt-2">
-                    <Divider />
-                </div>
-                <CardOverflow className="flex">
-                    {!!og.siteName && (
-                        <Typography noWrap level="body3" semiBold secondary title={og.siteName}>
-                            {og.siteName}
-                        </Typography>
-                    )}
-                    {!!og.type && (
-                        <>
-                            {!!og.siteName && <Divider orientation="vertical" />}
-                            <Typography level="body3" semiBold secondary>
-                                {og.type}
-                            </Typography>
-                        </>
-                    )}
-                    {!!(og.locale || og.localeAlternate) && (
-                        <>
-                            <Divider orientation="vertical" />
-                            <Typography level="body3" semiBold secondary>
-                                {[og.locale, og.localeAlternate].filter(Boolean).join(', ')}
-                            </Typography>
-                        </>
-                    )}
-                    {!!og.url && (
-                        <>
-                            <Divider orientation="vertical" />
-                            <Typography level="body3" noWrap semiBold secondary title={og.url}>
-                                {og.url}
-                            </Typography>
-                        </>
-                    )}
+    const card = (
+        <Card style={{
+            width: '100%',
+            maxWidth: 400,
+            minHeight: 209,
+            overflow: 'hidden',
+        }}>
+            {isImageDataUrl(og.imageBase64) &&
+                <CardOverflow>
+                    <NextImage
+                        src={og.imageBase64}
+                        alt="og:image"
+                        width={400}
+                        height={209}
+                        style={{
+                            objectFit: 'cover',
+                            width: '100%',
+                            height: 'auto',
+                        }} />
                 </CardOverflow>
-            </Card>
-        </Link>
-    )
+            }
+            <CardContent style={{ justifyContent: 'flex-end' }}>
+                <Stack style={{ paddingTop: 8 }}>
+                    <Typography level="h5">{og.title}</Typography>
+                    <Typography level="body2">{og.description}</Typography>
+                </Stack>
+            </CardContent>
+            <div className="mt-2">
+                <Divider />
+            </div>
+            <CardOverflow className="flex flex-wrap gap-2 p-2">
+                {!!og.siteName && (
+                    <Typography noWrap level="body3" semiBold secondary title={og.siteName}>
+                        {og.siteName}
+                    </Typography>
+                )}
+                {!!og.type && (
+                    <>
+                        {!!og.siteName && <Divider orientation="vertical" />}
+                        <Typography level="body3" semiBold secondary>
+                            {og.type}
+                        </Typography>
+                    </>
+                )}
+                {!!(og.locale || og.localeAlternate) && (
+                    <>
+                        <Divider orientation="vertical" />
+                        <Typography level="body3" semiBold secondary>
+                            {[og.locale, og.localeAlternate].filter(Boolean).join(', ')}
+                        </Typography>
+                    </>
+                )}
+                {!!og.url && (
+                    <>
+                        <Divider orientation="vertical" />
+                        <Typography level="body3" noWrap semiBold secondary title={og.url}>
+                            {og.url}
+                        </Typography>
+                    </>
+                )}
+            </CardOverflow>
+        </Card>
+    );
+    try {
+        return og.url ? <Link href={siteUrl(og.url).href}>{card}</Link> : card;
+    } catch {
+        return card;
+    }
 }
 
 function IconPreview({ favicon, icons }: { favicon: BrandResources['favicon'], icons: BrandResources['icons'] }) {
+    const fallback = icons.icon512Base64 || icons.icon256Base64 || icons.appleTouchIconBase64 || icons.icon128Base64 || icons.icon64Base64 || icons.icon32Base64 || icons.icon16Base64 || favicon.base64;
+    if (!isImageDataUrl(fallback)) return <>-</>;
+
     return (
         <div style={{
             width: 144 + 16 * 2 + 42 + 16 * 2,
@@ -108,7 +118,7 @@ function IconPreview({ favicon, icons }: { favicon: BrandResources['favicon'], i
                     border: '1px solid hsl(var(--border))',
                     borderRadius: 8
                 }}
-                src={icons.icon512Base64 || icons.icon256Base64 || icons.appleTouchIconBase64 || icons.icon128Base64 || icons.icon64Base64 || icons.icon32Base64 || icons.icon16Base64 || favicon.base64}
+                src={fallback}
                 alt="favicon"
                 width={144}
                 height={144} />
@@ -120,7 +130,7 @@ function IconPreview({ favicon, icons }: { favicon: BrandResources['favicon'], i
                     border: '1px solid hsl(var(--border))',
                     borderRadius: 8
                 }}
-                src={icons.icon64Base64 || icons.icon32Base64 || icons.icon16Base64 || favicon.base64}
+                src={icons.icon64Base64 || icons.icon32Base64 || icons.icon16Base64 || favicon.base64 || fallback}
                 alt="favicon"
                 width={42}
                 height={42} />
@@ -132,7 +142,7 @@ function IconPreview({ favicon, icons }: { favicon: BrandResources['favicon'], i
                     border: '1px solid hsl(var(--border))',
                     borderRadius: 8
                 }}
-                src={icons.icon16Base64 || favicon.base64}
+                src={icons.icon16Base64 || favicon.base64 || fallback}
                 alt="favicon"
                 width={16}
                 height={16} />
@@ -149,27 +159,23 @@ function TextInfo({ title, children }: PropsWithChildren<{ title: string }>) {
     )
 }
 
-async function getPageScreenshot(domain: string) {
-    const res = await fetch(`/api/screenshot?domain=${encodeURIComponent(domain)}`, { cache: 'no-store' });
-    const data = await res.json() as ScreenshotResponse;
-    // TODO: Move dimensions resolve to server
-    const dimensions = await getImageDimensions(data.data);
-    return {
-        data: data.data,
-        w: dimensions.w,
-        h: dimensions.h,
-        colors: data.colors
+async function fetchResource<T>(path: string, domain: string): Promise<T> {
+    const response = await fetch(`${path}?${new URLSearchParams({ domain })}`, {
+        cache: 'no-store', signal: AbortSignal.timeout(50_000),
+    });
+    if (!response.ok) {
+        const error = await response.json().catch(() => undefined);
+        throw new Error(error?.error || 'Could not load this website. Please try again.');
     }
+    return response.json() as Promise<T>;
 }
 
-function getImageDimensions(file: string) {
-    return new Promise<{ w: number, h: number }>(function (resolved) {
-        const i = new Image();
-        i.onload = function () {
-            resolved({ w: i.width, h: i.height })
-        };
-        i.src = file
-    })
+async function getPageScreenshot(domain: string) {
+    const data = await fetchResource<ScreenshotResponse>('/api/screenshot', domain);
+    if (!isImageDataUrl(data.data) || !data.width || !data.height) {
+        throw new Error('The page preview is unavailable. Please try again later.');
+    }
+    return data;
 }
 
 function hexToRgb(hex: string) {
@@ -196,26 +202,18 @@ function PagePreview({ domain }: { domain: string }) {
         <Stack spacing={3}>
             <TextInfo title="Page preview">
                 <Card style={{
-                    width: width,
+                    width: '100%',
+                    maxWidth: width,
                     height: containerHeight,
                     overflowY: 'auto',
-                    boxSizing: 'content-box',
                 }}>
                     <Loadable isLoading={pageScreenshot.isLoading} error={pageScreenshot.error} loadingLabel="Loading preview">
-                        <CardCover style={{
-                            height: ((width + 38) / (pageScreenshot.item?.w ?? 1)) * (pageScreenshot.item?.h ?? 0),
-                            borderRadius: 0
-                        }}>
-                            <img
-                                src={pageScreenshot.item?.data || ''}
-                                alt="Page preview"
-                                width={pageScreenshot.item?.w}
-                                height={pageScreenshot.item?.h}
-                                style={{
-                                    objectPosition: '0 0',
-                                    borderRadius: 0
-                                }} />
-                        </CardCover>
+                        {pageScreenshot.item && <img
+                            src={pageScreenshot.item.data}
+                            alt="Page preview"
+                            width={pageScreenshot.item.width}
+                            height={pageScreenshot.item.height}
+                            style={{ width: '100%', height: 'auto' }} />}
                     </Loadable>
                 </Card>
             </TextInfo>
@@ -233,7 +231,7 @@ function PagePreview({ domain }: { domain: string }) {
                                     padding: 4,
                                     alignItems: 'end',
                                     display: 'flex',
-                                    color: hexLightness(color.hex) < .5 ? 'rgba(256,256,256, .8)' : 'rgba(0,0,0, .8)',
+                                    color: hexLightness(color.hex) < .5 ? 'rgba(255,255,255, .8)' : 'rgba(0,0,0, .8)',
                                     border: '1px solid hsl(var(--border))'
                                 }}>
                                 {color.hex}
@@ -250,6 +248,10 @@ function BrandView({ domain }: { domain: string | undefined }) {
     const quickLookupDomain = useCallback(() => quickLookup(domain), [domain]);
     const domainResources = usePromise(quickLookupDomain);
     const resources = domainResources.item;
+
+    if (domainResources.error) {
+        return <Loadable loadingLabel="Loading branding" error={domainResources.error.replace(/^Error: /, '')} />;
+    }
 
     return (
         <Stack spacing={4}>
@@ -285,7 +287,7 @@ function BrandView({ domain }: { domain: string | undefined }) {
                 </TextInfo>
             </Stack>
             {resources?.domain && (
-                <PagePreview domain={resources?.domain} />
+                <PagePreview key={resources.domain} domain={resources.domain} />
             )}
         </Stack>
     );
@@ -296,7 +298,7 @@ async function quickLookup(domain: string | undefined): Promise<BrandResources |
         return undefined;
     }
 
-    return await fetch('/api/quick?domain=' + encodeURIComponent(domain)).then(res => res.json()).then(res => res as BrandResources);
+    return fetchResource<BrandResources>('/api/quick', domain);
 }
 
 const sectionsComponentRegistry = {
@@ -336,14 +338,19 @@ const sectionsData: SectionData[] = [
 
 export default function LandingPageView() {
     const [domain] = useSearchParam('domain');
+    const [retry, setRetry] = useState(0);
 
     return (
         <Stack spacing={8}>
             <Container maxWidth="md">
-                <InputGrabDomain />
+                <Stack spacing={2}>
+                    <Typography level="h1">Discover website branding</Typography>
+                    <Typography secondary>Enter a website to explore its metadata, icons, preview, and colors.</Typography>
+                    <InputGrabDomain onRetry={() => setRetry((value) => value + 1)} />
+                </Stack>
             </Container>
             <Container maxWidth="md">
-                <BrandView domain={domain} />
+                <BrandView key={`${domain}:${retry}`} domain={domain} />
             </Container>
             <SectionsView
                 sectionsData={sectionsData}
