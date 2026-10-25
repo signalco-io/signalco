@@ -29,7 +29,7 @@
         "@types/react-dom": "19.2.2",
         "react": "19.2.0",
         "react-dom": "19.2.0",
-        "sonner": "2.0.7",
+        "sonner": "2.0.8",
         "tsup": "8.5.1",
         "typescript": "5.9.3"
     },
