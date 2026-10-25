@@ -735,8 +735,8 @@ importers:
         specifier: 10.0.3
         version: 10.0.3(storybook@10.6.2(@types/react@19.2.2)(prettier@3.5.3)(react@19.2.0))
       '@storybook/addon-vitest':
-        specifier: 10.0.3
-        version: 10.0.3(@vitest/browser@4.1.10)(@vitest/runner@4.1.11)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(storybook@10.6.2(@types/react@19.2.2)(prettier@3.5.3)(react@19.2.0))(vitest@4.1.11)
+        specifier: 10.6.2
+        version: 10.6.2(@vitest/browser@4.1.10)(@vitest/runner@4.1.11)(react@19.2.0)(storybook@10.6.2(@types/react@19.2.2)(prettier@3.5.3)(react@19.2.0))(vitest@4.1.11)
       '@storybook/nextjs':
         specifier: 10.0.3
         version: 10.0.3(@swc/core@1.7.22(@swc/helpers@0.5.15))(esbuild@0.27.7)(next@15.5.28(@babel/core@7.28.4)(@playwright/test@1.56.1)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3))(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.93.3)(storybook@10.6.2(@types/react@19.2.2)(prettier@3.5.3)(react@19.2.0))(type-fest@4.41.0)(typescript@5.9.3)(webpack-hot-middleware@2.26.1)(webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.15))(esbuild@0.27.7))
@@ -4922,14 +4922,14 @@ packages:
     peerDependencies:
       storybook: ^10.0.3
 
-  '@storybook/addon-vitest@10.0.3':
-    resolution: {integrity: sha512-8yRAlJcaGXKz/DTo5BK2lFmDqw2+6k0O00kUNOEmEPocUI4N8yhO39YCniHLsIjMNGNmMRugztRh5E7/Ya87eg==}
+  '@storybook/addon-vitest@10.6.2':
+    resolution: {integrity: sha512-gyyBzncvUyEgWQR3LinnGuI4UsWIUYLyw1u8i244aTxmY4uxCYjsDmUNkaSr8xQzNz8nh2Ckh3G4bO4SvJ6nJQ==}
     peerDependencies:
-      '@vitest/browser': ^3.0.0 || ^4.0.0
-      '@vitest/browser-playwright': ^4.0.0
-      '@vitest/runner': ^3.0.0 || ^4.0.0
-      storybook: ^10.0.3
-      vitest: ^3.0.0 || ^4.0.0
+      '@vitest/browser': ^3.0.0 || ^4.0.0 || ^5.0.0
+      '@vitest/browser-playwright': ^4.0.0 || ^5.0.0
+      '@vitest/runner': ^3.0.0 || ^4.0.0 || ^5.0.0
+      storybook: ^10.6.2
+      vitest: ^3.0.0 || ^4.0.0 || ^5.0.0
     peerDependenciesMeta:
       '@vitest/browser':
         optional: true
@@ -13506,20 +13506,17 @@ snapshots:
       storybook: 10.6.2(@types/react@19.2.2)(prettier@3.5.3)(react@19.2.0)
       ts-dedent: 2.2.0
 
-  '@storybook/addon-vitest@10.0.3(@vitest/browser@4.1.10)(@vitest/runner@4.1.11)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(storybook@10.6.2(@types/react@19.2.2)(prettier@3.5.3)(react@19.2.0))(vitest@4.1.11)':
+  '@storybook/addon-vitest@10.6.2(@vitest/browser@4.1.10)(@vitest/runner@4.1.11)(react@19.2.0)(storybook@10.6.2(@types/react@19.2.2)(prettier@3.5.3)(react@19.2.0))(vitest@4.1.11)':
     dependencies:
       '@storybook/global': 5.0.0
-      '@storybook/icons': 1.6.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
-      prompts: 2.4.2
+      '@storybook/icons': 2.2.0(react@19.2.0)
       storybook: 10.6.2(@types/react@19.2.2)(prettier@3.5.3)(react@19.2.0)
-      ts-dedent: 2.2.0
     optionalDependencies:
       '@vitest/browser': 4.1.10(msw@2.7.0(@types/node@24.8.0)(typescript@5.9.3))(vite@6.3.4(@types/node@24.8.0)(jiti@1.21.7)(sass@1.93.3)(terser@5.44.0)(yaml@2.5.0))(vitest@4.1.11)
       '@vitest/runner': 4.1.11
       vitest: 4.1.11(@types/node@24.8.0)(@vitest/coverage-v8@4.0.6)(msw@2.7.0(@types/node@24.8.0)(typescript@5.9.3))(vite@6.3.4(@types/node@24.8.0)(jiti@1.21.7)(sass@1.93.3)(terser@5.44.0)(yaml@2.5.0))
     transitivePeerDependencies:
       - react
-      - react-dom
 
   '@storybook/builder-webpack5@10.0.3(@swc/core@1.7.22(@swc/helpers@0.5.15))(esbuild@0.27.7)(storybook@10.6.2(@types/react@19.2.2)(prettier@3.5.3)(react@19.2.0))(typescript@5.9.3)':
     dependencies:
