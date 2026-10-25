@@ -11,7 +11,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Identity.Client" Version="4.78.0" />
     <PackageReference Include="Microsoft.TeamFoundationServer.Client" Version="19.225.2" />
-    <PackageReference Include="Microsoft.VisualStudio.Services.Client" Version="19.225.1" />
+    <PackageReference Include="Microsoft.VisualStudio.Services.Client" Version="19.225.2" />
     <PackageReference Include="Microsoft.VisualStudio.Services.ServiceHooks.WebApi" Version="19.225.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
   </ItemGroup>
