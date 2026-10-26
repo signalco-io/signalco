@@ -348,7 +348,12 @@ internal class AzureStorageDao : IAzureStorageDao
     {
         var client =
             await this.clientFactory.GetBlobContainerClientAsync(BlobContainerNames.StationLogs, cancellationToken);
-        var blobsQuery = client.GetBlobsByHierarchyAsync(prefix: stationId, cancellationToken: cancellationToken);
+        var blobsQuery = client.GetBlobsByHierarchyAsync(
+            traits: Azure.Storage.Blobs.Models.BlobTraits.None,
+            states: Azure.Storage.Blobs.Models.BlobStates.None,
+            delimiter: null,
+            prefix: stationId,
+            cancellationToken: cancellationToken);
         if (blobsQuery == null)
             yield break;
 
