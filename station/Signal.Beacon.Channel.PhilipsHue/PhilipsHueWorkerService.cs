@@ -116,7 +116,7 @@ internal class PhilipsHueWorkerService(
 
             // Retrieve bridge connection
             var bridgeConnection = this.GetBridgeConnection(light.BridgeId);
-            var bridgeLightResponse = await bridgeConnection.LocalClient.GetLightAsync(light.Id);
+            var bridgeLightResponse = await bridgeConnection.LocalClient.Light.GetByIdAsync(light.Id);
             var bridgeLight = bridgeLightResponse.Data.FirstOrDefault();
             if (bridgeLightResponse.HasErrors ||
                 bridgeLight == null)
@@ -184,7 +184,7 @@ internal class PhilipsHueWorkerService(
             logger.LogDebug(
                 "Sending command to the bridge {BridgeId}: {@Command}",
                 light.BridgeId, lightCommand);
-            await bridgeConnection.LocalClient.UpdateLightAsync(light.Id, lightCommand);
+            await bridgeConnection.LocalClient.Light.UpdateAsync(light.Id, lightCommand);
 
             // Refresh immediately 
             await this.RefreshLightStateAsync(bridgeConnection, light, cancellationToken);
@@ -212,7 +212,7 @@ internal class PhilipsHueWorkerService(
         PhilipsHueLight light,
         CancellationToken cancellationToken)
     {
-        var updatedLightResponse = await bridge.LocalClient.GetLightAsync(light.Id);
+        var updatedLightResponse = await bridge.LocalClient.Light.GetByIdAsync(light.Id);
         var updatedLight = updatedLightResponse.Data.FirstOrDefault();
         if (!updatedLightResponse.HasErrors &&
             updatedLight != null)
@@ -230,7 +230,7 @@ internal class PhilipsHueWorkerService(
             await entityService.ContactSetAsync(
                 new ContactPointer(newLight.EntityId, PhilipsHueChannels.DeviceChannel, BrightnessContactName),
                 newLight.State.Brightness?.ToString(), cancellationToken);
-            var connectivity = await bridge.LocalClient.GetZigbeeConnectivityAsync();
+            var connectivity = await bridge.LocalClient.ZigbeeConnectivity.GetAllAsync();
             var isConnected = connectivity.Data.FirstOrDefault(c => updatedLight.Owner?.Rid == c.Owner?.Rid)?.Status == ConnectivityStatus.connected;
             await entityService.ContactSetAsync(
                 new ContactPointer(newLight.EntityId, PhilipsHueChannels.DeviceChannel, KnownContacts.Offline),
@@ -293,7 +293,7 @@ internal class PhilipsHueWorkerService(
         try
         {
             var bridge = this.GetBridgeConnection(bridgeId);
-            var remoteLightsResponse = await bridge.LocalClient.GetLightsAsync();
+            var remoteLightsResponse = await bridge.LocalClient.Light.GetAllAsync();
             var remoteLights = remoteLightsResponse.Data;
             foreach (var light in remoteLights)
             {
