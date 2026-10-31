@@ -19,7 +19,7 @@
         "@azure/communication-email": "1.1.0",
         "@azure/cosmos": "4.10.1",
         "@enterwell/react-form-builder": "0.3.2",
-        "@enterwell/react-form-validation": "1.4.0",
+        "@enterwell/react-form-validation": "1.6.0",
         "@react-email/components": "0.5.7",
         "@signalco/auth-client": "workspace:*",
         "@signalco/auth-server": "workspace:*",
