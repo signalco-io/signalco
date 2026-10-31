@@ -88,10 +88,10 @@ importers:
         version: 5.104.5(@tanstack/react-query@5.104.5(@types/react@19.2.2)(react@19.2.0))(@types/react@19.2.2)(csstype@3.1.3)(react@19.2.0)
       '@vercel/analytics':
         specifier: 1.5.0
-        version: 1.5.0(next@16.4.3(@playwright/test@1.56.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.106.1))(react@19.2.0)
+        version: 1.5.0(next@16.4.3(@playwright/test@1.56.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.107.1))(react@19.2.0)
       '@vercel/speed-insights':
         specifier: 1.2.0
-        version: 1.2.0(next@16.4.3(@playwright/test@1.56.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.106.1))(react@19.2.0)
+        version: 1.2.0(next@16.4.3(@playwright/test@1.56.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.107.1))(react@19.2.0)
       '@vvo/tzdb':
         specifier: 6.192.0
         version: 6.192.0
@@ -121,7 +121,7 @@ importers:
         version: 0.54.0
       next:
         specifier: 16.4.3
-        version: 16.4.3(@playwright/test@1.56.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.106.1)
+        version: 16.4.3(@playwright/test@1.56.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.107.1)
       next-secure-headers:
         specifier: 2.2.0
         version: 2.2.0
@@ -212,7 +212,7 @@ importers:
         version: 11.4.1
       next-sitemap:
         specifier: 4.2.3
-        version: 4.2.3(next@16.4.3(@playwright/test@1.56.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.106.1))
+        version: 4.2.3(next@16.4.3(@playwright/test@1.56.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.107.1))
       openapi-types:
         specifier: 12.1.3
         version: 12.1.3
@@ -220,11 +220,11 @@ importers:
         specifier: 8.5.31
         version: 8.5.31
       sass:
-        specifier: 1.106.1
-        version: 1.106.1
+        specifier: 1.107.1
+        version: 1.107.1
       sass-loader:
         specifier: 16.0.8
-        version: 16.0.8(sass@1.106.1)(webpack@5.94.0(postcss@8.5.31))
+        version: 16.0.8(sass@1.107.1)(webpack@5.94.0(postcss@8.5.31))
       typescript:
         specifier: 5.9.3
         version: 5.9.3
@@ -272,13 +272,13 @@ importers:
         version: link:../../packages/ui-themes-minimal
       '@vercel/analytics':
         specifier: 1.5.0
-        version: 1.5.0(next@16.4.3(@playwright/test@1.56.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.106.1))(react@19.2.0)
+        version: 1.5.0(next@16.4.3(@playwright/test@1.56.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.107.1))(react@19.2.0)
       autoprefixer:
         specifier: 10.4.21
         version: 10.4.21(postcss@8.5.31)
       next:
         specifier: 16.4.3
-        version: 16.4.3(@playwright/test@1.56.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.106.1)
+        version: 16.4.3(@playwright/test@1.56.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.107.1)
       next-secure-headers:
         specifier: 2.2.0
         version: 2.2.0
@@ -333,13 +333,13 @@ importers:
         version: 2.0.20
       next-sitemap:
         specifier: 4.2.3
-        version: 4.2.3(next@16.4.3(@playwright/test@1.56.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.106.1))
+        version: 4.2.3(next@16.4.3(@playwright/test@1.56.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.107.1))
       postcss:
         specifier: 8.5.31
         version: 8.5.31
       sass:
-        specifier: 1.106.1
-        version: 1.106.1
+        specifier: 1.107.1
+        version: 1.107.1
       typescript:
         specifier: 5.9.3
         version: 5.9.3
@@ -384,7 +384,7 @@ importers:
         version: 1.1.2
       next:
         specifier: 16.4.3
-        version: 16.4.3(@playwright/test@1.56.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.106.1)
+        version: 16.4.3(@playwright/test@1.56.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.107.1)
       next-secure-headers:
         specifier: 2.2.0
         version: 2.2.0
@@ -424,13 +424,13 @@ importers:
         version: 19.1.0-rc.3
       next-sitemap:
         specifier: 4.2.3
-        version: 4.2.3(next@16.4.3(@playwright/test@1.56.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.106.1))
+        version: 4.2.3(next@16.4.3(@playwright/test@1.56.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.107.1))
       postcss:
         specifier: 8.5.31
         version: 8.5.31
       sass:
-        specifier: 1.106.1
-        version: 1.106.1
+        specifier: 1.107.1
+        version: 1.107.1
       tailwindcss:
         specifier: 3.4.19
         version: 3.4.19(yaml@2.5.0)
@@ -526,7 +526,7 @@ importers:
         version: 5.104.5(@tanstack/react-query@5.104.5(@types/react@19.2.2)(react@19.2.0))(@types/react@19.2.2)(csstype@3.1.3)(react@19.2.0)
       '@vercel/analytics':
         specifier: 1.5.0
-        version: 1.5.0(next@16.4.3(@playwright/test@1.56.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.106.1))(react@19.2.0)
+        version: 1.5.0(next@16.4.3(@playwright/test@1.56.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.107.1))(react@19.2.0)
       autoprefixer:
         specifier: 10.4.21
         version: 10.4.21(postcss@8.5.31)
@@ -535,7 +535,7 @@ importers:
         version: 5.1.16
       next:
         specifier: 16.4.3
-        version: 16.4.3(@playwright/test@1.56.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.106.1)
+        version: 16.4.3(@playwright/test@1.56.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.107.1)
       next-secure-headers:
         specifier: 2.2.0
         version: 2.2.0
@@ -590,13 +590,13 @@ importers:
         version: 19.1.0-rc.3
       next-sitemap:
         specifier: 4.2.3
-        version: 4.2.3(next@16.4.3(@playwright/test@1.56.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.106.1))
+        version: 4.2.3(next@16.4.3(@playwright/test@1.56.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.107.1))
       postcss:
         specifier: 8.5.31
         version: 8.5.31
       sass:
-        specifier: 1.106.1
-        version: 1.106.1
+        specifier: 1.107.1
+        version: 1.107.1
       typescript:
         specifier: 5.9.3
         version: 5.9.3
@@ -632,7 +632,7 @@ importers:
         version: link:../../packages/ui-themes-minimal
       next:
         specifier: 16.4.3
-        version: 16.4.3(@playwright/test@1.56.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.106.1)
+        version: 16.4.3(@playwright/test@1.56.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.107.1)
       next-secure-headers:
         specifier: 2.2.0
         version: 2.2.0
@@ -681,13 +681,13 @@ importers:
         version: 19.1.0-rc.3
       next-sitemap:
         specifier: 4.2.3
-        version: 4.2.3(next@16.4.3(@playwright/test@1.56.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.106.1))
+        version: 4.2.3(next@16.4.3(@playwright/test@1.56.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.107.1))
       postcss:
         specifier: 8.5.31
         version: 8.5.31
       sass:
-        specifier: 1.106.1
-        version: 1.106.1
+        specifier: 1.107.1
+        version: 1.107.1
       typescript:
         specifier: 5.9.3
         version: 5.9.3
@@ -708,7 +708,7 @@ importers:
         version: link:../../packages/ui-themes-minimal
       next:
         specifier: 16.4.3
-        version: 16.4.3(@babel/core@7.29.7)(@playwright/test@1.56.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.106.1)
+        version: 16.4.3(@babel/core@7.29.7)(@playwright/test@1.56.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.107.1)
       react:
         specifier: 19.2.0
         version: 19.2.0
@@ -739,7 +739,7 @@ importers:
         version: 10.6.5(@vitest/browser@4.1.12)(react@19.2.0)(storybook@10.6.5(@types/react@19.2.2)(prettier@3.5.3)(react@19.2.0))(vitest@4.1.12)
       '@storybook/nextjs':
         specifier: 10.6.5
-        version: 10.6.5(@swc/core@1.7.22(@swc/helpers@0.5.23))(@types/react-dom@19.2.2(@types/react@19.2.2))(@types/react@19.2.2)(next@16.4.3(@babel/core@7.29.7)(@playwright/test@1.56.1)(@types/node@24.19.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.106.1))(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.106.1)(storybook@10.6.5(@types/react@19.2.2)(prettier@3.5.3)(react@19.2.0))(type-fest@4.41.0)(typescript@5.9.3)(webpack-hot-middleware@2.26.1)(webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.23))(postcss@8.5.31))
+        version: 10.6.5(@swc/core@1.7.22(@swc/helpers@0.5.23))(@types/react-dom@19.2.2(@types/react@19.2.2))(@types/react@19.2.2)(next@16.4.3(@babel/core@7.29.7)(@playwright/test@1.56.1)(@types/node@24.19.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.107.1))(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.107.1)(storybook@10.6.5(@types/react@19.2.2)(prettier@3.5.3)(react@19.2.0))(type-fest@4.41.0)(typescript@5.9.3)(webpack-hot-middleware@2.26.1)(webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.23))(postcss@8.5.31))
       '@types/react':
         specifier: 19.2.2
         version: 19.2.2
@@ -748,7 +748,7 @@ importers:
         version: 19.2.2(@types/react@19.2.2)
       '@vitest/browser':
         specifier: 4.1.12
-        version: 4.1.12(msw@2.7.0(@types/node@24.19.2)(typescript@5.9.3))(vite@6.3.4(@types/node@24.19.2)(jiti@2.6.1)(sass@1.106.1)(terser@5.44.0)(yaml@2.5.0))(vitest@4.1.12)
+        version: 4.1.12(msw@2.7.0(@types/node@24.19.2)(typescript@5.9.3))(vite@6.3.4(@types/node@24.19.2)(jiti@1.21.7)(sass@1.107.1)(terser@5.44.0)(yaml@2.5.0))(vitest@4.1.12)
       '@vitest/coverage-v8':
         specifier: 4.1.12
         version: 4.1.12(@vitest/browser@4.1.12)(vitest@4.1.12)
@@ -771,11 +771,11 @@ importers:
         specifier: 6.1.3
         version: 6.1.3
       sass:
-        specifier: 1.106.1
-        version: 1.106.1
+        specifier: 1.107.1
+        version: 1.107.1
       sass-loader:
         specifier: 16.0.8
-        version: 16.0.8(sass@1.106.1)(webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.23))(postcss@8.5.31))
+        version: 16.0.8(sass@1.107.1)(webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.23))(postcss@8.5.31))
       storybook:
         specifier: 10.6.5
         version: 10.6.5(@types/react@19.2.2)(prettier@3.5.3)(react@19.2.0)
@@ -799,7 +799,7 @@ importers:
         version: 5.9.3
       vitest:
         specifier: 4.1.12
-        version: 4.1.12(@types/node@24.19.2)(@vitest/coverage-v8@4.1.12)(msw@2.7.0(@types/node@24.19.2)(typescript@5.9.3))(vite@6.3.4(@types/node@24.19.2)(jiti@2.6.1)(sass@1.106.1)(terser@5.44.0)(yaml@2.5.0))
+        version: 4.1.12(@types/node@24.19.2)(@vitest/coverage-v8@4.1.12)(msw@2.7.0(@types/node@24.19.2)(typescript@5.9.3))(vite@6.3.4(@types/node@24.19.2)(jiti@1.21.7)(sass@1.107.1)(terser@5.44.0)(yaml@2.5.0))
 
   apps/web:
     dependencies:
@@ -853,13 +853,13 @@ importers:
         version: 0.5.20(tailwindcss@3.4.19(yaml@2.5.0))
       '@vercel/analytics':
         specifier: 1.5.0
-        version: 1.5.0(next@16.4.3(@babel/core@7.29.7)(@playwright/test@1.56.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.106.1))(react@19.2.0)
+        version: 1.5.0(next@16.4.3(@babel/core@7.29.7)(@playwright/test@1.56.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.107.1))(react@19.2.0)
       autoprefixer:
         specifier: 10.4.21
         version: 10.4.21(postcss@8.5.31)
       next:
         specifier: 16.4.3
-        version: 16.4.3(@babel/core@7.29.7)(@playwright/test@1.56.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.106.1)
+        version: 16.4.3(@babel/core@7.29.7)(@playwright/test@1.56.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.107.1)
       next-secure-headers:
         specifier: 2.2.0
         version: 2.2.0
@@ -920,7 +920,7 @@ importers:
         version: 2.0.20
       next-sitemap:
         specifier: 4.2.3
-        version: 4.2.3(next@16.4.3(@babel/core@7.29.7)(@playwright/test@1.56.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.106.1))
+        version: 4.2.3(next@16.4.3(@babel/core@7.29.7)(@playwright/test@1.56.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.107.1))
       openapi-types:
         specifier: 12.1.3
         version: 12.1.3
@@ -928,8 +928,8 @@ importers:
         specifier: 8.5.31
         version: 8.5.31
       sass:
-        specifier: 1.106.1
-        version: 1.106.1
+        specifier: 1.107.1
+        version: 1.107.1
       typescript:
         specifier: 5.9.3
         version: 5.9.3
@@ -1004,7 +1004,7 @@ importers:
         version: 5.104.5(@tanstack/react-query@5.104.5(@types/react@19.2.2)(react@19.2.0))(@types/react@19.2.2)(csstype@3.1.3)(react@19.2.0)
       '@vercel/analytics':
         specifier: 1.5.0
-        version: 1.5.0(next@16.4.3(@playwright/test@1.56.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.106.1))(react@19.2.0)
+        version: 1.5.0(next@16.4.3(@playwright/test@1.56.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.107.1))(react@19.2.0)
       jose:
         specifier: 6.1.0
         version: 6.1.0
@@ -1013,7 +1013,7 @@ importers:
         version: 5.1.16
       next:
         specifier: 16.4.3
-        version: 16.4.3(@playwright/test@1.56.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.106.1)
+        version: 16.4.3(@playwright/test@1.56.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.107.1)
       next-secure-headers:
         specifier: 2.2.0
         version: 2.2.0
@@ -1077,13 +1077,13 @@ importers:
         version: 19.1.0-rc.3
       next-sitemap:
         specifier: 4.2.3
-        version: 4.2.3(next@16.4.3(@playwright/test@1.56.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.106.1))
+        version: 4.2.3(next@16.4.3(@playwright/test@1.56.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.107.1))
       postcss:
         specifier: 8.5.31
         version: 8.5.31
       sass:
-        specifier: 1.106.1
-        version: 1.106.1
+        specifier: 1.107.1
+        version: 1.107.1
       typescript:
         specifier: 5.9.3
         version: 5.9.3
@@ -1117,7 +1117,7 @@ importers:
         version: 19.2.2(@types/react@19.2.2)
       next:
         specifier: 16.4.3
-        version: 16.4.3(@playwright/test@1.56.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.106.1)
+        version: 16.4.3(@playwright/test@1.56.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.107.1)
       react:
         specifier: 19.2.0
         version: 19.2.0
@@ -1153,7 +1153,7 @@ importers:
         version: 6.1.0
       next:
         specifier: 16.4.3
-        version: 16.4.3(@playwright/test@1.56.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.106.1)
+        version: 16.4.3(@playwright/test@1.56.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.107.1)
       react:
         specifier: 19.2.0
         version: 19.2.0
@@ -1295,7 +1295,7 @@ importers:
         version: 19.2.2
       next:
         specifier: 16.4.3
-        version: 16.4.3(@playwright/test@1.56.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.106.1)
+        version: 16.4.3(@playwright/test@1.56.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.107.1)
       react:
         specifier: 19.2.0
         version: 19.2.0
@@ -1420,8 +1420,8 @@ importers:
         specifier: 7.2.0
         version: 7.2.0(react@19.2.0)
       sass:
-        specifier: 1.106.1
-        version: 1.106.1
+        specifier: 1.107.1
+        version: 1.107.1
       tsup:
         specifier: 8.5.1
         version: 8.5.1(@microsoft/api-extractor@7.60.1(@types/node@24.19.2))(@swc/core@1.7.22(@swc/helpers@0.5.23))(jiti@2.6.1)(postcss@8.5.31)(typescript@5.9.3)(yaml@2.5.0)
@@ -1602,7 +1602,7 @@ importers:
         version: 2.2.21
       next:
         specifier: 16.4.3
-        version: 16.4.3(@playwright/test@1.56.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.106.1)
+        version: 16.4.3(@playwright/test@1.56.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.107.1)
       postcss:
         specifier: 8.5.31
         version: 8.5.31
@@ -1619,8 +1619,8 @@ importers:
         specifier: 7.2.0
         version: 7.2.0(react@19.2.0)
       sass:
-        specifier: 1.106.1
-        version: 1.106.1
+        specifier: 1.107.1
+        version: 1.107.1
       tailwind-merge:
         specifier: 2.6.1
         version: 2.6.1
@@ -1641,7 +1641,7 @@ importers:
         version: 1.1.2(@types/react-dom@19.2.2(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       vitest:
         specifier: 4.1.12
-        version: 4.1.12(@types/node@24.19.2)(@vitest/coverage-v8@4.1.12)(msw@2.7.0(@types/node@24.19.2)(typescript@5.9.3))(vite@6.3.4(@types/node@24.19.2)(jiti@2.6.1)(sass@1.106.1)(terser@5.44.0)(yaml@2.5.0))
+        version: 4.1.12(@types/node@24.19.2)(@vitest/coverage-v8@4.1.12)(msw@2.7.0(@types/node@24.19.2)(typescript@5.9.3))(vite@6.3.4(@types/node@24.19.2)(jiti@2.6.1)(sass@1.107.1)(terser@5.44.0)(yaml@2.5.0))
 
   packages/ui-themes-minimal:
     dependencies:
@@ -9072,8 +9072,8 @@ packages:
       webpack:
         optional: true
 
-  sass@1.106.1:
-    resolution: {integrity: sha512-kD+Gi66vycZcbJt+42NC4z4PXNMcCajVrJPhqoKKXy5cOBMmJQt052CxIBcRjwYXeImHYOpu/ydWWGZQIenl7A==}
+  sass@1.107.1:
+    resolution: {integrity: sha512-aJ1/LvxOOb04YhmiBjzZn3jVwdHKol+OVhoMV6fFl02fF9T3i+5Mg9l/CnzqtM+NX5Jn5o3lAbs/ZJivTCLHfQ==}
     engines: {node: '>=20.19.0'}
     hasBin: true
 
@@ -13555,8 +13555,8 @@ snapshots:
       '@storybook/icons': 2.2.0(react@19.2.0)
       storybook: 10.6.5(@types/react@19.2.2)(prettier@3.5.3)(react@19.2.0)
     optionalDependencies:
-      '@vitest/browser': 4.1.12(msw@2.7.0(@types/node@24.19.2)(typescript@5.9.3))(vite@6.3.4(@types/node@24.19.2)(jiti@2.6.1)(sass@1.106.1)(terser@5.44.0)(yaml@2.5.0))(vitest@4.1.12)
-      vitest: 4.1.12(@types/node@24.19.2)(@vitest/coverage-v8@4.1.12)(msw@2.7.0(@types/node@24.19.2)(typescript@5.9.3))(vite@6.3.4(@types/node@24.19.2)(jiti@2.6.1)(sass@1.106.1)(terser@5.44.0)(yaml@2.5.0))
+      '@vitest/browser': 4.1.12(msw@2.7.0(@types/node@24.19.2)(typescript@5.9.3))(vite@6.3.4(@types/node@24.19.2)(jiti@1.21.7)(sass@1.107.1)(terser@5.44.0)(yaml@2.5.0))(vitest@4.1.12)
+      vitest: 4.1.12(@types/node@24.19.2)(@vitest/coverage-v8@4.1.12)(msw@2.7.0(@types/node@24.19.2)(typescript@5.9.3))(vite@6.3.4(@types/node@24.19.2)(jiti@1.21.7)(sass@1.107.1)(terser@5.44.0)(yaml@2.5.0))
     transitivePeerDependencies:
       - react
 
@@ -13608,7 +13608,7 @@ snapshots:
     dependencies:
       react: 19.2.0
 
-  '@storybook/nextjs@10.6.5(@swc/core@1.7.22(@swc/helpers@0.5.23))(@types/react-dom@19.2.2(@types/react@19.2.2))(@types/react@19.2.2)(next@16.4.3(@babel/core@7.29.7)(@playwright/test@1.56.1)(@types/node@24.19.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.106.1))(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.106.1)(storybook@10.6.5(@types/react@19.2.2)(prettier@3.5.3)(react@19.2.0))(type-fest@4.41.0)(typescript@5.9.3)(webpack-hot-middleware@2.26.1)(webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.23))(postcss@8.5.31))':
+  '@storybook/nextjs@10.6.5(@swc/core@1.7.22(@swc/helpers@0.5.23))(@types/react-dom@19.2.2(@types/react@19.2.2))(@types/react@19.2.2)(next@16.4.3(@babel/core@7.29.7)(@playwright/test@1.56.1)(@types/node@24.19.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.107.1))(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.107.1)(storybook@10.6.5(@types/react@19.2.2)(prettier@3.5.3)(react@19.2.0))(type-fest@4.41.0)(typescript@5.9.3)(webpack-hot-middleware@2.26.1)(webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.23))(postcss@8.5.31))':
     dependencies:
       '@babel/core': 7.29.7
       '@babel/plugin-syntax-bigint': 7.8.3(@babel/core@7.29.7)
@@ -13631,7 +13631,7 @@ snapshots:
       babel-loader: 9.2.1(@babel/core@7.29.7)(webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.23))(postcss@8.5.31))
       css-loader: 6.11.0(webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.23))(postcss@8.5.31))
       loader-utils: 3.3.1
-      next: 16.4.3(@babel/core@7.29.7)(@playwright/test@1.56.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.106.1)
+      next: 16.4.3(@babel/core@7.29.7)(@playwright/test@1.56.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.107.1)
       node-polyfill-webpack-plugin: 2.0.1(webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.23))(postcss@8.5.31))
       postcss: 8.5.31
       postcss-loader: 8.2.1(postcss@8.5.31)(typescript@5.9.3)(webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.23))(postcss@8.5.31))
@@ -13640,7 +13640,7 @@ snapshots:
       react-dom: 19.2.0(react@19.2.0)
       react-refresh: 0.14.2
       resolve-url-loader: 5.0.0
-      sass-loader: 16.0.8(sass@1.106.1)(webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.23))(postcss@8.5.31))
+      sass-loader: 16.0.8(sass@1.107.1)(webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.23))(postcss@8.5.31))
       semver: 7.8.5
       storybook: 10.6.5(@types/react@19.2.2)(prettier@3.5.3)(react@19.2.0)
       style-loader: 3.3.4(webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.23))(postcss@8.5.31))
@@ -14269,31 +14269,31 @@ snapshots:
 
   '@ungap/structured-clone@1.3.0': {}
 
-  '@vercel/analytics@1.5.0(next@16.4.3(@babel/core@7.29.7)(@playwright/test@1.56.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.106.1))(react@19.2.0)':
+  '@vercel/analytics@1.5.0(next@16.4.3(@babel/core@7.29.7)(@playwright/test@1.56.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.107.1))(react@19.2.0)':
     optionalDependencies:
-      next: 16.4.3(@babel/core@7.29.7)(@playwright/test@1.56.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.106.1)
+      next: 16.4.3(@babel/core@7.29.7)(@playwright/test@1.56.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.107.1)
       react: 19.2.0
 
-  '@vercel/analytics@1.5.0(next@16.4.3(@playwright/test@1.56.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.106.1))(react@19.2.0)':
+  '@vercel/analytics@1.5.0(next@16.4.3(@playwright/test@1.56.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.107.1))(react@19.2.0)':
     optionalDependencies:
-      next: 16.4.3(@playwright/test@1.56.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.106.1)
+      next: 16.4.3(@playwright/test@1.56.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.107.1)
       react: 19.2.0
 
-  '@vercel/speed-insights@1.2.0(next@16.4.3(@playwright/test@1.56.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.106.1))(react@19.2.0)':
+  '@vercel/speed-insights@1.2.0(next@16.4.3(@playwright/test@1.56.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.107.1))(react@19.2.0)':
     optionalDependencies:
-      next: 16.4.3(@playwright/test@1.56.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.106.1)
+      next: 16.4.3(@playwright/test@1.56.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.107.1)
       react: 19.2.0
 
-  '@vitest/browser@4.1.12(msw@2.7.0(@types/node@24.19.2)(typescript@5.9.3))(vite@6.3.4(@types/node@24.19.2)(jiti@2.6.1)(sass@1.106.1)(terser@5.44.0)(yaml@2.5.0))(vitest@4.1.12)':
+  '@vitest/browser@4.1.12(msw@2.7.0(@types/node@24.19.2)(typescript@5.9.3))(vite@6.3.4(@types/node@24.19.2)(jiti@1.21.7)(sass@1.107.1)(terser@5.44.0)(yaml@2.5.0))(vitest@4.1.12)':
     dependencies:
       '@blazediff/core': 1.9.1
-      '@vitest/mocker': 4.1.12(msw@2.7.0(@types/node@24.19.2)(typescript@5.9.3))(vite@6.3.4(@types/node@24.19.2)(jiti@2.6.1)(sass@1.106.1)(terser@5.44.0)(yaml@2.5.0))
+      '@vitest/mocker': 4.1.12(msw@2.7.0(@types/node@24.19.2)(typescript@5.9.3))(vite@6.3.4(@types/node@24.19.2)(jiti@1.21.7)(sass@1.107.1)(terser@5.44.0)(yaml@2.5.0))
       '@vitest/utils': 4.1.12
       magic-string: 0.30.21
       pngjs: 7.0.0
       sirv: 3.0.2
       tinyrainbow: 3.2.0
-      vitest: 4.1.12(@types/node@24.19.2)(@vitest/coverage-v8@4.1.12)(msw@2.7.0(@types/node@24.19.2)(typescript@5.9.3))(vite@6.3.4(@types/node@24.19.2)(jiti@2.6.1)(sass@1.106.1)(terser@5.44.0)(yaml@2.5.0))
+      vitest: 4.1.12(@types/node@24.19.2)(@vitest/coverage-v8@4.1.12)(msw@2.7.0(@types/node@24.19.2)(typescript@5.9.3))(vite@6.3.4(@types/node@24.19.2)(jiti@1.21.7)(sass@1.107.1)(terser@5.44.0)(yaml@2.5.0))
       ws: 8.22.0
     transitivePeerDependencies:
       - bufferutil
@@ -14313,9 +14313,9 @@ snapshots:
       obug: 2.2.1
       std-env: 4.3.0
       tinyrainbow: 3.2.0
-      vitest: 4.1.12(@types/node@24.19.2)(@vitest/coverage-v8@4.1.12)(msw@2.7.0(@types/node@24.19.2)(typescript@5.9.3))(vite@6.3.4(@types/node@24.19.2)(jiti@2.6.1)(sass@1.106.1)(terser@5.44.0)(yaml@2.5.0))
+      vitest: 4.1.12(@types/node@24.19.2)(@vitest/coverage-v8@4.1.12)(msw@2.7.0(@types/node@24.19.2)(typescript@5.9.3))(vite@6.3.4(@types/node@24.19.2)(jiti@1.21.7)(sass@1.107.1)(terser@5.44.0)(yaml@2.5.0))
     optionalDependencies:
-      '@vitest/browser': 4.1.12(msw@2.7.0(@types/node@24.19.2)(typescript@5.9.3))(vite@6.3.4(@types/node@24.19.2)(jiti@2.6.1)(sass@1.106.1)(terser@5.44.0)(yaml@2.5.0))(vitest@4.1.12)
+      '@vitest/browser': 4.1.12(msw@2.7.0(@types/node@24.19.2)(typescript@5.9.3))(vite@6.3.4(@types/node@24.19.2)(jiti@1.21.7)(sass@1.107.1)(terser@5.44.0)(yaml@2.5.0))(vitest@4.1.12)
 
   '@vitest/expect@3.2.4':
     dependencies:
@@ -14334,14 +14334,23 @@ snapshots:
       chai: 6.3.0
       tinyrainbow: 3.2.0
 
-  '@vitest/mocker@4.1.12(msw@2.7.0(@types/node@24.19.2)(typescript@5.9.3))(vite@6.3.4(@types/node@24.19.2)(jiti@2.6.1)(sass@1.106.1)(terser@5.44.0)(yaml@2.5.0))':
+  '@vitest/mocker@4.1.12(msw@2.7.0(@types/node@24.19.2)(typescript@5.9.3))(vite@6.3.4(@types/node@24.19.2)(jiti@1.21.7)(sass@1.107.1)(terser@5.44.0)(yaml@2.5.0))':
     dependencies:
       '@vitest/spy': 4.1.12
       estree-walker: 3.0.3
       magic-string: 0.30.21
     optionalDependencies:
       msw: 2.7.0(@types/node@24.19.2)(typescript@5.9.3)
-      vite: 6.3.4(@types/node@24.19.2)(jiti@2.6.1)(sass@1.106.1)(terser@5.44.0)(yaml@2.5.0)
+      vite: 6.3.4(@types/node@24.19.2)(jiti@1.21.7)(sass@1.107.1)(terser@5.44.0)(yaml@2.5.0)
+
+  '@vitest/mocker@4.1.12(msw@2.7.0(@types/node@24.19.2)(typescript@5.9.3))(vite@6.3.4(@types/node@24.19.2)(jiti@2.6.1)(sass@1.107.1)(terser@5.44.0)(yaml@2.5.0))':
+    dependencies:
+      '@vitest/spy': 4.1.12
+      estree-walker: 3.0.3
+      magic-string: 0.30.21
+    optionalDependencies:
+      msw: 2.7.0(@types/node@24.19.2)(typescript@5.9.3)
+      vite: 6.3.4(@types/node@24.19.2)(jiti@2.6.1)(sass@1.107.1)(terser@5.44.0)(yaml@2.5.0)
 
   '@vitest/pretty-format@3.2.4':
     dependencies:
@@ -17142,28 +17151,28 @@ snapshots:
 
   next-secure-headers@2.2.0: {}
 
-  next-sitemap@4.2.3(next@16.4.3(@babel/core@7.29.7)(@playwright/test@1.56.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.106.1)):
+  next-sitemap@4.2.3(next@16.4.3(@babel/core@7.29.7)(@playwright/test@1.56.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.107.1)):
     dependencies:
       '@corex/deepmerge': 4.0.43
       '@next/env': 13.5.11
       fast-glob: 3.3.3
       minimist: 1.2.8
-      next: 16.4.3(@babel/core@7.29.7)(@playwright/test@1.56.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.106.1)
+      next: 16.4.3(@babel/core@7.29.7)(@playwright/test@1.56.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.107.1)
 
-  next-sitemap@4.2.3(next@16.4.3(@playwright/test@1.56.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.106.1)):
+  next-sitemap@4.2.3(next@16.4.3(@playwright/test@1.56.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.107.1)):
     dependencies:
       '@corex/deepmerge': 4.0.43
       '@next/env': 13.5.11
       fast-glob: 3.3.3
       minimist: 1.2.8
-      next: 16.4.3(@playwright/test@1.56.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.106.1)
+      next: 16.4.3(@playwright/test@1.56.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.107.1)
 
   next-themes@0.4.6(react-dom@19.2.0(react@19.2.0))(react@19.2.0):
     dependencies:
       react: 19.2.0
       react-dom: 19.2.0(react@19.2.0)
 
-  next@16.4.3(@babel/core@7.29.7)(@playwright/test@1.56.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.106.1):
+  next@16.4.3(@babel/core@7.29.7)(@playwright/test@1.56.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.107.1):
     dependencies:
       '@next/env': 16.4.3
       '@swc/helpers': 0.5.23
@@ -17184,14 +17193,14 @@ snapshots:
       '@next/swc-win32-x64-msvc': 16.4.3
       '@playwright/test': 1.56.1
       babel-plugin-react-compiler: 19.1.0-rc.3
-      sass: 1.106.1
+      sass: 1.107.1
       sharp: 0.35.5(@types/node@24.19.2)
     transitivePeerDependencies:
       - '@babel/core'
       - '@types/node'
       - babel-plugin-macros
 
-  next@16.4.3(@playwright/test@1.56.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.106.1):
+  next@16.4.3(@playwright/test@1.56.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(sass@1.107.1):
     dependencies:
       '@next/env': 16.4.3
       '@swc/helpers': 0.5.23
@@ -17212,7 +17221,7 @@ snapshots:
       '@next/swc-win32-x64-msvc': 16.4.3
       '@playwright/test': 1.56.1
       babel-plugin-react-compiler: 19.1.0-rc.3
-      sass: 1.106.1
+      sass: 1.107.1
       sharp: 0.35.5(@types/node@24.19.2)
     transitivePeerDependencies:
       - '@babel/core'
@@ -18622,21 +18631,21 @@ snapshots:
 
   safer-buffer@2.1.2: {}
 
-  sass-loader@16.0.8(sass@1.106.1)(webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.23))(postcss@8.5.31)):
+  sass-loader@16.0.8(sass@1.107.1)(webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.23))(postcss@8.5.31)):
     dependencies:
       neo-async: 2.6.2
     optionalDependencies:
-      sass: 1.106.1
+      sass: 1.107.1
       webpack: 5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.23))(postcss@8.5.31)
 
-  sass-loader@16.0.8(sass@1.106.1)(webpack@5.94.0(postcss@8.5.31)):
+  sass-loader@16.0.8(sass@1.107.1)(webpack@5.94.0(postcss@8.5.31)):
     dependencies:
       neo-async: 2.6.2
     optionalDependencies:
-      sass: 1.106.1
+      sass: 1.107.1
       webpack: 5.94.0(postcss@8.5.31)
 
-  sass@1.106.1:
+  sass@1.107.1:
     dependencies:
       chokidar: 5.0.0
       immutable: 5.1.9
@@ -19485,7 +19494,23 @@ snapshots:
       d3-time: 3.1.0
       d3-timer: 3.0.1
 
-  vite@6.3.4(@types/node@24.19.2)(jiti@2.6.1)(sass@1.106.1)(terser@5.44.0)(yaml@2.5.0):
+  vite@6.3.4(@types/node@24.19.2)(jiti@1.21.7)(sass@1.107.1)(terser@5.44.0)(yaml@2.5.0):
+    dependencies:
+      esbuild: 0.25.11
+      fdir: 6.5.0(picomatch@4.0.3)
+      picomatch: 4.0.3
+      postcss: 8.5.31
+      rollup: 4.52.4
+      tinyglobby: 0.2.15
+    optionalDependencies:
+      '@types/node': 24.19.2
+      fsevents: 2.3.3
+      jiti: 1.21.7
+      sass: 1.107.1
+      terser: 5.44.0
+      yaml: 2.5.0
+
+  vite@6.3.4(@types/node@24.19.2)(jiti@2.6.1)(sass@1.107.1)(terser@5.44.0)(yaml@2.5.0):
     dependencies:
       esbuild: 0.25.11
       fdir: 6.5.0(picomatch@4.0.3)
@@ -19497,14 +19522,14 @@ snapshots:
       '@types/node': 24.19.2
       fsevents: 2.3.3
       jiti: 2.6.1
-      sass: 1.106.1
+      sass: 1.107.1
       terser: 5.44.0
       yaml: 2.5.0
 
-  vitest@4.1.12(@types/node@24.19.2)(@vitest/coverage-v8@4.1.12)(msw@2.7.0(@types/node@24.19.2)(typescript@5.9.3))(vite@6.3.4(@types/node@24.19.2)(jiti@2.6.1)(sass@1.106.1)(terser@5.44.0)(yaml@2.5.0)):
+  vitest@4.1.12(@types/node@24.19.2)(@vitest/coverage-v8@4.1.12)(msw@2.7.0(@types/node@24.19.2)(typescript@5.9.3))(vite@6.3.4(@types/node@24.19.2)(jiti@1.21.7)(sass@1.107.1)(terser@5.44.0)(yaml@2.5.0)):
     dependencies:
       '@vitest/expect': 4.1.12
-      '@vitest/mocker': 4.1.12(msw@2.7.0(@types/node@24.19.2)(typescript@5.9.3))(vite@6.3.4(@types/node@24.19.2)(jiti@2.6.1)(sass@1.106.1)(terser@5.44.0)(yaml@2.5.0))
+      '@vitest/mocker': 4.1.12(msw@2.7.0(@types/node@24.19.2)(typescript@5.9.3))(vite@6.3.4(@types/node@24.19.2)(jiti@1.21.7)(sass@1.107.1)(terser@5.44.0)(yaml@2.5.0))
       '@vitest/pretty-format': 4.1.12
       '@vitest/runner': 4.1.12
       '@vitest/snapshot': 4.1.12
@@ -19521,7 +19546,35 @@ snapshots:
       tinyexec: 1.3.1
       tinyglobby: 0.2.15
       tinyrainbow: 3.2.0
-      vite: 6.3.4(@types/node@24.19.2)(jiti@2.6.1)(sass@1.106.1)(terser@5.44.0)(yaml@2.5.0)
+      vite: 6.3.4(@types/node@24.19.2)(jiti@1.21.7)(sass@1.107.1)(terser@5.44.0)(yaml@2.5.0)
+      why-is-node-running: 2.3.0
+    optionalDependencies:
+      '@types/node': 24.19.2
+      '@vitest/coverage-v8': 4.1.12(@vitest/browser@4.1.12)(vitest@4.1.12)
+    transitivePeerDependencies:
+      - msw
+
+  vitest@4.1.12(@types/node@24.19.2)(@vitest/coverage-v8@4.1.12)(msw@2.7.0(@types/node@24.19.2)(typescript@5.9.3))(vite@6.3.4(@types/node@24.19.2)(jiti@2.6.1)(sass@1.107.1)(terser@5.44.0)(yaml@2.5.0)):
+    dependencies:
+      '@vitest/expect': 4.1.12
+      '@vitest/mocker': 4.1.12(msw@2.7.0(@types/node@24.19.2)(typescript@5.9.3))(vite@6.3.4(@types/node@24.19.2)(jiti@2.6.1)(sass@1.107.1)(terser@5.44.0)(yaml@2.5.0))
+      '@vitest/pretty-format': 4.1.12
+      '@vitest/runner': 4.1.12
+      '@vitest/snapshot': 4.1.12
+      '@vitest/spy': 4.1.12
+      '@vitest/utils': 4.1.12
+      es-module-lexer: 2.3.2
+      expect-type: 1.4.0
+      magic-string: 0.30.21
+      obug: 2.2.1
+      pathe: 2.0.3
+      picomatch: 4.0.3
+      std-env: 4.3.0
+      tinybench: 2.9.0
+      tinyexec: 1.3.1
+      tinyglobby: 0.2.15
+      tinyrainbow: 3.2.0
+      vite: 6.3.4(@types/node@24.19.2)(jiti@2.6.1)(sass@1.107.1)(terser@5.44.0)(yaml@2.5.0)
       why-is-node-running: 2.3.0
     optionalDependencies:
       '@types/node': 24.19.2
