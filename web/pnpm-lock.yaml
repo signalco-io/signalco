@@ -42,8 +42,8 @@ importers:
         specifier: 0.7.0
         version: 0.7.0(react-dom@19.2.9(react@19.2.9))(react@19.2.9)
       '@hcaptcha/react-hcaptcha':
-        specifier: 1.14.0
-        version: 1.14.0(react-dom@19.2.9(react@19.2.9))(react@19.2.9)
+        specifier: 1.17.4
+        version: 1.17.4(react-dom@19.2.9(react@19.2.9))(react@19.2.9)
       '@microsoft/signalr':
         specifier: 9.0.19
         version: 9.0.19(encoding@0.1.13)
@@ -471,8 +471,8 @@ importers:
         specifier: 0.7.0
         version: 0.7.0(react-dom@19.2.9(react@19.2.9))(react@19.2.9)
       '@hcaptcha/react-hcaptcha':
-        specifier: 1.14.0
-        version: 1.14.0(react-dom@19.2.9(react@19.2.9))(react@19.2.9)
+        specifier: 1.17.4
+        version: 1.17.4(react-dom@19.2.9(react@19.2.9))(react@19.2.9)
       '@mantine/core':
         specifier: 8.3.18
         version: 8.3.18(@mantine/hooks@8.3.18(react@19.2.9))(@types/react@19.2.2)(react-dom@19.2.9(react@19.2.9))(react@19.2.9)
@@ -610,8 +610,8 @@ importers:
   apps/slco:
     dependencies:
       '@hcaptcha/react-hcaptcha':
-        specifier: 1.14.0
-        version: 1.14.0(react-dom@19.2.9(react@19.2.9))(react@19.2.9)
+        specifier: 1.17.4
+        version: 1.17.4(react-dom@19.2.9(react@19.2.9))(react@19.2.9)
       '@next/env':
         specifier: 16.4.3
         version: 16.4.3
@@ -813,8 +813,8 @@ importers:
         specifier: 0.7.0
         version: 0.7.0(react-dom@19.2.9(react@19.2.9))(react@19.2.9)
       '@hcaptcha/react-hcaptcha':
-        specifier: 1.14.0
-        version: 1.14.0(react-dom@19.2.9(react@19.2.9))(react@19.2.9)
+        specifier: 1.17.4
+        version: 1.17.4(react-dom@19.2.9(react@19.2.9))(react@19.2.9)
       '@next/env':
         specifier: 16.4.3
         version: 16.4.3
@@ -3194,11 +3194,11 @@ packages:
       prosemirror-state: ^1.0.0
       prosemirror-view: ^1.0.0
 
-  '@hcaptcha/loader@2.2.0':
-    resolution: {integrity: sha512-LAd0XRt1Mu0hLpUpWAx5OS9FS0d6V+V0aCSYUKFAz0a6tTDHeAuwm5iO81mp2HIEhXFOSSB8AwCCOU9zq695lg==}
+  '@hcaptcha/loader@2.4.2':
+    resolution: {integrity: sha512-+Pf0Vin6iJlJj5u/mq6XMgbJT1mi/Sg5LWHxxqO4YHt2YvdZgecp5V2sbC6vRaNPJUqQGk2HOu1K/i12mqs5vw==}
 
-  '@hcaptcha/react-hcaptcha@1.14.0':
-    resolution: {integrity: sha512-XHFhmRjw4L6spgRfTEUj/uW4cN4iWTp7BxLHyheF5zEle6g65fIHUCmqKMrIA/6OKLzBSElUKyc1IuDU+V8RaQ==}
+  '@hcaptcha/react-hcaptcha@1.17.4':
+    resolution: {integrity: sha512-rIvgesG1N7SS9sAYYHFoWm+nXqRrxq7RcA9z2pKkDWV+S1GdfmrTNYA1aPyVWVe3eowphTCwyDJvl97Swwy0mw==}
     peerDependencies:
       react: '>= 16.3.0'
       react-dom: '>= 16.3.0'
@@ -11762,12 +11762,12 @@ snapshots:
       prosemirror-transform: 1.12.4
       prosemirror-view: 1.42.9
 
-  '@hcaptcha/loader@2.2.0': {}
+  '@hcaptcha/loader@2.4.2': {}
 
-  '@hcaptcha/react-hcaptcha@1.14.0(react-dom@19.2.9(react@19.2.9))(react@19.2.9)':
+  '@hcaptcha/react-hcaptcha@1.17.4(react-dom@19.2.9(react@19.2.9))(react@19.2.9)':
     dependencies:
-      '@babel/runtime': 7.27.1
-      '@hcaptcha/loader': 2.2.0
+      '@babel/runtime': 7.29.10
+      '@hcaptcha/loader': 2.4.2
       react: 19.2.9
       react-dom: 19.2.9(react@19.2.9)
 
