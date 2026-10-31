@@ -21,8 +21,8 @@ importers:
         specifier: 2.7.0
         version: 2.7.0(ts-node@7.0.1)(typescript@5.9.3)
       '@pulumi/azure-native':
-        specifier: 3.8.0
-        version: 3.8.0(ts-node@7.0.1)(typescript@5.9.3)
+        specifier: 3.29.0
+        version: 3.29.0(ts-node@7.0.1)(typescript@5.9.3)
       '@pulumi/cloudflare':
         specifier: 6.11.0
         version: 6.11.0(ts-node@7.0.1)(typescript@5.9.3)
@@ -55,8 +55,8 @@ importers:
   apps/doprocess:
     dependencies:
       '@pulumi/azure-native':
-        specifier: 3.8.0
-        version: 3.8.0(ts-node@7.0.1)(typescript@5.9.3)
+        specifier: 3.29.0
+        version: 3.29.0(ts-node@7.0.1)(typescript@5.9.3)
       '@pulumi/cloudflare':
         specifier: 6.11.0
         version: 6.11.0(ts-node@7.0.1)(typescript@5.9.3)
@@ -89,8 +89,8 @@ importers:
         specifier: 2.7.0
         version: 2.7.0(ts-node@7.0.1)(typescript@5.9.3)
       '@pulumi/azure-native':
-        specifier: 3.8.0
-        version: 3.8.0(ts-node@7.0.1)(typescript@5.9.3)
+        specifier: 3.29.0
+        version: 3.29.0(ts-node@7.0.1)(typescript@5.9.3)
       '@pulumi/cloudflare':
         specifier: 6.11.0
         version: 6.11.0(ts-node@7.0.1)(typescript@5.9.3)
@@ -126,8 +126,8 @@ importers:
         specifier: 2.7.0
         version: 2.7.0(ts-node@7.0.1)(typescript@5.9.3)
       '@pulumi/azure-native':
-        specifier: 3.8.0
-        version: 3.8.0(ts-node@7.0.1)(typescript@5.9.3)
+        specifier: 3.29.0
+        version: 3.29.0(ts-node@7.0.1)(typescript@5.9.3)
       '@pulumi/cloudflare':
         specifier: 6.11.0
         version: 6.11.0(ts-node@7.0.1)(typescript@5.9.3)
@@ -160,8 +160,8 @@ importers:
   apps/workingparty:
     dependencies:
       '@pulumi/azure-native':
-        specifier: 3.8.0
-        version: 3.8.0(ts-node@7.0.1)(typescript@5.9.3)
+        specifier: 3.29.0
+        version: 3.29.0(ts-node@7.0.1)(typescript@5.9.3)
       '@pulumi/cloudflare':
         specifier: 6.11.0
         version: 6.11.0(ts-node@7.0.1)(typescript@5.9.3)
@@ -194,8 +194,8 @@ importers:
         specifier: 2.7.0
         version: 2.7.0(ts-node@7.0.1)(typescript@5.9.3)
       '@pulumi/azure-native':
-        specifier: 3.8.0
-        version: 3.8.0(ts-node@7.0.1)(typescript@5.9.3)
+        specifier: 3.29.0
+        version: 3.29.0(ts-node@7.0.1)(typescript@5.9.3)
       '@pulumi/cloudflare':
         specifier: 6.11.0
         version: 6.11.0(ts-node@7.0.1)(typescript@5.9.3)
@@ -606,8 +606,8 @@ packages:
   '@protobufjs/utf8@1.1.0':
     resolution: {integrity: sha512-Vvn3zZrhQZkkBE8LSuW3em98c0FwgO4nxzv6OdSxPKJIEKY2bGbHn+mhGIPerzI4twdxaP8/0+06HBpwf345Lw==}
 
-  '@pulumi/azure-native@3.8.0':
-    resolution: {integrity: sha512-emIoAW5gl2i0S03XRdEiX25GcUxjwH/0HZha8Jaz8YO58rlm+tr5MR6+DSgj0Fy71rcODt+SE/4p+6/ElEmkuw==}
+  '@pulumi/azure-native@3.29.0':
+    resolution: {integrity: sha512-J0j04PBBctR7e8/6cD3yxTUww3E1gv4xs3+8LEqem6DwOJtm3sNChEITJAZoSQAkV+SbAd3DgAUDILxqp851oQ==}
 
   '@pulumi/cloudflare@6.11.0':
     resolution: {integrity: sha512-KrKmoi7/L9Q8z2yr8PzNfcTo8Irm//NNJ5s4khQD9+W495Wd2k5fR1bOOEQN15iFsBALyjBbeDf+6+RdZKSd6A==}
@@ -667,56 +667,67 @@ packages:
     resolution: {integrity: sha512-xRiOu9Of1FZ4SxVbB0iEDXc4ddIcjCv2aj03dmW8UrZIW7aIQ9jVJdLBIhxBI+MaTnGAKyvMwPwQnoOEvP7FgQ==}
     cpu: [arm]
     os: [linux]
+    libc: [glibc]
 
   '@rollup/rollup-linux-arm-musleabihf@4.52.4':
     resolution: {integrity: sha512-FbhM2p9TJAmEIEhIgzR4soUcsW49e9veAQCziwbR+XWB2zqJ12b4i/+hel9yLiD8pLncDH4fKIPIbt5238341Q==}
     cpu: [arm]
     os: [linux]
+    libc: [musl]
 
   '@rollup/rollup-linux-arm64-gnu@4.52.4':
     resolution: {integrity: sha512-4n4gVwhPHR9q/g8lKCyz0yuaD0MvDf7dV4f9tHt0C73Mp8h38UCtSCSE6R9iBlTbXlmA8CjpsZoujhszefqueg==}
     cpu: [arm64]
     os: [linux]
+    libc: [glibc]
 
   '@rollup/rollup-linux-arm64-musl@4.52.4':
     resolution: {integrity: sha512-u0n17nGA0nvi/11gcZKsjkLj1QIpAuPFQbR48Subo7SmZJnGxDpspyw2kbpuoQnyK+9pwf3pAoEXerJs/8Mi9g==}
     cpu: [arm64]
     os: [linux]
+    libc: [musl]
 
   '@rollup/rollup-linux-loong64-gnu@4.52.4':
     resolution: {integrity: sha512-0G2c2lpYtbTuXo8KEJkDkClE/+/2AFPdPAbmaHoE870foRFs4pBrDehilMcrSScrN/fB/1HTaWO4bqw+ewBzMQ==}
     cpu: [loong64]
     os: [linux]
+    libc: [glibc]
 
   '@rollup/rollup-linux-ppc64-gnu@4.52.4':
     resolution: {integrity: sha512-teSACug1GyZHmPDv14VNbvZFX779UqWTsd7KtTM9JIZRDI5NUwYSIS30kzI8m06gOPB//jtpqlhmraQ68b5X2g==}
     cpu: [ppc64]
     os: [linux]
+    libc: [glibc]
 
   '@rollup/rollup-linux-riscv64-gnu@4.52.4':
     resolution: {integrity: sha512-/MOEW3aHjjs1p4Pw1Xk4+3egRevx8Ji9N6HUIA1Ifh8Q+cg9dremvFCUbOX2Zebz80BwJIgCBUemjqhU5XI5Eg==}
     cpu: [riscv64]
     os: [linux]
+    libc: [glibc]
 
   '@rollup/rollup-linux-riscv64-musl@4.52.4':
     resolution: {integrity: sha512-1HHmsRyh845QDpEWzOFtMCph5Ts+9+yllCrREuBR/vg2RogAQGGBRC8lDPrPOMnrdOJ+mt1WLMOC2Kao/UwcvA==}
     cpu: [riscv64]
     os: [linux]
+    libc: [musl]
 
   '@rollup/rollup-linux-s390x-gnu@4.52.4':
     resolution: {integrity: sha512-seoeZp4L/6D1MUyjWkOMRU6/iLmCU2EjbMTyAG4oIOs1/I82Y5lTeaxW0KBfkUdHAWN7j25bpkt0rjnOgAcQcA==}
     cpu: [s390x]
     os: [linux]
+    libc: [glibc]
 
   '@rollup/rollup-linux-x64-gnu@4.52.4':
     resolution: {integrity: sha512-Wi6AXf0k0L7E2gteNsNHUs7UMwCIhsCTs6+tqQ5GPwVRWMaflqGec4Sd8n6+FNFDw9vGcReqk2KzBDhCa1DLYg==}
     cpu: [x64]
     os: [linux]
+    libc: [glibc]
 
   '@rollup/rollup-linux-x64-musl@4.52.4':
     resolution: {integrity: sha512-dtBZYjDmCQ9hW+WgEkaffvRRCKm767wWhxsFW3Lw86VXz/uJRuD438/XvbZT//B96Vs8oTA8Q4A0AfHbrxP9zw==}
     cpu: [x64]
     os: [linux]
+    libc: [musl]
 
   '@rollup/rollup-openharmony-arm64@4.52.4':
     resolution: {integrity: sha512-1ox+GqgRWqaB1RnyZXL8PD6E5f7YyRUJYnCqKpNzxzP0TkaUh112NDrR9Tt+C8rJ4x5G9Mk8PQR3o7Ku2RKqKA==}
@@ -2232,7 +2243,7 @@ snapshots:
 
   '@protobufjs/utf8@1.1.0': {}
 
-  '@pulumi/azure-native@3.8.0(ts-node@7.0.1)(typescript@5.9.3)':
+  '@pulumi/azure-native@3.29.0(ts-node@7.0.1)(typescript@5.9.3)':
     dependencies:
       '@pulumi/pulumi': 3.205.0(ts-node@7.0.1)(typescript@5.9.3)
     transitivePeerDependencies:
