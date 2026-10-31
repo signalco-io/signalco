@@ -30,8 +30,8 @@ importers:
         specifier: 1.1.3
         version: 1.1.3(ts-node@7.0.1)(typescript@5.9.3)
       '@pulumi/docker':
-        specifier: 4.9.0
-        version: 4.9.0(ts-node@7.0.1)(typescript@5.9.3)
+        specifier: 4.11.2
+        version: 4.11.2(ts-node@7.0.1)(typescript@5.9.3)
       '@pulumi/pulumi':
         specifier: 3.205.0
         version: 3.205.0(ts-node@7.0.1)(typescript@5.9.3)
@@ -61,8 +61,8 @@ importers:
         specifier: 6.23.2
         version: 6.23.2(ts-node@7.0.1)(typescript@5.9.3)
       '@pulumi/docker':
-        specifier: 4.9.0
-        version: 4.9.0(ts-node@7.0.1)(typescript@5.9.3)
+        specifier: 4.11.2
+        version: 4.11.2(ts-node@7.0.1)(typescript@5.9.3)
       '@pulumi/pulumi':
         specifier: 3.205.0
         version: 3.205.0(ts-node@7.0.1)(typescript@5.9.3)
@@ -98,8 +98,8 @@ importers:
         specifier: 1.1.3
         version: 1.1.3(ts-node@7.0.1)(typescript@5.9.3)
       '@pulumi/docker':
-        specifier: 4.9.0
-        version: 4.9.0(ts-node@7.0.1)(typescript@5.9.3)
+        specifier: 4.11.2
+        version: 4.11.2(ts-node@7.0.1)(typescript@5.9.3)
       '@pulumi/pulumi':
         specifier: 3.205.0
         version: 3.205.0(ts-node@7.0.1)(typescript@5.9.3)
@@ -135,8 +135,8 @@ importers:
         specifier: 1.1.3
         version: 1.1.3(ts-node@7.0.1)(typescript@5.9.3)
       '@pulumi/docker':
-        specifier: 4.9.0
-        version: 4.9.0(ts-node@7.0.1)(typescript@5.9.3)
+        specifier: 4.11.2
+        version: 4.11.2(ts-node@7.0.1)(typescript@5.9.3)
       '@pulumi/pulumi':
         specifier: 3.205.0
         version: 3.205.0(ts-node@7.0.1)(typescript@5.9.3)
@@ -166,8 +166,8 @@ importers:
         specifier: 6.23.2
         version: 6.23.2(ts-node@7.0.1)(typescript@5.9.3)
       '@pulumi/docker':
-        specifier: 4.9.0
-        version: 4.9.0(ts-node@7.0.1)(typescript@5.9.3)
+        specifier: 4.11.2
+        version: 4.11.2(ts-node@7.0.1)(typescript@5.9.3)
       '@pulumi/pulumi':
         specifier: 3.205.0
         version: 3.205.0(ts-node@7.0.1)(typescript@5.9.3)
@@ -203,8 +203,8 @@ importers:
         specifier: 1.1.3
         version: 1.1.3(ts-node@7.0.1)(typescript@5.9.3)
       '@pulumi/docker':
-        specifier: 4.9.0
-        version: 4.9.0(ts-node@7.0.1)(typescript@5.9.3)
+        specifier: 4.11.2
+        version: 4.11.2(ts-node@7.0.1)(typescript@5.9.3)
       '@pulumi/pulumi':
         specifier: 3.205.0
         version: 3.205.0(ts-node@7.0.1)(typescript@5.9.3)
@@ -615,8 +615,8 @@ packages:
   '@pulumi/command@1.1.3':
     resolution: {integrity: sha512-eBzGE/BQlxMNcxrrA62N4cLaHdL0xDSRACXxB0Hjc4rJG60vhpDVO130xxb4x3cZ7HT1kvjS4KuuoH8R5JRbIQ==}
 
-  '@pulumi/docker@4.9.0':
-    resolution: {integrity: sha512-Iw5WQClre7j32oQmo3ObmHKAab0y/7Pf0hmQvcGCiBgb7X20uW3XMKV8OAFjk7/5tdyYHd1LK6s6H882IT0Bvw==}
+  '@pulumi/docker@4.11.2':
+    resolution: {integrity: sha512-mm8Uscb/3S7OieYyg1E/vvFx3OS4bAkZvtFvi1yTqYda9NbnYOMbJi7a5fU5xB0N0Kd/uliS8olJ/e6nnvVVPg==}
 
   '@pulumi/pulumi@3.205.0':
     resolution: {integrity: sha512-AcYCPNAPYpRX9D2D6vwnEfNP+1hg1R45eQYrBTJlbGY3rcR22sHP8fYheY5nJQy1g9KPY21kkkvfBDu6Ch6UIw==}
@@ -2270,7 +2270,7 @@ snapshots:
       - ts-node
       - typescript
 
-  '@pulumi/docker@4.9.0(ts-node@7.0.1)(typescript@5.9.3)':
+  '@pulumi/docker@4.11.2(ts-node@7.0.1)(typescript@5.9.3)':
     dependencies:
       '@pulumi/pulumi': 3.205.0(ts-node@7.0.1)(typescript@5.9.3)
       semver: 5.7.2
