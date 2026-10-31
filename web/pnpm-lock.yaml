@@ -444,8 +444,8 @@ importers:
   apps/doprocess:
     dependencies:
       '@azure/cosmos':
-        specifier: 4.7.0
-        version: 4.7.0
+        specifier: 4.10.1
+        version: 4.10.1
       '@blocknote/core':
         specifier: 0.41.1
         version: 0.41.1(@hocuspocus/provider@2.15.2(y-protocols@1.0.6(yjs@13.6.27))(yjs@13.6.27))(@tiptap/extensions@3.7.2(@tiptap/core@3.7.2(@tiptap/pm@3.7.2))(@tiptap/pm@3.7.2))(@types/hast@3.0.4)
@@ -940,8 +940,8 @@ importers:
         specifier: 1.1.0
         version: 1.1.0
       '@azure/cosmos':
-        specifier: 4.7.0
-        version: 4.7.0
+        specifier: 4.10.1
+        version: 4.10.1
       '@enterwell/react-form-builder':
         specifier: 0.3.2
         version: 0.3.2(@enterwell/react-form-validation@1.4.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
@@ -1765,9 +1765,9 @@ packages:
     resolution: {integrity: sha512-XPArKLzsvl0Hf0CaGyKHUyVgF7oDnhKoP85Xv6M4StF/1AhfORhZudHtOyf2s+FcbuQ9dPRAjB8J2KvRRMUK2A==}
     engines: {node: '>=20.0.0'}
 
-  '@azure/cosmos@4.7.0':
-    resolution: {integrity: sha512-a8OV7E41u/ZDaaaDAFdqTTiJ7c82jZc/+ot3XzNCIIilR25NBB+1ixzWQOAgP8SHRUIKfaUl6wAPdTuiG9I66A==}
-    engines: {node: '>=20.0.0'}
+  '@azure/cosmos@4.10.1':
+    resolution: {integrity: sha512-rTL/F4Uld6Te3UqPt4jUewLlf537uvxu52fVMntcChJRIyc7Pf2K8B6U4TPYmwsLlrjvAUC9lJnHGfX0jWNGPQ==}
+    engines: {node: '>=22.0.0'}
 
   '@azure/keyvault-common@2.0.0':
     resolution: {integrity: sha512-wRLVaroQtOqfg60cxkzUkGKrKMsCP6uYXAOomOIysSMyt1/YM0eUn9LqieAWM8DLcU4+07Fio2YGpPeqUbpP9w==}
@@ -10262,7 +10262,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@azure/cosmos@4.7.0':
+  '@azure/cosmos@4.10.1':
     dependencies:
       '@azure/abort-controller': 2.1.2
       '@azure/core-auth': 1.10.1
