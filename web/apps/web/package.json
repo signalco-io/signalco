@@ -39,8 +39,8 @@
         "next-secure-headers": "2.2.0",
         "next-themes": "0.4.6",
         "octokit": "5.0.5",
-        "react": "19.2.0",
-        "react-dom": "19.2.0",
+        "react": "19.2.9",
+        "react-dom": "19.2.9",
         "sharp": "0.35.5",
         "tailwindcss": "3.4.19",
         "tailwindcss-animate": "1.0.7"

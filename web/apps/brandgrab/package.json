@@ -32,8 +32,8 @@
         "cheerio": "1.1.2",
         "next": "16.4.3",
         "next-secure-headers": "2.2.0",
-        "react": "19.2.0",
-        "react-dom": "19.2.0",
+        "react": "19.2.9",
+        "react-dom": "19.2.9",
         "sharp": "0.35.5"
     },
     "devDependencies": {

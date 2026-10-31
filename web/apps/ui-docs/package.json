@@ -49,7 +49,7 @@
     "@signalco/ui-primitives": "workspace:*",
     "@signalco/ui-themes-minimal": "workspace:*",
     "next": "16.4.3",
-    "react": "19.2.0",
-    "react-dom": "19.2.0"
+    "react": "19.2.9",
+    "react-dom": "19.2.9"
   }
 }
