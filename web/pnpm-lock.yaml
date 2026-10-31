@@ -96,8 +96,8 @@ importers:
         specifier: 6.192.0
         version: 6.192.0
       autoprefixer:
-        specifier: 10.4.21
-        version: 10.4.21(postcss@8.5.32)
+        specifier: 10.6.2
+        version: 10.6.2(postcss@8.5.32)
       cobe:
         specifier: 0.6.5
         version: 0.6.5
@@ -274,8 +274,8 @@ importers:
         specifier: 1.5.0
         version: 1.5.0(next@16.4.3(@playwright/test@1.64.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.9(react@19.2.9))(react@19.2.9)(sass@1.107.1))(react@19.2.9)
       autoprefixer:
-        specifier: 10.4.21
-        version: 10.4.21(postcss@8.5.32)
+        specifier: 10.6.2
+        version: 10.6.2(postcss@8.5.32)
       next:
         specifier: 16.4.3
         version: 16.4.3(@playwright/test@1.64.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.9(react@19.2.9))(react@19.2.9)(sass@1.107.1)
@@ -531,8 +531,8 @@ importers:
         specifier: 1.5.0
         version: 1.5.0(next@16.4.3(@playwright/test@1.64.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.9(react@19.2.9))(react@19.2.9)(sass@1.107.1))(react@19.2.9)
       autoprefixer:
-        specifier: 10.4.21
-        version: 10.4.21(postcss@8.5.32)
+        specifier: 10.6.2
+        version: 10.6.2(postcss@8.5.32)
       nanoid:
         specifier: 5.1.16
         version: 5.1.16
@@ -759,8 +759,8 @@ importers:
         specifier: 4.1.12
         version: 4.1.12(@vitest/browser@4.1.12)(vitest@4.1.12)
       autoprefixer:
-        specifier: 10.4.21
-        version: 10.4.21(postcss@8.5.32)
+        specifier: 10.6.2
+        version: 10.6.2(postcss@8.5.32)
       css-loader:
         specifier: 7.1.5
         version: 7.1.5(webpack@5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.23))(postcss@8.5.32))
@@ -861,8 +861,8 @@ importers:
         specifier: 1.5.0
         version: 1.5.0(next@16.4.3(@babel/core@7.29.7)(@playwright/test@1.64.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.9(react@19.2.9))(react@19.2.9)(sass@1.107.1))(react@19.2.9)
       autoprefixer:
-        specifier: 10.4.21
-        version: 10.4.21(postcss@8.5.32)
+        specifier: 10.6.2
+        version: 10.6.2(postcss@8.5.32)
       next:
         specifier: 16.4.3
         version: 16.4.3(@babel/core@7.29.7)(@playwright/test@1.64.1)(@types/node@24.19.2)(babel-plugin-react-compiler@19.1.0-rc.3)(react-dom@19.2.9(react@19.2.9))(react@19.2.9)(sass@1.107.1)
@@ -1408,8 +1408,8 @@ importers:
         specifier: 4.1.7
         version: 4.1.7
       autoprefixer:
-        specifier: 10.4.21
-        version: 10.4.21(postcss@8.5.32)
+        specifier: 10.6.2
+        version: 10.6.2(postcss@8.5.32)
       postcss:
         specifier: 8.5.32
         version: 8.5.32
@@ -1601,8 +1601,8 @@ importers:
         specifier: 4.1.7
         version: 4.1.7
       autoprefixer:
-        specifier: 10.4.21
-        version: 10.4.21(postcss@8.5.32)
+        specifier: 10.6.2
+        version: 10.6.2(postcss@8.5.32)
       classix:
         specifier: 2.2.21
         version: 2.2.21
@@ -5855,15 +5855,8 @@ packages:
     resolution: {integrity: sha512-LElXdjswlqjWrPpJFg1Fx4wpkOCxj1TDHlSV4PlaRxHGWko024xICaa97ZkMfs6DRKlCguiAI+rbXv5GWwXIkg==}
     hasBin: true
 
-  autoprefixer@10.4.21:
-    resolution: {integrity: sha512-O+A6LWV5LDHSJD3LjHYoNi4VLsj/Whi7k6zG12xTYaU4cQ8oxQGckXNX8cRHK5yOZ/ppVHe0ZBXGzSV9jXdVbQ==}
-    engines: {node: ^10 || ^12 || >=14}
-    hasBin: true
-    peerDependencies:
-      postcss: ^8.1.0
-
-  autoprefixer@10.6.1:
-    resolution: {integrity: sha512-cL1Qz6ADZhcEbny/8HPfe99J6HhNoYtpX2LFLIbhgGE7Q1hlQVkYFdetDN7Id3KiQxhDrHwzlHr/YQCnZ8+xSA==}
+  autoprefixer@10.6.2:
+    resolution: {integrity: sha512-VOw9/yGTGwPPgzFcODtcv6zhEPIeIWkRSe10L2ri2f5vZ7ID7lCt6jZzRF5/ubgOZ+szYydmEF5AYsA5jxX1tA==}
     engines: {node: ^10 || ^12 || >=14}
     hasBin: true
     peerDependencies:
@@ -5942,10 +5935,6 @@ packages:
     engines: {node: '>=6.0.0'}
     hasBin: true
 
-  baseline-browser-mapping@2.8.17:
-    resolution: {integrity: sha512-j5zJcx6golJYTG6c05LUZ3Z8Gi+M62zRT/ycz4Xq4iCOdpcxwg7ngEYD4KA0eWZC7U17qh/Smq8bYbACJ0ipBA==}
-    hasBin: true
-
   before-after-hook@4.0.0:
     resolution: {integrity: sha512-q6tR3RPqIB1pMiTRMFcZwuG5T8vwp+vUvEG0vuI6B+Rikh5BfPp2fQ82c925FOs+b0lcFQ8CFrL+KbilfZFhOQ==}
 
@@ -6007,11 +5996,6 @@ packages:
 
   browserify-zlib@0.2.0:
     resolution: {integrity: sha512-Z942RysHXmJrhqk88FmKBVq/v5tqmSkDz7p54G/MGyjMnCFFnC79XWNbg+Vta8W6Wb2qtSZTSxIGkJrRpCFEiA==}
-
-  browserslist@4.26.3:
-    resolution: {integrity: sha512-lAUU+02RFBuCKQPj/P6NgjlbCnLBMp4UtgTx7vNHd3XSIJF87s9a5rA3aH2yw3GS9DqZAUbOtZdCCiZeVRqt0w==}
-    engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
-    hasBin: true
 
   browserslist@4.29.4:
     resolution: {integrity: sha512-2TcbbiwXEq+N0kD36tykpCfyyQigUXmuwNQbnPp4Xk4PX9JOqVIKjJlIDjpH7uY6tmRGoAd+apeT1p60T8wsdA==}
@@ -6694,9 +6678,6 @@ packages:
   eastasianwidth@0.2.0:
     resolution: {integrity: sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==}
 
-  electron-to-chromium@1.5.237:
-    resolution: {integrity: sha512-icUt1NvfhGLar5lSWH3tHNzablaA5js3HVHacQimfP8ViEBOQv+L7DKEuHdbTZ0SKCO1ogTJTIL1Gwk9S6Qvcg==}
-
   electron-to-chromium@1.5.464:
     resolution: {integrity: sha512-nRa65aFge40viPAKxMKULIY8tcXKwKboJWNn4RoKwyWXJ6SP7BnrDGKUTzc64818jIciH0PK7LSF8QzZes19GA==}
 
@@ -6972,9 +6953,6 @@ packages:
     peerDependencies:
       typescript: '>3.6.0'
       webpack: ^5.11.0
-
-  fraction.js@4.3.7:
-    resolution: {integrity: sha512-ZsDfxO51wGAXREY55a7la9LScWpwv9RxIrYABrlvOFBlH/ShPnrtsXeuUIfXKKOVicNxQ+o8JTbJvjS4M89yew==}
 
   fraction.js@5.3.4:
     resolution: {integrity: sha512-1X1NTtiJphryn/uLQz3whtY6jK3fTqoE3ohKs0tT+Ujr1W59oopxmoEh7Lu5p6vBaPbgoM0bzveAW4Qi5RyWDQ==}
@@ -7903,19 +7881,12 @@ packages:
     peerDependencies:
       webpack: '>=5'
 
-  node-releases@2.0.25:
-    resolution: {integrity: sha512-4auku8B/vw5psvTiiN9j1dAOsXvMoGqJuKJcR+dTdqiXEK20mMTk1UEo3HS16LeGQsVG6+qKTPM9u/qQ2LqATA==}
-
   node-releases@2.0.60:
     resolution: {integrity: sha512-OmO8+GM1JUZqXET720VrJCwkjUCXmCMQm0Z3UDDRbfNLHS4NEAvY60j5jiFv0tkKw2PNNlqOLhahVmwJIOLDIQ==}
     engines: {node: '>=18'}
 
   normalize-path@3.0.0:
     resolution: {integrity: sha512-6eZs5Ls3WtCisHWp9S2GUy8dqkpGi4BVSz3GaqiE6ezub0512ESztXUwUB6C6IKbQkY2Pnb/mD4WYojCRwcwLA==}
-    engines: {node: '>=0.10.0'}
-
-  normalize-range@0.1.2:
-    resolution: {integrity: sha512-bdok/XvKII3nUpklnV6P2hxtMNrCboOjAcyBuQnWEhO665FwrSNRxU+AqpsyvO6LgGYPspN+lu5CLtw4jPRKNA==}
     engines: {node: '>=0.10.0'}
 
   nth-check@2.1.1:
@@ -9630,12 +9601,6 @@ packages:
   unplugin@2.3.10:
     resolution: {integrity: sha512-6NCPkv1ClwH+/BGE9QeoTIl09nuiAt0gS28nn1PvYXsGKRwM2TCbFA2QiilmehPDTXIe684k4rZI1yl3A1PCUw==}
     engines: {node: '>=18.12.0'}
-
-  update-browserslist-db@1.1.3:
-    resolution: {integrity: sha512-UxhIZQ+QInVdunkDAaiazvvT/+fXL5Osr0JZlJulepYu6Jd7qJtDZjlur0emRlT71EN3ScPoE7gvsuIKKNavKw==}
-    hasBin: true
-    peerDependencies:
-      browserslist: '>= 4.21.0'
 
   update-browserslist-db@1.3.4:
     resolution: {integrity: sha512-t8wonIOdQyOjtPd2VktlBu6QjTVTks6v8bSi7kd0r2Vll8TK1JYDZtRRdbmCHOAMphkZgrzK+L+vXK4pyZ8t4A==}
@@ -14484,17 +14449,7 @@ snapshots:
 
   astring@1.9.0: {}
 
-  autoprefixer@10.4.21(postcss@8.5.32):
-    dependencies:
-      browserslist: 4.26.3
-      caniuse-lite: 1.0.30001751
-      fraction.js: 4.3.7
-      normalize-range: 0.1.2
-      picocolors: 1.1.1
-      postcss: 8.5.32
-      postcss-value-parser: 4.2.0
-
-  autoprefixer@10.6.1(postcss@8.5.32):
+  autoprefixer@10.6.2(postcss@8.5.32):
     dependencies:
       browserslist: 4.29.4
       caniuse-lite: 1.0.30001819
@@ -14570,8 +14525,6 @@ snapshots:
   base64id@2.0.0: {}
 
   baseline-browser-mapping@2.11.33: {}
-
-  baseline-browser-mapping@2.8.17: {}
 
   before-after-hook@4.0.0: {}
 
@@ -14653,14 +14606,6 @@ snapshots:
   browserify-zlib@0.2.0:
     dependencies:
       pako: 1.0.11
-
-  browserslist@4.26.3:
-    dependencies:
-      baseline-browser-mapping: 2.8.17
-      caniuse-lite: 1.0.30001751
-      electron-to-chromium: 1.5.237
-      node-releases: 2.0.25
-      update-browserslist-db: 1.1.3(browserslist@4.26.3)
 
   browserslist@4.29.4:
     dependencies:
@@ -15357,8 +15302,6 @@ snapshots:
 
   eastasianwidth@0.2.0: {}
 
-  electron-to-chromium@1.5.237: {}
-
   electron-to-chromium@1.5.464: {}
 
   elliptic@6.6.1:
@@ -15701,8 +15644,6 @@ snapshots:
       tapable: 2.3.0
       typescript: 5.9.3
       webpack: 5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.23))(postcss@8.5.32)
-
-  fraction.js@4.3.7: {}
 
   fraction.js@5.3.4: {}
 
@@ -16881,13 +16822,9 @@ snapshots:
       vm-browserify: 1.1.2
       webpack: 5.94.0(@swc/core@1.7.22(@swc/helpers@0.5.23))(postcss@8.5.32)
 
-  node-releases@2.0.25: {}
-
   node-releases@2.0.60: {}
 
   normalize-path@3.0.0: {}
-
-  normalize-range@0.1.2: {}
 
   nth-check@2.1.1:
     dependencies:
@@ -17484,7 +17421,7 @@ snapshots:
       '@csstools/postcss-text-decoration-shorthand': 4.0.3(postcss@8.5.32)
       '@csstools/postcss-trigonometric-functions': 4.0.9(postcss@8.5.32)
       '@csstools/postcss-unset-value': 4.0.0(postcss@8.5.32)
-      autoprefixer: 10.6.1(postcss@8.5.32)
+      autoprefixer: 10.6.2(postcss@8.5.32)
       browserslist: 4.29.4
       css-blank-pseudo: 7.0.1(postcss@8.5.32)
       css-has-pseudo: 7.0.3(postcss@8.5.32)
@@ -18893,12 +18830,6 @@ snapshots:
       acorn: 8.15.0
       picomatch: 4.0.3
       webpack-virtual-modules: 0.6.2
-
-  update-browserslist-db@1.1.3(browserslist@4.26.3):
-    dependencies:
-      browserslist: 4.26.3
-      escalade: 3.2.0
-      picocolors: 1.1.1
 
   update-browserslist-db@1.3.4(browserslist@4.29.4):
     dependencies:
