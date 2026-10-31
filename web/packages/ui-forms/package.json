@@ -10,7 +10,7 @@
     "scripts": {},
     "devDependencies": {
         "@enterwell/react-form-builder": "0.3.2",
-        "@enterwell/react-form-validation": "1.4.0",
+        "@enterwell/react-form-validation": "1.6.0",
         "@signalco/tailwindcss-config-signalco": "workspace:*",
         "@signalco/tsconfig": "workspace:*",
         "@signalco/ui": "workspace:*",
