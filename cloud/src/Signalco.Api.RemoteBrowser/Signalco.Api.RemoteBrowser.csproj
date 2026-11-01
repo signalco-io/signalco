@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -12,6 +12,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="inspect.js" />
     <PackageReference Include="chromium.linux-x64" Version="2025.11.1" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.23.0" />
     <PackageReference Include="Microsoft.Playwright" Version="1.64.1" />

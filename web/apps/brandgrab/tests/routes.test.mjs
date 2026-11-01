@@ -18,6 +18,7 @@ async function moduleAt(file, bindings = {}, globals = {}, context = createConte
     const source = stripTypeScriptTypes(await readFile(new URL(file, import.meta.url), 'utf8'));
     const module = new SourceTextModule(source, { context });
     await module.link(async (specifier) => {
+        if (specifier.endsWith('inspector')) return moduleAt('../src/inspector.ts', bindings, globals, context);
         if (specifier.endsWith('siteUrl')) return moduleAt('../src/siteUrl.ts', bindings, globals, context);
         const exports = bindings[specifier];
         assert.ok(exports, `Unexpected import: ${specifier}`);
@@ -40,7 +41,7 @@ async function route(name, bindings, fetch, env = {}) {
         },
         ...bindings,
     }, { fetch, process: { env } });
-    return (domain) => module.namespace.GET(new Request(`https://brandgrab.io/api/${name}?${new URLSearchParams(domain === undefined ? {} : { domain })}`));
+    return (domain, extra = {}) => module.namespace.GET(new Request(`https://brandgrab.io/api/${name}?${new URLSearchParams({ ...(domain === undefined ? {} : { domain }), ...extra })}`));
 }
 
 test('normalizes domains and full URLs and rejects unsupported inputs', async () => {
@@ -105,7 +106,7 @@ for (const name of ['quick', 'screenshot']) {
     });
 }
 
-test('screenshots encode the complete URL and extract colors from an RGB image', async () => {
+test('screenshots encode the complete URL and request scroll-through full-page capture', async () => {
     const png = await sharp({ create: { width: 12, height: 8, channels: 3, background: '#123456' } }).png().toBuffer();
     const get = await route('screenshot', {
         '../../../src/services/fetchSite': { publicSiteUrl: async (url) => new URL(url) },
@@ -113,6 +114,9 @@ test('screenshots encode the complete URL and extract colors from an RGB image',
         assert.equal(new URL(url).origin, 'https://browser.example.com');
         assert.equal(new URL(url).searchParams.get('url'), 'https://example.com/page?a=1&b=2');
         assert.equal(new URL(url).searchParams.get('fullPage'), 'true');
+        assert.equal(new URL(url).searchParams.get('scrollThrough'), 'true');
+        assert.equal(new URL(url).searchParams.get('inspect'), 'true');
+        assert.equal(new URL(url).searchParams.get('width'), '1440');
         return new Response(png);
     }, { SCREENSHOT_API_URL: 'https://browser.example.com/api/screenshot' });
     const response = await get('https://example.com/page?a=1&b=2');
@@ -120,7 +124,8 @@ test('screenshots encode the complete URL and extract colors from an RGB image',
     const result = await response.json();
     assert.equal(result.width, 12);
     assert.equal(result.height, 8);
-    assert.deepEqual(result.colors, [{ hex: '#123456', area: 1 }]);
+    assert.ok(result.data.startsWith('data:image/png;base64,'));
+    assert.equal(result.colors, undefined);
 });
 
 for (const failure of ['http', 'network', 'invalid image']) {
@@ -202,4 +207,34 @@ test('decodes compressed website responses', async () => {
     const response = await client.fetchSite('https://example.com', AbortSignal.timeout(1000));
     assert.equal(await response.text(), '<title>Compressed</title>');
     assert.equal(response.headers.get('content-encoding'), null);
+});
+
+
+test('device captures use independent dimensions and preserve rendered inspection data', async () => {
+    const png = await sharp({ create: { width: 390, height: 1200, channels: 3, background: '#123456' } }).png().toBuffer();
+    let requested;
+    const get = await route('screenshot', { '../../../src/services/fetchSite': { publicSiteUrl: async url => new URL(url) } }, async url => {
+        requested = new URL(url).searchParams;
+        return Response.json({ data: `data:image/png;base64,${png.toString('base64')}`, inspection: { styles: [] }, reachedBottom: true });
+    });
+    const result = await (await get('example.com', { device: 'mobile' })).json();
+    assert.equal(requested.get('width'), '390');
+    assert.equal(requested.get('height'), '844');
+    assert.equal(requested.get('mobile'), 'true');
+    assert.equal(requested.get('inspect'), 'false');
+    assert.equal(result.height, 1200);
+    assert.equal(result.reachedBottom, true);
+    assert.deepEqual(result.inspection, { styles: [] });
+    assert.equal((await get('example.com', { device: '__proto__' })).status, 400);
+});
+
+test('document proxy returns XML without executing it and enforces the size limit', async () => {
+    let body = '<sitemapindex><sitemap><loc>https://example.com/pages.xml</loc></sitemap></sitemapindex>';
+    const get = await route('document', { '../../../src/services/fetchSite': { fetchSite: async () => new Response(body) } });
+    const response = await get(undefined, { url: 'https://example.com/sitemap.xml' });
+    assert.equal(response.status, 200);
+    assert.equal((await response.json()).text, body);
+    body = 'x'.repeat(2_000_001);
+    assert.equal((await get(undefined, { url: 'https://example.com/sitemap.xml' })).status, 502);
+    assert.equal((await get(undefined, { url: 'file://example.com' })).status, 400);
 });

@@ -10,7 +10,7 @@ export function createRemoteBrowser(
     shouldProtect: boolean): { app: ReturnType<typeof createContainerApp> } {
     const environment = createManagedEnvironment(resourceGroup, namePrefix, logWorkspace, shouldProtect);
     const image = createContainerImage(registry, namePrefix, 'signalco-remote-browser', 'Signalco.Api.RemoteBrowser');
-    const app = createContainerApp(resourceGroup, namePrefix, environment.managedEnvironment, registry, image.image, shouldProtect);
+    const app = createContainerApp(resourceGroup, namePrefix, environment.managedEnvironment, registry, image.image, shouldProtect, { cpu: 1, memory: '2Gi', concurrentRequests: 3 });
 
     return {
         app,

@@ -4,7 +4,7 @@ import { Image } from '@pulumi/docker';
 import { interpolate } from '@pulumi/pulumi';
 import { type ContainerRegistryResult } from './containerRegistry.js';
 
-export function createContainerApp(resourceGroup: ResourceGroup, namePrefix: string, environment: ManagedEnvironment, registry: ContainerRegistryResult, image: Image, shouldProtect: boolean) {
+export function createContainerApp(resourceGroup: ResourceGroup, namePrefix: string, environment: ManagedEnvironment, registry: ContainerRegistryResult, image: Image, shouldProtect: boolean, captureCapacity?: { cpu: number; memory: string; concurrentRequests: number }) {
     const containerApp = new ContainerApp(`docker-app-${namePrefix}`, {
         resourceGroupName: resourceGroup.name,
         managedEnvironmentId: environment.id,
@@ -27,10 +27,15 @@ export function createContainerApp(resourceGroup: ResourceGroup, namePrefix: str
             containers: [{
                 name: 'app',
                 image: image.repoDigest,
+                resources: captureCapacity ? { cpu: captureCapacity.cpu, memory: captureCapacity.memory } : undefined,
             }],
             scale: {
                 minReplicas: 0,
                 maxReplicas: 3,
+                rules: captureCapacity ? [{
+                    name: 'http-scaler',
+                    http: { metadata: { concurrentRequests: String(captureCapacity.concurrentRequests) } },
+                }] : undefined,
             },
         },
     }, {
