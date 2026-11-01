@@ -69,7 +69,39 @@ app.MapGet("/api/screenshot", async (
                 (target.Scheme != "http" && target.Scheme != "https" && target.Scheme != "data"))
                 return Results.BadRequest(new { error = "An HTTP(S) or data URL is required." });
             page.SetDefaultTimeout(15000);
-            await page.GotoAsync(url, new PageGotoOptions { WaitUntil = WaitUntilState.DOMContentLoaded, Timeout = 25000 });
+            // A stalled font must settle before Playwright's screenshot font check.
+            await page.RouteAsync("**/*", async route =>
+            {
+                if (route.Request.ResourceType != "font")
+                {
+                    await route.ContinueAsync();
+                    return;
+                }
+                IAPIResponse? font = null;
+                try
+                {
+                    font = await route.FetchAsync(new RouteFetchOptions { Timeout = 5000 });
+                    await route.FulfillAsync(new RouteFulfillOptions { Response = font });
+                }
+                catch (Exception ex) when (ex is PlaywrightException or TimeoutException)
+                {
+                    if (!page.IsClosed) await route.AbortAsync();
+                }
+                finally
+                {
+                    if (font != null) await font.DisposeAsync();
+                }
+            });
+            try
+            {
+                await page.GotoAsync(url, new PageGotoOptions { WaitUntil = WaitUntilState.DOMContentLoaded, Timeout = 25000 });
+            }
+            catch (PlaywrightException ex) when (ex.Message.Contains("ERR_CONNECTION_RESET") ||
+                ex.Message.Contains("ERR_CONNECTION_CLOSED") || ex.Message.Contains("ERR_HTTP2_PROTOCOL_ERROR"))
+            {
+                await Task.Delay(400, cancellationToken);
+                await page.GotoAsync(url, new PageGotoOptions { WaitUntil = WaitUntilState.DOMContentLoaded, Timeout = 15000 });
+            }
             await Task.Delay(Math.Clamp(wait ?? 800, 0, 3000), cancellationToken);
             await page.EvaluateAsync("() => Promise.race([document.fonts.ready, new Promise(r => setTimeout(r, 2000))])");
 
