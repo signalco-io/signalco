@@ -50,3 +50,8 @@ render OG cards. Accessibility results are initial automated checks, not a full
 WCAG audit; contrast estimates need visual review, especially with images,
 gradients and transparency. Font stacks are computed CSS, not a guarantee of
 which fallback font rendered.
+
+The RemoteBrowser container uses 1 CPU / 2 GiB on demand, scales from zero to
+three replicas at three concurrent HTTP requests, and limits capture work to
+three requests per process. This bounds Chromium concurrency for the three
+responsive previews without starting unbounded browser processes.
