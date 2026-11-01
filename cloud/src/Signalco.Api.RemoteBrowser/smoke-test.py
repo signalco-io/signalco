@@ -10,7 +10,7 @@ html = '''<!doctype html><html lang="en"><head><meta name="viewport" content="wi
 body { margin:0; font:18px/27px Arial; color:#123456; background:white; }
 section { height:700px; } #reveal { opacity:0; } #reveal.shown { opacity:1; }
 </style></head><body><section><h1>Capture fixture</h1><button aria-label="Named action">Action</button></section>
-<section id="reveal"><h2>Scroll reveal target</h2><img src="missing.png"><input></section>
+<section id="reveal"><h2>Scroll reveal target</h2><img src="missing.png" width="32" height="32"><input></section>
 <script>new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('shown'); })).observe(document.querySelector('#reveal'));</script>
 </body></html>'''
 query = urllib.parse.urlencode({
