@@ -55,3 +55,8 @@ The RemoteBrowser container uses 1 CPU / 2 GiB on demand, scales from zero to
 three replicas at three concurrent HTTP requests, and limits capture work to
 three requests per process. This bounds Chromium concurrency for the three
 responsive previews without starting unbounded browser processes.
+
+Font requests have a five-second deadline so stalled fonts fall back instead of
+blocking screenshot capture. Navigation retries once for connection resets,
+closed connections or HTTP/2 protocol errors; timeouts and other failures retain
+the normal error path.
