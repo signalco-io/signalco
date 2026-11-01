@@ -11,10 +11,10 @@
   },
   "devDependencies": {
     "@infra/typescript-config": "workspace:*",
-    "turbo": "2.9.14"
+    "turbo": "2.11.10"
   },
-  "packageManager": "pnpm@10.20.0",
+  "packageManager": "pnpm@10.34.9",
   "engines": {
-    "node": "22.x"
+    "node": "24.x"
   }
 }

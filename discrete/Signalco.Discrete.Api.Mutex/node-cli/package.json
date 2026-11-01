@@ -5,9 +5,9 @@
   "type": "module",
   "author": "Signalco",
   "license": "AGPL-3.0-only",
-  "packageManager": "npm@11.6.2",
+  "packageManager": "npm@11.21.1",
   "engines": {
-    "node": "22.x"
+    "node": "24.x"
   },
   "bin": {
     "mutex": "index.js"

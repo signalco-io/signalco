@@ -12,12 +12,12 @@
     },
     "devDependencies": {
         "@signalco/tsconfig": "workspace:*",
-        "@types/node": "22.19.1",
+        "@types/node": "24.19.2",
         "@types/react": "19.2.2"
     },
     "dependencies": {
         "@react-email/components": "0.5.7",
-        "react": "19.2.0",
+        "react": "19.2.9",
         "react-email": "4.3.2",
         "typescript": "5.9.3"
     }

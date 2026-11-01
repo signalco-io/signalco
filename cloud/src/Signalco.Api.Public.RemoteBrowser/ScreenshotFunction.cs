@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net;
@@ -45,7 +45,9 @@ public class ScreenshotFunction(
             req.Query["fullPage"]?.ToLowerInvariant() == "true",
             width, height,
             req.Query["allowAnimations"]?.ToLowerInvariant() == "true",
-            wait);
+            wait,
+            req.Query["inspect"] == "true",
+            req.Query["mobile"] == "true");
 
         // TODO: Validate request
         // TODO: Fix URL to contain only absolute URLs with protocol
@@ -92,20 +94,23 @@ public class ScreenshotFunction(
 
             var queryParams = new List<string>
             {
-                $"url={request.Url}"
+                $"url={Uri.EscapeDataString(request.Url)}"
             };
             if (request.ScrollThrough == true)
                 queryParams.Add("scrollThrough=true");
             if (request.FullPage == true)
-                queryParams.Add("scrollThrough=true");
+                queryParams.Add("fullPage=true");
             if (request.Width.HasValue)
                 queryParams.Add($"width={request.Width.Value}");
             if (request.Height.HasValue)
                 queryParams.Add($"height={request.Height.Value}");
             if (request.Wait.HasValue)
-                queryParams.Add($"height={request.Wait.Value}");
+                queryParams.Add($"wait={request.Wait.Value}");
             if (request.AllowAnimations == true)
                 queryParams.Add($"allowAnimations=true");
+
+            if (request.Inspect == true) queryParams.Add("inspect=true");
+            if (request.Mobile == true) queryParams.Add("mobile=true");
 
             // Construct request for RemoteBrowser app
             var reqUrl = $"{url}/api/screenshot?{string.Join("&", queryParams)}";
@@ -113,6 +118,7 @@ public class ScreenshotFunction(
             // TODO: Use http client factory
             // Request from RemoteBrowser app
             using var response = await this.httpClient.GetAsync(reqUrl, cancellationToken);
+            response.EnsureSuccessStatusCode();
             var bytes = await response.Content.ReadAsByteArrayAsync(cancellationToken);
             var contentType = response.Content.Headers.ContentType?.ToString() ?? "image/png";
 
@@ -172,7 +178,9 @@ public record ScreenshotRequest(
     [property: JsonPropertyName("width")] int? Width,
     [property: JsonPropertyName("height")] int? Height,
     [property: JsonPropertyName("allowAnimations")] bool? AllowAnimations,
-    [property: JsonPropertyName("wait")] int? Wait);
+    [property: JsonPropertyName("wait")] int? Wait,
+    [property: JsonPropertyName("inspect")] bool? Inspect = null,
+    [property: JsonPropertyName("mobile")] bool? Mobile = null);
 
 public record ScreenshotResult(
     DateTime RequestedTimeStamp,

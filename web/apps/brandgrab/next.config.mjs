@@ -36,6 +36,14 @@ const nextConfig = {
             }
         ]
     },
+    async redirects() {
+        return ['privacy-policy', 'terms-of-service', 'cookie-policy', 'acceptable-use-policy', 'sla']
+            .map((page) => ({
+                source: `/legal/${page}`,
+                destination: `https://www.signalco.io/legal/${page}`,
+                permanent: true,
+            }));
+    },
     async headers() {
         return [{
             source: '/(.*)',
