@@ -5,6 +5,8 @@ import { fetchSite } from '../../../src/services/fetchSite';
 
 export type BrandResources = {
     domain: string;
+    html: string;
+    finalUrl: string;
     description: string;
     title: string;
     themeColor: string;
@@ -45,6 +47,9 @@ export type BrandResources = {
     };
     twitter: {
         card: string;
+        title: string;
+        description: string;
+        imageBase64: string;
     };
 }
 
@@ -85,7 +90,8 @@ export async function GET(request: Request) {
         const signal = AbortSignal.timeout(12_000);
         const pageHtml = await fetchSite(url.href, signal);
         const baseUrl = pageHtml.url || url.href;
-        const $ = load(await pageHtml.text());
+        const html = await pageHtml.text();
+        const $ = load(html);
         const title = $('title')?.text() || '';
         const description = $('meta[name="description"]')?.attr('content') || '';
         const favicon = $('link[rel~="icon"]')?.attr('href') || '/favicon.ico';
@@ -114,13 +120,15 @@ export async function GET(request: Request) {
         const twitterCard = $('meta[name="twitter:card"]')?.attr('content') || '';
 
         const [favIcoBase64 = '', ogImageBase64 = '', icon16Base64 = '', icon32Base64 = '', icon64Base64 = '',
-            icon128Base64 = '', icon256Base64 = '', icon512Base64 = '', appleTouchIconBase64 = ''] = await Promise.all(
-            [favicon, ogImage, icon16, icon32, icon64, icon128, icon256, icon512, appleTouchIcon]
+            icon128Base64 = '', icon256Base64 = '', icon512Base64 = '', appleTouchIconBase64 = '', twitterImageBase64 = ''] = await Promise.all(
+            [favicon, ogImage, icon16, icon32, icon64, icon128, icon256, icon512, appleTouchIcon, $('meta[name="twitter:image"],meta[property="twitter:image"]').attr('content') || '']
                 .map((image) => fetchDataUrl(image, baseUrl, signal))
         );
 
         return NextResponse.json({
             domain: url.href,
+            html,
+            finalUrl: baseUrl,
             title,
             description,
             themeColor,
@@ -160,7 +168,10 @@ export async function GET(request: Request) {
                 localeAlternate: ogLocaleAlternate
             },
             twitter: {
-                card: twitterCard
+                card: twitterCard,
+                title: $('meta[name="twitter:title"],meta[property="twitter:title"]').attr('content') || '',
+                description: $('meta[name="twitter:description"],meta[property="twitter:description"]').attr('content') || '',
+                imageBase64: twitterImageBase64
             },
         } satisfies BrandResources);
     } catch {

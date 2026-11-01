@@ -7,12 +7,13 @@ async function mockLookup(page: Page, { artwork = true, previewError = false } =
     await page.route('**/api/quick?*', (route) => route.fulfill({ json: {
         domain: new URL(route.request().url()).searchParams.get('domain'),
         title: 'Example branding', description: 'A website description',
+        html: '<html lang="en"><head><title>Example branding</title><meta name="description" content="A website description"><meta name="viewport" content="width=device-width"></head><body><h1>Example</h1></body></html>',
         favicon: { url: '/icon.png', base64: artwork ? image : '' }, icons: {},
         og: { title: 'Open Graph title', description: 'Social preview', image: '/og.png', imageBase64: artwork ? image : '', url: '' },
     } }));
     await page.route('**/api/screenshot?*', (route) => previewError
         ? route.fulfill({ status: 504, contentType: 'text/html', body: '<h1>Gateway timeout</h1>' })
-        : route.fulfill({ json: { data: image, width: 1, height: 1, colors: [{ hex: '#123456', area: 1 }] } }));
+        : route.fulfill({ json: { data: image, width: 1, height: 1, inspection: { styles: [{ tag: 'p', text: 'Example text', color: 'rgb(18, 52, 86)', background: 'rgb(255, 255, 255)', family: 'Arial, sans-serif', size: '16px', weight: '400', lineHeight: '24px', spacing: 'normal', count: 1 }], checks: [], headings: [], language: 'en', sampled: 1, total: 1 } } }));
 }
 
 async function assertAccessibility(page: Page) {
@@ -49,12 +50,14 @@ test('grabs a full URL, renders results and fits the viewport', async ({ page })
     await page.goto('/');
     await page.getByRole('textbox', { name: 'Domain', exact: true }).fill(' https://example.com/brand?a=1&b=2 ');
     await page.getByRole('button', { name: 'Grab' }).click();
-    await expect(page.getByText('Example branding', { exact: true })).toBeVisible();
-    await expect(page.getByRole('img', { name: 'Page preview', exact: true })).toBeVisible();
-    await expect(page.getByRole('img', { name: 'Page preview', exact: true })).toHaveJSProperty('naturalWidth', 12);
-    await expect(page.getByText('#123456')).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Example branding', exact: true })).toBeVisible();
+    await expect(page.getByRole('img', { name: 'Desktop page preview', exact: true })).toBeVisible();
+    await expect(page.getByRole('img', { name: 'Desktop page preview', exact: true })).toHaveJSProperty('naturalWidth', 12);
+    await page.getByRole('tab', { name: 'Branding', exact: true }).click();
+    await expect(page.getByText('#123456').first()).toBeVisible();
     await expect(page.getByRole('textbox', { name: 'Domain', exact: true })).toHaveValue('https://example.com/brand?a=1&b=2');
-    await expect(page.getByText('Open Graph title', { exact: true })).toBeVisible();
+    await page.getByRole('tab', { name: 'Social previews' }).click();
+    await expect(page.getByRole('link', { name: 'Open Graph title', exact: true })).toBeVisible();
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true);
     expect(errors).toEqual([]);
     await assertAccessibility(page);
@@ -63,10 +66,10 @@ test('grabs a full URL, renders results and fits the viewport', async ({ page })
 test('shows a preview failure and preserves metadata when optional artwork is absent', async ({ page }) => {
     await mockLookup(page, { artwork: false, previewError: true });
     await page.goto('/?domain=example.com');
-    await expect(page.getByText('Example branding', { exact: true })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Example branding', exact: true })).toBeVisible();
     await expect(page.getByText('Could not load this website. Please try again.').first()).toBeVisible();
     await expect(page.getByRole('img', { name: 'Loading preview' })).toHaveCount(0);
-    await expect(page.getByRole('img', { name: 'favicon' })).toHaveCount(0);
+    await expect(page.getByRole('img', { name: 'Website icon' })).toHaveCount(0);
 });
 
 test('shows lookup failures and supports correcting the address', async ({ page }) => {
@@ -76,7 +79,7 @@ test('shows lookup failures and supports correcting the address', async ({ page 
     await mockLookup(page);
     await page.getByRole('textbox', { name: 'Domain', exact: true }).fill('example.com');
     await page.getByRole('button', { name: 'Grab' }).click();
-    await expect(page.getByText('Example branding', { exact: true })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Example branding', exact: true })).toBeVisible();
 });
 
 test('can retry the same website after a failure', async ({ page }) => {
@@ -85,7 +88,7 @@ test('can retry the same website after a failure', async ({ page }) => {
     await expect(page.getByRole('alert').filter({ hasText: 'Please retry.' })).toBeVisible();
     await mockLookup(page);
     await page.getByRole('button', { name: 'Grab' }).click();
-    await expect(page.getByText('Example branding', { exact: true })).toBeVisible();
+    await expect(page.getByRole('heading', { name: 'Example branding', exact: true })).toBeVisible();
 });
 
 test('rejects invalid input and allows clearing a lookup', async ({ page }) => {
@@ -99,7 +102,7 @@ test('rejects invalid input and allows clearing a lookup', async ({ page }) => {
     await input.fill('');
     await input.press('Enter');
     await expect(page).toHaveURL('/');
-    await expect(page.getByText('Example branding', { exact: true })).toHaveCount(0);
+    await expect(page.getByRole('heading', { name: 'Example branding', exact: true })).toHaveCount(0);
 });
 
 test('footer links and old legal URLs reach the published legal pages', async ({ page, request }) => {
@@ -111,4 +114,49 @@ test('footer links and old legal URLs reach the published legal pages', async ({
         expect(response.status()).toBe(308);
         expect(response.headers().location).toBe(`https://www.signalco.io/legal/${path}`);
     }
+});
+
+
+test('device results appear independently and tab keyboard navigation works', async ({ page }) => {
+    await mockLookup(page);
+    let release;
+    const held = new Promise<void>(resolve => { release = resolve; });
+    await page.route('**/api/screenshot?*', async route => {
+        const device = new URL(route.request().url()).searchParams.get('device');
+        if (device === 'desktop') await held;
+        await route.fulfill({ json: { data: image, width: 12, height: 8 } });
+    });
+    await page.goto('/?domain=example.com');
+    await expect(page.getByRole('img', { name: 'Mobile page preview' })).toBeVisible();
+    await expect(page.getByRole('img', { name: 'Desktop page preview' })).toHaveCount(0);
+    release!();
+    await expect(page.getByRole('img', { name: 'Desktop page preview' })).toBeVisible();
+    await page.getByRole('tab', { name: 'Page previews' }).focus();
+    await page.keyboard.press('ArrowRight');
+    await expect(page.getByRole('tab', { name: 'Branding', exact: true })).toBeFocused();
+    await expect(page.getByRole('tab', { name: 'Branding', exact: true })).toHaveAttribute('aria-selected', 'true');
+});
+
+test('SEO, accessibility and nested sitemap exploration work on the client', async ({ page }) => {
+    await mockLookup(page);
+    await page.route('**/api/document?*', route => {
+        const url = new URL(route.request().url()).searchParams.get('url')!;
+        const text = url.endsWith('robots.txt') ? 'User-agent: *\nSitemap: https://example.com/sitemap.xml' : url.endsWith('sitemap.xml') ? '<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><sitemap><loc>https://example.com/pages.xml</loc></sitemap></sitemapindex>' : '<urlset><url><loc>https://example.com/about</loc><lastmod>2026-11-01</lastmod></url><url><loc>javascript:alert(1)</loc></url></urlset>';
+        return route.fulfill({ json: { url, text } });
+    });
+    await page.goto('/?domain=example.com');
+    await page.getByRole('tab', { name: 'SEO', exact: true }).click();
+    await expect(page.getByText('1 H1 headings')).toBeVisible();
+    await assertAccessibility(page);
+    await page.getByRole('tab', { name: 'Accessibility', exact: true }).click();
+    await expect(page.getByRole('tabpanel', { name: 'Accessibility' }).getByText('Document language', { exact: true })).toBeVisible();
+    await assertAccessibility(page);
+    await page.getByRole('tab', { name: 'Sitemap', exact: true }).click();
+    await page.getByRole('button', { name: 'Explore', exact: true }).click();
+    await page.getByRole('button', { name: 'https://example.com/pages.xml', exact: true }).click();
+    await expect(page.getByRole('link', { name: 'https://example.com/about', exact: true })).toBeVisible();
+    await expect(page.getByText('1 URLs found')).toBeVisible();
+    await page.getByRole('searchbox', { name: 'Filter URLs' }).fill('missing');
+    await expect(page.getByRole('link', { name: 'https://example.com/about', exact: true })).toHaveCount(0);
+    await assertAccessibility(page);
 });

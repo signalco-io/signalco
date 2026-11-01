@@ -163,6 +163,8 @@ jobs:
             --output /tmp/remote-browser-screenshot.png
           python3 -c 'import pathlib, struct; data = pathlib.Path("/tmp/remote-browser-screenshot.png").read_bytes(); assert data[:8] == bytes.fromhex("89504e470d0a1a0a"); assert struct.unpack(">II", data[16:24]) == (64, 64)'
 
+          python3 cloud/src/Signalco.Api.RemoteBrowser/smoke-test.py http://127.0.0.1:18086
+
   companion_maui_ci:
     name: "Companion Android"
     needs: changes

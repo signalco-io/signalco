@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Playwright;
+using System.Text.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 var playwright = await Playwright.CreateAsync();
@@ -28,12 +29,15 @@ app.MapGet("/api/screenshot", async (
     [FromQuery] int? width,
     [FromQuery] int? height,
     [FromQuery] bool? allowAnimations,
-    [FromQuery] int? wait) =>
+    [FromQuery] int? wait,
+    [FromQuery] bool? inspect,
+    [FromQuery] bool? mobile,
+    CancellationToken cancellationToken) =>
 {
     // TODO: Use browser pool with prepared browsers
     var browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions
     {
-        ExecutablePath = Path.Combine(
+        ExecutablePath = Environment.GetEnvironmentVariable("REMOTE_BROWSER_EXECUTABLE_PATH") ?? Path.Combine(
             AppContext.BaseDirectory,
             "runtimes",
             "linux-x64",
@@ -44,33 +48,53 @@ app.MapGet("/api/screenshot", async (
 
     var page = await browser.NewPageAsync(new BrowserNewPageOptions
     {
-        ViewportSize = ResolveViewport(width, height)
+        ViewportSize = ResolveViewport(width.HasValue ? Math.Clamp(width.Value, 1, 2560) : null, height.HasValue ? Math.Clamp(height.Value, 1, 1600) : null),
+        IsMobile = mobile == true,
+        DeviceScaleFactor = 1,
+        ReducedMotion = ReducedMotion.Reduce
     });
 
     try
     {
-        await page.GotoAsync(url);
-        
-        await Task.Delay(wait ?? 1000);
+        if (!Uri.TryCreate(url, UriKind.Absolute, out var target) ||
+            (target.Scheme != "http" && target.Scheme != "https" && target.Scheme != "data"))
+            return Results.BadRequest(new { error = "An HTTP(S) or data URL is required." });
+        page.SetDefaultTimeout(15000);
+        await page.GotoAsync(url, new PageGotoOptions { WaitUntil = WaitUntilState.DOMContentLoaded, Timeout = 25000 });
+        await Task.Delay(Math.Clamp(wait ?? 800, 0, 3000), cancellationToken);
+        await page.EvaluateAsync("() => Promise.race([document.fonts.ready, new Promise(r => setTimeout(r, 2000))])");
 
-        // Scroll through whole page to trigger in-view animations and content
+        // Visit each viewport so IntersectionObserver and lazy images can load. Bound
+        // the work for infinite-scroll pages and report whether the bottom was reached.
+        var reachedBottom = false;
         if (scrollThrough == true)
         {
-            var lastLeftToScroll = float.MaxValue;
-            while (lastLeftToScroll > 0)
-            {
-                var leftToScroll = await page.EvaluateAsync<float>("document.body.scrollHeight - (window.innerHeight + window.scrollY)");
-                if (leftToScroll <= 0 ||
-                    Math.Abs(lastLeftToScroll - leftToScroll) < float.Epsilon)
-                    break;
-                
-                lastLeftToScroll = leftToScroll;
-                await page.EvaluateAsync("window.scrollBy(0, 100)");
-                await Task.Delay(50);
-            }
+            reachedBottom = await page.EvaluateAsync<bool>("""
+                async () => {
+                    const start = Date.now();
+                    const pause = ms => new Promise(r => setTimeout(r, ms));
+                    let bottom = false;
+                    for (let step = 0; step < 100 && Date.now() - start < 18000; step++) {
+                        window.scrollBy({ top: Math.max(200, innerHeight * .75), behavior: 'instant' });
+                        await pause(220);
+                        if (scrollY + innerHeight >= document.documentElement.scrollHeight - 2) {
+                            await pause(500);
+                            if (scrollY + innerHeight >= document.documentElement.scrollHeight - 2) { bottom = true; break; }
+                        }
+                    }
+                    await Promise.race([Promise.all([...document.images].filter(i => !i.complete).map(i => new Promise(r => { i.addEventListener('load', r, { once: true }); i.addEventListener('error', r, { once: true }); }))), pause(2000)]);
+                    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+                    await pause(600);
+                    return bottom;
+                }
+                """);
+        }
 
-            await page.EvaluateAsync("window.scrollTo({ top: 0, left: 0, behaviour: 'instant' })");
-            await Task.Delay(500);
+        JsonElement? inspection = null;
+        if (inspect == true)
+        {
+            using var script = new StreamReader(typeof(Program).Assembly.GetManifestResourceStream("Signalco.Api.RemoteBrowser.inspect.js")!);
+            inspection = await page.EvaluateAsync<JsonElement>(await script.ReadToEndAsync(cancellationToken));
         }
 
         var img = await page.ScreenshotAsync(new PageScreenshotOptions
@@ -80,6 +104,8 @@ app.MapGet("/api/screenshot", async (
             Animations = allowAnimations == true ? ScreenshotAnimations.Allow : ScreenshotAnimations.Disabled
         });
 
+        if (inspect == true)
+            return Results.Json(new { data = $"data:image/png;base64,{Convert.ToBase64String(img)}", inspection, reachedBottom });
         return Results.File(img, "image/png", "screenshot.png");
     }
     finally
