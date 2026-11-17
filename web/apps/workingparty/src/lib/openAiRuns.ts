@@ -1,4 +1,3 @@
-import { WORKING_PARTY_DEFAULT_MODEL } from '../data/markerplaceWorkers';
 import { openAiClient } from './openAiClient';
 import { openAiListMessages, openAiCreateMessage } from './openAiMessages';
 
@@ -16,7 +15,6 @@ export async function openAiCreateRunAndPoll(accountId: string, threadId: string
         .join('\n');
     const response = await openai.responses.create({
         model,
-        ...(model === WORKING_PARTY_DEFAULT_MODEL ? { reasoning: { effort: 'low' as const } } : {}),
         instructions,
         input: transcript
     });
