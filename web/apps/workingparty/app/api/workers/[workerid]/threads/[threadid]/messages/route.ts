@@ -1,6 +1,7 @@
 import { threadsGet } from '../../../../../../../src/lib/repository/threadsRepository';
 import { messagesCreateAndPoll, messagesGetAll } from '../../../../../../../src/lib/repository/messagesRepository';
 import { accountUsageIncrement, accountUsageOverLimit } from '../../../../../../../src/lib/repository/accountsRepository';
+import { WORKING_PARTY_DEFAULT_MODEL } from '../../../../../../../src/data/markerplaceWorkers';
 import { openAiCreateRunAndPoll } from '../../../../../../../src/lib/openAiRuns';
 import { openAiCreateMessage, openAiListMessages } from '../../../../../../../src/lib/openAiMessages';
 import { cosmosDataContainerThreads } from '../../../../../../../src/lib/cosmosClient';
@@ -83,7 +84,7 @@ export async function POST(request: Request, { params }: { params: Promise<{ wor
                 // Use a one-off completion to caption
                 await openAiCreateMessage(accountId, threadid, `Summarize this conversation in < 8 words:
 ${messagesExtract}`, 'user');
-                const { status: oaiCaptionStatus } = await openAiCreateRunAndPoll(accountId, threadid, 'gpt-4o-mini');
+                const { status: oaiCaptionStatus } = await openAiCreateRunAndPoll(accountId, threadid, WORKING_PARTY_DEFAULT_MODEL);
                 if (oaiCaptionStatus !== 'completed') {
                     console.warn('Captioning run failed', oaiCaptionStatus);
                     throw new Error('Captioning run failed');
