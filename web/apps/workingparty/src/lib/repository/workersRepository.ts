@@ -1,6 +1,6 @@
 import { nanoid } from 'nanoid';
 import { cosmosDataContainerWorkers } from '../cosmosClient';
-import { marketplaceWorkers, WORKING_PARTY_DEFAULT_MODEL } from '../../data/markerplaceWorkers';
+import { marketplaceWorkers } from '../../data/markerplaceWorkers';
 
 export type DbWorker = {
     id: string;
@@ -42,16 +42,12 @@ export async function workersGet(accountId: string, workerId: string): Promise<D
     // Fallback for legacy records that stored assistant id only
     const marketplaceInfo = marketplaceWorkers.find((w) => w.id === workerDbItem.marketplaceWorkerId);
 
-    const storedModel = workerDbItem.model;
-    const usesLegacyDefault = !workerDbItem.isCustom
-        && (storedModel === 'gpt-4o-mini' || storedModel === 'gpt-4o');
-
     return {
         id: workerDbItem.id,
         accountId: workerDbItem.accountId,
         name: workerDbItem.name,
         marketplaceWorkerId: workerDbItem.marketplaceWorkerId,
-        model: usesLegacyDefault ? WORKING_PARTY_DEFAULT_MODEL : storedModel ?? marketplaceInfo?.model ?? WORKING_PARTY_DEFAULT_MODEL,
+        model: workerDbItem.model ?? marketplaceInfo?.model ?? 'gpt-4o',
         instructions: workerDbItem.instructions ?? ('You are a worker for Working Party. You are an expert in your field.' + (marketplaceInfo?.instructions ?? '')),
         isCustom: workerDbItem.isCustom ?? false,
         createdAt: workerDbItem.createdAt,
