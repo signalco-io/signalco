@@ -33,8 +33,8 @@ export async function GET(_request: Request, { params }: { params: Promise<{ id:
         ].join('\n');
 
         const response = await openai.responses.create({
-            // Choose a small, capable model; adjust per your account availability
-            model: 'gpt-4o-mini',
+            model: 'gpt-6.2-sol',
+            reasoning: { effort: 'low' },
             input: prompt
         });
 
