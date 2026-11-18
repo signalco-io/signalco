@@ -34,7 +34,7 @@
     "@types/react": "19.2.2",
     "@types/react-dom": "19.2.2",
     "jose": "6.1.0",
-    "next": "16.4.3",
+    "next": "16.4.5",
     "react": "19.2.9",
     "react-dom": "19.2.9",
     "tsup": "8.5.1",
